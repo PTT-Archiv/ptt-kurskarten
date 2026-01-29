@@ -1,0 +1,72 @@
+<main class="layout">
+  <section class="panel">
+    <div class="section-title">Connections</div>
+    <div class="form-grid">
+      <label class="field">
+        <span>From</span>
+        <select [value]="fromId()" (change)="fromId.set($any($event.target).value)">
+          @for (node of nodes(); track node.id) {
+            <option [value]="node.id">{{ node.name }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>To</span>
+        <select [value]="toId()" (change)="toId.set($any($event.target).value)">
+          @for (node of nodes(); track node.id) {
+            <option [value]="node.id">{{ node.name }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Year</span>
+        <input type="number" [value]="year()" (input)="onYearInput($event)" />
+      </label>
+
+      <label class="field">
+        <span>Depart</span>
+        <input type="time" [value]="departTime()" (input)="onDepartInput($event)" />
+      </label>
+    </div>
+
+    <button class="action-btn" (click)="search()">Search</button>
+  </section>
+
+  <section class="results">
+    @if (loading()) {
+      <div class="muted">Searching…</div>
+    } @else {
+      @if (results().length === 0) {
+        <div class="muted">No connections yet.</div>
+      } @else {
+        <div class="result-list">
+          @for (option of results(); track option.departs + option.arrives + option.durationMinutes) {
+            <div class="result-card">
+              <div class="result-head">
+                <div class="result-time">
+                  {{ option.departs }} → {{ option.arrives }}
+                  @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+                    <span>(+{{ option.arriveDayOffset }})</span>
+                  }
+                </div>
+                <div class="result-meta">
+                  {{ option.durationMinutes }} min · {{ transferCount(option) }} transfers
+                </div>
+              </div>
+              <div class="legs">
+                @for (leg of option.legs; track leg.edgeId + leg.tripId) {
+                  <div class="leg-row">
+                    <div class="leg-time">{{ leg.departs }} → {{ leg.arrives }}</div>
+                    <div class="leg-line">{{ leg.from }} → {{ leg.to }} ({{ leg.transport }})</div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    }
+  </section>
+</main>

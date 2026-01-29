@@ -1,0 +1,178 @@
+<main class="layout">
+  <section class="canvas-area">
+    <app-map-stage
+      [graph]="displayGraph()"
+      [nodeDetail]="nodeDetail()"
+      (mapPointer)="onMapPointer($event)"
+    ></app-map-stage>
+  </section>
+
+  <aside class="side-panel">
+    <section class="panel-section">
+      <div class="section-title">Mode</div>
+      <div class="mode-row">
+        <button class="mode-btn" [class.active]="mode() === 'select'" (click)="setMode('select')">
+          Select
+        </button>
+        <button class="mode-btn" [class.active]="mode() === 'add-node'" (click)="setMode('add-node')">
+          Add Node
+        </button>
+        <button class="mode-btn" [class.active]="mode() === 'add-edge'" (click)="setMode('add-edge')">
+          Add Edge
+        </button>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Year</div>
+      <div class="year-value">{{ year() }}</div>
+      <input
+        class="year-slider"
+        type="range"
+        [min]="minYear()"
+        [max]="maxYear()"
+        [value]="year()"
+        (input)="onYearInput($event)"
+      />
+      <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
+    </section>
+
+    @if (mode() === 'select') {
+      <section class="panel-section">
+        <div class="section-title">Selected node</div>
+        @if (nodeDetail(); as detail) {
+          <label class="field">
+            <span>Name</span>
+            <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+          </label>
+          <label class="field">
+            <span>Valid from</span>
+            <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
+          </label>
+          <label class="field">
+            <span>Valid to</span>
+            <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
+          </label>
+          <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
+          <button class="action-btn" (click)="saveSelectedNode()">Save</button>
+        } @else {
+          <div class="muted">Click a node to edit.</div>
+        }
+      </section>
+    }
+
+    @if (mode() === 'add-node') {
+      <section class="panel-section">
+        <div class="section-title">New node</div>
+        @if (draftNode(); as draft) {
+          <label class="field">
+            <span>Name</span>
+            <input type="text" [value]="draft.name" (input)="updateDraftName($event)" />
+          </label>
+          <label class="field">
+            <span>Valid from</span>
+            <input type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
+          </label>
+          <label class="field">
+            <span>Valid to</span>
+            <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
+          </label>
+          <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
+          <button class="action-btn" (click)="saveDraftNode()">Create</button>
+        } @else {
+          <div class="muted">Click on the map to place a node.</div>
+        }
+      </section>
+    }
+
+    @if (mode() === 'add-edge') {
+      <section class="panel-section">
+        <div class="section-title">New edge</div>
+        @if (draftEdge(); as draft) {
+          <div class="coord">From: {{ draft.from ?? '—' }} → To: {{ draft.to ?? '—' }}</div>
+          <label class="field">
+            <span>Transport</span>
+            <select [value]="draft.transport" (change)="updateDraftEdgeTransport($event)">
+              <option value="coach">coach</option>
+              <option value="rail">rail</option>
+              <option value="tram">tram</option>
+              <option value="ship">ship</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Valid from</span>
+            <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
+          </label>
+          <label class="field">
+            <span>Valid to</span>
+            <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
+          </label>
+          <label class="field">
+            <span>Duration (min)</span>
+            <input type="number" [value]="draft.durationMinutes" (input)="updateDraftEdgeDuration($event)" />
+          </label>
+          <div class="trip-section">
+            <div class="trip-header">
+              <span>Trips</span>
+              <button class="action-btn" type="button" (click)="addTrip()">Add trip</button>
+            </div>
+            @if (draft.trips.length > 0) {
+              <div class="trip-list">
+                @for (trip of draft.trips; track trip.id) {
+                  <div class="trip-row">
+                    <input
+                      type="text"
+                      [value]="trip.departs"
+                      placeholder="HH:MM"
+                      (input)="updateTripField(trip.id, 'departs', $any($event.target).value)"
+                    />
+                    <input
+                      type="text"
+                      [value]="trip.arrives"
+                      placeholder="HH:MM"
+                      (input)="updateTripField(trip.id, 'arrives', $any($event.target).value)"
+                    />
+                    <select
+                      [value]="trip.arrivalDayOffset ?? 0"
+                      (change)="updateTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
+                    >
+                      <option [value]="0">+0</option>
+                      <option [value]="1">+1</option>
+                      <option [value]="2">+2</option>
+                    </select>
+                    <input
+                      type="text"
+                      [value]="trip.notes ?? ''"
+                      placeholder="Notes"
+                      (input)="updateTripField(trip.id, 'notes', $any($event.target).value)"
+                    />
+                    <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">Remove</button>
+                  </div>
+                }
+              </div>
+              <div class="hint">Times must be HH:MM.</div>
+            } @else {
+              <div class="muted">No trips yet. Add at least one.</div>
+            }
+          </div>
+          <button
+            class="action-btn"
+            [disabled]="!draft.from || !draft.to || !tripsValid(draft.trips)"
+            (click)="saveDraftEdge()"
+          >
+            Create
+          </button>
+        } @else {
+          <div class="muted">Click two nodes to connect them.</div>
+        }
+      </section>
+    }
+
+    <section class="panel-section">
+      <div class="section-title">Undo</div>
+      <button class="action-btn" [disabled]="undoStack().length === 0" (click)="undoMove()">
+        Undo move
+      </button>
+    </section>
+  </aside>
+</main>

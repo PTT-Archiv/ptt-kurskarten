@@ -1,0 +1,167 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 86px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  min-height: calc(100vh - 86px);
+}
+
+.canvas-area {
+  position: relative;
+  border-right: var(--border);
+  background: var(--ptt-white);
+  display: flex;
+}
+
+.side-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--ptt-white);
+}
+
+.panel-section {
+  border: var(--border);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.year-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.year-slider {
+  width: 100%;
+  accent-color: var(--ptt-yellow);
+}
+
+.year-range {
+  font-size: 13px;
+}
+
+.mode-row {
+  display: grid;
+  gap: 8px;
+}
+
+.mode-btn,
+.action-btn {
+  border: 2px solid var(--ptt-black);
+  color: var(--ptt-black);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mode-btn {
+  background: var(--ptt-white);
+}
+
+.action-btn {
+  background: var(--ptt-yellow);
+}
+
+.mode-btn.active {
+  background: var(--ptt-yellow);
+  outline: 2px solid var(--ptt-blue);
+  outline-offset: 2px;
+}
+
+.action-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.field input,
+.field select {
+  border: 1px solid var(--ptt-black);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #f8f8f8;
+}
+
+.trip-section {
+  display: grid;
+  gap: 10px;
+}
+
+.trip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.trip-list {
+  display: grid;
+  gap: 8px;
+}
+
+.trip-row {
+  display: grid;
+  grid-template-columns: 80px 80px 64px 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.trip-row input,
+.trip-row select {
+  border: 1px solid var(--ptt-black);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: #f8f8f8;
+  font-size: 13px;
+}
+
+.remove-btn {
+  background: var(--ptt-white);
+  border: 2px solid var(--ptt-black);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hint {
+  font-size: 12px;
+  color: #3a3a3a;
+}
+
+.coord {
+  font-size: 13px;
+}
+
+.muted {
+  font-size: 14px;
+  color: #3a3a3a;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .canvas-area {
+    min-height: 360px;
+    border-right: none;
+    border-bottom: var(--border);
+  }
+}

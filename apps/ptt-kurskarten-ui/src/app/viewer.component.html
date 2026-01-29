@@ -1,0 +1,118 @@
+<main class="layout">
+  <section class="canvas-area">
+    <app-map-stage
+      [graph]="graph()"
+      [nodeDetail]="nodeDetail()"
+      [highlightedEdgeIds]="highlightedEdgeIds()"
+      [highlightedNodeIds]="highlightedNodeIds()"
+      (nodeSelected)="onNodeSelected($event)"
+    ></app-map-stage>
+    @if (!graph()) {
+      <div class="canvas-overlay">Loading graph…</div>
+    }
+  </section>
+
+  <aside class="side-panel">
+    <section class="panel-section">
+      <div class="section-title">Connections</div>
+      <label class="field">
+        <span>From</span>
+        <select [value]="fromId()" (change)="fromId.set($any($event.target).value)">
+          @for (node of nodes(); track node.id) {
+            <option [value]="node.id">{{ node.name }}</option>
+          }
+        </select>
+      </label>
+      <button class="swap-btn" type="button" (click)="swapConnections()">Swap</button>
+      <label class="field">
+        <span>To</span>
+        <select [value]="toId()" (change)="toId.set($any($event.target).value)">
+          @for (node of nodes(); track node.id) {
+            <option [value]="node.id">{{ node.name }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span>Depart</span>
+        <input type="time" [value]="departTime()" (input)="departTime.set($any($event.target).value)" />
+      </label>
+      <button class="action-btn" (click)="onSearchConnections()">Search</button>
+
+      @if (connectionResults().length > 0) {
+        <div class="result-list">
+          @for (option of connectionResults(); track option.id) {
+            <button
+              class="result-card"
+              [class.active]="selectedConnectionId() === option.id"
+              (click)="selectConnection(option)"
+            >
+              {{ connectionSummary(option) }}
+            </button>
+          }
+        </div>
+      } @else {
+        <div class="muted">No connections yet.</div>
+      }
+
+      @if (selectedConnection(); as selected) {
+        <div class="detail">
+          <div class="detail-title">Route details</div>
+          @for (leg of selected.legs; track leg.edgeId + leg.tripId) {
+            <div class="detail-row">
+              <div class="detail-time">
+                {{ leg.departs }} → {{ leg.arrives }}
+                @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
+                  <span>(+{{ leg.arrivalDayOffset }})</span>
+                }
+              </div>
+              <div class="detail-line">
+                {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Year</div>
+      <div class="year-value">{{ year() }}</div>
+      <input
+        class="year-slider"
+        type="range"
+        [min]="minYear()"
+        [max]="maxYear()"
+        [value]="year()"
+        (input)="onYearInput($event)"
+      />
+      <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Legend</div>
+      <div class="legend">
+        <div>Nodes: stations / towns</div>
+        <div>Edges: routes (filtered by year)</div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Node detail</div>
+      @if (nodeDetail(); as detail) {
+        <div class="node-name">{{ detail.node?.name }}</div>
+        <div class="node-id">{{ detail.node?.id }}</div>
+        <div class="edge-list-title">Connections</div>
+        <ul class="edge-list">
+          @for (edge of detail.edges; track edge.id) {
+            <li>
+              <div>{{ edge.from }} → {{ edge.to }} ({{ edge.transport }})</div>
+              <div class="trip-summary">{{ tripSummary(edge) }}</div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="muted">Select a node to see details.</div>
+      }
+    </section>
+  </aside>
+</main>

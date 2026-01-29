@@ -1,0 +1,14 @@
+{
+  "name": "ptt-kurskarten",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run start --workspace ptt-kurskarten-ui",
+    "dev:api": "npm run start:dev --workspace ptt-kurskarten.api",
+    "dev": "npm run dev:web",
+    "build": "npm run build --workspace @ptt-kurskarten/shared && npm run build --workspace ptt-kurskarten.api && npm run build --workspace ptt-kurskarten-ui"
+  }
+}
