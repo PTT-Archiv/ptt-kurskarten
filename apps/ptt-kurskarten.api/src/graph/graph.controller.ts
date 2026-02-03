@@ -1,7 +1,17 @@
 import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@nestjs/common';
-import type { ConnectionOption, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TimeHHMM } from '@ptt-kurskarten/shared';
+import type {
+  ConnectionOption,
+  EdgeTimetableReport,
+  GraphEdge,
+  GraphNode,
+  GraphSnapshot,
+  NodeDetail,
+  StationProfileReport,
+  TimeHHMM
+} from '@ptt-kurskarten/shared';
 import { GRAPH_REPOSITORY, type GraphRepository } from './graph.repository';
 import { computeConnections } from './routing';
+import { buildEdgeTimetable, buildStationProfile } from './reporting';
 
 @Controller('v1')
 export class GraphController {
@@ -50,6 +60,20 @@ export class GraphController {
       depart: depart as TimeHHMM,
       k: count
     });
+  }
+
+  @Get('report/station/:nodeId')
+  async getStationReport(@Param('nodeId') nodeId: string, @Query('year') year?: string): Promise<StationProfileReport> {
+    const targetYear = Number(year) || 1871;
+    const snapshot = await this.graphRepository.getGraphSnapshot(targetYear);
+    return buildStationProfile(snapshot, nodeId);
+  }
+
+  @Get('report/edge/:edgeId')
+  async getEdgeReport(@Param('edgeId') edgeId: string, @Query('year') year?: string): Promise<EdgeTimetableReport> {
+    const targetYear = Number(year) || 1871;
+    const snapshot = await this.graphRepository.getGraphSnapshot(targetYear);
+    return buildEdgeTimetable(snapshot, edgeId);
   }
 
   @Post('nodes')

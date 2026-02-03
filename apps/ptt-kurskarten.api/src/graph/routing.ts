@@ -230,7 +230,10 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       arrives: trip.arrives,
       arrivalDayOffset: trip.arrivalDayOffset,
       departDayOffset: departDayOffset as 0 | 1 | 2,
-      arriveDayOffset: arriveDayOffset as 0 | 1 | 2
+      arriveDayOffset: arriveDayOffset as 0 | 1 | 2,
+      departAbsMinutes: info.departAbs,
+      arriveAbsMinutes: info.arriveAbs,
+      durationMinutes: info.arriveAbs - info.departAbs
     });
 
     nodeCursor = info.prevNode;
@@ -242,8 +245,11 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     return null;
   }
 
-  const departAbs = prev.get(legs[0].from)?.departAbs ?? startTime;
-  const arriveAbs = targetTime;
+  const firstLeg = legs[0];
+  const departAbs = firstLeg?.departAbsMinutes ?? startTime;
+  const arriveAbs = firstLeg && legs.length
+    ? (legs[legs.length - 1].arriveAbsMinutes ?? targetTime)
+    : targetTime;
   const departDayOffset = Math.floor(departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
   const arriveDayOffset = Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
 
@@ -253,8 +259,8 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     to: params.to,
     requestedDepart: params.depart,
     departs: formatTime(departAbs),
-    arrives: formatTime(arriveAbs),
     departDayOffset: departDayOffset as 0 | 1 | 2,
+    arrives: formatTime(arriveAbs),
     arriveDayOffset: arriveDayOffset as 0 | 1 | 2,
     durationMinutes: arriveAbs - departAbs,
     legs
@@ -262,7 +268,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 }
 
 export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsParams): ConnectionOption[] {
-  const k = Math.max(1, Math.min(params.k ?? 5, 10));
+  const k = Math.max(3, Math.min(params.k ?? 5, 10));
   const results: ConnectionOption[] = [];
 
   const base = computeEarliestArrival(snapshot, params);
@@ -288,24 +294,25 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   const minTransferMinutes = params.minTransferMinutes ?? 8;
   const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 2;
 
-  const startChoices: TripChoice[] = [];
+  const candidateDepartures = new Set<number>();
   for (const edge of startEdges) {
-    const choice = computeTripChoice(edge, startTime, 0);
-    if (choice) {
-      startChoices.push(choice);
+    for (const trip of edge.trips ?? []) {
+      const dep = parseTime(trip.departs);
+      const depAbs = dep >= startTime ? dep : dep + DAY_MINUTES;
+      candidateDepartures.add(depAbs);
     }
   }
 
-  startChoices.sort((a, b) => a.departAbs - b.departAbs);
+  const sortedDepartures = [...candidateDepartures].sort((a, b) => a - b).slice(0, k * 2);
 
-  for (const choice of startChoices) {
+  for (const depAbs of sortedDepartures) {
     if (results.length >= k) {
       break;
     }
 
     const seededParams: RoutingParams = {
       ...params,
-      depart: formatTime(choice.departAbs),
+      depart: formatTime(depAbs),
       minTransferMinutes,
       maxMinutesHorizon
     };

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bern",
+    "name": "Bern",
+    "x": 314.8217636022514,
+    "y": 240.8667917448405,
+    "validFrom": 1800,
+    "validTo": null
+  },
+  {
+    "id": "zurich",
+    "name": "Zurich",
+    "x": 483.30206378986867,
+    "y": 60.003752345215744,
+    "validFrom": 1800,
+    "validTo": null
+  },
+  {
+    "id": "basel",
+    "name": "Basel",
+    "x": 267.5422138836773,
+    "y": 106.90806754221387,
+    "validFrom": 1830,
+    "validTo": null
+  },
+  {
+    "id": "geneva",
+    "name": "Geneva",
+    "x": 40.90056285178236,
+    "y": 392.8367729831144,
+    "validFrom": 1845,
+    "validTo": null
+  },
+  {
+    "id": "lucerne",
+    "name": "Lucerne",
+    "x": 505.81613508442774,
+    "y": 222.10506566604127,
+    "validFrom": 1855,
+    "validTo": 1885
+  },
+  {
+    "id": "st-gallen",
+    "name": "St. Gallen",
+    "x": 520,
+    "y": 110,
+    "validFrom": 1875,
+    "validTo": null
+  }
+]

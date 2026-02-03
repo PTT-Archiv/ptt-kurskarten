@@ -3,13 +3,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { ConnectionLeg, ConnectionOption, GraphEdge, GraphSnapshot, NodeDetail, TimeHHMM } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 const DEFAULT_YEAR = 1871;
 
 @Component({
   selector: 'app-viewer',
   standalone: true,
-  imports: [MapStageComponent],
+  imports: [MapStageComponent, TranslocoPipe],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css'
 })
@@ -28,6 +29,7 @@ export class ViewerComponent implements OnDestroy {
   departTime = signal<TimeHHMM>('08:00');
   connectionResults = signal<ConnectionOption[]>([]);
   selectedConnectionId = signal<string | null>(null);
+  showConnectionDetailsOnMap = signal(true);
 
   nodes = computed(() => {
     const snapshot = this.graph();
@@ -36,6 +38,7 @@ export class ViewerComponent implements OnDestroy {
     }
     return [...snapshot.nodes].sort((a, b) => a.name.localeCompare(b.name));
   });
+
 
   minYear = computed(() => {
     const years = this.availableYears();
@@ -85,6 +88,7 @@ export class ViewerComponent implements OnDestroy {
   }
 
   onNodeSelected(nodeId: string | null): void {
+    this.selectedConnectionId.set(null);
     if (!nodeId) {
       this.selectedNodeId.set(null);
       this.nodeDetail.set(null);
@@ -122,6 +126,7 @@ export class ViewerComponent implements OnDestroy {
         }
       });
   }
+
 
   swapConnections(): void {
     const from = this.fromId();
@@ -213,7 +218,7 @@ export class ViewerComponent implements OnDestroy {
 
   connectionSummary(option: ConnectionOption): string {
     const transfers = option.transfers ?? option.legs.length - 1;
-    return `${option.departs} → ${option.arrives} · ${option.durationMinutes} min · ${transfers} transfers`;
+    return `${option.departs} → ${option.arrives} · ${this.formatDuration(option.durationMinutes)} · ${transfers} transfers`;
   }
 
   getNodeName(id: string): string {
@@ -243,5 +248,14 @@ export class ViewerComponent implements OnDestroy {
     const arr = ah * 60 + am + (dayOffset ?? 0) * 1440;
     const normalized = arr < dep ? arr + 1440 : arr;
     return normalized - dep;
+  }
+
+  formatDuration(totalMinutes: number): string {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    if (hours <= 0) {
+      return `${minutes} min`;
+    }
+    return `${hours}h ${minutes.toString().padStart(2, '0')}m`;
   }
 }

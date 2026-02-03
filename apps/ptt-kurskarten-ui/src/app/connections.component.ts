@@ -2,12 +2,14 @@ import { Component, PLATFORM_ID, computed, effect, inject, signal } from '@angul
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { ConnectionOption, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 const DEFAULT_YEAR = 1871;
 
 @Component({
   selector: 'app-connections',
   standalone: true,
+  imports: [TranslocoPipe],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'
 })

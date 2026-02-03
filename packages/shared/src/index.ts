@@ -58,10 +58,62 @@ export type ConnectionOption = {
   requestedDepart: TimeHHMM;
   departs: TimeHHMM;
   arrives: TimeHHMM;
+  departDayOffset?: DayOffset;
   arriveDayOffset?: DayOffset;
   durationMinutes: number;
   transfers?: number;
   legs: ConnectionLeg[];
+};
+
+export type StationProfileReport = {
+  year: Year;
+  node: GraphNode | null;
+  outgoing: Array<{
+    toNode: GraphNode;
+    edgeId: string;
+    transport: TransportType;
+    tripsCount: number;
+    firstDeparture?: TimeHHMM;
+    lastDeparture?: TimeHHMM;
+    minDurationMinutes?: number;
+  }>;
+  incoming: Array<{
+    fromNode: GraphNode;
+    edgeId: string;
+    transport: TransportType;
+    tripsCount: number;
+    firstDeparture?: TimeHHMM;
+    lastDeparture?: TimeHHMM;
+    minDurationMinutes?: number;
+  }>;
+  totals: {
+    outgoingEdges: number;
+    outgoingTrips: number;
+    incomingEdges: number;
+    incomingTrips: number;
+  };
+};
+
+export type EdgeTimetableReport = {
+  year: Year;
+  edge: GraphEdge | null;
+  fromNode: GraphNode | null;
+  toNode: GraphNode | null;
+  trips: Array<{
+    tripId: string;
+    departs: TimeHHMM;
+    arrives: TimeHHMM;
+    arrivalDayOffset?: DayOffset;
+    durationMinutes: number;
+    notes?: string;
+  }>;
+  summary: {
+    tripsCount: number;
+    firstDeparture?: TimeHHMM;
+    lastDeparture?: TimeHHMM;
+    minDurationMinutes?: number;
+    maxDurationMinutes?: number;
+  };
 };
 
 export type GraphSnapshot = {

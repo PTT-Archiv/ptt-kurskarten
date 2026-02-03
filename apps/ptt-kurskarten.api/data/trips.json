@@ -1,0 +1,84 @@
+[
+  {
+    "id": "bern-zurich-coach-early",
+    "departs": "06:15",
+    "arrives": "16:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "bern-zurich-coach"
+  },
+  {
+    "id": "bern-zurich-rail-1",
+    "departs": "06:15",
+    "arrives": "09:10",
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "bern-zurich-rail-2",
+    "departs": "12:00",
+    "arrives": "14:55",
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "bern-zurich-rail-3",
+    "departs": "18:30",
+    "arrives": "21:10",
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "basel-zurich-rail-overnight",
+    "departs": "22:40",
+    "arrives": "01:20",
+    "arrivalDayOffset": 1,
+    "edgeId": "basel-zurich-rail"
+  },
+  {
+    "id": "bern-geneva-coach-1",
+    "departs": "07:00",
+    "arrives": "16:00",
+    "edgeId": "bern-geneva-coach"
+  },
+  {
+    "id": "bern-geneva-rail-1",
+    "departs": "08:00",
+    "arrives": "11:10",
+    "edgeId": "bern-geneva-rail"
+  },
+  {
+    "id": "bern-geneva-rail-2",
+    "departs": "14:00",
+    "arrives": "17:10",
+    "edgeId": "bern-geneva-rail"
+  },
+  {
+    "id": "lucerne-bern-coach-1",
+    "departs": "09:30",
+    "arrives": "13:30",
+    "edgeId": "lucerne-bern-coach"
+  },
+  {
+    "id": "zurich-st-gallen-rail-1",
+    "departs": "05:50",
+    "arrives": "08:20",
+    "edgeId": "zurich-st-gallen-rail"
+  },
+  {
+    "id": "zurich-st-gallen-rail-2",
+    "departs": "17:15",
+    "arrives": "19:45",
+    "edgeId": "zurich-st-gallen-rail"
+  },
+  {
+    "id": "trip-1770116654731",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770116650402"
+  },
+  {
+    "id": "trip-1770116729515",
+    "departs": "20:00",
+    "arrives": "21:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770116716947"
+  }
+]

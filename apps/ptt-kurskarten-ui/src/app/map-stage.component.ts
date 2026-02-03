@@ -13,8 +13,11 @@ import {
   inject
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import type { GraphNode, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
+import type { ConnectionOption, GraphNode, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
 import { computeTransform, DEFAULT_VIEWBOX, worldToScreen } from './map-coordinates';
+import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
+import { TranslocoService } from '@jsverse/transloco';
+import { Subscription } from 'rxjs';
 
 const NODE_RADIUS = 9;
 
@@ -78,6 +81,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() nodeDetail: NodeDetail | null = null;
   @Input() highlightedEdgeIds: Set<string> | null = null;
   @Input() highlightedNodeIds: Set<string> | null = null;
+  @Input() selectedConnection: ConnectionOption | null = null;
+  @Input() showConnectionDetailsOnMap = true;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -88,6 +93,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly transloco = inject(TranslocoService);
 
   @ViewChild('graphCanvas') private canvasRef?: ElementRef<HTMLCanvasElement>;
 
@@ -98,6 +104,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private transform = computeTransform(1, 1, DEFAULT_VIEWBOX);
   private needsRender = false;
   private activePointerId: number | null = null;
+  private langSub?: Subscription;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -105,6 +112,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     this.attachResizeObserver();
+    this.langSub = this.transloco.langChanges$.subscribe(() => this.scheduleRender());
     this.scheduleRender();
   }
 
@@ -113,7 +121,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
-    if (changes['graph'] || changes['nodeDetail']) {
+    if (
+      changes['graph'] ||
+      changes['nodeDetail'] ||
+      changes['selectedConnection'] ||
+      changes['showConnectionDetailsOnMap']
+    ) {
       this.scheduleRender();
     }
   }
@@ -122,6 +135,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (this.rafId !== null) {
       cancelAnimationFrame(this.rafId);
     }
+    this.langSub?.unsubscribe();
     this.resizeObserver?.disconnect();
   }
 
@@ -290,6 +304,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
+
+    if (this.showConnectionDetailsOnMap && this.selectedConnection) {
+      this.drawConnectionDetails(ctx, this.selectedConnection);
+    }
   }
 
   private project(node: GraphNode): { x: number; y: number } {
@@ -355,4 +373,197 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     return { screen, world, hitNodeId };
   }
+
+  private drawConnectionDetails(ctx: CanvasRenderingContext2D, connection: ConnectionOption): void {
+    const placed: Array<{ x: number; y: number; w: number; h: number }> = [];
+    const maxLabels = 12;
+    const waitSegments = buildWaitSegments(connection);
+
+    const overnightStops = new Set(
+      waitSegments.filter((segment) => segment.overnight).map((segment) => segment.atNodeId)
+    );
+
+    if (overnightStops.size > 0) {
+      ctx.save();
+      ctx.strokeStyle = '#141414';
+      ctx.lineWidth = 2;
+      overnightStops.forEach((nodeId) => {
+        const node = this.screenNodes.get(nodeId);
+        if (!node) {
+          return;
+        }
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, NODE_RADIUS + 6, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    const waitLabel = this.transloco.translate('label.wait');
+    const overnightLabel = this.transloco.translate('label.overnight');
+
+    const labels: Array<{
+      text: string;
+      anchor: { x: number; y: number };
+      priority: number;
+    }> = [];
+
+    const legLabels = connection.legs
+      .map((leg) => {
+        const from = this.screenNodes.get(leg.from);
+        const to = this.screenNodes.get(leg.to);
+        if (!from || !to) {
+          return null;
+        }
+        const anchor = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 };
+        const depart = getLegAbsTime(leg, 'depart');
+        const arrive = getLegAbsTime(leg, 'arrive');
+        const dayDelta = Math.max(0, arrive.dayOffset - depart.dayOffset);
+        const suffix = dayDelta > 0 ? ` (+${dayDelta})` : '';
+        const text = `${leg.transport} ${leg.departs}→${leg.arrives}${suffix}`;
+        return { text, anchor, priority: 3 };
+      })
+      .filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } => Boolean(label));
+
+    const waitLabels = waitSegments.map((segment) => {
+      const node = this.screenNodes.get(segment.atNodeId);
+      if (!node) {
+        return null;
+      }
+      const duration = formatDuration(segment.durationMinutes);
+      let text = `${waitLabel} ${duration}`;
+      if (segment.overnight) {
+        const delta = Math.max(0, segment.endDayOffset - segment.startDayOffset);
+        text += delta > 0 ? ` (${overnightLabel} +${delta})` : ` (${overnightLabel})`;
+      }
+      return {
+        text,
+        anchor: { x: node.x, y: node.y },
+        priority: segment.overnight ? 1 : 2
+      };
+    });
+
+    labels.push(
+      ...waitLabels.filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } =>
+        Boolean(label)
+      ),
+      ...legLabels
+    );
+
+    labels.sort((a, b) => a.priority - b.priority);
+
+    ctx.save();
+    ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+
+    let rendered = 0;
+    for (const label of labels) {
+      if (rendered >= maxLabels) {
+        break;
+      }
+      const size = measureLabel(ctx, label.text);
+      const position = placeLabel(placed, label.anchor.x, label.anchor.y, size.w, size.h);
+      if (!position) {
+        continue;
+      }
+      drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
+      placed.push({ x: position.x, y: position.y, w: size.w, h: size.h });
+      rendered += 1;
+    }
+
+    ctx.restore();
+  }
+}
+
+function measureLabel(ctx: CanvasRenderingContext2D, text: string): { w: number; h: number } {
+  const metrics = ctx.measureText(text);
+  const paddingX = 8;
+  const paddingY = 6;
+  const textHeight = 12;
+  return {
+    w: Math.ceil(metrics.width) + paddingX * 2,
+    h: textHeight + paddingY * 2
+  };
+}
+
+function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number): void {
+  ctx.save();
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#141414';
+  ctx.lineWidth = 1.5;
+  drawRoundedRect(ctx, x, y, w, h, 6);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#141414';
+  ctx.fillText(text, x + 8, y + h / 2);
+  ctx.restore();
+}
+
+function drawRoundedRect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number
+): void {
+  const radius = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + w - radius, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+  ctx.lineTo(x + w, y + h - radius);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+  ctx.lineTo(x + radius, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
+function placeLabel(
+  placed: Array<{ x: number; y: number; w: number; h: number }>,
+  anchorX: number,
+  anchorY: number,
+  w: number,
+  h: number
+): { x: number; y: number } | null {
+  const offsets = [
+    { x: 0, y: -18 },
+    { x: 18, y: 0 },
+    { x: 0, y: 18 },
+    { x: -18, y: 0 },
+    { x: 18, y: -18 },
+    { x: -18, y: -18 },
+    { x: 18, y: 18 },
+    { x: -18, y: 18 }
+  ];
+
+  for (const offset of offsets) {
+    const x = anchorX + offset.x - w / 2;
+    const y = anchorY + offset.y - h / 2;
+    const box = { x, y, w, h };
+    if (!placed.some((existing) => boxesIntersect(existing, box))) {
+      return { x, y };
+    }
+  }
+
+  return null;
+}
+
+function boxesIntersect(
+  a: { x: number; y: number; w: number; h: number },
+  b: { x: number; y: number; w: number; h: number }
+): boolean {
+  return !(a.x + a.w < b.x || b.x + b.w < a.x || a.y + a.h < b.y || b.y + b.h < a.y);
+}
+
+function formatDuration(totalMinutes: number): string {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = Math.max(0, totalMinutes % 60);
+  if (hours <= 0) {
+    return `${minutes}m`;
+  }
+  return `${hours}h ${minutes}m`;
 }

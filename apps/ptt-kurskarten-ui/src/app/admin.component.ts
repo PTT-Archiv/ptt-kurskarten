@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 const DEFAULT_YEAR = 1871;
 const UNDO_LIMIT = 20;
@@ -39,7 +40,7 @@ type EdgeDraft = {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MapStageComponent],
+  imports: [MapStageComponent, TranslocoPipe],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -53,6 +54,7 @@ export class AdminComponent implements OnDestroy {
   graph = signal<GraphSnapshot | null>(null);
   availableYears = signal<number[]>([]);
   selectedNodeId = signal<string | null>(null);
+  selectedEdgeId = signal<string | null>(null);
 
   draftNode = signal<NodeDraft | null>(null);
   draftEdge = signal<EdgeDraft | null>(null);
@@ -88,6 +90,49 @@ export class AdminComponent implements OnDestroy {
       node,
       neighbors,
       edges
+    };
+  });
+
+  outgoingEdges = computed(() => {
+    const snapshot = this.graph();
+    const nodeId = this.selectedNodeId();
+    if (!snapshot || !nodeId) {
+      return [];
+    }
+    return snapshot.edges
+      .filter((edge) => edge.from === nodeId)
+      .map((edge) => {
+        const toNode = snapshot.nodes.find((node) => node.id === edge.to);
+        return {
+          id: edge.id,
+          toName: toNode?.name ?? edge.to,
+          transport: edge.transport,
+          tripsCount: edge.trips?.length ?? 0,
+          validFrom: edge.validFrom,
+          validTo: edge.validTo
+        };
+      });
+  });
+
+  selectedEdgeDraft = computed<EdgeDraft | null>(() => {
+    const snapshot = this.graph();
+    const edgeId = this.selectedEdgeId();
+    if (!snapshot || !edgeId) {
+      return null;
+    }
+    const edge = snapshot.edges.find((candidate) => candidate.id === edgeId);
+    if (!edge) {
+      return null;
+    }
+    return {
+      id: edge.id,
+      from: edge.from,
+      to: edge.to,
+      transport: edge.transport,
+      validFrom: edge.validFrom,
+      validTo: edge.validTo,
+      durationMinutes: edge.durationMinutes ?? 60,
+      trips: edge.trips ?? []
     };
   });
 
@@ -173,6 +218,7 @@ export class AdminComponent implements OnDestroy {
   setMode(next: Mode): void {
     this.mode.set(next);
     this.selectedNodeId.set(null);
+    this.selectedEdgeId.set(null);
     this.draftNode.set(null);
     this.draftEdge.set(null);
     this.dragState = null;
@@ -184,6 +230,7 @@ export class AdminComponent implements OnDestroy {
     if (!Number.isNaN(nextYear)) {
       this.year.set(nextYear);
       this.selectedNodeId.set(null);
+      this.selectedEdgeId.set(null);
       this.draftNode.set(null);
       this.draftEdge.set(null);
       this.dragState = null;
@@ -214,6 +261,14 @@ export class AdminComponent implements OnDestroy {
         this.pickEdgeNode(event.hitNodeId);
       }
     }
+  }
+
+  selectEdge(edgeId: string): void {
+    this.selectedEdgeId.set(edgeId);
+  }
+
+  clearEdgeSelection(): void {
+    this.selectedEdgeId.set(null);
   }
 
   saveSelectedNode(): void {
@@ -369,6 +424,103 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, durationMinutes: value });
+  }
+
+  updateSelectedEdgeTransport(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value as TransportType;
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { transport: value });
+  }
+
+  updateSelectedEdgeValidFrom(event: Event): void {
+    const value = Number((event.target as HTMLInputElement).value);
+    const draft = this.selectedEdgeDraft();
+    if (!draft || Number.isNaN(value)) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { validFrom: value });
+  }
+
+  updateSelectedEdgeValidTo(event: Event): void {
+    const raw = (event.target as HTMLInputElement).value;
+    const value = raw === '' ? undefined : Number(raw);
+    const draft = this.selectedEdgeDraft();
+    if (!draft || (value !== undefined && Number.isNaN(value))) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { validTo: value });
+  }
+
+  updateSelectedEdgeDuration(event: Event): void {
+    const value = Number((event.target as HTMLInputElement).value);
+    const draft = this.selectedEdgeDraft();
+    if (!draft || Number.isNaN(value)) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { durationMinutes: value });
+  }
+
+  updateSelectedTripField(tripId: string, field: keyof EdgeTrip, value: string | number | undefined): void {
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    const trips = draft.trips.map((trip) =>
+      trip.id === tripId
+        ? {
+            ...trip,
+            [field]: value
+          }
+        : trip
+    );
+    this.updateEdgeLocal(draft.id, { trips });
+  }
+
+  addSelectedTrip(): void {
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    const newTrip: EdgeTrip = {
+      id: `trip-${Date.now()}`,
+      departs: '08:00',
+      arrives: '09:00',
+      arrivalDayOffset: 0
+    };
+    this.updateEdgeLocal(draft.id, { trips: [...draft.trips, newTrip] });
+  }
+
+  removeSelectedTrip(tripId: string): void {
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { trips: draft.trips.filter((trip) => trip.id !== tripId) });
+  }
+
+  saveSelectedEdge(): void {
+    const draft = this.selectedEdgeDraft();
+    if (!draft || !draft.from || !draft.to || !this.tripsValid(draft.trips)) {
+      return;
+    }
+
+    this.http
+      .put<GraphEdge>(`/api/v1/edges/${draft.id}`, {
+        transport: draft.transport,
+        validFrom: draft.validFrom,
+        validTo: draft.validTo,
+        durationMinutes: draft.durationMinutes,
+        trips: draft.trips
+      })
+      .subscribe({
+        next: (updated) => {
+          this.replaceEdge(updated);
+        },
+        error: () => null
+      });
   }
 
   addTrip(): void {
@@ -566,6 +718,24 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.graph.set({ ...snapshot, edges: [...snapshot.edges, edge] });
+  }
+
+  private replaceEdge(edge: GraphEdge): void {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return;
+    }
+    const edges = snapshot.edges.map((candidate) => (candidate.id === edge.id ? edge : candidate));
+    this.graph.set({ ...snapshot, edges });
+  }
+
+  private updateEdgeLocal(id: string, patch: Partial<GraphEdge>): void {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return;
+    }
+    const edges = snapshot.edges.map((edge) => (edge.id === id ? { ...edge, ...patch } : edge));
+    this.graph.set({ ...snapshot, edges });
   }
 
   private replaceNode(node: GraphNode): void {

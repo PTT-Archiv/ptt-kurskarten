@@ -1,0 +1,83 @@
+[
+  {
+    "id": "bern-zurich-coach",
+    "from": "bern",
+    "to": "zurich",
+    "transport": "coach",
+    "validFrom": 1845,
+    "durationMinutes": 600,
+    "validTo": 1865
+  },
+  {
+    "id": "bern-zurich-rail",
+    "from": "bern",
+    "to": "zurich",
+    "transport": "rail",
+    "validFrom": 1866,
+    "durationMinutes": 210,
+    "validTo": null
+  },
+  {
+    "id": "basel-zurich-rail",
+    "from": "basel",
+    "to": "zurich",
+    "transport": "rail",
+    "validFrom": 1855,
+    "durationMinutes": 180,
+    "validTo": null
+  },
+  {
+    "id": "bern-geneva-coach",
+    "from": "bern",
+    "to": "geneva",
+    "transport": "coach",
+    "validFrom": 1848,
+    "durationMinutes": 540,
+    "validTo": 1878
+  },
+  {
+    "id": "bern-geneva-rail",
+    "from": "bern",
+    "to": "geneva",
+    "transport": "rail",
+    "validFrom": 1879,
+    "durationMinutes": 190,
+    "validTo": null
+  },
+  {
+    "id": "lucerne-bern-coach",
+    "from": "lucerne",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1855,
+    "durationMinutes": 240,
+    "validTo": 1885
+  },
+  {
+    "id": "zurich-st-gallen-rail",
+    "from": "zurich",
+    "to": "st-gallen",
+    "transport": "rail",
+    "validFrom": 1875,
+    "durationMinutes": 150,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770116650402",
+    "from": "geneva",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "durationMinutes": 60,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770116716947",
+    "from": "geneva",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "durationMinutes": 60,
+    "validTo": null
+  }
+]

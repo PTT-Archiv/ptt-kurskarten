@@ -5,27 +5,29 @@
       [nodeDetail]="nodeDetail()"
       [highlightedEdgeIds]="highlightedEdgeIds()"
       [highlightedNodeIds]="highlightedNodeIds()"
+      [selectedConnection]="selectedConnection()"
+      [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()"
       (nodeSelected)="onNodeSelected($event)"
     ></app-map-stage>
     @if (!graph()) {
-      <div class="canvas-overlay">Loading graph…</div>
+      <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
   </section>
 
   <aside class="side-panel">
     <section class="panel-section">
-      <div class="section-title">Connections</div>
+      <div class="section-title">{{ 'viewer.connections' | transloco }}</div>
       <label class="field">
-        <span>From</span>
+        <span>{{ 'label.from' | transloco }}</span>
         <select [value]="fromId()" (change)="fromId.set($any($event.target).value)">
           @for (node of nodes(); track node.id) {
             <option [value]="node.id">{{ node.name }}</option>
           }
         </select>
       </label>
-      <button class="swap-btn" type="button" (click)="swapConnections()">Swap</button>
+      <button class="swap-btn" type="button" (click)="swapConnections()">{{ 'btn.swap' | transloco }}</button>
       <label class="field">
-        <span>To</span>
+        <span>{{ 'label.to' | transloco }}</span>
         <select [value]="toId()" (change)="toId.set($any($event.target).value)">
           @for (node of nodes(); track node.id) {
             <option [value]="node.id">{{ node.name }}</option>
@@ -33,10 +35,18 @@
         </select>
       </label>
       <label class="field">
-        <span>Depart</span>
+        <span>{{ 'label.departure' | transloco }}</span>
         <input type="time" [value]="departTime()" (input)="departTime.set($any($event.target).value)" />
       </label>
-      <button class="action-btn" (click)="onSearchConnections()">Search</button>
+      <label class="toggle-row">
+        <input
+          type="checkbox"
+          [checked]="showConnectionDetailsOnMap()"
+          (change)="showConnectionDetailsOnMap.set($any($event.target).checked)"
+        />
+        <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
+      </label>
+      <button class="action-btn" (click)="onSearchConnections()">{{ 'btn.search' | transloco }}</button>
 
       @if (connectionResults().length > 0) {
         <div class="result-list">
@@ -46,17 +56,26 @@
               [class.active]="selectedConnectionId() === option.id"
               (click)="selectConnection(option)"
             >
-              {{ connectionSummary(option) }}
+              {{ option.departs }}
+              @if (option.departDayOffset && option.departDayOffset > 0) {
+                <span>(+{{ option.departDayOffset }})</span>
+              }
+              → {{ option.arrives }}
+              @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+                <span>(+{{ option.arriveDayOffset }})</span>
+              }
+              · {{ formatDuration(option.durationMinutes) }} · {{ option.transfers ?? option.legs.length - 1 }}
+              <span>{{ 'label.transfers' | transloco }}</span>
             </button>
           }
         </div>
       } @else {
-        <div class="muted">No connections yet.</div>
+        <div class="muted">{{ 'viewer.noConnections' | transloco }}</div>
       }
 
       @if (selectedConnection(); as selected) {
         <div class="detail">
-          <div class="detail-title">Route details</div>
+          <div class="detail-title">{{ 'viewer.routeDetails' | transloco }}</div>
           @for (leg of selected.legs; track leg.edgeId + leg.tripId) {
             <div class="detail-row">
               <div class="detail-time">
@@ -68,6 +87,7 @@
               <div class="detail-line">
                 {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
               </div>
+              <div class="detail-duration">{{ formatDuration(leg.durationMinutes ?? 0) }}</div>
             </div>
           }
         </div>
@@ -75,7 +95,7 @@
     </section>
 
     <section class="panel-section">
-      <div class="section-title">Year</div>
+      <div class="section-title">{{ 'label.year' | transloco }}</div>
       <div class="year-value">{{ year() }}</div>
       <input
         class="year-slider"
@@ -89,19 +109,19 @@
     </section>
 
     <section class="panel-section">
-      <div class="section-title">Legend</div>
+      <div class="section-title">{{ 'viewer.legend' | transloco }}</div>
       <div class="legend">
-        <div>Nodes: stations / towns</div>
-        <div>Edges: routes (filtered by year)</div>
+        <div>{{ 'viewer.legend.nodes' | transloco }}</div>
+        <div>{{ 'viewer.legend.edges' | transloco }}</div>
       </div>
     </section>
 
     <section class="panel-section">
-      <div class="section-title">Node detail</div>
+      <div class="section-title">{{ 'viewer.nodeDetail' | transloco }}</div>
       @if (nodeDetail(); as detail) {
         <div class="node-name">{{ detail.node?.name }}</div>
         <div class="node-id">{{ detail.node?.id }}</div>
-        <div class="edge-list-title">Connections</div>
+        <div class="edge-list-title">{{ 'viewer.nodeConnections' | transloco }}</div>
         <ul class="edge-list">
           @for (edge of detail.edges; track edge.id) {
             <li>
@@ -111,7 +131,7 @@
           }
         </ul>
       } @else {
-        <div class="muted">Select a node to see details.</div>
+        <div class="muted">{{ 'viewer.noNodeSelected' | transloco }}</div>
       }
     </section>
   </aside>

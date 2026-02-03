@@ -29,3 +29,34 @@
   font-size: 14px;
   color: var(--ptt-white);
 }
+
+.nav {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--ptt-white);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav a.active {
+  border-bottom-color: var(--ptt-yellow);
+}
+
+.lang-label {
+  font-size: 12px;
+}
+
+.lang-select {
+  font-size: 12px;
+  background: transparent;
+  border: 1px solid var(--ptt-white);
+  color: var(--ptt-white);
+  padding: 2px 6px;
+  border-radius: 6px;
+}

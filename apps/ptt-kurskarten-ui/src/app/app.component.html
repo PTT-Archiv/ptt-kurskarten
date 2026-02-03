@@ -1,9 +1,22 @@
 <header class="topbar">
   <div class="topbar-inner">
     <div>
-      <div class="title">PTT Kurskarten</div>
-      <div class="subtitle">Swiss network snapshots</div>
+      <div class="title">PTT Kurskarten - Demo</div>
+      <div class="subtitle">{{ 'app.subtitle' | transloco }}</div>
     </div>
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        {{ 'nav.viewer' | transloco }}
+      </a>
+      <a routerLink="/reports" routerLinkActive="active">{{ 'nav.reports' | transloco }}</a>
+      <a routerLink="/admin" routerLinkActive="active">{{ 'nav.admin' | transloco }}</a>
+      <label class="lang-label" for="lang-select">{{ 'nav.language' | transloco }}</label>
+      <select id="lang-select" class="lang-select" [value]="activeLang()" (change)="setLang($event)">
+        @for (lang of availableLangs; track lang) {
+          <option [value]="lang">{{ ('nav.' + (lang === 'de' ? 'german' : 'french')) | transloco }}</option>
+        }
+      </select>
+    </nav>
   </div>
 </header>
 
