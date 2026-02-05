@@ -90,6 +90,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() selectedConnection: ConnectionOption | null = null;
   @Input() showConnectionDetailsOnMap = true;
   @Input() selectedNodeId: string | null = null;
+  @Input() routingActive = false;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -134,7 +135,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['nodeDetail'] ||
       changes['selectedConnection'] ||
       changes['showConnectionDetailsOnMap'] ||
-      changes['selectedNodeId']
+      changes['selectedNodeId'] ||
+      changes['routingActive']
     ) {
       this.scheduleRender();
     }
@@ -321,6 +323,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       });
 
       const count = group.length;
+      const centerLaneIndex = Math.floor((count - 1) / 2);
       group.forEach((edge, index) => {
         const from = nodeMap.get(edge.from);
         const to = nodeMap.get(edge.to);
@@ -349,6 +352,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.lineWidth = 2;
       ctx.fill();
       ctx.stroke();
+
+      if (isSelected || isHovered) {
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, radius + 4, 0, Math.PI * 2);
+        ctx.strokeStyle = '#141414';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
 
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });

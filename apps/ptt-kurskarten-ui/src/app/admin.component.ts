@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { ToastService } from './shared/toast/toast.service';
 
 const DEFAULT_YEAR = 1871;
 const UNDO_LIMIT = 20;
@@ -48,6 +49,7 @@ export class AdminComponent implements OnDestroy {
   private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private readonly toastService = inject(ToastService);
 
   mode = signal<Mode>('select');
   year = signal<number>(DEFAULT_YEAR);
@@ -119,9 +121,25 @@ export class AdminComponent implements OnDestroy {
     if (!snapshot) {
       return [];
     }
-    return [...snapshot.nodes]
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map((node) => ({ id: node.id, name: node.name }));
+    const options = new Map<string, { id: string; name: string }>();
+    snapshot.nodes.forEach((node) => options.set(node.id, { id: node.id, name: node.name }));
+
+    const ensure = (id: string | null | undefined) => {
+      if (!id || options.has(id)) {
+        return;
+      }
+      options.set(id, { id, name: id });
+    };
+
+    const selected = this.selectedEdgeDraft();
+    ensure(selected?.from);
+    ensure(selected?.to);
+
+    const draft = this.draftEdge();
+    ensure(draft?.from);
+    ensure(draft?.to);
+
+    return [...options.values()].sort((a, b) => a.name.localeCompare(b.name));
   });
 
   selectedEdgeDraft = computed<EdgeDraft | null>(() => {
@@ -301,8 +319,22 @@ export class AdminComponent implements OnDestroy {
         y: node.y
       })
       .subscribe({
-        next: (updated) => this.replaceNode(updated),
-        error: () => null
+        next: (updated) => {
+          this.replaceNode(updated);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Knoten gespeichert',
+            key: 'node-save'
+          });
+        },
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'node-save'
+          });
+        }
       });
   }
 
@@ -348,8 +380,20 @@ export class AdminComponent implements OnDestroy {
           this.addNode(created);
           this.mode.set('select');
           this.selectedNodeId.set(created.id);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Knoten erstellt',
+            key: 'node-save'
+          });
         },
-        error: () => null
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'node-save'
+          });
+        }
       });
   }
 
@@ -394,8 +438,27 @@ export class AdminComponent implements OnDestroy {
           this.draftEdge.set(null);
           this.addEdge(created);
           this.mode.set('select');
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Strecke erstellt',
+            key: 'edge-save'
+          });
+          if (draft.trips.length) {
+            this.toastService.addToast({
+              type: 'success',
+              title: 'Fahrten gespeichert',
+              key: 'trip-save'
+            });
+          }
         },
-        error: () => null
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'edge-save'
+          });
+        }
       });
   }
 
@@ -576,8 +639,27 @@ export class AdminComponent implements OnDestroy {
       .subscribe({
         next: (updated) => {
           this.replaceEdge(updated);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Strecke gespeichert',
+            key: 'edge-save'
+          });
+          if (draft.trips.length) {
+            this.toastService.addToast({
+              type: 'success',
+              title: 'Fahrten gespeichert',
+              key: 'trip-save'
+            });
+          }
         },
-        error: () => null
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'edge-save'
+          });
+        }
       });
   }
 
@@ -631,9 +713,21 @@ export class AdminComponent implements OnDestroy {
         if (result.deleted) {
           this.removeEdgeLocal(edgeId);
           this.selectedEdgeId.set(null);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Strecke gelöscht',
+            key: 'edge-save'
+          });
         }
       },
-      error: () => null
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'edge-save'
+        });
+      }
     });
   }
 
@@ -699,8 +793,22 @@ export class AdminComponent implements OnDestroy {
         this.http
           .put<GraphNode>(`/api/v1/nodes/${node.id}`, { x: node.x, y: node.y })
           .subscribe({
-            next: (updated) => this.replaceNode(updated),
-            error: () => null
+            next: (updated) => {
+              this.replaceNode(updated);
+              this.toastService.addToast({
+                type: 'success',
+                title: 'Position aktualisiert',
+                key: 'node-move'
+              });
+            },
+            error: (error) => {
+              this.toastService.addToast({
+                type: 'error',
+                title: 'Fehler',
+                message: this.extractErrorMessage(error),
+                key: 'node-move'
+              });
+            }
           });
       }
 
@@ -886,6 +994,10 @@ export class AdminComponent implements OnDestroy {
     console.log('Validating time:', value, /^\\d{2}:\\d{2}$/.test(value));
     return true;
    // return /^d{2}:d{2}$/.test(value?.trim());
+  }
+
+  private extractErrorMessage(error: any): string {
+    return error?.error?.message || error?.message || 'Unerwarteter Fehler';
   }
 
   private applyDurationToTrip(trip: EdgeTrip, durationMinutes: number): EdgeTrip {

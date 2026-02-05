@@ -161,12 +161,6 @@
                         <option [value]="1">+1</option>
                         <option [value]="2">+2</option>
                       </select>
-                      <input
-                        type="text"
-                        [value]="trip.notes ?? ''"
-                        [placeholder]="'label.notes' | transloco"
-                        (input)="updateSelectedTripField(trip.id, 'notes', $any($event.target).value)"
-                      />
                       <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
                         {{ 'btn.remove' | transloco }}
                       </button>
@@ -291,12 +285,6 @@
                       <option [value]="1">+1</option>
                       <option [value]="2">+2</option>
                     </select>
-                    <input
-                      type="text"
-                      [value]="trip.notes ?? ''"
-                      [placeholder]="'label.notes' | transloco"
-                      (input)="updateTripField(trip.id, 'notes', $any($event.target).value)"
-                    />
                     <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
                       {{ 'btn.remove' | transloco }}
                     </button>

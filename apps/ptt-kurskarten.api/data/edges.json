@@ -24,28 +24,12 @@
     "validTo": null
   },
   {
-    "id": "bern-geneva-coach",
-    "from": "bern",
-    "to": "geneva",
-    "transport": "coach",
-    "validFrom": 1848,
-    "validTo": 1878
-  },
-  {
     "id": "bern-geneva-rail",
     "from": "bern",
     "to": "geneva",
     "transport": "rail",
     "validFrom": 1879,
     "validTo": null
-  },
-  {
-    "id": "lucerne-bern-coach",
-    "from": "lucerne",
-    "to": "bern",
-    "transport": "coach",
-    "validFrom": 1855,
-    "validTo": 1885
   },
   {
     "id": "zurich-st-gallen-rail",
@@ -88,46 +72,6 @@
     "validTo": null
   },
   {
-    "id": "draft-edge-1770282240863",
-    "from": "basel",
-    "to": "bern",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282248713",
-    "from": "basel",
-    "to": "bern",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282255180",
-    "from": "basel",
-    "to": "bern",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282260351",
-    "from": "basel",
-    "to": "bern",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282667566",
-    "from": "bern",
-    "to": "basel",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
     "id": "draft-edge-1770282687799",
     "from": "bern",
     "to": "basel",
@@ -144,17 +88,9 @@
     "validTo": null
   },
   {
-    "id": "draft-edge-1770282705061",
+    "id": "draft-edge-1770288808954",
     "from": "bern",
-    "to": "basel",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282717460",
-    "from": "bern",
-    "to": "basel",
+    "to": "lucerne",
     "transport": "coach",
     "validFrom": 1871,
     "validTo": null

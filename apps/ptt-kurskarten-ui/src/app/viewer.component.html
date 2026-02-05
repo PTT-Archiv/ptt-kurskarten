@@ -8,6 +8,7 @@
       [selectedNodeId]="selectedNodeId()"
       [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()"
+      [routingActive]="!!selectedConnection()"
       (nodeSelected)="onNodeSelected($event)"
     ></app-map-stage>
     @if (!graph()) {
