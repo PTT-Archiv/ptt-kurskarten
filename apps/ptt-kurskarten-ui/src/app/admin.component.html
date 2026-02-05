@@ -92,7 +92,23 @@
         @if (selectedEdgeDraft(); as edgeDraft) {
           <section class="panel-section">
             <div class="section-title">{{ 'admin.editEdge' | transloco }}</div>
-            <div class="coord">{{ edgeDraft.from }} → {{ edgeDraft.to }}</div>
+            <div class="coord">{{ getNodeName(edgeDraft.from) }} → {{ getNodeName(edgeDraft.to) }}</div>
+            <label class="field">
+              <span>{{ 'label.from' | transloco }}</span>
+              <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id">{{ node.name }}</option>
+                }
+              </select>
+            </label>
+            <label class="field">
+              <span>{{ 'label.to' | transloco }}</span>
+              <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id">{{ node.name }}</option>
+                }
+              </select>
+            </label>
             <label class="field">
               <span>{{ 'label.transport' | transloco }}</span>
               <select [value]="edgeDraft.transport" (change)="updateSelectedEdgeTransport($event)">
@@ -163,6 +179,9 @@
               }
             </div>
             <button class="action-btn" (click)="saveSelectedEdge()">{{ 'btn.updateEdge' | transloco }}</button>
+            <button class="action-btn secondary" type="button" (click)="removeSelectedEdge()">
+              {{ 'btn.deleteEdge' | transloco }}
+            </button>
           </section>
         }
       }
@@ -197,8 +216,29 @@
         <div class="section-title">{{ 'admin.newEdge' | transloco }}</div>
         @if (draftEdge(); as draft) {
           <div class="coord">
-            {{ 'admin.edgeFromTo' | transloco: { from: draft.from ?? '—', to: draft.to ?? '—' } }}
+            {{
+              'admin.edgeFromTo'
+                | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) }
+            }}
           </div>
+          <label class="field">
+            <span>{{ 'label.from' | transloco }}</span>
+            <select [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
+              <option value="">—</option>
+              @for (node of nodeOptions(); track node.id) {
+                <option [value]="node.id">{{ node.name }}</option>
+              }
+            </select>
+          </label>
+          <label class="field">
+            <span>{{ 'label.to' | transloco }}</span>
+            <select [value]="draft.to" (change)="updateDraftEdgeTo($event)">
+              <option value="">—</option>
+              @for (node of nodeOptions(); track node.id) {
+                <option [value]="node.id">{{ node.name }}</option>
+              }
+            </select>
+          </label>
           <label class="field">
             <span>{{ 'label.transport' | transloco }}</span>
             <select [value]="draft.transport" (change)="updateDraftEdgeTransport($event)">

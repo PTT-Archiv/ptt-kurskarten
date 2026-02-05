@@ -130,6 +130,10 @@ export class InMemoryGraphRepository implements GraphRepository {
     return YEARS;
   }
 
+  async getAllNodes(): Promise<GraphNode[]> {
+    return NODES;
+  }
+
   async createNode(node: GraphNode): Promise<GraphNode> {
     const exists = NODES.find((candidate) => candidate.id === node.id);
     if (exists) {
@@ -168,6 +172,15 @@ export class InMemoryGraphRepository implements GraphRepository {
     const normalized = { ...updated, trips: updated.trips ?? EDGES[index].trips ?? [] };
     EDGES = [...EDGES.slice(0, index), normalized, ...EDGES.slice(index + 1)];
     return normalized;
+  }
+
+  async deleteEdge(id: string): Promise<boolean> {
+    const index = EDGES.findIndex((candidate) => candidate.id === id);
+    if (index === -1) {
+      return false;
+    }
+    EDGES = [...EDGES.slice(0, index), ...EDGES.slice(index + 1)];
+    return true;
   }
 
   private coerceYear(year: number): Year {

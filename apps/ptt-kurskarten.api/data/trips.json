@@ -80,5 +80,19 @@
     "arrives": "21:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-1770116716947"
+  },
+  {
+    "id": "trip-1770124685793",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770124678420"
+  },
+  {
+    "id": "trip-1770124696151",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770124693205"
   }
 ]

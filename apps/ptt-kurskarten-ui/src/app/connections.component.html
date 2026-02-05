@@ -60,7 +60,9 @@
                 @for (leg of option.legs; track leg.edgeId + leg.tripId) {
                   <div class="leg-row">
                     <div class="leg-time">{{ leg.departs }} → {{ leg.arrives }}</div>
-                    <div class="leg-line">{{ leg.from }} → {{ leg.to }} ({{ leg.transport }})</div>
+                    <div class="leg-line">
+                      {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
+                    </div>
                   </div>
                 }
               </div>

@@ -80,6 +80,10 @@ export class ConnectionsComponent {
     return Math.max(0, option.legs.length - 1);
   }
 
+  getNodeName(id: string): string {
+    return this.nodes().find((node) => node.id === id)?.name ?? '—';
+  }
+
   private fetchNodes(year: number): void {
     this.http.get<GraphSnapshot>(`/api/v1/graph?year=${year}`).subscribe({
       next: (snapshot) => {

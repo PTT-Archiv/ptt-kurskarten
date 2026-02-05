@@ -5,6 +5,7 @@
       [nodeDetail]="nodeDetail()"
       [highlightedEdgeIds]="highlightedEdgeIds()"
       [highlightedNodeIds]="highlightedNodeIds()"
+      [selectedNodeId]="selectedNodeId()"
       [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()"
       (nodeSelected)="onNodeSelected($event)"
@@ -125,7 +126,7 @@
         <ul class="edge-list">
           @for (edge of detail.edges; track edge.id) {
             <li>
-              <div>{{ edge.from }} → {{ edge.to }} ({{ edge.transport }})</div>
+              <div>{{ getNodeName(edge.from) }} → {{ getNodeName(edge.to) }} ({{ edge.transport }})</div>
               <div class="trip-summary">{{ tripSummary(edge) }}</div>
             </li>
           }

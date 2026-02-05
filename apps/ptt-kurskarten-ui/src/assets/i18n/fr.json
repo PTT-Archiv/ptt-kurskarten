@@ -81,5 +81,6 @@
   "reports.durationMinutes": "Durée (min)",
   "viewer.detailsOnMap": "Détails sur la carte",
   "label.wait": "Attente",
-  "label.overnight": "nuit"
+  "label.overnight": "nuit",
+  "btn.deleteEdge": "Supprimer la liaison"
 }

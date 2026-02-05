@@ -19,7 +19,12 @@ import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 
-const NODE_RADIUS = 9;
+const NODE_RADIUS = 5;
+const NODE_RADIUS_MAX = 20;
+const NODE_RADIUS_STEP = 1;
+const EDGE_LINE_WIDTH = 1;
+const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
+const EDGE_LANE_SPACING = 6;
 
 @Component({
   selector: 'app-map-stage',
@@ -34,6 +39,7 @@ const NODE_RADIUS = 9;
           (pointerdown)="onPointerDown($event)"
           (pointermove)="onPointerMove($event)"
           (pointerup)="onPointerUp($event)"
+          (pointerleave)="onPointerLeave()"
         ></canvas>
       </div>
     </div>
@@ -83,6 +89,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() highlightedNodeIds: Set<string> | null = null;
   @Input() selectedConnection: ConnectionOption | null = null;
   @Input() showConnectionDetailsOnMap = true;
+  @Input() selectedNodeId: string | null = null;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -105,6 +112,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private needsRender = false;
   private activePointerId: number | null = null;
   private langSub?: Subscription;
+  private hoveredNodeId: string | null = null;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -125,7 +133,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['graph'] ||
       changes['nodeDetail'] ||
       changes['selectedConnection'] ||
-      changes['showConnectionDetailsOnMap']
+      changes['showConnectionDetailsOnMap'] ||
+      changes['selectedNodeId']
     ) {
       this.scheduleRender();
     }
@@ -157,12 +166,15 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   onPointerMove(event: PointerEvent): void {
-    if (!this.isBrowser || this.activePointerId !== event.pointerId) {
+    if (!this.isBrowser) {
       return;
     }
 
     const payload = this.buildPointerPayload(event);
-    this.mapPointer.emit({ ...payload, type: 'move' });
+    if (this.activePointerId === event.pointerId) {
+      this.mapPointer.emit({ ...payload, type: 'move' });
+    }
+    this.updateHoverState(payload.hitNodeId);
   }
 
   onPointerUp(event: PointerEvent): void {
@@ -182,6 +194,13 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (payload.hitNodeId) {
       this.nodeSelected.emit(payload.hitNodeId);
     }
+  }
+
+  onPointerLeave(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+    this.updateHoverState(null);
   }
 
   private attachResizeObserver(): void {
@@ -273,32 +292,61 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     this.screenNodes.clear();
 
-    ctx.lineWidth = 1;
-
+    const edgeCounts = new Map<string, number>();
     edges.forEach((edge) => {
-      const from = nodeMap.get(edge.from);
-      const to = nodeMap.get(edge.to);
-      if (!from || !to) {
-        return;
+      edgeCounts.set(edge.from, (edgeCounts.get(edge.from) ?? 0) + 1);
+      edgeCounts.set(edge.to, (edgeCounts.get(edge.to) ?? 0) + 1);
+    });
+
+    const edgeGroups = new Map<string, GraphSnapshot['edges']>();
+    edges.forEach((edge) => {
+      const key = `${edge.from}→${edge.to}`;
+      const list = edgeGroups.get(key);
+      if (list) {
+        list.push(edge);
+      } else {
+        edgeGroups.set(key, [edge]);
       }
-      const fromPos = this.project(from);
-      const toPos = this.project(to);
-      ctx.beginPath();
-      ctx.moveTo(fromPos.x, fromPos.y);
-      ctx.lineTo(toPos.x, toPos.y);
-      ctx.strokeStyle = edgeHighlights.has(edge.id) ? '#141414' : 'rgba(20, 20, 20, 0.2)';
-      ctx.lineWidth = edgeHighlights.has(edge.id) ? 2 : 1;
-      ctx.stroke();
+    });
+
+    edgeGroups.forEach((group) => {
+      group.sort((a, b) => {
+        if (a.transport !== b.transport) {
+          return a.transport.localeCompare(b.transport);
+        }
+        if (a.validFrom !== b.validFrom) {
+          return a.validFrom - b.validFrom;
+        }
+        return a.id.localeCompare(b.id);
+      });
+
+      const count = group.length;
+      group.forEach((edge, index) => {
+        const from = nodeMap.get(edge.from);
+        const to = nodeMap.get(edge.to);
+        if (!from || !to) {
+          return;
+        }
+        const laneIndex = index - (count - 1) / 2;
+        const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
+        const isHighlighted = edgeHighlights.has(edge.id);
+        this.drawEdgeLane(ctx, from, to, laneOffsetPx, isHighlighted);
+      });
     });
 
     nodes.forEach((node) => {
       const position = this.project(node);
-      const isHighlighted = nodeHighlights.has(node.id);
-      const radius = isHighlighted ? NODE_RADIUS + 2 : NODE_RADIUS;
+      const degree = edgeCounts.get(node.id) ?? 0;
+      const baseRadius = Math.min(NODE_RADIUS_MAX, NODE_RADIUS + degree * NODE_RADIUS_STEP);
+      const isSelected = this.selectedNodeId === node.id;
+      const isHighlighted = nodeHighlights.has(node.id) || isSelected;
+      const isHovered = this.hoveredNodeId === node.id;
+      const radius = baseRadius + (isHighlighted || isHovered ? 2 : 0);
       ctx.beginPath();
       ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = isHighlighted ? '#ffff00' : '#141414';
+      ctx.fillStyle = '#ffff00';
       ctx.strokeStyle = '#141414';
+      ctx.lineWidth = 2;
       ctx.fill();
       ctx.stroke();
 
@@ -349,6 +397,35 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     return null;
   }
 
+  private drawEdgeLane(
+    ctx: CanvasRenderingContext2D,
+    from: GraphNode,
+    to: GraphNode,
+    laneOffsetPx: number,
+    isHighlighted: boolean
+  ): void {
+    const fromPos = this.project(from);
+    const toPos = this.project(to);
+    const dx = toPos.x - fromPos.x;
+    const dy = toPos.y - fromPos.y;
+    const len = Math.hypot(dx, dy);
+    if (len === 0) {
+      return;
+    }
+    const px = -dy / len;
+    const py = dx / len;
+    ctx.strokeStyle = isHighlighted ? '#141414' : 'rgba(20, 20, 20, 0.35)';
+    ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
+    const x1 = fromPos.x + px * laneOffsetPx;
+    const y1 = fromPos.y + py * laneOffsetPx;
+    const x2 = toPos.x + px * laneOffsetPx;
+    const y2 = toPos.y + py * laneOffsetPx;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
+
   private buildPointerPayload(event: PointerEvent): {
     screen: { x: number; y: number };
     world: { x: number; y: number };
@@ -372,6 +449,18 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const hitNodeId = this.hitTestNode(event);
 
     return { screen, world, hitNodeId };
+  }
+
+  private updateHoverState(hitNodeId: string | null): void {
+    const canvas = this.canvasRef?.nativeElement;
+    if (canvas) {
+      canvas.style.cursor = hitNodeId ? 'pointer' : 'default';
+    }
+    if (this.hoveredNodeId === hitNodeId) {
+      return;
+    }
+    this.hoveredNodeId = hitNodeId;
+    this.scheduleRender();
   }
 
   private drawConnectionDetails(ctx: CanvasRenderingContext2D, connection: ConnectionOption): void {

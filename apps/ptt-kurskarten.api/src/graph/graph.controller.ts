@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Inject, Param, Post, Put, Query } from '@nestjs/common';
 import type {
   ConnectionOption,
   EdgeTimetableReport,
@@ -108,6 +108,7 @@ export class GraphController {
 
   @Post('edges')
   async createEdge(@Body() body: GraphEdge): Promise<GraphEdge> {
+    await this.assertEdgeNodeIds(body.from, body.to);
     const edge: GraphEdge = {
       ...body,
       id: body.id ?? `edge-${Date.now()}`,
@@ -121,6 +122,9 @@ export class GraphController {
 
   @Put('edges/:id')
   async updateEdge(@Param('id') edgeId: string, @Body() body: Partial<GraphEdge>): Promise<GraphEdge> {
+    if (body.from || body.to) {
+      await this.assertEdgeNodeIds(body.from, body.to);
+    }
     const updated = await this.graphRepository.updateEdge(edgeId, body);
     if (!updated) {
       return {
@@ -135,5 +139,22 @@ export class GraphController {
       };
     }
     return updated;
+  }
+
+  @Delete('edges/:id')
+  async deleteEdge(@Param('id') edgeId: string): Promise<{ deleted: boolean }> {
+    const deleted = await this.graphRepository.deleteEdge(edgeId);
+    return { deleted };
+  }
+
+  private async assertEdgeNodeIds(from?: string, to?: string): Promise<void> {
+    const nodes = await this.graphRepository.getAllNodes();
+    const nodeIds = new Set(nodes.map((node) => node.id));
+    if (!from || !nodeIds.has(from)) {
+      throw new BadRequestException('Invalid edge: from node id not found');
+    }
+    if (!to || !nodeIds.has(to)) {
+      throw new BadRequestException('Invalid edge: to node id not found');
+    }
   }
 }

@@ -158,11 +158,12 @@ export class ReportsComponent {
     this.http.get<GraphSnapshot>(`/api/v1/graph?year=${year}`).subscribe({
       next: (snapshot) => {
         const nodes = [...snapshot.nodes].sort((a, b) => a.name.localeCompare(b.name));
+        const nodesById = new Map(nodes.map((node) => [node.id, node.name]));
         this.nodes.set(nodes.map((node) => ({ id: node.id, name: node.name })));
         this.edges.set(
           snapshot.edges.map((edge) => ({
             id: edge.id,
-            label: `${edge.from} → ${edge.to} (${edge.transport})`
+            label: `${nodesById.get(edge.from) ?? '—'} → ${nodesById.get(edge.to) ?? '—'} (${edge.transport})`
           }))
         );
         if (!this.stationId() && nodes.length) {

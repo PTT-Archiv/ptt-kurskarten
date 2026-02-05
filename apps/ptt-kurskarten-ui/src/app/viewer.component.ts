@@ -223,7 +223,7 @@ export class ViewerComponent implements OnDestroy {
 
   getNodeName(id: string): string {
     const match = this.nodes().find((node) => node.id === id);
-    return match?.name ?? id;
+    return match?.name ?? '—';
   }
 
   private ensureConnectionId(option: ConnectionOption, index: number): ConnectionOption {

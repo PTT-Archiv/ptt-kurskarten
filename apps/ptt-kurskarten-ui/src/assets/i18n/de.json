@@ -81,5 +81,6 @@
   "reports.durationMinutes": "Dauer (Min.)",
   "viewer.detailsOnMap": "Details auf der Karte",
   "label.wait": "Warten",
-  "label.overnight": "über Nacht"
+  "label.overnight": "über Nacht",
+  "btn.deleteEdge": "Strecke löschen"
 }

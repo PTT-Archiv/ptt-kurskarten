@@ -5,7 +5,7 @@ import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } 
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
-type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips'> & { validTo: Year | null };
+type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'durationMinutes'> & { validTo: Year | null };
 type StoredTrip = EdgeTrip & { edgeId: string };
 
 type GraphData = {
@@ -86,6 +86,13 @@ export class JsonGraphRepository implements GraphRepository {
     return [...years].sort((a, b) => a - b);
   }
 
+  async getAllNodes(): Promise<GraphNode[]> {
+    await this.writeQueue;
+    await this.ensureInitialized();
+    const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
+    return nodes.map((node) => this.fromStoredNode(node));
+  }
+
   async createNode(node: GraphNode): Promise<GraphNode> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
@@ -162,6 +169,23 @@ export class JsonGraphRepository implements GraphRepository {
     });
   }
 
+  async deleteEdge(id: string): Promise<boolean> {
+    return this.enqueueWrite(async () => {
+      await this.ensureInitialized();
+      const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
+      const index = edges.findIndex((candidate) => candidate.id === id);
+      if (index === -1) {
+        return false;
+      }
+      const nextEdges = [...edges.slice(0, index), ...edges.slice(index + 1)];
+      const nextTrips = trips.filter((trip) => trip.edgeId !== id);
+      await this.writeJsonAtomic(this.edgesPath, nextEdges);
+      await this.writeJsonAtomic(this.tripsPath, nextTrips);
+      return true;
+    });
+  }
+
   private coerceYear(year: number): Year {
     return Number.isFinite(year) ? year : 1871;
   }
@@ -177,10 +201,17 @@ export class JsonGraphRepository implements GraphRepository {
   private async loadGraphData(): Promise<GraphData> {
     await this.ensureInitialized();
     const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
-    const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+    let edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
     const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
 
     const normalizedNodes = nodes.map((node) => this.fromStoredNode(node));
+    const migration = this.migrateEdgesIfNeeded(edges, normalizedNodes);
+    if (migration.changed) {
+      edges = migration.edges;
+      await this.enqueueWrite(async () => {
+        await this.writeJsonAtomic(this.edgesPath, migration.edges);
+      });
+    }
     const normalizedEdges = edges.map((edge) => this.assembleEdge(edge, trips));
 
     return {
@@ -226,11 +257,65 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private toStoredEdge(edge: GraphEdge): StoredEdge {
-    const { trips: _trips, ...rest } = edge;
+    const { trips: _trips, durationMinutes: _durationMinutes, ...rest } = edge;
     return {
       ...rest,
       validTo: edge.validTo ?? null
     };
+  }
+
+  private migrateEdgesIfNeeded(
+    edges: StoredEdge[],
+    nodes: GraphNode[]
+  ): { edges: StoredEdge[]; changed: boolean } {
+    const nodeIds = new Set(nodes.map((node) => node.id));
+    const nameToId = new Map<string, string>();
+    const duplicates = new Set<string>();
+
+    nodes.forEach((node) => {
+      if (nameToId.has(node.name)) {
+        duplicates.add(node.name);
+        return;
+      }
+      nameToId.set(node.name, node.id);
+    });
+
+    duplicates.forEach((name) => nameToId.delete(name));
+
+    let changed = false;
+    const migrated = edges.map((edge) => {
+      const { durationMinutes: _durationMinutes, ...base } = edge as StoredEdge & { durationMinutes?: number };
+      let next: StoredEdge = { ...base };
+      if (_durationMinutes !== undefined) {
+        changed = true;
+      }
+
+      if (!nodeIds.has(edge.from)) {
+        const mapped = nameToId.get(edge.from);
+        if (mapped) {
+          console.info(`Migrated edge ${edge.id} from "${edge.from}" to node id "${mapped}" (from).`);
+          next = { ...next, from: mapped };
+          changed = true;
+        } else {
+          console.warn(`Failed to migrate edge ${edge.id}: from node "${edge.from}" not found.`);
+        }
+      }
+
+      if (!nodeIds.has(edge.to)) {
+        const mapped = nameToId.get(edge.to);
+        if (mapped) {
+          console.info(`Migrated edge ${edge.id} from "${edge.to}" to node id "${mapped}" (to).`);
+          next = { ...next, to: mapped };
+          changed = true;
+        } else {
+          console.warn(`Failed to migrate edge ${edge.id}: to node "${edge.to}" not found.`);
+        }
+      }
+
+      return next;
+    });
+
+    return { edges: migrated, changed };
   }
 
   private async ensureInitialized(): Promise<void> {

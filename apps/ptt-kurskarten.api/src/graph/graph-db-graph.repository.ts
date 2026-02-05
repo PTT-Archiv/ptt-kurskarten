@@ -15,6 +15,10 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
+  async getAllNodes(): Promise<import('@ptt-kurskarten/shared').GraphNode[]> {
+    throw new Error('Graph DB repository not wired yet.');
+  }
+
   async createNode(_node: import('@ptt-kurskarten/shared').GraphNode): Promise<import('@ptt-kurskarten/shared').GraphNode> {
     throw new Error('Graph DB repository not wired yet.');
   }
@@ -34,6 +38,10 @@ export class GraphDbGraphRepository implements GraphRepository {
     _id: string,
     _patch: Partial<import('@ptt-kurskarten/shared').GraphEdge>
   ): Promise<import('@ptt-kurskarten/shared').GraphEdge | null> {
+    throw new Error('Graph DB repository not wired yet.');
+  }
+
+  async deleteEdge(_id: string): Promise<boolean> {
     throw new Error('Graph DB repository not wired yet.');
   }
 }

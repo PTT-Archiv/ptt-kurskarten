@@ -5,7 +5,6 @@
     "to": "zurich",
     "transport": "coach",
     "validFrom": 1845,
-    "durationMinutes": 600,
     "validTo": 1865
   },
   {
@@ -14,7 +13,6 @@
     "to": "zurich",
     "transport": "rail",
     "validFrom": 1866,
-    "durationMinutes": 210,
     "validTo": null
   },
   {
@@ -23,7 +21,6 @@
     "to": "zurich",
     "transport": "rail",
     "validFrom": 1855,
-    "durationMinutes": 180,
     "validTo": null
   },
   {
@@ -32,7 +29,6 @@
     "to": "geneva",
     "transport": "coach",
     "validFrom": 1848,
-    "durationMinutes": 540,
     "validTo": 1878
   },
   {
@@ -41,7 +37,6 @@
     "to": "geneva",
     "transport": "rail",
     "validFrom": 1879,
-    "durationMinutes": 190,
     "validTo": null
   },
   {
@@ -50,7 +45,6 @@
     "to": "bern",
     "transport": "coach",
     "validFrom": 1855,
-    "durationMinutes": 240,
     "validTo": 1885
   },
   {
@@ -59,7 +53,6 @@
     "to": "st-gallen",
     "transport": "rail",
     "validFrom": 1875,
-    "durationMinutes": 150,
     "validTo": null
   },
   {
@@ -68,7 +61,6 @@
     "to": "bern",
     "transport": "coach",
     "validFrom": 1871,
-    "durationMinutes": 60,
     "validTo": null
   },
   {
@@ -77,7 +69,94 @@
     "to": "bern",
     "transport": "coach",
     "validFrom": 1871,
-    "durationMinutes": 60,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770124678420",
+    "from": "draft-node-1770124603090",
+    "to": "lucerne",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770124693205",
+    "from": "draft-node-1770124603090",
+    "to": "lucerne",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282240863",
+    "from": "basel",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282248713",
+    "from": "basel",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282255180",
+    "from": "basel",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282260351",
+    "from": "basel",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282667566",
+    "from": "bern",
+    "to": "basel",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282687799",
+    "from": "bern",
+    "to": "basel",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282698677",
+    "from": "bern",
+    "to": "basel",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282705061",
+    "from": "bern",
+    "to": "basel",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770282717460",
+    "from": "bern",
+    "to": "basel",
+    "transport": "coach",
+    "validFrom": 1871,
     "validTo": null
   }
 ]

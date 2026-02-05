@@ -105,13 +105,23 @@ export class AdminComponent implements OnDestroy {
         const toNode = snapshot.nodes.find((node) => node.id === edge.to);
         return {
           id: edge.id,
-          toName: toNode?.name ?? edge.to,
+          toName: toNode?.name ?? '—',
           transport: edge.transport,
           tripsCount: edge.trips?.length ?? 0,
           validFrom: edge.validFrom,
           validTo: edge.validTo
         };
       });
+  });
+
+  nodeOptions = computed(() => {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return [];
+    }
+    return [...snapshot.nodes]
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((node) => ({ id: node.id, name: node.name }));
   });
 
   selectedEdgeDraft = computed<EdgeDraft | null>(() => {
@@ -398,6 +408,24 @@ export class AdminComponent implements OnDestroy {
     this.draftEdge.set({ ...draft, transport: value });
   }
 
+  updateDraftEdgeFrom(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const draft = this.ensureDraftEdge();
+    if (!draft) {
+      return;
+    }
+    this.draftEdge.set({ ...draft, from: value || null });
+  }
+
+  updateDraftEdgeTo(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const draft = this.ensureDraftEdge();
+    if (!draft) {
+      return;
+    }
+    this.draftEdge.set({ ...draft, to: value || null });
+  }
+
   updateDraftEdgeValidFrom(event: Event): void {
     const value = Number((event.target as HTMLInputElement).value);
     const draft = this.draftEdge();
@@ -435,6 +463,32 @@ export class AdminComponent implements OnDestroy {
     this.updateEdgeLocal(draft.id, { transport: value });
   }
 
+  updateSelectedEdgeFrom(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    const nextFrom = value || draft.from;
+    if (!nextFrom) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { from: nextFrom });
+  }
+
+  updateSelectedEdgeTo(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    const nextTo = value || draft.to;
+    if (!nextTo) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { to: nextTo });
+  }
+
   updateSelectedEdgeValidFrom(event: Event): void {
     const value = Number((event.target as HTMLInputElement).value);
     const draft = this.selectedEdgeDraft();
@@ -468,14 +522,16 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    const trips = draft.trips.map((trip) =>
-      trip.id === tripId
-        ? {
-            ...trip,
-            [field]: value
-          }
-        : trip
-    );
+    const trips = draft.trips.map((trip) => {
+      if (trip.id !== tripId) {
+        return trip;
+      }
+      const next = { ...trip, [field]: value };
+      if (field === 'departs') {
+        return this.applyDurationToTrip(next, draft.durationMinutes);
+      }
+      return next;
+    });
     this.updateEdgeLocal(draft.id, { trips });
   }
 
@@ -509,6 +565,8 @@ export class AdminComponent implements OnDestroy {
 
     this.http
       .put<GraphEdge>(`/api/v1/edges/${draft.id}`, {
+        from: draft.from,
+        to: draft.to,
         transport: draft.transport,
         validFrom: draft.validFrom,
         validTo: draft.validTo,
@@ -550,15 +608,33 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    const trips = draft.trips.map((trip) =>
-      trip.id === tripId
-        ? {
-            ...trip,
-            [field]: value
-          }
-        : trip
-    );
+    const trips = draft.trips.map((trip) => {
+      if (trip.id !== tripId) {
+        return trip;
+      }
+      const next = { ...trip, [field]: value };
+      if (field === 'departs') {
+        return this.applyDurationToTrip(next, draft.durationMinutes);
+      }
+      return next;
+    });
     this.draftEdge.set({ ...draft, trips });
+  }
+
+  removeSelectedEdge(): void {
+    const edgeId = this.selectedEdgeId();
+    if (!edgeId) {
+      return;
+    }
+    this.http.delete<{ deleted: boolean }>(`/api/v1/edges/${edgeId}`).subscribe({
+      next: (result) => {
+        if (result.deleted) {
+          this.removeEdgeLocal(edgeId);
+          this.selectedEdgeId.set(null);
+        }
+      },
+      error: () => null
+    });
   }
 
   undoMove(): void {
@@ -651,6 +727,24 @@ export class AdminComponent implements OnDestroy {
     });
   }
 
+  private ensureDraftEdge(): EdgeDraft | null {
+    const draft = this.draftEdge();
+    if (draft) {
+      return draft;
+    }
+    const created: EdgeDraft = {
+      id: `draft-edge-${Date.now()}`,
+      from: null,
+      to: null,
+      transport: 'coach',
+      validFrom: this.year(),
+      durationMinutes: 60,
+      trips: []
+    };
+    this.draftEdge.set(created);
+    return created;
+  }
+
   private pickEdgeNode(nodeId: string): void {
     const draft = this.draftEdge();
     if (!draft) {
@@ -738,6 +832,15 @@ export class AdminComponent implements OnDestroy {
     this.graph.set({ ...snapshot, edges });
   }
 
+  private removeEdgeLocal(id: string): void {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return;
+    }
+    const edges = snapshot.edges.filter((edge) => edge.id !== id);
+    this.graph.set({ ...snapshot, edges });
+  }
+
   private replaceNode(node: GraphNode): void {
     const snapshot = this.graph();
     if (!snapshot) {
@@ -749,6 +852,13 @@ export class AdminComponent implements OnDestroy {
 
   private findNode(id: string): GraphNode | undefined {
     return this.graph()?.nodes.find((candidate) => candidate.id === id);
+  }
+
+  getNodeName(id: string | null | undefined): string {
+    if (!id) {
+      return '—';
+    }
+    return this.graph()?.nodes.find((node) => node.id === id)?.name ?? '—';
   }
 
   private bindUndoShortcut(): void {
@@ -776,5 +886,50 @@ export class AdminComponent implements OnDestroy {
     console.log('Validating time:', value, /^\\d{2}:\\d{2}$/.test(value));
     return true;
    // return /^d{2}:d{2}$/.test(value?.trim());
+  }
+
+  private applyDurationToTrip(trip: EdgeTrip, durationMinutes: number): EdgeTrip {
+    if (!trip.departs || !Number.isFinite(durationMinutes)) {
+      return trip;
+    }
+    const departMinutes = this.parseTimeMinutes(trip.departs);
+    if (departMinutes === null) {
+      return trip;
+    }
+    const total = departMinutes + Math.max(0, Math.floor(durationMinutes));
+    const arrivalDayOffset = this.toDayOffset(Math.floor(total / 1440));
+    const arrives = this.formatTimeMinutes(total % 1440);
+    return { ...trip, arrives: arrives as EdgeTrip['arrives'], arrivalDayOffset };
+  }
+
+  private parseTimeMinutes(value: string): number | null {
+    const parts = value.split(':');
+    if (parts.length !== 2) {
+      return null;
+    }
+    const hours = Number(parts[0]);
+    const minutes = Number(parts[1]);
+    if (!Number.isFinite(hours) || !Number.isFinite(minutes)) {
+      return null;
+    }
+    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+      return null;
+    }
+    return hours * 60 + minutes;
+  }
+
+  private formatTimeMinutes(totalMinutes: number): string {
+    const hours = Math.floor(totalMinutes / 60)
+      .toString()
+      .padStart(2, '0');
+    const minutes = Math.floor(totalMinutes % 60)
+      .toString()
+      .padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
+  private toDayOffset(value: number): EdgeTrip['arrivalDayOffset'] {
+    const clamped = Math.max(0, Math.min(2, Math.floor(value)));
+    return clamped as 0 | 1 | 2;
   }
 }

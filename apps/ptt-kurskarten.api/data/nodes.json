@@ -46,5 +46,13 @@
     "y": 110,
     "validFrom": 1875,
     "validTo": null
+  },
+  {
+    "id": "draft-node-1770124603090",
+    "name": "Tessin",
+    "x": 531.7073170731708,
+    "y": 475.3883677298311,
+    "validFrom": 1871,
+    "validTo": null
   }
 ]
