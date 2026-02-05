@@ -153,6 +153,20 @@ export class InMemoryGraphRepository implements GraphRepository {
     return updated;
   }
 
+  async deleteNode(id: string): Promise<boolean> {
+    const index = NODES.findIndex((candidate) => candidate.id === id);
+    if (index === -1) {
+      return false;
+    }
+    NODES = [...NODES.slice(0, index), ...NODES.slice(index + 1)];
+    const removedEdges = EDGES.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id);
+    if (removedEdges.length) {
+      const removedSet = new Set(removedEdges);
+      EDGES = EDGES.filter((edge) => !removedSet.has(edge.id));
+    }
+    return true;
+  }
+
   async createEdge(edge: GraphEdge): Promise<GraphEdge> {
     const exists = EDGES.find((candidate) => candidate.id === edge.id);
     if (exists) {

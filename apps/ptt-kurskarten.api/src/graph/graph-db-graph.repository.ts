@@ -30,6 +30,10 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
+  async deleteNode(_id: string): Promise<boolean> {
+    throw new Error('Graph DB repository not wired yet.');
+  }
+
   async createEdge(_edge: import('@ptt-kurskarten/shared').GraphEdge): Promise<import('@ptt-kurskarten/shared').GraphEdge> {
     throw new Error('Graph DB repository not wired yet.');
   }

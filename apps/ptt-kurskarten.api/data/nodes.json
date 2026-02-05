@@ -26,8 +26,8 @@
   {
     "id": "geneva",
     "name": "Geneva",
-    "x": 40.90056285178236,
-    "y": 392.8367729831144,
+    "x": 31.7743132887899,
+    "y": 407.2293986636971,
     "validFrom": 1845,
     "validTo": null
   },
@@ -52,6 +52,62 @@
     "name": "Tessin",
     "x": 531.7073170731708,
     "y": 475.3883677298311,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770293075766",
+    "name": "Wallis",
+    "x": 279.1388270230141,
+    "y": 409.011135857461,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770294217060",
+    "name": "New node",
+    "x": 494.7271045328399,
+    "y": 163.71322849213692,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770294225267",
+    "name": "New node",
+    "x": 503.2377428307123,
+    "y": 297.6632747456059,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770294228742",
+    "name": "New node",
+    "x": 200.1850138760407,
+    "y": 167.413506012951,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770294231241",
+    "name": "New node",
+    "x": 200.1850138760407,
+    "y": 167.413506012951,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770294235899",
+    "name": "New node",
+    "x": 226.45698427382052,
+    "y": 385.35985198889915,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770298096656",
+    "name": "Fribourg gloubs",
+    "x": 191.67437557816837,
+    "y": 220.69750231267346,
     "validFrom": 1871,
     "validTo": null
   }

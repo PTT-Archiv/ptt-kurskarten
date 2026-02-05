@@ -1,21 +1,29 @@
-import { Component, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastService } from './shared/toast/toast.service';
+import { AdminSelectionState } from './admin-selection.service';
+import { ADMIN_GRAPH_REPOSITORY, type AdminGraphRepository } from './admin-graph.repository';
+import { TourService } from './tour.service';
+import { TourOverlayComponent } from './tour-overlay.component';
+import { ADMIN_TUTORIAL_STEPS } from './admin-tutorial.steps';
 
 const DEFAULT_YEAR = 1871;
 const UNDO_LIMIT = 20;
-
-type Mode = 'select' | 'add-node' | 'add-edge';
 
 type MoveUndo = {
   type: 'MOVE_NODE';
   id: string;
   from: { x: number; y: number };
   to: { x: number; y: number };
+};
+
+type DeleteNodeUndo = {
+  type: 'DELETE_NODE';
+  node: GraphNode;
+  edges: GraphEdge[];
 };
 
 type NodeDraft = {
@@ -41,27 +49,38 @@ type EdgeDraft = {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe],
+  imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
 export class AdminComponent implements OnDestroy {
-  private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly toastService = inject(ToastService);
+  readonly selection = inject(AdminSelectionState);
+  private readonly hostRef = inject(ElementRef<HTMLElement>);
+  private readonly repo = inject<AdminGraphRepository>(ADMIN_GRAPH_REPOSITORY);
+  private readonly tour = inject(TourService);
 
-  mode = signal<Mode>('select');
   year = signal<number>(DEFAULT_YEAR);
   graph = signal<GraphSnapshot | null>(null);
   availableYears = signal<number[]>([]);
-  selectedNodeId = signal<string | null>(null);
-  selectedEdgeId = signal<string | null>(null);
+  selectedNodeId = this.selection.selectedNodeId;
+  selectedEdgeId = this.selection.selectedEdgeId;
+  selectedType = this.selection.selectedType;
+  highlightedEdgeIds = computed<Set<string> | null>(() => {
+    const id = this.selectedEdgeId();
+    return id ? new Set([id]) : null;
+  });
 
   draftNode = signal<NodeDraft | null>(null);
   draftEdge = signal<EdgeDraft | null>(null);
 
-  undoStack = signal<MoveUndo[]>([]);
+  undoStack = signal<Array<MoveUndo | DeleteNodeUndo>>([]);
+  dirty = signal<boolean>(false);
+  isDemo = signal<boolean>(this.repo.isDemo);
+  shortcutsCollapsed = signal<boolean>(false);
+  confirmDeleteNode = signal<boolean>(false);
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
   private dragState:
@@ -71,6 +90,8 @@ export class AdminComponent implements OnDestroy {
         moved: boolean;
       }
     | null = null;
+  @ViewChild('edgeEditor') private edgeEditorRef?: ElementRef<HTMLElement>;
+  @ViewChild('nodePanel') private nodePanelRef?: ElementRef<HTMLElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -117,7 +138,7 @@ export class AdminComponent implements OnDestroy {
   });
 
   nodeOptions = computed(() => {
-    const snapshot = this.graph();
+    const snapshot = this.displayGraph() ?? this.graph();
     if (!snapshot) {
       return [];
     }
@@ -214,8 +235,13 @@ export class AdminComponent implements OnDestroy {
 
   constructor() {
     if (this.isBrowser) {
+      const stored = window.localStorage.getItem('admin.shortcutsCollapsed');
+      this.shortcutsCollapsed.set(stored === 'true');
       this.fetchYears();
       this.bindUndoShortcut();
+      if (this.repo.isDemo && !this.tour.isCompleted()) {
+        this.tour.start(ADMIN_TUTORIAL_STEPS);
+      }
     }
 
     effect(() => {
@@ -232,6 +258,50 @@ export class AdminComponent implements OnDestroy {
         this.fetchGraph(targetYear);
       }, 200);
     });
+
+    effect(() => {
+      const edgeId = this.selectedEdgeId();
+      const draft = this.draftEdge();
+      if (!this.isBrowser) {
+        return;
+      }
+      if (edgeId || draft) {
+        requestAnimationFrame(() => {
+          this.edgeEditorRef?.nativeElement?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        });
+      }
+    });
+
+    effect(() => {
+      const draft = this.draftEdge();
+      const snapshot = this.displayGraph() ?? this.graph();
+      if (!draft || !snapshot) {
+        return;
+      }
+      const nodes = snapshot.nodes;
+      if (!nodes.length) {
+        return;
+      }
+      let from = draft.from;
+      let to = draft.to;
+      if (!from) {
+        from = nodes[0]?.id ?? null;
+      }
+      if (!to || to === from) {
+        to = nodes.find((node) => node.id !== from)?.id ?? null;
+      }
+      if (from !== draft.from || to !== draft.to) {
+        this.draftEdge.set({ ...draft, from, to });
+      }
+    });
+  }
+
+  toggleShortcuts(): void {
+    const next = !this.shortcutsCollapsed();
+    this.shortcutsCollapsed.set(next);
+    if (this.isBrowser) {
+      window.localStorage.setItem('admin.shortcutsCollapsed', String(next));
+    }
   }
 
   ngOnDestroy(): void {
@@ -243,60 +313,174 @@ export class AdminComponent implements OnDestroy {
     }
   }
 
-  setMode(next: Mode): void {
-    this.mode.set(next);
-    this.selectedNodeId.set(null);
-    this.selectedEdgeId.set(null);
-    this.draftNode.set(null);
-    this.draftEdge.set(null);
-    this.dragState = null;
-  }
-
   onYearInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const nextYear = Number(input.value);
     if (!Number.isNaN(nextYear)) {
       this.year.set(nextYear);
-      this.selectedNodeId.set(null);
-      this.selectedEdgeId.set(null);
+      this.selection.clearSelection();
+      this.selection.clearPendingEdge();
       this.draftNode.set(null);
       this.draftEdge.set(null);
       this.dragState = null;
     }
   }
 
-  onMapPointer(event: { type: 'down' | 'move' | 'up'; world: { x: number; y: number }; hitNodeId: string | null }): void {
+  onMapPointer(event: {
+    type: 'down' | 'move' | 'up';
+    world: { x: number; y: number };
+    hitNodeId: string | null;
+    hitEdgeId: string | null;
+  }): void {
     if (!this.isBrowser) {
       return;
     }
 
-    const mode = this.mode();
-
-    if (mode === 'select') {
-      this.handleSelectPointer(event);
-      return;
-    }
-
-    if (mode === 'add-node') {
-      if (event.type === 'up' && !event.hitNodeId) {
-        this.createDraftNode(event.world);
-      }
-      return;
-    }
-
-    if (mode === 'add-edge') {
-      if (event.type === 'up' && event.hitNodeId) {
-        this.pickEdgeNode(event.hitNodeId);
-      }
-    }
+    this.selection.lastMapPointerPosition.set(event.world);
+    this.handleSelectPointer(event);
   }
 
   selectEdge(edgeId: string): void {
-    this.selectedEdgeId.set(edgeId);
+    this.draftEdge.set(null);
+    this.selection.selectEdge(edgeId);
+    this.confirmDeleteNode.set(false);
   }
 
   clearEdgeSelection(): void {
-    this.selectedEdgeId.set(null);
+    this.selection.clearSelection();
+    this.confirmDeleteNode.set(false);
+  }
+
+  addNodeAtCursor(): void {
+    const point = this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
+    this.createDraftNode(point);
+  }
+
+  startEdgeFromSelected(): void {
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return;
+    }
+    const snapshot = this.graph();
+    const nodes = snapshot?.nodes ?? [];
+    const fallbackTo = nodes.find((node) => node.id !== nodeId)?.id ?? null;
+    if (fallbackTo) {
+      this.draftEdge.set({
+        id: `draft-edge-${Date.now()}`,
+        from: nodeId,
+        to: fallbackTo,
+        transport: 'coach',
+        validFrom: this.year(),
+        durationMinutes: 60,
+        trips: []
+      });
+      this.selection.selectEdge(this.draftEdge()!.id);
+      this.dirty.set(true);
+      return;
+    }
+    this.selection.startEdgeFrom(nodeId);
+  }
+
+  cancelPendingEdge(): void {
+    this.selection.clearPendingEdge();
+  }
+
+  requestDeleteNode(): void {
+    if (!this.selectedNodeId()) {
+      return;
+    }
+    this.confirmDeleteNode.set(true);
+    requestAnimationFrame(() => {
+      this.nodePanelRef?.nativeElement?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    });
+  }
+
+  cancelDeleteNode(): void {
+    this.confirmDeleteNode.set(false);
+  }
+
+  deleteSelectedNode(): void {
+    const nodeId = this.selectedNodeId();
+    const snapshot = this.graph();
+    if (!nodeId || !snapshot) {
+      return;
+    }
+    const node = snapshot.nodes.find((candidate) => candidate.id === nodeId);
+    if (!node) {
+      return;
+    }
+    const edges = snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId);
+    this.repo.deleteNode(nodeId).subscribe({
+      next: (result) => {
+        if (!result.deleted) {
+          return;
+        }
+        this.removeNodeCascadeLocal(nodeId);
+        this.pushUndo({ type: 'DELETE_NODE', node, edges });
+        this.selection.clearSelection();
+        this.confirmDeleteNode.set(false);
+        this.dirty.set(true);
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Knoten gelöscht',
+          key: 'node-delete'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'node-delete'
+        });
+      }
+    });
+  }
+
+  duplicateSelectedNode(): void {
+    const nodeId = this.selectedNodeId();
+    const snapshot = this.graph();
+    if (!nodeId || !snapshot) {
+      return;
+    }
+    const node = snapshot.nodes.find((candidate) => candidate.id === nodeId);
+    if (!node) {
+      return;
+    }
+    const id = `node-${Date.now()}`;
+    this.draftNode.set({
+      id,
+      name: `${node.name} Copy`,
+      x: node.x + 10,
+      y: node.y + 10,
+      validFrom: node.validFrom,
+      validTo: node.validTo
+    });
+    this.dirty.set(true);
+  }
+
+  resetDemo(): void {
+    if (!this.repo.isDemo) {
+      return;
+    }
+    this.repo.reset().subscribe({
+      next: () => {
+        this.fetchGraph(this.year());
+        this.dirty.set(false);
+        this.toastService.addToast({
+          type: 'info',
+          title: 'Demo zurückgesetzt',
+          key: 'demo-reset'
+        });
+      }
+    });
+  }
+
+  restartTutorial(): void {
+    if (!this.repo.isDemo) {
+      return;
+    }
+    this.tour.restart(ADMIN_TUTORIAL_STEPS);
   }
 
   saveSelectedNode(): void {
@@ -310,8 +494,8 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    this.http
-      .put<GraphNode>(`/api/v1/nodes/${nodeId}`, {
+    this.repo
+      .updateNode(nodeId, {
         name: node.name,
         validFrom: node.validFrom,
         validTo: node.validTo,
@@ -321,6 +505,7 @@ export class AdminComponent implements OnDestroy {
       .subscribe({
         next: (updated) => {
           this.replaceNode(updated);
+          this.dirty.set(false);
           this.toastService.addToast({
             type: 'success',
             title: 'Knoten gespeichert',
@@ -345,6 +530,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateNodeLocal(nodeId, { name: value });
+    this.dirty.set(true);
   }
 
   updateSelectedValidFrom(event: Event): void {
@@ -354,6 +540,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateNodeLocal(nodeId, { validFrom: value });
+    this.dirty.set(true);
   }
 
   updateSelectedValidTo(event: Event): void {
@@ -364,6 +551,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateNodeLocal(nodeId, { validTo: value });
+    this.dirty.set(true);
   }
 
   saveDraftNode(): void {
@@ -372,14 +560,14 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    this.http
-      .post<GraphNode>('/api/v1/nodes', draft)
+    this.repo
+      .createNode(draft)
       .subscribe({
         next: (created) => {
           this.draftNode.set(null);
           this.addNode(created);
-          this.mode.set('select');
-          this.selectedNodeId.set(created.id);
+          this.selection.selectNode(created.id);
+          this.dirty.set(false);
           this.toastService.addToast({
             type: 'success',
             title: 'Knoten erstellt',
@@ -404,6 +592,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftNode.set({ ...draft, name: value });
+    this.dirty.set(true);
   }
 
   updateDraftValidFrom(event: Event): void {
@@ -413,6 +602,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftNode.set({ ...draft, validFrom: value });
+    this.dirty.set(true);
   }
 
   updateDraftValidTo(event: Event): void {
@@ -423,6 +613,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftNode.set({ ...draft, validTo: value });
+    this.dirty.set(true);
   }
 
   saveDraftEdge(): void {
@@ -431,13 +622,13 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    this.http
-      .post<GraphEdge>('/api/v1/edges', draft)
+    this.repo
+      .createEdge(draft as GraphEdge)
       .subscribe({
         next: (created) => {
           this.draftEdge.set(null);
           this.addEdge(created);
-          this.mode.set('select');
+          this.dirty.set(false);
           this.toastService.addToast({
             type: 'success',
             title: 'Strecke erstellt',
@@ -469,6 +660,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, transport: value });
+    this.dirty.set(true);
   }
 
   updateDraftEdgeFrom(event: Event): void {
@@ -478,6 +670,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, from: value || null });
+    this.dirty.set(true);
   }
 
   updateDraftEdgeTo(event: Event): void {
@@ -487,6 +680,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, to: value || null });
+    this.dirty.set(true);
   }
 
   updateDraftEdgeValidFrom(event: Event): void {
@@ -496,6 +690,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, validFrom: value });
+    this.dirty.set(true);
   }
 
   updateDraftEdgeValidTo(event: Event): void {
@@ -506,6 +701,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, validTo: value });
+    this.dirty.set(true);
   }
 
   updateDraftEdgeDuration(event: Event): void {
@@ -515,6 +711,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, durationMinutes: value });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeTransport(event: Event): void {
@@ -524,6 +721,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { transport: value });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeFrom(event: Event): void {
@@ -537,6 +735,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { from: nextFrom });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeTo(event: Event): void {
@@ -550,6 +749,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { to: nextTo });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeValidFrom(event: Event): void {
@@ -559,6 +759,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { validFrom: value });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeValidTo(event: Event): void {
@@ -569,6 +770,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { validTo: value });
+    this.dirty.set(true);
   }
 
   updateSelectedEdgeDuration(event: Event): void {
@@ -578,6 +780,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { durationMinutes: value });
+    this.dirty.set(true);
   }
 
   updateSelectedTripField(tripId: string, field: keyof EdgeTrip, value: string | number | undefined): void {
@@ -596,6 +799,7 @@ export class AdminComponent implements OnDestroy {
       return next;
     });
     this.updateEdgeLocal(draft.id, { trips });
+    this.dirty.set(true);
   }
 
   addSelectedTrip(): void {
@@ -610,6 +814,8 @@ export class AdminComponent implements OnDestroy {
       arrivalDayOffset: 0
     };
     this.updateEdgeLocal(draft.id, { trips: [...draft.trips, newTrip] });
+    this.tour.markEvent('tripAdded');
+    this.dirty.set(true);
   }
 
   removeSelectedTrip(tripId: string): void {
@@ -618,6 +824,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateEdgeLocal(draft.id, { trips: draft.trips.filter((trip) => trip.id !== tripId) });
+    this.dirty.set(true);
   }
 
   saveSelectedEdge(): void {
@@ -626,8 +833,8 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    this.http
-      .put<GraphEdge>(`/api/v1/edges/${draft.id}`, {
+    this.repo
+      .updateEdge(draft.id, {
         from: draft.from,
         to: draft.to,
         transport: draft.transport,
@@ -635,10 +842,11 @@ export class AdminComponent implements OnDestroy {
         validTo: draft.validTo,
         durationMinutes: draft.durationMinutes,
         trips: draft.trips
-      })
+      } as GraphEdge)
       .subscribe({
         next: (updated) => {
           this.replaceEdge(updated);
+          this.dirty.set(false);
           this.toastService.addToast({
             type: 'success',
             title: 'Strecke gespeichert',
@@ -675,6 +883,8 @@ export class AdminComponent implements OnDestroy {
       arrivalDayOffset: 0
     };
     this.draftEdge.set({ ...draft, trips: [...draft.trips, newTrip] });
+    this.tour.markEvent('tripAdded');
+    this.dirty.set(true);
   }
 
   removeTrip(tripId: string): void {
@@ -683,6 +893,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftEdge.set({ ...draft, trips: draft.trips.filter((trip) => trip.id !== tripId) });
+    this.dirty.set(true);
   }
 
   updateTripField(tripId: string, field: keyof EdgeTrip, value: string | number | undefined): void {
@@ -701,6 +912,7 @@ export class AdminComponent implements OnDestroy {
       return next;
     });
     this.draftEdge.set({ ...draft, trips });
+    this.dirty.set(true);
   }
 
   removeSelectedEdge(): void {
@@ -708,11 +920,12 @@ export class AdminComponent implements OnDestroy {
     if (!edgeId) {
       return;
     }
-    this.http.delete<{ deleted: boolean }>(`/api/v1/edges/${edgeId}`).subscribe({
+    this.repo.deleteEdge(edgeId).subscribe({
       next: (result) => {
         if (result.deleted) {
           this.removeEdgeLocal(edgeId);
-          this.selectedEdgeId.set(null);
+          this.selection.clearSelection();
+          this.dirty.set(false);
           this.toastService.addToast({
             type: 'success',
             title: 'Strecke gelöscht',
@@ -739,19 +952,66 @@ export class AdminComponent implements OnDestroy {
     }
 
     this.undoStack.set(stack.slice(0, -1));
-    this.updateNodeLocal(last.id, { x: last.from.x, y: last.from.y });
-    this.http
-      .put<GraphNode>(`/api/v1/nodes/${last.id}`, {
-        x: last.from.x,
-        y: last.from.y
-      })
-      .subscribe({
-        next: (updated) => this.replaceNode(updated),
-        error: () => null
+    if (last.type === 'MOVE_NODE') {
+      this.updateNodeLocal(last.id, { x: last.from.x, y: last.from.y });
+      this.dirty.set(true);
+      this.repo
+        .updateNode(last.id, {
+          x: last.from.x,
+          y: last.from.y
+        })
+        .subscribe({
+          next: (updated) => {
+            this.replaceNode(updated);
+            this.toastService.addToast({
+              type: 'info',
+              title: 'Änderung rückgängig gemacht',
+              key: 'undo'
+            });
+          },
+          error: () => null
+        });
+      return;
+    }
+
+    if (last.type === 'DELETE_NODE') {
+      this.restoreDeletedNode(last.node, last.edges);
+      this.toastService.addToast({
+        type: 'info',
+        title: 'Änderung rückgängig gemacht',
+        key: 'undo'
       });
+    }
   }
 
-  private handleSelectPointer(event: { type: 'down' | 'move' | 'up'; world: { x: number; y: number }; hitNodeId: string | null }): void {
+  private handleSelectPointer(event: {
+    type: 'down' | 'move' | 'up';
+    world: { x: number; y: number };
+    hitNodeId: string | null;
+    hitEdgeId: string | null;
+  }): void {
+    const pendingFrom = this.selection.pendingCreateEdgeFromNodeId();
+    if (pendingFrom && event.type === 'down') {
+      return;
+    }
+    if (pendingFrom && event.type === 'up' && event.hitNodeId && event.hitNodeId !== pendingFrom) {
+      this.selection.clearPendingEdge();
+      const draftId = `draft-edge-${Date.now()}`;
+      this.draftEdge.set({
+        id: draftId,
+        from: pendingFrom,
+        to: event.hitNodeId,
+        transport: 'coach',
+        validFrom: this.year(),
+        durationMinutes: 60,
+        trips: []
+      });
+      this.selection.selectEdge(draftId);
+      this.tour.markEvent('edgeCreated');
+      this.dirty.set(true);
+      return;
+    }
+
     if (event.type === 'down') {
       if (event.hitNodeId) {
         const node = this.findNode(event.hitNodeId);
@@ -763,9 +1023,16 @@ export class AdminComponent implements OnDestroy {
           from: { x: node.x, y: node.y },
           moved: false
         };
-        this.selectedNodeId.set(node.id);
+        this.selection.selectNode(node.id);
+        this.draftEdge.set(null);
+        this.confirmDeleteNode.set(false);
+      } else if (event.hitEdgeId) {
+        this.selection.selectEdge(event.hitEdgeId);
+        this.draftEdge.set(null);
+        this.confirmDeleteNode.set(false);
       } else {
-        this.selectedNodeId.set(null);
+        this.selection.clearSelection();
+        this.confirmDeleteNode.set(false);
       }
       return;
     }
@@ -776,6 +1043,7 @@ export class AdminComponent implements OnDestroy {
       }
       this.dragState.moved = true;
       this.updateNodeLocal(this.dragState.id, { x: event.world.x, y: event.world.y });
+      this.dirty.set(true);
       return;
     }
 
@@ -790,8 +1058,8 @@ export class AdminComponent implements OnDestroy {
       if (moved && node) {
         const to = { x: node.x, y: node.y };
         this.pushUndo({ type: 'MOVE_NODE', id: node.id, from, to });
-        this.http
-          .put<GraphNode>(`/api/v1/nodes/${node.id}`, { x: node.x, y: node.y })
+        this.repo
+          .updateNode(node.id, { x: node.x, y: node.y })
           .subscribe({
             next: (updated) => {
               this.replaceNode(updated);
@@ -810,13 +1078,14 @@ export class AdminComponent implements OnDestroy {
               });
             }
           });
+        this.tour.markEvent('nodeMoved');
       }
 
       this.dragState = null;
     }
   }
 
-  private pushUndo(action: MoveUndo): void {
+  private pushUndo(action: MoveUndo | DeleteNodeUndo): void {
     const stack = [...this.undoStack(), action];
     if (stack.length > UNDO_LIMIT) {
       stack.shift();
@@ -826,6 +1095,7 @@ export class AdminComponent implements OnDestroy {
 
   private createDraftNode(point: { x: number; y: number }): void {
     const id = `draft-node-${Date.now()}`;
+    this.selection.clearSelection();
     this.draftNode.set({
       id,
       name: 'New node',
@@ -833,6 +1103,72 @@ export class AdminComponent implements OnDestroy {
       y: point.y,
       validFrom: this.year()
     });
+    this.tour.markEvent('nodeCreated');
+    this.dirty.set(true);
+  }
+
+  duplicateSelectedTrip(): void {
+    const draft = this.selectedEdgeDraft();
+    if (!draft || draft.trips.length === 0) {
+      return;
+    }
+    const last = draft.trips[draft.trips.length - 1];
+    const copy: EdgeTrip = { ...last, id: `trip-${Date.now()}` };
+    this.updateEdgeLocal(draft.id, { trips: [...draft.trips, copy] });
+    this.tour.markEvent('tripAdded');
+    this.dirty.set(true);
+    requestAnimationFrame(() => this.focusTripField(draft.trips.length, 'departs'));
+  }
+
+  duplicateDraftTrip(): void {
+    const draft = this.draftEdge();
+    if (!draft || draft.trips.length === 0) {
+      return;
+    }
+    const last = draft.trips[draft.trips.length - 1];
+    const copy: EdgeTrip = { ...last, id: `trip-${Date.now()}` };
+    this.draftEdge.set({ ...draft, trips: [...draft.trips, copy] });
+    this.tour.markEvent('tripAdded');
+    this.dirty.set(true);
+    requestAnimationFrame(() => this.focusTripField(draft.trips.length, 'departs'));
+  }
+
+  handleTripEnter(isSelected: boolean, index: number, field: 'departs' | 'arrives' | 'arrivalDayOffset'): void {
+    const order: Array<'departs' | 'arrives' | 'arrivalDayOffset'> = ['departs', 'arrives', 'arrivalDayOffset'];
+    const currentIndex = order.indexOf(field);
+    if (currentIndex === -1) {
+      return;
+    }
+    if (currentIndex < order.length - 1) {
+      this.focusTripField(index, order[currentIndex + 1]);
+      return;
+    }
+
+    const nextIndex = index + 1;
+    const trips = isSelected ? this.selectedEdgeDraft()?.trips ?? [] : this.draftEdge()?.trips ?? [];
+    if (nextIndex < trips.length) {
+      this.focusTripField(nextIndex, 'departs');
+      return;
+    }
+
+    if (isSelected) {
+      this.addSelectedTrip();
+    } else {
+      this.addTrip();
+    }
+    requestAnimationFrame(() => this.focusTripField(nextIndex, 'departs'));
+  }
+
+  private focusTripField(index: number, field: 'departs' | 'arrives' | 'arrivalDayOffset'): void {
+    const root = this.hostRef.nativeElement;
+    const selector = `[data-trip-index=\"${index}\"][data-trip-field=\"${field}\"]`;
+    const el = root.querySelector(selector) as HTMLInputElement | HTMLSelectElement | null;
+    if (el) {
+      el.focus();
+      if (el instanceof HTMLInputElement) {
+        el.select();
+      }
+    }
   }
 
   private ensureDraftEdge(): EdgeDraft | null {
@@ -840,10 +1176,15 @@ export class AdminComponent implements OnDestroy {
     if (draft) {
       return draft;
     }
+    const snapshot = this.displayGraph() ?? this.graph();
+    const nodes = snapshot?.nodes ?? [];
+    const selected = this.selectedNodeId();
+    const from = selected ?? nodes[0]?.id ?? null;
+    const to = nodes.find((node) => node.id !== from)?.id ?? null;
     const created: EdgeDraft = {
       id: `draft-edge-${Date.now()}`,
-      from: null,
-      to: null,
+      from,
+      to,
       transport: 'coach',
       validFrom: this.year(),
       durationMinutes: 60,
@@ -879,17 +1220,17 @@ export class AdminComponent implements OnDestroy {
   }
 
   private fetchYears(): void {
-    this.http.get<number[]>('/api/v1/years').subscribe({
+    this.repo.loadYears().subscribe({
       next: (years) => this.availableYears.set(years),
       error: () => this.availableYears.set([])
     });
   }
 
   private fetchGraph(year: number): void {
-    this.http.get<GraphSnapshot>(`/api/v1/graph?year=${year}`).subscribe({
+    this.repo.loadGraph(year).subscribe({
       next: (graph) => {
         this.graph.set(graph);
-        this.selectedNodeId.set(null);
+        this.selection.clearSelection();
         this.draftNode.set(null);
         this.draftEdge.set(null);
       },
@@ -920,6 +1261,43 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.graph.set({ ...snapshot, edges: [...snapshot.edges, edge] });
+  }
+
+  private removeNodeCascadeLocal(id: string): void {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return;
+    }
+    const removedEdgeIds = new Set(
+      snapshot.edges.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id)
+    );
+    const nodes = snapshot.nodes.filter((node) => node.id !== id);
+    const edges = snapshot.edges.filter((edge) => !removedEdgeIds.has(edge.id));
+    this.graph.set({ ...snapshot, nodes, edges });
+  }
+
+  private restoreDeletedNode(node: GraphNode, edges: GraphEdge[]): void {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return;
+    }
+    const nodes = snapshot.nodes.some((candidate) => candidate.id === node.id)
+      ? snapshot.nodes
+      : [...snapshot.nodes, node];
+    const existingEdgeIds = new Set(snapshot.edges.map((edge) => edge.id));
+    const restoredEdges = edges.filter((edge) => !existingEdgeIds.has(edge.id));
+    this.graph.set({ ...snapshot, nodes, edges: [...snapshot.edges, ...restoredEdges] });
+    this.repo.createNode(node).subscribe({
+      next: () => null,
+      error: () => null
+    });
+    restoredEdges.forEach((edge) => {
+      this.repo.createEdge(edge).subscribe({
+        next: () => null,
+        error: () => null
+      });
+    });
+    this.selection.selectNode(node.id);
   }
 
   private replaceEdge(edge: GraphEdge): void {
@@ -977,9 +1355,58 @@ export class AdminComponent implements OnDestroy {
   }
 
   private onKeyDown = (event: KeyboardEvent): void => {
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
+    const target = event.target as HTMLElement | null;
+    const tag = target?.tagName?.toLowerCase();
+    const isEditable =
+      tag === 'input' || tag === 'textarea' || tag === 'select' || target?.isContentEditable;
+    if (isEditable) {
+      return;
+    }
+
+    const key = event.key.toLowerCase();
+    if ((event.metaKey || event.ctrlKey) && key === 'z') {
       event.preventDefault();
       this.undoMove();
+      return;
+    }
+
+    if ((event.metaKey || event.ctrlKey) && key === 's') {
+      event.preventDefault();
+      if (this.draftEdge()) {
+        this.saveDraftEdge();
+        return;
+      }
+      if (this.selectedEdgeDraft()) {
+        this.saveSelectedEdge();
+        return;
+      }
+      if (this.draftNode()) {
+        this.saveDraftNode();
+        return;
+      }
+      if (this.selectedNodeId()) {
+        this.saveSelectedNode();
+      }
+      return;
+    }
+
+    if (key === 'escape') {
+      this.selection.clearPendingEdge();
+      this.selection.clearSelection();
+      return;
+    }
+
+    if (key === 'n') {
+      const point = this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
+      this.createDraftNode(point);
+      return;
+    }
+
+    if (key === 'e') {
+      const nodeId = this.selectedNodeId();
+      if (nodeId) {
+        this.selection.startEdgeFrom(nodeId);
+      }
     }
   };
 

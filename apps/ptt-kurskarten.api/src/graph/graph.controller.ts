@@ -106,6 +106,12 @@ export class GraphController {
     return updated;
   }
 
+  @Delete('nodes/:id')
+  async deleteNode(@Param('id') nodeId: string): Promise<{ deleted: boolean }> {
+    const deleted = await this.graphRepository.deleteNode(nodeId);
+    return { deleted };
+  }
+
   @Post('edges')
   async createEdge(@Body() body: GraphEdge): Promise<GraphEdge> {
     await this.assertEdgeNodeIds(body.from, body.to);

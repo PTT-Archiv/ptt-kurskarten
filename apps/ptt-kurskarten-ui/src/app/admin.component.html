@@ -3,187 +3,115 @@
     <app-map-stage
       [graph]="displayGraph()"
       [nodeDetail]="nodeDetail()"
+      [selectedNodeId]="selectedNodeId()"
+      [highlightedEdgeIds]="highlightedEdgeIds()"
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
-  </section>
-
-  <aside class="side-panel">
-    <section class="panel-section">
-      <div class="section-title">{{ 'admin.mode' | transloco }}</div>
-      <div class="mode-row">
-        <button class="mode-btn" [class.active]="mode() === 'select'" (click)="setMode('select')">
-          {{ 'admin.selectMode' | transloco }}
-        </button>
-        <button class="mode-btn" [class.active]="mode() === 'add-node'" (click)="setMode('add-node')">
-          {{ 'admin.addNode' | transloco }}
-        </button>
-        <button class="mode-btn" [class.active]="mode() === 'add-edge'" (click)="setMode('add-edge')">
-          {{ 'admin.addEdge' | transloco }}
+    <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
+      <div class="shortcuts-header">
+        <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
+        <button type="button" class="ghost-btn" (click)="toggleShortcuts()">
+          @if (shortcutsCollapsed()) { + } @else { – }
         </button>
       </div>
-    </section>
-
-    <section class="panel-section">
-      <div class="section-title">{{ 'label.year' | transloco }}</div>
-      <div class="year-value">{{ year() }}</div>
-      <input
-        class="year-slider"
-        type="range"
-        [min]="minYear()"
-        [max]="maxYear()"
-        [value]="year()"
-        (input)="onYearInput($event)"
-      />
-      <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
-    </section>
-
-    @if (mode() === 'select') {
-      <section class="panel-section">
-        <div class="section-title">{{ 'admin.selectedNode' | transloco }}</div>
-        @if (nodeDetail(); as detail) {
-          <label class="field">
-            <span>{{ 'label.name' | transloco }}</span>
-            <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.validFrom' | transloco }}</span>
-            <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.validTo' | transloco }}</span>
-            <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
-          </label>
-          <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
-          <button class="action-btn" (click)="saveSelectedNode()">{{ 'btn.save' | transloco }}</button>
-        } @else {
-          <div class="muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
-        }
-      </section>
-      @if (nodeDetail()) {
-        <section class="panel-section">
-          <div class="section-title">{{ 'admin.outgoingEdges' | transloco }}</div>
-          @if (outgoingEdges().length === 0) {
-            <div class="muted">{{ 'admin.noOutgoingEdges' | transloco }}</div>
-          } @else {
-            <div class="edge-list">
-              @for (edge of outgoingEdges(); track edge.id) {
-                <button
-                  type="button"
-                  class="edge-item"
-                  [class.active]="selectedEdgeId() === edge.id"
-                  (click)="selectEdge(edge.id)"
-                >
-                  <div>{{ edge.toName }} ({{ edge.transport }})</div>
-                  <div class="edge-meta">
-                    {{ edge.tripsCount }}
-                    <span>{{ 'label.trips' | transloco }}</span>
-                    · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}
-                  </div>
-                </button>
-              }
-            </div>
-          }
-          @if (selectedEdgeId()) {
-            <button class="action-btn secondary" type="button" (click)="clearEdgeSelection()">
-              <span>{{ 'admin.clearEdgeSelection' | transloco }}</span>
-            </button>
-          }
-        </section>
-        @if (selectedEdgeDraft(); as edgeDraft) {
-          <section class="panel-section">
-            <div class="section-title">{{ 'admin.editEdge' | transloco }}</div>
-            <div class="coord">{{ getNodeName(edgeDraft.from) }} → {{ getNodeName(edgeDraft.to) }}</div>
-            <label class="field">
-              <span>{{ 'label.from' | transloco }}</span>
-              <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
-                @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id">{{ node.name }}</option>
-                }
-              </select>
-            </label>
-            <label class="field">
-              <span>{{ 'label.to' | transloco }}</span>
-              <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
-                @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id">{{ node.name }}</option>
-                }
-              </select>
-            </label>
-            <label class="field">
-              <span>{{ 'label.transport' | transloco }}</span>
-              <select [value]="edgeDraft.transport" (change)="updateSelectedEdgeTransport($event)">
-                <option value="coach">coach</option>
-                <option value="rail">rail</option>
-                <option value="tram">tram</option>
-                <option value="ship">ship</option>
-              </select>
-            </label>
-            <label class="field">
-              <span>{{ 'label.validFrom' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.validFrom" (input)="updateSelectedEdgeValidFrom($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.validTo' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.durationMin' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.durationMinutes" (input)="updateSelectedEdgeDuration($event)" />
-            </label>
-            <div class="trip-section">
-              <div class="trip-header">
-                <span>{{ 'label.trips' | transloco }}</span>
-                <button class="action-btn" type="button" (click)="addSelectedTrip()">
-                  {{ 'btn.addTrip' | transloco }}
-                </button>
-              </div>
-              @if (edgeDraft.trips.length > 0) {
-                <div class="trip-list">
-                  @for (trip of edgeDraft.trips; track trip.id) {
-                    <div class="trip-row">
-                      <input
-                        type="text"
-                        [value]="trip.departs"
-                        placeholder="HH:MM"
-                        (input)="updateSelectedTripField(trip.id, 'departs', $any($event.target).value)"
-                      />
-                      <input
-                        type="text"
-                        [value]="trip.arrives"
-                        placeholder="HH:MM"
-                        (input)="updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)"
-                      />
-                      <select
-                        [value]="trip.arrivalDayOffset ?? 0"
-                        (change)="updateSelectedTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
-                      >
-                        <option [value]="0">+0</option>
-                        <option [value]="1">+1</option>
-                        <option [value]="2">+2</option>
-                      </select>
-                      <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
-                        {{ 'btn.remove' | transloco }}
-                      </button>
-                    </div>
-                  }
-                </div>
-                <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
-              } @else {
-                <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
-              }
-            </div>
-            <button class="action-btn" (click)="saveSelectedEdge()">{{ 'btn.updateEdge' | transloco }}</button>
-            <button class="action-btn secondary" type="button" (click)="removeSelectedEdge()">
-              {{ 'btn.deleteEdge' | transloco }}
-            </button>
-          </section>
-        }
+      @if (!shortcutsCollapsed()) {
+        <div class="shortcuts-list">
+          <div><span class="keycap">N</span> {{ 'admin.shortcut.addNode' | transloco }}</div>
+          <div><span class="keycap">E</span> {{ 'admin.shortcut.addEdge' | transloco }}</div>
+          <div><span class="keycap">Esc</span> {{ 'admin.shortcut.escape' | transloco }}</div>
+          <div><span class="keycap">Ctrl/Cmd+S</span> {{ 'admin.shortcut.save' | transloco }}</div>
+          <div><span class="keycap">Ctrl/Cmd+Z</span> {{ 'admin.shortcut.undo' | transloco }}</div>
+        </div>
       }
-    }
+    </div>
+  </section>
 
-    @if (mode() === 'add-node') {
-      <section class="panel-section">
-        <div class="section-title">{{ 'admin.newNode' | transloco }}</div>
+  <aside class="side-panel admin-panel">
+    <div class="sidebar-header">
+      <div class="header-row">
+        <div class="header-title">
+          Admin
+          @if (isDemo()) {
+            <span class="demo-badge">{{ 'admin.demoBadge' | transloco }}</span>
+          }
+        </div>
+        <div class="header-actions">
+          <button class="ghost-btn" type="button" (click)="addNodeAtCursor()">
+            + {{ 'admin.addNode' | transloco }}
+          </button>
+          @if (selectedNodeId()) {
+            <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
+              + {{ 'admin.addEdge' | transloco }}
+            </button>
+          }
+          @if (isDemo()) {
+            <button class="ghost-btn" type="button" (click)="restartTutorial()">
+              {{ 'admin.restartTutorial' | transloco }}
+            </button>
+          }
+        </div>
+      </div>
+      @if (isDemo()) {
+        <div class="demo-note">{{ 'admin.demoNotice' | transloco }}</div>
+      }
+      @if (selection.pendingCreateEdgeFromNodeId(); as fromId) {
+        <div class="pending-row">
+          <span>{{ 'admin.addEdge' | transloco }}: {{ getNodeName(fromId) }} → …</span>
+          <button class="ghost-btn" type="button" (click)="cancelPendingEdge()">Esc</button>
+        </div>
+      }
+      <div class="year-row">
+        <div class="year-title">{{ 'label.year' | transloco }}</div>
+        <div class="year-value">{{ year() }}</div>
+        <input
+          class="year-slider"
+          type="range"
+          [min]="minYear()"
+          [max]="maxYear()"
+          [value]="year()"
+          (input)="onYearInput($event)"
+        />
+        <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
+      </div>
+    </div>
+
+    <div class="sidebar-body">
+      @if (!selectedNodeId() && !selectedEdgeId() && !draftNode() && !draftEdge()) {
+        <section class="panel-section empty-state">
+          <div class="section-title">{{ 'admin.selectMode' | transloco }}</div>
+          <div class="muted">{{ 'admin.emptyState' | transloco }}</div>
+          <div class="hint">{{ 'admin.shortcuts' | transloco }}</div>
+        </section>
+      }
+
+      <section class="panel-section compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
+        <div class="section-title">{{ 'admin.selectedNode' | transloco }}</div>
+        @if (selectedNodeId() && !draftNode()) {
+          <div class="node-actions">
+            <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
+              + {{ 'admin.addEdge' | transloco }}
+            </button>
+            <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
+              {{ 'admin.duplicateNode' | transloco }}
+            </button>
+            <button class="ghost-btn danger" type="button" (click)="requestDeleteNode()">
+              {{ 'admin.deleteNode' | transloco }}
+            </button>
+          </div>
+        }
+        @if (confirmDeleteNode()) {
+          <div class="confirm-row">
+            <span>{{ 'admin.confirmDeleteNode' | transloco }}</span>
+            <div class="confirm-actions">
+              <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                {{ 'admin.deleteNode' | transloco }}
+              </button>
+              <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                {{ 'btn.cancel' | transloco }}
+              </button>
+            </div>
+          </div>
+        }
         @if (draftNode(); as draft) {
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
@@ -198,29 +126,93 @@
             <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
           </label>
           <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
-          <button class="action-btn" (click)="saveDraftNode()">{{ 'btn.createNode' | transloco }}</button>
+        } @else if (nodeDetail(); as detail) {
+          <label class="field">
+            <span>{{ 'label.name' | transloco }}</span>
+            <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+          </label>
+          <label class="field">
+            <span>{{ 'label.validFrom' | transloco }}</span>
+            <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
+          </label>
+          <label class="field">
+            <span>{{ 'label.validTo' | transloco }}</span>
+            <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
+          </label>
+          <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
+          @if (outgoingEdges().length > 0) {
+            <div class="edge-list dense">
+              @for (edge of outgoingEdges(); track edge.id) {
+                <button
+                  type="button"
+                  class="edge-row"
+                  [class.active]="selectedEdgeId() === edge.id"
+                  (click)="selectEdge(edge.id)"
+                >
+                  <span>{{ edge.toName }}</span>
+                  <span class="edge-meta">{{ edge.transport }} · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}</span>
+                </button>
+              }
+            </div>
+          }
         } @else {
-          <div class="muted">{{ 'admin.clickMapToPlaceNode' | transloco }}</div>
+          <div class="muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
         }
       </section>
-    }
 
-    @if (mode() === 'add-edge') {
-      <section class="panel-section">
-        <div class="section-title">{{ 'admin.newEdge' | transloco }}</div>
-        @if (draftEdge(); as draft) {
+      <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
+        <div class="section-title">{{ 'admin.editEdge' | transloco }}</div>
+        @if (selectedEdgeDraft(); as edgeDraft) {
+          <div class="coord">{{ getNodeName(edgeDraft.from) }} → {{ getNodeName(edgeDraft.to) }}</div>
+          <label class="field">
+            <span>{{ 'label.from' | transloco }}</span>
+            <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
+              @for (node of nodeOptions(); track node.id) {
+                <option [value]="node.id" [selected]="node.id === edgeDraft.from">{{ node.name }}</option>
+              }
+            </select>
+          </label>
+          <label class="field">
+            <span>{{ 'label.to' | transloco }}</span>
+            <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
+              @for (node of nodeOptions(); track node.id) {
+                <option [value]="node.id" [selected]="node.id === edgeDraft.to">{{ node.name }}</option>
+              }
+            </select>
+          </label>
+          <label class="field">
+            <span>{{ 'label.transport' | transloco }}</span>
+            <select [value]="edgeDraft.transport" (change)="updateSelectedEdgeTransport($event)">
+              <option value="coach">coach</option>
+              <option value="rail">rail</option>
+              <option value="tram">tram</option>
+              <option value="ship">ship</option>
+            </select>
+          </label>
+          <div class="field-grid">
+            <label class="field">
+              <span>{{ 'label.validFrom' | transloco }}</span>
+              <input type="number" [value]="edgeDraft.validFrom" (input)="updateSelectedEdgeValidFrom($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.validTo' | transloco }}</span>
+              <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.durationMin' | transloco }}</span>
+              <input type="number" [value]="edgeDraft.durationMinutes" (input)="updateSelectedEdgeDuration($event)" />
+            </label>
+          </div>
+        } @else if (draftEdge(); as draft) {
           <div class="coord">
-            {{
-              'admin.edgeFromTo'
-                | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) }
-            }}
+            {{ 'admin.edgeFromTo' | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) } }}
           </div>
           <label class="field">
             <span>{{ 'label.from' | transloco }}</span>
             <select [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
               <option value="">—</option>
               @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id">{{ node.name }}</option>
+                <option [value]="node.id" [selected]="node.id === draft.from">{{ node.name }}</option>
               }
             </select>
           </label>
@@ -229,7 +221,7 @@
             <select [value]="draft.to" (change)="updateDraftEdgeTo($event)">
               <option value="">—</option>
               @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id">{{ node.name }}</option>
+                <option [value]="node.id" [selected]="node.id === draft.to">{{ node.name }}</option>
               }
             </select>
           </label>
@@ -242,78 +234,176 @@
               <option value="ship">ship</option>
             </select>
           </label>
-          <label class="field">
-            <span>{{ 'label.validFrom' | transloco }}</span>
-            <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.validTo' | transloco }}</span>
-            <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.durationMin' | transloco }}</span>
-            <input type="number" [value]="draft.durationMinutes" (input)="updateDraftEdgeDuration($event)" />
-          </label>
-          <div class="trip-section">
-            <div class="trip-header">
-              <span>{{ 'label.trips' | transloco }}</span>
-              <button class="action-btn" type="button" (click)="addTrip()">
-                {{ 'btn.addTrip' | transloco }}
-              </button>
-            </div>
-            @if (draft.trips.length > 0) {
-              <div class="trip-list">
-                @for (trip of draft.trips; track trip.id) {
-                  <div class="trip-row">
-                    <input
-                      type="text"
-                      [value]="trip.departs"
-                      placeholder="HH:MM"
-                      (input)="updateTripField(trip.id, 'departs', $any($event.target).value)"
-                    />
-                    <input
-                      type="text"
-                      [value]="trip.arrives"
-                      placeholder="HH:MM"
-                      (input)="updateTripField(trip.id, 'arrives', $any($event.target).value)"
-                    />
-                    <select
-                      [value]="trip.arrivalDayOffset ?? 0"
-                      (change)="updateTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
-                    >
-                      <option [value]="0">+0</option>
-                      <option [value]="1">+1</option>
-                      <option [value]="2">+2</option>
-                    </select>
-                    <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
-                      {{ 'btn.remove' | transloco }}
-                    </button>
-                  </div>
-                }
-              </div>
-              <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
-            } @else {
-              <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
-            }
+          <div class="field-grid">
+            <label class="field">
+              <span>{{ 'label.validFrom' | transloco }}</span>
+              <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.validTo' | transloco }}</span>
+              <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.durationMin' | transloco }}</span>
+              <input type="number" [value]="draft.durationMinutes" (input)="updateDraftEdgeDuration($event)" />
+            </label>
           </div>
-          <button
-            class="action-btn"
-            [disabled]="!draft.from || !draft.to || !tripsValid(draft.trips)"
-            (click)="saveDraftEdge()"
-          >
-            {{ 'btn.createEdge' | transloco }}
-          </button>
         } @else {
           <div class="muted">{{ 'admin.clickTwoNodes' | transloco }}</div>
         }
       </section>
-    }
 
-    <section class="panel-section">
-      <div class="section-title">{{ 'label.undo' | transloco }}</div>
-      <button class="action-btn" [disabled]="undoStack().length === 0" (click)="undoMove()">
-        {{ 'admin.undoMove' | transloco }}
-      </button>
-    </section>
+      <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
+        <div class="section-title">{{ 'label.trips' | transloco }}</div>
+        @if (selectedEdgeDraft(); as edgeDraft) {
+          <div class="trip-header">
+            <button class="ghost-btn" type="button" (click)="addSelectedTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+            <button class="ghost-btn" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
+          </div>
+          @if (edgeDraft.trips.length > 0) {
+            <div class="trip-table">
+              <div class="trip-row header">
+                <span>Dep</span>
+                <span>Arr</span>
+                <span>+Tag</span>
+                <span></span>
+              </div>
+              @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
+                <div class="trip-row">
+                  <input
+                    type="text"
+                    [value]="trip.departs"
+                    placeholder="HH:MM"
+                    (input)="updateSelectedTripField(trip.id, 'departs', $any($event.target).value)"
+                    (keydown.enter)="handleTripEnter(true, idx, 'departs')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="departs"
+                  />
+                  <input
+                    type="text"
+                    [value]="trip.arrives"
+                    placeholder="HH:MM"
+                    (input)="updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)"
+                    (keydown.enter)="handleTripEnter(true, idx, 'arrives')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="arrives"
+                  />
+                  <select
+                    [value]="trip.arrivalDayOffset ?? 0"
+                    (change)="updateSelectedTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
+                    (keydown.enter)="handleTripEnter(true, idx, 'arrivalDayOffset')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="arrivalDayOffset"
+                  >
+                    <option [value]="0">+0</option>
+                    <option [value]="1">+1</option>
+                    <option [value]="2">+2</option>
+                  </select>
+                  <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">×</button>
+                </div>
+              }
+            </div>
+            <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
+          } @else {
+            <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+          }
+        } @else if (draftEdge(); as draft) {
+          <div class="trip-header">
+            <button class="ghost-btn" type="button" (click)="addTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+            <button class="ghost-btn" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
+          </div>
+          @if (draft.trips.length > 0) {
+            <div class="trip-table">
+              <div class="trip-row header">
+                <span>Dep</span>
+                <span>Arr</span>
+                <span>+Tag</span>
+                <span></span>
+              </div>
+              @for (trip of draft.trips; track trip.id; let idx = $index) {
+                <div class="trip-row">
+                  <input
+                    type="text"
+                    [value]="trip.departs"
+                    placeholder="HH:MM"
+                    (input)="updateTripField(trip.id, 'departs', $any($event.target).value)"
+                    (keydown.enter)="handleTripEnter(false, idx, 'departs')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="departs"
+                  />
+                  <input
+                    type="text"
+                    [value]="trip.arrives"
+                    placeholder="HH:MM"
+                    (input)="updateTripField(trip.id, 'arrives', $any($event.target).value)"
+                    (keydown.enter)="handleTripEnter(false, idx, 'arrives')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="arrives"
+                  />
+                  <select
+                    [value]="trip.arrivalDayOffset ?? 0"
+                    (change)="updateTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
+                    (keydown.enter)="handleTripEnter(false, idx, 'arrivalDayOffset')"
+                    [attr.data-trip-index]="idx"
+                    data-trip-field="arrivalDayOffset"
+                  >
+                    <option [value]="0">+0</option>
+                    <option [value]="1">+1</option>
+                    <option [value]="2">+2</option>
+                  </select>
+                  <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">×</button>
+                </div>
+              }
+            </div>
+            <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
+          } @else {
+            <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+          }
+        }
+      </section>
+    </div>
+
+    <div class="sticky-bar">
+      <div class="status-text" [class.active]="dirty()">{{ 'admin.unsaved' | transloco }}</div>
+      <div class="action-row">
+        @if (draftEdge()) {
+          <button
+            class="action-btn"
+            [disabled]="!draftEdge()?.from || !draftEdge()?.to || !tripsValid(draftEdge()?.trips ?? [])"
+            (click)="saveDraftEdge()"
+          >
+            {{ 'btn.createEdge' | transloco }}
+          </button>
+        } @else if (selectedEdgeDraft()) {
+          <button class="action-btn" (click)="saveSelectedEdge()">{{ 'btn.updateEdge' | transloco }}</button>
+        } @else if (draftNode()) {
+          <button class="action-btn" (click)="saveDraftNode()">{{ 'btn.createNode' | transloco }}</button>
+        } @else if (selectedNodeId()) {
+          <button class="action-btn" (click)="saveSelectedNode()">{{ 'btn.save' | transloco }}</button>
+        } @else {
+          <button class="action-btn" disabled>{{ 'btn.save' | transloco }}</button>
+        }
+        @if (selectedType() === 'node') {
+          <button class="action-btn secondary" [disabled]="!selectedNodeId()" (click)="requestDeleteNode()">
+            {{ 'admin.deleteNode' | transloco }}
+          </button>
+        } @else {
+          <button class="action-btn secondary" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
+            {{ 'btn.deleteEdge' | transloco }}
+          </button>
+        }
+        <button class="action-btn secondary" [disabled]="undoStack().length === 0" (click)="undoMove()">
+          {{ 'admin.undoMove' | transloco }}
+        </button>
+        @if (isDemo()) {
+          <button class="action-btn secondary" type="button" (click)="resetDemo()">
+            {{ 'admin.resetDemo' | transloco }}
+          </button>
+        }
+      </div>
+    </div>
   </aside>
 </main>
+@if (isDemo()) {
+  <app-tour-overlay></app-tour-overlay>
+}

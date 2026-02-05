@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -30,7 +31,8 @@ const EDGE_LANE_SPACING = 6;
   selector: 'app-map-stage',
   standalone: true,
   template: `
-    <div class="stage">
+    <div class="stage" [class.no-border]="!showBorder">
+      <img class="map map-shadow" src="assets/maps/switzerland.svg" alt="" />
       <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" />
       <div class="overlay">
         <canvas
@@ -46,6 +48,10 @@ const EDGE_LANE_SPACING = 6;
   `,
   styles: [
     `
+      :host(.pick-mode) .map {
+        opacity: 0.45;
+        transition: opacity 150ms ease-out;
+      }
       :host {
         display: block;
         width: 100%;
@@ -60,6 +66,10 @@ const EDGE_LANE_SPACING = 6;
         border: 1px solid var(--ptt-black);
       }
 
+      .stage.no-border {
+        border: none;
+      }
+
       .map {
         width: 100%;
         height: 100%;
@@ -68,10 +78,25 @@ const EDGE_LANE_SPACING = 6;
         pointer-events: none;
       }
 
+      .map-shadow {
+        position: absolute;
+        inset: 0;
+        transform: translate(6px, 6px);
+        opacity: 0.35;
+        filter: grayscale(1) brightness(0.2);
+        z-index: 0;
+      }
+
+      .map:not(.map-shadow) {
+        position: relative;
+        z-index: 1;
+      }
+
       .overlay {
         position: absolute;
         inset: 0;
         pointer-events: auto;
+        z-index: 2;
       }
 
       .graph-canvas {
@@ -87,28 +112,39 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() nodeDetail: NodeDetail | null = null;
   @Input() highlightedEdgeIds: Set<string> | null = null;
   @Input() highlightedNodeIds: Set<string> | null = null;
+  @Input() pulseNodeIds: Set<string> | null = null;
+  @Input() pickMode: 'from' | 'to' | null = null;
   @Input() selectedConnection: ConnectionOption | null = null;
   @Input() showConnectionDetailsOnMap = true;
   @Input() selectedNodeId: string | null = null;
   @Input() routingActive = false;
+  @Input() showBorder = true;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
     screen: { x: number; y: number };
     world: { x: number; y: number };
     hitNodeId: string | null;
+    hitEdgeId: string | null;
   }>();
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly transloco = inject(TranslocoService);
 
+  @HostBinding('class.pick-mode') get pickModeClass(): boolean {
+    return this.pickMode !== null;
+  }
+
   @ViewChild('graphCanvas') private canvasRef?: ElementRef<HTMLCanvasElement>;
 
   private rafId: number | null = null;
   private resizeObserver?: ResizeObserver;
   private screenNodes = new Map<string, { x: number; y: number; r: number }>();
+  private screenEdges = new Map<string, { x1: number; y1: number; x2: number; y2: number }>();
   private canvasSize = { width: 0, height: 0 };
+  private pendingCanvasSize: { width: number; height: number } | null = null;
+  private resizeRafId: number | null = null;
   private transform = computeTransform(1, 1, DEFAULT_VIEWBOX);
   private needsRender = false;
   private activePointerId: number | null = null;
@@ -133,6 +169,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (
       changes['graph'] ||
       changes['nodeDetail'] ||
+      changes['pulseNodeIds'] ||
+      changes['pickMode'] ||
       changes['selectedConnection'] ||
       changes['showConnectionDetailsOnMap'] ||
       changes['selectedNodeId'] ||
@@ -212,13 +250,26 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     if (typeof ResizeObserver !== 'undefined') {
-      this.resizeObserver = new ResizeObserver(() => this.resizeCanvas());
+      this.resizeObserver = new ResizeObserver(() => this.queueResize());
       if (canvas.parentElement) {
         this.resizeObserver.observe(canvas.parentElement);
       }
     }
 
-    this.resizeCanvas();
+    this.queueResize();
+  }
+
+  private queueResize(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+    if (this.resizeRafId !== null) {
+      return;
+    }
+    this.resizeRafId = requestAnimationFrame(() => {
+      this.resizeRafId = null;
+      this.resizeCanvas();
+    });
   }
 
   private resizeCanvas(): void {
@@ -231,6 +282,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const width = Math.max(1, Math.floor(rect.width));
     const height = Math.max(1, Math.floor(rect.height));
     const dpr = window.devicePixelRatio || 1;
+
+    const widthDelta = Math.abs(width - this.canvasSize.width);
+    const heightDelta = Math.abs(height - this.canvasSize.height);
+    if (widthDelta < 2 && heightDelta < 2) {
+      return;
+    }
 
     if (width === this.canvasSize.width && height === this.canvasSize.height) {
       return;
@@ -291,8 +348,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const highlightIds = this.getHighlightIds();
     const edgeHighlights = this.highlightedEdgeIds ?? highlightIds.edgeIds;
     const nodeHighlights = this.highlightedNodeIds ?? highlightIds.nodeIds;
+    const routingActive = this.routingActive;
 
     this.screenNodes.clear();
+    this.screenEdges.clear();
 
     const edgeCounts = new Map<string, number>();
     edges.forEach((edge) => {
@@ -333,30 +392,67 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const laneIndex = index - (count - 1) / 2;
         const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
         const isHighlighted = edgeHighlights.has(edge.id);
-        this.drawEdgeLane(ctx, from, to, laneOffsetPx, isHighlighted);
+        const isDimmed = routingActive && !isHighlighted;
+        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isDimmed);
+        if (routingActive && isHighlighted && index === centerLaneIndex) {
+          this.drawEdgeChevrons(ctx, from, to, laneOffsetPx);
+        }
       });
     });
 
+    const sizeScale = this.getSizeScale();
+    const pulseIds = this.pulseNodeIds ?? new Set<string>();
+    const pulseTime = this.isBrowser ? performance.now() : 0;
     nodes.forEach((node) => {
       const position = this.project(node);
       const degree = edgeCounts.get(node.id) ?? 0;
-      const baseRadius = Math.min(NODE_RADIUS_MAX, NODE_RADIUS + degree * NODE_RADIUS_STEP);
+      const baseRadius = Math.min(
+        NODE_RADIUS_MAX * sizeScale,
+        (NODE_RADIUS + degree * NODE_RADIUS_STEP) * sizeScale
+      );
       const isSelected = this.selectedNodeId === node.id;
       const isHighlighted = nodeHighlights.has(node.id) || isSelected;
       const isHovered = this.hoveredNodeId === node.id;
-      const radius = baseRadius + (isHighlighted || isHovered ? 2 : 0);
+      const isDimmed = routingActive && !isHighlighted && !isHovered;
+      const radius = baseRadius + (isHighlighted || isHovered ? 2 * sizeScale : 0);
+      const showShadow = this.pickMode !== null;
+      if (showShadow) {
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 5 * sizeScale;
+        ctx.shadowOffsetY = 5 * sizeScale;
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffff00';
+        ctx.fill();
+        ctx.restore();
+      } else {
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffff00';
+        ctx.fill();
+      }
+      // Keep nodes at full opacity even when edges are dimmed.
       ctx.beginPath();
       ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffff00';
       ctx.strokeStyle = '#141414';
       ctx.lineWidth = 2;
-      ctx.fill();
       ctx.stroke();
 
       if (isSelected || isHovered) {
         ctx.beginPath();
-        ctx.arc(position.x, position.y, radius + 4, 0, Math.PI * 2);
+        ctx.arc(position.x, position.y, radius + 4 * sizeScale, 0, Math.PI * 2);
         ctx.strokeStyle = '#141414';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      if (pulseIds.has(node.id)) {
+        const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, radius + 8 * sizeScale + pulse * 4 * sizeScale, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(20, 20, 20, 0.5)';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -366,6 +462,27 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     if (this.showConnectionDetailsOnMap && this.selectedConnection) {
       this.drawConnectionDetails(ctx, this.selectedConnection);
+    }
+
+    if (this.hoveredNodeId) {
+      const node = this.screenNodes.get(this.hoveredNodeId);
+      const data = nodeMap.get(this.hoveredNodeId);
+      if (node && data?.name) {
+        ctx.save();
+        ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        const text = data.name;
+        const size = measureLabel(ctx, text);
+        const x = node.x + 10;
+        const y = node.y - size.h - 8;
+        drawLabel(ctx, text, x, y, size.w, size.h);
+        ctx.restore();
+      }
+    }
+
+    if (pulseIds.size > 0) {
+      this.scheduleRender();
     }
   }
 
@@ -410,10 +527,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private drawEdgeLane(
     ctx: CanvasRenderingContext2D,
+    edgeId: string,
     from: GraphNode,
     to: GraphNode,
     laneOffsetPx: number,
-    isHighlighted: boolean
+    isHighlighted: boolean,
+    isDimmed: boolean
   ): void {
     const fromPos = this.project(from);
     const toPos = this.project(to);
@@ -425,29 +544,83 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
     const px = -dy / len;
     const py = dx / len;
-    ctx.strokeStyle = isHighlighted ? '#141414' : 'rgba(20, 20, 20, 0.35)';
+    const pickDim = this.pickMode !== null;
+    const baseStroke = pickDim ? 'rgba(20, 20, 20, 0.18)' : 'rgba(20, 20, 20, 0.35)';
+    const dimStroke = pickDim ? 'rgba(20, 20, 20, 0.08)' : 'rgba(20, 20, 20, 0.12)';
+    ctx.strokeStyle = isHighlighted ? '#141414' : isDimmed ? dimStroke : baseStroke;
     ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
     const x1 = fromPos.x + px * laneOffsetPx;
     const y1 = fromPos.y + py * laneOffsetPx;
     const x2 = toPos.x + px * laneOffsetPx;
     const y2 = toPos.y + py * laneOffsetPx;
+    this.screenEdges.set(edgeId, { x1, y1, x2, y2 });
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
   }
 
+  private drawEdgeChevrons(ctx: CanvasRenderingContext2D, from: GraphNode, to: GraphNode, laneOffsetPx: number): void {
+    const fromPos = this.project(from);
+    const toPos = this.project(to);
+    const dx = toPos.x - fromPos.x;
+    const dy = toPos.y - fromPos.y;
+    const len = Math.hypot(dx, dy);
+    if (len < 30) {
+      return;
+    }
+
+    const ux = dx / len;
+    const uy = dy / len;
+    const px = -uy;
+    const py = ux;
+
+    const x1 = fromPos.x + px * laneOffsetPx;
+    const y1 = fromPos.y + py * laneOffsetPx;
+    const x2 = toPos.x + px * laneOffsetPx;
+    const y2 = toPos.y + py * laneOffsetPx;
+
+    const positions = len < 120 ? [0.6] : [0.5, 0.7];
+    const chevronSize = 5;
+    const chevronSpread = 3;
+
+    ctx.save();
+    ctx.strokeStyle = '#141414';
+    ctx.lineWidth = 1.5;
+
+    positions.forEach((t) => {
+      const cx = x1 + (x2 - x1) * t;
+      const cy = y1 + (y2 - y1) * t;
+      const tipX = cx + ux * 2;
+      const tipY = cy + uy * 2;
+      const leftX = tipX - ux * chevronSize + px * chevronSpread;
+      const leftY = tipY - uy * chevronSize + py * chevronSpread;
+      const rightX = tipX - ux * chevronSize - px * chevronSpread;
+      const rightY = tipY - uy * chevronSize - py * chevronSpread;
+
+      ctx.beginPath();
+      ctx.moveTo(leftX, leftY);
+      ctx.lineTo(tipX, tipY);
+      ctx.lineTo(rightX, rightY);
+      ctx.stroke();
+    });
+
+    ctx.restore();
+  }
+
   private buildPointerPayload(event: PointerEvent): {
     screen: { x: number; y: number };
     world: { x: number; y: number };
     hitNodeId: string | null;
+    hitEdgeId: string | null;
   } {
     const canvas = this.canvasRef?.nativeElement;
     if (!canvas) {
       return {
         screen: { x: 0, y: 0 },
         world: { x: 0, y: 0 },
-        hitNodeId: null
+        hitNodeId: null,
+        hitEdgeId: null
       };
     }
 
@@ -458,8 +631,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: (screen.y - this.transform.offsetY) / this.transform.scale
     };
     const hitNodeId = this.hitTestNode(event);
+    const hitEdgeId = hitNodeId ? null : this.hitTestEdge(screen.x, screen.y);
 
-    return { screen, world, hitNodeId };
+    return { screen, world, hitNodeId, hitEdgeId };
   }
 
   private updateHoverState(hitNodeId: string | null): void {
@@ -472,6 +646,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
     this.hoveredNodeId = hitNodeId;
     this.scheduleRender();
+  }
+
+  private hitTestEdge(x: number, y: number): string | null {
+    let bestId: string | null = null;
+    let bestDist = Infinity;
+    const threshold = 6;
+
+    for (const [id, edge] of this.screenEdges) {
+      const dist = distanceToSegment(x, y, edge.x1, edge.y1, edge.x2, edge.y2);
+      if (dist < threshold && dist < bestDist) {
+        bestDist = dist;
+        bestId = id;
+      }
+    }
+
+    return bestId;
   }
 
   private drawConnectionDetails(ctx: CanvasRenderingContext2D, connection: ConnectionOption): void {
@@ -493,7 +683,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
           return;
         }
         ctx.beginPath();
-        ctx.arc(node.x, node.y, NODE_RADIUS + 6, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, node.r + 6 * this.getSizeScale(), 0, Math.PI * 2);
         ctx.stroke();
       });
       ctx.restore();
@@ -573,6 +763,15 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     ctx.restore();
+  }
+
+  private getSizeScale(): number {
+    const minDim = Math.min(this.canvasSize.width, this.canvasSize.height);
+    if (!minDim) {
+      return 1;
+    }
+    const scale = minDim / 800;
+    return Math.max(0.7, Math.min(1.4, scale));
   }
 }
 
@@ -666,4 +865,24 @@ function formatDuration(totalMinutes: number): string {
     return `${minutes}m`;
   }
   return `${hours}h ${minutes}m`;
+}
+
+function distanceToSegment(
+  px: number,
+  py: number,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number
+): number {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  if (dx === 0 && dy === 0) {
+    return Math.hypot(px - x1, py - y1);
+  }
+  const t = ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy);
+  const clamped = Math.max(0, Math.min(1, t));
+  const projX = x1 + clamped * dx;
+  const projY = y1 + clamped * dy;
+  return Math.hypot(px - projX, py - projY);
 }

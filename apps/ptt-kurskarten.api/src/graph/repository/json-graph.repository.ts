@@ -122,6 +122,31 @@ export class JsonGraphRepository implements GraphRepository {
     });
   }
 
+  async deleteNode(id: string): Promise<boolean> {
+    return this.enqueueWrite(async () => {
+      await this.ensureInitialized();
+      const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
+      const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
+      const index = nodes.findIndex((candidate) => candidate.id === id);
+      if (index === -1) {
+        return false;
+      }
+
+      const remainingNodes = [...nodes.slice(0, index), ...nodes.slice(index + 1)];
+      const removedEdgeIds = new Set(
+        edges.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id)
+      );
+      const remainingEdges = edges.filter((edge) => !removedEdgeIds.has(edge.id));
+      const remainingTrips = trips.filter((trip) => !removedEdgeIds.has(trip.edgeId));
+
+      await this.writeJsonAtomic(this.nodesPath, remainingNodes);
+      await this.writeJsonAtomic(this.edgesPath, remainingEdges);
+      await this.writeJsonAtomic(this.tripsPath, remainingTrips);
+      return true;
+    });
+  }
+
   async createEdge(edge: GraphEdge): Promise<GraphEdge> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();

@@ -72,25 +72,49 @@
     "validTo": null
   },
   {
-    "id": "draft-edge-1770282687799",
-    "from": "bern",
-    "to": "basel",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
-    "id": "draft-edge-1770282698677",
-    "from": "bern",
-    "to": "basel",
-    "transport": "coach",
-    "validFrom": 1871,
-    "validTo": null
-  },
-  {
     "id": "draft-edge-1770288808954",
     "from": "bern",
     "to": "lucerne",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770293189880",
+    "from": "bern",
+    "to": "draft-node-1770293075766",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770293255395",
+    "from": "bern",
+    "to": "draft-node-1770293075766",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770293288104",
+    "from": "bern",
+    "to": "draft-node-1770293075766",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770294735094",
+    "from": "basel",
+    "to": "bern",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770298118328",
+    "from": "draft-node-1770298096656",
+    "to": "bern",
     "transport": "coach",
     "validFrom": 1871,
     "validTo": null

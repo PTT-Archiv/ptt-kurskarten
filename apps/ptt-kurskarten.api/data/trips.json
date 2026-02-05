@@ -7,24 +7,6 @@
     "edgeId": "bern-zurich-coach"
   },
   {
-    "id": "bern-zurich-rail-1",
-    "departs": "06:15",
-    "arrives": "09:10",
-    "edgeId": "bern-zurich-rail"
-  },
-  {
-    "id": "bern-zurich-rail-2",
-    "departs": "12:00",
-    "arrives": "14:55",
-    "edgeId": "bern-zurich-rail"
-  },
-  {
-    "id": "bern-zurich-rail-3",
-    "departs": "18:30",
-    "arrives": "21:10",
-    "edgeId": "bern-zurich-rail"
-  },
-  {
     "id": "basel-zurich-rail-overnight",
     "departs": "22:40",
     "arrives": "01:20",
@@ -56,13 +38,6 @@
     "edgeId": "zurich-st-gallen-rail"
   },
   {
-    "id": "trip-1770116654731",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-1770116650402"
-  },
-  {
     "id": "trip-1770116729515",
     "departs": "20:00",
     "arrives": "21:00",
@@ -89,5 +64,103 @@
     "arrives": "09:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-1770288808954"
+  },
+  {
+    "id": "trip-1770293010964",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "trip-1770293011849",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "trip-1770293012802",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "bern-zurich-rail"
+  },
+  {
+    "id": "trip-1770116654731",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770116650402"
+  },
+  {
+    "id": "trip-1770293032396",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770116650402"
+  },
+  {
+    "id": "trip-1770293204120",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293189880"
+  },
+  {
+    "id": "trip-1770293206262",
+    "departs": "9:00",
+    "arrives": "10:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293189880"
+  },
+  {
+    "id": "trip-1770293215330",
+    "departs": "10:00",
+    "arrives": "11:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293189880"
+  },
+  {
+    "id": "trip-1770293219914",
+    "departs": "13:00",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293189880"
+  },
+  {
+    "id": "trip-1770293271461",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293255395"
+  },
+  {
+    "id": "trip-1770293298020",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770293288104"
+  },
+  {
+    "id": "trip-1770294736642",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770294735094"
+  },
+  {
+    "id": "trip-1770294739291",
+    "departs": "9:39",
+    "arrives": "10:39",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770294735094"
+  },
+  {
+    "id": "trip-1770298122221",
+    "departs": "08:00",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "draft-edge-1770298118328"
   }
 ]
