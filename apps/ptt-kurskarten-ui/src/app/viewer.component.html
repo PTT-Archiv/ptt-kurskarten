@@ -1,180 +1,141 @@
-<main
-  class="viewer-shell planner-minimized"
-  [class.sidebar-open]="sidebarOpen()"
-  [class.map-settled]="mapSettled()"
-  [class.pick-mode]="pickTarget()"
->
+<main class="viewer-shell planner-minimized" [class.sidebar-open]="sidebarOpen()" [class.map-settled]="mapSettled()"
+  [class.pick-mode]="pickTarget()">
   <section class="map-stage">
-    <app-map-stage
-      [graph]="graph()"
-      [nodeDetail]="null"
-      [highlightedEdgeIds]="highlightedEdgeIds()"
-      [highlightedNodeIds]="highlightedNodeIds()"
-      [selectedNodeId]="selectedNodeId()"
-      [pulseNodeIds]="pulseNodeIds()"
-      [pickMode]="pickTarget()"
-      [selectedConnection]="selectedConnection()"
-      [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()"
-      [routingActive]="routingActive()"
-      [showBorder]="false"
-      (nodeSelected)="onNodeSelected($event)"
-      (mapPointer)="onMapPointer($event)"
-    ></app-map-stage>
+    <app-map-stage [graph]="graph()" [nodeDetail]="null" [highlightedEdgeIds]="highlightedEdgeIds()"
+      [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
+      [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
+      [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
+      (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
     @if (!graph()) {
-      <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
+    <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
     <div class="planner-overlay">
-      <app-viewer-route-planner-overlay
-        [nodes]="nodes()"
-        [fromId]="fromId()"
-        [toId]="toId()"
-        [departTime]="departTime()"
-        [searching]="routingState() === 'searching'"
-        [variant]="'compact'"
-        [pickMode]="pickTarget()"
-        (fromIdChange)="onFromIdChange($event)"
-        (toIdChange)="onToIdChange($event)"
-        (fromPreviewChange)="onFromPreview($event)"
-        (toPreviewChange)="onToPreview($event)"
-        (pickFrom)="startMapPick('from')"
-        (pickTo)="startMapPick('to')"
-        (departTimeChange)="departTime.set($event)"
-        (swap)="swapConnections()"
-        (plannerFocus)="onPlannerFocus($event)"
-        (plannerHover)="onPlannerHover($event)"
-      ></app-viewer-route-planner-overlay>
+      <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
+        [departTime]="departTime()" [searching]="routingState() === 'searching'" [variant]="'compact'"
+        [pickMode]="pickTarget()" (fromIdChange)="onFromIdChange($event)" (toIdChange)="onToIdChange($event)"
+        (fromPreviewChange)="onFromPreview($event)" (toPreviewChange)="onToPreview($event)"
+        (pickFrom)="startMapPick('from')" (pickTo)="startMapPick('to')" (departTimeChange)="departTime.set($event)"
+        (swap)="swapConnections()" (plannerFocus)="onPlannerFocus($event)"
+        (plannerHover)="onPlannerHover($event)"></app-viewer-route-planner-overlay>
       @if (routingState() === 'searching') {
-        <div class="planner-status">
-          <div class="status-card">
-            <span class="spinner" aria-hidden="true"></span>
-            <span>{{ 'viewer.searching' | transloco }}</span>
-          </div>
+      <div class="planner-status">
+        <div class="status-card">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>{{ 'viewer.searching' | transloco }}</span>
         </div>
+      </div>
       } @else if (routingState() === 'no_results') {
-        <div class="planner-status">
-          <div class="status-card">{{ getNoResultsMessage() }}</div>
-        </div>
+      <div class="planner-status">
+        <div class="status-card">{{ getNoResultsMessage() }}</div>
+      </div>
       }
       @if (pickTarget()) {
-        <div class="planner-status pick-status">
-          <div class="status-card">{{ getPickModeLabel() }}</div>
-        </div>
+      <div class="planner-status pick-status">
+        <div class="status-card">{{ getPickModeLabel() }}</div>
+      </div>
       }
-  </div>
+    </div>
   </section>
 
   <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">
-      <div class="sidebar-header">
-        <div class="section-title">{{ 'viewer.details' | transloco }}</div>
-        <button class="ghost-btn" type="button" (click)="closeSidebar()">×</button>
-      </div>
+    <div class="sidebar-header">
+      <div class="section-title">{{ 'viewer.details' | transloco }}</div>
+      <button class="ghost-btn" type="button" (click)="closeSidebar()">×</button>
+    </div>
     <section class="panel-section results-panel">
       <div class="section-title">{{ 'viewer.results' | transloco }}</div>
       @if (routingState() === 'searching') {
-        <div class="muted">{{ 'viewer.searching' | transloco }}</div>
+      <div class="muted">{{ 'viewer.searching' | transloco }}</div>
       } @else if (routingState() === 'error') {
-        <div class="muted">{{ 'viewer.error' | transloco }}</div>
+      <div class="muted">{{ 'viewer.error' | transloco }}</div>
       } @else if (connectionResults().length > 0) {
-        <div class="result-list">
-          @for (option of connectionResults(); track option.id) {
-            <button
-              class="result-card"
-              [class.active]="selectedConnectionId() === option.id"
-              (click)="selectConnection(option)"
-            >
-              <div class="result-time">
-                {{ 'viewer.departShort' | transloco }} {{ option.departs }}
-                @if (option.departDayOffset && option.departDayOffset > 0) {
-                  <span>(+{{ option.departDayOffset }})</span>
-                }
-                · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
-                @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
-                  <span>(+{{ option.arriveDayOffset }})</span>
-                }
-              </div>
-              <div class="result-meta">
-                {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
-                ·
-                @if ((option.transfers ?? option.legs.length - 1) === 0) {
-                  {{ 'viewer.direct' | transloco }}
-                } @else if ((option.transfers ?? option.legs.length - 1) === 1) {
-                  {{ 'viewer.oneTransfer' | transloco }}
-                } @else {
-                  {{ 'viewer.manyTransfers' | transloco: { count: option.transfers ?? option.legs.length - 1 } }}
-                }
-              </div>
-            </button>
-          }
-        </div>
-      } @else {
-        <div class="muted">{{ getNoResultsMessage() }}</div>
-        @if (routingState() === 'no_results') {
-          <div class="quick-actions">
-            <button type="button" class="ghost-btn" (click)="shiftTime(-30)">-30 min</button>
-            <button type="button" class="ghost-btn" (click)="shiftTime(30)">+30 min</button>
+      <div class="result-list">
+        @for (option of connectionResults(); track option.id) {
+        <button class="result-card" [class.active]="selectedConnectionId() === option.id"
+          (click)="selectConnection(option)">
+          <div class="result-time">
+            {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+            @if (option.departDayOffset && option.departDayOffset > 0) {
+            <span>(+{{ option.departDayOffset }})</span>
+            }
+            · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+            @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+            <span>(+{{ option.arriveDayOffset }})</span>
+            }
           </div>
+          <div class="result-meta">
+            {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
+            ·
+            @if ((option.transfers ?? option.legs.length - 1) === 0) {
+            {{ 'viewer.direct' | transloco }}
+            } @else if ((option.transfers ?? option.legs.length - 1) === 1) {
+            {{ 'viewer.oneTransfer' | transloco }}
+            } @else {
+            {{ 'viewer.manyTransfers' | transloco: { count: option.transfers ?? option.legs.length - 1 } }}
+            }
+          </div>
+        </button>
         }
+      </div>
+      } @else {
+      <div class="muted">{{ getNoResultsMessage() }}</div>
+      @if (routingState() === 'no_results') {
+      <div class="quick-actions">
+        <button type="button" class="ghost-btn" (click)="shiftTime(-30)">-30 min</button>
+        <button type="button" class="ghost-btn" (click)="shiftTime(30)">+30 min</button>
+      </div>
+      }
       }
     </section>
 
     @if (selectedConnection(); as selected) {
-      <section class="panel-section detail-panel">
-        <div class="section-title">{{ 'viewer.routeDetails' | transloco }}</div>
-        <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
-        @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
-          <div class="detail-row">
-            <div class="detail-time">
-              {{ leg.departs }} → {{ leg.arrives }}
-              @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
-                <span>(+{{ leg.arrivalDayOffset }})</span>
-              }
-            </div>
-            <div class="detail-line">
-              {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
-            </div>
-            <div class="detail-duration">{{ formatDuration(leg.durationMinutes ?? 0) }}</div>
-          </div>
-          @if (selectedWaitSegments()[idx]; as wait) {
-            <div class="wait-row">
-              <div class="wait-title">
-                {{ 'label.wait' | transloco }} {{ formatDuration(wait.durationMinutes) }}
-              </div>
-              @if (wait.overnight) {
-                <div class="wait-meta">
-                  {{ 'label.overnight' | transloco }}
-                  @if (wait.endDayOffset - wait.startDayOffset > 0) {
-                    <span>(+{{ wait.endDayOffset - wait.startDayOffset }})</span>
-                  }
-                </div>
-              }
-            </div>
+    <section class="panel-section detail-panel">
+      <div class="section-title">{{ 'viewer.routeDetails' | transloco }}</div>
+      <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
+      @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
+      <div class="detail-row">
+        <div class="detail-time">
+          {{ leg.departs }} → {{ leg.arrives }}
+          @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
+          <span>(+{{ leg.arrivalDayOffset }})</span>
           }
+        </div>
+        <div class="detail-line">
+          {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
+        </div>
+        <div class="detail-duration">{{ formatDuration(leg.durationMinutes ?? 0) }}</div>
+      </div>
+      @if (selectedWaitSegments()[idx]; as wait) {
+      <div class="wait-row">
+        <div class="wait-title">
+          {{ 'label.wait' | transloco }} {{ formatDuration(wait.durationMinutes) }}
+        </div>
+        @if (wait.overnight) {
+        <div class="wait-meta">
+          {{ 'label.overnight' | transloco }}
+          @if (wait.endDayOffset - wait.startDayOffset > 0) {
+          <span>(+{{ wait.endDayOffset - wait.startDayOffset }})</span>
+          }
+        </div>
         }
-      </section>
+      </div>
+      }
+      }
+    </section>
     }
 
     <section class="panel-section">
       <div class="section-title">{{ 'label.year' | transloco }}</div>
       <div class="year-value">{{ yearDraft() }}</div>
-      <input
-        class="year-slider"
-        type="range"
-        [min]="minYear()"
-        [max]="maxYear()"
-        [value]="yearDraft()"
-        (input)="onYearInput($event)"
-        (change)="onYearCommit($event)"
-      />
+      <input class="year-slider" type="range" [min]="minYear()" [max]="maxYear()" [value]="yearDraft()"
+        (input)="onYearInput($event)" (change)="onYearCommit($event)" />
       <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
     </section>
 
     <section class="panel-section">
       <label class="toggle-row">
-        <input
-          type="checkbox"
-          [checked]="showConnectionDetailsOnMap()"
-          (change)="showConnectionDetailsOnMap.set($any($event.target).checked)"
-        />
+        <input type="checkbox" [checked]="showConnectionDetailsOnMap()"
+          (change)="showConnectionDetailsOnMap.set($any($event.target).checked)" />
         <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
       </label>
     </section>
@@ -188,22 +149,22 @@
     </section>
 
     @if (selectedNodeId(); as nodeId) {
-      @if (getNodeById(nodeId); as node) {
-        <section class="panel-section">
-          <div class="section-title">{{ 'viewer.nodeDetail' | transloco }}</div>
-          <div class="node-name">{{ node.name }}</div>
-          <div class="node-id">{{ node.id }}</div>
-          <button class="ghost-btn" type="button" (click)="onNodeSelected(null)">
-            {{ 'btn.cancel' | transloco }}
-          </button>
-        </section>
-      }
+    @if (getNodeById(nodeId); as node) {
+    <section class="panel-section">
+      <div class="section-title">{{ 'viewer.nodeDetail' | transloco }}</div>
+      <div class="node-name">{{ node.name }}</div>
+      <div class="node-id">{{ node.id }}</div>
+      <button class="ghost-btn" type="button" (click)="onNodeSelected(null)">
+        {{ 'btn.cancel' | transloco }}
+      </button>
+    </section>
+    }
     }
   </aside>
 
   @if (!sidebarOpen()) {
-    <button class="sidebar-handle" type="button" (click)="toggleSidebar()" aria-label="Details">
-      <span class="handle-text">{{ 'viewer.details' | transloco }}</span>
-    </button>
+  <button class="sidebar-handle" type="button" (click)="toggleSidebar()" aria-label="Details">
+    <span class="handle-text">{{ 'viewer.details' | transloco }}</span>
+  </button>
   }
 </main>

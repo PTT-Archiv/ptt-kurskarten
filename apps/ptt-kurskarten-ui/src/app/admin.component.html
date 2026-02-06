@@ -5,6 +5,7 @@
       [nodeDetail]="nodeDetail()"
       [selectedNodeId]="selectedNodeId()"
       [highlightedEdgeIds]="highlightedEdgeIds()"
+      [showBorder]="false"
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
     <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
@@ -27,7 +28,7 @@
   </section>
 
   <aside class="side-panel admin-panel">
-    <div class="sidebar-header">
+    <div class="sidebar-header panel-section">
       <div class="header-row">
         <div class="header-title">
           Admin
