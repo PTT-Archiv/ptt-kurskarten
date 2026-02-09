@@ -15,7 +15,7 @@ describe('routing', () => {
           id: 'a-b',
           from: 'a',
           to: 'b',
-          transport: 'rail',
+          transport: 'courier',
           validFrom: 1800,
           trips: [
             { id: 'a-b-1', departs: '17:40', arrives: '18:30' },
@@ -26,7 +26,7 @@ describe('routing', () => {
           id: 'b-c',
           from: 'b',
           to: 'c',
-          transport: 'rail',
+          transport: 'courier',
           validFrom: 1800,
           trips: [
             { id: 'b-c-1', departs: '18:45', arrives: '19:30' },
@@ -62,7 +62,7 @@ describe('routing', () => {
           id: 'a-b',
           from: 'a',
           to: 'b',
-          transport: 'coach',
+          transport: 'postkutsche',
           validFrom: 1800,
           trips: [{ id: 'a-b-overnight', departs: '22:30', arrives: '01:10', arrivalDayOffset: 1 }]
         }

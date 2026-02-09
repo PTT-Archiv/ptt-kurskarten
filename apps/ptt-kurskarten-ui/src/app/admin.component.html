@@ -167,7 +167,9 @@
                   (click)="selectEdge(edge.id)"
                 >
                   <span>{{ edge.toName }}</span>
-                  <span class="edge-meta">{{ edge.transport }} · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}</span>
+                  <span class="edge-meta">
+                    {{ ('transport.' + edge.transport) | transloco }} · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}
+                  </span>
                 </button>
               }
             </div>
@@ -200,10 +202,9 @@
           <label class="field">
             <span>{{ 'label.transport' | transloco }}</span>
             <select [value]="edgeDraft.transport" (change)="updateSelectedEdgeTransport($event)">
-              <option value="coach">coach</option>
-              <option value="rail">rail</option>
-              <option value="tram">tram</option>
-              <option value="ship">ship</option>
+              @for (transport of transportOptions; track transport) {
+                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+              }
             </select>
           </label>
           <div class="field-grid">
@@ -245,10 +246,9 @@
           <label class="field">
             <span>{{ 'label.transport' | transloco }}</span>
             <select [value]="draft.transport" (change)="updateDraftEdgeTransport($event)">
-              <option value="coach">coach</option>
-              <option value="rail">rail</option>
-              <option value="tram">tram</option>
-              <option value="ship">ship</option>
+              @for (transport of transportOptions; track transport) {
+                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+              }
             </select>
           </label>
           <div class="field-grid">

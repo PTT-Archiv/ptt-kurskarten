@@ -167,7 +167,7 @@
           }
         </div>
         <div class="detail-line">
-          {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
+          {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ ('transport.' + leg.transport) | transloco }})
         </div>
         <div class="detail-duration">{{ formatDuration(leg.durationMinutes) }}</div>
         }

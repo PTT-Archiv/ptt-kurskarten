@@ -107,7 +107,7 @@ export class ReportsComponent {
       outgoingHeader,
       ...report.outgoing.map((item) => [
         item.toNode.name,
-        item.transport,
+        this.transportLabel(item.transport),
         String(item.tripsCount),
         item.firstDeparture ?? '',
         item.lastDeparture ?? '',
@@ -117,7 +117,7 @@ export class ReportsComponent {
       incomingHeader,
       ...report.incoming.map((item) => [
         item.fromNode.name,
-        item.transport,
+        this.transportLabel(item.transport),
         String(item.tripsCount),
         item.firstDeparture ?? '',
         item.lastDeparture ?? '',
@@ -163,7 +163,9 @@ export class ReportsComponent {
         this.edges.set(
           snapshot.edges.map((edge) => ({
             id: edge.id,
-            label: `${nodesById.get(edge.from) ?? '—'} → ${nodesById.get(edge.to) ?? '—'} (${edge.transport})`
+            label: `${nodesById.get(edge.from) ?? '—'} → ${nodesById.get(edge.to) ?? '—'} (${this.transportLabel(
+              edge.transport
+            )})`
           }))
         );
         if (!this.stationId() && nodes.length) {
@@ -196,5 +198,11 @@ export class ReportsComponent {
       return `"${value.replace(/"/g, '""')}"`;
     }
     return value;
+  }
+
+  private transportLabel(transport: string): string {
+    const key = `transport.${transport}`;
+    const label = this.transloco.translate(key);
+    return label === key ? transport : label;
   }
 }

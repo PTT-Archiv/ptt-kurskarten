@@ -463,6 +463,24 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
 
+    const topNodes = this.getTopConnectedNodes(nodes, edgeCounts, 4);
+    topNodes.forEach((node) => {
+      const screen = this.screenNodes.get(node.id);
+      if (!screen) {
+        return;
+      }
+      ctx.save();
+      ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+      const text = node.name;
+      const size = measureLabel(ctx, text);
+      const x = screen.x + 10;
+      const y = screen.y - size.h - 8;
+      drawLabel(ctx, text, x, y, size.w, size.h);
+      ctx.restore();
+    });
+
     if (this.showConnectionDetailsOnMap && this.selectedConnection) {
       this.drawConnectionDetails(ctx, this.selectedConnection);
     }
@@ -505,6 +523,24 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     detail?.edges.forEach((edge) => edgeIds.add(edge.id));
 
     return { nodeIds, edgeIds };
+  }
+
+  private getTopConnectedNodes(nodes: GraphNode[], edgeCounts: Map<string, number>, limit: number): GraphNode[] {
+    return [...nodes]
+      .sort((a, b) => {
+        const countDiff = (edgeCounts.get(b.id) ?? 0) - (edgeCounts.get(a.id) ?? 0);
+        if (countDiff !== 0) {
+          return countDiff;
+        }
+        return a.name.localeCompare(b.name);
+      })
+      .slice(0, limit);
+  }
+
+  private transportLabel(transport: string): string {
+    const key = `transport.${transport}`;
+    const label = this.transloco.translate(key);
+    return label === key ? transport : label;
   }
 
   private hitTestNode(event: MouseEvent): string | null {
@@ -716,7 +752,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const arrive = getLegAbsTime(leg, 'arrive');
         const dayDelta = Math.max(0, arrive.dayOffset - depart.dayOffset);
         const suffix = dayDelta > 0 ? ` (+${dayDelta})` : '';
-        const text = `${leg.transport} ${leg.departs}→${leg.arrives}${suffix}`;
+      const transportLabel = this.transportLabel(leg.transport);
+      const text = `${transportLabel} ${leg.departs}→${leg.arrives}${suffix}`;
         return { text, anchor, priority: 3 };
       })
       .filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } => Boolean(label));

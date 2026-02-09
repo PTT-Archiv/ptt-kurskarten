@@ -7,7 +7,7 @@ User can:
 - choose a year (slider)
 - see nodes + edges for that year
 - click a node to view details + connected edges
-- optionally filter by transport mode (coach/postauto/rail) [MVP optional]
+- optionally filter by transport mode (postkutsche/dampfschiff/segelboot/courier/messagerie) [MVP optional]
 
 User cannot (Non-goals for MVP):
 - OCR / automatic extraction from scanned kurskarten

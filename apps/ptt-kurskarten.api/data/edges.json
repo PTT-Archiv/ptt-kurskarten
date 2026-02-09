@@ -3,7 +3,7 @@
     "id": "bern-zurich-coach",
     "from": "bern",
     "to": "zurich",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1845,
     "validTo": 1865
   },
@@ -11,7 +11,7 @@
     "id": "bern-zurich-rail",
     "from": "bern",
     "to": "zurich",
-    "transport": "rail",
+    "transport": "courier",
     "validFrom": 1866,
     "validTo": null
   },
@@ -19,7 +19,7 @@
     "id": "basel-zurich-rail",
     "from": "basel",
     "to": "zurich",
-    "transport": "rail",
+    "transport": "courier",
     "validFrom": 1855,
     "validTo": null
   },
@@ -27,7 +27,7 @@
     "id": "bern-geneva-rail",
     "from": "bern",
     "to": "geneva",
-    "transport": "rail",
+    "transport": "courier",
     "validFrom": 1879,
     "validTo": null
   },
@@ -35,7 +35,7 @@
     "id": "zurich-st-gallen-rail",
     "from": "zurich",
     "to": "st-gallen",
-    "transport": "rail",
+    "transport": "courier",
     "validFrom": 1875,
     "validTo": null
   },
@@ -43,7 +43,7 @@
     "id": "draft-edge-1770116650402",
     "from": "geneva",
     "to": "bern",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -51,7 +51,7 @@
     "id": "draft-edge-1770116716947",
     "from": "geneva",
     "to": "bern",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -59,7 +59,7 @@
     "id": "draft-edge-1770124678420",
     "from": "draft-node-1770124603090",
     "to": "lucerne",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -67,7 +67,7 @@
     "id": "draft-edge-1770124693205",
     "from": "draft-node-1770124603090",
     "to": "lucerne",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -75,7 +75,7 @@
     "id": "draft-edge-1770288808954",
     "from": "bern",
     "to": "lucerne",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -83,7 +83,7 @@
     "id": "draft-edge-1770293189880",
     "from": "bern",
     "to": "draft-node-1770293075766",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -91,7 +91,7 @@
     "id": "draft-edge-1770293255395",
     "from": "bern",
     "to": "draft-node-1770293075766",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -99,7 +99,7 @@
     "id": "draft-edge-1770293288104",
     "from": "bern",
     "to": "draft-node-1770293075766",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -107,7 +107,7 @@
     "id": "draft-edge-1770294735094",
     "from": "basel",
     "to": "bern",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -115,7 +115,7 @@
     "id": "draft-edge-1770298118328",
     "from": "draft-node-1770298096656",
     "to": "bern",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -123,7 +123,7 @@
     "id": "draft-edge-1770374079917",
     "from": "draft-node-1770374066761",
     "to": "geneva",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   },
@@ -131,7 +131,7 @@
     "id": "draft-edge-1770374103834",
     "from": "geneva",
     "to": "draft-node-1770374066761",
-    "transport": "coach",
+    "transport": "postkutsche",
     "validFrom": 1871,
     "validTo": null
   }

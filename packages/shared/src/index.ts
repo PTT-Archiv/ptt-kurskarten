@@ -1,6 +1,6 @@
 export type Year = number;
 
-export type TransportType = 'coach' | 'rail' | 'tram' | 'ship';
+export type TransportType = 'postkutsche' | 'dampfschiff' | 'segelboot' | 'courier' | 'messagerie';
 
 export type TimeHHMM = `${number}${number}:${number}${number}`;
 

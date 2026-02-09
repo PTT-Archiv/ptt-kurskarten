@@ -157,7 +157,7 @@ function buildDemoSnapshot(year: number): GraphSnapshot {
         id: 'edge-bern-zurich',
         from: 'bern',
         to: 'zurich',
-        transport: 'rail',
+        transport: 'courier',
         validFrom: year,
         validTo: undefined,
         durationMinutes: 70,

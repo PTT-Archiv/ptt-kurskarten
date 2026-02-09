@@ -82,6 +82,13 @@ export class AdminComponent implements OnDestroy {
   isDemo = signal<boolean>(this.repo.isDemo);
   shortcutsCollapsed = signal<boolean>(false);
   confirmDeleteNode = signal<boolean>(false);
+  readonly transportOptions: TransportType[] = [
+    'postkutsche',
+    'dampfschiff',
+    'segelboot',
+    'courier',
+    'messagerie'
+  ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
   private dragState:
@@ -370,7 +377,7 @@ export class AdminComponent implements OnDestroy {
         id: `draft-edge-${Date.now()}`,
         from: nodeId,
         to: fallbackTo,
-        transport: 'coach',
+        transport: 'postkutsche',
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []
@@ -1023,7 +1030,7 @@ export class AdminComponent implements OnDestroy {
         id: draftId,
         from: pendingFrom,
         to: event.hitNodeId,
-        transport: 'coach',
+        transport: 'postkutsche',
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []
@@ -1207,7 +1214,7 @@ export class AdminComponent implements OnDestroy {
       id: `draft-edge-${Date.now()}`,
       from,
       to,
-      transport: 'coach',
+      transport: 'postkutsche',
       validFrom: this.year(),
       durationMinutes: 60,
       trips: []
@@ -1223,7 +1230,7 @@ export class AdminComponent implements OnDestroy {
         id: `draft-edge-${Date.now()}`,
         from: nodeId,
         to: null,
-        transport: 'coach',
+        transport: 'postkutsche',
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []

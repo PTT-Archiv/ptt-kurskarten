@@ -423,7 +423,7 @@ function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: str
     tripId: trip?.id ?? `outside:${fromId}->${toId}`,
     from: fromId,
     to: toId,
-    transport: edge?.transport ?? 'coach',
+    transport: edge?.transport ?? 'postkutsche',
     departs: trip?.departs,
     arrives: undefined,
     continuationOutsideDataset: true

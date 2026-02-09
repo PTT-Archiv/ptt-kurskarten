@@ -77,7 +77,7 @@
             @for (row of report.outgoing; track row.edgeId) {
               <tr>
                 <td>{{ row.toNode.name }}</td>
-                <td>{{ row.transport }}</td>
+                <td>{{ ('transport.' + row.transport) | transloco }}</td>
                 <td>{{ row.tripsCount }}</td>
                 <td>{{ row.firstDeparture ?? '—' }}</td>
                 <td>{{ row.lastDeparture ?? '—' }}</td>
@@ -103,7 +103,7 @@
             @for (row of report.incoming; track row.edgeId) {
               <tr>
                 <td>{{ row.fromNode.name }}</td>
-                <td>{{ row.transport }}</td>
+                <td>{{ ('transport.' + row.transport) | transloco }}</td>
                 <td>{{ row.tripsCount }}</td>
                 <td>{{ row.firstDeparture ?? '—' }}</td>
                 <td>{{ row.lastDeparture ?? '—' }}</td>

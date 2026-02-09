@@ -140,7 +140,7 @@ export class GraphController {
         id: edgeId,
         from: body.from ?? '',
         to: body.to ?? '',
-        transport: body.transport ?? 'coach',
+        transport: body.transport ?? 'postkutsche',
         validFrom: body.validFrom ?? 1871,
         validTo: body.validTo,
         durationMinutes: body.durationMinutes ?? 60,
