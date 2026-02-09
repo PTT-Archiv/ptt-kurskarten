@@ -193,6 +193,12 @@
   font-size: 12px;
 }
 
+.field.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .field input,
 .field select {
   border: 2px solid #141414;

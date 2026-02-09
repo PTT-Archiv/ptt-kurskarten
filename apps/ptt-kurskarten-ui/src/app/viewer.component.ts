@@ -190,7 +190,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.lastSearchParams.set({ from, to, time: depart, year });
     this.http
       .get<ConnectionOption[]>(
-        `/api/v1/connections?year=${year}&from=${from}&to=${to}&depart=${depart}&k=10`
+        `/api/v1/connections?year=${year}&from=${from}&to=${to}&depart=${depart}&k=10&allowForeignStartFallback=true`
       )
       .subscribe({
         next: (options) => {
@@ -383,6 +383,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return match?.name ?? '—';
   }
 
+  getNodeLabel(id: string): string {
+    const match = this.nodes().find((node) => node.id === id);
+    return match?.name ?? id;
+  }
+
   getNodeById(id: string | null): { id: string; name: string } | null {
     if (!id) {
       return null;
@@ -395,11 +400,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const id = option.id || `${option.from}-${option.to}-${index}`;
     const transfers = option.transfers ?? option.legs.length - 1;
     const legs = option.legs.map((leg) => this.ensureLegDuration(leg));
-    return { ...option, id, transfers, legs };
+    const kind = option.kind ?? 'COMPLETE_JOURNEY';
+    return { ...option, id, transfers, legs, kind };
   }
 
   private ensureLegDuration(leg: ConnectionLeg): ConnectionLeg {
     if (leg.durationMinutes !== undefined) {
+      return leg;
+    }
+    if (!leg.departs || !leg.arrives) {
       return leg;
     }
     const durationMinutes = this.computeLegDurationMinutes(leg.departs, leg.arrives, leg.arrivalDayOffset);
@@ -415,7 +424,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return normalized - dep;
   }
 
-  formatDuration(totalMinutes: number): string {
+  formatDuration(totalMinutes?: number): string {
+    if (totalMinutes === undefined) {
+      return '—';
+    }
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
     if (hours <= 0) {

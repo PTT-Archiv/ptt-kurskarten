@@ -53,6 +53,41 @@
         @for (option of connectionResults(); track option.id) {
         <button class="result-card" [class.active]="selectedConnectionId() === option.id"
           (click)="selectConnection(option)">
+          @if (option.kind === 'COMPLETE_PREFIX') {
+          <div class="result-time">
+            Reise bis {{ getNodeLabel(option.resolvedTo ?? option.to) }} (Datensatz-Ende)
+          </div>
+          <div class="result-meta badge">
+            Weiterreise ins Ausland: Zeiten unvollständig
+          </div>
+          <div class="result-meta">
+            @if (option.departs) {
+            {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+            @if (option.departDayOffset && option.departDayOffset > 0) {
+            <span>(+{{ option.departDayOffset }})</span>
+            }
+            }
+            @if (option.arrives) {
+            · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+            @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+            <span>(+{{ option.arriveDayOffset }})</span>
+            }
+            }
+            @if (option.durationMinutes !== undefined) {
+            · {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
+            }
+          </div>
+          } @else if (option.kind === 'FOREIGN_START_FALLBACK') {
+          <div class="result-time">
+            {{ getNodeLabel(option.requestedFrom ?? option.from) }} → {{ getNodeLabel(option.to) }}
+          </div>
+          <div class="result-meta badge">
+            Start in der Schweiz: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
+          </div>
+          <div class="result-meta">
+            {{ getNodeLabel(option.requestedFrom ?? option.from) }} außerhalb Datensatz (Startzeit unbekannt)
+          </div>
+          } @else {
           <div class="result-time">
             {{ 'viewer.departShort' | transloco }} {{ option.departs }}
             @if (option.departDayOffset && option.departDayOffset > 0) {
@@ -74,6 +109,7 @@
             {{ 'viewer.manyTransfers' | transloco: { count: option.transfers ?? option.legs.length - 1 } }}
             }
           </div>
+          }
         </button>
         }
       </div>
@@ -91,9 +127,39 @@
     @if (selectedConnection(); as selected) {
     <section class="panel-section detail-panel">
       <div class="section-title">{{ 'viewer.routeDetails' | transloco }}</div>
+      @if (selected.kind === 'COMPLETE_PREFIX') {
+      <div class="detail-subtitle">
+        Reise bis {{ getNodeLabel(selected.resolvedTo ?? selected.to) }} (Datensatz-Ende)
+      </div>
+      <div class="detail-badge">Weiterreise ins Ausland: Zeiten unvollständig</div>
+      } @else if (selected.kind === 'FOREIGN_START_FALLBACK') {
+      <div class="detail-subtitle">
+        {{ getNodeLabel(selected.requestedFrom ?? selected.from) }} → {{ getNodeLabel(selected.to) }}
+      </div>
+      <div class="detail-badge">
+        Start in der Schweiz: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+      </div>
+      <div class="detail-line">
+        Zubringer: Ankunft {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+        (weitere Zeiten unbekannt)
+      </div>
+      } @else {
       <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
+      }
       @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
       <div class="detail-row">
+        @if (leg.continuationOutsideDataset) {
+        <div class="detail-time">Weiterreise Richtung {{ getNodeLabel(leg.to) }}</div>
+        @if (leg.departs) {
+        <div class="detail-line">Abfahrt {{ leg.departs }}</div>
+        }
+        <div class="detail-line">Ankunft unbekannt (außerhalb Datensatz)</div>
+        } @else if (leg.foreignStartPreface) {
+        <div class="detail-time">
+          Zubringer: Ankunft {{ getNodeLabel(leg.to) }} {{ leg.arrives }}
+        </div>
+        <div class="detail-line">Weitere Zeiten unbekannt</div>
+        } @else {
         <div class="detail-time">
           {{ leg.departs }} → {{ leg.arrives }}
           @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
@@ -103,7 +169,8 @@
         <div class="detail-line">
           {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ leg.transport }})
         </div>
-        <div class="detail-duration">{{ formatDuration(leg.durationMinutes ?? 0) }}</div>
+        <div class="detail-duration">{{ formatDuration(leg.durationMinutes) }}</div>
+        }
       </div>
       @if (selectedWaitSegments()[idx]; as wait) {
       <div class="wait-row">

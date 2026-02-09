@@ -118,5 +118,21 @@
     "transport": "coach",
     "validFrom": 1871,
     "validTo": null
+  },
+  {
+    "id": "draft-edge-1770374079917",
+    "from": "draft-node-1770374066761",
+    "to": "geneva",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-edge-1770374103834",
+    "from": "geneva",
+    "to": "draft-node-1770374066761",
+    "transport": "coach",
+    "validFrom": 1871,
+    "validTo": null
   }
 ]

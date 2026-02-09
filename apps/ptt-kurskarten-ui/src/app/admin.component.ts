@@ -31,6 +31,7 @@ type NodeDraft = {
   name: string;
   x: number;
   y: number;
+  foreign?: boolean;
   validFrom: number;
   validTo?: number;
 };
@@ -497,6 +498,7 @@ export class AdminComponent implements OnDestroy {
     this.repo
       .updateNode(nodeId, {
         name: node.name,
+        foreign: node.foreign,
         validFrom: node.validFrom,
         validTo: node.validTo,
         x: node.x,
@@ -551,6 +553,16 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateNodeLocal(nodeId, { validTo: value });
+    this.dirty.set(true);
+  }
+
+  updateSelectedForeign(event: Event): void {
+    const value = (event.target as HTMLInputElement).checked;
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return;
+    }
+    this.updateNodeLocal(nodeId, { foreign: value });
     this.dirty.set(true);
   }
 
@@ -613,6 +625,16 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.draftNode.set({ ...draft, validTo: value });
+    this.dirty.set(true);
+  }
+
+  updateDraftForeign(event: Event): void {
+    const value = (event.target as HTMLInputElement).checked;
+    const draft = this.draftNode();
+    if (!draft) {
+      return;
+    }
+    this.draftNode.set({ ...draft, foreign: value });
     this.dirty.set(true);
   }
 
@@ -1414,7 +1436,9 @@ export class AdminComponent implements OnDestroy {
     if (!trips.length) {
       return true;
     }
-    return trips.every((trip) => this.isTimeValid(trip.departs) && this.isTimeValid(trip.arrives));
+    return trips.every(
+      (trip) => this.isTimeValid(trip.departs ?? '') && this.isTimeValid(trip.arrives ?? '')
+    );
   }
 
   private isTimeValid(value: string): boolean {

@@ -26,6 +26,8 @@ const NODE_RADIUS_STEP = 1;
 const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
+const NODE_COLOR_DEFAULT = '#ffff00';
+const NODE_COLOR_FOREIGN = '#0000ff';
 
 @Component({
   selector: 'app-map-stage',
@@ -416,6 +418,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       const isDimmed = routingActive && !isHighlighted && !isHovered;
       const radius = baseRadius + (isHighlighted || isHovered ? 2 * sizeScale : 0);
       const showShadow = this.pickMode !== null;
+      const fillColor = node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
       if (showShadow) {
         ctx.save();
         ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
@@ -424,13 +427,13 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.shadowOffsetY = 5 * sizeScale;
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffff00';
+        ctx.fillStyle = fillColor;
         ctx.fill();
         ctx.restore();
       } else {
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffff00';
+        ctx.fillStyle = fillColor;
         ctx.fill();
       }
       // Keep nodes at full opacity even when edges are dimmed.
@@ -700,6 +703,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     const legLabels = connection.legs
       .map((leg) => {
+        if (leg.continuationOutsideDataset || leg.foreignStartPreface || !leg.departs || !leg.arrives) {
+          return null;
+        }
         const from = this.screenNodes.get(leg.from);
         const to = this.screenNodes.get(leg.to);
         if (!from || !to) {

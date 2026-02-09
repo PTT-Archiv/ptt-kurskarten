@@ -118,6 +118,14 @@
             <span>{{ 'label.name' | transloco }}</span>
             <input type="text" [value]="draft.name" (input)="updateDraftName($event)" />
           </label>
+          <label class="field checkbox-row">
+            <input
+              type="checkbox"
+              [checked]="draft.foreign ?? false"
+              (change)="updateDraftForeign($event)"
+            />
+            <span>{{ 'label.foreign' | transloco }}</span>
+          </label>
           <label class="field">
             <span>{{ 'label.validFrom' | transloco }}</span>
             <input type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
@@ -131,6 +139,14 @@
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
             <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+          </label>
+          <label class="field checkbox-row">
+            <input
+              type="checkbox"
+              [checked]="detail.node?.foreign ?? false"
+              (change)="updateSelectedForeign($event)"
+            />
+            <span>{{ 'label.foreign' | transloco }}</span>
           </label>
           <label class="field">
             <span>{{ 'label.validFrom' | transloco }}</span>

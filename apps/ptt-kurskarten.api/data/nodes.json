@@ -110,5 +110,30 @@
     "y": 220.69750231267346,
     "validFrom": 1871,
     "validTo": null
+  },
+  {
+    "id": "draft-node-1770374043041",
+    "name": "New node",
+    "x": -54.391959798994996,
+    "y": 264.63651591289783,
+    "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770374066761",
+    "name": "Paris",
+    "x": -0.3584589614740521,
+    "y": 245.91624790619767,
+    "validFrom": 1871,
+    "validTo": null,
+    "foreign": true
+  },
+  {
+    "id": "draft-node-1770380860998",
+    "name": "New node",
+    "x": 374.1035856573705,
+    "y": 111.37051792828684,
+    "validFrom": 1871,
+    "validTo": null
   }
 ]

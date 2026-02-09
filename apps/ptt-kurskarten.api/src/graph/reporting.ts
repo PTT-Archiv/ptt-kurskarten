@@ -56,14 +56,16 @@ export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): Edg
   const fromNode = edge ? nodesById.get(edge.from) ?? null : null;
   const toNode = edge ? nodesById.get(edge.to) ?? null : null;
 
-  const trips = (edge?.trips ?? []).map((trip) => ({
-    tripId: trip.id,
-    departs: trip.departs,
-    arrives: trip.arrives,
-    arrivalDayOffset: trip.arrivalDayOffset,
-    durationMinutes: computeDurationMinutes(trip.departs, trip.arrives, trip.arrivalDayOffset),
-    notes: trip.notes
-  }));
+  const trips = (edge?.trips ?? [])
+    .filter((trip) => Boolean(trip.departs) && Boolean(trip.arrives))
+    .map((trip) => ({
+      tripId: trip.id,
+      departs: trip.departs as TimeHHMM,
+      arrives: trip.arrives as TimeHHMM,
+      arrivalDayOffset: trip.arrivalDayOffset,
+      durationMinutes: computeDurationMinutes(trip.departs as TimeHHMM, trip.arrives as TimeHHMM, trip.arrivalDayOffset),
+      notes: trip.notes
+    }));
 
   trips.sort((a, b) => timeToMinutes(a.departs) - timeToMinutes(b.departs));
 
@@ -116,8 +118,8 @@ function buildEdgeStats(
     return null;
   }
 
-  const trips = edge.trips ?? [];
-  const departures = trips.map((trip) => timeToMinutes(trip.departs));
+  const trips = (edge.trips ?? []).filter((trip) => Boolean(trip.departs) && Boolean(trip.arrives));
+  const departures = trips.map((trip) => timeToMinutes(trip.departs as TimeHHMM));
   const durations = trips.map((trip) => computeDurationMinutes(trip.departs, trip.arrives, trip.arrivalDayOffset));
 
   const base = {

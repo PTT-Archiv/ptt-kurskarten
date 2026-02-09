@@ -24,6 +24,9 @@ export function buildWaitSegments(option: ConnectionOption): WaitSegment[] {
   for (let i = 0; i < legs.length - 1; i += 1) {
     const current = legs[i];
     const next = legs[i + 1];
+    if (!current.arrives || !next.departs) {
+      continue;
+    }
     const start = getLegAbsTime(current, 'arrive');
     const end = getLegAbsTime(next, 'depart');
 
@@ -71,7 +74,11 @@ export function getLegAbsTime(leg: ConnectionLeg, kind: 'depart' | 'arrive'): Le
     };
   }
 
-  const baseMinutes = toMinutes(kind === 'depart' ? leg.departs : leg.arrives);
+  const timeValue = kind === 'depart' ? leg.departs : leg.arrives;
+  if (!timeValue) {
+    return { absMinutes: 0, dayOffset: 0 };
+  }
+  const baseMinutes = toMinutes(timeValue);
 
   if (kind === 'depart') {
     if (leg.departDayOffset !== undefined) {
@@ -90,6 +97,9 @@ export function getLegAbsTime(leg: ConnectionLeg, kind: 'depart' | 'arrive'): Le
     };
   }
 
+  if (!leg.departs) {
+    return { absMinutes: baseMinutes, dayOffset: 0 };
+  }
   const departMinutes = toMinutes(leg.departs);
   let dayOffset = leg.departDayOffset ?? 0;
   if (baseMinutes < departMinutes) {

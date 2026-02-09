@@ -8,7 +8,7 @@ export type DayOffset = 0 | 1 | 2;
 
 export type EdgeTrip = {
   id: string;
-  departs: TimeHHMM;
+  departs?: TimeHHMM;
   arrives: TimeHHMM;
   arrivalDayOffset?: DayOffset;
   notes?: string;
@@ -21,6 +21,7 @@ export type GraphNode = {
   y: number;
   validFrom: Year;
   validTo?: Year;
+  foreign?: boolean;
 };
 
 export type GraphEdge = {
@@ -40,15 +41,19 @@ export type ConnectionLeg = {
   from: string;
   to: string;
   transport: TransportType;
-  departs: TimeHHMM;
-  arrives: TimeHHMM;
+  departs?: TimeHHMM;
+  arrives?: TimeHHMM;
   arrivalDayOffset?: DayOffset;
   departDayOffset?: DayOffset;
   arriveDayOffset?: DayOffset;
   departAbsMinutes?: number;
   arriveAbsMinutes?: number;
   durationMinutes?: number;
+  continuationOutsideDataset?: true;
+  foreignStartPreface?: true;
 };
+
+export type RouteResultKind = 'COMPLETE_JOURNEY' | 'COMPLETE_PREFIX' | 'FOREIGN_START_FALLBACK';
 
 export type ConnectionOption = {
   id?: string;
@@ -57,12 +62,19 @@ export type ConnectionOption = {
   to: string;
   requestedDepart: TimeHHMM;
   departs: TimeHHMM;
-  arrives: TimeHHMM;
+  arrives?: TimeHHMM;
   departDayOffset?: DayOffset;
   arriveDayOffset?: DayOffset;
-  durationMinutes: number;
+  durationMinutes?: number;
   transfers?: number;
   legs: ConnectionLeg[];
+  kind: RouteResultKind;
+  resolvedTo?: string;
+  targetOutsideDataset?: boolean;
+  requestedFrom?: string;
+  effectiveFrom?: string;
+  effectiveStartTime?: TimeHHMM;
+  foreignStartNote?: string;
 };
 
 export type StationProfileReport = {

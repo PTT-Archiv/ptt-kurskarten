@@ -46,6 +46,7 @@
   "label.name": "Name",
   "label.validFrom": "Gültig ab",
   "label.validTo": "Gültig bis",
+  "label.foreign": "Ausland (außerhalb Datensatz)",
   "btn.save": "Speichern",
   "admin.clickNodeToEdit": "Knoten anklicken, um zu bearbeiten.",
   "admin.outgoingEdges": "Ausgehende Kanten",

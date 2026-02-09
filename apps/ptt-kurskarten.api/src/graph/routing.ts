@@ -1,4 +1,13 @@
-import type { ConnectionLeg, ConnectionOption, EdgeTrip, GraphEdge, GraphSnapshot, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
+import type {
+  ConnectionLeg,
+  ConnectionOption,
+  EdgeTrip,
+  GraphEdge,
+  GraphSnapshot,
+  RouteResultKind,
+  TimeHHMM,
+  TransportType
+} from '@ptt-kurskarten/shared';
 
 export type RoutingParams = {
   year: number;
@@ -11,6 +20,7 @@ export type RoutingParams = {
 
 export type ConnectionsParams = RoutingParams & {
   k?: number;
+  allowForeignStartFallback?: boolean;
 };
 
 type TripChoice = {
@@ -20,6 +30,7 @@ type TripChoice = {
   arriveAbs: number;
   departDayOffset: number;
   arriveDayOffset: number;
+  arrivesKnown: boolean;
 };
 
 type QueueItem = { nodeId: string; time: number };
@@ -30,6 +41,7 @@ type PrevInfo = {
   tripId: string | null;
   departAbs: number | null;
   arriveAbs: number | null;
+  arriveKnown: boolean;
   transport: TransportType | null;
 };
 
@@ -72,32 +84,43 @@ export function computeTripChoice(
   let chosenDay = day;
   let chosenDep = 0;
   let chosenArr = 0;
+  let chosenArrKnown = true;
 
   for (const trip of trips) {
+    if (!trip.departs) {
+      continue;
+    }
     const dep = parseTime(trip.departs);
-    const arrRaw = parseTime(trip.arrives);
-    const offset = trip.arrivalDayOffset;
+    const hasArrive = Boolean(trip.arrives);
+    const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
+    const offset = hasArrive ? trip.arrivalDayOffset : undefined;
     const arr = offset !== undefined ? arrRaw + offset * DAY_MINUTES : arrRaw < dep ? arrRaw + DAY_MINUTES : arrRaw;
 
     if (dep >= inDay && (chosen === null || dep < chosenDep)) {
       chosen = trip;
       chosenDep = dep;
       chosenArr = arr;
+      chosenArrKnown = hasArrive;
       chosenDay = day;
     }
   }
 
   if (!chosen) {
     for (const trip of trips) {
+      if (!trip.departs) {
+        continue;
+      }
       const dep = parseTime(trip.departs);
-      const arrRaw = parseTime(trip.arrives);
-      const offset = trip.arrivalDayOffset;
+      const hasArrive = Boolean(trip.arrives);
+      const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
+      const offset = hasArrive ? trip.arrivalDayOffset : undefined;
       const arr = offset !== undefined ? arrRaw + offset * DAY_MINUTES : arrRaw < dep ? arrRaw + DAY_MINUTES : arrRaw;
 
       if (chosen === null || dep < chosenDep) {
         chosen = trip;
         chosenDep = dep;
         chosenArr = arr;
+        chosenArrKnown = hasArrive;
         chosenDay = day + 1;
       }
     }
@@ -118,7 +141,8 @@ export function computeTripChoice(
     departAbs,
     arriveAbs,
     departDayOffset,
-    arriveDayOffset
+    arriveDayOffset,
+    arrivesKnown: chosenArrKnown
   };
 }
 
@@ -145,6 +169,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     tripId: null,
     departAbs: null,
     arriveAbs: null,
+    arriveKnown: true,
     transport: null
   });
   heap.push({ nodeId: params.from, time: startTime });
@@ -190,6 +215,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
           tripId: choice.trip.id,
           departAbs: choice.departAbs,
           arriveAbs: choice.arriveAbs,
+          arriveKnown: choice.arrivesKnown,
           transport: edge.transport
         });
         heap.push({ nodeId: edge.to, time: choice.arriveAbs });
@@ -227,13 +253,13 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       to: edge.to,
       transport: edge.transport,
       departs: trip.departs,
-      arrives: trip.arrives,
-      arrivalDayOffset: trip.arrivalDayOffset,
+      arrives: info.arriveKnown ? trip.arrives : undefined,
+      arrivalDayOffset: info.arriveKnown ? trip.arrivalDayOffset : undefined,
       departDayOffset: departDayOffset as 0 | 1 | 2,
-      arriveDayOffset: arriveDayOffset as 0 | 1 | 2,
+      arriveDayOffset: info.arriveKnown ? (arriveDayOffset as 0 | 1 | 2) : undefined,
       departAbsMinutes: info.departAbs,
-      arriveAbsMinutes: info.arriveAbs,
-      durationMinutes: info.arriveAbs - info.departAbs
+      arriveAbsMinutes: info.arriveKnown ? info.arriveAbs : undefined,
+      durationMinutes: info.arriveKnown ? info.arriveAbs - info.departAbs : undefined
     });
 
     nodeCursor = info.prevNode;
@@ -247,11 +273,12 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 
   const firstLeg = legs[0];
   const departAbs = firstLeg?.departAbsMinutes ?? startTime;
-  const arriveAbs = firstLeg && legs.length
-    ? (legs[legs.length - 1].arriveAbsMinutes ?? targetTime)
-    : targetTime;
+  const lastLeg = legs[legs.length - 1];
+  const arriveAbs = lastLeg?.arriveAbsMinutes;
   const departDayOffset = Math.floor(departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
-  const arriveDayOffset = Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
+  const arriveDayOffset = arriveAbs !== undefined
+    ? Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES)
+    : undefined;
 
   return {
     year: params.year,
@@ -260,16 +287,33 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     requestedDepart: params.depart,
     departs: formatTime(departAbs),
     departDayOffset: departDayOffset as 0 | 1 | 2,
-    arrives: formatTime(arriveAbs),
+    arrives: arriveAbs !== undefined ? formatTime(arriveAbs) : undefined,
     arriveDayOffset: arriveDayOffset as 0 | 1 | 2,
-    durationMinutes: arriveAbs - departAbs,
-    legs
+    durationMinutes: arriveAbs !== undefined ? arriveAbs - departAbs : undefined,
+    legs,
+    kind: 'COMPLETE_JOURNEY'
   };
 }
 
 export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsParams): ConnectionOption[] {
   const k = Math.max(3, Math.min(params.k ?? 5, 10));
   const results: ConnectionOption[] = [];
+  const allowForeignStartFallback = params.allowForeignStartFallback ?? true;
+
+  if (!isNodeInSnapshot(params.to, snapshot) && isNodeInSnapshot(params.from, snapshot)) {
+    return computePrefixConnections(snapshot, params, k);
+  }
+
+  if (!isNodeInSnapshot(params.from, snapshot) && isNodeInSnapshot(params.to, snapshot)) {
+    const normal = computeEarliestArrival(snapshot, params);
+    if (normal) {
+      results.push(normal);
+    }
+    if (allowForeignStartFallback) {
+      results.push(...computeForeignStartFallback(snapshot, params, k));
+    }
+    return results.slice(0, k);
+  }
 
   const base = computeEarliestArrival(snapshot, params);
   if (base) {
@@ -330,6 +374,155 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   }
 
   return results.slice(0, k);
+}
+
+function computePrefixConnections(snapshot: GraphSnapshot, params: ConnectionsParams, k: number): ConnectionOption[] {
+  const edgesToTarget = snapshot.edges.filter((edge) => edge.to === params.to);
+  const candidateNodes = Array.from(
+    new Set(
+      edgesToTarget
+        .map((edge) => edge.from)
+        .filter((nodeId) => isNodeInSnapshot(nodeId, snapshot))
+    )
+  );
+
+  if (!candidateNodes.length) {
+    return [];
+  }
+
+  const options: ConnectionOption[] = [];
+
+  for (const candidate of candidateNodes) {
+    const option = computeEarliestArrival(snapshot, { ...params, to: candidate });
+    if (!option) {
+      continue;
+    }
+    const continuation = buildContinuationLeg(snapshot, candidate, params.to);
+    option.legs = [...option.legs, continuation];
+    option.kind = 'COMPLETE_PREFIX';
+    option.resolvedTo = candidate;
+    option.targetOutsideDataset = true;
+    option.to = params.to;
+    options.push(option);
+  }
+
+  const sorted = options.sort((a, b) => {
+    const aArr = a.legs[a.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
+    const bArr = b.legs[b.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
+    return aArr - bArr;
+  });
+
+  return sorted.slice(0, k);
+}
+
+function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: string): ConnectionLeg {
+  const edge = snapshot.edges.find((candidate) => candidate.from === fromId && candidate.to === toId);
+  const trip = edge?.trips?.[0];
+  return {
+    edgeId: edge?.id ?? `outside:${fromId}->${toId}`,
+    tripId: trip?.id ?? `outside:${fromId}->${toId}`,
+    from: fromId,
+    to: toId,
+    transport: edge?.transport ?? 'coach',
+    departs: trip?.departs,
+    arrives: undefined,
+    continuationOutsideDataset: true
+  };
+}
+
+function isNodeInSnapshot(nodeId: string, snapshot: GraphSnapshot): boolean {
+  return snapshot.nodes.some((node) => node.id === nodeId && node.foreign !== true);
+}
+
+function computeForeignStartFallback(
+  snapshot: GraphSnapshot,
+  params: ConnectionsParams,
+  k: number
+): ConnectionOption[] {
+  const entryTrips: Array<{
+    from: string;
+    to: string;
+    arrival: TimeHHMM;
+    arrivalDayOffset?: number;
+    edge: GraphEdge;
+  }> = [];
+
+  snapshot.edges.forEach((edge) => {
+    if (edge.from !== params.from) {
+      return;
+    }
+    if (!isNodeInSnapshot(edge.to, snapshot)) {
+      return;
+    }
+    (edge.trips ?? []).forEach((trip) => {
+      if (!trip.arrives || trip.departs) {
+        return;
+      }
+      entryTrips.push({
+        from: edge.from,
+        to: edge.to,
+        arrival: trip.arrives,
+        arrivalDayOffset: trip.arrivalDayOffset,
+        edge
+      });
+    });
+  });
+
+  const sortedEntries = entryTrips.sort((a, b) => {
+    const aArr = parseTime(a.arrival);
+    const bArr = parseTime(b.arrival);
+    if (aArr !== bArr) {
+      return aArr - bArr;
+    }
+    return a.to.localeCompare(b.to);
+  });
+
+  const options: ConnectionOption[] = [];
+  for (const entry of sortedEntries) {
+    if (options.length >= k) {
+      break;
+    }
+    const inner = computeConnections(snapshot, {
+      ...params,
+      from: entry.to,
+      depart: entry.arrival,
+      allowForeignStartFallback: false
+    });
+    if (!inner.length) {
+      continue;
+    }
+    inner.forEach((option) => {
+      if (options.length >= k) {
+        return;
+      }
+      const preface: ConnectionLeg = {
+        edgeId: entry.edge.id,
+        tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
+        from: entry.from,
+        to: entry.to,
+        transport: entry.edge.transport,
+        arrives: entry.arrival,
+        arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
+        continuationOutsideDataset: true,
+        foreignStartPreface: true
+      };
+      options.push({
+        ...option,
+        from: params.from,
+        to: params.to,
+        requestedDepart: params.depart,
+        departs: entry.arrival,
+        kind: 'FOREIGN_START_FALLBACK',
+        requestedFrom: params.from,
+        effectiveFrom: entry.to,
+        effectiveStartTime: entry.arrival,
+        foreignStartNote: `${entry.from} außerhalb Datensatz (Startzeit unbekannt)`,
+        legs: [preface, ...option.legs]
+      });
+    });
+  }
+
+  return options;
 }
 
 class MinHeap<T> {

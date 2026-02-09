@@ -44,7 +44,8 @@ export class GraphController {
     @Query('from') from: string,
     @Query('to') to: string,
     @Query('depart') depart: string,
-    @Query('k') k?: string
+    @Query('k') k?: string,
+    @Query('allowForeignStartFallback') allowForeignStartFallback?: string
   ): Promise<ConnectionOption[]> {
     const targetYear = Number(year) || 1871;
     if (!from || !to || !depart) {
@@ -52,13 +53,15 @@ export class GraphController {
     }
     const snapshot = await this.graphRepository.getGraphSnapshot(targetYear);
     const count = k ? Number(k) : undefined;
+    const allowFallback = allowForeignStartFallback !== 'false';
 
     return computeConnections(snapshot, {
       year: targetYear,
       from,
       to,
       depart: depart as TimeHHMM,
-      k: count
+      k: count,
+      allowForeignStartFallback: allowFallback
     });
   }
 

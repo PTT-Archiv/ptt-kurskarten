@@ -151,6 +151,10 @@
   color: #3a3a3a;
 }
 
+.result-meta.badge {
+  font-weight: 600;
+}
+
 .detail-row {
   display: grid;
   gap: 2px;
@@ -172,6 +176,12 @@
   font-size: 14px;
   color: #3a3a3a;
   overflow-wrap: anywhere;
+}
+
+.detail-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a3a3a;
 }
 
 .legend {
