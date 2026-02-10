@@ -134,5 +134,13 @@
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "draft-edge-1770738772904",
+    "from": "draft-node-1770374066761",
+    "to": "bern",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]

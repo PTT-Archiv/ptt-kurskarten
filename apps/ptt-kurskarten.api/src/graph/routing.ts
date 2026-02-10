@@ -305,13 +305,10 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   }
 
   if (!isNodeInSnapshot(params.from, snapshot) && isNodeInSnapshot(params.to, snapshot)) {
-    const normal = computeEarliestArrival(snapshot, params);
-    if (normal) {
-      results.push(normal);
+    if (!allowForeignStartFallback) {
+      return [];
     }
-    if (allowForeignStartFallback) {
-      results.push(...computeForeignStartFallback(snapshot, params, k));
-    }
+    results.push(...computeForeignStartFallback(snapshot, params, k));
     return results.slice(0, k);
   }
 
@@ -439,7 +436,15 @@ function computeForeignStartFallback(
   params: ConnectionsParams,
   k: number
 ): ConnectionOption[] {
-  const entryTrips: Array<{
+  const knownDepartures: Array<{
+    from: string;
+    to: string;
+    depart: TimeHHMM;
+    arrival: TimeHHMM;
+    arrivalDayOffset?: number;
+    edge: GraphEdge;
+  }> = [];
+  const arrivalOnly: Array<{
     from: string;
     to: string;
     arrival: TimeHHMM;
@@ -455,10 +460,26 @@ function computeForeignStartFallback(
       return;
     }
     (edge.trips ?? []).forEach((trip) => {
-      if (!trip.arrives || trip.departs) {
+      if (!trip.arrives) {
         return;
       }
-      entryTrips.push({
+      if (trip.departs) {
+        const depart = parseTime(trip.departs);
+        const requested = parseTime(params.depart);
+        if (depart < requested) {
+          return;
+        }
+        knownDepartures.push({
+          from: edge.from,
+          to: edge.to,
+          depart: trip.departs,
+          arrival: trip.arrives,
+          arrivalDayOffset: trip.arrivalDayOffset,
+          edge
+        });
+        return;
+      }
+      arrivalOnly.push({
         from: edge.from,
         to: edge.to,
         arrival: trip.arrives,
@@ -468,7 +489,16 @@ function computeForeignStartFallback(
     });
   });
 
-  const sortedEntries = entryTrips.sort((a, b) => {
+  const sortedKnown = knownDepartures.sort((a, b) => {
+    const aDep = parseTime(a.depart);
+    const bDep = parseTime(b.depart);
+    if (aDep !== bDep) {
+      return aDep - bDep;
+    }
+    return a.to.localeCompare(b.to);
+  });
+
+  const sortedArrivalOnly = arrivalOnly.sort((a, b) => {
     const aArr = parseTime(a.arrival);
     const bArr = parseTime(b.arrival);
     if (aArr !== bArr) {
@@ -478,10 +508,16 @@ function computeForeignStartFallback(
   });
 
   const options: ConnectionOption[] = [];
-  for (const entry of sortedEntries) {
-    if (options.length >= k) {
-      break;
-    }
+
+  const pushFromEntry = (entry: {
+    from: string;
+    to: string;
+    arrival: TimeHHMM;
+    arrivalDayOffset?: number;
+    edge: GraphEdge;
+    depart?: TimeHHMM;
+    arrivalOnly?: boolean;
+  }) => {
     const inner = computeConnections(snapshot, {
       ...params,
       from: entry.to,
@@ -489,7 +525,7 @@ function computeForeignStartFallback(
       allowForeignStartFallback: false
     });
     if (!inner.length) {
-      continue;
+      return;
     }
     inner.forEach((option) => {
       if (options.length >= k) {
@@ -511,15 +547,29 @@ function computeForeignStartFallback(
         from: params.from,
         to: params.to,
         requestedDepart: params.depart,
-        departs: entry.arrival,
+        departs: entry.depart ?? entry.arrival,
         kind: 'FOREIGN_START_FALLBACK',
         requestedFrom: params.from,
         effectiveFrom: entry.to,
         effectiveStartTime: entry.arrival,
-        foreignStartNote: `${entry.from} außerhalb Datensatz (Startzeit unbekannt)`,
+        foreignStartNote: entry.arrivalOnly ? `Known from ${entry.to}` : undefined,
         legs: [preface, ...option.legs]
       });
     });
+  };
+
+  for (const entry of sortedKnown) {
+    if (options.length >= k) {
+      break;
+    }
+    pushFromEntry(entry);
+  }
+
+  for (const entry of sortedArrivalOnly) {
+    if (options.length >= k) {
+      break;
+    }
+    pushFromEntry({ ...entry, arrivalOnly: true });
   }
 
   return options;

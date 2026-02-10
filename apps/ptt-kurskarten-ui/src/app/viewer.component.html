@@ -94,17 +94,25 @@
             · {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
             }
           </div>
-          } @else if (option.kind === 'FOREIGN_START_FALLBACK') {
-          <div class="result-time">
-            {{ getNodeLabel(option.requestedFrom ?? option.from) }} → {{ getNodeLabel(option.to) }}
-          </div>
-          <div class="result-meta badge">
-            Start in der Schweiz: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
-          </div>
-          <div class="result-meta">
-            {{ getNodeLabel(option.requestedFrom ?? option.from) }} außerhalb Datensatz (Startzeit unbekannt)
-          </div>
-          } @else {
+      } @else if (option.kind === 'FOREIGN_START_FALLBACK') {
+      <div class="result-time">
+        {{ getNodeLabel(option.requestedFrom ?? option.from) }} → {{ getNodeLabel(option.to) }}
+      </div>
+      <div class="result-meta badge">
+        @if (option.foreignStartNote) {
+          {{ option.foreignStartNote }}: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
+        } @else {
+          Start in der Schweiz: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
+        }
+      </div>
+      <div class="result-meta">
+        @if (option.foreignStartNote) {
+          {{ getNodeLabel(option.requestedFrom ?? option.from) }} außerhalb Datensatz (Startzeit unbekannt)
+        } @else {
+          Abfahrt {{ getNodeLabel(option.requestedFrom ?? option.from) }} {{ option.departs }}
+        }
+      </div>
+      } @else {
           <div class="result-time">
             {{ 'viewer.departShort' | transloco }} {{ option.departs }}
             @if (option.departDayOffset && option.departDayOffset > 0) {
@@ -154,11 +162,19 @@
         {{ getNodeLabel(selected.requestedFrom ?? selected.from) }} → {{ getNodeLabel(selected.to) }}
       </div>
       <div class="detail-badge">
-        Start in der Schweiz: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+        @if (selected.foreignStartNote) {
+          {{ selected.foreignStartNote }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+        } @else {
+          Start in der Schweiz: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+        }
       </div>
       <div class="detail-line">
-        Zubringer: Ankunft {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
-        (weitere Zeiten unbekannt)
+        @if (selected.foreignStartNote) {
+          Zubringer: Ankunft {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+          (weitere Zeiten unbekannt)
+        } @else {
+          Abfahrt {{ getNodeLabel(selected.requestedFrom ?? selected.from) }} {{ selected.departs }}
+        }
       </div>
       } @else {
       <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
