@@ -9,6 +9,13 @@ import { ADMIN_GRAPH_REPOSITORY, type AdminGraphRepository } from './admin-graph
 import { TourService } from './tour.service';
 import { TourOverlayComponent } from './tour-overlay.component';
 import { ADMIN_TUTORIAL_STEPS } from './admin-tutorial.steps';
+import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
+import {
+  ARCHIVE_DEFAULT_REGION,
+  buildArchiveSnippetUrl,
+  buildArchiveSnippetUrlFromRegion,
+  computeArchiveTransform
+} from './archive-snippet.util';
 
 const DEFAULT_YEAR = 1871;
 const UNDO_LIMIT = 20;
@@ -50,7 +57,7 @@ type EdgeDraft = {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent],
+  imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent, ArchiveSnippetViewerComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -100,6 +107,7 @@ export class AdminComponent implements OnDestroy {
     | null = null;
   @ViewChild('edgeEditor') private edgeEditorRef?: ElementRef<HTMLElement>;
   @ViewChild('nodePanel') private nodePanelRef?: ElementRef<HTMLElement>;
+  @ViewChild('archivePanel') private archivePanelRef?: ElementRef<HTMLElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -122,6 +130,25 @@ export class AdminComponent implements OnDestroy {
       neighbors,
       edges
     };
+  });
+
+  archiveSnippetUrl = computed(() => {
+    const transform = computeArchiveTransform();
+    const draft = this.draftNode();
+    if (draft) {
+      if (transform) {
+        return buildArchiveSnippetUrl(draft.x, draft.y, transform);
+      }
+      return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+    }
+    const detail = this.nodeDetail();
+    if (detail?.node) {
+      if (transform) {
+        return buildArchiveSnippetUrl(detail.node.x, detail.node.y, transform);
+      }
+      return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+    }
+    return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
   });
 
   outgoingEdges = computed(() => {
@@ -1043,6 +1070,7 @@ export class AdminComponent implements OnDestroy {
 
     if (event.type === 'down') {
       if (event.hitNodeId) {
+        const transform = computeArchiveTransform();
         const node = this.findNode(event.hitNodeId);
         if (!node) {
           return;
@@ -1052,6 +1080,7 @@ export class AdminComponent implements OnDestroy {
           from: { x: node.x, y: node.y },
           moved: false
         };
+        this.scrollArchivePanelIntoView();
         this.selection.selectNode(node.id);
         this.draftEdge.set(null);
         this.confirmDeleteNode.set(false);
@@ -1080,6 +1109,7 @@ export class AdminComponent implements OnDestroy {
       if (!this.dragState) {
         return;
       }
+      const transform = computeArchiveTransform();
       const node = this.findNode(this.dragState.id);
       const from = this.dragState.from;
       const moved = this.dragState.moved && node && (node.x !== from.x || node.y !== from.y);
@@ -1120,6 +1150,16 @@ export class AdminComponent implements OnDestroy {
       stack.shift();
     }
     this.undoStack.set(stack);
+  }
+
+  private scrollArchivePanelIntoView(): void {
+    const panel = this.archivePanelRef?.nativeElement;
+    if (!panel) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
   }
 
   private createDraftNode(point: { x: number; y: number }): void {

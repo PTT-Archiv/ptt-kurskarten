@@ -179,6 +179,11 @@
         }
       </section>
 
+      <section class="panel-section" #archivePanel>
+        <div class="section-title">{{ 'viewer.archiveSnippet' | transloco }}</div>
+        <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()"></app-archive-snippet-viewer>
+      </section>
+
       <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
         <div class="section-title">{{ 'admin.editEdge' | transloco }}</div>
         @if (selectedEdgeDraft(); as edgeDraft) {

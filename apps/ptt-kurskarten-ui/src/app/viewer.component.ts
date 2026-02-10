@@ -3,16 +3,24 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { ConnectionLeg, ConnectionOption, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
+import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
+import {
+  ARCHIVE_DEFAULT_REGION,
+  buildArchiveSnippetUrl,
+  buildArchiveSnippetUrlFromRegion,
+  computeArchiveTransform,
+  type ArchiveTransform
+} from './archive-snippet.util';
 
 const DEFAULT_YEAR = 1871;
 
 @Component({
   selector: 'app-viewer',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent],
+  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css'
 })
@@ -48,6 +56,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
   pickTarget = signal<'from' | 'to' | null>(null);
+  private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -70,6 +79,14 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return [...snapshot.nodes].sort((a, b) => a.name.localeCompare(b.name));
   });
 
+  archiveSnippetUrl = computed(() => {
+    const node = this.getArchiveSnippetNode();
+    const transform = this.archiveTransform();
+    if (node) {
+      return buildArchiveSnippetUrl(node.x, node.y, transform);
+    }
+    return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+  });
 
   minYear = computed(() => {
     const years = this.availableYears();
@@ -113,6 +130,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
         this.onSearchConnections();
       }, 300);
     });
+
+    // Transform is derived from fixed anchors; no need to recompute on graph changes.
   }
 
   ngAfterViewInit(): void {
@@ -395,6 +414,16 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const match = this.nodes().find((node) => node.id === id);
     return match ? { id: match.id, name: match.name } : null;
   }
+
+  private getArchiveSnippetNode(): { id: string; name: string; x: number; y: number } | null {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return null;
+    }
+    const preferredId = this.selectedNodeId() || this.fromId() || this.toId() || 'bern';
+    return snapshot.nodes.find((node) => node.id === preferredId) ?? snapshot.nodes[0] ?? null;
+  }
+
 
   private ensureConnectionId(option: ConnectionOption, index: number): ConnectionOption {
     const id = option.id || `${option.from}-${option.to}-${index}`;

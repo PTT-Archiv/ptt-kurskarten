@@ -35,6 +35,7 @@
   "viewer.legend": "Légende",
   "viewer.legend.nodes": "Nœuds : stations / lieux",
   "viewer.legend.edges": "Liaisons : routes (filtrées par année)",
+  "viewer.archiveSnippet": "Extrait de l’original",
   "viewer.nodeDetail": "Détails du nœud",
   "viewer.nodeConnections": "Correspondances",
   "viewer.noNodeSelected": "Sélectionnez un nœud pour voir les détails.",

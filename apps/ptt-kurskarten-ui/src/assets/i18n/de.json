@@ -35,6 +35,7 @@
   "viewer.legend": "Legende",
   "viewer.legend.nodes": "Knoten: Stationen / Orte",
   "viewer.legend.edges": "Kanten: Routen (nach Jahr gefiltert)",
+  "viewer.archiveSnippet": "Ausschnitt aus dem Original",
   "viewer.nodeDetail": "Knotendetails",
   "viewer.nodeConnections": "Verbindungen",
   "viewer.noNodeSelected": "Knoten auswählen, um Details zu sehen.",
