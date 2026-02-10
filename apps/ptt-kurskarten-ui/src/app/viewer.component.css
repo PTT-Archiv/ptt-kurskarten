@@ -51,6 +51,32 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
+.node-snippet-tooltip {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  border: 2px solid #141414;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.node-snippet-tooltip img {
+  display: block;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+
+.tooltip-loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.7);
+}
+
 .viewer-sidebar {
   position: absolute;
   top: 0;

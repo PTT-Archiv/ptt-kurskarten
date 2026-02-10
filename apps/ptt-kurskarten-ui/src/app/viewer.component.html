@@ -6,6 +6,23 @@
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
+    @if (hoveredSnippetUrl(); as snippetUrl) {
+    @if (hoveredNodeScreen(); as pos) {
+    <div class="node-snippet-tooltip" [style.left.px]="pos.x + 12" [style.top.px]="pos.y + 12">
+      @if (hoveredSnippetLoading()) {
+        <div class="tooltip-loader">
+          <span class="spinner" aria-hidden="true"></span>
+        </div>
+      }
+      <img
+        [src]="snippetUrl"
+        alt=""
+        (load)="hoveredSnippetLoading.set(false)"
+        (error)="hoveredSnippetLoading.set(false)"
+      />
+    </div>
+    }
+    }
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }

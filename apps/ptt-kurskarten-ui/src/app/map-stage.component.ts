@@ -213,7 +213,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     const payload = this.buildPointerPayload(event);
-    if (this.activePointerId === event.pointerId) {
+    if (this.activePointerId === event.pointerId || this.activePointerId === null) {
       this.mapPointer.emit({ ...payload, type: 'move' });
     }
     this.updateHoverState(payload.hitNodeId);

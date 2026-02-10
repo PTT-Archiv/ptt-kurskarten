@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import type { ConnectionLeg, ConnectionOption, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
+import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
@@ -57,6 +57,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
   pickTarget = signal<'from' | 'to' | null>(null);
   private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
+  hoveredNodeId = signal<string | null>(null);
+  hoveredNodeScreen = signal<{ x: number; y: number } | null>(null);
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -87,6 +89,21 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
   });
+
+  hoveredSnippetUrl = computed(() => {
+    const hoveredId = this.hoveredNodeId();
+    const screen = this.hoveredNodeScreen();
+    if (!hoveredId || !screen) {
+      return null;
+    }
+    const node = this.getNodeByIdFull(hoveredId);
+    if (!node) {
+      return null;
+    }
+    return buildArchiveSnippetUrlForNode(node, this.archiveTransform());
+  });
+
+  hoveredSnippetLoading = signal(false);
 
   minYear = computed(() => {
     const years = this.availableYears();
@@ -129,6 +146,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.searchHandle = setTimeout(() => {
         this.onSearchConnections();
       }, 300);
+    });
+
+    effect(() => {
+      const url = this.hoveredSnippetUrl();
+      this.hoveredSnippetLoading.set(!!url);
     });
 
     // Transform is derived from fixed anchors; no need to recompute on graph changes.
@@ -297,6 +319,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     hitNodeId: string | null;
     hitEdgeId: string | null;
   }): void {
+    if (payload.type === 'move') {
+      this.hoveredNodeId.set(payload.hitNodeId);
+      this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
+    }
     if (this.pickTarget() && payload.type === 'up' && !payload.hitNodeId) {
       this.pickTarget.set(null);
     }
@@ -413,6 +439,14 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     const match = this.nodes().find((node) => node.id === id);
     return match ? { id: match.id, name: match.name } : null;
+  }
+
+  private getNodeByIdFull(id: string): GraphNode | null {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return null;
+    }
+    return snapshot.nodes.find((node) => node.id === id) ?? null;
   }
 
   private getArchiveSnippetNode(): { id: string; name: string; x: number; y: number } | null {
