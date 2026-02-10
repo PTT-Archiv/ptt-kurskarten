@@ -2,12 +2,12 @@
   {
     "id": "bern",
     "name": "Bern",
-    "x": 263.3466135458167,
-    "y": 212.56573705179284,
+    "x": 268.5326633165829,
+    "y": 219.11222780569517,
     "validFrom": 1800,
     "validTo": null,
-    "iiifCenterX": 4887,
-    "iiifCenterY": 4159
+    "iiifCenterX": 4857,
+    "iiifCenterY": 4130
   },
   {
     "id": "zurich",
@@ -32,22 +32,22 @@
   {
     "id": "geneva",
     "name": "Geneva",
-    "x": 23.107569721115496,
-    "y": 413.7609561752988,
+    "x": 19.92031872509956,
+    "y": 413.36254980079684,
     "validFrom": 1845,
     "validTo": null,
-    "iiifCenterX": 1422,
-    "iiifCenterY": 6644
+    "iiifCenterX": 1099,
+    "iiifCenterY": 7185
   },
   {
     "id": "lucerne",
     "name": "Lucerne",
-    "x": 413.14741035856576,
-    "y": 185.0756972111554,
+    "x": 421.11553784860564,
+    "y": 187.06772908366534,
     "validFrom": 1855,
     "validTo": 1885,
-    "iiifCenterX": 7299,
-    "iiifCenterY": 3698
+    "iiifCenterX": 7257,
+    "iiifCenterY": 3685
   },
   {
     "id": "st-gallen",
@@ -126,7 +126,9 @@
     "x": 239.84063745019918,
     "y": 253.60159362549803,
     "validFrom": 1871,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4501,
+    "iiifCenterY": 4740
   },
   {
     "id": "draft-node-1770374043041",

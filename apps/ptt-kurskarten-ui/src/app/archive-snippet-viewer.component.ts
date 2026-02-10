@@ -27,6 +27,7 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   @Input() autoFit = true;
   @Input() allowWrite = false;
   @Input() showCenterMarker = true;
+  @Input() emitOnAutoFit = false;
   @Output() regionChange = new EventEmitter<{ iiifCenterX: number; iiifCenterY: number }>();
   @ViewChild('osdContainer') private osdContainer?: ElementRef<HTMLDivElement>;
 
@@ -90,8 +91,8 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
     this.applyRegionFromUrl(this.pendingRegionUrl ?? this.imageUrl);
   }
 
-  emitCurrentCenter(): void {
-    if (!this.viewer || !this.allowWrite) {
+  emitCurrentCenter(force = false): void {
+    if (!this.viewer || (!this.allowWrite && !force)) {
       return;
     }
     const item = this.viewer.world.getItemAt(0);
@@ -170,6 +171,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
     this.suppressNextViewportEvent = true;
     this.viewer.viewport.fitBounds(rect, true);
     this.viewer.viewport.applyConstraints();
+    if (this.emitOnAutoFit && this.allowWrite) {
+      setTimeout(() => this.emitCurrentCenter(), 0);
+    }
   }
 
   private parseRegion(url: string): { x: number; y: number; w: number; h: number } | null {

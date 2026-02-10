@@ -637,7 +637,7 @@ export class AdminComponent implements OnDestroy {
         .subscribe({
           next: (updated) => {
             console.info('[archive-snippet] saved', updated.id, updated.iiifCenterX, updated.iiifCenterY);
-            this.replaceNode(updated);
+            //this.replaceNode(updated);
             this.toastService.addToast({
               type: 'success',
               title: 'Archiv-Ausschnitt aktualisiert',
@@ -1186,7 +1186,7 @@ export class AdminComponent implements OnDestroy {
           .updateNode(node.id, { x: node.x, y: node.y, iiifCenterX: undefined, iiifCenterY: undefined })
           .subscribe({
             next: (updated) => {
-              this.replaceNode(updated);
+              //this.replaceNode(updated);
               this.toastService.addToast({
                 type: 'success',
                 title: 'Position aktualisiert',
@@ -1207,7 +1207,9 @@ export class AdminComponent implements OnDestroy {
 
       this.dragState = null;
       this.isDragging.set(false);
-      this.archiveViewer?.emitCurrentCenter();
+      if (this.archiveViewer) {
+        setTimeout(() => this.archiveViewer?.emitCurrentCenter(true), 150);
+      }
     }
   }
 

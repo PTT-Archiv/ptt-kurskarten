@@ -190,8 +190,10 @@
         }
         <app-archive-snippet-viewer
           [imageUrl]="archiveSnippetUrl()"
-          [allowWrite]="true"
+          [allowWrite]="!isDragging()"
           [showCenterMarker]="true"
+          [autoFit]="true"
+          [emitOnAutoFit]="true"
           (regionChange)="onArchiveRegionChange($event)"
         ></app-archive-snippet-viewer>
       </section>
