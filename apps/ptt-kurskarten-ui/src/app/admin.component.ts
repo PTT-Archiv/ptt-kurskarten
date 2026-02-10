@@ -17,7 +17,7 @@ import {
   computeArchiveTransform
 } from './archive-snippet.util';
 
-const DEFAULT_YEAR = 1871;
+const DEFAULT_YEAR = 1852;
 const UNDO_LIMIT = 20;
 
 type MoveUndo = {

@@ -4,7 +4,7 @@ import { computeEarliestArrival } from './routing';
 describe('routing', () => {
   it('finds a transfer path with time-dependent trips', () => {
     const snapshot: GraphSnapshot = {
-      year: 1871,
+      year: 1852,
       nodes: [
         { id: 'a', name: 'A', x: 0, y: 0, validFrom: 1800 },
         { id: 'b', name: 'B', x: 0, y: 0, validFrom: 1800 },
@@ -37,7 +37,7 @@ describe('routing', () => {
     };
 
     const result = computeEarliestArrival(snapshot, {
-      year: 1871,
+      year: 1852,
       from: 'a',
       to: 'c',
       depart: '17:30',
@@ -52,7 +52,7 @@ describe('routing', () => {
 
   it('handles overnight arrival with day offset', () => {
     const snapshot: GraphSnapshot = {
-      year: 1871,
+      year: 1852,
       nodes: [
         { id: 'a', name: 'A', x: 0, y: 0, validFrom: 1800 },
         { id: 'b', name: 'B', x: 0, y: 0, validFrom: 1800 }
@@ -70,7 +70,7 @@ describe('routing', () => {
     };
 
     const result = computeEarliestArrival(snapshot, {
-      year: 1871,
+      year: 1852,
       from: 'a',
       to: 'b',
       depart: '22:00',

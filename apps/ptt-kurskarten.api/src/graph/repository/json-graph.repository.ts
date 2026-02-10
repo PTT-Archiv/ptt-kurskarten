@@ -80,7 +80,7 @@ export class JsonGraphRepository implements GraphRepository {
     });
 
     if (years.size === 0) {
-      return [1871];
+      return [1852];
     }
 
     return [...years].sort((a, b) => a - b);
@@ -212,7 +212,7 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private coerceYear(year: number): Year {
-    return Number.isFinite(year) ? year : 1871;
+    return Number.isFinite(year) ? year : 1852;
   }
 
   private isNodeActive(node: GraphNode, year: Year): boolean {

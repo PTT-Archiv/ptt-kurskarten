@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import type { ConnectionOption, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
 import { TranslocoPipe } from '@jsverse/transloco';
 
-const DEFAULT_YEAR = 1871;
+const DEFAULT_YEAR = 1852;
 
 @Component({
   selector: 'app-connections',

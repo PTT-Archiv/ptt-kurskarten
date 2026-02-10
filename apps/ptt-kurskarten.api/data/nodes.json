@@ -2,22 +2,22 @@
   {
     "id": "bern",
     "name": "Bern",
-    "x": 268.5326633165829,
-    "y": 219.11222780569517,
+    "x": 262.54980079681275,
+    "y": 212.56573705179284,
     "validFrom": 1800,
     "validTo": null,
-    "iiifCenterX": 4857,
-    "iiifCenterY": 4130
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112
   },
   {
     "id": "zurich",
     "name": "Zurich",
-    "x": 425.09960159362555,
-    "y": 116.15139442231076,
+    "x": 454.98007968127496,
+    "y": 119.73705179282868,
     "validFrom": 1800,
     "validTo": null,
-    "iiifCenterX": 7963,
-    "iiifCenterY": 2322
+    "iiifCenterX": 7950,
+    "iiifCenterY": 2301
   },
   {
     "id": "basel",
@@ -62,7 +62,7 @@
     "name": "Nauders",
     "x": 802.0603015075377,
     "y": 235.27973199329986,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null,
     "foreign": true,
     "iiifCenterX": 13384,
@@ -73,7 +73,7 @@
     "name": "Wallis",
     "x": 256.57370517928285,
     "y": 421.33067729083666,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 5212,
     "iiifCenterY": 7214
@@ -83,7 +83,7 @@
     "name": "New node",
     "x": 476.8924302788845,
     "y": 235.27490039840637,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 8214,
     "iiifCenterY": 4461
@@ -93,15 +93,17 @@
     "name": "New node",
     "x": 503.2377428307123,
     "y": 297.6632747456059,
-    "validFrom": 1871,
-    "validTo": null
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 8627,
+    "iiifCenterY": 5412
   },
   {
     "id": "draft-node-1770294228742",
     "name": "New node",
     "x": 68.1274900398406,
     "y": 355.99203187251,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -109,7 +111,7 @@
     "name": "New node",
     "x": 200.1850138760407,
     "y": 167.413506012951,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -117,7 +119,7 @@
     "name": "Evian Nord",
     "x": 226.45698427382052,
     "y": 385.35985198889915,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -125,7 +127,7 @@
     "name": "Fribourg gloubs",
     "x": 239.84063745019918,
     "y": 253.60159362549803,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 4501,
     "iiifCenterY": 4740
@@ -135,7 +137,7 @@
     "name": "New node",
     "x": -54.391959798994996,
     "y": 264.63651591289783,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -143,7 +145,7 @@
     "name": "Paris",
     "x": 11.155378486055733,
     "y": 245.00929047481947,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null,
     "foreign": true,
     "iiifCenterX": 840,
@@ -154,7 +156,7 @@
     "name": "New node",
     "x": 374.1035856573705,
     "y": 111.37051792828684,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -162,9 +164,19 @@
     "name": "New node",
     "x": 459.7609561752988,
     "y": 11.76892430278883,
-    "validFrom": 1871,
+    "validFrom": 1852,
     "iiifCenterX": 4862,
     "iiifCenterY": 4112,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770727542632",
+    "name": "New node",
+    "x": 623.9043824701196,
+    "y": 92.64541832669322,
+    "validFrom": 1852,
+    "iiifCenterX": 11199,
+    "iiifCenterY": 1497,
     "validTo": null
   }
 ]

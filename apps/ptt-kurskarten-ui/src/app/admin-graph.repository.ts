@@ -63,8 +63,8 @@ export class HttpGraphRepository implements AdminGraphRepository {
 @Injectable()
 export class DemoGraphRepository implements AdminGraphRepository {
   readonly isDemo = true;
-  private readonly years = [1871];
-  private snapshot: GraphSnapshot = buildDemoSnapshot(1871);
+  private readonly years = [1852];
+  private snapshot: GraphSnapshot = buildDemoSnapshot(1852);
 
   loadYears(): Observable<number[]> {
     return of([...this.years]);

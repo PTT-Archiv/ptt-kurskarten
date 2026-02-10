@@ -44,7 +44,7 @@
     "from": "geneva",
     "to": "bern",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -52,7 +52,7 @@
     "from": "geneva",
     "to": "bern",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -60,7 +60,7 @@
     "from": "draft-node-1770124603090",
     "to": "lucerne",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -68,7 +68,7 @@
     "from": "draft-node-1770124603090",
     "to": "lucerne",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -76,7 +76,7 @@
     "from": "bern",
     "to": "lucerne",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -84,7 +84,7 @@
     "from": "bern",
     "to": "draft-node-1770293075766",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -92,7 +92,7 @@
     "from": "bern",
     "to": "draft-node-1770293075766",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -100,7 +100,7 @@
     "from": "bern",
     "to": "draft-node-1770293075766",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -108,7 +108,7 @@
     "from": "basel",
     "to": "bern",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -116,7 +116,7 @@
     "from": "draft-node-1770298096656",
     "to": "bern",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -124,7 +124,7 @@
     "from": "draft-node-1770374066761",
     "to": "geneva",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   },
   {
@@ -132,7 +132,7 @@
     "from": "geneva",
     "to": "draft-node-1770374066761",
     "transport": "postkutsche",
-    "validFrom": 1871,
+    "validFrom": 1852,
     "validTo": null
   }
 ]

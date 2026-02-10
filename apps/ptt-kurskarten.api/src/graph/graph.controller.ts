@@ -20,7 +20,7 @@ export class GraphController {
   @Get('graph')
   async getGraph(@Query('year') year?: string): Promise<GraphSnapshot> {
     const parsedYear = Number(year);
-    const targetYear = Number.isFinite(parsedYear) ? parsedYear : 1871;
+    const targetYear = Number.isFinite(parsedYear) ? parsedYear : 1852;
 
     return this.graphRepository.getGraphSnapshot(targetYear);
   }
@@ -33,7 +33,7 @@ export class GraphController {
   @Get('nodes/:id')
   async getNodeDetail(@Param('id') nodeId: string, @Query('year') year?: string): Promise<NodeDetail> {
     const parsedYear = Number(year);
-    const targetYear = Number.isFinite(parsedYear) ? parsedYear : 1871;
+    const targetYear = Number.isFinite(parsedYear) ? parsedYear : 1852;
 
     return this.graphRepository.getNodeNeighborhood(nodeId, targetYear);
   }
@@ -47,7 +47,7 @@ export class GraphController {
     @Query('k') k?: string,
     @Query('allowForeignStartFallback') allowForeignStartFallback?: string
   ): Promise<ConnectionOption[]> {
-    const targetYear = Number(year) || 1871;
+    const targetYear = Number(year) || 1852;
     if (!from || !to || !depart) {
       return [];
     }
@@ -67,14 +67,14 @@ export class GraphController {
 
   @Get('report/station/:nodeId')
   async getStationReport(@Param('nodeId') nodeId: string, @Query('year') year?: string): Promise<StationProfileReport> {
-    const targetYear = Number(year) || 1871;
+    const targetYear = Number(year) || 1852;
     const snapshot = await this.graphRepository.getGraphSnapshot(targetYear);
     return buildStationProfile(snapshot, nodeId);
   }
 
   @Get('report/edge/:edgeId')
   async getEdgeReport(@Param('edgeId') edgeId: string, @Query('year') year?: string): Promise<EdgeTimetableReport> {
-    const targetYear = Number(year) || 1871;
+    const targetYear = Number(year) || 1852;
     const snapshot = await this.graphRepository.getGraphSnapshot(targetYear);
     return buildEdgeTimetable(snapshot, edgeId);
   }
@@ -85,7 +85,7 @@ export class GraphController {
       ...body,
       id: body.id ?? `node-${Date.now()}`,
       name: body.name ?? 'Unnamed',
-      validFrom: body.validFrom ?? 1871,
+      validFrom: body.validFrom ?? 1852,
       x: body.x ?? 0,
       y: body.y ?? 0
     };
@@ -102,7 +102,7 @@ export class GraphController {
         name: body.name ?? 'Unknown',
         x: body.x ?? 0,
         y: body.y ?? 0,
-        validFrom: body.validFrom ?? 1871,
+        validFrom: body.validFrom ?? 1852,
         validTo: body.validTo
       };
     }
@@ -121,7 +121,7 @@ export class GraphController {
     const edge: GraphEdge = {
       ...body,
       id: body.id ?? `edge-${Date.now()}`,
-      validFrom: body.validFrom ?? 1871,
+      validFrom: body.validFrom ?? 1852,
       durationMinutes: body.durationMinutes ?? 60,
       trips: body.trips ?? []
     };
@@ -141,7 +141,7 @@ export class GraphController {
         from: body.from ?? '',
         to: body.to ?? '',
         transport: body.transport ?? 'postkutsche',
-        validFrom: body.validFrom ?? 1871,
+        validFrom: body.validFrom ?? 1852,
         validTo: body.validTo,
         durationMinutes: body.durationMinutes ?? 60,
         trips: body.trips ?? []

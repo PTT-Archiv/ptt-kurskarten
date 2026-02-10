@@ -15,7 +15,7 @@ import {
   type ArchiveTransform
 } from './archive-snippet.util';
 
-const DEFAULT_YEAR = 1871;
+const DEFAULT_YEAR = 1852;
 
 @Component({
   selector: 'app-viewer',

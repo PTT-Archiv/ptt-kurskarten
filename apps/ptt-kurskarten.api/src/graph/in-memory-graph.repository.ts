@@ -1,7 +1,7 @@
 import type { GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } from '@ptt-kurskarten/shared';
 import type { GraphRepository } from './graph.repository';
 
-const YEARS: number[] = [1840, 1855, 1871, 1888, 1900];
+const YEARS: number[] = [1840, 1855, 1852, 1888, 1900];
 
 let NODES: GraphNode[] = [
   { id: 'bern', name: 'Bern', x: 300, y: 200, validFrom: 1800 },
@@ -198,7 +198,7 @@ export class InMemoryGraphRepository implements GraphRepository {
   }
 
   private coerceYear(year: number): Year {
-    return Number.isFinite(year) ? year : 1871;
+    return Number.isFinite(year) ? year : 1852;
   }
 
   private filterNodes(year: Year): GraphNode[] {

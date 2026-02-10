@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import type { EdgeTimetableReport, GraphSnapshot, StationProfileReport } from '@ptt-kurskarten/shared';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
-const DEFAULT_YEAR = 1871;
+const DEFAULT_YEAR = 1852;
 
 type Tab = 'station' | 'edge';
 

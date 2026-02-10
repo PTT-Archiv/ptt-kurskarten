@@ -1,7 +1,7 @@
 import type { GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
 
 export const outsideDatasetSnapshot: GraphSnapshot = {
-  year: 1871,
+  year: 1852,
   nodes: [
     { id: 'A', name: 'A', x: 0, y: 0, validFrom: 1800 },
     { id: 'B', name: 'B', x: 1, y: 1, validFrom: 1800 },
@@ -36,7 +36,7 @@ export const outsideDatasetSnapshot: GraphSnapshot = {
 };
 
 export const outsideDatasetParams = {
-  year: 1871,
+  year: 1852,
   from: 'A',
   to: 'D',
   depart: '08:00' as TimeHHMM,
