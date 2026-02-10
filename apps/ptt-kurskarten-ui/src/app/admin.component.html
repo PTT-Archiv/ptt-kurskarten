@@ -181,7 +181,18 @@
 
       <section class="panel-section" #archivePanel>
         <div class="section-title">{{ 'viewer.archiveSnippet' | transloco }}</div>
-        <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()"></app-archive-snippet-viewer>
+        @if (selectedNodeId(); as nodeId) {
+          @if (getNodeById(nodeId); as node) {
+            <div class="archive-debug">
+              iiifCenter: {{ node.iiifCenterX ?? '—' }}, {{ node.iiifCenterY ?? '—' }}
+            </div>
+          }
+        }
+        <app-archive-snippet-viewer
+          [imageUrl]="archiveSnippetUrl()"
+          [allowWrite]="true"
+          (regionChange)="onArchiveRegionChange($event)"
+        ></app-archive-snippet-viewer>
       </section>
 
       <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>

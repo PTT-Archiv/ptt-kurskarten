@@ -12,7 +12,7 @@ import { ADMIN_TUTORIAL_STEPS } from './admin-tutorial.steps';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import {
   ARCHIVE_DEFAULT_REGION,
-  buildArchiveSnippetUrl,
+  buildArchiveSnippetUrlForNode,
   buildArchiveSnippetUrlFromRegion,
   computeArchiveTransform
 } from './archive-snippet.util';
@@ -39,6 +39,8 @@ type NodeDraft = {
   x: number;
   y: number;
   foreign?: boolean;
+  iiifCenterX?: number;
+  iiifCenterY?: number;
   validFrom: number;
   validTo?: number;
 };
@@ -89,6 +91,9 @@ export class AdminComponent implements OnDestroy {
   isDemo = signal<boolean>(this.repo.isDemo);
   shortcutsCollapsed = signal<boolean>(false);
   confirmDeleteNode = signal<boolean>(false);
+  isDragging = signal<boolean>(false);
+  private archiveSaveHandle: ReturnType<typeof setTimeout> | null = null;
+  private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number } | null = null;
   readonly transportOptions: TransportType[] = [
     'postkutsche',
     'dampfschiff',
@@ -108,6 +113,7 @@ export class AdminComponent implements OnDestroy {
   @ViewChild('edgeEditor') private edgeEditorRef?: ElementRef<HTMLElement>;
   @ViewChild('nodePanel') private nodePanelRef?: ElementRef<HTMLElement>;
   @ViewChild('archivePanel') private archivePanelRef?: ElementRef<HTMLElement>;
+  @ViewChild(ArchiveSnippetViewerComponent) private archiveViewer?: ArchiveSnippetViewerComponent;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -137,14 +143,14 @@ export class AdminComponent implements OnDestroy {
     const draft = this.draftNode();
     if (draft) {
       if (transform) {
-        return buildArchiveSnippetUrl(draft.x, draft.y, transform);
+        return buildArchiveSnippetUrlForNode(draft, transform);
       }
       return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
     }
     const detail = this.nodeDetail();
     if (detail?.node) {
       if (transform) {
-        return buildArchiveSnippetUrl(detail.node.x, detail.node.y, transform);
+        return buildArchiveSnippetUrlForNode(detail.node, transform);
       }
       return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
     }
@@ -598,6 +604,57 @@ export class AdminComponent implements OnDestroy {
     }
     this.updateNodeLocal(nodeId, { foreign: value });
     this.dirty.set(true);
+  }
+
+  onArchiveRegionChange(event: { iiifCenterX: number; iiifCenterY: number }): void {
+    console.info('[archive-snippet] regionChange', event);
+    if (this.isDragging()) {
+      return;
+    }
+    const draft = this.draftNode();
+    if (draft) {
+      this.draftNode.set({ ...draft, iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY });
+      this.dirty.set(true);
+      return;
+    }
+
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return;
+    }
+    this.updateNodeLocal(nodeId, { iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY });
+    this.pendingIiifUpdate = { nodeId, iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY };
+    if (this.archiveSaveHandle) {
+      clearTimeout(this.archiveSaveHandle);
+    }
+    this.archiveSaveHandle = setTimeout(() => {
+      const pending = this.pendingIiifUpdate;
+      if (!pending) {
+        return;
+      }
+      this.repo
+        .updateNode(pending.nodeId, { iiifCenterX: pending.iiifCenterX, iiifCenterY: pending.iiifCenterY })
+        .subscribe({
+          next: (updated) => {
+            console.info('[archive-snippet] saved', updated.id, updated.iiifCenterX, updated.iiifCenterY);
+            this.replaceNode(updated);
+            this.toastService.addToast({
+              type: 'success',
+              title: 'Archiv-Ausschnitt aktualisiert',
+              key: 'archive-snippet'
+            });
+          },
+          error: () => {
+            console.warn('[archive-snippet] save failed');
+            this.toastService.addToast({
+              type: 'error',
+              title: 'Fehler',
+              message: 'Archiv-Ausschnitt konnte nicht gespeichert werden.',
+              key: 'archive-snippet'
+            });
+          }
+        });
+    }, 250);
   }
 
   saveDraftNode(): void {
@@ -1080,6 +1137,7 @@ export class AdminComponent implements OnDestroy {
           from: { x: node.x, y: node.y },
           moved: false
         };
+        this.isDragging.set(true);
         this.scrollArchivePanelIntoView();
         this.selection.selectNode(node.id);
         this.draftEdge.set(null);
@@ -1088,9 +1146,11 @@ export class AdminComponent implements OnDestroy {
         this.selection.selectEdge(event.hitEdgeId);
         this.draftEdge.set(null);
         this.confirmDeleteNode.set(false);
+        this.isDragging.set(false);
       } else {
         this.selection.clearSelection();
         this.confirmDeleteNode.set(false);
+        this.isDragging.set(false);
       }
       return;
     }
@@ -1100,7 +1160,12 @@ export class AdminComponent implements OnDestroy {
         return;
       }
       this.dragState.moved = true;
-      this.updateNodeLocal(this.dragState.id, { x: event.world.x, y: event.world.y });
+      this.updateNodeLocal(this.dragState.id, {
+        x: event.world.x,
+        y: event.world.y,
+        iiifCenterX: undefined,
+        iiifCenterY: undefined
+      });
       this.dirty.set(true);
       return;
     }
@@ -1118,7 +1183,7 @@ export class AdminComponent implements OnDestroy {
         const to = { x: node.x, y: node.y };
         this.pushUndo({ type: 'MOVE_NODE', id: node.id, from, to });
         this.repo
-          .updateNode(node.id, { x: node.x, y: node.y })
+          .updateNode(node.id, { x: node.x, y: node.y, iiifCenterX: undefined, iiifCenterY: undefined })
           .subscribe({
             next: (updated) => {
               this.replaceNode(updated);
@@ -1141,6 +1206,8 @@ export class AdminComponent implements OnDestroy {
       }
 
       this.dragState = null;
+      this.isDragging.set(false);
+      this.archiveViewer?.emitCurrentCenter();
     }
   }
 
@@ -1312,7 +1379,18 @@ export class AdminComponent implements OnDestroy {
     if (!snapshot) {
       return;
     }
-    const nodes = snapshot.nodes.map((node) => (node.id === id ? { ...node, ...patch } : node));
+    const shouldClearIiif = patch.x !== undefined || patch.y !== undefined;
+    const nodes = snapshot.nodes.map((node) => {
+      if (node.id !== id) {
+        return node;
+      }
+      const next = { ...node, ...patch };
+      if (shouldClearIiif) {
+        next.iiifCenterX = undefined;
+        next.iiifCenterY = undefined;
+      }
+      return next;
+    });
     this.graph.set({ ...snapshot, nodes });
   }
 
@@ -1414,6 +1492,13 @@ export class AdminComponent implements OnDestroy {
       return '—';
     }
     return this.graph()?.nodes.find((node) => node.id === id)?.name ?? '—';
+  }
+
+  getNodeById(id: string | null): GraphNode | null {
+    if (!id) {
+      return null;
+    }
+    return this.graph()?.nodes.find((node) => node.id === id) ?? null;
   }
 
   private bindUndoShortcut(): void {

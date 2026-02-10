@@ -2,10 +2,12 @@
   {
     "id": "bern",
     "name": "Bern",
-    "x": 303.8458961474037,
-    "y": 227.1959798994975,
+    "x": 265.73705179282865,
+    "y": 211.76892430278886,
     "validFrom": 1800,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4887,
+    "iiifCenterY": 4159
   },
   {
     "id": "zurich",
@@ -13,7 +15,9 @@
     "x": 464.67001675041877,
     "y": 97.43048576214406,
     "validFrom": 1800,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7959,
+    "iiifCenterY": 2299
   },
   {
     "id": "basel",
@@ -21,23 +25,29 @@
     "x": 294.4857621440536,
     "y": 60.84087102177555,
     "validFrom": 1830,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5271,
+    "iiifCenterY": 1502
   },
   {
     "id": "geneva",
     "name": "Geneva",
-    "x": 23.467336683417074,
-    "y": 413.54773869346735,
+    "x": 23.107569721115496,
+    "y": 414.5577689243028,
     "validFrom": 1845,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 1075,
+    "iiifCenterY": 7196
   },
   {
     "id": "lucerne",
     "name": "Lucerne",
-    "x": 437.86599664991627,
-    "y": 196.56281407035178,
+    "x": 413.14741035856576,
+    "y": 185.0756972111554,
     "validFrom": 1855,
-    "validTo": 1885
+    "validTo": 1885,
+    "iiifCenterX": 7347,
+    "iiifCenterY": 3614
   },
   {
     "id": "st-gallen",
@@ -54,15 +64,19 @@
     "y": 235.27973199329986,
     "validFrom": 1871,
     "validTo": null,
-    "foreign": true
+    "foreign": true,
+    "iiifCenterX": 13384,
+    "iiifCenterY": 4457
   },
   {
     "id": "draft-node-1770293075766",
     "name": "Wallis",
-    "x": 225.09960159362547,
-    "y": 405.39442231075697,
+    "x": 256.57370517928285,
+    "y": 421.33067729083666,
     "validFrom": 1871,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5212,
+    "iiifCenterY": 7214
   },
   {
     "id": "draft-node-1770294217060",
@@ -135,6 +149,16 @@
     "x": 374.1035856573705,
     "y": 111.37051792828684,
     "validFrom": 1871,
+    "validTo": null
+  },
+  {
+    "id": "draft-node-1770715617884",
+    "name": "New node",
+    "x": 459.7609561752988,
+    "y": 11.76892430278883,
+    "validFrom": 1871,
+    "iiifCenterX": 8234,
+    "iiifCenterY": 922,
     "validTo": null
   }
 ]

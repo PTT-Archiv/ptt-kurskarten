@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   PLATFORM_ID,
   SimpleChanges,
   ViewChild,
@@ -23,11 +25,16 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   @Input({ required: true }) imageUrl = '';
   @Input() autoFit = true;
+  @Input() allowWrite = false;
+  @Output() regionChange = new EventEmitter<{ iiifCenterX: number; iiifCenterY: number }>();
   @ViewChild('osdContainer') private osdContainer?: ElementRef<HTMLDivElement>;
 
   private viewer: OpenSeadragon.Viewer | null = null;
   private readonly iiifInfoUrl = 'https://iiif.ptt-archiv.ch/iiif/3/P-38-2-1852-07.jp2/info.json';
   private pendingRegionUrl: string | null = null;
+  private suppressNextViewportEvent = false;
+  private viewportDebounce?: ReturnType<typeof setTimeout>;
+  private lastEmittedCenter?: { x: number; y: number };
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -52,6 +59,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   }
 
   ngOnDestroy(): void {
+    if (this.viewportDebounce) {
+      clearTimeout(this.viewportDebounce);
+    }
     this.viewer?.destroy();
     this.viewer = null;
   }
@@ -77,6 +87,21 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       return;
     }
     this.applyRegionFromUrl(this.pendingRegionUrl ?? this.imageUrl);
+  }
+
+  emitCurrentCenter(): void {
+    if (!this.viewer || !this.allowWrite) {
+      return;
+    }
+    const item = this.viewer.world.getItemAt(0);
+    if (!item) {
+      return;
+    }
+    const center = this.viewer.viewport.getCenter(true);
+    const imageCenter = item.viewportToImageCoordinates(center);
+    const next = { x: Math.round(imageCenter.x), y: Math.round(imageCenter.y) };
+    this.lastEmittedCenter = next;
+    this.regionChange.emit({ iiifCenterX: next.x, iiifCenterY: next.y });
   }
 
   private initViewer(): void {
@@ -117,6 +142,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
           this.applyRegionFromUrl(this.pendingRegionUrl ?? undefined);
         }
       });
+      this.viewer.addHandler('viewport-change', () => this.onViewportChange());
+      this.viewer.addHandler('canvas-drag-end', () => this.onViewportChange(true));
+      this.viewer.addHandler('animation-finish', () => this.onViewportChange(true));
       this.viewer.open(this.iiifInfoUrl);
     });
   }
@@ -138,6 +166,7 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       return;
     }
     const rect = item.imageToViewportRectangle(region.x, region.y, region.w, region.h);
+    this.suppressNextViewportEvent = true;
     this.viewer.viewport.fitBounds(rect, true);
     this.viewer.viewport.applyConstraints();
   }
@@ -153,5 +182,41 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       w: Number(match[3]),
       h: Number(match[4])
     };
+  }
+
+  private onViewportChange(immediate = false): void {
+    if (!this.viewer || !this.allowWrite) {
+      return;
+    }
+    if (this.suppressNextViewportEvent) {
+      this.suppressNextViewportEvent = false;
+      return;
+    }
+    const emit = () => {
+      if (!this.viewer) {
+        return;
+      }
+      const item = this.viewer.world.getItemAt(0);
+      if (!item) {
+        return;
+      }
+      const center = this.viewer.viewport.getCenter(true);
+      const imageCenter = item.viewportToImageCoordinates(center);
+      const next = { x: Math.round(imageCenter.x), y: Math.round(imageCenter.y) };
+      if (this.lastEmittedCenter && this.lastEmittedCenter.x === next.x && this.lastEmittedCenter.y === next.y) {
+        return;
+      }
+      this.lastEmittedCenter = next;
+      this.regionChange.emit({ iiifCenterX: next.x, iiifCenterY: next.y });
+    };
+
+    if (immediate) {
+      emit();
+      return;
+    }
+    if (this.viewportDebounce) {
+      clearTimeout(this.viewportDebounce);
+    }
+    this.viewportDebounce = setTimeout(emit, 120);
   }
 }

@@ -22,6 +22,8 @@ export type GraphNode = {
   validFrom: Year;
   validTo?: Year;
   foreign?: boolean;
+  iiifCenterX?: number;
+  iiifCenterY?: number;
 };
 
 export type GraphEdge = {

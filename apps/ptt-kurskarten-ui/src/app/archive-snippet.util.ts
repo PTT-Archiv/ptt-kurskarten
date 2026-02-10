@@ -11,15 +11,20 @@ export type ArchiveTransform = {
 };
 
 const ANCHORS = {
-  bern: { mapX: 23.467336683417074, mapY: 413.54773869346735, ix: 600, iy: 6668 },
+  geneva: { mapX: 23.467336683417074, mapY: 413.54773869346735, ix: 600, iy: 6668 },
   nauders: { mapX: 806.2178766941084, mapY: 235.09412168003752, ix: 12860, iy: 3946 }
 };
 
+export type IiifOverride = {
+  iiifCenterX?: number;
+  iiifCenterY?: number;
+};
+
 export function computeArchiveTransform(): ArchiveTransform {
-  const scaleX = (ANCHORS.nauders.ix - ANCHORS.bern.ix) / (ANCHORS.nauders.mapX - ANCHORS.bern.mapX);
-  const scaleY = (ANCHORS.nauders.iy - ANCHORS.bern.iy) / (ANCHORS.nauders.mapY - ANCHORS.bern.mapY);
-  const offsetX = ANCHORS.bern.ix - ANCHORS.bern.mapX * scaleX;
-  const offsetY = ANCHORS.bern.iy - ANCHORS.bern.mapY * scaleY;
+  const scaleX = (ANCHORS.nauders.ix - ANCHORS.geneva.ix) / (ANCHORS.nauders.mapX - ANCHORS.geneva.mapX);
+  const scaleY = (ANCHORS.nauders.iy - ANCHORS.geneva.iy) / (ANCHORS.nauders.mapY - ANCHORS.geneva.mapY);
+  const offsetX = ANCHORS.geneva.ix - ANCHORS.geneva.mapX * scaleX;
+  const offsetY = ANCHORS.geneva.iy - ANCHORS.geneva.mapY * scaleY;
   return { scaleX, scaleY, offsetX, offsetY };
 }
 
@@ -35,4 +40,25 @@ export function buildArchiveSnippetUrlFromRegion(region: string): string {
 
 export function buildArchiveSnippetUrl(x: number, y: number, transform: ArchiveTransform): string {
   return buildArchiveSnippetUrlFromRegion(buildArchiveRegion(x, y, transform));
+}
+
+export function buildArchiveRegionFromOverride(override: IiifOverride): string | null {
+  if (override.iiifCenterX === undefined || override.iiifCenterY === undefined) {
+    return null;
+  }
+  const half = Math.round(ARCHIVE_REGION_SIZE / 2);
+  const iiifX = Math.round(override.iiifCenterX - half);
+  const iiifY = Math.round(override.iiifCenterY - half);
+  return `${iiifX},${iiifY},${ARCHIVE_REGION_SIZE},${ARCHIVE_REGION_SIZE}`;
+}
+
+export function buildArchiveSnippetUrlForNode(
+  node: { x: number; y: number } & IiifOverride,
+  transform: ArchiveTransform
+): string {
+  const overrideRegion = buildArchiveRegionFromOverride(node);
+  if (overrideRegion) {
+    return buildArchiveSnippetUrlFromRegion(overrideRegion);
+  }
+  return buildArchiveSnippetUrl(node.x, node.y, transform);
 }

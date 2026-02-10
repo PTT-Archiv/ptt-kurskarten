@@ -9,7 +9,7 @@ import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import {
   ARCHIVE_DEFAULT_REGION,
-  buildArchiveSnippetUrl,
+  buildArchiveSnippetUrlForNode,
   buildArchiveSnippetUrlFromRegion,
   computeArchiveTransform,
   type ArchiveTransform
@@ -83,7 +83,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const node = this.getArchiveSnippetNode();
     const transform = this.archiveTransform();
     if (node) {
-      return buildArchiveSnippetUrl(node.x, node.y, transform);
+      return buildArchiveSnippetUrlForNode(node, transform);
     }
     return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
   });
