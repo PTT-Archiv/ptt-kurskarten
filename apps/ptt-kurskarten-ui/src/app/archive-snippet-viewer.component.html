@@ -1,5 +1,10 @@
 <div class="snippet-frame">
   <div #osdContainer class="osd-container" aria-label="Archiv-Ausschnitt"></div>
+  @if (showCenterMarker) {
+    <div class="osd-center-marker" aria-hidden="true">
+      <span class="marker-dot"></span>
+    </div>
+  }
   <div class="snippet-controls">
     <button class="ghost-btn" type="button" (click)="zoomIn()">+</button>
     <button class="ghost-btn" type="button" (click)="zoomOut()">−</button>

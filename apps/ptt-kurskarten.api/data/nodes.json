@@ -2,8 +2,8 @@
   {
     "id": "bern",
     "name": "Bern",
-    "x": 265.73705179282865,
-    "y": 211.76892430278886,
+    "x": 263.3466135458167,
+    "y": 212.56573705179284,
     "validFrom": 1800,
     "validTo": null,
     "iiifCenterX": 4887,
@@ -12,32 +12,32 @@
   {
     "id": "zurich",
     "name": "Zurich",
-    "x": 464.67001675041877,
-    "y": 97.43048576214406,
+    "x": 425.09960159362555,
+    "y": 116.15139442231076,
     "validFrom": 1800,
     "validTo": null,
-    "iiifCenterX": 7959,
-    "iiifCenterY": 2299
+    "iiifCenterX": 7963,
+    "iiifCenterY": 2322
   },
   {
     "id": "basel",
     "name": "Basel",
-    "x": 294.4857621440536,
-    "y": 60.84087102177555,
+    "x": 294.4223107569721,
+    "y": 59.17928286852589,
     "validFrom": 1830,
     "validTo": null,
-    "iiifCenterX": 5271,
-    "iiifCenterY": 1502
+    "iiifCenterX": 5329,
+    "iiifCenterY": 1513
   },
   {
     "id": "geneva",
     "name": "Geneva",
     "x": 23.107569721115496,
-    "y": 414.5577689243028,
+    "y": 413.7609561752988,
     "validFrom": 1845,
     "validTo": null,
-    "iiifCenterX": 1075,
-    "iiifCenterY": 7196
+    "iiifCenterX": 1422,
+    "iiifCenterY": 6644
   },
   {
     "id": "lucerne",
@@ -46,8 +46,8 @@
     "y": 185.0756972111554,
     "validFrom": 1855,
     "validTo": 1885,
-    "iiifCenterX": 7347,
-    "iiifCenterY": 3614
+    "iiifCenterX": 7299,
+    "iiifCenterY": 3698
   },
   {
     "id": "st-gallen",
@@ -81,10 +81,12 @@
   {
     "id": "draft-node-1770294217060",
     "name": "New node",
-    "x": 494.7271045328399,
-    "y": 163.71322849213692,
+    "x": 476.8924302788845,
+    "y": 235.27490039840637,
     "validFrom": 1871,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8214,
+    "iiifCenterY": 4461
   },
   {
     "id": "draft-node-1770294225267",
@@ -141,7 +143,9 @@
     "y": 245.00929047481947,
     "validFrom": 1871,
     "validTo": null,
-    "foreign": true
+    "foreign": true,
+    "iiifCenterX": 840,
+    "iiifCenterY": 3038
   },
   {
     "id": "draft-node-1770380860998",
@@ -157,8 +161,8 @@
     "x": 459.7609561752988,
     "y": 11.76892430278883,
     "validFrom": 1871,
-    "iiifCenterX": 8234,
-    "iiifCenterY": 922,
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112,
     "validTo": null
   }
 ]

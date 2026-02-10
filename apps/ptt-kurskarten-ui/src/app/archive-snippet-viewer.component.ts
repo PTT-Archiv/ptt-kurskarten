@@ -26,6 +26,7 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   @Input({ required: true }) imageUrl = '';
   @Input() autoFit = true;
   @Input() allowWrite = false;
+  @Input() showCenterMarker = true;
   @Output() regionChange = new EventEmitter<{ iiifCenterX: number; iiifCenterY: number }>();
   @ViewChild('osdContainer') private osdContainer?: ElementRef<HTMLDivElement>;
 

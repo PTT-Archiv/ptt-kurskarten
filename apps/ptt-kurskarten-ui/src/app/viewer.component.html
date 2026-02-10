@@ -217,7 +217,7 @@
 
     <section class="panel-section">
       <div class="section-title">{{ 'viewer.archiveSnippet' | transloco }}</div>
-      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()"></app-archive-snippet-viewer>
+      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
     </section>
 
     @if (selectedNodeId(); as nodeId) {
