@@ -299,6 +299,8 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   const k = Math.max(3, Math.min(params.k ?? 5, 10));
   const results: ConnectionOption[] = [];
   const allowForeignStartFallback = params.allowForeignStartFallback ?? true;
+  const fromNode = snapshot.nodes.find((node) => node.id === params.from) ?? null;
+  const fromIsForeign = fromNode?.foreign === true;
 
   if (!isNodeInSnapshot(params.to, snapshot) && isNodeInSnapshot(params.from, snapshot)) {
     return computePrefixConnections(snapshot, params, k);
@@ -370,6 +372,38 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
     }
   }
 
+  if (fromIsForeign && isNodeInSnapshot(params.to, snapshot) && allowForeignStartFallback) {
+    const fallback = computeForeignStartFallback(snapshot, params, k);
+    if (fallback.length) {
+      const existing = new Set(
+        results.map((option) => option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|'))
+      );
+      const merged = [...results];
+      for (const option of fallback) {
+        const signature = option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
+        if (!existing.has(signature)) {
+          existing.add(signature);
+          merged.push(option);
+        }
+      }
+
+      if (merged.length <= k) {
+        return merged;
+      }
+
+      const normal = merged.filter((option) => option.kind !== 'FOREIGN_START_FALLBACK');
+      const foreign = merged.filter((option) => option.kind === 'FOREIGN_START_FALLBACK');
+
+      if (normal.length && foreign.length && k > 1) {
+        const trimmed = normal.slice(0, k - 1);
+        trimmed.push(foreign[0]);
+        return trimmed;
+      }
+
+      return merged.slice(0, k);
+    }
+  }
+
   return results.slice(0, k);
 }
 
@@ -428,7 +462,7 @@ function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: str
 }
 
 function isNodeInSnapshot(nodeId: string, snapshot: GraphSnapshot): boolean {
-  return snapshot.nodes.some((node) => node.id === nodeId && node.foreign !== true);
+  return snapshot.nodes.some((node) => node.id === nodeId);
 }
 
 function computeForeignStartFallback(
