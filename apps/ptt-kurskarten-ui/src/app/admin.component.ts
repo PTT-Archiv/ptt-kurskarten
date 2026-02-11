@@ -417,7 +417,7 @@ export class AdminComponent implements OnDestroy {
     const fallbackTo = nodes.find((node) => node.id !== nodeId)?.id ?? null;
     if (fallbackTo) {
       this.draftEdge.set({
-        id: `draft-edge-${Date.now()}`,
+        id: `edge-${Date.now()}`,
         from: nodeId,
         to: fallbackTo,
         transport: 'postkutsche',
@@ -1154,7 +1154,7 @@ export class AdminComponent implements OnDestroy {
     }
     if (pendingFrom && event.type === 'up' && event.hitNodeId && event.hitNodeId !== pendingFrom) {
       this.selection.clearPendingEdge();
-      const draftId = `draft-edge-${Date.now()}`;
+      const draftId = `edge-${Date.now()}`;
       this.draftEdge.set({
         id: draftId,
         from: pendingFrom,
@@ -1277,7 +1277,7 @@ export class AdminComponent implements OnDestroy {
   }
 
   private createDraftNode(point: { x: number; y: number }): void {
-    const id = `draft-node-${Date.now()}`;
+    const id = `node-${Date.now()}`;
     this.selection.clearSelection();
     this.draftNode.set({
       id,
@@ -1365,7 +1365,7 @@ export class AdminComponent implements OnDestroy {
     const from = selected ?? nodes[0]?.id ?? null;
     const to = nodes.find((node) => node.id !== from)?.id ?? null;
     const created: EdgeDraft = {
-      id: `draft-edge-${Date.now()}`,
+      id: `edge-${Date.now()}`,
       from,
       to,
       transport: 'postkutsche',
@@ -1382,7 +1382,7 @@ export class AdminComponent implements OnDestroy {
     const draft = this.draftEdge();
     if (!draft) {
       this.draftEdge.set({
-        id: `draft-edge-${Date.now()}`,
+        id: `edge-${Date.now()}`,
         from: nodeId,
         to: null,
         transport: 'postkutsche',
