@@ -100,16 +100,19 @@
       </div>
       <div class="result-meta badge">
         @if (option.foreignStartNote) {
-          {{ option.foreignStartNote }}: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
+          {{ 'viewer.knownFrom' | transloco }}: {{ getNodeLabel(option.effectiveFrom ?? '') }}
+          {{ option.effectiveStartTime }}
         } @else {
-          Start in der Schweiz: {{ getNodeLabel(option.effectiveFrom ?? '') }} {{ option.effectiveStartTime }}
+          {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(option.effectiveFrom ?? '') }}
+          {{ option.effectiveStartTime }}
         }
       </div>
       <div class="result-meta">
         @if (option.foreignStartNote) {
-          {{ getNodeLabel(option.requestedFrom ?? option.from) }} außerhalb Datensatz (Startzeit unbekannt)
+          {{ 'viewer.outsideDataset' | transloco: { node: getNodeLabel(option.requestedFrom ?? option.from) } }}
+          ({{ 'viewer.unknownStartTime' | transloco }})
         } @else {
-          Abfahrt {{ getNodeLabel(option.requestedFrom ?? option.from) }} {{ option.departs }}
+          {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(option.requestedFrom ?? option.from), time: option.departs } }}
         }
       </div>
       } @else {
@@ -163,17 +166,19 @@
       </div>
       <div class="detail-badge">
         @if (selected.foreignStartNote) {
-          {{ selected.foreignStartNote }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+          {{ 'viewer.knownFrom' | transloco }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }}
+          {{ selected.effectiveStartTime }}
         } @else {
-          Start in der Schweiz: {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
+          {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }}
+          {{ selected.effectiveStartTime }}
         }
       </div>
       <div class="detail-line">
         @if (selected.foreignStartNote) {
-          Zubringer: Ankunft {{ getNodeLabel(selected.effectiveFrom ?? '') }} {{ selected.effectiveStartTime }}
-          (weitere Zeiten unbekannt)
+          {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(selected.effectiveFrom ?? ''), time: selected.effectiveStartTime } }}
+          ({{ 'viewer.unknownFurtherTimes' | transloco }})
         } @else {
-          Abfahrt {{ getNodeLabel(selected.requestedFrom ?? selected.from) }} {{ selected.departs }}
+          {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(selected.requestedFrom ?? selected.from), time: selected.departs } }}
         }
       </div>
       } @else {
@@ -184,14 +189,14 @@
         @if (leg.continuationOutsideDataset) {
         <div class="detail-time">Weiterreise Richtung {{ getNodeLabel(leg.to) }}</div>
         @if (leg.departs) {
-        <div class="detail-line">Abfahrt {{ leg.departs }}</div>
+        <div class="detail-line">{{ 'viewer.departAt' | transloco: { time: leg.departs } }}</div>
         }
-        <div class="detail-line">Ankunft unbekannt (außerhalb Datensatz)</div>
+        <div class="detail-line">{{ 'viewer.unknownArrivalOutside' | transloco }}</div>
         } @else if (leg.foreignStartPreface) {
         <div class="detail-time">
-          Zubringer: Ankunft {{ getNodeLabel(leg.to) }} {{ leg.arrives }}
+          {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(leg.to), time: leg.arrives } }}
         </div>
-        <div class="detail-line">Weitere Zeiten unbekannt</div>
+        <div class="detail-line">{{ 'viewer.unknownFurtherTimes' | transloco }}</div>
         } @else {
         <div class="detail-time">
           {{ leg.departs }} → {{ leg.arrives }}

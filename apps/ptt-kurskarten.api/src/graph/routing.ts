@@ -523,7 +523,9 @@ function computeForeignStartFallback(
     });
   });
 
-  const sortedKnown = knownDepartures.sort((a, b) => {
+  const effectiveKnown = arrivalOnly.length > 0 ? [] : knownDepartures;
+
+  const sortedKnown = effectiveKnown.sort((a, b) => {
     const aDep = parseTime(a.depart);
     const bDep = parseTime(b.depart);
     if (aDep !== bDep) {
