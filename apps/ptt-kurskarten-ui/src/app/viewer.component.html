@@ -100,7 +100,7 @@
       </div>
       <div class="result-meta badge">
         @if (option.foreignStartNote) {
-          {{ 'viewer.knownFrom' | transloco }}: {{ getNodeLabel(option.effectiveFrom ?? '') }}
+          {{ 'viewer.knownFrom' | transloco }} {{ getNodeLabel(option.effectiveFrom ?? '') }}
           {{ option.effectiveStartTime }}
         } @else {
           {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(option.effectiveFrom ?? '') }}
@@ -109,7 +109,6 @@
       </div>
       <div class="result-meta">
         @if (option.foreignStartNote) {
-          {{ 'viewer.outsideDataset' | transloco: { node: getNodeLabel(option.requestedFrom ?? option.from) } }}
           ({{ 'viewer.unknownStartTime' | transloco }})
         } @else {
           {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(option.requestedFrom ?? option.from), time: option.departs } }}
@@ -166,19 +165,11 @@
       </div>
       <div class="detail-badge">
         @if (selected.foreignStartNote) {
-          {{ 'viewer.knownFrom' | transloco }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }}
+          {{ 'viewer.knownFrom' | transloco }} {{ getNodeLabel(selected.effectiveFrom ?? '') }}
           {{ selected.effectiveStartTime }}
         } @else {
           {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }}
           {{ selected.effectiveStartTime }}
-        }
-      </div>
-      <div class="detail-line">
-        @if (selected.foreignStartNote) {
-          {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(selected.effectiveFrom ?? ''), time: selected.effectiveStartTime } }}
-          ({{ 'viewer.unknownFurtherTimes' | transloco }})
-        } @else {
-          {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(selected.requestedFrom ?? selected.from), time: selected.departs } }}
         }
       </div>
       } @else {
@@ -187,16 +178,12 @@
       @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
       <div class="detail-row">
         @if (leg.continuationOutsideDataset) {
-        <div class="detail-time">Weiterreise Richtung {{ getNodeLabel(leg.to) }}</div>
         @if (leg.departs) {
         <div class="detail-line">{{ 'viewer.departAt' | transloco: { time: leg.departs } }}</div>
         }
-        <div class="detail-line">{{ 'viewer.unknownArrivalOutside' | transloco }}</div>
         } @else if (leg.foreignStartPreface) {
         <div class="detail-time">
-          {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(leg.to), time: leg.arrives } }}
         </div>
-        <div class="detail-line">{{ 'viewer.unknownFurtherTimes' | transloco }}</div>
         } @else {
         <div class="detail-time">
           {{ leg.departs }} → {{ leg.arrives }}

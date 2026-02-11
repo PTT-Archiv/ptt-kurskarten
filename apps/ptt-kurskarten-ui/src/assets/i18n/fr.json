@@ -39,7 +39,7 @@
   "viewer.feederArrival": "Acheminement : arrivée {{node}} {{time}}",
   "viewer.unknownFurtherTimes": "Autres horaires inconnus",
   "viewer.departAt": "Départ {{time}}",
-  "viewer.unknownArrivalOutside": "Arrivée inconnue (hors du jeu de données)",
+  "viewer.unknownDepartureOutside": "Départ inconnu (hors du jeu de données)",
   "label.year": "Année",
   "viewer.legend": "Légende",
   "viewer.legend.nodes": "Nœuds : stations / lieux",
