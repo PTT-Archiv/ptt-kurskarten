@@ -80,6 +80,7 @@
   "btn.cancel": "Annuler",
   "admin.timeHint": "Les heures doivent être HH:MM.",
   "admin.noTrips": "Aucune course pour l’instant. Ajoutez-en au moins une.",
+  "admin.geoSearch": "Activer la recherche geo.admin",
   "btn.updateEdge": "Mettre à jour la liaison",
   "admin.newNode": "Nouveau nœud",
   "btn.createNode": "Créer un nœud",

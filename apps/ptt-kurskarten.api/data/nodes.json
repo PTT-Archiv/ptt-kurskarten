@@ -71,5 +71,75 @@
     "iiifCenterX": 1248,
     "iiifCenterY": 6692,
     "validTo": null
+  },
+  {
+    "id": "node-1770809870824",
+    "name": "Bern",
+    "x": 275.0418006430868,
+    "y": 233.5819935691318,
+    "validFrom": 1852,
+    "iiifCenterX": 5052,
+    "iiifCenterY": 4426,
+    "validTo": null
+  },
+  {
+    "id": "node-1770810571016",
+    "name": "Luzern",
+    "x": 417,
+    "y": 185,
+    "validFrom": 1852,
+    "iiifCenterX": 5052,
+    "iiifCenterY": 4426,
+    "validTo": null
+  },
+  {
+    "id": "node-1770811420932",
+    "name": "Bellinzona",
+    "x": 544.5991509454054,
+    "y": 424.89066442315243,
+    "validFrom": 1852,
+    "iiifCenterX": 9274,
+    "iiifCenterY": 7353,
+    "validTo": null
+  },
+  {
+    "id": "node-1770811785314",
+    "name": "Chur",
+    "x": 630.2788844621515,
+    "y": 243.24302788844622,
+    "validFrom": 1852,
+    "iiifCenterX": 10951,
+    "iiifCenterY": 4621,
+    "validTo": null
+  },
+  {
+    "id": "node-1770811803557",
+    "name": "Schaffhausen",
+    "x": 477.93614540793897,
+    "y": 11.124331570137997,
+    "validFrom": 1852,
+    "iiifCenterX": 8230,
+    "iiifCenterY": 1042,
+    "validTo": null
+  },
+  {
+    "id": "node-1770812095922",
+    "name": "Basel",
+    "x": 293.62549800796813,
+    "y": 59.577689243027876,
+    "validFrom": 1852,
+    "iiifCenterX": 5336,
+    "iiifCenterY": 1532,
+    "validTo": null
+  },
+  {
+    "id": "node-1770812117179",
+    "name": "Nyon",
+    "x": 46.227019629833876,
+    "y": 370.58227860587357,
+    "validFrom": 1852,
+    "iiifCenterX": 1468,
+    "iiifCenterY": 6525,
+    "validTo": null
   }
 ]

@@ -199,6 +199,46 @@
   gap: 8px;
 }
 
+.typeahead {
+  position: relative;
+}
+
+.typeahead-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 2px solid #141414;
+  border-radius: 12px;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+  padding: 4px;
+  display: grid;
+  gap: 4px;
+  z-index: 5;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.typeahead-list button {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+  border: 2px solid transparent;
+  background: #f8f8f8;
+  padding: 6px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 12px;
+}
+
+.typeahead-list button:hover {
+  border-color: #141414;
+  background: #ffffff;
+}
+
 .field input,
 .field select,
 .field textarea {

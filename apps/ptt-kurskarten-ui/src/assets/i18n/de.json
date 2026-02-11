@@ -80,6 +80,7 @@
   "btn.cancel": "Abbrechen",
   "admin.timeHint": "Zeiten müssen HH:MM sein.",
   "admin.noTrips": "Noch keine Fahrten. Mindestens eine hinzufügen.",
+  "admin.geoSearch": "Geo.admin Suche aktivieren",
   "btn.updateEdge": "Strecke aktualisieren",
   "admin.newNode": "Neuer Knoten",
   "btn.createNode": "Knoten erstellen",

@@ -116,7 +116,23 @@
         @if (draftNode(); as draft) {
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
-            <input type="text" [value]="draft.name" (input)="updateDraftName($event)" />
+            <div class="typeahead">
+              <input type="text" [value]="draft.name" (input)="updateDraftName($event)" />
+              @if (geoSearchEnabled() && geoResults().length > 0) {
+                <div class="typeahead-list">
+                  @for (result of geoResults(); track result.id) {
+                    <button type="button" (click)="applyGeoResult(result)">
+                      <span>{{ result.label }}</span>
+                      <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </label>
+          <label class="field checkbox-row">
+            <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+            <span>{{ 'admin.geoSearch' | transloco }}</span>
           </label>
           <label class="field checkbox-row">
             <input
@@ -138,7 +154,23 @@
         } @else if (nodeDetail(); as detail) {
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
-            <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+            <div class="typeahead">
+              <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+              @if (geoSearchEnabled() && geoResults().length > 0) {
+                <div class="typeahead-list">
+                  @for (result of geoResults(); track result.id) {
+                    <button type="button" (click)="applyGeoResult(result)">
+                      <span>{{ result.label }}</span>
+                      <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </label>
+          <label class="field checkbox-row">
+            <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+            <span>{{ 'admin.geoSearch' | transloco }}</span>
           </label>
           <label class="field checkbox-row">
             <input

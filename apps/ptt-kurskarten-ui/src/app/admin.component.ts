@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import type {
   EdgeTrip,
   GraphEdge,
@@ -65,6 +66,13 @@ type EdgeDraft = {
   trips: EdgeTrip[];
 };
 
+type GeoAdminResult = {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+};
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -73,6 +81,7 @@ type EdgeDraft = {
   styleUrl: './admin.component.css'
 })
 export class AdminComponent implements OnDestroy {
+  private readonly http = inject(HttpClient);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly toastService = inject(ToastService);
@@ -101,6 +110,10 @@ export class AdminComponent implements OnDestroy {
   shortcutsCollapsed = signal<boolean>(false);
   confirmDeleteNode = signal<boolean>(false);
   isDragging = signal<boolean>(false);
+  geoSearchEnabled = signal<boolean>(true);
+  geoResults = signal<GeoAdminResult[]>([]);
+  geoLoading = signal<boolean>(false);
+  private geoSearchHandle: ReturnType<typeof setTimeout> | null = null;
   private archiveSaveHandle: ReturnType<typeof setTimeout> | null = null;
   private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number } | null = null;
   readonly transportOptions: TransportType[] = [
@@ -116,10 +129,10 @@ export class AdminComponent implements OnDestroy {
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
   private dragState:
     | {
-        id: string;
-        from: { x: number; y: number };
-        moved: boolean;
-      }
+      id: string;
+      from: { x: number; y: number };
+      moved: boolean;
+    }
     | null = null;
   @ViewChild('edgeEditor') private edgeEditorRef?: ElementRef<HTMLElement>;
   @ViewChild('nodePanel') private nodePanelRef?: ElementRef<HTMLElement>;
@@ -585,6 +598,7 @@ export class AdminComponent implements OnDestroy {
     }
     this.updateNodeLocal(nodeId, { name: value });
     this.dirty.set(true);
+    this.queueGeoSearch(value);
   }
 
   updateSelectedValidFrom(event: Event): void {
@@ -708,6 +722,53 @@ export class AdminComponent implements OnDestroy {
     }
     this.draftNode.set({ ...draft, name: value });
     this.dirty.set(true);
+    this.queueGeoSearch(value);
+  }
+
+  toggleGeoSearch(event: Event): void {
+    const value = (event.target as HTMLInputElement).checked;
+    this.geoSearchEnabled.set(value);
+    if (!value) {
+      this.geoResults.set([]);
+      if (this.geoSearchHandle) {
+        clearTimeout(this.geoSearchHandle);
+        this.geoSearchHandle = null;
+      }
+    }
+  }
+
+  applyGeoResult(result: GeoAdminResult): void {
+    const mapped = this.mapGeoAdminToLocal(result.x, result.y);
+    if (!mapped) {
+      return;
+    }
+    const draft = this.draftNode();
+    if (draft) {
+      this.draftNode.set({
+        ...draft,
+        name: result.label || draft.name,
+        x: mapped.x,
+        y: mapped.y,
+        iiifCenterX: undefined,
+        iiifCenterY: undefined
+      });
+      this.dirty.set(true);
+      this.geoResults.set([]);
+      return;
+    }
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return;
+    }
+    this.updateNodeLocal(nodeId, {
+      name: result.label || this.findNode(nodeId)?.name,
+      x: mapped.x,
+      y: mapped.y,
+      iiifCenterX: undefined,
+      iiifCenterY: undefined
+    });
+    this.dirty.set(true);
+    this.geoResults.set([]);
   }
 
   updateDraftValidFrom(event: Event): void {
@@ -1356,6 +1417,162 @@ export class AdminComponent implements OnDestroy {
     }
   }
 
+  private queueGeoSearch(query: string): void {
+    if (!this.geoSearchEnabled() || !this.isBrowser) {
+      return;
+    }
+    const trimmed = query.trim();
+    if (trimmed.length < 2) {
+      this.geoResults.set([]);
+      return;
+    }
+    if (this.geoSearchHandle) {
+      clearTimeout(this.geoSearchHandle);
+    }
+    this.geoSearchHandle = setTimeout(() => this.fetchGeoAdminResults(trimmed), 250);
+  }
+
+  private fetchGeoAdminResults(query: string): void {
+    if (!this.geoSearchEnabled() || !this.isBrowser) {
+      return;
+    }
+    this.geoLoading.set(true);
+    const url =
+      'https://api3.geo.admin.ch/rest/services/api/SearchServer' +
+      `?type=locations&origins=gg25&searchText=${encodeURIComponent(query)}&limit=10`;
+    this.http.get<{ results?: Array<{ id?: string; attrs?: { label?: string; x?: number; y?: number } }> }>(url).subscribe({
+      next: (response) => {
+        const results =
+          response.results
+            ?.map((entry) => {
+              const attrs = entry.attrs ?? {};
+              const x = typeof attrs.x === 'number' ? attrs.x : Number(attrs.x);
+              const y = typeof attrs.y === 'number' ? attrs.y : Number(attrs.y);
+              if (!Number.isFinite(x) || !Number.isFinite(y)) {
+                return null;
+              }
+              const label = attrs.label?.replaceAll('<b>', '').replaceAll('</b>', '')?.replace(/\([^)]*\)$/, '').trim() ?? '';
+              return {
+                id: entry.id ?? `${label}-${x}-${y}`,
+                label: label || query,
+                x,
+                y
+              } satisfies GeoAdminResult;
+            })
+            .filter((entry): entry is GeoAdminResult => Boolean(entry)) ?? [];
+        this.geoResults.set(results);
+        this.geoLoading.set(false);
+      },
+      error: () => {
+        this.geoResults.set([]);
+        this.geoLoading.set(false);
+      }
+    });
+  }
+
+  private mapGeoAdminToLocal(geoX: number, geoY: number): { x: number; y: number } | null {
+    const anchors = [
+      { geo: { x: 117839, y: 499959 }, local: { x: 21, y: 414 } }, // Geneva
+      { geo: { x: 200386, y: 598633 }, local: { x: 275, y: 233 } }, // Bern
+      { geo: { x: 211883, y: 665512 }, local: { x: 417, y: 185 } }, // Lucerne
+      { geo: { x: 118851, y: 719163 }, local: { x: 550, y: 426 } }, // Bellinzona
+      { geo: { x: 188899, y: 758513 }, local: { x: 629.32328308207, y: 254.42546063651594 } }, // Chur
+      { geo: { x: 286052, y: 690159 }, local: { x: 475.73199329983254, y: 8.509212730318259 } } // Schaffhausen
+    ];
+
+    const result = this.computeAffineLeastSquares(anchors);
+    if (!result) {
+      return null;
+    }
+    const { a, b, c, d, e, f } = result;
+    return { x: a * geoX + b * geoY + c, y: d * geoX + e * geoY + f };
+  }
+
+  private computeAffineLeastSquares(anchors: Array<{ geo: { x: number; y: number }; local: { x: number; y: number } }>): {
+    a: number;
+    b: number;
+    c: number;
+    d: number;
+    e: number;
+    f: number;
+  } | null {
+    if (anchors.length < 3) {
+      return null;
+    }
+
+    // Solve for x: [X Y 1] * [a b c]^T = x'
+    // Solve for y: [X Y 1] * [d e f]^T = y'
+    const solve3 = (coords: Array<{ X: number; Y: number; v: number }>) => {
+      let sXX = 0;
+      let sXY = 0;
+      let sX1 = 0;
+      let sYY = 0;
+      let sY1 = 0;
+      let s11 = coords.length;
+      let sXv = 0;
+      let sYv = 0;
+      let s1v = 0;
+
+      for (const row of coords) {
+        sXX += row.X * row.X;
+        sXY += row.X * row.Y;
+        sX1 += row.X;
+        sYY += row.Y * row.Y;
+        sY1 += row.Y;
+        sXv += row.X * row.v;
+        sYv += row.Y * row.v;
+        s1v += row.v;
+      }
+
+      const A = [
+        [sXX, sXY, sX1],
+        [sXY, sYY, sY1],
+        [sX1, sY1, s11]
+      ];
+      const B = [sXv, sYv, s1v];
+
+      const det =
+        A[0][0] * (A[1][1] * A[2][2] - A[1][2] * A[2][1]) -
+        A[0][1] * (A[1][0] * A[2][2] - A[1][2] * A[2][0]) +
+        A[0][2] * (A[1][0] * A[2][1] - A[1][1] * A[2][0]);
+      if (det === 0) {
+        return null;
+      }
+
+      const inv = [
+        [
+          (A[1][1] * A[2][2] - A[1][2] * A[2][1]) / det,
+          (A[0][2] * A[2][1] - A[0][1] * A[2][2]) / det,
+          (A[0][1] * A[1][2] - A[0][2] * A[1][1]) / det
+        ],
+        [
+          (A[1][2] * A[2][0] - A[1][0] * A[2][2]) / det,
+          (A[0][0] * A[2][2] - A[0][2] * A[2][0]) / det,
+          (A[0][2] * A[1][0] - A[0][0] * A[1][2]) / det
+        ],
+        [
+          (A[1][0] * A[2][1] - A[1][1] * A[2][0]) / det,
+          (A[0][1] * A[2][0] - A[0][0] * A[2][1]) / det,
+          (A[0][0] * A[1][1] - A[0][1] * A[1][0]) / det
+        ]
+      ];
+
+      const x = inv[0][0] * B[0] + inv[0][1] * B[1] + inv[0][2] * B[2];
+      const y = inv[1][0] * B[0] + inv[1][1] * B[1] + inv[1][2] * B[2];
+      const z = inv[2][0] * B[0] + inv[2][1] * B[1] + inv[2][2] * B[2];
+      return [x, y, z] as const;
+    };
+
+    const xRows = anchors.map((a) => ({ X: a.geo.x, Y: a.geo.y, v: a.local.x }));
+    const yRows = anchors.map((a) => ({ X: a.geo.x, Y: a.geo.y, v: a.local.y }));
+    const solX = solve3(xRows);
+    const solY = solve3(yRows);
+    if (!solX || !solY) {
+      return null;
+    }
+    return { a: solX[0], b: solX[1], c: solX[2], d: solY[0], e: solY[1], f: solY[2] };
+  }
+
   private ensureDraftEdge(): EdgeDraft | null {
     const draft = this.draftEdge();
     if (draft) {
@@ -1626,7 +1843,7 @@ export class AdminComponent implements OnDestroy {
   private isTimeValid(value: string): boolean {
     console.log('Validating time:', value, /^\\d{2}:\\d{2}$/.test(value));
     return true;
-   // return /^d{2}:d{2}$/.test(value?.trim());
+    // return /^d{2}:d{2}$/.test(value?.trim());
   }
 
   private extractErrorMessage(error: any): string {
