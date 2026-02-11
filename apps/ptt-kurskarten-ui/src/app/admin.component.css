@@ -234,6 +234,11 @@
   font-size: 12px;
 }
 
+.typeahead-list button.active {
+  border-color: #141414;
+  background: #ffffff;
+}
+
 .typeahead-list button:hover {
   border-color: #141414;
   background: #ffffff;

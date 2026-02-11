@@ -117,11 +117,21 @@
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
             <div class="typeahead">
-              <input type="text" [value]="draft.name" (input)="updateDraftName($event)" />
+              <input
+                #nodeNameInput
+                type="text"
+                [value]="draft.name"
+                (input)="updateDraftName($event)"
+                (keydown)="onNodeNameKeydown($event, 'draft')"
+              />
               @if (geoSearchEnabled() && geoResults().length > 0) {
                 <div class="typeahead-list">
-                  @for (result of geoResults(); track result.id) {
-                    <button type="button" (click)="applyGeoResult(result)">
+                  @for (result of geoResults(); track result.id; let idx = $index) {
+                    <button
+                      type="button"
+                      [class.active]="idx === geoActiveIndex()"
+                      (click)="applyGeoResult(result)"
+                    >
                       <span>{{ result.label }}</span>
                       <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
                     </button>
@@ -155,11 +165,21 @@
           <label class="field">
             <span>{{ 'label.name' | transloco }}</span>
             <div class="typeahead">
-              <input type="text" [value]="detail.node?.name" (input)="updateSelectedName($event)" />
+              <input
+                #nodeNameInput
+                type="text"
+                [value]="detail.node?.name"
+                (input)="updateSelectedName($event)"
+                (keydown)="onNodeNameKeydown($event, 'selected')"
+              />
               @if (geoSearchEnabled() && geoResults().length > 0) {
                 <div class="typeahead-list">
-                  @for (result of geoResults(); track result.id) {
-                    <button type="button" (click)="applyGeoResult(result)">
+                  @for (result of geoResults(); track result.id; let idx = $index) {
+                    <button
+                      type="button"
+                      [class.active]="idx === geoActiveIndex()"
+                      (click)="applyGeoResult(result)"
+                    >
                       <span>{{ result.label }}</span>
                       <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
                     </button>

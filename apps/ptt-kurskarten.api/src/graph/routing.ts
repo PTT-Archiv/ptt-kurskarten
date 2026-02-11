@@ -319,7 +319,9 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   if (base) {
     results.push(base);
   } else {
-    return results;
+    if (!(fromIsForeign && allowForeignStartFallback && isNodeInSnapshot(params.to, snapshot))) {
+      return results;
+    }
   }
 
   if (k === 1) {
@@ -555,6 +557,35 @@ function computeForeignStartFallback(
     depart?: TimeHHMM;
     arrivalOnly?: boolean;
   }) => {
+    if (entry.to === params.to) {
+      const preface: ConnectionLeg = {
+        edgeId: entry.edge.id,
+        tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
+        from: entry.from,
+        to: entry.to,
+        transport: entry.edge.transport,
+        arrives: entry.arrival,
+        arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
+        notes: entry.edge.notes,
+        continuationOutsideDataset: true,
+        foreignStartPreface: true
+      };
+      options.push({
+        year: params.year,
+        from: params.from,
+        to: params.to,
+        requestedDepart: params.depart,
+        departs: entry.depart ?? entry.arrival,
+        kind: 'FOREIGN_START_FALLBACK',
+        requestedFrom: params.from,
+        effectiveFrom: entry.to,
+        effectiveStartTime: entry.arrival,
+        foreignStartNote: entry.arrivalOnly ? `Known from ${entry.to}` : undefined,
+        legs: [preface]
+      });
+      return;
+    }
+
     const inner = computeConnections(snapshot, {
       ...params,
       from: entry.to,

@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": "edge-1770818739111",
+    "from": "node-1770818444657",
+    "to": "node-1770809870824",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1770818770684",
+    "from": "node-1770809062251",
+    "to": "node-1770818444657",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1770821499133",
+    "from": "node-1770809183587",
+    "to": "node-1770809062251",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1770822697409",
+    "from": "node-1770809183587",
+    "to": "node-1770809870824",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  }
+]

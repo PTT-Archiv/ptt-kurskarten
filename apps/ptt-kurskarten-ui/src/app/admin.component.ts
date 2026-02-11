@@ -113,6 +113,7 @@ export class AdminComponent implements OnDestroy {
   geoSearchEnabled = signal<boolean>(true);
   geoResults = signal<GeoAdminResult[]>([]);
   geoLoading = signal<boolean>(false);
+  geoActiveIndex = signal<number>(0);
   private geoSearchHandle: ReturnType<typeof setTimeout> | null = null;
   private archiveSaveHandle: ReturnType<typeof setTimeout> | null = null;
   private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number } | null = null;
@@ -138,6 +139,7 @@ export class AdminComponent implements OnDestroy {
   @ViewChild('nodePanel') private nodePanelRef?: ElementRef<HTMLElement>;
   @ViewChild('archivePanel') private archivePanelRef?: ElementRef<HTMLElement>;
   @ViewChild(ArchiveSnippetViewerComponent) private archiveViewer?: ArchiveSnippetViewerComponent;
+  @ViewChild('nodeNameInput') private nodeNameInput?: ElementRef<HTMLInputElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -725,11 +727,50 @@ export class AdminComponent implements OnDestroy {
     this.queueGeoSearch(value);
   }
 
+  onNodeNameKeydown(event: KeyboardEvent, mode: 'draft' | 'selected'): void {
+    if (!this.geoSearchEnabled()) {
+      if (event.key === 'Enter' && mode === 'draft') {
+        event.preventDefault();
+        this.saveDraftNodeAndContinue();
+      }
+      return;
+    }
+    const results = this.geoResults();
+    if (event.key === 'ArrowDown' && results.length) {
+      event.preventDefault();
+      this.geoActiveIndex.set((this.geoActiveIndex() + 1) % results.length);
+      return;
+    }
+    if (event.key === 'ArrowUp' && results.length) {
+      event.preventDefault();
+      this.geoActiveIndex.set((this.geoActiveIndex() - 1 + results.length) % results.length);
+      return;
+    }
+    if (event.key === 'Escape') {
+      this.geoResults.set([]);
+      this.geoActiveIndex.set(0);
+      return;
+    }
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      if (results.length) {
+        const picked = results[this.geoActiveIndex()] ?? results[0];
+        if (picked) {
+          this.applyGeoResult(picked);
+        }
+      }
+      if (mode === 'draft') {
+        this.saveDraftNodeAndContinue();
+      }
+    }
+  }
+
   toggleGeoSearch(event: Event): void {
     const value = (event.target as HTMLInputElement).checked;
     this.geoSearchEnabled.set(value);
     if (!value) {
       this.geoResults.set([]);
+      this.geoActiveIndex.set(0);
       if (this.geoSearchHandle) {
         clearTimeout(this.geoSearchHandle);
         this.geoSearchHandle = null;
@@ -754,6 +795,7 @@ export class AdminComponent implements OnDestroy {
       });
       this.dirty.set(true);
       this.geoResults.set([]);
+      this.geoActiveIndex.set(0);
       return;
     }
     const nodeId = this.selectedNodeId();
@@ -769,6 +811,7 @@ export class AdminComponent implements OnDestroy {
     });
     this.dirty.set(true);
     this.geoResults.set([]);
+    this.geoActiveIndex.set(0);
   }
 
   updateDraftValidFrom(event: Event): void {
@@ -1339,12 +1382,12 @@ export class AdminComponent implements OnDestroy {
     });
   }
 
-  private createDraftNode(point: { x: number; y: number }): void {
+  private createDraftNode(point: { x: number; y: number }, name = 'New node'): void {
     const id = `node-${Date.now()}`;
     this.selection.clearSelection();
     this.draftNode.set({
       id,
-      name: 'New node',
+      name,
       x: point.x,
       y: point.y,
       validFrom: this.year()
@@ -1417,19 +1460,56 @@ export class AdminComponent implements OnDestroy {
     }
   }
 
+  private saveDraftNodeAndContinue(): void {
+    const draft = this.draftNode();
+    if (!draft) {
+      return;
+    }
+    this.repo
+      .createNode(draft)
+      .subscribe({
+        next: (created) => {
+          this.addNode(created);
+          this.dirty.set(false);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Knoten erstellt',
+            key: 'node-save'
+          });
+          this.createDraftNode({ x: created.x, y: created.y }, '');
+          this.focusNodeNameInput();
+        },
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'node-save'
+          });
+        }
+      });
+  }
+
+  private focusNodeNameInput(): void {
+    requestAnimationFrame(() => {
+      this.nodeNameInput?.nativeElement?.focus();
+      this.nodeNameInput?.nativeElement?.select();
+    });
+  }
+
   private queueGeoSearch(query: string): void {
     if (!this.geoSearchEnabled() || !this.isBrowser) {
       return;
     }
-    const trimmed = query.trim();
-    if (trimmed.length < 2) {
+    const cleaned = query.replace(/\([^)]*\)$/, '').trim();
+    if (cleaned.length < 2) {
       this.geoResults.set([]);
       return;
     }
     if (this.geoSearchHandle) {
       clearTimeout(this.geoSearchHandle);
     }
-    this.geoSearchHandle = setTimeout(() => this.fetchGeoAdminResults(trimmed), 250);
+    this.geoSearchHandle = setTimeout(() => this.fetchGeoAdminResults(cleaned), 250);
   }
 
   private fetchGeoAdminResults(query: string): void {
@@ -1461,10 +1541,12 @@ export class AdminComponent implements OnDestroy {
             })
             .filter((entry): entry is GeoAdminResult => Boolean(entry)) ?? [];
         this.geoResults.set(results);
+        this.geoActiveIndex.set(0);
         this.geoLoading.set(false);
       },
       error: () => {
         this.geoResults.set([]);
+        this.geoActiveIndex.set(0);
         this.geoLoading.set(false);
       }
     });

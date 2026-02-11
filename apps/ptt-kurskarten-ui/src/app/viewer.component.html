@@ -174,8 +174,6 @@
       </div>
       <div class="detail-line">
         @if (selected.foreignStartNote) {
-          {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(selected.effectiveFrom ?? ''), time: selected.effectiveStartTime } }}
-          ({{ 'viewer.unknownFurtherTimes' | transloco }})
         } @else {
           {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(selected.requestedFrom ?? selected.from), time: selected.departs } }}
         }
@@ -186,22 +184,7 @@
       @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
       <div class="detail-row">
         @if (leg.continuationOutsideDataset) {
-          <div class="detail-time">Weiterreise Richtung {{ getNodeLabel(leg.to) }}</div>
-          @if (leg.departs) {
-            <div class="detail-line">{{ 'viewer.departAt' | transloco: { time: leg.departs } }}</div>
-          }
-          <div class="detail-line">{{ 'viewer.unknownDepartureOutside' | transloco }}</div>
-          @if (leg.notes) {
-            <div class="detail-note">{{ getLocalizedNote(leg.notes) }}</div>
-          }
-        } @else if (leg.foreignStartPreface) {
-          <div class="detail-time">
-            {{ 'viewer.feederArrival' | transloco: { node: getNodeLabel(leg.to), time: leg.arrives } }}
-          </div>
-          <div class="detail-line">{{ 'viewer.unknownFurtherTimes' | transloco }}</div>
-          @if (leg.notes) {
-            <div class="detail-note">{{ getLocalizedNote(leg.notes) }}</div>
-          }
+        
         } @else {
           <div class="detail-time">
             {{ leg.departs }} → {{ leg.arrives }}

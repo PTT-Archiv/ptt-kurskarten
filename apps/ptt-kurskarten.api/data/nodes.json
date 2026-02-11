@@ -18,7 +18,8 @@
     "validFrom": 1852,
     "iiifCenterX": 1113,
     "iiifCenterY": 7991,
-    "validTo": null
+    "validTo": null,
+    "foreign": true
   },
   {
     "id": "node-1770809018783",
@@ -141,5 +142,93 @@
     "iiifCenterX": 1468,
     "iiifCenterY": 6525,
     "validTo": null
+  },
+  {
+    "id": "node-1770818428222",
+    "name": "Lausanne",
+    "x": 120.15438711655293,
+    "y": 332.91631737615245,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818436737",
+    "name": "Morges",
+    "x": 97.324807864685,
+    "y": 345.8993597064011,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818441812",
+    "name": "Nyon",
+    "x": 46.227019629833876,
+    "y": 370.58227860587357,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818444657",
+    "name": "Oron",
+    "x": 154.23709120026865,
+    "y": 326.2896336420434,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 3160,
+    "iiifCenterY": 5849
+  },
+  {
+    "id": "node-1770818451614",
+    "name": "Schönbühl",
+    "x": 276.64047369502896,
+    "y": 201.49603921814935,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112
+  },
+  {
+    "id": "node-1770818476302",
+    "name": "Schwanden bei Brienz",
+    "x": 375.1757513400996,
+    "y": 271.21323673239726,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818481603",
+    "name": "Aarberg",
+    "x": 237.3634517763869,
+    "y": 194.0361605069337,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112
+  },
+  {
+    "id": "node-1770818483826",
+    "name": "Ins",
+    "x": 206.01302610130415,
+    "y": 204.9880259471533,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818487149",
+    "name": "Walkringen",
+    "x": 298.87433752283346,
+    "y": 218.37087641441144,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770818509015",
+    "name": "Münsingen",
+    "x": 287.51407911701585,
+    "y": 239.06785766189853,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 5248,
+    "iiifCenterY": 4519
   }
 ]
