@@ -240,6 +240,27 @@
               <input type="number" [value]="edgeDraft.durationMinutes" (input)="updateSelectedEdgeDuration($event)" />
             </label>
           </div>
+          <div class="field">
+            <span>{{ 'label.notes' | transloco }}</span>
+            <div class="notes-grid">
+              <label class="notes-field">
+                <span>DE</span>
+                <textarea
+                  rows="3"
+                  [value]="edgeDraft.notes?.de ?? ''"
+                  (input)="updateSelectedEdgeNotes('de', $event)"
+                ></textarea>
+              </label>
+              <label class="notes-field">
+                <span>FR</span>
+                <textarea
+                  rows="3"
+                  [value]="edgeDraft.notes?.fr ?? ''"
+                  (input)="updateSelectedEdgeNotes('fr', $event)"
+                ></textarea>
+              </label>
+            </div>
+          </div>
         } @else if (draftEdge(); as draft) {
           <div class="coord">
             {{ 'admin.edgeFromTo' | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) } }}
@@ -283,6 +304,27 @@
               <span>{{ 'label.durationMin' | transloco }}</span>
               <input type="number" [value]="draft.durationMinutes" (input)="updateDraftEdgeDuration($event)" />
             </label>
+          </div>
+          <div class="field">
+            <span>{{ 'label.notes' | transloco }}</span>
+            <div class="notes-grid">
+              <label class="notes-field">
+                <span>DE</span>
+                <textarea
+                  rows="3"
+                  [value]="draft.notes?.de ?? ''"
+                  (input)="updateDraftEdgeNotes('de', $event)"
+                ></textarea>
+              </label>
+              <label class="notes-field">
+                <span>FR</span>
+                <textarea
+                  rows="3"
+                  [value]="draft.notes?.fr ?? ''"
+                  (input)="updateDraftEdgeNotes('fr', $event)"
+                ></textarea>
+              </label>
+            </div>
           </div>
         } @else {
           <div class="muted">{{ 'admin.clickTwoNodes' | transloco }}</div>

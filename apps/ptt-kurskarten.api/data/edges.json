@@ -5,7 +5,11 @@
     "to": "zurich",
     "transport": "postkutsche",
     "validFrom": 1845,
-    "validTo": 1865
+    "validTo": 1865,
+    "notes": {
+      "de": "i.Sommer",
+      "fr": "ete"
+    }
   },
   {
     "id": "bern-zurich-rail",

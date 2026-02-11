@@ -254,6 +254,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       transport: edge.transport,
       departs: trip.departs,
       arrives: info.arriveKnown ? trip.arrives : undefined,
+      notes: edge.notes,
       arrivalDayOffset: info.arriveKnown ? trip.arrivalDayOffset : undefined,
       departDayOffset: departDayOffset as 0 | 1 | 2,
       arriveDayOffset: info.arriveKnown ? (arriveDayOffset as 0 | 1 | 2) : undefined,
@@ -567,17 +568,18 @@ function computeForeignStartFallback(
       if (options.length >= k) {
         return;
       }
-      const preface: ConnectionLeg = {
-        edgeId: entry.edge.id,
-        tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
-        from: entry.from,
-        to: entry.to,
-        transport: entry.edge.transport,
-        arrives: entry.arrival,
-        arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
-        continuationOutsideDataset: true,
-        foreignStartPreface: true
-      };
+    const preface: ConnectionLeg = {
+      edgeId: entry.edge.id,
+      tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
+      from: entry.from,
+      to: entry.to,
+      transport: entry.edge.transport,
+      arrives: entry.arrival,
+      arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
+      notes: entry.edge.notes,
+      continuationOutsideDataset: true,
+      foreignStartPreface: true
+    };
       options.push({
         ...option,
         from: params.from,

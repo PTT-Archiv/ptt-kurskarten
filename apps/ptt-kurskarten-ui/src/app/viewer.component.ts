@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
+import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
@@ -456,6 +456,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     const preferredId = this.selectedNodeId() || this.fromId() || this.toId() || 'bern';
     return snapshot.nodes.find((node) => node.id === preferredId) ?? snapshot.nodes[0] ?? null;
+  }
+
+  getLocalizedNote(note?: LocalizedText): string | null {
+    if (!note) {
+      return null;
+    }
+    const lang = this.transloco.getActiveLang();
+    const value = (note as Record<string, string | undefined>)[lang] ?? note.de ?? note.fr;
+    return value?.trim() ? value : null;
   }
 
 

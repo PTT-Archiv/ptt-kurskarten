@@ -135,6 +135,9 @@
                   }
           }}
         </div>
+        @if (getLocalizedNote(report.edge?.notes); as note) {
+          <div class="summary">{{ 'label.notes' | transloco }}: {{ note }}</div>
+        }
         <table class="report-table">
           <thead>
             <tr>
@@ -142,7 +145,6 @@
               <th>{{ 'label.arrival' | transloco }}</th>
               <th>{{ 'label.dayOffset' | transloco }}</th>
               <th>{{ 'reports.durationMinutes' | transloco }}</th>
-              <th>{{ 'label.notes' | transloco }}</th>
             </tr>
           </thead>
           <tbody>
@@ -152,7 +154,6 @@
                 <td>{{ trip.arrives }}</td>
                 <td>{{ trip.arrivalDayOffset ?? 0 }}</td>
                 <td>{{ trip.durationMinutes }}</td>
-                <td>{{ trip.notes ?? '' }}</td>
               </tr>
             }
           </tbody>

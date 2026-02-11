@@ -2,6 +2,11 @@ export type Year = number;
 
 export type TransportType = 'postkutsche' | 'dampfschiff' | 'segelboot' | 'courier' | 'messagerie';
 
+export type LocalizedText = {
+  de?: string;
+  fr?: string;
+};
+
 export type TimeHHMM = `${number}${number}:${number}${number}`;
 
 export type DayOffset = 0 | 1 | 2;
@@ -11,7 +16,6 @@ export type EdgeTrip = {
   departs?: TimeHHMM;
   arrives: TimeHHMM;
   arrivalDayOffset?: DayOffset;
-  notes?: string;
 };
 
 export type GraphNode = {
@@ -34,6 +38,7 @@ export type GraphEdge = {
   validFrom: Year;
   validTo?: Year;
   durationMinutes?: number;
+  notes?: LocalizedText;
   trips: EdgeTrip[];
 };
 
@@ -45,6 +50,7 @@ export type ConnectionLeg = {
   transport: TransportType;
   departs?: TimeHHMM;
   arrives?: TimeHHMM;
+  notes?: LocalizedText;
   arrivalDayOffset?: DayOffset;
   departDayOffset?: DayOffset;
   arriveDayOffset?: DayOffset;
@@ -119,7 +125,6 @@ export type EdgeTimetableReport = {
     arrives: TimeHHMM;
     arrivalDayOffset?: DayOffset;
     durationMinutes: number;
-    notes?: string;
   }>;
   summary: {
     tripsCount: number;

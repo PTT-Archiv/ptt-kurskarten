@@ -1,6 +1,14 @@
 import { Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType } from '@ptt-kurskarten/shared';
+import type {
+  EdgeTrip,
+  GraphEdge,
+  GraphNode,
+  GraphSnapshot,
+  LocalizedText,
+  NodeDetail,
+  TransportType
+} from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ToastService } from './shared/toast/toast.service';
@@ -53,6 +61,7 @@ type EdgeDraft = {
   validFrom: number;
   validTo?: number;
   durationMinutes: number;
+  notes?: LocalizedText;
   trips: EdgeTrip[];
 };
 
@@ -222,6 +231,7 @@ export class AdminComponent implements OnDestroy {
       validFrom: edge.validFrom,
       validTo: edge.validTo,
       durationMinutes: edge.durationMinutes ?? 60,
+      notes: edge.notes,
       trips: edge.trips ?? []
     };
   });
@@ -827,6 +837,23 @@ export class AdminComponent implements OnDestroy {
     this.dirty.set(true);
   }
 
+  updateDraftEdgeNotes(lang: keyof LocalizedText, event: Event): void {
+    const value = (event.target as HTMLTextAreaElement).value;
+    const draft = this.draftEdge();
+    if (!draft) {
+      return;
+    }
+    const next = value.trim();
+    const notes = { ...(draft.notes ?? {}) } satisfies LocalizedText;
+    notes[lang] = next ? value : undefined;
+    if (!notes.de && !notes.fr) {
+      this.draftEdge.set({ ...draft, notes: undefined });
+    } else {
+      this.draftEdge.set({ ...draft, notes });
+    }
+    this.dirty.set(true);
+  }
+
   updateSelectedEdgeTransport(event: Event): void {
     const value = (event.target as HTMLSelectElement).value as TransportType;
     const draft = this.selectedEdgeDraft();
@@ -896,6 +923,23 @@ export class AdminComponent implements OnDestroy {
     this.dirty.set(true);
   }
 
+  updateSelectedEdgeNotes(lang: keyof LocalizedText, event: Event): void {
+    const value = (event.target as HTMLTextAreaElement).value;
+    const draft = this.selectedEdgeDraft();
+    if (!draft) {
+      return;
+    }
+    const next = value.trim();
+    const notes = { ...(draft.notes ?? {}) } satisfies LocalizedText;
+    notes[lang] = next ? value : undefined;
+    if (!notes.de && !notes.fr) {
+      this.updateEdgeLocal(draft.id, { notes: undefined });
+    } else {
+      this.updateEdgeLocal(draft.id, { notes });
+    }
+    this.dirty.set(true);
+  }
+
   updateSelectedTripField(tripId: string, field: keyof EdgeTrip, value: string | number | undefined): void {
     const draft = this.selectedEdgeDraft();
     if (!draft) {
@@ -954,6 +998,7 @@ export class AdminComponent implements OnDestroy {
         validFrom: draft.validFrom,
         validTo: draft.validTo,
         durationMinutes: draft.durationMinutes,
+        notes: draft.notes,
         trips: draft.trips
       } as GraphEdge)
       .subscribe({
@@ -1326,6 +1371,7 @@ export class AdminComponent implements OnDestroy {
       transport: 'postkutsche',
       validFrom: this.year(),
       durationMinutes: 60,
+      notes: undefined,
       trips: []
     };
     this.draftEdge.set(created);

@@ -63,8 +63,7 @@ export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): Edg
       departs: trip.departs as TimeHHMM,
       arrives: trip.arrives as TimeHHMM,
       arrivalDayOffset: trip.arrivalDayOffset,
-      durationMinutes: computeDurationMinutes(trip.departs as TimeHHMM, trip.arrives as TimeHHMM, trip.arrivalDayOffset),
-      notes: trip.notes
+      durationMinutes: computeDurationMinutes(trip.departs as TimeHHMM, trip.arrives as TimeHHMM, trip.arrivalDayOffset)
     }));
 
   trips.sort((a, b) => timeToMinutes(a.departs) - timeToMinutes(b.departs));

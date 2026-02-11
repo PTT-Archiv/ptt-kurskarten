@@ -1,7 +1,7 @@
 import { Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import type { EdgeTimetableReport, GraphSnapshot, StationProfileReport } from '@ptt-kurskarten/shared';
+import type { EdgeTimetableReport, GraphSnapshot, LocalizedText, StationProfileReport } from '@ptt-kurskarten/shared';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 
 const DEFAULT_YEAR = 1852;
@@ -36,6 +36,15 @@ export class ReportsComponent {
     if (this.isBrowser) {
       this.fetchGraph(this.year());
     }
+  }
+
+  getLocalizedNote(note?: LocalizedText): string | null {
+    if (!note) {
+      return null;
+    }
+    const lang = this.transloco.getActiveLang();
+    const value = (note as Record<string, string | undefined>)[lang] ?? note.de ?? note.fr;
+    return value?.trim() ? value : null;
   }
 
   setTab(tab: Tab): void {
@@ -137,8 +146,7 @@ export class ReportsComponent {
       this.transloco.translate('label.departure'),
       this.transloco.translate('label.arrival'),
       this.transloco.translate('label.dayOffset'),
-      this.transloco.translate('reports.durationMinutes'),
-      this.transloco.translate('label.notes')
+      this.transloco.translate('reports.durationMinutes')
     ];
     const rows: string[][] = [
       header,
@@ -146,8 +154,7 @@ export class ReportsComponent {
         trip.departs,
         trip.arrives,
         (trip.arrivalDayOffset ?? 0).toString(),
-        trip.durationMinutes.toString(),
-        trip.notes ?? ''
+        trip.durationMinutes.toString()
       ])
     ];
 
