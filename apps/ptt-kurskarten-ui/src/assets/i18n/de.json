@@ -70,6 +70,8 @@
   "transport.segelboot": "Segelboot",
   "transport.courier": "Kurier",
   "transport.messagerie": "Messagerie",
+  "transport.mallepost": "Mallepost",
+  "transport.diligence": "Diligence",
   "label.durationMin": "Dauer (Min.)",
   "btn.addTrip": "Fahrt hinzufügen",
   "btn.duplicate": "Duplizieren",

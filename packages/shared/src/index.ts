@@ -1,6 +1,13 @@
 export type Year = number;
 
-export type TransportType = 'postkutsche' | 'dampfschiff' | 'segelboot' | 'courier' | 'messagerie';
+export type TransportType =
+  | 'postkutsche'
+  | 'dampfschiff'
+  | 'segelboot'
+  | 'courier'
+  | 'messagerie'
+  | 'mallepost'
+  | 'diligence';
 
 export type LocalizedText = {
   de?: string;

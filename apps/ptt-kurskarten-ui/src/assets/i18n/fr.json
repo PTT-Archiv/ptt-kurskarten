@@ -70,6 +70,8 @@
   "transport.segelboot": "Voilier",
   "transport.courier": "Courrier",
   "transport.messagerie": "Messagerie",
+  "transport.mallepost": "Mallepost",
+  "transport.diligence": "Diligence",
   "label.durationMin": "Durée (min)",
   "btn.addTrip": "Ajouter une course",
   "btn.duplicate": "Dupliquer",

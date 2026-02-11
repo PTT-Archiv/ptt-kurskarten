@@ -1,3 +1,75 @@
 [
-
+  {
+    "id": "node-1770808860448",
+    "name": "Turin",
+    "x": 92.03187250996012,
+    "y": 501.8087649402391,
+    "validFrom": 1852,
+    "iiifCenterX": 2186,
+    "iiifCenterY": 8526,
+    "foreign": true,
+    "validTo": null
+  },
+  {
+    "id": "node-1770808908336",
+    "name": "Chambery",
+    "x": 23.505976095617488,
+    "y": 466.7490039840638,
+    "validFrom": 1852,
+    "iiifCenterX": 1113,
+    "iiifCenterY": 7991,
+    "validTo": null
+  },
+  {
+    "id": "node-1770809018783",
+    "name": "Sallenches Chamouny",
+    "x": 82.47011952191231,
+    "y": 444.8366533864542,
+    "validFrom": 1852,
+    "iiifCenterX": 2036,
+    "iiifCenterY": 7657,
+    "validTo": null,
+    "foreign": true
+  },
+  {
+    "id": "node-1770809062251",
+    "name": "Genève",
+    "x": 21.115537848605534,
+    "y": 414.9561752988048,
+    "validFrom": 1852,
+    "iiifCenterX": 1075,
+    "iiifCenterY": 7201,
+    "validTo": null
+  },
+  {
+    "id": "node-1770809102948",
+    "name": "Lyon",
+    "x": -18.977491961414792,
+    "y": 417.30321294165117,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 402,
+    "iiifCenterY": 6908
+  },
+  {
+    "id": "node-1770809183587",
+    "name": "Paris",
+    "x": 2.6655948553054634,
+    "y": 144.55948553054662,
+    "validFrom": 1852,
+    "iiifCenterX": 786,
+    "iiifCenterY": 3077,
+    "foreign": true,
+    "validTo": null
+  },
+  {
+    "id": "node-1770809209472",
+    "name": "Coppet",
+    "x": 33.29260450160771,
+    "y": 383.4501607717042,
+    "validFrom": 1852,
+    "iiifCenterX": 1248,
+    "iiifCenterY": 6692,
+    "validTo": null
+  }
 ]

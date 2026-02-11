@@ -108,7 +108,9 @@ export class AdminComponent implements OnDestroy {
     'dampfschiff',
     'segelboot',
     'courier',
-    'messagerie'
+    'messagerie',
+    'mallepost',
+    'diligence'
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
