@@ -411,16 +411,6 @@
     "iiifCenterY": 6326
   },
   {
-    "id": "node-1770890592470",
-    "name": "Châtel-Saint-Denis",
-    "x": 176.04137963994663,
-    "y": 336.69810700148383,
-    "validFrom": 1852,
-    "iiifCenterX": 3502,
-    "iiifCenterY": 6008,
-    "validTo": null
-  },
-  {
     "id": "node-1770890609929",
     "name": "Montpreveyres",
     "x": 138.34412272326108,
@@ -1116,6 +1106,338 @@
     "iiifCenterX": 13367,
     "iiifCenterY": 4457,
     "foreign": true,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897442282",
+    "name": "Cossonay",
+    "x": 95.85822303460077,
+    "y": 309.17777238155395,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897530894",
+    "name": "Le Pont",
+    "x": 61.35458167330673,
+    "y": 304.996015936255,
+    "validFrom": 1852,
+    "iiifCenterX": 1644,
+    "iiifCenterY": 5237,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897591288",
+    "name": "Le Brassus",
+    "x": 41.03585657370514,
+    "y": 332.8844621513944,
+    "validFrom": 1852,
+    "iiifCenterX": 1293,
+    "iiifCenterY": 5585,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897613242",
+    "name": "Orbe",
+    "x": 103.89723322277405,
+    "y": 279.22533537734967,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897625083",
+    "name": "Yverdon",
+    "x": 120.17682942676151,
+    "y": 267.2082974661679,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 2627,
+    "iiifCenterY": 4948
+  },
+  {
+    "id": "node-1770897668923",
+    "name": "Moudon",
+    "x": 147.20335395584107,
+    "y": 294.71416741256456,
+    "validFrom": 1852,
+    "iiifCenterX": 3050,
+    "iiifCenterY": 5367,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897698221",
+    "name": "Châtel-Saint-Denis",
+    "x": 176.04137963994663,
+    "y": 336.69810700148383,
+    "validFrom": 1852,
+    "iiifCenterX": 3502,
+    "iiifCenterY": 6008,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897770477",
+    "name": "Bulle",
+    "x": 197.54353540477132,
+    "y": 313.7720135077093,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897790722",
+    "name": "Montbovon",
+    "x": 193.6254980079681,
+    "y": 343.6414342629482,
+    "validFrom": 1852,
+    "iiifCenterX": 3777,
+    "iiifCenterY": 6114,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897856386",
+    "name": "Saanen",
+    "x": 236.97987658146099,
+    "y": 343.35504193430825,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897860152",
+    "name": "Zweisimmen",
+    "x": 254.463581502539,
+    "y": 331.4109086042778,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897868165",
+    "name": "Frutigen",
+    "x": 295.0091873528538,
+    "y": 328.1093514393866,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897884517",
+    "name": "Hospitz",
+    "x": 472.9083665338646,
+    "y": 318.54183266932273,
+    "validFrom": 1852,
+    "iiifCenterX": 8151,
+    "iiifCenterY": 5731,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897945287",
+    "name": "Airolo",
+    "x": 472.16790497409715,
+    "y": 335.0457824125791,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897948683",
+    "name": "Bignasco",
+    "x": 462.9693019132096,
+    "y": 379.78146246012625,
+    "validFrom": 1852,
+    "iiifCenterX": 7996,
+    "iiifCenterY": 6665,
+    "validTo": null
+  },
+  {
+    "id": "node-1770897993209",
+    "name": "Locarno",
+    "x": 525.5549398877265,
+    "y": 437.6268282812067,
+    "validFrom": 1852,
+    "iiifCenterX": 8838,
+    "iiifCenterY": 7341,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898030151",
+    "name": "Magadino",
+    "x": 512.7339825125534,
+    "y": 450.2822802763659,
+    "validFrom": 1852,
+    "iiifCenterX": 8775,
+    "iiifCenterY": 7740,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898099050",
+    "name": "Osogna",
+    "x": 543.6557687754084,
+    "y": 399.184957584982,
+    "validFrom": 1852,
+    "iiifCenterX": 9260,
+    "iiifCenterY": 6961,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898134797",
+    "name": "Biasca",
+    "x": 551.0762859121432,
+    "y": 383.13638170748044,
+    "validFrom": 1852,
+    "iiifCenterX": 9376,
+    "iiifCenterY": 6716,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898144757",
+    "name": "Bodio",
+    "x": 521.8012043168274,
+    "y": 374.75358918419056,
+    "validFrom": 1852,
+    "iiifCenterX": 9059,
+    "iiifCenterY": 6418,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898184274",
+    "name": "Olivone",
+    "x": 527.672283111398,
+    "y": 331.2664421113636,
+    "validFrom": 1852,
+    "iiifCenterX": 9009,
+    "iiifCenterY": 5925,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898221637",
+    "name": "Cama",
+    "x": 583.0790820194543,
+    "y": 410.7841375173422,
+    "validFrom": 1852,
+    "iiifCenterX": 9877,
+    "iiifCenterY": 7138,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898228869",
+    "name": "Misocco",
+    "x": 580.67242848818,
+    "y": 360.9933089572764,
+    "validFrom": 1852,
+    "iiifCenterX": 9839,
+    "iiifCenterY": 6378,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898312719",
+    "name": "San Bernhardino",
+    "x": 578.8844621513945,
+    "y": 339.2589641434263,
+    "validFrom": 1852,
+    "iiifCenterX": 9925,
+    "iiifCenterY": 6281,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898350997",
+    "name": "Rheinwald",
+    "x": 582.0717131474104,
+    "y": 326.1115537848606,
+    "validFrom": 1852,
+    "iiifCenterX": 9947,
+    "iiifCenterY": 5928,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898396116",
+    "name": "Faido",
+    "x": 513.1474103585658,
+    "y": 348.8207171314741,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 8782,
+    "iiifCenterY": 6193
+  },
+  {
+    "id": "node-1770898495591",
+    "name": "Splügen",
+    "x": 603.187250996016,
+    "y": 325.31474103585657,
+    "validFrom": 1852,
+    "iiifCenterX": 10301,
+    "iiifCenterY": 5861,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898535921",
+    "name": "Andeer",
+    "x": 623.9886906368231,
+    "y": 322.252550128647,
+    "validFrom": 1852,
+    "iiifCenterX": 10518,
+    "iiifCenterY": 5787,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898587206",
+    "name": "Mühlen",
+    "x": 642.2310756972112,
+    "y": 338.06374501992036,
+    "validFrom": 1852,
+    "iiifCenterX": 11224,
+    "iiifCenterY": 5949,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898624681",
+    "name": "Silvaplana",
+    "x": 689.9974865133956,
+    "y": 354.9918263226693,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898631981",
+    "name": "Samedan",
+    "x": 697.8812168056729,
+    "y": 334.1892292645333,
+    "validFrom": 1852,
+    "iiifCenterX": 11675,
+    "iiifCenterY": 5970,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898668601",
+    "name": "Scanfs",
+    "x": 722.3107569721116,
+    "y": 304.996015936255,
+    "validFrom": 1852,
+    "iiifCenterX": 12198,
+    "iiifCenterY": 5631,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898704049",
+    "name": "Zernetz",
+    "x": 732.4160468335713,
+    "y": 280.5155821038793,
+    "validFrom": 1852,
+    "iiifCenterX": 12216,
+    "iiifCenterY": 5151,
+    "validTo": null
+  },
+  {
+    "id": "node-1770898723871",
+    "name": "Schuls",
+    "x": 772.6346869601261,
+    "y": 262.64158777734275,
+    "validFrom": 1852,
+    "validTo": null,
+    "iiifCenterX": 12878,
+    "iiifCenterY": 4960
+  },
+  {
+    "id": "node-1770898741949",
+    "name": "",
+    "x": 772.6346869601261,
+    "y": 262.64158777734275,
+    "validFrom": 1852,
     "validTo": null
   }
 ]
