@@ -54,6 +54,10 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         opacity: 0.45;
         transition: opacity 150ms ease-out;
       }
+      :host(.routing-active) .map {
+        opacity: 0.35;
+        transition: opacity 150ms ease-out;
+      }
       :host {
         display: block;
         width: 100%;
@@ -136,6 +140,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @HostBinding('class.pick-mode') get pickModeClass(): boolean {
     return this.pickMode !== null;
+  }
+
+  @HostBinding('class.routing-active') get routingActiveClass(): boolean {
+    return this.routingActive;
   }
 
   @ViewChild('graphCanvas') private canvasRef?: ElementRef<HTMLCanvasElement>;
@@ -419,29 +427,36 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       const radius = baseRadius + (isHighlighted || isHovered ? 2 * sizeScale : 0);
       const showShadow = this.pickMode !== null;
       const fillColor = node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
+      const nodeAlpha = isDimmed ? 0.2 : 1;
       if (showShadow) {
         ctx.save();
         ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
         ctx.shadowBlur = 0;
         ctx.shadowOffsetX = 5 * sizeScale;
         ctx.shadowOffsetY = 5 * sizeScale;
+        ctx.globalAlpha = nodeAlpha;
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = fillColor;
         ctx.fill();
         ctx.restore();
       } else {
+        ctx.save();
+        ctx.globalAlpha = nodeAlpha;
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = fillColor;
         ctx.fill();
+        ctx.restore();
       }
-      // Keep nodes at full opacity even when edges are dimmed.
+      ctx.save();
+      ctx.globalAlpha = nodeAlpha;
       ctx.beginPath();
       ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
       ctx.strokeStyle = '#141414';
       ctx.lineWidth = 2;
       ctx.stroke();
+      ctx.restore();
 
       if (isSelected || isHovered) {
         ctx.beginPath();
@@ -584,8 +599,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const px = -dy / len;
     const py = dx / len;
     const pickDim = this.pickMode !== null;
-    const baseStroke = pickDim ? 'rgba(20, 20, 20, 0.18)' : 'rgba(20, 20, 20, 0.35)';
-    const dimStroke = pickDim ? 'rgba(20, 20, 20, 0.08)' : 'rgba(20, 20, 20, 0.12)';
+    const baseStroke = pickDim ? 'rgba(20, 20, 20, 0.18)' : 'rgba(20, 20, 20, 0.32)';
+    const dimStroke = pickDim ? 'rgba(20, 20, 20, 0.05)' : 'rgba(20, 20, 20, 0.08)';
     ctx.strokeStyle = isHighlighted ? '#141414' : isDimmed ? dimStroke : baseStroke;
     ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
     const x1 = fromPos.x + px * laneOffsetPx;
@@ -728,13 +743,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.restore();
     }
 
-    const waitLabel = this.transloco.translate('label.wait');
     const overnightLabel = this.transloco.translate('label.overnight');
 
     const labels: Array<{
       text: string;
       anchor: { x: number; y: number };
       priority: number;
+      kind: 'leg' | 'wait';
+      overnightDelta?: number;
     }> = [];
 
     const legLabels = connection.legs
@@ -754,9 +770,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const suffix = dayDelta > 0 ? ` (+${dayDelta})` : '';
         const transportLabel = this.transportLabel(leg.transport);
         const text = `${transportLabel} ${leg.departs}→${leg.arrives}${suffix}`;
-        return { text, anchor, priority: 3 };
+        return { text, anchor, priority: 3, kind: 'leg' };
       })
-      .filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } => Boolean(label));
+      .filter(
+        (label): label is { text: string; anchor: { x: number; y: number }; priority: number; kind: 'leg' } =>
+          Boolean(label)
+      );
 
     const waitLabels = waitSegments.map((segment) => {
       const node = this.screenNodes.get(segment.atNodeId);
@@ -764,24 +783,18 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         return null;
       }
       const duration = formatDuration(segment.durationMinutes);
-      let text = `${waitLabel} ${duration}`;
-      if (segment.overnight) {
-        const delta = Math.max(0, segment.endDayOffset - segment.startDayOffset);
-        text += delta > 0 ? ` (${overnightLabel} +${delta})` : ` (${overnightLabel})`;
-      }
+      const delta = segment.overnight ? Math.max(0, segment.endDayOffset - segment.startDayOffset) : 0;
+      const text = `${duration}`;
       return {
         text,
         anchor: { x: node.x, y: node.y },
-        priority: segment.overnight ? 1 : 2
+        priority: segment.overnight ? 1 : 2,
+        kind: 'wait',
+        overnightDelta: delta > 0 ? delta : undefined
       };
     });
 
-    labels.push(
-      ...waitLabels.filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } =>
-        Boolean(label)
-      ),
-      ...legLabels
-    );
+    labels.push(...(waitLabels.filter(Boolean) as Array<typeof labels[number]>), ...legLabels);
 
     labels.sort((a, b) => a.priority - b.priority);
 
@@ -795,12 +808,19 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (rendered >= maxLabels) {
         break;
       }
-      const size = measureLabel(ctx, label.text);
+      const size =
+        label.kind === 'wait'
+          ? measureWaitLabel(ctx, label.text, label.overnightDelta)
+          : measureLabel(ctx, label.text);
       const position = placeLabel(placed, label.anchor.x, label.anchor.y, size.w, size.h);
       if (!position) {
         continue;
       }
-      drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
+      if (label.kind === 'wait') {
+        drawWaitLabel(ctx, label.text, position.x, position.y, size.w, size.h, label.overnightDelta);
+      } else {
+        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
+      }
       placed.push({ x: position.x, y: position.y, w: size.w, h: size.h });
       rendered += 1;
     }
@@ -829,6 +849,20 @@ function measureLabel(ctx: CanvasRenderingContext2D, text: string): { w: number;
   };
 }
 
+function measureWaitLabel(ctx: CanvasRenderingContext2D, text: string, overnightDelta?: number): { w: number; h: number } {
+  const metrics = ctx.measureText(text);
+  const paddingX = 8;
+  const paddingY = 6;
+  const textHeight = 12;
+  const iconSize = 12;
+  const gap = 6;
+  const overnightWidth = overnightDelta !== undefined ? iconSize + gap + ctx.measureText(`+${overnightDelta}`).width : 0;
+  return {
+    w: Math.ceil(metrics.width) + paddingX * 2 + iconSize + gap + overnightWidth,
+    h: textHeight + paddingY * 2
+  };
+}
+
 function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number): void {
   ctx.save();
   ctx.fillStyle = '#ffffff';
@@ -839,6 +873,93 @@ function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: nu
   ctx.stroke();
   ctx.fillStyle = '#141414';
   ctx.fillText(text, x + 8, y + h / 2);
+  ctx.restore();
+}
+
+const WAIT_ICON_PATH_DATA =
+  'M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z';
+let waitIconPath: Path2D | null = null;
+
+const OVERNIGHT_ICON_PATH_DATA =
+  'M303.3 112.7C196.2 121.2 112 210.8 112 320C112 434.9 205.1 528 320 528C353.3 528 384.7 520.2 412.6 506.3C309.2 482.9 232 390.5 232 280C232 214.2 259.4 154.9 303.3 112.7zM64 320C64 178.6 178.6 64 320 64C339.4 64 358.4 66.2 376.7 70.3C386.6 72.5 394 80.8 395.2 90.8C396.4 100.8 391.2 110.6 382.1 115.2C321.5 145.4 280 207.9 280 280C280 381.6 362.4 464 464 464C469 464 473.9 463.8 478.8 463.4C488.9 462.6 498.4 468.2 502.6 477.5C506.8 486.8 504.6 497.6 497.3 504.6C451.3 548.8 388.8 576 320 576C178.6 576 64 461.4 64 320z';
+let overnightIconPath: Path2D | null = null;
+
+function drawWaitLabel(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  overnightDelta?: number
+): void {
+  const iconSize = 12;
+  const gap = 6;
+  ctx.save();
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#141414';
+  ctx.lineWidth = 1.5;
+  drawRoundedRect(ctx, x, y, w, h, 6);
+  ctx.fill();
+  ctx.stroke();
+
+  const iconX = x + 8;
+  const iconY = y + h / 2 - iconSize / 2;
+  if (typeof Path2D !== 'undefined') {
+    if (!waitIconPath) {
+      waitIconPath = new Path2D(WAIT_ICON_PATH_DATA);
+    }
+    const scale = iconSize / 640;
+    ctx.save();
+    ctx.translate(iconX, iconY);
+    ctx.scale(scale, scale);
+    ctx.fillStyle = '#141414';
+    ctx.fill(waitIconPath);
+    ctx.restore();
+  } else {
+    // SSR-safe fallback: draw a simple clock
+    ctx.save();
+    ctx.strokeStyle = '#141414';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.arc(iconX + iconSize / 2, iconY + iconSize / 2, iconSize / 2, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(iconX + iconSize / 2, iconY + iconSize / 2);
+    ctx.lineTo(iconX + iconSize / 2, iconY + iconSize * 0.25);
+    ctx.moveTo(iconX + iconSize / 2, iconY + iconSize / 2);
+    ctx.lineTo(iconX + iconSize * 0.75, iconY + iconSize / 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  ctx.fillStyle = '#141414';
+  let textX = x + 8 + iconSize + gap;
+  ctx.fillText(text, textX, y + h / 2);
+
+  if (overnightDelta !== undefined) {
+    const suffix = `+${overnightDelta}`;
+    const suffixWidth = ctx.measureText(suffix).width;
+    const overnightX = textX + ctx.measureText(text).width + gap;
+    if (typeof Path2D !== 'undefined') {
+      if (!overnightIconPath) {
+        overnightIconPath = new Path2D(OVERNIGHT_ICON_PATH_DATA);
+      }
+      const scale = iconSize / 640;
+      ctx.save();
+      ctx.translate(overnightX, iconY);
+      ctx.scale(scale, scale);
+      ctx.fillStyle = '#141414';
+      ctx.fill(overnightIconPath);
+      ctx.restore();
+      ctx.fillText(suffix, overnightX + iconSize + gap, y + h / 2);
+    } else {
+      // Fallback: just draw "+N"
+      ctx.fillText(suffix, overnightX + gap, y + h / 2);
+    }
+    // avoid unused variable linting
+    void suffixWidth;
+  }
   ctx.restore();
 }
 
