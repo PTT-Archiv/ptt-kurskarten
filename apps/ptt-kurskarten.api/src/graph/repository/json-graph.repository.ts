@@ -5,7 +5,7 @@ import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } 
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
-type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'durationMinutes'> & { validTo: Year | null };
+type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips'> & { validTo: Year | null; durationMinutes?: number | null };
 type StoredTrip = EdgeTrip & { edgeId: string };
 
 type GraphData = {
@@ -247,9 +247,13 @@ export class JsonGraphRepository implements GraphRepository {
 
   private assembleEdge(edge: StoredEdge, trips: StoredTrip[]): GraphEdge {
     const edgeTrips = trips.filter((trip) => trip.edgeId === edge.id).map(this.stripTripEdgeId);
+    const durationMinutes =
+      edge.durationMinutes ??
+      this.deriveDurationMinutes(edgeTrips);
     return {
       ...edge,
       validTo: edge.validTo ?? undefined,
+      durationMinutes,
       trips: edgeTrips
     };
   }
@@ -267,6 +271,38 @@ export class JsonGraphRepository implements GraphRepository {
     return rest;
   }
 
+  private deriveDurationMinutes(trips: EdgeTrip[]): number | undefined {
+    const durations: number[] = [];
+    for (const trip of trips) {
+      if (!trip.departs || !trip.arrives) {
+        continue;
+      }
+      const depart = this.parseTime(trip.departs);
+      const arriveRaw = this.parseTime(trip.arrives);
+      const offset = trip.arrivalDayOffset ?? 0;
+      let arrive = arriveRaw + offset * 1440;
+      if (offset === 0 && arriveRaw < depart) {
+        arrive += 1440;
+      }
+      const duration = arrive - depart;
+      if (duration >= 0) {
+        durations.push(duration);
+      }
+    }
+    if (!durations.length) {
+      return undefined;
+    }
+    return Math.min(...durations);
+  }
+
+  private parseTime(value: string): number {
+    const [hh, mm] = value.split(':').map((part) => Number(part));
+    if (!Number.isFinite(hh) || !Number.isFinite(mm)) {
+      return 0;
+    }
+    return hh * 60 + mm;
+  }
+
   private toStoredNode(node: GraphNode): StoredNode {
     return {
       ...node,
@@ -282,10 +318,11 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private toStoredEdge(edge: GraphEdge): StoredEdge {
-    const { trips: _trips, durationMinutes: _durationMinutes, ...rest } = edge;
+    const { trips: _trips, ...rest } = edge;
     return {
       ...rest,
-      validTo: edge.validTo ?? null
+      validTo: edge.validTo ?? null,
+      durationMinutes: edge.durationMinutes ?? null
     };
   }
 

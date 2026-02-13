@@ -346,9 +346,15 @@
 
 .trip-row {
   display: grid;
-  grid-template-columns: minmax(0, 70px) minmax(0, 70px) minmax(0, 56px) auto;
+  grid-template-columns: minmax(0, 70px) minmax(0, 70px) minmax(0, 80px) auto;
   gap: 6px;
   align-items: center;
+}
+
+.trip-readonly {
+  font-size: 12px;
+  color: #3a3a3a;
+  padding: 4px 2px;
 }
 
 .trip-row.header {

@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "edge-1770972180078",
+    "from": "node-1770808860448",
+    "to": "node-1770808908336",
+    "transport": "mallepost",
+    "validFrom": 1852,
+    "validTo": null
+  }
+]

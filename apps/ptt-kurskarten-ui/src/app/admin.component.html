@@ -395,7 +395,7 @@
               <div class="trip-row header">
                 <span>Dep</span>
                 <span>Arr</span>
-                <span>+Tag</span>
+                <span>{{ 'label.durationMin' | transloco }}</span>
                 <span></span>
               </div>
               @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
@@ -418,17 +418,7 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <select
-                    [value]="trip.arrivalDayOffset ?? 0"
-                    (change)="updateSelectedTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
-                    (keydown.enter)="handleTripEnter(true, idx, 'arrivalDayOffset')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="arrivalDayOffset"
-                  >
-                    <option [value]="0">+0</option>
-                    <option [value]="1">+1</option>
-                    <option [value]="2">+2</option>
-                  </select>
+                  <span class="trip-readonly">{{ edgeDraft.durationMinutes ?? '—' }}</span>
                   <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">×</button>
                 </div>
               }
@@ -447,7 +437,7 @@
               <div class="trip-row header">
                 <span>Dep</span>
                 <span>Arr</span>
-                <span>+Tag</span>
+                <span>{{ 'label.durationMin' | transloco }}</span>
                 <span></span>
               </div>
               @for (trip of draft.trips; track trip.id; let idx = $index) {
@@ -470,17 +460,7 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <select
-                    [value]="trip.arrivalDayOffset ?? 0"
-                    (change)="updateTripField(trip.id, 'arrivalDayOffset', $any($event.target).valueAsNumber)"
-                    (keydown.enter)="handleTripEnter(false, idx, 'arrivalDayOffset')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="arrivalDayOffset"
-                  >
-                    <option [value]="0">+0</option>
-                    <option [value]="1">+1</option>
-                    <option [value]="2">+2</option>
-                  </select>
+                  <span class="trip-readonly">{{ draft.durationMinutes ?? '—' }}</span>
                   <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">×</button>
                 </div>
               }
