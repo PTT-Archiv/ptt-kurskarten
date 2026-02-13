@@ -1428,8 +1428,8 @@
     "y": 262.64158777734275,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 12910,
-    "iiifCenterY": 4971
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112
   },
   {
     "id": "node-1770898741949",
@@ -2060,22 +2060,14 @@
     "iiifCenterY": 958
   },
   {
-    "id": "node-1770905640680",
+    "id": "node-1770905648479",
     "name": "Zürich",
-    "x": 458.7180206704393,
-    "y": 104.87449868612964,
+    "x": 458.16733067729086,
+    "y": 105.79282868525895,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 7929,
-    "iiifCenterY": 2472
-  },
-  {
-    "id": "node-1770905648479",
-    "name": "",
-    "x": 458.7180206704393,
-    "y": 104.87449868612964,
-    "validFrom": 1852,
-    "validTo": null
+    "iiifCenterX": 7977,
+    "iiifCenterY": 2313
   },
   {
     "id": "node-1770905682253",
@@ -2232,18 +2224,8 @@
     "y": 129.48291311480432,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 5567,
-    "iiifCenterY": 2505
-  },
-  {
-    "id": "node-1770906021106",
-    "name": "Dürrmühle",
-    "x": 312.15876811408225,
-    "y": 134.08937919497544,
-    "validFrom": 1852,
-    "validTo": null,
-    "iiifCenterX": 5331,
-    "iiifCenterY": 2717
+    "iiifCenterX": 5449,
+    "iiifCenterY": 2765
   },
   {
     "id": "node-1770906061553",
@@ -2251,8 +2233,8 @@
     "x": 312.15876811408225,
     "y": 134.08937919497544,
     "validFrom": 1852,
-    "iiifCenterX": 5360,
-    "iiifCenterY": 2754,
+    "iiifCenterX": 5341,
+    "iiifCenterY": 2745,
     "validTo": null
   },
   {
@@ -3399,14 +3381,6 @@
     "validFrom": 1852,
     "iiifCenterX": 9301,
     "iiifCenterY": 2928,
-    "validTo": null
-  },
-  {
-    "id": "node-1770985437852",
-    "name": "Zürich",
-    "x": 458.7180206704393,
-    "y": 104.87449868612964,
-    "validFrom": 1852,
     "validTo": null
   },
   {

@@ -6776,24 +6776,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905083669-node-1770905640680",
-    "from": "node-1770905083669",
-    "to": "node-1770905640680",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905640680-node-1770905083669",
-    "from": "node-1770905640680",
-    "to": "node-1770905083669",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905083669-node-1770905648479",
     "from": "node-1770905083669",
     "to": "node-1770905648479",
@@ -7604,24 +7586,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905441164-node-1770905640680",
-    "from": "node-1770905441164",
-    "to": "node-1770905640680",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905640680-node-1770905441164",
-    "from": "node-1770905640680",
-    "to": "node-1770905441164",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905441164-node-1770905648479",
     "from": "node-1770905441164",
     "to": "node-1770905648479",
@@ -7796,60 +7760,6 @@
     "id": "draft-edge-auto-node-1770905559674-node-1770905568056",
     "from": "node-1770905559674",
     "to": "node-1770905568056",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905640680-node-1770905648479",
-    "from": "node-1770905640680",
-    "to": "node-1770905648479",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905648479-node-1770905640680",
-    "from": "node-1770905648479",
-    "to": "node-1770905640680",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905640680-node-1770905238902",
-    "from": "node-1770905640680",
-    "to": "node-1770905238902",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905238902-node-1770905640680",
-    "from": "node-1770905238902",
-    "to": "node-1770905640680",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905640680-node-1770904356934",
-    "from": "node-1770905640680",
-    "to": "node-1770904356934",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770904356934-node-1770905640680",
-    "from": "node-1770904356934",
-    "to": "node-1770905640680",
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null,
@@ -8522,24 +8432,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905944274-node-1770906021106",
-    "from": "node-1770905944274",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770905944274",
-    "from": "node-1770906021106",
-    "to": "node-1770905944274",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905944274-node-1770906061553",
     "from": "node-1770905944274",
     "to": "node-1770906061553",
@@ -8587,24 +8479,6 @@
   {
     "id": "draft-edge-auto-node-1770905979601-node-1770905962102",
     "from": "node-1770905979601",
-    "to": "node-1770905962102",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905962102-node-1770906021106",
-    "from": "node-1770905962102",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770905962102",
-    "from": "node-1770906021106",
     "to": "node-1770905962102",
     "transport": "postkutsche",
     "validFrom": 1852,
@@ -8666,24 +8540,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905979601-node-1770906021106",
-    "from": "node-1770905979601",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770905979601",
-    "from": "node-1770906021106",
-    "to": "node-1770905979601",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905979601-node-1770906061553",
     "from": "node-1770905979601",
     "to": "node-1770906061553",
@@ -8714,42 +8570,6 @@
     "id": "draft-edge-auto-node-1770905940014-node-1770905979601",
     "from": "node-1770905940014",
     "to": "node-1770905979601",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770906061553",
-    "from": "node-1770906021106",
-    "to": "node-1770906061553",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906061553-node-1770906021106",
-    "from": "node-1770906061553",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770912564452",
-    "from": "node-1770906021106",
-    "to": "node-1770912564452",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770912564452-node-1770906021106",
-    "from": "node-1770912564452",
-    "to": "node-1770906021106",
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null,
@@ -9037,24 +8857,6 @@
   {
     "id": "draft-edge-auto-node-1770912080230-node-1770906161164",
     "from": "node-1770912080230",
-    "to": "node-1770906161164",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906161164-node-1770906021106",
-    "from": "node-1770906161164",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770906161164",
-    "from": "node-1770906021106",
     "to": "node-1770906161164",
     "transport": "postkutsche",
     "validFrom": 1852,
@@ -12061,24 +11863,6 @@
   {
     "id": "draft-edge-auto-node-1770905890445-node-1770912569156",
     "from": "node-1770905890445",
-    "to": "node-1770912569156",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770912569156-node-1770906021106",
-    "from": "node-1770912569156",
-    "to": "node-1770906021106",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906021106-node-1770912569156",
-    "from": "node-1770906021106",
     "to": "node-1770912569156",
     "transport": "postkutsche",
     "validFrom": 1852,

@@ -7902,27 +7902,6 @@
     "edgeId": "draft-edge-auto-node-1770913221426-node-1770905083669"
   },
   {
-    "id": "trip-auto-draft-edge-auto-node-1770905083669-node-1770905640680-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905083669-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770905083669-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770905083669"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770905083669-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770905083669"
-  },
-  {
     "id": "trip-auto-draft-edge-auto-node-1770905083669-node-1770905648479-1",
     "departs": "08:00",
     "arrives": "09:00",
@@ -8875,20 +8854,6 @@
     "edgeId": "draft-edge-auto-node-1770905554809-node-1770905441164"
   },
   {
-    "id": "trip-auto-draft-edge-auto-node-1770905441164-node-1770905640680-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905441164-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770905441164-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770905441164"
-  },
-  {
     "id": "trip-auto-draft-edge-auto-node-1770905441164-node-1770905648479-1",
     "departs": "08:00",
     "arrives": "09:00",
@@ -9104,62 +9069,6 @@
     "arrives": "09:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-auto-node-1770905559674-node-1770905568056"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770905648479-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770905648479"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905648479-node-1770905640680-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905648479-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905648479-node-1770905640680-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905648479-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770905238902-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770905238902"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905238902-node-1770905640680-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905238902-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905238902-node-1770905640680-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905238902-node-1770905640680"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905640680-node-1770904356934-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905640680-node-1770904356934"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770904356934-node-1770905640680-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770904356934-node-1770905640680"
   },
   {
     "id": "trip-auto-draft-edge-auto-node-1770905648479-node-1770905238902-1",
@@ -9925,27 +9834,6 @@
     "edgeId": "draft-edge-auto-node-1770905979601-node-1770905944274"
   },
   {
-    "id": "trip-auto-draft-edge-auto-node-1770905944274-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905944274-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905944274-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905944274"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905944274-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905944274"
-  },
-  {
     "id": "trip-auto-draft-edge-auto-node-1770905944274-node-1770906061553-1",
     "departs": "08:00",
     "arrives": "09:00",
@@ -10000,34 +9888,6 @@
     "arrives": "09:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-auto-node-1770905979601-node-1770905962102"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905962102-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905962102-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905962102-node-1770906021106-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905962102-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905962102-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905962102"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905962102-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905962102"
   },
   {
     "id": "trip-auto-draft-edge-auto-node-1770905962102-node-1770906061553-1",
@@ -10100,34 +9960,6 @@
     "edgeId": "draft-edge-auto-node-1770905979601-node-1770905973449"
   },
   {
-    "id": "trip-auto-draft-edge-auto-node-1770905979601-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905979601-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770905979601-node-1770906021106-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770905979601-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905979601-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905979601"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770905979601-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770905979601"
-  },
-  {
     "id": "trip-auto-draft-edge-auto-node-1770905979601-node-1770906061553-1",
     "departs": "08:00",
     "arrives": "09:00",
@@ -10161,48 +9993,6 @@
     "arrives": "09:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-auto-node-1770905940014-node-1770905979601"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770906061553-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770906061553"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906061553-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906061553-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906061553-node-1770906021106-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906061553-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770912564452-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770912564452"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770912564452-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770912564452"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770912564452-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770912564452-node-1770906021106"
   },
   {
     "id": "trip-auto-draft-edge-auto-node-1770906061553-node-1770912564452-1",
@@ -10553,20 +10343,6 @@
     "arrives": "09:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-auto-node-1770912080230-node-1770906161164"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906161164-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906161164-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770906161164-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770906161164"
   },
   {
     "id": "trip-auto-draft-edge-auto-node-1770906194376-node-1770906982068-1",
@@ -14165,27 +13941,6 @@
     "arrives": "13:00",
     "arrivalDayOffset": 0,
     "edgeId": "draft-edge-auto-node-1770905890445-node-1770912569156"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770912569156-node-1770906021106-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770912569156-node-1770906021106"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770912569156-1",
-    "departs": "08:00",
-    "arrives": "09:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770912569156"
-  },
-  {
-    "id": "trip-auto-draft-edge-auto-node-1770906021106-node-1770912569156-2",
-    "departs": "12:00",
-    "arrives": "13:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "draft-edge-auto-node-1770906021106-node-1770912569156"
   },
   {
     "id": "trip-auto-draft-edge-auto-node-1770912572454-node-1770912586038-1",

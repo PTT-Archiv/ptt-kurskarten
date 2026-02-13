@@ -478,23 +478,25 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
 
-    const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
-    nodes.filter((node) => labeledNames.has(node.name)).forEach((node) => {
-      const screen = this.screenNodes.get(node.id);
-      if (!screen) {
-        return;
-      }
-      ctx.save();
-      ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'left';
-      const text = node.name;
-      const size = measureLabel(ctx, text);
-      const x = screen.x + 10;
-      const y = screen.y - size.h - 8;
-      drawLabel(ctx, text, x, y, size.w, size.h);
-      ctx.restore();
-    });
+    if (!(this.showConnectionDetailsOnMap && this.selectedConnection)) {
+      const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
+      nodes.filter((node) => labeledNames.has(node.name)).forEach((node) => {
+        const screen = this.screenNodes.get(node.id);
+        if (!screen) {
+          return;
+        }
+        ctx.save();
+        ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        const text = node.name;
+        const size = measureLabel(ctx, text);
+        const x = screen.x + 10;
+        const y = screen.y - size.h - 8;
+        drawLabel(ctx, text, x, y, size.w, size.h);
+        ctx.restore();
+      });
+    }
 
     if (this.showConnectionDetailsOnMap && this.selectedConnection) {
       this.drawConnectionDetails(ctx, this.selectedConnection);
@@ -749,7 +751,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       text: string;
       anchor: { x: number; y: number };
       priority: number;
-      kind: 'leg' | 'wait';
+      kind: 'leg' | 'wait' | 'endpoint';
       overnightDelta?: number;
     }> = [];
 
@@ -796,6 +798,27 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     labels.push(...(waitLabels.filter(Boolean) as Array<typeof labels[number]>), ...legLabels);
 
+    const startNode = this.screenNodes.get(connection.from);
+    if (startNode && connection.departs) {
+      labels.push({
+        text: `${this.getNodeLabel(connection.from)} ${connection.departs}`,
+        anchor: { x: startNode.x, y: startNode.y },
+        priority: 0,
+        kind: 'endpoint'
+      });
+    }
+    const endNode = this.screenNodes.get(connection.to);
+    if (endNode && connection.arrives) {
+      const arriveSuffix =
+        connection.arriveDayOffset && connection.arriveDayOffset > 0 ? ` (+${connection.arriveDayOffset})` : '';
+      labels.push({
+        text: `${this.getNodeLabel(connection.to)} ${connection.arrives}${arriveSuffix}`,
+        anchor: { x: endNode.x, y: endNode.y },
+        priority: 0,
+        kind: 'endpoint'
+      });
+    }
+
     labels.sort((a, b) => a.priority - b.priority);
 
     ctx.save();
@@ -818,6 +841,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
       if (label.kind === 'wait') {
         drawWaitLabel(ctx, label.text, position.x, position.y, size.w, size.h, label.overnightDelta);
+      } else if (label.kind === 'endpoint') {
+        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h, '#ffe600');
       } else {
         drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
       }
@@ -835,6 +860,11 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
     const scale = minDim / 800;
     return Math.max(0.7, Math.min(1.4, scale));
+  }
+
+  private getNodeLabel(id: string): string {
+    const nodes = this.graph?.nodes ?? [];
+    return nodes.find((node) => node.id === id)?.name ?? id;
   }
 }
 
@@ -863,9 +893,17 @@ function measureWaitLabel(ctx: CanvasRenderingContext2D, text: string, overnight
   };
 }
 
-function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number): void {
+function drawLabel(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  fillColor = '#ffffff'
+): void {
   ctx.save();
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = fillColor;
   ctx.strokeStyle = '#141414';
   ctx.lineWidth = 1.5;
   drawRoundedRect(ctx, x, y, w, h, 6);
@@ -1028,7 +1066,7 @@ function formatDuration(totalMinutes: number): string {
   if (hours <= 0) {
     return `${minutes}m`;
   }
-  return `${hours}h ${minutes}m`;
+  return `${hours}h ${minutes > 0 ? ` ${minutes}m` : ''}`;
 }
 
 function distanceToSegment(
