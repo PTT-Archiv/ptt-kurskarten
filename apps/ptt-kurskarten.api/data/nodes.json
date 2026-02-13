@@ -2,11 +2,11 @@
   {
     "id": "node-1770808860448",
     "name": "Turin",
-    "x": 92.03187250996012,
-    "y": 501.8087649402391,
+    "x": 201.59362549800795,
+    "y": 540.0557768924303,
     "validFrom": 1852,
-    "iiifCenterX": 4862,
-    "iiifCenterY": 4112,
+    "iiifCenterX": 2236,
+    "iiifCenterY": 8522,
     "foreign": true,
     "validTo": null
   },
@@ -38,8 +38,8 @@
     "x": 21.115537848605534,
     "y": 414.9561752988048,
     "validFrom": 1852,
-    "iiifCenterX": 1075,
-    "iiifCenterY": 7201,
+    "iiifCenterX": 1092,
+    "iiifCenterY": 7195,
     "validTo": null
   },
   {
@@ -76,11 +76,11 @@
   {
     "id": "node-1770809870824",
     "name": "Bern",
-    "x": 269.3227091633466,
-    "y": 221.33067729083666,
+    "x": 267.72908366533864,
+    "y": 218.9402390438247,
     "validFrom": 1852,
-    "iiifCenterX": 4850,
-    "iiifCenterY": 4101,
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112,
     "validTo": null
   },
   {
@@ -89,8 +89,8 @@
     "x": 544.5991509454054,
     "y": 424.89066442315243,
     "validFrom": 1852,
-    "iiifCenterX": 9274,
-    "iiifCenterY": 7353,
+    "iiifCenterX": 9451,
+    "iiifCenterY": 7393,
     "validTo": null
   },
   {
@@ -99,8 +99,8 @@
     "x": 630.2788844621515,
     "y": 243.24302788844622,
     "validFrom": 1852,
-    "iiifCenterX": 10951,
-    "iiifCenterY": 4621,
+    "iiifCenterX": 10934,
+    "iiifCenterY": 4576,
     "validTo": null
   },
   {
@@ -119,8 +119,8 @@
     "x": 46.227019629833876,
     "y": 370.58227860587357,
     "validFrom": 1852,
-    "iiifCenterX": 1468,
-    "iiifCenterY": 6525,
+    "iiifCenterX": 1396,
+    "iiifCenterY": 6417,
     "validTo": null
   },
   {
@@ -129,7 +129,9 @@
     "x": 120.15438711655293,
     "y": 332.91631737615245,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2542,
+    "iiifCenterY": 5878
   },
   {
     "id": "node-1770818436737",
@@ -138,8 +140,8 @@
     "y": 345.8993597064011,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2269,
-    "iiifCenterY": 6148
+    "iiifCenterX": 2145,
+    "iiifCenterY": 5949
   },
   {
     "id": "node-1770818441812",
@@ -156,8 +158,8 @@
     "y": 326.2896336420434,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 3078,
-    "iiifCenterY": 5962
+    "iiifCenterX": 3234,
+    "iiifCenterY": 5586
   },
   {
     "id": "node-1770818451614",
@@ -166,8 +168,8 @@
     "y": 201.49603921814935,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4862,
-    "iiifCenterY": 4112
+    "iiifCenterX": 4986,
+    "iiifCenterY": 3747
   },
   {
     "id": "node-1770818476302",
@@ -177,17 +179,17 @@
     "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 6571,
-    "iiifCenterY": 4856
+    "iiifCenterY": 4907
   },
   {
     "id": "node-1770818481603",
     "name": "Aarberg",
-    "x": 237.3634517763869,
-    "y": 194.0361605069337,
+    "x": 233.49593495934957,
+    "y": 191.88617886178864,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4862,
-    "iiifCenterY": 4112
+    "iiifCenterX": 4338,
+    "iiifCenterY": 3731
   },
   {
     "id": "node-1770818483826",
@@ -195,7 +197,9 @@
     "x": 206.01302610130415,
     "y": 204.9880259471533,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3918,
+    "iiifCenterY": 3859
   },
   {
     "id": "node-1770818487149",
@@ -203,7 +207,9 @@
     "x": 298.87433752283346,
     "y": 218.37087641441144,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5369,
+    "iiifCenterY": 4048
   },
   {
     "id": "node-1770818509015",
@@ -212,8 +218,8 @@
     "y": 239.06785766189853,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 5248,
-    "iiifCenterY": 4519
+    "iiifCenterX": 5133,
+    "iiifCenterY": 4545
   },
   {
     "id": "node-1770823561872",
@@ -221,7 +227,9 @@
     "x": 202.18837100988685,
     "y": 450.5509644189274,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3791,
+    "iiifCenterY": 7700
   },
   {
     "id": "node-1770823570686",
@@ -229,8 +237,8 @@
     "x": 246.4059271597555,
     "y": 421.2355426888281,
     "validFrom": 1852,
-    "iiifCenterX": 4604,
-    "iiifCenterY": 7297,
+    "iiifCenterX": 4596,
+    "iiifCenterY": 7158,
     "validTo": null
   },
   {
@@ -239,8 +247,8 @@
     "x": 227.1315464486256,
     "y": 441.9127301588046,
     "validFrom": 1852,
-    "iiifCenterX": 4302,
-    "iiifCenterY": 7613,
+    "iiifCenterX": 4200,
+    "iiifCenterY": 7415,
     "validTo": null
   },
   {
@@ -249,8 +257,8 @@
     "x": 276.5036008958991,
     "y": 405.405106157098,
     "validFrom": 1852,
-    "iiifCenterX": 5075,
-    "iiifCenterY": 7056,
+    "iiifCenterX": 5085,
+    "iiifCenterY": 6936,
     "validTo": null
   },
   {
@@ -279,7 +287,9 @@
     "x": 27.936838334828053,
     "y": 351.2398810267862,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 1179,
+    "iiifCenterY": 6128
   },
   {
     "id": "node-1770890186709",
@@ -298,8 +308,8 @@
     "x": 67.44663525827491,
     "y": 359.58362391672375,
     "validFrom": 1852,
-    "iiifCenterX": 1801,
-    "iiifCenterY": 6357,
+    "iiifCenterX": 1663,
+    "iiifCenterY": 6107,
     "validTo": null
   },
   {
@@ -310,7 +320,7 @@
     "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 1848,
-    "iiifCenterY": 6062
+    "iiifCenterY": 5815
   },
   {
     "id": "node-1770890387454",
@@ -372,8 +382,8 @@
     "x": 185.20029433230366,
     "y": 425.72834963019073,
     "validFrom": 1852,
-    "iiifCenterX": 3645,
-    "iiifCenterY": 7366,
+    "iiifCenterX": 3583,
+    "iiifCenterY": 7197,
     "validTo": null
   },
   {
@@ -382,7 +392,9 @@
     "x": 179.13082289861154,
     "y": 392.60385948018086,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3490,
+    "iiifCenterY": 6773
   },
   {
     "id": "node-1770890564956",
@@ -391,8 +403,8 @@
     "y": 357.56157230654657,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 3169,
-    "iiifCenterY": 6326
+    "iiifCenterX": 3130,
+    "iiifCenterY": 6179
   },
   {
     "id": "node-1770890609929",
@@ -400,7 +412,9 @@
     "x": 138.34412272326108,
     "y": 318.73366724859613,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2844,
+    "iiifCenterY": 5611
   },
   {
     "id": "node-1770890628791",
@@ -408,7 +422,9 @@
     "x": 119.99426406385078,
     "y": 302.9711729613187,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2551,
+    "iiifCenterY": 5365
   },
   {
     "id": "node-1770890634406",
@@ -416,7 +432,9 @@
     "x": 95.85822303460077,
     "y": 309.17777238155395,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2190,
+    "iiifCenterY": 5491
   },
   {
     "id": "node-1770890638355",
@@ -511,17 +529,6 @@
     "iiifCenterY": 10031,
     "validTo": null,
     "foreign": true
-  },
-  {
-    "id": "node-1770891242837",
-    "name": "Turin",
-    "x": 441.8326693227092,
-    "y": 561.9681274900398,
-    "validFrom": 1852,
-    "iiifCenterX": 7568,
-    "iiifCenterY": 9793,
-    "foreign": true,
-    "validTo": null
   },
   {
     "id": "node-1770891315316",
@@ -639,8 +646,8 @@
     "x": 543.4262948207172,
     "y": 497.0278884462152,
     "validFrom": 1852,
-    "iiifCenterX": 9380,
-    "iiifCenterY": 8775,
+    "iiifCenterX": 9356,
+    "iiifCenterY": 8780,
     "validTo": null
   },
   {
@@ -659,8 +666,8 @@
     "x": 537.1590746331435,
     "y": 453.01271112670935,
     "validFrom": 1852,
-    "iiifCenterX": 9158,
-    "iiifCenterY": 7782,
+    "iiifCenterX": 9179,
+    "iiifCenterY": 7814,
     "validTo": null
   },
   {
@@ -698,10 +705,12 @@
   {
     "id": "node-1770892196035",
     "name": "Sevelen",
-    "x": 612.7490039840638,
-    "y": 196.23107569721117,
+    "x": 621.5139442231076,
+    "y": 190.25498007968127,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10655,
+    "iiifCenterY": 3348
   },
   {
     "id": "node-1770892203535",
@@ -717,8 +726,8 @@
     "x": 620.3187250996017,
     "y": 169.5378486055777,
     "validFrom": 1852,
-    "iiifCenterX": 10668,
-    "iiifCenterY": 3005,
+    "iiifCenterX": 10660,
+    "iiifCenterY": 2957,
     "validTo": null
   },
   {
@@ -938,8 +947,8 @@
     "validFrom": 1852,
     "foreign": true,
     "validTo": null,
-    "iiifCenterX": 5342,
-    "iiifCenterY": 958
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112
   },
   {
     "id": "node-1770893573469",
@@ -1118,7 +1127,9 @@
     "x": 103.89723322277405,
     "y": 279.22533537734967,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2265,
+    "iiifCenterY": 5001
   },
   {
     "id": "node-1770897625083",
@@ -1127,8 +1138,8 @@
     "y": 267.2082974661679,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2627,
-    "iiifCenterY": 4948
+    "iiifCenterX": 2583,
+    "iiifCenterY": 4779
   },
   {
     "id": "node-1770897668923",
@@ -1136,8 +1147,8 @@
     "x": 147.20335395584107,
     "y": 294.71416741256456,
     "validFrom": 1852,
-    "iiifCenterX": 3050,
-    "iiifCenterY": 5367,
+    "iiifCenterX": 3001,
+    "iiifCenterY": 5247,
     "validTo": null
   },
   {
@@ -1146,8 +1157,8 @@
     "x": 176.04137963994663,
     "y": 336.69810700148383,
     "validFrom": 1852,
-    "iiifCenterX": 3502,
-    "iiifCenterY": 6008,
+    "iiifCenterX": 3333,
+    "iiifCenterY": 5842,
     "validTo": null
   },
   {
@@ -1156,7 +1167,9 @@
     "x": 197.54353540477132,
     "y": 313.7720135077093,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3768,
+    "iiifCenterY": 5486
   },
   {
     "id": "node-1770897790722",
@@ -1164,8 +1177,8 @@
     "x": 193.6254980079681,
     "y": 343.6414342629482,
     "validFrom": 1852,
-    "iiifCenterX": 3777,
-    "iiifCenterY": 6114,
+    "iiifCenterX": 3715,
+    "iiifCenterY": 6104,
     "validTo": null
   },
   {
@@ -1174,7 +1187,9 @@
     "x": 236.97987658146099,
     "y": 343.35504193430825,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4325,
+    "iiifCenterY": 6082
   },
   {
     "id": "node-1770897860152",
@@ -1182,7 +1197,9 @@
     "x": 254.463581502539,
     "y": 331.4109086042778,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4650,
+    "iiifCenterY": 5816
   },
   {
     "id": "node-1770897868165",
@@ -1190,7 +1207,9 @@
     "x": 295.0091873528538,
     "y": 328.1093514393866,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5463,
+    "iiifCenterY": 5668
   },
   {
     "id": "node-1770897884517",
@@ -1198,8 +1217,8 @@
     "x": 472.9083665338646,
     "y": 318.54183266932273,
     "validFrom": 1852,
-    "iiifCenterX": 8151,
-    "iiifCenterY": 5731,
+    "iiifCenterX": 8185,
+    "iiifCenterY": 5759,
     "validTo": null
   },
   {
@@ -1208,7 +1227,9 @@
     "x": 472.16790497409715,
     "y": 335.0457824125791,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8431,
+    "iiifCenterY": 6018
   },
   {
     "id": "node-1770897948683",
@@ -1216,8 +1237,8 @@
     "x": 462.9693019132096,
     "y": 379.78146246012625,
     "validFrom": 1852,
-    "iiifCenterX": 7996,
-    "iiifCenterY": 6665,
+    "iiifCenterX": 8265,
+    "iiifCenterY": 6754,
     "validTo": null
   },
   {
@@ -1227,7 +1248,7 @@
     "y": 437.6268282812067,
     "validFrom": 1852,
     "iiifCenterX": 8838,
-    "iiifCenterY": 7341,
+    "iiifCenterY": 7424,
     "validTo": null
   },
   {
@@ -1236,8 +1257,8 @@
     "x": 512.7339825125534,
     "y": 450.2822802763659,
     "validFrom": 1852,
-    "iiifCenterX": 8775,
-    "iiifCenterY": 7740,
+    "iiifCenterX": 9000,
+    "iiifCenterY": 7615,
     "validTo": null
   },
   {
@@ -1246,8 +1267,8 @@
     "x": 543.6557687754084,
     "y": 399.184957584982,
     "validFrom": 1852,
-    "iiifCenterX": 9260,
-    "iiifCenterY": 6961,
+    "iiifCenterX": 9412,
+    "iiifCenterY": 6956,
     "validTo": null
   },
   {
@@ -1256,8 +1277,8 @@
     "x": 551.0762859121432,
     "y": 383.13638170748044,
     "validFrom": 1852,
-    "iiifCenterX": 9376,
-    "iiifCenterY": 6716,
+    "iiifCenterX": 9326,
+    "iiifCenterY": 6677,
     "validTo": null
   },
   {
@@ -1266,8 +1287,8 @@
     "x": 521.8012043168274,
     "y": 374.75358918419056,
     "validFrom": 1852,
-    "iiifCenterX": 9059,
-    "iiifCenterY": 6418,
+    "iiifCenterX": 9050,
+    "iiifCenterY": 6513,
     "validTo": null
   },
   {
@@ -1276,8 +1297,8 @@
     "x": 527.672283111398,
     "y": 331.2664421113636,
     "validFrom": 1852,
-    "iiifCenterX": 9009,
-    "iiifCenterY": 5925,
+    "iiifCenterX": 9218,
+    "iiifCenterY": 6020,
     "validTo": null
   },
   {
@@ -1296,8 +1317,8 @@
     "x": 580.67242848818,
     "y": 360.9933089572764,
     "validFrom": 1852,
-    "iiifCenterX": 9839,
-    "iiifCenterY": 6378,
+    "iiifCenterX": 10008,
+    "iiifCenterY": 6606,
     "validTo": null
   },
   {
@@ -1306,18 +1327,18 @@
     "x": 578.8844621513945,
     "y": 339.2589641434263,
     "validFrom": 1852,
-    "iiifCenterX": 9925,
-    "iiifCenterY": 6281,
+    "iiifCenterX": 9888,
+    "iiifCenterY": 6258,
     "validTo": null
   },
   {
     "id": "node-1770898350997",
-    "name": "Rheinwald",
+    "name": "Hinterhein",
     "x": 582.0717131474104,
     "y": 326.1115537848606,
     "validFrom": 1852,
-    "iiifCenterX": 9947,
-    "iiifCenterY": 5928,
+    "iiifCenterX": 9963,
+    "iiifCenterY": 5965,
     "validTo": null
   },
   {
@@ -1327,8 +1348,8 @@
     "y": 348.8207171314741,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8782,
-    "iiifCenterY": 6193
+    "iiifCenterX": 8836,
+    "iiifCenterY": 6188
   },
   {
     "id": "node-1770898495591",
@@ -1346,8 +1367,8 @@
     "x": 623.9886906368231,
     "y": 322.252550128647,
     "validFrom": 1852,
-    "iiifCenterX": 10518,
-    "iiifCenterY": 5787,
+    "iiifCenterX": 10654,
+    "iiifCenterY": 5662,
     "validTo": null
   },
   {
@@ -1366,7 +1387,9 @@
     "x": 689.9974865133956,
     "y": 354.9918263226693,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 11722,
+    "iiifCenterY": 6210
   },
   {
     "id": "node-1770898631981",
@@ -1374,8 +1397,8 @@
     "x": 697.8812168056729,
     "y": 334.1892292645333,
     "validFrom": 1852,
-    "iiifCenterX": 11675,
-    "iiifCenterY": 5970,
+    "iiifCenterX": 11957,
+    "iiifCenterY": 5897,
     "validTo": null
   },
   {
@@ -1384,8 +1407,8 @@
     "x": 722.3107569721116,
     "y": 304.996015936255,
     "validFrom": 1852,
-    "iiifCenterX": 12198,
-    "iiifCenterY": 5631,
+    "iiifCenterX": 12236,
+    "iiifCenterY": 5615,
     "validTo": null
   },
   {
@@ -1394,8 +1417,8 @@
     "x": 732.4160468335713,
     "y": 280.5155821038793,
     "validFrom": 1852,
-    "iiifCenterX": 12216,
-    "iiifCenterY": 5151,
+    "iiifCenterX": 12521,
+    "iiifCenterY": 5293,
     "validTo": null
   },
   {
@@ -1405,8 +1428,8 @@
     "y": 262.64158777734275,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 12878,
-    "iiifCenterY": 4960
+    "iiifCenterX": 12910,
+    "iiifCenterY": 4971
   },
   {
     "id": "node-1770898741949",
@@ -1432,7 +1455,9 @@
     "x": 633.8760069212574,
     "y": 298.3900186074272,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10650,
+    "iiifCenterY": 5253
   },
   {
     "id": "node-1770903942187",
@@ -1440,7 +1465,9 @@
     "x": 640.9768473113886,
     "y": 264.29817556289873,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 11008,
+    "iiifCenterY": 5003
   },
   {
     "id": "node-1770903965292",
@@ -1458,15 +1485,19 @@
     "x": 685.9248856755432,
     "y": 227.49871699861922,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 11573,
+    "iiifCenterY": 4201
   },
   {
     "id": "node-1770904033887",
-    "name": "Bad Ragaz",
+    "name": "Ragaz",
     "x": 628.2560724069483,
     "y": 208.43001619503508,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10675,
+    "iiifCenterY": 3813
   },
   {
     "id": "node-1770904042006",
@@ -1474,8 +1505,8 @@
     "x": 645.0199203187251,
     "y": 193.04382470119523,
     "validFrom": 1852,
-    "iiifCenterX": 11072,
-    "iiifCenterY": 3559,
+    "iiifCenterX": 11028,
+    "iiifCenterY": 3523,
     "validTo": null
   },
   {
@@ -1490,11 +1521,13 @@
   },
   {
     "id": "node-1770904139063",
-    "name": "",
+    "name": "Altstätten",
     "x": 638.9777594407622,
     "y": 107.7265123418473,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10918,
+    "iiifCenterY": 2252
   },
   {
     "id": "node-1770904186342",
@@ -1502,7 +1535,9 @@
     "x": 629.5788849739954,
     "y": 77.03781419462564,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10709,
+    "iiifCenterY": 1760
   },
   {
     "id": "node-1770904191097",
@@ -1520,7 +1555,9 @@
     "x": 617.2632718352645,
     "y": 66.20456319527455,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10445,
+    "iiifCenterY": 1599
   },
   {
     "id": "node-1770904220319",
@@ -1529,8 +1566,8 @@
     "y": 90.65338645418326,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 10554,
-    "iiifCenterY": 2255
+    "iiifCenterX": 10720,
+    "iiifCenterY": 2014
   },
   {
     "id": "node-1770904231733",
@@ -1538,8 +1575,8 @@
     "x": 625.0996015936256,
     "y": 103.800796812749,
     "validFrom": 1852,
-    "iiifCenterX": 10580,
-    "iiifCenterY": 2357,
+    "iiifCenterX": 10584,
+    "iiifCenterY": 2244,
     "validTo": null
   },
   {
@@ -1548,7 +1585,9 @@
     "x": 612.9922483854584,
     "y": 116.35631975038973,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10417,
+    "iiifCenterY": 2422
   },
   {
     "id": "node-1770904291181",
@@ -1556,7 +1595,9 @@
     "x": 611.1841147962273,
     "y": 91.49149541912573,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10315,
+    "iiifCenterY": 2038
   },
   {
     "id": "node-1770904296483",
@@ -1564,7 +1605,9 @@
     "x": 590.7380470726412,
     "y": 103.53411018051168,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10109,
+    "iiifCenterY": 2344
   },
   {
     "id": "node-1770904323878",
@@ -1572,7 +1615,9 @@
     "x": 583.6459387734171,
     "y": 120.07328060386124,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9811,
+    "iiifCenterY": 2515
   },
   {
     "id": "node-1770904329965",
@@ -1581,8 +1626,8 @@
     "y": 127.5275379959354,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9486,
-    "iiifCenterY": 2817
+    "iiifCenterX": 9512,
+    "iiifCenterY": 2567
   },
   {
     "id": "node-1770904350948",
@@ -1590,7 +1635,9 @@
     "x": 527.9848094977056,
     "y": 130.44864027331596,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9001,
+    "iiifCenterY": 2661
   },
   {
     "id": "node-1770904356934",
@@ -1598,7 +1645,9 @@
     "x": 493.4308904117454,
     "y": 111.8457630540928,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8620,
+    "iiifCenterY": 2436
   },
   {
     "id": "node-1770904366395",
@@ -1606,7 +1655,9 @@
     "x": 498.41716687168105,
     "y": 102.7874222626217,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8732,
+    "iiifCenterY": 2213
   },
   {
     "id": "node-1770904371435",
@@ -1614,7 +1665,9 @@
     "x": 523.6705889288994,
     "y": 105.50855454826592,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9049,
+    "iiifCenterY": 2234
   },
   {
     "id": "node-1770904374540",
@@ -1622,7 +1675,9 @@
     "x": 531.9406918631025,
     "y": 114.51234750102014,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9232,
+    "iiifCenterY": 2394
   },
   {
     "id": "node-1770904442341",
@@ -1630,7 +1685,9 @@
     "x": 588.8959682602563,
     "y": 91.27867724127441,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9904,
+    "iiifCenterY": 2047
   },
   {
     "id": "node-1770904535478",
@@ -1638,7 +1695,9 @@
     "x": 576.8419566144066,
     "y": 96.46301921937379,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9614,
+    "iiifCenterY": 2009
   },
   {
     "id": "node-1770904544888",
@@ -1656,7 +1715,9 @@
     "x": 577.511964317039,
     "y": 71.65950924972663,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9878,
+    "iiifCenterY": 1758
   },
   {
     "id": "node-1770904561366",
@@ -1664,7 +1725,9 @@
     "x": 575.0577023463179,
     "y": 58.73556843864583,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9683,
+    "iiifCenterY": 1475
   },
   {
     "id": "node-1770904580735",
@@ -1672,7 +1735,9 @@
     "x": 560.4856308737412,
     "y": 52.10847588614854,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9393,
+    "iiifCenterY": 1483
   },
   {
     "id": "node-1770904587781",
@@ -1680,7 +1745,9 @@
     "x": 525.3817687303351,
     "y": 55.55661672589633,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8973,
+    "iiifCenterY": 1529
   },
   {
     "id": "node-1770904633393",
@@ -1689,8 +1756,8 @@
     "y": 78.90051688902611,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9347,
-    "iiifCenterY": 2076
+    "iiifCenterX": 9248,
+    "iiifCenterY": 1977
   },
   {
     "id": "node-1770904637851",
@@ -1698,8 +1765,8 @@
     "x": 527.4455156076174,
     "y": 71.08454492349699,
     "validFrom": 1852,
-    "iiifCenterX": 9006,
-    "iiifCenterY": 1956,
+    "iiifCenterX": 8906,
+    "iiifCenterY": 1865,
     "validTo": null
   },
   {
@@ -1718,7 +1785,9 @@
     "x": 503.552798826978,
     "y": 34.545621455578726,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8765,
+    "iiifCenterY": 1245
   },
   {
     "id": "node-1770904724487",
@@ -1727,8 +1796,8 @@
     "y": 66.74900398406373,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6241,
-    "iiifCenterY": 1654
+    "iiifCenterX": 6208,
+    "iiifCenterY": 1611
   },
   {
     "id": "node-1770904765130",
@@ -1766,8 +1835,8 @@
     "x": 589.6414342629482,
     "y": 67.94422310756971,
     "validFrom": 1852,
-    "iiifCenterX": 9980,
-    "iiifCenterY": 1908,
+    "iiifCenterX": 10000,
+    "iiifCenterY": 1476,
     "validTo": null
   },
   {
@@ -1776,8 +1845,8 @@
     "x": 511.5537848605578,
     "y": 116.94820717131473,
     "validFrom": 1852,
-    "iiifCenterX": 8895,
-    "iiifCenterY": 2497,
+    "iiifCenterX": 8931,
+    "iiifCenterY": 2494,
     "validTo": null
   },
   {
@@ -1786,7 +1855,9 @@
     "x": 500.60830435575326,
     "y": 131.71856305491178,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8497,
+    "iiifCenterY": 2633
   },
   {
     "id": "node-1770905083669",
@@ -1804,8 +1875,8 @@
     "x": 425.46201778175055,
     "y": 133.73003833066525,
     "validFrom": 1852,
-    "iiifCenterX": 7408,
-    "iiifCenterY": 2912,
+    "iiifCenterX": 7562,
+    "iiifCenterY": 2735,
     "validTo": null
   },
   {
@@ -1814,7 +1885,9 @@
     "x": 409.75967991388666,
     "y": 122.81706475811939,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7239,
+    "iiifCenterY": 2698
   },
   {
     "id": "node-1770905227821",
@@ -1822,7 +1895,9 @@
     "x": 398.4544717641513,
     "y": 102.39682446852896,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6992,
+    "iiifCenterY": 2238
   },
   {
     "id": "node-1770905233782",
@@ -1830,7 +1905,9 @@
     "x": 415.4309207188928,
     "y": 111.09567587447941,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7341,
+    "iiifCenterY": 2466
   },
   {
     "id": "node-1770905238902",
@@ -1838,7 +1915,9 @@
     "x": 424.4615173990105,
     "y": 113.26003243597881,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7645,
+    "iiifCenterY": 2450
   },
   {
     "id": "node-1770905243649",
@@ -1846,7 +1925,9 @@
     "x": 403.4702012539328,
     "y": 97.62755220173779,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7219,
+    "iiifCenterY": 2159
   },
   {
     "id": "node-1770905249596",
@@ -1854,7 +1935,9 @@
     "x": 395.2684154485323,
     "y": 77.80938080313285,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7064,
+    "iiifCenterY": 1784
   },
   {
     "id": "node-1770905254016",
@@ -1862,7 +1945,9 @@
     "x": 416.9112893314955,
     "y": 79.2385605763485,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7403,
+    "iiifCenterY": 1890
   },
   {
     "id": "node-1770905257484",
@@ -1872,15 +1957,17 @@
     "validFrom": 1852,
     "validTo": null,
     "iiifCenterX": 7280,
-    "iiifCenterY": 1629
+    "iiifCenterY": 1487
   },
   {
     "id": "node-1770905262003",
-    "name": "Wildhaus-Alt St. Johann",
+    "name": "Wildhaus",
     "x": 599.1119078219733,
     "y": 153.91919431002032,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 10290,
+    "iiifCenterY": 2997
   },
   {
     "id": "node-1770905399229",
@@ -1908,7 +1995,9 @@
     "x": 431.1937816575187,
     "y": 69.76642838634211,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7638,
+    "iiifCenterY": 1750
   },
   {
     "id": "node-1770905432489",
@@ -1917,8 +2006,8 @@
     "y": 62.9182453190333,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 7963,
-    "iiifCenterY": 1832
+    "iiifCenterX": 7975,
+    "iiifCenterY": 1767
   },
   {
     "id": "node-1770905441164",
@@ -1927,18 +2016,8 @@
     "y": 93.8406374501992,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8295,
-    "iiifCenterY": 2303
-  },
-  {
-    "id": "node-1770905453228",
-    "name": "Baltenschweil",
-    "x": 529.2153552564175,
-    "y": 84.19753968087821,
-    "validFrom": 1852,
-    "iiifCenterX": 9033,
-    "iiifCenterY": 2156,
-    "validTo": null
+    "iiifCenterX": 8247,
+    "iiifCenterY": 2059
   },
   {
     "id": "node-1770905554809",
@@ -1946,7 +2025,9 @@
     "x": 492.60551087440035,
     "y": 71.44377326184258,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8486,
+    "iiifCenterY": 1765
   },
   {
     "id": "node-1770905559674",
@@ -1954,7 +2035,9 @@
     "x": 487.0744453995428,
     "y": 47.885268509533944,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8338,
+    "iiifCenterY": 1358
   },
   {
     "id": "node-1770905563396",
@@ -1963,8 +2046,8 @@
     "y": 39.65737051792828,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8094,
-    "iiifCenterY": 1256
+    "iiifCenterX": 8054,
+    "iiifCenterY": 1255
   },
   {
     "id": "node-1770905568056",
@@ -1972,7 +2055,9 @@
     "x": 477.93614540793897,
     "y": 11.124331570137997,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8217,
+    "iiifCenterY": 958
   },
   {
     "id": "node-1770905640680",
@@ -1998,8 +2083,8 @@
     "x": 382.09026757328274,
     "y": 59.61593806851113,
     "validFrom": 1852,
-    "iiifCenterX": 6729,
-    "iiifCenterY": 1781,
+    "iiifCenterX": 6632,
+    "iiifCenterY": 1474,
     "validTo": null
   },
   {
@@ -2008,7 +2093,9 @@
     "x": 332.5808403665703,
     "y": 53.940859019355344,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5809,
+    "iiifCenterY": 1529
   },
   {
     "id": "node-1770905794500",
@@ -2016,16 +2103,18 @@
     "x": 367.30624448137246,
     "y": 68.5654237240052,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6466,
+    "iiifCenterY": 1748
   },
   {
     "id": "node-1770905800343",
-    "name": "Bözen",
+    "name": "Bötzen",
     "x": 380.49507629194113,
     "y": 71.80198249231603,
     "validFrom": 1852,
-    "iiifCenterX": 6704,
-    "iiifCenterY": 1967,
+    "iiifCenterX": 6740,
+    "iiifCenterY": 1834,
     "validTo": null
   },
   {
@@ -2034,7 +2123,9 @@
     "x": 316.53703679567457,
     "y": 74.74682504798932,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5537,
+    "iiifCenterY": 1892
   },
   {
     "id": "node-1770905858716",
@@ -2042,8 +2133,8 @@
     "x": 338.3801754404176,
     "y": 94.52808480406964,
     "validFrom": 1852,
-    "iiifCenterX": 6044,
-    "iiifCenterY": 2314,
+    "iiifCenterX": 5863,
+    "iiifCenterY": 2046,
     "validTo": null
   },
   {
@@ -2060,7 +2151,9 @@
     "x": 373.38650099934443,
     "y": 100.68051232821563,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6525,
+    "iiifCenterY": 2259
   },
   {
     "id": "node-1770905882167",
@@ -2068,7 +2161,9 @@
     "x": 395.06795039629446,
     "y": 132.7663265039788,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6773,
+    "iiifCenterY": 2687
   },
   {
     "id": "node-1770905886053",
@@ -2076,7 +2171,9 @@
     "x": 357.8026685358752,
     "y": 127.90122694050251,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6329,
+    "iiifCenterY": 2751
   },
   {
     "id": "node-1770905890445",
@@ -2094,7 +2191,9 @@
     "x": 338.31430030964657,
     "y": 135.98012119292707,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5913,
+    "iiifCenterY": 2750
   },
   {
     "id": "node-1770905944274",
@@ -2102,7 +2201,9 @@
     "x": 313.4134613612446,
     "y": 121.47058868859597,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5379,
+    "iiifCenterY": 2475
   },
   {
     "id": "node-1770905962102",
@@ -2120,7 +2221,9 @@
     "x": 318.8545973712446,
     "y": 103.88551687059419,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5478,
+    "iiifCenterY": 2226
   },
   {
     "id": "node-1770905979601",
@@ -2128,7 +2231,9 @@
     "x": 315.7897816201487,
     "y": 129.48291311480432,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5567,
+    "iiifCenterY": 2505
   },
   {
     "id": "node-1770906021106",
@@ -2137,8 +2242,8 @@
     "y": 134.08937919497544,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 5634,
-    "iiifCenterY": 2917
+    "iiifCenterX": 5331,
+    "iiifCenterY": 2717
   },
   {
     "id": "node-1770906061553",
@@ -2151,20 +2256,14 @@
     "validTo": null
   },
   {
-    "id": "node-1770906097505",
-    "name": "Aesch",
-    "x": 407.1759404915342,
-    "y": 137.09863552505567,
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
     "id": "node-1770906108849",
     "name": "Aesch",
     "x": 291.6291293352979,
     "y": 76.8330025770839,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5183,
+    "iiifCenterY": 1818
   },
   {
     "id": "node-1770906124944",
@@ -2172,7 +2271,9 @@
     "x": 273.87332095235,
     "y": 95.03330606945701,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4906,
+    "iiifCenterY": 1984
   },
   {
     "id": "node-1770906150586",
@@ -2180,7 +2281,9 @@
     "x": 246.60140575500395,
     "y": 104.38756117929108,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4603,
+    "iiifCenterY": 2137
   },
   {
     "id": "node-1770906161164",
@@ -2189,8 +2292,8 @@
     "y": 133.27945055374119,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 5075,
-    "iiifCenterY": 2905
+    "iiifCenterX": 4971,
+    "iiifCenterY": 2467
   },
   {
     "id": "node-1770906194376",
@@ -2198,7 +2301,9 @@
     "x": 253.49295047465034,
     "y": 130.51172087608757,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4619,
+    "iiifCenterY": 2443
   },
   {
     "id": "node-1770906199277",
@@ -2206,7 +2311,9 @@
     "x": 219.30197241828796,
     "y": 145.67259090283767,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4091,
+    "iiifCenterY": 2709
   },
   {
     "id": "node-1770906213725",
@@ -2214,7 +2321,9 @@
     "x": 183.30595742378773,
     "y": 132.70622980831774,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3567,
+    "iiifCenterY": 2640
   },
   {
     "id": "node-1770906278302",
@@ -2222,8 +2331,8 @@
     "x": 198.804780876494,
     "y": 114.15936254980079,
     "validFrom": 1852,
-    "iiifCenterX": 3858,
-    "iiifCenterY": 2613,
+    "iiifCenterX": 3902,
+    "iiifCenterY": 2422,
     "validTo": null
   },
   {
@@ -2232,8 +2341,8 @@
     "x": 200.16282742246972,
     "y": 89.94734186092035,
     "validFrom": 1852,
-    "iiifCenterX": 3880,
-    "iiifCenterY": 2244,
+    "iiifCenterX": 3812,
+    "iiifCenterY": 1938,
     "validTo": null
   },
   {
@@ -2263,8 +2372,8 @@
     "y": 116.95638602093413,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4321,
-    "iiifCenterY": 2656
+    "iiifCenterX": 4269,
+    "iiifCenterY": 2383
   },
   {
     "id": "node-1770906451065",
@@ -2282,8 +2391,8 @@
     "x": 235.9090424702049,
     "y": 140.72372740444268,
     "validFrom": 1852,
-    "iiifCenterX": 4439,
-    "iiifCenterY": 3019,
+    "iiifCenterX": 4331,
+    "iiifCenterY": 2621,
     "validTo": null
   },
   {
@@ -2292,15 +2401,19 @@
     "x": 169.17802565820193,
     "y": 155.94307052835075,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3302,
+    "iiifCenterY": 3006
   },
   {
     "id": "node-1770906644770",
-    "name": "La Chaux-de-Fonds",
+    "name": "Chaux-de-Fonds",
     "x": 159.2574916818553,
     "y": 173.22126454771046,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3124,
+    "iiifCenterY": 3297
   },
   {
     "id": "node-1770906650706",
@@ -2309,8 +2422,8 @@
     "y": 188.93374380385194,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 3423,
-    "iiifCenterY": 3754
+    "iiifCenterX": 3251,
+    "iiifCenterY": 3561
   },
   {
     "id": "node-1770906712573",
@@ -2319,8 +2432,8 @@
     "y": 183.4820717131474,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2941,
-    "iiifCenterY": 3671
+    "iiifCenterX": 2457,
+    "iiifCenterY": 3250
   },
   {
     "id": "node-1770906731613",
@@ -2329,8 +2442,8 @@
     "y": 188.31178017420524,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2963,
-    "iiifCenterY": 3744
+    "iiifCenterX": 2698,
+    "iiifCenterY": 3396
   },
   {
     "id": "node-1770906799317",
@@ -2338,7 +2451,9 @@
     "x": 113.73927606091479,
     "y": 211.09810134453988,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2397,
+    "iiifCenterY": 3777
   },
   {
     "id": "node-1770906804866",
@@ -2346,8 +2461,8 @@
     "x": 138.6788696146723,
     "y": 204.7322831341757,
     "validFrom": 1852,
-    "iiifCenterX": 2832,
-    "iiifCenterY": 3804,
+    "iiifCenterX": 2828,
+    "iiifCenterY": 3773,
     "validTo": null
   },
   {
@@ -2367,8 +2482,8 @@
     "y": 225.89672482397083,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2170,
-    "iiifCenterY": 4192
+    "iiifCenterX": 2114,
+    "iiifCenterY": 4167
   },
   {
     "id": "node-1770906982068",
@@ -2385,16 +2500,18 @@
     "y": 225.92037806692264,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4715,
-    "iiifCenterY": 2863
+    "iiifCenterX": 4606,
+    "iiifCenterY": 2457
   },
   {
     "id": "node-1770907088865",
-    "name": "La Côte-aux-Fées",
+    "name": "Côte-aux-Fées",
     "x": 94.89262324509286,
     "y": 240.05625426574125,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2191,
+    "iiifCenterY": 4357
   },
   {
     "id": "node-1770907094109",
@@ -2402,7 +2519,9 @@
     "x": 94.216363441981,
     "y": 250.98316469816666,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2181,
+    "iiifCenterY": 4557
   },
   {
     "id": "node-1770907100588",
@@ -2410,7 +2529,9 @@
     "x": 165.69608606077418,
     "y": 275.40634322238054,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3260,
+    "iiifCenterY": 4941
   },
   {
     "id": "node-1770907142041",
@@ -2418,7 +2539,9 @@
     "x": 173.9278568155064,
     "y": 253.95644263927136,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3445,
+    "iiifCenterY": 4642
   },
   {
     "id": "node-1770907145936",
@@ -2426,7 +2549,9 @@
     "x": 159.81358871874477,
     "y": 241.0636663647478,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3120,
+    "iiifCenterY": 4505
   },
   {
     "id": "node-1770907151001",
@@ -2435,8 +2560,8 @@
     "y": 234.80210256308368,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4862,
-    "iiifCenterY": 4112
+    "iiifCenterX": 2974,
+    "iiifCenterY": 4308
   },
   {
     "id": "node-1770907154674",
@@ -2444,7 +2569,9 @@
     "x": 152.71472392439296,
     "y": 209.33713059853773,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3026,
+    "iiifCenterY": 3948
   },
   {
     "id": "node-1770907161310",
@@ -2452,7 +2579,9 @@
     "x": 177.53215707139134,
     "y": 199.23507156214788,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3413,
+    "iiifCenterY": 3893
   },
   {
     "id": "node-1770907246859",
@@ -2461,8 +2590,8 @@
     "y": 244.4382470119522,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 5069,
-    "iiifCenterY": 4601
+    "iiifCenterX": 4875,
+    "iiifCenterY": 4605
   },
   {
     "id": "node-1770911077601",
@@ -2470,8 +2599,8 @@
     "x": 203.66590185964492,
     "y": 269.93655803144475,
     "validFrom": 1852,
-    "iiifCenterX": 4595,
-    "iiifCenterY": 3189,
+    "iiifCenterX": 3929,
+    "iiifCenterY": 5073,
     "validTo": null
   },
   {
@@ -2480,7 +2609,9 @@
     "x": 171.99694764845867,
     "y": 287.54231728439936,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3508,
+    "iiifCenterY": 5025
   },
   {
     "id": "node-1770911208987",
@@ -2498,7 +2629,9 @@
     "x": 217.7869880362657,
     "y": 221.70631263623534,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3881,
+    "iiifCenterY": 4252
   },
   {
     "id": "node-1770911222493",
@@ -2506,7 +2639,9 @@
     "x": 197.20203216580717,
     "y": 205.2464727658549,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3751,
+    "iiifCenterY": 3939
   },
   {
     "id": "node-1770911226606",
@@ -2524,7 +2659,9 @@
     "x": 185.62726237908305,
     "y": 163.2920742296476,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 3609,
+    "iiifCenterY": 3131
   },
   {
     "id": "node-1770912050316",
@@ -2533,8 +2670,8 @@
     "y": 153.44047484714258,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4177,
-    "iiifCenterY": 3213
+    "iiifCenterX": 4005,
+    "iiifCenterY": 2988
   },
   {
     "id": "node-1770912067754",
@@ -2543,8 +2680,8 @@
     "y": 165.14925113050072,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4427,
-    "iiifCenterY": 3391
+    "iiifCenterX": 4192,
+    "iiifCenterY": 3306
   },
   {
     "id": "node-1770912080230",
@@ -2552,7 +2689,9 @@
     "x": 254.97084315028405,
     "y": 151.6621083653755,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4613,
+    "iiifCenterY": 3097
   },
   {
     "id": "node-1770912100324",
@@ -2560,7 +2699,9 @@
     "x": 281.61701507427597,
     "y": 149.84762295792598,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4948,
+    "iiifCenterY": 2939
   },
   {
     "id": "node-1770912118654",
@@ -2568,7 +2709,9 @@
     "x": 281.67360453750393,
     "y": 169.27081737383583,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 4953,
+    "iiifCenterY": 3326
   },
   {
     "id": "node-1770912128082",
@@ -2577,8 +2720,8 @@
     "y": 167.562781543926,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 4724,
-    "iiifCenterY": 3428
+    "iiifCenterX": 4676,
+    "iiifCenterY": 3371
   },
   {
     "id": "node-1770912131031",
@@ -2594,7 +2737,9 @@
     "x": 295.46285573528667,
     "y": 183.68946481623573,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5288,
+    "iiifCenterY": 3480
   },
   {
     "id": "node-1770912202211",
@@ -2602,7 +2747,9 @@
     "x": 299.79739754631487,
     "y": 167.79573651223382,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5434,
+    "iiifCenterY": 4289
   },
   {
     "id": "node-1770912220114",
@@ -2629,7 +2776,7 @@
     "y": 206.58964143426294,
     "validFrom": 1852,
     "iiifCenterX": 4684,
-    "iiifCenterY": 3757,
+    "iiifCenterY": 3726,
     "validTo": null
   },
   {
@@ -2644,11 +2791,13 @@
   },
   {
     "id": "node-1770912333324",
-    "name": "Därstetten",
+    "name": "Weissenburg",
     "x": 274.63691192563965,
     "y": 299.94189846806375,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5008,
+    "iiifCenterY": 5376
   },
   {
     "id": "node-1770912364302",
@@ -2666,7 +2815,9 @@
     "x": 294.95247129969994,
     "y": 278.3458454630586,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5436,
+    "iiifCenterY": 4930
   },
   {
     "id": "node-1770912401064",
@@ -2674,7 +2825,9 @@
     "x": 336.8348953619725,
     "y": 291.2635336869815,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6068,
+    "iiifCenterY": 5182
   },
   {
     "id": "node-1770912408628",
@@ -2682,7 +2835,9 @@
     "x": 388.3236386582487,
     "y": 286.9301080987397,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7091,
+    "iiifCenterY": 5053
   },
   {
     "id": "node-1770912412950",
@@ -2690,7 +2845,9 @@
     "x": 330.36114479101684,
     "y": 219.9885986348741,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5823,
+    "iiifCenterY": 4146
   },
   {
     "id": "node-1770912420029",
@@ -2699,8 +2856,8 @@
     "y": 237.7972202768409,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6236,
-    "iiifCenterY": 4499
+    "iiifCenterX": 6280,
+    "iiifCenterY": 4244
   },
   {
     "id": "node-1770912450080",
@@ -2719,8 +2876,8 @@
     "y": 218.0262278884548,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6838,
-    "iiifCenterY": 4198
+    "iiifCenterX": 6630,
+    "iiifCenterY": 4008
   },
   {
     "id": "node-1770912479656",
@@ -2737,8 +2894,8 @@
     "y": 177.46745711541166,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6035,
-    "iiifCenterY": 3579
+    "iiifCenterX": 6091,
+    "iiifCenterY": 3558
   },
   {
     "id": "node-1770912543968",
@@ -2746,7 +2903,9 @@
     "x": 331.033369272782,
     "y": 199.12365164442423,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5731,
+    "iiifCenterY": 3780
   },
   {
     "id": "node-1770912548392",
@@ -2754,7 +2913,9 @@
     "x": 297.0124080252847,
     "y": 191.6224484900705,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5438,
+    "iiifCenterY": 3658
   },
   {
     "id": "node-1770912553971",
@@ -2770,7 +2931,9 @@
     "x": 313.98818636866486,
     "y": 156.3988586063101,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 5610,
+    "iiifCenterY": 3075
   },
   {
     "id": "node-1770912569156",
@@ -2794,7 +2957,9 @@
     "x": 378.22794085902615,
     "y": 132.05382000984946,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6619,
+    "iiifCenterY": 2842
   },
   {
     "id": "node-1770912586038",
@@ -2802,7 +2967,9 @@
     "x": 356.29362418960454,
     "y": 144.90372167101282,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6497,
+    "iiifCenterY": 2988
   },
   {
     "id": "node-1770912594808",
@@ -2810,7 +2977,9 @@
     "x": 383.59773498044933,
     "y": 159.16252023011123,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 6753,
+    "iiifCenterY": 3300
   },
   {
     "id": "node-1770912606182",
@@ -2818,8 +2987,8 @@
     "x": 319.5219123505976,
     "y": 180.29482071713147,
     "validFrom": 1852,
-    "iiifCenterX": 5749,
-    "iiifCenterY": 3622,
+    "iiifCenterX": 5709,
+    "iiifCenterY": 3417,
     "validTo": null
   },
   {
@@ -2828,7 +2997,9 @@
     "x": 449.1953878539489,
     "y": 324.3334658965595,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8735,
+    "iiifCenterY": 6161
   },
   {
     "id": "node-1770912658453",
@@ -2842,11 +3013,13 @@
   },
   {
     "id": "node-1770912672117",
-    "name": "Gurtnellen",
+    "name": "Inschi",
     "x": 478.25794495832633,
     "y": 280.9506927732951,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8318,
+    "iiifCenterY": 4998
   },
   {
     "id": "node-1770912689899",
@@ -2854,7 +3027,9 @@
     "x": 479.5349108940841,
     "y": 239.4358804139647,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8303,
+    "iiifCenterY": 4604
   },
   {
     "id": "node-1770912696547",
@@ -2862,7 +3037,9 @@
     "x": 480.35665895601915,
     "y": 232.56244782915297,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8229,
+    "iiifCenterY": 4319
   },
   {
     "id": "node-1770912699696",
@@ -2870,7 +3047,9 @@
     "x": 393.55431469484097,
     "y": 266.50134916051906,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7195,
+    "iiifCenterY": 4680
   },
   {
     "id": "node-1770912704041",
@@ -2878,7 +3057,9 @@
     "x": 398.74037657198846,
     "y": 237.31473135266663,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7395,
+    "iiifCenterY": 4341
   },
   {
     "id": "node-1770912707032",
@@ -2886,15 +3067,19 @@
     "x": 447.12949464245116,
     "y": 223.5999025226788,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7810,
+    "iiifCenterY": 4055
   },
   {
     "id": "node-1770912711681",
-    "name": "Ingenbohl",
+    "name": "Brunnen",
     "x": 471.6234663009627,
     "y": 207.83239735954953,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8163,
+    "iiifCenterY": 3948
   },
   {
     "id": "node-1770912798782",
@@ -2912,7 +3097,9 @@
     "x": 482.326752567408,
     "y": 201.3118259057851,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8387,
+    "iiifCenterY": 3795
   },
   {
     "id": "node-1770912823042",
@@ -2920,7 +3107,9 @@
     "x": 459.64782097413126,
     "y": 192.43524586376958,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7956,
+    "iiifCenterY": 3658
   },
   {
     "id": "node-1770912826245",
@@ -2928,7 +3117,9 @@
     "x": 477.1479341255167,
     "y": 185.9938909541699,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8339,
+    "iiifCenterY": 3519
   },
   {
     "id": "node-1770912829695",
@@ -2937,8 +3128,8 @@
     "y": 193.2479099829079,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 7307,
-    "iiifCenterY": 3820
+    "iiifCenterX": 7285,
+    "iiifCenterY": 3693
   },
   {
     "id": "node-1770912845895",
@@ -2956,7 +3147,9 @@
     "x": 407.0672066666266,
     "y": 167.9448113571342,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7074,
+    "iiifCenterY": 3282
   },
   {
     "id": "node-1770912961774",
@@ -2964,7 +3157,9 @@
     "x": 417.67388749504903,
     "y": 163.01251571623368,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7314,
+    "iiifCenterY": 3159
   },
   {
     "id": "node-1770912969831",
@@ -2972,8 +3167,8 @@
     "x": 436.0004661737007,
     "y": 175.7251053392805,
     "validFrom": 1852,
-    "iiifCenterX": 7613,
-    "iiifCenterY": 3423,
+    "iiifCenterX": 7601,
+    "iiifCenterY": 3390,
     "validTo": null
   },
   {
@@ -2982,7 +3177,9 @@
     "x": 458.08663041108184,
     "y": 166.79893021551982,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7911,
+    "iiifCenterY": 3203
   },
   {
     "id": "node-1770913010028",
@@ -2991,8 +3188,8 @@
     "y": 173.33946448421932,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8261,
-    "iiifCenterY": 3516
+    "iiifCenterX": 8130,
+    "iiifCenterY": 3330
   },
   {
     "id": "node-1770913090657",
@@ -3001,8 +3198,8 @@
     "y": 179.4980079681275,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8719,
-    "iiifCenterY": 3610
+    "iiifCenterX": 8750,
+    "iiifCenterY": 3618
   },
   {
     "id": "node-1770913131646",
@@ -3010,8 +3207,8 @@
     "x": 498.8047808764941,
     "y": 162.36653386454182,
     "validFrom": 1852,
-    "iiifCenterX": 8557,
-    "iiifCenterY": 3349,
+    "iiifCenterX": 8552,
+    "iiifCenterY": 3312,
     "validTo": null
   },
   {
@@ -3021,8 +3218,8 @@
     "y": 153.17588865044684,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 8379,
-    "iiifCenterY": 3208
+    "iiifCenterX": 8358,
+    "iiifCenterY": 3042
   },
   {
     "id": "node-1770913186861",
@@ -3030,8 +3227,8 @@
     "x": 473.7051792828686,
     "y": 137.26693227091633,
     "validFrom": 1852,
-    "iiifCenterX": 8164,
-    "iiifCenterY": 2966,
+    "iiifCenterX": 8096,
+    "iiifCenterY": 2792,
     "validTo": null
   },
   {
@@ -3040,7 +3237,9 @@
     "x": 446.90330233802774,
     "y": 146.17161662160538,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7711,
+    "iiifCenterY": 2849
   },
   {
     "id": "node-1770913225645",
@@ -3048,7 +3247,9 @@
     "x": 432.74818513531454,
     "y": 158.49119252556875,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7599,
+    "iiifCenterY": 3074
   },
   {
     "id": "node-1770913233135",
@@ -3056,7 +3257,9 @@
     "x": 408.4665743858443,
     "y": 130.29652136011634,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 7120,
+    "iiifCenterY": 2861
   },
   {
     "id": "node-1770913265492",
@@ -3064,8 +3267,8 @@
     "x": 585.3135254019605,
     "y": 272.50691079940685,
     "validFrom": 1852,
-    "iiifCenterX": 9912,
-    "iiifCenterY": 5029,
+    "iiifCenterX": 10016,
+    "iiifCenterY": 4916,
     "validTo": null
   },
   {
@@ -3074,8 +3277,8 @@
     "x": 557.768924302789,
     "y": 284.2788844621514,
     "validFrom": 1852,
-    "iiifCenterX": 9472,
-    "iiifCenterY": 5082,
+    "iiifCenterX": 9455,
+    "iiifCenterY": 5081,
     "validTo": null
   },
   {
@@ -3085,8 +3288,8 @@
     "y": 224.1195219123506,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9312,
-    "iiifCenterY": 4291
+    "iiifCenterX": 9250,
+    "iiifCenterY": 4260
   },
   {
     "id": "node-1770913368260",
@@ -3095,8 +3298,8 @@
     "y": 188.66135458167332,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9443,
-    "iiifCenterY": 3750
+    "iiifCenterX": 9474,
+    "iiifCenterY": 3707
   },
   {
     "id": "node-1770913438620",
@@ -3104,8 +3307,8 @@
     "x": 605.3761125639899,
     "y": 174.58907773920419,
     "validFrom": 1852,
-    "iiifCenterX": 10219,
-    "iiifCenterY": 3333,
+    "iiifCenterX": 10165,
+    "iiifCenterY": 3350,
     "validTo": null
   },
   {
@@ -3114,8 +3317,8 @@
     "x": 560.2284174729805,
     "y": 168.0724818817382,
     "validFrom": 1852,
-    "iiifCenterX": 9519,
-    "iiifCenterY": 3436,
+    "iiifCenterX": 9536,
+    "iiifCenterY": 3342,
     "validTo": null
   },
   {
@@ -3125,8 +3328,8 @@
     "y": 171.13147410358565,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9233,
-    "iiifCenterY": 3380
+    "iiifCenterX": 9236,
+    "iiifCenterY": 3341
   },
   {
     "id": "node-1770913525543",
@@ -3134,7 +3337,9 @@
     "x": 517.2511185950582,
     "y": 154.31948639873633,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 8910,
+    "iiifCenterY": 3169
   },
   {
     "id": "node-1770913567237",
@@ -3142,8 +3347,8 @@
     "x": 527.0916334661355,
     "y": 141.25099601593627,
     "validFrom": 1852,
-    "iiifCenterX": 8834,
-    "iiifCenterY": 2956,
+    "iiifCenterX": 8803,
+    "iiifCenterY": 2955,
     "validTo": null
   },
   {
@@ -3162,7 +3367,9 @@
     "x": 532.2278628777153,
     "y": 146.41038024917816,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9066,
+    "iiifCenterY": 3015
   },
   {
     "id": "node-1770913663546",
@@ -3171,8 +3378,8 @@
     "y": 143.69323695078674,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 9601,
-    "iiifCenterY": 3064
+    "iiifCenterX": 9729,
+    "iiifCenterY": 2828
   },
   {
     "id": "node-1770913685913",
@@ -3180,7 +3387,9 @@
     "x": 582.6037939039957,
     "y": 145.48028126435065,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 9970,
+    "iiifCenterY": 2964
   },
   {
     "id": "node-1770913715054",
@@ -3188,8 +3397,26 @@
     "x": 540.5308704256813,
     "y": 146.52917123543102,
     "validFrom": 1852,
-    "iiifCenterX": 9211,
-    "iiifCenterY": 3107,
+    "iiifCenterX": 9301,
+    "iiifCenterY": 2928,
+    "validTo": null
+  },
+  {
+    "id": "node-1770985437852",
+    "name": "Zürich",
+    "x": 458.7180206704393,
+    "y": 104.87449868612964,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1770991540696",
+    "name": "Urseren",
+    "x": 491.6334661354582,
+    "y": 293.0438247011952,
+    "validFrom": 1852,
+    "iiifCenterX": 8445,
+    "iiifCenterY": 5342,
     "validTo": null
   }
 ]

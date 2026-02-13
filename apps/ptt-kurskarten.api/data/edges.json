@@ -5894,24 +5894,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770904371435-node-1770905453228",
-    "from": "node-1770904371435",
-    "to": "node-1770905453228",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905453228-node-1770904371435",
-    "from": "node-1770905453228",
-    "to": "node-1770904371435",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770904371435-node-1770904350948",
     "from": "node-1770904371435",
     "to": "node-1770904350948",
@@ -6308,42 +6290,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770904587781-node-1770905453228",
-    "from": "node-1770904587781",
-    "to": "node-1770905453228",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905453228-node-1770904587781",
-    "from": "node-1770905453228",
-    "to": "node-1770904587781",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770904633393-node-1770905453228",
-    "from": "node-1770904633393",
-    "to": "node-1770905453228",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905453228-node-1770904633393",
-    "from": "node-1770905453228",
-    "to": "node-1770904633393",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770904633393-node-1770904637851",
     "from": "node-1770904633393",
     "to": "node-1770904637851",
@@ -6392,24 +6338,6 @@
     "id": "draft-edge-auto-node-1770904535478-node-1770904633393",
     "from": "node-1770904535478",
     "to": "node-1770904633393",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770904637851-node-1770905453228",
-    "from": "node-1770904637851",
-    "to": "node-1770905453228",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905453228-node-1770904637851",
-    "from": "node-1770905453228",
-    "to": "node-1770904637851",
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null,
@@ -6920,24 +6848,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905146525-node-1770906097505",
-    "from": "node-1770905146525",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770905146525",
-    "from": "node-1770906097505",
-    "to": "node-1770905146525",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905146525-node-1770905217644",
     "from": "node-1770905146525",
     "to": "node-1770905217644",
@@ -7021,24 +6931,6 @@
   {
     "id": "draft-edge-auto-node-1770905233782-node-1770905217644",
     "from": "node-1770905233782",
-    "to": "node-1770905217644",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905217644-node-1770906097505",
-    "from": "node-1770905217644",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770905217644",
-    "from": "node-1770906097505",
     "to": "node-1770905217644",
     "transport": "postkutsche",
     "validFrom": 1852,
@@ -7748,24 +7640,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905453228-node-1770904374540",
-    "from": "node-1770905453228",
-    "to": "node-1770904374540",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770904374540-node-1770905453228",
-    "from": "node-1770904374540",
-    "to": "node-1770905453228",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905554809-node-1770905559674",
     "from": "node-1770905554809",
     "to": "node-1770905559674",
@@ -8378,24 +8252,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770905882167-node-1770906097505",
-    "from": "node-1770905882167",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770905882167",
-    "from": "node-1770906097505",
-    "to": "node-1770905882167",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770905882167-node-1770913233135",
     "from": "node-1770905882167",
     "to": "node-1770913233135",
@@ -8912,42 +8768,6 @@
     "id": "draft-edge-auto-node-1770912564452-node-1770906061553",
     "from": "node-1770912564452",
     "to": "node-1770906061553",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770913233135",
-    "from": "node-1770906097505",
-    "to": "node-1770913233135",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770913233135-node-1770906097505",
-    "from": "node-1770913233135",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770905233782",
-    "from": "node-1770906097505",
-    "to": "node-1770905233782",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770905233782-node-1770906097505",
-    "from": "node-1770905233782",
-    "to": "node-1770906097505",
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null,
@@ -12338,24 +12158,6 @@
     "inDraft": true
   },
   {
-    "id": "draft-edge-auto-node-1770912580537-node-1770906097505",
-    "from": "node-1770912580537",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770912580537",
-    "from": "node-1770906097505",
-    "to": "node-1770912580537",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
     "id": "draft-edge-auto-node-1770912586038-node-1770905890445",
     "from": "node-1770912586038",
     "to": "node-1770905890445",
@@ -12403,24 +12205,6 @@
   {
     "id": "draft-edge-auto-node-1770912586038-node-1770912594808",
     "from": "node-1770912586038",
-    "to": "node-1770912594808",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770912594808-node-1770906097505",
-    "from": "node-1770912594808",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770912594808",
-    "from": "node-1770906097505",
     "to": "node-1770912594808",
     "transport": "postkutsche",
     "validFrom": 1852,
@@ -12956,7 +12740,11 @@
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null,
-    "inDraft": true
+    "inDraft": true,
+    "notes": {
+      "de": "i. Sommer",
+      "fr": "été"
+    }
   },
   {
     "id": "draft-edge-auto-node-1770912969831-node-1770912829695",
@@ -13087,24 +12875,6 @@
   {
     "id": "draft-edge-auto-node-1770912969831-node-1770912961774",
     "from": "node-1770912969831",
-    "to": "node-1770912961774",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770912961774-node-1770906097505",
-    "from": "node-1770912961774",
-    "to": "node-1770906097505",
-    "transport": "postkutsche",
-    "validFrom": 1852,
-    "validTo": null,
-    "inDraft": true
-  },
-  {
-    "id": "draft-edge-auto-node-1770906097505-node-1770912961774",
-    "from": "node-1770906097505",
     "to": "node-1770912961774",
     "transport": "postkutsche",
     "validFrom": 1852,
@@ -14010,5 +13780,13 @@
     "validFrom": 1852,
     "validTo": null,
     "inDraft": true
+  },
+  {
+    "id": "edge-1770984332995",
+    "from": "node-1770809183587",
+    "to": "node-1770809062251",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
