@@ -5,7 +5,10 @@ import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } 
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
-type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips'> & { validTo: Year | null; durationMinutes?: number | null };
+type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips'> & {
+  validTo: Year | null;
+  durationMinutes?: number | null;
+};
 type StoredTrip = EdgeTrip & { edgeId: string };
 
 type GraphData = {

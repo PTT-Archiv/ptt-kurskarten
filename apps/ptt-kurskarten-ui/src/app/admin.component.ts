@@ -1460,6 +1460,7 @@ export class AdminComponent implements OnDestroy {
     }
   }
 
+
   private saveDraftNodeAndContinue(): void {
     const draft = this.draftNode();
     if (!draft) {

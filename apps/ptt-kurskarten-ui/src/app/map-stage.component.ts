@@ -21,8 +21,8 @@ import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 
 const NODE_RADIUS = 5;
-const NODE_RADIUS_MAX = 20;
-const NODE_RADIUS_STEP = 1;
+const NODE_RADIUS_MAX = 9;
+const NODE_RADIUS_STEP = .3;
 const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
@@ -463,8 +463,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
 
-    const topNodes = this.getTopConnectedNodes(nodes, edgeCounts, 4);
-    topNodes.forEach((node) => {
+    const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
+    nodes.filter((node) => labeledNames.has(node.name)).forEach((node) => {
       const screen = this.screenNodes.get(node.id);
       if (!screen) {
         return;
@@ -752,8 +752,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const arrive = getLegAbsTime(leg, 'arrive');
         const dayDelta = Math.max(0, arrive.dayOffset - depart.dayOffset);
         const suffix = dayDelta > 0 ? ` (+${dayDelta})` : '';
-      const transportLabel = this.transportLabel(leg.transport);
-      const text = `${transportLabel} ${leg.departs}→${leg.arrives}${suffix}`;
+        const transportLabel = this.transportLabel(leg.transport);
+        const text = `${transportLabel} ${leg.departs}→${leg.arrives}${suffix}`;
         return { text, anchor, priority: 3 };
       })
       .filter((label): label is { text: string; anchor: { x: number; y: number }; priority: number } => Boolean(label));

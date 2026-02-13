@@ -45,6 +45,7 @@ export type GraphEdge = {
   validFrom: Year;
   validTo?: Year;
   durationMinutes?: number;
+  inDraft?: boolean;
   notes?: LocalizedText;
   trips: EdgeTrip[];
 };
