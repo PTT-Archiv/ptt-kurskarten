@@ -15,7 +15,7 @@ import { buildEdgeTimetable, buildStationProfile } from './reporting';
 
 @Controller('v1')
 export class GraphController {
-  constructor(@Inject(GRAPH_REPOSITORY) private readonly graphRepository: GraphRepository) {}
+  constructor(@Inject(GRAPH_REPOSITORY) private readonly graphRepository: GraphRepository) { }
 
   @Get('graph')
   async getGraph(@Query('year') year?: string): Promise<GraphSnapshot> {

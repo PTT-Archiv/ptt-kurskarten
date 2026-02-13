@@ -73,29 +73,6 @@ export function computeTripChoice(
 ): TripChoice | null {
   const trips = edge.trips ?? [];
   if (!trips.length) {
-    if (edge.inDraft && edge.durationMinutes !== undefined) {
-      const earliest = currentTime + minTransferMinutes;
-      const departAbs = earliest;
-      const arriveAbs = departAbs + edge.durationMinutes;
-      const departDay = Math.floor(departAbs / DAY_MINUTES);
-      const arriveDay = Math.floor(arriveAbs / DAY_MINUTES);
-      const arrivalDayOffset = Math.max(0, arriveDay - departDay) as 0 | 1 | 2;
-      const trip: EdgeTrip = {
-        id: `draft:${edge.id}:${departAbs}`,
-        departs: formatTime(departAbs),
-        arrives: formatTime(arriveAbs),
-        arrivalDayOffset
-      };
-      return {
-        edge,
-        trip,
-        departAbs,
-        arriveAbs,
-        departDayOffset: Math.floor(departAbs / DAY_MINUTES) - Math.floor(currentTime / DAY_MINUTES),
-        arriveDayOffset: Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(currentTime / DAY_MINUTES),
-        arrivesKnown: true
-      };
-    }
     return null;
   }
 
@@ -171,7 +148,7 @@ export function computeTripChoice(
 
 export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingParams): ConnectionOption | null {
   const minTransferMinutes = params.minTransferMinutes ?? 8;
-  const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 2;
+  const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 20;
   const startTime = parseTime(params.depart);
 
   const adjacency = new Map<string, GraphEdge[]>();
@@ -262,32 +239,23 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 
     const edge = snapshot.edges.find((candidate) => candidate.id === info.edgeId);
     const trip = edge?.trips.find((candidate) => candidate.id === info.tripId);
-    if (!edge) {
-      break;
-    }
-    if (!trip && !edge.inDraft) {
+    if (!edge || !trip) {
       break;
     }
 
     const departDayOffset = Math.floor(info.departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
     const arriveDayOffset = Math.floor(info.arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
 
-    const departs = trip?.departs ?? formatTime(info.departAbs);
-    const arrives = info.arriveKnown ? (trip?.arrives ?? formatTime(info.arriveAbs)) : undefined;
-    const arrivalOffset = info.arriveKnown
-      ? (trip?.arrivalDayOffset ?? (arriveDayOffset as 0 | 1 | 2))
-      : undefined;
-
     legs.push({
       edgeId: edge.id,
-      tripId: trip?.id ?? info.tripId ?? `draft:${edge.id}`,
+      tripId: trip.id,
       from: edge.from,
       to: edge.to,
       transport: edge.transport,
-      departs,
-      arrives,
+      departs: trip.departs,
+      arrives: info.arriveKnown ? trip.arrives : undefined,
       notes: edge.notes,
-      arrivalDayOffset: arrivalOffset,
+      arrivalDayOffset: info.arriveKnown ? trip.arrivalDayOffset : undefined,
       departDayOffset: departDayOffset as 0 | 1 | 2,
       arriveDayOffset: info.arriveKnown ? (arriveDayOffset as 0 | 1 | 2) : undefined,
       departAbsMinutes: info.departAbs,
