@@ -418,7 +418,7 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <span class="trip-readonly">{{ edgeDraft.durationMinutes ?? '—' }}</span>
+                  <span class="trip-readonly">{{ edgeDraft.durationMinutes }}</span>
                   <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">×</button>
                 </div>
               }
@@ -460,7 +460,7 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <span class="trip-readonly">{{ draft.durationMinutes ?? '—' }}</span>
+                  <span class="trip-readonly">{{ draft.durationMinutes }}</span>
                   <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">×</button>
                 </div>
               }

@@ -38,8 +38,8 @@
     "x": 21.115537848605534,
     "y": 414.9561752988048,
     "validFrom": 1852,
-    "iiifCenterX": 1092,
-    "iiifCenterY": 7195,
+    "iiifCenterX": 1176,
+    "iiifCenterY": 7276,
     "validTo": null
   },
   {
@@ -237,8 +237,8 @@
     "x": 246.4059271597555,
     "y": 421.2355426888281,
     "validFrom": 1852,
-    "iiifCenterX": 4596,
-    "iiifCenterY": 7158,
+    "iiifCenterX": 4862,
+    "iiifCenterY": 4112,
     "validTo": null
   },
   {
@@ -1074,11 +1074,11 @@
   {
     "id": "node-1770895016880",
     "name": "Lyon",
-    "x": 5.976095617529836,
-    "y": 299.41832669322713,
+    "x": 2.352941176470544,
+    "y": 453.99999999999994,
     "validFrom": 1852,
-    "iiifCenterX": 838,
-    "iiifCenterY": 5439,
+    "iiifCenterX": 4836,
+    "iiifCenterY": 4091,
     "foreign": true,
     "validTo": null
   },
