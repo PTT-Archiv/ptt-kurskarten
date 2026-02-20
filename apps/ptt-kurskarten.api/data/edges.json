@@ -262,7 +262,6 @@
     "to": "node-1770812117179",
     "transport": "postkutsche",
     "validFrom": 1852,
-    "durationMinutes": 55,
     "validTo": null
   }
 ]

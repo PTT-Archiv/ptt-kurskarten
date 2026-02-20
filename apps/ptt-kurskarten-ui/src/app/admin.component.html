@@ -291,10 +291,6 @@
               <span>{{ 'label.leuge' | transloco }}</span>
               <input type="number" [value]="edgeDraft.leuge ?? ''" (input)="updateSelectedEdgeLeuge($event)" />
             </label>
-            <label class="field">
-              <span>{{ 'label.durationMin' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.durationMinutes" (input)="updateSelectedEdgeDuration($event)" />
-            </label>
           </div>
           <div class="field">
             <span>{{ 'label.notes' | transloco }}</span>
@@ -360,10 +356,6 @@
               <span>{{ 'label.leuge' | transloco }}</span>
               <input type="number" [value]="draft.leuge ?? ''" (input)="updateDraftEdgeLeuge($event)" />
             </label>
-            <label class="field">
-              <span>{{ 'label.durationMin' | transloco }}</span>
-              <input type="number" [value]="draft.durationMinutes" (input)="updateDraftEdgeDuration($event)" />
-            </label>
           </div>
           <div class="field">
             <span>{{ 'label.notes' | transloco }}</span>
@@ -403,7 +395,6 @@
               <div class="trip-row header">
                 <span>Dep</span>
                 <span>Arr</span>
-                <span>{{ 'label.durationMin' | transloco }}</span>
                 <span></span>
               </div>
               @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
@@ -426,7 +417,6 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <span class="trip-readonly">{{ edgeDraft.durationMinutes }}</span>
                   <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">×</button>
                 </div>
               }
@@ -445,7 +435,6 @@
               <div class="trip-row header">
                 <span>Dep</span>
                 <span>Arr</span>
-                <span>{{ 'label.durationMin' | transloco }}</span>
                 <span></span>
               </div>
               @for (trip of draft.trips; track trip.id; let idx = $index) {
@@ -468,7 +457,6 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <span class="trip-readonly">{{ draft.durationMinutes }}</span>
                   <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">×</button>
                 </div>
               }

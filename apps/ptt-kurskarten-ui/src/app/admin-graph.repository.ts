@@ -161,7 +161,6 @@ function buildDemoSnapshot(year: number): GraphSnapshot {
         leuge: 10,
         validFrom: year,
         validTo: undefined,
-        durationMinutes: 70,
         trips: [
           {
             id: 'trip-1',

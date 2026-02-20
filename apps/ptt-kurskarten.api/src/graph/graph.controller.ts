@@ -123,7 +123,6 @@ export class GraphController {
       id: body.id ?? `edge-${Date.now()}`,
       validFrom: body.validFrom ?? 1852,
       leuge: body.leuge,
-      durationMinutes: body.durationMinutes ?? 60,
       trips: body.trips ?? []
     };
 
@@ -145,7 +144,6 @@ export class GraphController {
         leuge: body.leuge,
         validFrom: body.validFrom ?? 1852,
         validTo: body.validTo,
-        durationMinutes: body.durationMinutes ?? 60,
         trips: body.trips ?? []
       };
     }

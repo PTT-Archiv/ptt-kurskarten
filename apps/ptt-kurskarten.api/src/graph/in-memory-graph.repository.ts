@@ -20,7 +20,6 @@ let EDGES: GraphEdge[] = [
     transport: 'postkutsche',
     validFrom: 1845,
     validTo: 1865,
-    durationMinutes: 600,
     trips: [
       {
         id: 'bern-zurich-coach-early',
@@ -36,7 +35,6 @@ let EDGES: GraphEdge[] = [
     to: 'zurich',
     transport: 'courier',
     validFrom: 1866,
-    durationMinutes: 210,
     trips: [
       { id: 'bern-zurich-rail-1', departs: '06:15', arrives: '09:10' },
       { id: 'bern-zurich-rail-2', departs: '12:00', arrives: '14:55' },
@@ -49,7 +47,6 @@ let EDGES: GraphEdge[] = [
     to: 'zurich',
     transport: 'courier',
     validFrom: 1855,
-    durationMinutes: 180,
     trips: [
       { id: 'basel-zurich-rail-overnight', departs: '22:40', arrives: '01:20', arrivalDayOffset: 1 }
     ]
@@ -61,7 +58,6 @@ let EDGES: GraphEdge[] = [
     transport: 'postkutsche',
     validFrom: 1848,
     validTo: 1878,
-    durationMinutes: 540,
     trips: [{ id: 'bern-geneva-coach-1', departs: '07:00', arrives: '16:00' }]
   },
   {
@@ -70,7 +66,6 @@ let EDGES: GraphEdge[] = [
     to: 'geneva',
     transport: 'courier',
     validFrom: 1879,
-    durationMinutes: 190,
     trips: [
       { id: 'bern-geneva-rail-1', departs: '08:00', arrives: '11:10' },
       { id: 'bern-geneva-rail-2', departs: '14:00', arrives: '17:10' }
@@ -83,7 +78,6 @@ let EDGES: GraphEdge[] = [
     transport: 'postkutsche',
     validFrom: 1855,
     validTo: 1885,
-    durationMinutes: 240,
     trips: [{ id: 'lucerne-bern-coach-1', departs: '09:30', arrives: '13:30' }]
   },
   {
@@ -92,7 +86,6 @@ let EDGES: GraphEdge[] = [
     to: 'st-gallen',
     transport: 'courier',
     validFrom: 1875,
-    durationMinutes: 150,
     trips: [
       { id: 'zurich-st-gallen-rail-1', departs: '05:50', arrives: '08:20' },
       { id: 'zurich-st-gallen-rail-2', departs: '17:15', arrives: '19:45' }

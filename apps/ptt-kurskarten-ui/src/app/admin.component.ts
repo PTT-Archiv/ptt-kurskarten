@@ -62,7 +62,6 @@ type EdgeDraft = {
   leuge?: number;
   validFrom: number;
   validTo?: number;
-  durationMinutes: number;
   notes?: LocalizedText;
   trips: EdgeTrip[];
 };
@@ -249,7 +248,6 @@ export class AdminComponent implements OnDestroy {
       leuge: edge.leuge,
       validFrom: edge.validFrom,
       validTo: edge.validTo,
-      durationMinutes: edge.durationMinutes ?? 60,
       notes: edge.notes,
       trips: edge.trips ?? []
     };
@@ -285,7 +283,6 @@ export class AdminComponent implements OnDestroy {
         leuge: draftEdge.leuge,
         validFrom: draftEdge.validFrom,
         validTo: draftEdge.validTo,
-        durationMinutes: draftEdge.durationMinutes,
         trips: draftEdge.trips
       };
       edges = [...edges, tempEdge];
@@ -444,7 +441,6 @@ export class AdminComponent implements OnDestroy {
         transport: 'postkutsche',
         leuge,
         validFrom: this.year(),
-        durationMinutes: 60,
         trips: []
       });
       this.selection.selectEdge(this.draftEdge()!.id);
@@ -951,16 +947,6 @@ export class AdminComponent implements OnDestroy {
     this.dirty.set(true);
   }
 
-  updateDraftEdgeDuration(event: Event): void {
-    const value = Number((event.target as HTMLInputElement).value);
-    const draft = this.draftEdge();
-    if (!draft || Number.isNaN(value)) {
-      return;
-    }
-    this.draftEdge.set({ ...draft, durationMinutes: value });
-    this.dirty.set(true);
-  }
-
   updateDraftEdgeNotes(lang: keyof LocalizedText, event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;
     const draft = this.draftEdge();
@@ -1050,16 +1036,6 @@ export class AdminComponent implements OnDestroy {
     this.dirty.set(true);
   }
 
-  updateSelectedEdgeDuration(event: Event): void {
-    const value = Number((event.target as HTMLInputElement).value);
-    const draft = this.selectedEdgeDraft();
-    if (!draft || Number.isNaN(value)) {
-      return;
-    }
-    this.updateEdgeLocal(draft.id, { durationMinutes: value });
-    this.dirty.set(true);
-  }
-
   updateSelectedEdgeNotes(lang: keyof LocalizedText, event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;
     const draft = this.selectedEdgeDraft();
@@ -1087,9 +1063,6 @@ export class AdminComponent implements OnDestroy {
         return trip;
       }
       const next = { ...trip, [field]: value };
-      if (field === 'departs') {
-        return this.applyDurationToTrip(next, draft.durationMinutes);
-      }
       return next;
     });
     this.updateEdgeLocal(draft.id, { trips });
@@ -1135,7 +1108,6 @@ export class AdminComponent implements OnDestroy {
         leuge: draft.leuge,
         validFrom: draft.validFrom,
         validTo: draft.validTo,
-        durationMinutes: draft.durationMinutes,
         notes: draft.notes,
         trips: draft.trips
       } as GraphEdge)
@@ -1202,9 +1174,6 @@ export class AdminComponent implements OnDestroy {
         return trip;
       }
       const next = { ...trip, [field]: value };
-      if (field === 'departs') {
-        return this.applyDurationToTrip(next, draft.durationMinutes);
-      }
       return next;
     });
     this.draftEdge.set({ ...draft, trips });
@@ -1300,7 +1269,6 @@ export class AdminComponent implements OnDestroy {
         transport: 'postkutsche',
         leuge: this.findExistingLeuge(pendingFrom, event.hitNodeId),
         validFrom: this.year(),
-        durationMinutes: 60,
         trips: []
       });
       this.selection.selectEdge(draftId);
@@ -1706,7 +1674,6 @@ export class AdminComponent implements OnDestroy {
       transport: 'postkutsche',
       leuge: this.findExistingLeuge(from, to),
       validFrom: this.year(),
-      durationMinutes: 60,
       notes: undefined,
       trips: []
     };
@@ -1724,7 +1691,6 @@ export class AdminComponent implements OnDestroy {
         transport: 'postkutsche',
         leuge: undefined,
         validFrom: this.year(),
-        durationMinutes: 60,
         trips: []
       });
       return;
@@ -2000,48 +1966,4 @@ export class AdminComponent implements OnDestroy {
     return error?.error?.message || error?.message || 'Unerwarteter Fehler';
   }
 
-  private applyDurationToTrip(trip: EdgeTrip, durationMinutes: number): EdgeTrip {
-    if (!trip.departs || !Number.isFinite(durationMinutes)) {
-      return trip;
-    }
-    const departMinutes = this.parseTimeMinutes(trip.departs);
-    if (departMinutes === null) {
-      return trip;
-    }
-    const total = departMinutes + Math.max(0, Math.floor(durationMinutes));
-    const arrivalDayOffset = this.toDayOffset(Math.floor(total / 1440));
-    const arrives = this.formatTimeMinutes(total % 1440);
-    return { ...trip, arrives: arrives as EdgeTrip['arrives'], arrivalDayOffset };
-  }
-
-  private parseTimeMinutes(value: string): number | null {
-    const parts = value.split(':');
-    if (parts.length !== 2) {
-      return null;
-    }
-    const hours = Number(parts[0]);
-    const minutes = Number(parts[1]);
-    if (!Number.isFinite(hours) || !Number.isFinite(minutes)) {
-      return null;
-    }
-    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-      return null;
-    }
-    return hours * 60 + minutes;
-  }
-
-  private formatTimeMinutes(totalMinutes: number): string {
-    const hours = Math.floor(totalMinutes / 60)
-      .toString()
-      .padStart(2, '0');
-    const minutes = Math.floor(totalMinutes % 60)
-      .toString()
-      .padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
-
-  private toDayOffset(value: number): EdgeTrip['arrivalDayOffset'] {
-    const clamped = Math.max(0, Math.min(2, Math.floor(value)));
-    return clamped as 0 | 1 | 2;
-  }
 }
