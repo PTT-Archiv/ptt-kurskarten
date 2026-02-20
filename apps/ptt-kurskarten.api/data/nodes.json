@@ -3384,5 +3384,15 @@
     "iiifCenterX": 8445,
     "iiifCenterY": 5342,
     "validTo": null
+  },
+  {
+    "id": "node-1771596256944",
+    "name": "Boniswil",
+    "x": 497.910447761194,
+    "y": 417.98009950248763,
+    "validFrom": 1852,
+    "iiifCenterX": 8701,
+    "iiifCenterY": 7229,
+    "validTo": null
   }
 ]

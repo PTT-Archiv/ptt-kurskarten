@@ -223,3 +223,73 @@ Empfohlene Verbesserungen:
 3. .............................................................................
 
 Nachtest nach Anpassungen nötig: [ ] Ja  [ ] Nein
+
+
+
+
+
+Digitalisierung der Feedbacks
+
+
+Allgemein: 
+
+Direkt gezoomz, konnte nicht zu nahe zoomer, dafür sehr weit hinaus zoomen
+Farben haben Gewicht und müssen vereinfacht werden. Gelb nur sporadisch
+Mit maus viel beweggt
+
+Suche:
+- Deutsch und Französisch möglich machen, auch wenn auf der karte nur eines oder das andere möglich ist.
+- Fragte nach Verbindungssytyp: man sieht die aktuell nur als Resultat aber man kann nicht filtern
+- zoom auf details, aber nicht anklickbar. 
+- Bug: Retry von der gleichen Suche
+- Mehr interaktive verbindung zum sidepanel
+- Legende für die Icons sehr wichtig. 
+
+Ausschnitt ist sehr klein aber an minimum im sidepnal
+Outline der Karte verwirrend, auch schlagschatten verwirrend
+Wie Zeit angeben? Wohl nur eingabefeld? man wollte eigentlich ein dropdown icon sehen. 
+"Anwenden" Button ist zu unverlässlich
+
+Sidepanel Aktivität (? keine ahnung was ich da gemeint hatte)
+Als Zielort neben Node -> Aim ist wichtig, sollte nicht so wichtig sein. Man kann sich ja verklicken. 
+
+Anstatt das man über Auswahlmodus auf die Karte klickt: 
+klick auf node soll auch die Möglichkeit geben, als start oder zielnode es auszuwählen. 
+
+Hilfe nicht wirklich brauchbar, etwas im Text überarbeiten
+Infos der Nodes auch anklickbar, alles auf karte soll etwas auslösen eigentlich
+Evtl. auch die Edges. 
+legende für icons noch einmal...
+Unterscheidung auf karte von unbekannten abfahrtszeiten auf karte und sidepanel ersichtlicher machen. 
+Verklicken -> was soll tatsächlich passieren
+Wie Route zurücksetzen? 
+ein Button "Route anzeigen"?
+
+
+Feedback : 
+
+Bild in Bild Logik vereinfachen, die Tiefen anpassen? 
+Sidebar: Floating Cards anpassen -> Abflachen und mit ganz durchzogenen Linien wie im Warenkorb der Recherechenonline. 
+Suchbar mit Opacity = 100% nicht mehr so mit halb durchsichtbar. 
+
+UX: Klick auf Löschen (x) und (+) zu nahe
+- Routeplanuing als eine Option und nicht als Hauptfunktion anschauen. 
+Fokus ist Karte und Routeplaning ist EINER der Möglichkeiten. 
+
+Durch die Komplexität der Karte führen, das ist das Ziel. Wie z.B. Fokus auf Route ist so etwas. Oder filter nach nur Schiffahrten und auf karte ersichtlich machen zum beispiel. 
+
+Farben einfach halten: 
+- Gelb = ganz rausnehemen, nur ganz dezent einsetzen für einzelnen call to action oder sogar gar nicht. 
+- Scwharz und weiss für buttons und karten verwenden. nodes z.B. schwarz. 
+
+- Pulse der Nodes auch auf Labels. So, dass beides verbunden ist.
+Klick auf label auch gut. 
+- Clustering? Wie ? Ein Vorschlag wäre gut abe nicht auf Zahlen und pseudo regionen. 
+- Karten schwarz/weiss wie ein sternenbild, die nodes sind kleiner und ohne borders. schlagschatten der karte entfernen und edges irrelevant machen in dem sie im fokus modus verschwindne. 
+die nodes sind in drei stufen vorhanden: kreis ohne border, kreis mit border und kreis doppelborder. 
+- grenzen ausblurren? so dass man sieht, dass schweiz nicht eine insel ist. 
+Einstieg auf seite: 
+   - map loading kacheln with alter karte als memory kacheln
+   - Toggle Map und ein riesiger IIIF Viewer zum herum naivigeren
+   - Slider einbauen, der auf die einzelnen Jahren und der entsprechennde Kurskarte geht. so als drüber lappieren und so. 
+   
