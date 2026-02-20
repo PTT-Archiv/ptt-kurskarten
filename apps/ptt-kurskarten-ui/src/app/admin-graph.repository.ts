@@ -158,6 +158,7 @@ function buildDemoSnapshot(year: number): GraphSnapshot {
         from: 'bern',
         to: 'zurich',
         transport: 'courier',
+        leuge: 10,
         validFrom: year,
         validTo: undefined,
         durationMinutes: 70,

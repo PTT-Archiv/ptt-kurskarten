@@ -122,6 +122,7 @@ export class GraphController {
       ...body,
       id: body.id ?? `edge-${Date.now()}`,
       validFrom: body.validFrom ?? 1852,
+      leuge: body.leuge,
       durationMinutes: body.durationMinutes ?? 60,
       trips: body.trips ?? []
     };
@@ -141,6 +142,7 @@ export class GraphController {
         from: body.from ?? '',
         to: body.to ?? '',
         transport: body.transport ?? 'postkutsche',
+        leuge: body.leuge,
         validFrom: body.validFrom ?? 1852,
         validTo: body.validTo,
         durationMinutes: body.durationMinutes ?? 60,

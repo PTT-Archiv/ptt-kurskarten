@@ -42,6 +42,7 @@ export type GraphEdge = {
   from: string;
   to: string;
   transport: TransportType;
+  leuge?: number;
   validFrom: Year;
   validTo?: Year;
   durationMinutes?: number;

@@ -288,6 +288,10 @@
               <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
             </label>
             <label class="field">
+              <span>{{ 'label.leuge' | transloco }}</span>
+              <input type="number" [value]="edgeDraft.leuge ?? ''" (input)="updateSelectedEdgeLeuge($event)" />
+            </label>
+            <label class="field">
               <span>{{ 'label.durationMin' | transloco }}</span>
               <input type="number" [value]="edgeDraft.durationMinutes" (input)="updateSelectedEdgeDuration($event)" />
             </label>
@@ -351,6 +355,10 @@
             <label class="field">
               <span>{{ 'label.validTo' | transloco }}</span>
               <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.leuge' | transloco }}</span>
+              <input type="number" [value]="draft.leuge ?? ''" (input)="updateDraftEdgeLeuge($event)" />
             </label>
             <label class="field">
               <span>{{ 'label.durationMin' | transloco }}</span>

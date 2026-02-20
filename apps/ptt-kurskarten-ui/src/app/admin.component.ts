@@ -59,6 +59,7 @@ type EdgeDraft = {
   from: string | null;
   to: string | null;
   transport: TransportType;
+  leuge?: number;
   validFrom: number;
   validTo?: number;
   durationMinutes: number;
@@ -245,6 +246,7 @@ export class AdminComponent implements OnDestroy {
       from: edge.from,
       to: edge.to,
       transport: edge.transport,
+      leuge: edge.leuge,
       validFrom: edge.validFrom,
       validTo: edge.validTo,
       durationMinutes: edge.durationMinutes ?? 60,
@@ -280,6 +282,7 @@ export class AdminComponent implements OnDestroy {
         from: draftEdge.from,
         to: draftEdge.to,
         transport: draftEdge.transport,
+        leuge: draftEdge.leuge,
         validFrom: draftEdge.validFrom,
         validTo: draftEdge.validTo,
         durationMinutes: draftEdge.durationMinutes,
@@ -433,11 +436,13 @@ export class AdminComponent implements OnDestroy {
     const nodes = snapshot?.nodes ?? [];
     const fallbackTo = nodes.find((node) => node.id !== nodeId)?.id ?? null;
     if (fallbackTo) {
+      const leuge = this.findExistingLeuge(nodeId, fallbackTo);
       this.draftEdge.set({
         id: `edge-${Date.now()}`,
         from: nodeId,
         to: fallbackTo,
         transport: 'postkutsche',
+        leuge,
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []
@@ -888,7 +893,7 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    this.draftEdge.set({ ...draft, transport: value });
+      this.draftEdge.set({ ...draft, transport: value });
     this.dirty.set(true);
   }
 
@@ -898,7 +903,8 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    this.draftEdge.set({ ...draft, from: value || null });
+    const next = this.prefillDraftLeuge({ ...draft, from: value || null });
+    this.draftEdge.set(next);
     this.dirty.set(true);
   }
 
@@ -908,7 +914,19 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    this.draftEdge.set({ ...draft, to: value || null });
+    const next = this.prefillDraftLeuge({ ...draft, to: value || null });
+    this.draftEdge.set(next);
+    this.dirty.set(true);
+  }
+
+  updateDraftEdgeLeuge(event: Event): void {
+    const raw = (event.target as HTMLInputElement).value.trim();
+    const value = raw === '' ? undefined : Number(raw);
+    const draft = this.draftEdge();
+    if (!draft || (value !== undefined && Number.isNaN(value))) {
+      return;
+    }
+    this.draftEdge.set({ ...draft, leuge: value });
     this.dirty.set(true);
   }
 
@@ -980,7 +998,8 @@ export class AdminComponent implements OnDestroy {
     if (!nextFrom) {
       return;
     }
-    this.updateEdgeLocal(draft.id, { from: nextFrom });
+    const leuge = this.findExistingLeuge(nextFrom, draft.to, draft.id) ?? draft.leuge;
+    this.updateEdgeLocal(draft.id, { from: nextFrom, leuge });
     this.dirty.set(true);
   }
 
@@ -994,7 +1013,19 @@ export class AdminComponent implements OnDestroy {
     if (!nextTo) {
       return;
     }
-    this.updateEdgeLocal(draft.id, { to: nextTo });
+    const leuge = this.findExistingLeuge(draft.from, nextTo, draft.id) ?? draft.leuge;
+    this.updateEdgeLocal(draft.id, { to: nextTo, leuge });
+    this.dirty.set(true);
+  }
+
+  updateSelectedEdgeLeuge(event: Event): void {
+    const raw = (event.target as HTMLInputElement).value.trim();
+    const value = raw === '' ? undefined : Number(raw);
+    const draft = this.selectedEdgeDraft();
+    if (!draft || (value !== undefined && Number.isNaN(value))) {
+      return;
+    }
+    this.updateEdgeLocal(draft.id, { leuge: value });
     this.dirty.set(true);
   }
 
@@ -1101,6 +1132,7 @@ export class AdminComponent implements OnDestroy {
         from: draft.from,
         to: draft.to,
         transport: draft.transport,
+        leuge: draft.leuge,
         validFrom: draft.validFrom,
         validTo: draft.validTo,
         durationMinutes: draft.durationMinutes,
@@ -1266,6 +1298,7 @@ export class AdminComponent implements OnDestroy {
         from: pendingFrom,
         to: event.hitNodeId,
         transport: 'postkutsche',
+        leuge: this.findExistingLeuge(pendingFrom, event.hitNodeId),
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []
@@ -1671,6 +1704,7 @@ export class AdminComponent implements OnDestroy {
       from,
       to,
       transport: 'postkutsche',
+      leuge: this.findExistingLeuge(from, to),
       validFrom: this.year(),
       durationMinutes: 60,
       notes: undefined,
@@ -1688,6 +1722,7 @@ export class AdminComponent implements OnDestroy {
         from: nodeId,
         to: null,
         transport: 'postkutsche',
+        leuge: undefined,
         validFrom: this.year(),
         durationMinutes: 60,
         trips: []
@@ -1696,13 +1731,45 @@ export class AdminComponent implements OnDestroy {
     }
 
     if (!draft.from) {
-      this.draftEdge.set({ ...draft, from: nodeId });
+      const next = this.prefillDraftLeuge({ ...draft, from: nodeId });
+      this.draftEdge.set(next);
       return;
     }
 
     if (!draft.to && nodeId !== draft.from) {
-      this.draftEdge.set({ ...draft, to: nodeId });
+      const next = this.prefillDraftLeuge({ ...draft, to: nodeId });
+      this.draftEdge.set(next);
     }
+  }
+
+  private prefillDraftLeuge(draft: EdgeDraft): EdgeDraft {
+    if (!draft.from || !draft.to || draft.leuge !== undefined) {
+      return draft;
+    }
+    const leuge = this.findExistingLeuge(draft.from, draft.to);
+    if (leuge === undefined) {
+      return draft;
+    }
+    return { ...draft, leuge };
+  }
+
+  private findExistingLeuge(from: string | null, to: string | null, excludeEdgeId?: string): number | undefined {
+    if (!from || !to) {
+      return undefined;
+    }
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return undefined;
+    }
+    const [a, b] = from <= to ? [from, to] : [to, from];
+    const match = snapshot.edges.find((edge) => {
+      if (excludeEdgeId && edge.id === excludeEdgeId) {
+        return false;
+      }
+      const [edgeA, edgeB] = edge.from <= edge.to ? [edge.from, edge.to] : [edge.to, edge.from];
+      return edgeA === a && edgeB === b && edge.leuge !== undefined;
+    });
+    return match?.leuge;
   }
 
   private fetchYears(): void {

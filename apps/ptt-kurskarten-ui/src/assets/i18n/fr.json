@@ -56,6 +56,7 @@
   "label.name": "Nom",
   "label.validFrom": "Valable dès",
   "label.validTo": "Valable jusqu’à",
+  "label.leuge": "Leuge",
   "label.foreign": "Étranger (hors jeu de données)",
   "btn.save": "Enregistrer",
   "admin.clickNodeToEdit": "Cliquez sur un nœud pour modifier.",

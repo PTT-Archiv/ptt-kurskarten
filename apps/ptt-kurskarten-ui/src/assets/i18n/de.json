@@ -56,6 +56,7 @@
   "label.name": "Name",
   "label.validFrom": "Gültig ab",
   "label.validTo": "Gültig bis",
+  "label.leuge": "Leuge",
   "label.foreign": "Ausland (ausserhalb Datensatz)",
   "btn.save": "Speichern",
   "admin.clickNodeToEdit": "Knoten anklicken, um zu bearbeiten.",

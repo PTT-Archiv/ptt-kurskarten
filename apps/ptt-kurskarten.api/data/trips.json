@@ -56,27 +56,6 @@
     "edgeId": "edge-1771345247729"
   },
   {
-    "id": "trip-1771345323563",
-    "departs": "22:30",
-    "arrives": "23:50",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345293296"
-  },
-  {
-    "id": "trip-1771345440746",
-    "departs": "12:00",
-    "arrives": "13:10",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345438928"
-  },
-  {
-    "id": "trip-1771345476314",
-    "departs": "7:00",
-    "arrives": "08:40",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345464111"
-  },
-  {
     "id": "trip-1771345594449",
     "departs": "14:00",
     "arrives": "17:00",
@@ -187,5 +166,173 @@
     "arrives": "",
     "arrivalDayOffset": 0,
     "edgeId": "edge-1771346433633"
+  },
+  {
+    "id": "trip-1771576674159",
+    "departs": "",
+    "arrives": "18:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336"
+  },
+  {
+    "id": "trip-1771576708318",
+    "departs": "",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576698439"
+  },
+  {
+    "id": "trip-1771576718078",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576698439"
+  },
+  {
+    "id": "trip-1771576727695",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576698439"
+  },
+  {
+    "id": "trip-1771576746662",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576698439"
+  },
+  {
+    "id": "trip-1771576805823",
+    "departs": "",
+    "arrives": "22:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576787950"
+  },
+  {
+    "id": "trip-1771576814502",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576787950"
+  },
+  {
+    "id": "trip-1771576838559",
+    "departs": "02:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790"
+  },
+  {
+    "id": "trip-1771576900439",
+    "departs": "07:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576881279"
+  },
+  {
+    "id": "trip-1771576915567",
+    "departs": "09:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576881279"
+  },
+  {
+    "id": "trip-1771576859718",
+    "departs": "10:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576854997"
+  },
+  {
+    "id": "trip-1771576942026",
+    "departs": "09:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576854997"
+  },
+  {
+    "id": "trip-1771577208734",
+    "departs": "10:50",
+    "arrives": "12:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577198343"
+  },
+  {
+    "id": "trip-1771577314318",
+    "departs": "10:00",
+    "arrives": "10:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577297069"
+  },
+  {
+    "id": "trip-1771577364510",
+    "departs": "08:25",
+    "arrives": "09:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577355662"
+  },
+  {
+    "id": "trip-1771345323563",
+    "departs": "22:30",
+    "arrives": "23:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345293296"
+  },
+  {
+    "id": "trip-1771577887053",
+    "departs": "12:15",
+    "arrives": "13:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577877405"
+  },
+  {
+    "id": "trip-1771577908244",
+    "departs": "00:15",
+    "arrives": "01:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577877405"
+  },
+  {
+    "id": "trip-1771345440746",
+    "departs": "12:00",
+    "arrives": "13:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345438928"
+  },
+  {
+    "id": "trip-1771345476314",
+    "departs": "7:00",
+    "arrives": "08:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345464111"
+  },
+  {
+    "id": "trip-1771577109061",
+    "departs": "09:05",
+    "arrives": "10:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577098526"
+  },
+  {
+    "id": "trip-1771577234839",
+    "departs": "10:35",
+    "arrives": "11:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577226142"
+  },
+  {
+    "id": "trip-1771577345034",
+    "departs": "11:30",
+    "arrives": "13:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577336894"
+  },
+  {
+    "id": "trip-1771578105060",
+    "departs": "23:55",
+    "arrives": "00:50",
+    "arrivalDayOffset": 1,
+    "edgeId": "edge-1771578091020"
   }
 ]

@@ -5,9 +5,15 @@ import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } 
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
-type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips'> & {
+type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'leuge'> & {
   validTo: Year | null;
   durationMinutes?: number | null;
+};
+type StoredSegment = {
+  id: string;
+  a: string;
+  b: string;
+  leuge: number | null;
 };
 type StoredTrip = EdgeTrip & { edgeId: string };
 
@@ -20,6 +26,7 @@ export class JsonGraphRepository implements GraphRepository {
   private readonly dataDir: string;
   private readonly nodesPath: string;
   private readonly edgesPath: string;
+  private readonly segmentsPath: string;
   private readonly tripsPath: string;
   private initPromise: Promise<void> | null = null;
   private writeQueue: Promise<void> = Promise.resolve();
@@ -28,6 +35,7 @@ export class JsonGraphRepository implements GraphRepository {
     this.dataDir = this.resolveDataDir();
     this.nodesPath = path.join(this.dataDir, 'nodes.json');
     this.edgesPath = path.join(this.dataDir, 'edges.json');
+    this.segmentsPath = path.join(this.dataDir, 'segments.json');
     this.tripsPath = path.join(this.dataDir, 'trips.json');
   }
 
@@ -130,6 +138,7 @@ export class JsonGraphRepository implements GraphRepository {
       await this.ensureInitialized();
       const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = nodes.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
@@ -141,10 +150,12 @@ export class JsonGraphRepository implements GraphRepository {
         edges.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id)
       );
       const remainingEdges = edges.filter((edge) => !removedEdgeIds.has(edge.id));
+      const remainingSegments = this.cleanupOrphanSegments(segments, remainingEdges);
       const remainingTrips = trips.filter((trip) => !removedEdgeIds.has(trip.edgeId));
 
       await this.writeJsonAtomic(this.nodesPath, remainingNodes);
       await this.writeJsonAtomic(this.edgesPath, remainingEdges);
+      await this.writeJsonAtomic(this.segmentsPath, remainingSegments);
       await this.writeJsonAtomic(this.tripsPath, remainingTrips);
       return true;
     });
@@ -154,21 +165,25 @@ export class JsonGraphRepository implements GraphRepository {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const existing = edges.find((candidate) => candidate.id === edge.id);
       if (existing) {
-        return this.assembleEdge(existing, trips);
+        return this.assembleEdge(existing, trips, segments);
       }
 
       const normalizedTrips = this.normalizeTrips(edge.id, edge.trips ?? []);
       const storedEdge = this.toStoredEdge({ ...edge, trips: [] });
+      const nextSegments = this.upsertSegment(segments, edge.from, edge.to, edge.leuge);
       const nextTrips = trips.filter((trip) => trip.edgeId !== edge.id).concat(normalizedTrips);
 
       edges.push(storedEdge);
       await this.writeJsonAtomic(this.edgesPath, edges);
+      await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      return { ...edge, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const leuge = this.getSegmentLeuge(nextSegments, edge.from, edge.to);
+      return { ...edge, leuge, trips: normalizedTrips.map(this.stripTripEdgeId) };
     });
   }
 
@@ -176,24 +191,28 @@ export class JsonGraphRepository implements GraphRepository {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = edges.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
         return null;
       }
 
-      const existing = this.assembleEdge(edges[index], trips);
+      const existing = this.assembleEdge(edges[index], trips, segments);
       const updated = { ...existing, ...patch, id } satisfies GraphEdge;
       const nextTripsPayload = patch.trips ?? existing.trips ?? [];
       const normalizedTrips = this.normalizeTrips(id, nextTripsPayload);
+      const nextSegments = this.upsertSegment(segments, updated.from, updated.to, patch.leuge);
 
       edges[index] = this.toStoredEdge(updated);
       const nextTrips = trips.filter((trip) => trip.edgeId !== id).concat(normalizedTrips);
 
       await this.writeJsonAtomic(this.edgesPath, edges);
+      await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      return { ...updated, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const leuge = this.getSegmentLeuge(nextSegments, updated.from, updated.to);
+      return { ...updated, leuge, trips: normalizedTrips.map(this.stripTripEdgeId) };
     });
   }
 
@@ -201,14 +220,17 @@ export class JsonGraphRepository implements GraphRepository {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = edges.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
         return false;
       }
       const nextEdges = [...edges.slice(0, index), ...edges.slice(index + 1)];
+      const nextSegments = this.cleanupOrphanSegments(segments, nextEdges);
       const nextTrips = trips.filter((trip) => trip.edgeId !== id);
       await this.writeJsonAtomic(this.edgesPath, nextEdges);
+      await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
       return true;
     });
@@ -229,18 +251,22 @@ export class JsonGraphRepository implements GraphRepository {
   private async loadGraphData(): Promise<GraphData> {
     await this.ensureInitialized();
     const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
-    let edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+    const rawEdges = await this.readArrayFile<StoredEdge>(this.edgesPath);
+    let edges = rawEdges;
+    let segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
     const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
 
     const normalizedNodes = nodes.map((node) => this.fromStoredNode(node));
-    const migration = this.migrateEdgesIfNeeded(edges, normalizedNodes);
+    const migration = this.migrateEdgesIfNeeded(rawEdges, normalizedNodes, segments);
     if (migration.changed) {
       edges = migration.edges;
+      segments = migration.segments;
       await this.enqueueWrite(async () => {
         await this.writeJsonAtomic(this.edgesPath, migration.edges);
+        await this.writeJsonAtomic(this.segmentsPath, migration.segments);
       });
     }
-    const normalizedEdges = edges.map((edge) => this.assembleEdge(edge, trips));
+    const normalizedEdges = edges.map((edge) => this.assembleEdge(edge, trips, segments));
 
     return {
       nodes: normalizedNodes,
@@ -248,13 +274,15 @@ export class JsonGraphRepository implements GraphRepository {
     };
   }
 
-  private assembleEdge(edge: StoredEdge, trips: StoredTrip[]): GraphEdge {
+  private assembleEdge(edge: StoredEdge, trips: StoredTrip[], segments: StoredSegment[]): GraphEdge {
     const edgeTrips = trips.filter((trip) => trip.edgeId === edge.id).map(this.stripTripEdgeId);
     const durationMinutes =
       edge.durationMinutes ??
       this.deriveDurationMinutes(edgeTrips);
+    const leuge = this.getSegmentLeuge(segments, edge.from, edge.to);
     return {
       ...edge,
+      leuge,
       validTo: edge.validTo ?? undefined,
       durationMinutes,
       trips: edgeTrips
@@ -321,7 +349,7 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private toStoredEdge(edge: GraphEdge): StoredEdge {
-    const { trips: _trips, ...rest } = edge;
+    const { trips: _trips, leuge: _leuge, ...rest } = edge;
     return {
       ...rest,
       validTo: edge.validTo ?? null,
@@ -331,8 +359,9 @@ export class JsonGraphRepository implements GraphRepository {
 
   private migrateEdgesIfNeeded(
     edges: StoredEdge[],
-    nodes: GraphNode[]
-  ): { edges: StoredEdge[]; changed: boolean } {
+    nodes: GraphNode[],
+    existingSegments: StoredSegment[]
+  ): { edges: StoredEdge[]; segments: StoredSegment[]; changed: boolean } {
     const nodeIds = new Set(nodes.map((node) => node.id));
     const nameToId = new Map<string, string>();
     const duplicates = new Set<string>();
@@ -348,10 +377,18 @@ export class JsonGraphRepository implements GraphRepository {
     duplicates.forEach((name) => nameToId.delete(name));
 
     let changed = false;
+    const segments = new Map(existingSegments.map((segment) => [segment.id, segment]));
     const migrated = edges.map((edge) => {
-      const { durationMinutes: _durationMinutes, ...base } = edge as StoredEdge & { durationMinutes?: number };
+      const {
+        durationMinutes: _durationMinutes,
+        leuge: legacyLeuge,
+        ...base
+      } = edge as StoredEdge & { durationMinutes?: number; leuge?: number };
       let next: StoredEdge = { ...base };
       if (_durationMinutes !== undefined) {
+        changed = true;
+      }
+      if (legacyLeuge !== undefined) {
         changed = true;
       }
 
@@ -377,10 +414,20 @@ export class JsonGraphRepository implements GraphRepository {
         }
       }
 
+      const segment = this.createStoredSegment(next.from, next.to, legacyLeuge);
+      const existing = segments.get(segment.id);
+      if (!existing) {
+        changed = true;
+        segments.set(segment.id, segment);
+      } else if (existing.leuge === null && segment.leuge !== null) {
+        changed = true;
+        segments.set(segment.id, segment);
+      }
+
       return next;
     });
 
-    return { edges: migrated, changed };
+    return { edges: migrated, segments: [...segments.values()], changed };
   }
 
   private async ensureInitialized(): Promise<void> {
@@ -394,7 +441,57 @@ export class JsonGraphRepository implements GraphRepository {
     await fs.mkdir(this.dataDir, { recursive: true });
     await this.ensureFile(this.nodesPath);
     await this.ensureFile(this.edgesPath);
+    await this.ensureFile(this.segmentsPath);
     await this.ensureFile(this.tripsPath);
+  }
+
+  private getSegmentLeuge(segments: StoredSegment[], from: string, to: string): number | undefined {
+    const id = this.segmentIdFor(from, to);
+    const segment = segments.find((candidate) => candidate.id === id);
+    return segment?.leuge ?? undefined;
+  }
+
+  private upsertSegment(
+    segments: StoredSegment[],
+    from: string,
+    to: string,
+    leuge: number | undefined
+  ): StoredSegment[] {
+    const next = [...segments];
+    const segment = this.createStoredSegment(from, to, leuge);
+    const index = next.findIndex((candidate) => candidate.id === segment.id);
+    if (index === -1) {
+      next.push(segment);
+      return next;
+    }
+    if (leuge !== undefined) {
+      next[index] = segment;
+    }
+    return next;
+  }
+
+  private cleanupOrphanSegments(segments: StoredSegment[], edges: StoredEdge[]): StoredSegment[] {
+    const used = new Set(edges.map((edge) => this.segmentIdFor(edge.from, edge.to)));
+    return segments.filter((segment) => used.has(segment.id));
+  }
+
+  private createStoredSegment(from: string, to: string, leuge?: number): StoredSegment {
+    const [a, b] = this.normalizeSegmentNodes(from, to);
+    return {
+      id: this.segmentIdFor(from, to),
+      a,
+      b,
+      leuge: leuge ?? null
+    };
+  }
+
+  private normalizeSegmentNodes(from: string, to: string): [string, string] {
+    return from <= to ? [from, to] : [to, from];
+  }
+
+  private segmentIdFor(from: string, to: string): string {
+    const [a, b] = this.normalizeSegmentNodes(from, to);
+    return `${a}__${b}`;
   }
 
   private async ensureFile(filePath: string): Promise<void> {
