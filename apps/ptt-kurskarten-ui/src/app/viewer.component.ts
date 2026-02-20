@@ -53,6 +53,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   plannerActive = signal(false);
   mapSettled = signal(false);
   helpOpen = signal(true);
+  resetViewportToken = signal(0);
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
   private toPreviewId = signal<string>('');
@@ -369,6 +370,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   onToPreview(id: string): void {
     this.toPreviewId.set(id);
+  }
+
+  resetMapView(): void {
+    this.resetViewportToken.set(this.resetViewportToken() + 1);
   }
 
   plannerAutoMinimize = computed(() => !this.sidebarOpen() && !this.plannerHovered() && !this.plannerFocused());

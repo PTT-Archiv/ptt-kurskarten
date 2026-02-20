@@ -5,6 +5,7 @@
       [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
+      [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
     @if (hoveredSnippetUrl(); as snippetUrl) {
     @if (hoveredNodeScreen(); as pos) {
@@ -55,6 +56,9 @@
       </div>
       }
     </div>
+    <button class="reset-view-btn" type="button" (click)="resetMapView()">
+      {{ 'viewer.resetView' | transloco }}
+    </button>
   </section>
 
   <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">

@@ -23,6 +23,7 @@
   "viewer.noRouteNotYet": "Diese Verbindung existiert im Jahr {{year}} noch nicht.",
   "viewer.noRouteTime": "Keine Verbindung gefunden.",
   "viewer.details": "Details",
+  "viewer.resetView": "Ansicht zurücksetzen",
   "label.from": "Von",
   "btn.swap": "Tauschen",
   "label.to": "Nach",

@@ -23,6 +23,7 @@
   "viewer.noRouteNotYet": "Cette liaison n’existe pas encore en {{year}}.",
   "viewer.noRouteTime": "Aucune liaison trouvée.",
   "viewer.details": "Détails",
+  "viewer.resetView": "Réinitialiser la vue",
   "label.from": "De",
   "btn.swap": "Inverser",
   "label.to": "À",

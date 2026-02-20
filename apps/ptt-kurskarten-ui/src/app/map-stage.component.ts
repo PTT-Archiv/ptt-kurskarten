@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import type { ConnectionOption, GraphNode, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
-import { computeTransform, DEFAULT_VIEWBOX, worldToScreen } from './map-coordinates';
+import { computeTransform, DEFAULT_VIEWBOX, screenToWorld, worldToScreen } from './map-coordinates';
 import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
@@ -34,8 +34,8 @@ const NODE_COLOR_FOREIGN = '#0000ff';
   standalone: true,
   template: `
     <div class="stage" [class.no-border]="!showBorder">
-      <img class="map map-shadow" src="assets/maps/switzerland.svg" alt="" />
-      <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" />
+      <img class="map map-shadow" src="assets/maps/switzerland.svg" alt="" [style.transform]="getMapTransform(true)" />
+      <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform(false)" />
       <div class="overlay">
         <canvas
           #graphCanvas
@@ -44,6 +44,7 @@ const NODE_COLOR_FOREIGN = '#0000ff';
           (pointermove)="onPointerMove($event)"
           (pointerup)="onPointerUp($event)"
           (pointerleave)="onPointerLeave()"
+          (wheel)="onWheel($event)"
         ></canvas>
       </div>
     </div>
@@ -82,12 +83,12 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         display: block;
         object-fit: contain;
         pointer-events: none;
+        transform-origin: 0 0;
       }
 
       .map-shadow {
         position: absolute;
         inset: 0;
-        transform: translate(6px, 6px);
         opacity: 0.35;
         filter: grayscale(1) brightness(0.2);
         z-index: 0;
@@ -125,6 +126,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() selectedNodeId: string | null = null;
   @Input() routingActive = false;
   @Input() showBorder = true;
+  @Input() interactiveViewport = false;
+  @Input() resetViewportToken = 0;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -156,8 +159,13 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private pendingCanvasSize: { width: number; height: number } | null = null;
   private resizeRafId: number | null = null;
   private transform = computeTransform(1, 1, DEFAULT_VIEWBOX);
+  private fitTransform = computeTransform(1, 1, DEFAULT_VIEWBOX);
+  private viewportZoom = 1;
+  private viewportPan = { x: 0, y: 0 };
   private needsRender = false;
   private activePointerId: number | null = null;
+  private panStart: { x: number; y: number; panX: number; panY: number } | null = null;
+  private isPanning = false;
   private langSub?: Subscription;
   private hoveredNodeId: string | null = null;
 
@@ -184,8 +192,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['selectedConnection'] ||
       changes['showConnectionDetailsOnMap'] ||
       changes['selectedNodeId'] ||
-      changes['routingActive']
+      changes['routingActive'] ||
+      changes['resetViewportToken']
     ) {
+      if (changes['resetViewportToken'] && this.interactiveViewport) {
+        this.resetViewport();
+      }
       this.scheduleRender();
     }
   }
@@ -210,6 +222,19 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     this.activePointerId = event.pointerId;
     canvas.setPointerCapture(event.pointerId);
+    if (this.interactiveViewport && this.pickMode === null) {
+      const screen = this.getScreenPoint(event);
+      this.panStart = {
+        x: screen.x,
+        y: screen.y,
+        panX: this.viewportPan.x,
+        panY: this.viewportPan.y
+      };
+      this.isPanning = false;
+    } else {
+      this.panStart = null;
+      this.isPanning = false;
+    }
 
     const payload = this.buildPointerPayload(event);
     this.mapPointer.emit({ ...payload, type: 'down' });
@@ -218,6 +243,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   onPointerMove(event: PointerEvent): void {
     if (!this.isBrowser) {
       return;
+    }
+
+    if (this.activePointerId === event.pointerId && this.panStart && this.interactiveViewport && this.pickMode === null) {
+      const screen = this.getScreenPoint(event);
+      const dx = screen.x - this.panStart.x;
+      const dy = screen.y - this.panStart.y;
+      if (!this.isPanning && Math.hypot(dx, dy) > 3) {
+        this.isPanning = true;
+      }
+      if (this.isPanning) {
+        this.viewportPan = {
+          x: this.panStart.panX + dx,
+          y: this.panStart.panY + dy
+        };
+        this.scheduleRender();
+      }
     }
 
     const payload = this.buildPointerPayload(event);
@@ -237,11 +278,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       canvas.releasePointerCapture(event.pointerId);
     }
     this.activePointerId = null;
+    const wasPanning = this.isPanning;
+    this.isPanning = false;
+    this.panStart = null;
 
     const payload = this.buildPointerPayload(event);
     this.mapPointer.emit({ ...payload, type: 'up' });
 
-    if (payload.hitNodeId) {
+    if (!wasPanning && payload.hitNodeId) {
       this.nodeSelected.emit(payload.hitNodeId);
     }
   }
@@ -251,6 +295,34 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
     this.updateHoverState(null);
+  }
+
+  onWheel(event: WheelEvent): void {
+    if (!this.isBrowser || !this.interactiveViewport || this.pickMode !== null) {
+      return;
+    }
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) {
+      return;
+    }
+    event.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const sx = event.clientX - rect.left;
+    const sy = event.clientY - rect.top;
+    const currentZoom = this.viewportZoom;
+    const zoomFactor = Math.exp(-event.deltaY * 0.0015);
+    const nextZoom = Math.max(0.7, Math.min(4, currentZoom * zoomFactor));
+    if (Math.abs(nextZoom - currentZoom) < 0.0001) {
+      return;
+    }
+
+    const world = screenToWorld({ x: sx, y: sy }, this.transform);
+    this.viewportZoom = nextZoom;
+    this.viewportPan = {
+      x: sx - (world.x * this.fitTransform.scale + this.fitTransform.offsetX) * this.viewportZoom,
+      y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
+    };
+    this.scheduleRender();
   }
 
   private attachResizeObserver(): void {
@@ -352,7 +424,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     const { nodes, edges } = graph;
-    this.transform = computeTransform(width, height, DEFAULT_VIEWBOX);
+    this.fitTransform = computeTransform(width, height, DEFAULT_VIEWBOX);
+    this.transform = {
+      scale: this.fitTransform.scale * this.viewportZoom,
+      offsetX: this.fitTransform.offsetX * this.viewportZoom + this.viewportPan.x,
+      offsetY: this.fitTransform.offsetY * this.viewportZoom + this.viewportPan.y
+    };
 
     const nodeMap = new Map(nodes.map((node) => [node.id, node]));
     const highlightIds = this.getHighlightIds();
@@ -480,7 +557,11 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     if (!(this.showConnectionDetailsOnMap && this.selectedConnection)) {
       const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
-      nodes.filter((node) => labeledNames.has(node.name)).forEach((node) => {
+      const labelNodes =
+        this.interactiveViewport && this.viewportZoom >= 1.8
+          ? nodes
+          : nodes.filter((node) => labeledNames.has(node.name));
+      labelNodes.forEach((node) => {
         const screen = this.screenNodes.get(node.id);
         if (!screen) {
           return;
@@ -526,6 +607,29 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   private project(node: GraphNode): { x: number; y: number } {
     return worldToScreen(node, this.transform);
+  }
+
+  getMapTransform(shadow: boolean): string {
+    const tx = this.viewportPan.x + (shadow ? 6 : 0);
+    const ty = this.viewportPan.y + (shadow ? 6 : 0);
+    return `translate(${tx}px, ${ty}px) scale(${this.viewportZoom})`;
+  }
+
+  private getScreenPoint(event: PointerEvent): { x: number; y: number } {
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) {
+      return { x: 0, y: 0 };
+    }
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
+  }
+
+  private resetViewport(): void {
+    this.viewportZoom = 1;
+    this.viewportPan = { x: 0, y: 0 };
   }
 
   private getHighlightIds(): { nodeIds: Set<string>; edgeIds: Set<string> } {

@@ -278,6 +278,22 @@
   gap: 10px;
 }
 
+.reset-view-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 7;
+  border: 2px solid #141414;
+  background: #ffffff;
+  color: #141414;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
 .viewer-shell.sidebar-open .planner-overlay {
   width: clamp(420px, 52vw, 560px);
   top: 28px;
@@ -469,6 +485,11 @@
     left: 50%;
     transform: translateX(-50%);
     width: calc(100vw - 24px);
+  }
+
+  .reset-view-btn {
+    right: 12px;
+    bottom: 12px;
   }
 
   .sidebar-handle {
