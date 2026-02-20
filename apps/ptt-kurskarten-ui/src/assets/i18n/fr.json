@@ -56,6 +56,7 @@
   "viewer.helpText3": "Vous pouvez effectuer la recherche en saisissant du texte ou sélectionner directement sur la carte en cliquant sur le symbole +.",
   "viewer.helpOpen": "Ouvrir l’aide",
   "viewer.helpClose": "Fermer l’aide",
+  "viewer.zoomHint": "Molette pour zoomer, glisser pour déplacer",
   "admin.mode": "Mode",
   "admin.selectMode": "Sélection",
   "admin.addNode": "Ajouter un nœud",

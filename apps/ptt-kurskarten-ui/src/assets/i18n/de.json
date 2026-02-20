@@ -56,6 +56,7 @@
   "viewer.helpText3": "Sie können per Eingabe suchen oder direkt auf der Karte auswählen, indem Sie auf das + Symbol klicken.",
   "viewer.helpOpen": "Hilfe öffnen",
   "viewer.helpClose": "Hilfe schliessen",
+  "viewer.zoomHint": "Scrollen zum Zoomen, ziehen zum Verschieben",
   "admin.mode": "Modus",
   "admin.selectMode": "Auswahl",
   "admin.addNode": "Knoten hinzufügen",

@@ -33,7 +33,12 @@ const NODE_COLOR_FOREIGN = '#0000ff';
   selector: 'app-map-stage',
   standalone: true,
   template: `
-    <div class="stage" [class.no-border]="!showBorder">
+    <div
+      class="stage"
+      [class.no-border]="!showBorder"
+      (mouseenter)="onStageEnter()"
+      (mouseleave)="onStageLeave()"
+    >
       <img class="map map-shadow" src="assets/maps/switzerland.svg" alt="" [style.transform]="getMapTransform(true)" />
       <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform(false)" />
       <div class="overlay">
@@ -46,6 +51,9 @@ const NODE_COLOR_FOREIGN = '#0000ff';
           (pointerleave)="onPointerLeave()"
           (wheel)="onWheel($event)"
         ></canvas>
+        <div class="zoom-hint" [class.visible]="showZoomHint()">
+          {{ getZoomHintLabel() }}
+        </div>
       </div>
     </div>
   `,
@@ -111,6 +119,27 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         height: 100%;
         display: block;
       }
+
+      .zoom-hint {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        line-height: 1.2;
+        color: #fff;
+        background: rgba(20, 20, 20, 0.78);
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 140ms ease-out, transform 140ms ease-out;
+        pointer-events: none;
+      }
+
+      .zoom-hint.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     `
   ]
 })
@@ -168,6 +197,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private isPanning = false;
   private langSub?: Subscription;
   private hoveredNodeId: string | null = null;
+  private stageHover = false;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -323,6 +353,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
     };
     this.scheduleRender();
+  }
+
+  onStageEnter(): void {
+    this.stageHover = true;
+  }
+
+  onStageLeave(): void {
+    this.stageHover = false;
+  }
+
+  showZoomHint(): boolean {
+    return this.interactiveViewport && this.pickMode === null && this.stageHover;
+  }
+
+  getZoomHintLabel(): string {
+    return this.transloco.translate('viewer.zoomHint');
   }
 
   private attachResizeObserver(): void {
