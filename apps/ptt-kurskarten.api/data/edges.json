@@ -263,5 +263,13 @@
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "edge-1771579350347",
+    "from": "node-1770812117179",
+    "to": "node-1770809209472",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]

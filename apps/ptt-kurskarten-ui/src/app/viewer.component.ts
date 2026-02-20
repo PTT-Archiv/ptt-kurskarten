@@ -38,6 +38,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   fromId = signal<string>('');
   toId = signal<string>('');
   departTime = signal<TimeHHMM>('08:00');
+  draftDepartTime = signal<TimeHHMM>('08:00');
+  hasSearched = signal(false);
   connectionResults = signal<ConnectionOption[]>([]);
   selectedConnectionId = signal<string | null>(null);
   showConnectionDetailsOnMap = signal(true);
@@ -134,8 +136,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
       const from = this.fromId();
       const to = this.toId();
-      const depart = this.departTime();
-
       if (!from || !to || from === to) {
         this.routingState.set('idle');
         this.connectionResults.set([]);
@@ -226,6 +226,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
     const year = this.year();
     const depart = this.departTime();
+    this.hasSearched.set(true);
     this.routingState.set('searching');
     this.uiState.set('landing');
     this.lastSearchParams.set({ from, to, time: depart, year });
@@ -268,10 +269,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   shiftTime(minutes: number): void {
-    const current = this.departTime();
+    const current = this.draftDepartTime();
     const total = this.parseTimeMinutes(current) + minutes;
     const normalized = ((total % 1440) + 1440) % 1440;
-    this.departTime.set(this.formatTimeMinutes(normalized));
+    const next = this.formatTimeMinutes(normalized);
+    this.draftDepartTime.set(next);
+    this.departTime.set(next);
+    this.onSearchConnections();
   }
 
   selectConnection(option: ConnectionOption): void {
@@ -343,6 +347,19 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   onToIdChange(id: string): void {
     this.toId.set(id);
     this.triggerPulse(id);
+  }
+
+  onDepartTimeDraftChange(time: TimeHHMM): void {
+    this.draftDepartTime.set(time);
+  }
+
+  applyDepartTime(): void {
+    const next = this.draftDepartTime();
+    if (next === this.departTime()) {
+      return;
+    }
+    this.departTime.set(next);
+    this.onSearchConnections();
   }
 
   onFromPreview(id: string): void {

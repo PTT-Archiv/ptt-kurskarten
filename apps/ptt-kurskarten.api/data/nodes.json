@@ -116,11 +116,11 @@
   {
     "id": "node-1770812117179",
     "name": "Nyon",
-    "x": 46.227019629833876,
-    "y": 370.58227860587357,
+    "x": 47.13692946058091,
+    "y": 364.2074688796681,
     "validFrom": 1852,
-    "iiifCenterX": 1396,
-    "iiifCenterY": 6417,
+    "iiifCenterX": 1410,
+    "iiifCenterY": 6398,
     "validTo": null
   },
   {
@@ -142,14 +142,6 @@
     "validTo": null,
     "iiifCenterX": 2145,
     "iiifCenterY": 5949
-  },
-  {
-    "id": "node-1770818441812",
-    "name": "Nyon",
-    "x": 46.227019629833876,
-    "y": 370.58227860587357,
-    "validFrom": 1852,
-    "validTo": null
   },
   {
     "id": "node-1770818444657",

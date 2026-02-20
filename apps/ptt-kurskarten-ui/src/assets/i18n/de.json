@@ -28,6 +28,7 @@
   "label.to": "Nach",
   "label.departure": "Abfahrtszeit",
   "btn.search": "Suchen",
+  "btn.apply": "Apply",
   "label.transfers": "Umstiege",
   "viewer.noConnections": "Keine Verbindungen gefunden.",
   "viewer.routeDetails": "Routendetails",

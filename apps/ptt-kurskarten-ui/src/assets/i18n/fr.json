@@ -28,6 +28,7 @@
   "label.to": "À",
   "label.departure": "Heure de départ",
   "btn.search": "Rechercher",
+  "btn.apply": "Apply",
   "label.transfers": "Correspondances",
   "viewer.noConnections": "Aucune correspondance trouvée.",
   "viewer.routeDetails": "Détails de l’itinéraire",

@@ -28,10 +28,13 @@
     }
     <div class="planner-overlay">
       <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
-        [departTime]="departTime()" [searching]="routingState() === 'searching'" [variant]="'compact'"
+        [departTime]="draftDepartTime()" [showTime]="hasSearched()"
+        [canApplyTime]="hasSearched() && draftDepartTime() !== departTime()"
+        [searching]="routingState() === 'searching'" [variant]="'compact'"
         [pickMode]="pickTarget()" (fromIdChange)="onFromIdChange($event)" (toIdChange)="onToIdChange($event)"
         (fromPreviewChange)="onFromPreview($event)" (toPreviewChange)="onToPreview($event)"
-        (pickFrom)="startMapPick('from')" (pickTo)="startMapPick('to')" (departTimeChange)="departTime.set($event)"
+        (pickFrom)="startMapPick('from')" (pickTo)="startMapPick('to')" (departTimeChange)="onDepartTimeDraftChange($event)"
+        (applyTime)="applyDepartTime()"
         (swap)="swapConnections()" (plannerFocus)="onPlannerFocus($event)"
         (plannerHover)="onPlannerHover($event)"></app-viewer-route-planner-overlay>
       @if (routingState() === 'searching') {

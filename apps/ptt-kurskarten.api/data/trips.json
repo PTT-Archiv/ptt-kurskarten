@@ -334,5 +334,26 @@
     "arrives": "00:50",
     "arrivalDayOffset": 1,
     "edgeId": "edge-1771578091020"
+  },
+  {
+    "id": "trip-1771579304429",
+    "departs": "13:15",
+    "arrives": "14:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771578091020"
+  },
+  {
+    "id": "trip-1771579356395",
+    "departs": "23:15",
+    "arrives": "12:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771579350347"
+  },
+  {
+    "id": "trip-1771579370900",
+    "departs": "11:15",
+    "arrives": "12:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771579350347"
   }
 ]

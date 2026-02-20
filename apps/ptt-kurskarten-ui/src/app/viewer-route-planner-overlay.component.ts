@@ -107,6 +107,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         </label>
       </div>
       <div class="planner-row">
+        @if (showTime) {
         <label class="field time-field">
           <span>{{ 'label.departure' | transloco }}</span>
           <div class="time-picker">
@@ -118,8 +119,10 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 inputmode="numeric"
                 list="hour-options"
                 maxlength="2"
-                [value]="hourValue"
+                [value]="hourDisplayValue"
+                (focus)="onHourFocus()"
                 (input)="onHourInput($any($event.target).value)"
+                (blur)="onHourBlur()"
               />
               <datalist id="hour-options">
                 @for (h of hours; track h) {
@@ -135,8 +138,10 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 inputmode="numeric"
                 list="minute-options"
                 maxlength="2"
-                [value]="minuteValue"
+                [value]="minuteDisplayValue"
+                (focus)="onMinuteFocus()"
                 (input)="onMinuteInput($any($event.target).value)"
+                (blur)="onMinuteBlur()"
               />
               <datalist id="minute-options">
                 @for (m of minutes; track m) {
@@ -146,6 +151,12 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
             </div>
           </div>
         </label>
+        @if (canApplyTime) {
+          <button type="button" class="action-btn" (click)="applyTime.emit()">
+            {{ 'btn.apply' | transloco }}
+          </button>
+        }
+        }
       </div>
     </div>
   `,
@@ -482,11 +493,14 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   @Input() fromId = '';
   @Input() toId = '';
   @Input() departTime: TimeHHMM = '08:00';
+  @Input() showTime = false;
+  @Input() canApplyTime = false;
   @Input() searching = false;
   @Input() pickMode: 'from' | 'to' | null = null;
   @Output() fromIdChange = new EventEmitter<string>();
   @Output() toIdChange = new EventEmitter<string>();
   @Output() departTimeChange = new EventEmitter<TimeHHMM>();
+  @Output() applyTime = new EventEmitter<void>();
   @Output() swap = new EventEmitter<void>();
   @Output() plannerFocus = new EventEmitter<boolean>();
   @Output() plannerHover = new EventEmitter<boolean>();
@@ -504,6 +518,10 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   toOpen = false;
   fromActiveIndex = 0;
   toActiveIndex = 0;
+  private hourDraft = '';
+  private minuteDraft = '';
+  private editingHour = false;
+  private editingMinute = false;
 
   hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
   minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
@@ -516,16 +534,46 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     return this.departTime?.split(':')[1] ?? '00';
   }
 
+  get hourDisplayValue(): string {
+    return this.editingHour ? this.hourDraft : this.hourValue;
+  }
+
+  get minuteDisplayValue(): string {
+    return this.editingMinute ? this.minuteDraft : this.minuteValue;
+  }
+
+  onHourFocus(): void {
+    this.editingHour = true;
+    this.hourDraft = this.hourValue;
+  }
+
   onHourInput(value: string): void {
-    const hour = this.normalizeNumber(value, 23);
-    const next = `${hour}:${this.minuteValue}` as TimeHHMM;
-    this.departTimeChange.emit(next);
+    this.hourDraft = this.normalizeDraft(value);
+    if (this.hourDraft.length === 2) {
+      this.commitHour();
+    }
+  }
+
+  onHourBlur(): void {
+    this.commitHour();
+    this.editingHour = false;
+  }
+
+  onMinuteFocus(): void {
+    this.editingMinute = true;
+    this.minuteDraft = this.minuteValue;
   }
 
   onMinuteInput(value: string): void {
-    const minute = this.normalizeNumber(value, 59);
-    const next = `${this.hourValue}:${minute}` as TimeHHMM;
-    this.departTimeChange.emit(next);
+    this.minuteDraft = this.normalizeDraft(value);
+    if (this.minuteDraft.length === 2) {
+      this.commitMinute();
+    }
+  }
+
+  onMinuteBlur(): void {
+    this.commitMinute();
+    this.editingMinute = false;
   }
 
   private normalizeNumber(value: string, max: number): string {
@@ -543,6 +591,14 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     }
     if ((changes['toId'] || changes['nodes']) && !this.toOpen) {
       this.toQuery = this.nameForId(this.toId);
+    }
+    if (changes['departTime']) {
+      if (!this.editingHour) {
+        this.hourDraft = this.hourValue;
+      }
+      if (!this.editingMinute) {
+        this.minuteDraft = this.minuteValue;
+      }
     }
   }
 
@@ -709,20 +765,47 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   }
 
   private filterNodes(query: string): Array<{ id: string; name: string }> {
-    const q = query.trim().toLowerCase();
+    const q = this.normalizeSearch(query);
     const list = this.nodes ?? [];
     if (!q) {
       return list.slice(0, 8);
     }
-    return list.filter((node) => node.name.toLowerCase().includes(q)).slice(0, 8);
+    return list.filter((node) => this.normalizeSearch(node.name).includes(q)).slice(0, 8);
   }
 
   private matchByName(value: string): { id: string; name: string } | null {
-    const v = value.trim().toLowerCase();
+    const v = this.normalizeSearch(value);
     if (!v) {
       return null;
     }
-    return this.nodes.find((node) => node.name.toLowerCase() === v) ?? null;
+    return this.nodes.find((node) => this.normalizeSearch(node.name) === v) ?? null;
+  }
+
+  private normalizeSearch(value: string): string {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[’']/g, '')
+      .toLowerCase()
+      .trim();
+  }
+
+  private normalizeDraft(value: string): string {
+    return value.replace(/\D/g, '').slice(0, 2);
+  }
+
+  private commitHour(): void {
+    const hour = this.normalizeNumber(this.hourDraft || this.hourValue, 23);
+    this.hourDraft = hour;
+    const next = `${hour}:${this.minuteValue}` as TimeHHMM;
+    this.departTimeChange.emit(next);
+  }
+
+  private commitMinute(): void {
+    const minute = this.normalizeNumber(this.minuteDraft || this.minuteValue, 59);
+    this.minuteDraft = minute;
+    const next = `${this.hourValue}:${minute}` as TimeHHMM;
+    this.departTimeChange.emit(next);
   }
 
   private nameForId(id: string): string {
