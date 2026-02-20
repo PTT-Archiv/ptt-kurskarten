@@ -123,6 +123,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 (focus)="onHourFocus()"
                 (input)="onHourInput($any($event.target).value)"
                 (blur)="onHourBlur()"
+                (keydown.enter)="onHourEnter($event)"
               />
               <datalist id="hour-options">
                 @for (h of hours; track h) {
@@ -142,6 +143,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 (focus)="onMinuteFocus()"
                 (input)="onMinuteInput($any($event.target).value)"
                 (blur)="onMinuteBlur()"
+                (keydown.enter)="onMinuteEnter($event)"
               />
               <datalist id="minute-options">
                 @for (m of minutes; track m) {
@@ -559,6 +561,15 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     this.editingHour = false;
   }
 
+  onHourEnter(event: Event): void {
+    event.preventDefault();
+    this.commitHour();
+    this.editingHour = false;
+    if (this.canApplyTime) {
+      this.applyTime.emit();
+    }
+  }
+
   onMinuteFocus(): void {
     this.editingMinute = true;
     this.minuteDraft = this.minuteValue;
@@ -574,6 +585,15 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   onMinuteBlur(): void {
     this.commitMinute();
     this.editingMinute = false;
+  }
+
+  onMinuteEnter(event: Event): void {
+    event.preventDefault();
+    this.commitMinute();
+    this.editingMinute = false;
+    if (this.canApplyTime) {
+      this.applyTime.emit();
+    }
   }
 
   private normalizeNumber(value: string, max: number): string {

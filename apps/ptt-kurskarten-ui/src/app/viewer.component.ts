@@ -52,6 +52,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   lastResultParams = signal<{ from: string; to: string; year: number } | null>(null);
   plannerActive = signal(false);
   mapSettled = signal(false);
+  helpOpen = signal(true);
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
   private toPreviewId = signal<string>('');

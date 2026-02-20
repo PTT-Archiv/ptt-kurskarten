@@ -224,27 +224,11 @@
     }
 
     <section class="panel-section">
-      <div class="section-title">{{ 'label.year' | transloco }}</div>
-      <div class="year-value">{{ yearDraft() }}</div>
-      <input class="year-slider" type="range" [min]="minYear()" [max]="maxYear()" [value]="yearDraft()"
-        (input)="onYearInput($event)" (change)="onYearCommit($event)" />
-      <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
-    </section>
-
-    <section class="panel-section">
       <label class="toggle-row">
         <input type="checkbox" [checked]="showConnectionDetailsOnMap()"
           (change)="showConnectionDetailsOnMap.set($any($event.target).checked)" />
         <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
       </label>
-    </section>
-
-    <section class="panel-section">
-      <div class="section-title">{{ 'viewer.legend' | transloco }}</div>
-      <div class="legend">
-        <div>{{ 'viewer.legend.nodes' | transloco }}</div>
-        <div>{{ 'viewer.legend.edges' | transloco }}</div>
-      </div>
     </section>
 
     <section class="panel-section">
@@ -269,6 +253,24 @@
   @if (!sidebarOpen()) {
   <button class="sidebar-handle" type="button" (click)="toggleSidebar()" aria-label="Details">
     <span class="handle-text">{{ 'viewer.details' | transloco }}</span>
+  </button>
+  }
+
+  @if (helpOpen()) {
+  <section class="help-popup">
+    <div class="help-header">
+      <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+      <button class="help-close" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
+        ×
+      </button>
+    </div>
+    <p>{{ 'viewer.helpText1' | transloco }}</p>
+    <p>{{ 'viewer.helpText2' | transloco }}</p>
+    <p>{{ 'viewer.helpText3' | transloco }}</p>
+  </section>
+  } @else {
+  <button class="help-fab" type="button" (click)="helpOpen.set(true)">
+    {{ 'viewer.helpOpen' | transloco }}
   </button>
   }
 </main>
