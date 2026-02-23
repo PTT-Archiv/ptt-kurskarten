@@ -731,5 +731,213 @@
     "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "edge-1771862140603",
+    "from": "node-1770890564956",
+    "to": "node-1770890556808",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862187158",
+    "from": "node-1770890556808",
+    "to": "node-1770890564956",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862228235",
+    "from": "node-1770890556808",
+    "to": "node-1770890541178",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862262355",
+    "from": "node-1770890541178",
+    "to": "node-1770890556808",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862284485",
+    "from": "node-1770890541178",
+    "to": "node-1770890523913",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862302051",
+    "from": "node-1770890523913",
+    "to": "node-1770890541178",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862318521",
+    "from": "node-1770890523913",
+    "to": "node-1770890434712",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862344310",
+    "from": "node-1770890434712",
+    "to": "node-1770890523913",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862539869",
+    "from": "node-1770890541178",
+    "to": "node-1770823561872",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862589400",
+    "from": "node-1770823561872",
+    "to": "node-1770890541178",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862623067",
+    "from": "node-1770823561872",
+    "to": "node-1770823595717",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862655318",
+    "from": "node-1770823595717",
+    "to": "node-1770823561872",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862679446",
+    "from": "node-1770823595717",
+    "to": "node-1770823570686",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862702866",
+    "from": "node-1770823570686",
+    "to": "node-1770823595717",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862722919",
+    "from": "node-1770823570686",
+    "to": "node-1770823607384",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862739339",
+    "from": "node-1770823607384",
+    "to": "node-1770823570686",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862748856",
+    "from": "node-1770823607384",
+    "to": "node-1770823621828",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862766751",
+    "from": "node-1770823621828",
+    "to": "node-1770823607384",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862781801",
+    "from": "node-1770823621828",
+    "to": "node-1770823657588",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862801474",
+    "from": "node-1770823657588",
+    "to": "node-1770823621828",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862817595",
+    "from": "node-1770823657588",
+    "to": "node-1770890638355",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862833238",
+    "from": "node-1770890638355",
+    "to": "node-1770823657588",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862907051",
+    "from": "node-1770890638355",
+    "to": "node-1770890809431",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862921413",
+    "from": "node-1770890809431",
+    "to": "node-1770890638355",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862934253",
+    "from": "node-1770890809431",
+    "to": "node-1770890971568",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1771862949036",
+    "from": "node-1770890971568",
+    "to": "node-1770890809431",
+    "transport": "postkutsche",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
