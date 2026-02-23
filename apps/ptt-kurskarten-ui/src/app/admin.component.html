@@ -8,6 +8,122 @@
       [showBorder]="false"
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
+    <section class="quick-edge-panel">
+      <div class="quick-edge-title">Quick Edge</div>
+      <div class="quick-edge-row">
+        <label class="quick-edge-field">
+          <span>{{ 'label.from' | transloco }}</span>
+          <div class="quick-edge-typeahead">
+            <input
+              #quickFromInput
+              type="text"
+              [value]="quickFromQuery()"
+              placeholder="Type station..."
+              (focus)="quickFromOpen.set(true)"
+              (input)="onQuickFromInput($event)"
+              (keydown)="onQuickFromKeydown($event)"
+              (blur)="closeQuickFromList()"
+            />
+            @if (quickFromOpen() && quickFromSuggestions().length > 0) {
+              <div class="quick-edge-list">
+                @for (node of quickFromSuggestions(); track node.id; let idx = $index) {
+                  <button
+                    type="button"
+                    [class.active]="idx === quickFromActiveIndex()"
+                    (mousedown)="selectQuickFrom(node.id)"
+                  >
+                    {{ node.name }}
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        </label>
+
+        <button type="button" class="quick-edge-swap" (click)="swapQuickDirection()" title="Swap direction">
+          ⇄
+        </button>
+
+        <label class="quick-edge-field">
+          <span>{{ 'label.to' | transloco }}</span>
+          <div class="quick-edge-typeahead">
+            <input
+              #quickToInput
+              type="text"
+              [value]="quickToQuery()"
+              placeholder="Type station..."
+              (focus)="quickToOpen.set(true)"
+              (input)="onQuickToInput($event)"
+              (keydown)="onQuickToKeydown($event)"
+              (blur)="closeQuickToList()"
+            />
+            @if (quickToOpen() && quickToSuggestions().length > 0) {
+              <div class="quick-edge-list">
+                @for (node of quickToSuggestions(); track node.id; let idx = $index) {
+                  <button
+                    type="button"
+                    [class.active]="idx === quickToActiveIndex()"
+                    (mousedown)="selectQuickTo(node.id)"
+                  >
+                    {{ node.name }}
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        </label>
+      </div>
+      <div class="quick-edge-row quick-edge-meta">
+        <label class="quick-edge-field">
+          <span>{{ 'label.leuge' | transloco }}</span>
+          <input #quickLeugeInput type="number" [value]="quickLeuge()" (input)="updateQuickLeuge($event)" />
+        </label>
+      </div>
+      <div class="quick-trip-header">
+        <span class="quick-trip-title">{{ 'label.trips' | transloco }}</span>
+        <button type="button" class="ghost-btn" (click)="addQuickTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+      </div>
+      <div class="quick-trip-table">
+        <div class="quick-trip-row header">
+          <span>Dep</span>
+          <span>Arr</span>
+          <span></span>
+        </div>
+        @for (trip of quickTrips(); track trip.id; let idx = $index) {
+          <div class="quick-trip-row">
+            <input
+              type="text"
+              [value]="trip.departs"
+              placeholder="HH:MM"
+              (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
+              (keydown)="onQuickTripKeydown($event, idx, 'departs')"
+              [attr.data-quick-trip-index]="idx"
+              data-quick-trip-field="departs"
+            />
+            <input
+              type="text"
+              [value]="trip.arrives"
+              placeholder="HH:MM"
+              (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
+              (keydown)="onQuickTripKeydown($event, idx, 'arrives')"
+              [attr.data-quick-trip-index]="idx"
+              data-quick-trip-field="arrives"
+            />
+            <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+              ×
+            </button>
+          </div>
+        }
+      </div>
+      <button
+        type="button"
+        class="quick-edge-create"
+        [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
+        (click)="saveQuickEdge()"
+      >
+        {{ 'btn.createEdge' | transloco }}
+      </button>
+    </section>
     <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>

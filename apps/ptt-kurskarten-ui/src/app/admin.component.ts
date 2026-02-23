@@ -110,6 +110,19 @@ export class AdminComponent implements OnDestroy {
   shortcutsCollapsed = signal<boolean>(false);
   confirmDeleteNode = signal<boolean>(false);
   isDragging = signal<boolean>(false);
+  quickFromQuery = signal<string>('');
+  quickToQuery = signal<string>('');
+  quickFromId = signal<string | null>(null);
+  quickToId = signal<string | null>(null);
+  quickFromOpen = signal<boolean>(false);
+  quickToOpen = signal<boolean>(false);
+  quickFromActiveIndex = signal<number>(0);
+  quickToActiveIndex = signal<number>(0);
+  quickLeuge = signal<string>('');
+  quickLeugeDirty = signal<boolean>(false);
+  quickTrips = signal<EdgeTrip[]>([
+    { id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
+  ]);
   geoSearchEnabled = signal<boolean>(true);
   geoResults = signal<GeoAdminResult[]>([]);
   geoLoading = signal<boolean>(false);
@@ -140,6 +153,9 @@ export class AdminComponent implements OnDestroy {
   @ViewChild('archivePanel') private archivePanelRef?: ElementRef<HTMLElement>;
   @ViewChild(ArchiveSnippetViewerComponent) private archiveViewer?: ArchiveSnippetViewerComponent;
   @ViewChild('nodeNameInput') private nodeNameInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('quickFromInput') private quickFromInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('quickToInput') private quickToInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('quickLeugeInput') private quickLeugeInput?: ElementRef<HTMLInputElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -228,6 +244,24 @@ export class AdminComponent implements OnDestroy {
     ensure(draft?.to);
 
     return [...options.values()].sort((a, b) => a.name.localeCompare(b.name));
+  });
+
+  quickFromSuggestions = computed(() => {
+    const query = this.quickFromQuery().trim().toLowerCase();
+    const selectedToId = this.quickToId();
+    return this.nodeOptions()
+      .filter((node) => node.id !== selectedToId)
+      .filter((node) => !query || node.name.toLowerCase().includes(query))
+      .slice(0, 12);
+  });
+
+  quickToSuggestions = computed(() => {
+    const query = this.quickToQuery().trim().toLowerCase();
+    const selectedFromId = this.quickFromId();
+    return this.nodeOptions()
+      .filter((node) => node.id !== selectedFromId)
+      .filter((node) => !query || node.name.toLowerCase().includes(query))
+      .slice(0, 12);
   });
 
   selectedEdgeDraft = computed<EdgeDraft | null>(() => {
@@ -433,21 +467,314 @@ export class AdminComponent implements OnDestroy {
     const nodes = snapshot?.nodes ?? [];
     const fallbackTo = nodes.find((node) => node.id !== nodeId)?.id ?? null;
     if (fallbackTo) {
-      const leuge = this.findExistingLeuge(nodeId, fallbackTo);
-      this.draftEdge.set({
-        id: `edge-${Date.now()}`,
-        from: nodeId,
-        to: fallbackTo,
-        transport: 'postkutsche',
-        leuge,
-        validFrom: this.year(),
-        trips: []
-      });
-      this.selection.selectEdge(this.draftEdge()!.id);
-      this.dirty.set(true);
+      this.createDraftEdgeBetween(nodeId, fallbackTo);
       return;
     }
     this.selection.startEdgeFrom(nodeId);
+  }
+
+  onQuickFromInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.quickFromQuery.set(value);
+    this.quickFromId.set(null);
+    this.quickFromOpen.set(true);
+    this.quickFromActiveIndex.set(0);
+    const normalized = value.trim().toLowerCase();
+    if (!normalized) {
+      return;
+    }
+    const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickToId());
+    if (exact) {
+      this.quickFromId.set(exact.id);
+      this.applyQuickLeugePrefill();
+    }
+  }
+
+  onQuickToInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.quickToQuery.set(value);
+    this.quickToId.set(null);
+    this.quickToOpen.set(true);
+    this.quickToActiveIndex.set(0);
+    const normalized = value.trim().toLowerCase();
+    if (!normalized) {
+      return;
+    }
+    const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickFromId());
+    if (exact) {
+      this.quickToId.set(exact.id);
+      this.applyQuickLeugePrefill();
+    }
+  }
+
+  onQuickFromKeydown(event: KeyboardEvent): void {
+    const isArrowDown = event.key === 'ArrowDown' || event.key === 'Down';
+    const isArrowUp = event.key === 'ArrowUp' || event.key === 'Up';
+    const isEnter = event.key === 'Enter';
+    const isEscape = event.key === 'Escape';
+    const suggestions = this.quickFromSuggestions();
+    if (isArrowDown) {
+      if (!suggestions.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickFromOpen.set(true);
+      this.quickFromActiveIndex.set((this.quickFromActiveIndex() + 1) % suggestions.length);
+      return;
+    }
+    if (isArrowUp) {
+      if (!suggestions.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickFromOpen.set(true);
+      this.quickFromActiveIndex.set((this.quickFromActiveIndex() - 1 + suggestions.length) % suggestions.length);
+      return;
+    }
+    if (isEnter && suggestions.length) {
+      event.preventDefault();
+      event.stopPropagation();
+      const picked = suggestions[this.quickFromActiveIndex()] ?? suggestions[0];
+      if (picked) {
+        this.selectQuickFrom(picked.id);
+      }
+      return;
+    }
+    if (isEnter && this.quickFromId()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.focusQuickToInput();
+      return;
+    }
+    if (isEscape) {
+      event.stopPropagation();
+      this.quickFromOpen.set(false);
+    }
+  }
+
+  onQuickToKeydown(event: KeyboardEvent): void {
+    const isArrowDown = event.key === 'ArrowDown' || event.key === 'Down';
+    const isArrowUp = event.key === 'ArrowUp' || event.key === 'Up';
+    const isEnter = event.key === 'Enter';
+    const isEscape = event.key === 'Escape';
+    const suggestions = this.quickToSuggestions();
+    if (isArrowDown) {
+      if (!suggestions.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickToOpen.set(true);
+      this.quickToActiveIndex.set((this.quickToActiveIndex() + 1) % suggestions.length);
+      return;
+    }
+    if (isArrowUp) {
+      if (!suggestions.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickToOpen.set(true);
+      this.quickToActiveIndex.set((this.quickToActiveIndex() - 1 + suggestions.length) % suggestions.length);
+      return;
+    }
+    if (isEnter && suggestions.length) {
+      event.preventDefault();
+      event.stopPropagation();
+      const picked = suggestions[this.quickToActiveIndex()] ?? suggestions[0];
+      if (picked) {
+        this.selectQuickTo(picked.id);
+      }
+      return;
+    }
+    if (isEnter && this.quickToId()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.focusQuickLeugeInput();
+      return;
+    }
+    if (isEscape) {
+      event.stopPropagation();
+      this.quickToOpen.set(false);
+    }
+  }
+
+  closeQuickFromList(): void {
+    setTimeout(() => this.quickFromOpen.set(false), 80);
+  }
+
+  closeQuickToList(): void {
+    setTimeout(() => this.quickToOpen.set(false), 80);
+  }
+
+  selectQuickFrom(nodeId: string): void {
+    const node = this.nodeOptions().find((candidate) => candidate.id === nodeId);
+    if (!node) {
+      return;
+    }
+    this.quickFromId.set(node.id);
+    this.quickFromQuery.set(node.name);
+    this.quickFromOpen.set(false);
+    this.quickFromActiveIndex.set(0);
+    if (this.quickToId() === node.id) {
+      this.quickToId.set(null);
+      this.quickToQuery.set('');
+    }
+    this.applyQuickLeugePrefill();
+  }
+
+  selectQuickTo(nodeId: string): void {
+    const node = this.nodeOptions().find((candidate) => candidate.id === nodeId);
+    if (!node) {
+      return;
+    }
+    this.quickToId.set(node.id);
+    this.quickToQuery.set(node.name);
+    this.quickToOpen.set(false);
+    this.quickToActiveIndex.set(0);
+    if (this.quickFromId() === node.id) {
+      this.quickFromId.set(null);
+      this.quickFromQuery.set('');
+    }
+    this.applyQuickLeugePrefill();
+  }
+
+  updateQuickLeuge(event: Event): void {
+    this.quickLeuge.set((event.target as HTMLInputElement).value);
+    this.quickLeugeDirty.set(true);
+  }
+
+  addQuickTrip(copyLast = false): void {
+    const trips = this.quickTrips();
+    const next: EdgeTrip = copyLast && trips.length > 0
+      ? { ...trips[trips.length - 1], id: `quick-trip-${Date.now()}` }
+      : { id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 };
+    this.quickTrips.set([...trips, next]);
+  }
+
+  removeQuickTrip(tripId: string): void {
+    const trips = this.quickTrips();
+    if (trips.length <= 1) {
+      return;
+    }
+    this.quickTrips.set(trips.filter((trip) => trip.id !== tripId));
+  }
+
+  updateQuickTripField(tripId: string, field: keyof EdgeTrip, value: string | number | undefined): void {
+    const trips = this.quickTrips().map((trip) => (trip.id === tripId ? { ...trip, [field]: value } : trip));
+    this.quickTrips.set(trips);
+  }
+
+  onQuickTripKeydown(event: KeyboardEvent, index: number, field: 'departs' | 'arrives'): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (field === 'departs') {
+        this.focusQuickTripField(index, 'arrives');
+        return;
+      }
+      const nextIndex = index + 1;
+      if (nextIndex < this.quickTrips().length) {
+        this.focusQuickTripField(nextIndex, 'departs');
+        return;
+      }
+      this.addQuickTrip(true);
+      requestAnimationFrame(() => this.focusQuickTripField(nextIndex, 'departs'));
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      event.stopPropagation();
+      const nextIndex = Math.min(index + 1, this.quickTrips().length - 1);
+      this.focusQuickTripField(nextIndex, field);
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      event.stopPropagation();
+      const prevIndex = Math.max(index - 1, 0);
+      this.focusQuickTripField(prevIndex, field);
+    }
+  }
+
+  saveQuickEdge(): void {
+    const from = this.quickFromId();
+    const to = this.quickToId();
+    if (!from || !to || from === to) {
+      return;
+    }
+
+    const leugeRaw = this.quickLeuge().trim();
+    const leuge = leugeRaw === '' ? undefined : Number(leugeRaw);
+    if (leuge !== undefined && Number.isNaN(leuge)) {
+      return;
+    }
+
+    const trips = this.quickTrips().map((trip) => ({ ...trip, id: trip.id || `trip-${Date.now()}` }));
+    if (!this.tripsValid(trips)) {
+      return;
+    }
+
+    const edge: GraphEdge = {
+      id: `edge-${Date.now()}`,
+      from,
+      to,
+      transport: 'postkutsche',
+      leuge,
+      validFrom: this.year(),
+      trips
+    };
+
+    this.repo.createEdge(edge).subscribe({
+      next: (created) => {
+        this.addEdge(created);
+        this.selection.selectEdge(created.id);
+        this.dirty.set(false);
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Strecke erstellt',
+          key: 'edge-save'
+        });
+        if (trips.length) {
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Fahrten gespeichert',
+            key: 'trip-save'
+          });
+        }
+        this.quickFromOpen.set(false);
+        this.quickToOpen.set(false);
+        this.quickToId.set(null);
+        this.quickToQuery.set('');
+        this.quickLeuge.set('');
+        this.quickLeugeDirty.set(false);
+        this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'edge-save'
+        });
+      }
+    });
+  }
+
+  swapQuickDirection(): void {
+    const fromId = this.quickFromId();
+    const toId = this.quickToId();
+    const fromQuery = this.quickFromQuery();
+    const toQuery = this.quickToQuery();
+    this.quickFromId.set(toId);
+    this.quickToId.set(fromId);
+    this.quickFromQuery.set(toQuery);
+    this.quickToQuery.set(fromQuery);
+    this.applyQuickLeugePrefill();
   }
 
   cancelPendingEdge(): void {
@@ -1261,19 +1588,8 @@ export class AdminComponent implements OnDestroy {
     }
     if (pendingFrom && event.type === 'up' && event.hitNodeId && event.hitNodeId !== pendingFrom) {
       this.selection.clearPendingEdge();
-      const draftId = `edge-${Date.now()}`;
-      this.draftEdge.set({
-        id: draftId,
-        from: pendingFrom,
-        to: event.hitNodeId,
-        transport: 'postkutsche',
-        leuge: this.findExistingLeuge(pendingFrom, event.hitNodeId),
-        validFrom: this.year(),
-        trips: []
-      });
-      this.selection.selectEdge(draftId);
+      this.createDraftEdgeBetween(pendingFrom, event.hitNodeId);
       this.tour.markEvent('edgeCreated');
-      this.dirty.set(true);
       return;
     }
 
@@ -1679,6 +1995,67 @@ export class AdminComponent implements OnDestroy {
     };
     this.draftEdge.set(created);
     return created;
+  }
+
+  private createDraftEdgeBetween(from: string, to: string): void {
+    const draftId = `edge-${Date.now()}`;
+    this.draftEdge.set({
+      id: draftId,
+      from,
+      to,
+      transport: 'postkutsche',
+      leuge: this.findExistingLeuge(from, to),
+      validFrom: this.year(),
+      notes: undefined,
+      trips: []
+    });
+    this.selection.selectEdge(draftId);
+    this.confirmDeleteNode.set(false);
+    this.dirty.set(true);
+  }
+
+  private applyQuickLeugePrefill(): void {
+    if (this.quickLeugeDirty()) {
+      return;
+    }
+    const from = this.quickFromId();
+    const to = this.quickToId();
+    if (!from || !to) {
+      this.quickLeuge.set('');
+      return;
+    }
+    const found = this.findExistingLeuge(from, to);
+    this.quickLeuge.set(found !== undefined ? String(found) : '');
+  }
+
+  private focusQuickTripField(index: number, field: 'departs' | 'arrives'): void {
+    const root = this.hostRef.nativeElement;
+    const selector = `[data-quick-trip-index=\"${index}\"][data-quick-trip-field=\"${field}\"]`;
+    const el = root.querySelector(selector) as HTMLInputElement | null;
+    if (el) {
+      el.focus();
+      el.select();
+    }
+  }
+
+  private focusQuickToInput(): void {
+    requestAnimationFrame(() => {
+      const input = this.quickToInput?.nativeElement;
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    });
+  }
+
+  private focusQuickLeugeInput(): void {
+    requestAnimationFrame(() => {
+      const input = this.quickLeugeInput?.nativeElement;
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    });
   }
 
   private pickEdgeNode(nodeId: string): void {

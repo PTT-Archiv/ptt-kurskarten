@@ -300,8 +300,8 @@
     "x": 67.44663525827491,
     "y": 359.58362391672375,
     "validFrom": 1852,
-    "iiifCenterX": 1663,
-    "iiifCenterY": 6107,
+    "iiifCenterX": 2004,
+    "iiifCenterY": 6518,
     "validTo": null
   },
   {
@@ -417,16 +417,6 @@
     "validTo": null,
     "iiifCenterX": 2551,
     "iiifCenterY": 5365
-  },
-  {
-    "id": "node-1770890634406",
-    "name": "Cossonay",
-    "x": 95.85822303460077,
-    "y": 309.17777238155395,
-    "validFrom": 1852,
-    "validTo": null,
-    "iiifCenterX": 2190,
-    "iiifCenterY": 5491
   },
   {
     "id": "node-1770890638355",
@@ -1091,7 +1081,9 @@
     "x": 95.85822303460077,
     "y": 309.17777238155395,
     "validFrom": 1852,
-    "validTo": null
+    "validTo": null,
+    "iiifCenterX": 2179,
+    "iiifCenterY": 5493
   },
   {
     "id": "node-1770897530894",
@@ -2058,8 +2050,8 @@
     "y": 105.79282868525895,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 7977,
-    "iiifCenterY": 2313
+    "iiifCenterX": 8110,
+    "iiifCenterY": 2322
   },
   {
     "id": "node-1770905682253",
