@@ -19,20 +19,22 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         <label class="field minimal typeahead">
           <span>{{ 'label.from' | transloco }}</span>
           <div class="typeahead-input">
-            <input
-              type="text"
-              [value]="fromQuery"
-              (input)="onFromInput($any($event.target).value)"
-              (focus)="onFromFocus()"
-              (blur)="onFromBlur()"
-              (keydown)="onFromKeydown($event)"
-              placeholder=" "
-            />
-            @if (fromQuery) {
-              <button type="button" class="clear-btn" (mousedown)="clearFrom()">
-                ×
-              </button>
-            }
+            <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(fromQuery)">
+              <input
+                type="text"
+                [value]="fromQuery"
+                (input)="onFromInput($any($event.target).value)"
+                (focus)="onFromFocus()"
+                (blur)="onFromBlur()"
+                (keydown)="onFromKeydown($event)"
+                placeholder=" "
+              />
+              @if (fromQuery) {
+                <button type="button" class="clear-btn" (mousedown)="clearFrom()">
+                  ×
+                </button>
+              }
+            </div>
             <button
               type="button"
               class="pick-btn"
@@ -60,24 +62,28 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
             </div>
           }
         </label>
-        <button class="swap-btn" type="button" (click)="swap.emit()">⇄</button>
+        <button class="swap-btn" type="button" (click)="swap.emit()">
+          <span class="swap-icon">⇄</span>
+        </button>
         <label class="field minimal typeahead">
           <span>{{ 'label.to' | transloco }}</span>
           <div class="typeahead-input">
-            <input
-              type="text"
-              [value]="toQuery"
-              (input)="onToInput($any($event.target).value)"
-              (focus)="onToFocus()"
-              (blur)="onToBlur()"
-              (keydown)="onToKeydown($event)"
-              placeholder=" "
-            />
-            @if (toQuery) {
-              <button type="button" class="clear-btn" (mousedown)="clearTo()">
-                ×
-              </button>
-            }
+            <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(toQuery)">
+              <input
+                type="text"
+                [value]="toQuery"
+                (input)="onToInput($any($event.target).value)"
+                (focus)="onToFocus()"
+                (blur)="onToBlur()"
+                (keydown)="onToKeydown($event)"
+                placeholder=" "
+              />
+              @if (toQuery) {
+                <button type="button" class="clear-btn" (mousedown)="clearTo()">
+                  ×
+                </button>
+              }
+            </div>
             <button
               type="button"
               class="pick-btn"
@@ -293,14 +299,30 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         border-radius: 999px;
         height: 56px;
         width: 56px;
+        padding: 0;
         cursor: pointer;
         font-weight: 600;
         font-size: 22px;
-        box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+        line-height: 1;
+        display: grid;
+        place-items: center;
+        box-shadow: none;
+      }
+
+      .swap-btn:hover,
+      .swap-btn:focus-visible {
+        background: #141414;
+        color: #ffffff;
+      }
+
+      .swap-icon {
+        display: block;
+        line-height: 1;
+        transform: translateY(-1px);
       }
 
       .action-btn {
-        background: #ffff00;
+        background: #ffffff;
         border: 2px solid #141414;
         color: #141414;
         padding: 8px 14px;
@@ -308,7 +330,13 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         font-weight: 600;
         cursor: pointer;
         height: 40px;
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: none;
+      }
+
+      .action-btn:hover,
+      .action-btn:focus-visible {
+        background: #141414;
+        color: #ffffff;
       }
 
       .action-btn[disabled] {
@@ -318,6 +346,12 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .action-btn.secondary {
         background: #ffffff;
+      }
+
+      .action-btn.secondary:hover,
+      .action-btn.secondary:focus-visible {
+        background: #141414;
+        color: #ffffff;
       }
 
       .planner-card.compact {
@@ -353,14 +387,22 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       }
 
       .typeahead-input {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .input-shell {
         position: relative;
+        width: 100%;
       }
 
       .typeahead-input input {
         border: none;
         border-bottom: 2px solid #d9d9d9;
         border-radius: 0;
-        padding: 4px 54px 6px 2px;
+        padding: 4px 24px 6px 2px;
         background: transparent;
         font-size: 22px;
         font-weight: 600;
@@ -374,23 +416,24 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .clear-btn {
         position: absolute;
-        right: 28px;
-        top: 50%;
+        left: var(--clear-left, 8px);
+        top: 45%;
         transform: translateY(-50%);
         border: none;
-        background: #ffffff;
-        color: #141414;
-        font-size: 20px;
+        background: transparent;
+        color: #7a7a7a;
+        font-size: 18px;
         line-height: 1;
+        height: 20px;
+        width: 20px;
+        display: grid;
+        place-items: center;
         cursor: pointer;
-        padding: 0 4px;
+        padding: 0;
       }
 
       .pick-btn {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative;
         border: 2px solid #141414;
         background: #ffffff;
         color: #141414;
@@ -402,7 +445,13 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         cursor: pointer;
         display: grid;
         place-items: center;
-        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+      }
+
+      .pick-btn:hover,
+      .pick-btn:focus-visible {
+        background: #141414;
+        color: #ffffff;
       }
 
       .pick-btn.pulsing {
@@ -411,13 +460,13 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       @keyframes pickPulse {
         0% {
-          transform: translateY(-50%) scale(1);
+          transform: scale(1);
         }
         50% {
-          transform: translateY(-50%) scale(1.12);
+          transform: scale(1.12);
         }
         100% {
-          transform: translateY(-50%) scale(1);
+          transform: scale(1);
         }
       }
 
@@ -828,6 +877,29 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   private normalizeDraft(value: string): string {
     return value.replace(/\D/g, '').slice(0, 2);
+  }
+
+  clearButtonLeft(value: string): number {
+    const text = value ?? '';
+    const fontSize = this.variant === 'compact' ? 16 : 22;
+    const textWidth = this.measureTextWidth(text, fontSize);
+    const basePadding = 6;
+    const left = basePadding + textWidth + 2;
+    return Math.max(8, Math.min(left, 260));
+  }
+
+  private measureTextWidth(text: string, fontSize: number): number {
+    const sample = text.length ? text : ' ';
+    if (typeof document === 'undefined') {
+      return sample.length * fontSize * 0.56;
+    }
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      return sample.length * fontSize * 0.56;
+    }
+    ctx.font = `600 ${fontSize}px system-ui`;
+    return ctx.measureText(sample).width;
   }
 
   private commitHour(): void {

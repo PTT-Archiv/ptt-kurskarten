@@ -301,7 +301,7 @@ P0 (kritisch, zuerst lösen)
 3. „Anwenden“-Button zuverlässig machen: klarer Klick-Status, kein „passiert nichts“.
 (x) Route zurücksetzen hinzufügen: klarer Route löschen/Reset-Button.
 5. Klick-Fehlbedienung absichern: definieren, was bei Fehlklick passiert (undo/clear/confirm).
-6. Abstand zwischen + und x vergrößern (Fehlklick vermeiden).
+(x) Abstand zwischen + und x vergrößern (Fehlklick vermeiden).
 P1 (wichtig für Verständnis & Usability)
 1. Start/Ziel direkt per Node-Klick wählbar machen (ohne extra Auswahlmodus).
 2. Nodes und Labels klickbar machen; optional auch Edges klickbar.

@@ -165,6 +165,7 @@
 
 .result-card.active {
   background: var(--ptt-yellow);
+  color: #141414;
   border-width: 2px;
 }
 
@@ -301,7 +302,6 @@
 
 .viewer-shell.planner-minimized .planner-overlay {
   transform: translateX(-50%) translateY(-24px);
-  opacity: 0.78;
 }
 
 .planner-status {
@@ -374,6 +374,7 @@
 .handle-text {
   font-size: 11px;
   font-weight: 600;
+  color: #141414;
   transform: rotate(-90deg);
   white-space: nowrap;
 }
@@ -432,7 +433,7 @@
   bottom: 16px;
   z-index: 7;
   border: 2px solid #141414;
-  background: var(--ptt-yellow);
+  background: #ffffff;
   color: #141414;
   border-radius: 999px;
   padding: 8px 12px;
@@ -440,6 +441,32 @@
   font-size: 12px;
   font-weight: 600;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.result-card:hover,
+.result-card:focus-visible,
+.ghost-btn:hover,
+.ghost-btn:focus-visible,
+.reset-view-btn:hover,
+.reset-view-btn:focus-visible,
+.sidebar-handle:hover,
+.sidebar-handle:focus-visible,
+.help-close:hover,
+.help-close:focus-visible,
+.help-fab:hover,
+.help-fab:focus-visible {
+  background: #141414;
+  color: #ffffff;
+}
+
+.result-card:hover .result-meta,
+.result-card:focus-visible .result-meta,
+.result-card.active .result-meta {
+  color: #d7d7d7;
+}
+
+.result-card.active .result-meta {
+  color: #3a3a3a;
 }
 
 
