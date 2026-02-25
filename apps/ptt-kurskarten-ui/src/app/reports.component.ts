@@ -171,7 +171,7 @@ export class ReportsComponent {
           snapshot.edges.map((edge) => ({
             id: edge.id,
             label: `${nodesById.get(edge.from) ?? '—'} → ${nodesById.get(edge.to) ?? '—'} (${this.transportLabel(
-              edge.transport
+              edge.trips?.[0]?.transport ?? 'postkutsche'
             )})`
           }))
         );

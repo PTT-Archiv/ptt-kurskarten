@@ -15,22 +15,20 @@ describe('routing', () => {
           id: 'a-b',
           from: 'a',
           to: 'b',
-          transport: 'courier',
           validFrom: 1800,
           trips: [
-            { id: 'a-b-1', departs: '17:40', arrives: '18:30' },
-            { id: 'a-b-2', departs: '19:00', arrives: '19:50' }
+            { id: 'a-b-1', transport: 'courier', departs: '17:40', arrives: '18:30' },
+            { id: 'a-b-2', transport: 'courier', departs: '19:00', arrives: '19:50' }
           ]
         },
         {
           id: 'b-c',
           from: 'b',
           to: 'c',
-          transport: 'courier',
           validFrom: 1800,
           trips: [
-            { id: 'b-c-1', departs: '18:45', arrives: '19:30' },
-            { id: 'b-c-2', departs: '20:05', arrives: '21:00' }
+            { id: 'b-c-1', transport: 'courier', departs: '18:45', arrives: '19:30' },
+            { id: 'b-c-2', transport: 'courier', departs: '20:05', arrives: '21:00' }
           ]
         }
       ]
@@ -62,9 +60,8 @@ describe('routing', () => {
           id: 'a-b',
           from: 'a',
           to: 'b',
-          transport: 'postkutsche',
           validFrom: 1800,
-          trips: [{ id: 'a-b-overnight', departs: '22:30', arrives: '01:10', arrivalDayOffset: 1 }]
+          trips: [{ id: 'a-b-overnight', transport: 'postkutsche', departs: '22:30', arrives: '01:10', arrivalDayOffset: 1 }]
         }
       ]
     };
@@ -94,25 +91,22 @@ describe('routing', () => {
           id: 'a-b',
           from: 'a',
           to: 'b',
-          transport: 'courier',
           validFrom: 1800,
-          trips: [{ id: 'a-b-1', departs: '08:00', arrives: '08:10' }]
+          trips: [{ id: 'a-b-1', transport: 'courier', departs: '08:00', arrives: '08:10' }]
         },
         {
           id: 'b-c',
           from: 'b',
           to: 'c',
-          transport: 'courier',
           validFrom: 1800,
-          trips: [{ id: 'b-c-1', departs: '08:15', arrives: '08:20' }]
+          trips: [{ id: 'b-c-1', transport: 'courier', departs: '08:15', arrives: '08:20' }]
         },
         {
           id: 'a-c',
           from: 'a',
           to: 'c',
-          transport: 'courier',
           validFrom: 1800,
-          trips: [{ id: 'a-c-1', departs: '08:05', arrives: '09:30' }]
+          trips: [{ id: 'a-c-1', transport: 'courier', departs: '08:05', arrives: '09:30' }]
         }
       ]
     };

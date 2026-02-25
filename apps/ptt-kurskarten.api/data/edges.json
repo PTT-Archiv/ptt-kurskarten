@@ -3,7 +3,6 @@
     "id": "edge-1771344899514",
     "from": "node-1770808860448",
     "to": "node-1770808908336",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -11,7 +10,6 @@
     "id": "edge-1771344976481",
     "from": "node-1770808908336",
     "to": "node-1770808860448",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -19,7 +17,6 @@
     "id": "edge-1771345024662",
     "from": "node-1770808908336",
     "to": "node-1770809062251",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -27,7 +24,6 @@
     "id": "edge-1771345109013",
     "from": "node-1770808908336",
     "to": "node-1770809062251",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -35,7 +31,6 @@
     "id": "edge-1771345216914",
     "from": "node-1770809062251",
     "to": "node-1770809018783",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -43,7 +38,6 @@
     "id": "edge-1771345247729",
     "from": "node-1770809018783",
     "to": "node-1770809062251",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -51,7 +45,6 @@
     "id": "edge-1771345293296",
     "from": "node-1770809062251",
     "to": "node-1770809209472",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -59,7 +52,6 @@
     "id": "edge-1771345438928",
     "from": "node-1770809062251",
     "to": "node-1770809209472",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -67,7 +59,6 @@
     "id": "edge-1771345464111",
     "from": "node-1770809062251",
     "to": "node-1770890387454",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -75,7 +66,6 @@
     "id": "edge-1771345591565",
     "from": "node-1770809062251",
     "to": "node-1770818428222",
-    "transport": "dampfschiff",
     "validFrom": 1852,
     "validTo": null
   },
@@ -83,7 +73,6 @@
     "id": "edge-1771345655486",
     "from": "node-1770809062251",
     "to": "node-1770808908336",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -91,7 +80,6 @@
     "id": "edge-1771345749118",
     "from": "node-1770809062251",
     "to": "node-1770808908336",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -99,7 +87,6 @@
     "id": "edge-1771345876135",
     "from": "node-1770895016880",
     "to": "node-1770809062251",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -107,7 +94,6 @@
     "id": "edge-1771345913433",
     "from": "node-1770895016880",
     "to": "node-1770809062251",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -115,7 +101,6 @@
     "id": "edge-1771345969110",
     "from": "node-1770895016880",
     "to": "node-1770809062251",
-    "transport": "diligence",
     "validFrom": 1852,
     "notes": {
       "fr": "p. Seyssel"
@@ -126,7 +111,6 @@
     "id": "edge-1771346398463",
     "from": "node-1770809062251",
     "to": "node-1770895016880",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -134,7 +118,6 @@
     "id": "edge-1771346433633",
     "from": "node-1770809062251",
     "to": "node-1770895016880",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -142,7 +125,6 @@
     "id": "edge-1771576664336",
     "from": "node-1770809183587",
     "to": "node-1770809062251",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -150,7 +132,6 @@
     "id": "edge-1771576698439",
     "from": "node-1770809183587",
     "to": "node-1770809062251",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -158,7 +139,6 @@
     "id": "edge-1771576787950",
     "from": "node-1770809183587",
     "to": "node-1770809062251",
-    "transport": "diligence",
     "validFrom": 1852,
     "notes": {
       "fr": "p. Châlons"
@@ -169,7 +149,6 @@
     "id": "edge-1771576829790",
     "from": "node-1770809062251",
     "to": "node-1770809183587",
-    "transport": "mallepost",
     "validFrom": 1852,
     "validTo": null
   },
@@ -177,7 +156,6 @@
     "id": "edge-1771576854997",
     "from": "node-1770809062251",
     "to": "node-1770809183587",
-    "transport": "diligence",
     "validFrom": 1852,
     "validTo": null
   },
@@ -185,7 +163,6 @@
     "id": "edge-1771576881279",
     "from": "node-1770809062251",
     "to": "node-1770809183587",
-    "transport": "diligence",
     "validFrom": 1852,
     "notes": {
       "fr": "p. Châlons"
@@ -196,7 +173,6 @@
     "id": "edge-1771577098526",
     "from": "node-1770890387454",
     "to": "node-1770890410235",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -204,7 +180,6 @@
     "id": "edge-1771577198343",
     "from": "node-1770890410235",
     "to": "node-1770890387454",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -212,7 +187,6 @@
     "id": "edge-1771577226142",
     "from": "node-1770890410235",
     "to": "node-1770890490883",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -220,7 +194,6 @@
     "id": "edge-1771577297069",
     "from": "node-1770890490883",
     "to": "node-1770890410235",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -228,7 +201,6 @@
     "id": "edge-1771577336894",
     "from": "node-1770890490883",
     "to": "node-1770890434712",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -236,7 +208,6 @@
     "id": "edge-1771577355662",
     "from": "node-1770890434712",
     "to": "node-1770890490883",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -244,7 +215,6 @@
     "id": "edge-1771577877405",
     "from": "node-1770809209472",
     "to": "node-1770809062251",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -252,7 +222,6 @@
     "id": "edge-1771578091020",
     "from": "node-1770809209472",
     "to": "node-1770812117179",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -260,7 +229,6 @@
     "id": "edge-1771579350347",
     "from": "node-1770812117179",
     "to": "node-1770809209472",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -268,7 +236,6 @@
     "id": "edge-1771589362261",
     "from": "node-1770890162679",
     "to": "node-1770890186709",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -276,7 +243,6 @@
     "id": "edge-1771589389836",
     "from": "node-1770890186709",
     "to": "node-1770890162679",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -284,7 +250,6 @@
     "id": "edge-1771589492845",
     "from": "node-1770812117179",
     "to": "node-1770890162679",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -292,7 +257,6 @@
     "id": "edge-1771589520364",
     "from": "node-1770890162679",
     "to": "node-1770812117179",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "notes": {
       "fr": "Estafette",
@@ -304,7 +268,6 @@
     "id": "edge-1771589587421",
     "from": "node-1770812117179",
     "to": "node-1770890297820",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -312,7 +275,6 @@
     "id": "edge-1771857760117",
     "from": "node-1770890297820",
     "to": "node-1770812117179",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -320,7 +282,6 @@
     "id": "edge-1771857875917",
     "from": "node-1770890297820",
     "to": "node-1770818436737",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -328,7 +289,6 @@
     "id": "edge-1771857925066",
     "from": "node-1770818436737",
     "to": "node-1770890297820",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -336,7 +296,6 @@
     "id": "edge-1771857959700",
     "from": "node-1770818436737",
     "to": "node-1770818428222",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -344,7 +303,6 @@
     "id": "edge-1771858005565",
     "from": "node-1770818428222",
     "to": "node-1770818436737",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -352,7 +310,6 @@
     "id": "edge-1771858124615",
     "from": "node-1770818428222",
     "to": "node-1770897442282",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -360,7 +317,6 @@
     "id": "edge-1771858158531",
     "from": "node-1770818428222",
     "to": "node-1770890628791",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -368,7 +324,6 @@
     "id": "edge-1771858218215",
     "from": "node-1770818428222",
     "to": "node-1770890609929",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -376,7 +331,6 @@
     "id": "edge-1771858236394",
     "from": "node-1770818428222",
     "to": "node-1770818444657",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -384,7 +338,6 @@
     "id": "edge-1771858280182",
     "from": "node-1770818428222",
     "to": "node-1770890564956",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -392,7 +345,6 @@
     "id": "edge-1771858295500",
     "from": "node-1770818428222",
     "to": "node-1770890564956",
-    "transport": "dampfschiff",
     "validFrom": 1852,
     "validTo": null
   },
@@ -400,7 +352,6 @@
     "id": "edge-1771858415694",
     "from": "node-1770890564956",
     "to": "node-1770818428222",
-    "transport": "dampfschiff",
     "validFrom": 1852,
     "validTo": null
   },
@@ -408,7 +359,6 @@
     "id": "edge-1771859991473",
     "from": "node-1770897442282",
     "to": "node-1770818428222",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -416,7 +366,6 @@
     "id": "edge-1771860017727",
     "from": "node-1770897442282",
     "to": "node-1770897530894",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -424,7 +373,6 @@
     "id": "edge-1771860044843",
     "from": "node-1770897442282",
     "to": "node-1770897613242",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -432,7 +380,6 @@
     "id": "edge-1771860071262",
     "from": "node-1770897530894",
     "to": "node-1770897591288",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -440,7 +387,6 @@
     "id": "edge-1771860090803",
     "from": "node-1770897591288",
     "to": "node-1770897530894",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -448,7 +394,6 @@
     "id": "edge-1771860136577",
     "from": "node-1770897530894",
     "to": "node-1770897442282",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -456,7 +401,6 @@
     "id": "edge-1771860161310",
     "from": "node-1770897530894",
     "to": "node-1770897613242",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -464,7 +408,6 @@
     "id": "edge-1771860444924",
     "from": "node-1770890628791",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -472,7 +415,6 @@
     "id": "edge-1771860492924",
     "from": "node-1770890609929",
     "to": "node-1770897668923",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -480,7 +422,6 @@
     "id": "edge-1771860526445",
     "from": "node-1770818444657",
     "to": "node-1770911202396",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -488,7 +429,6 @@
     "id": "edge-1771860608534",
     "from": "node-1770897613242",
     "to": "node-1770894994828",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -496,7 +436,6 @@
     "id": "edge-1771860635841",
     "from": "node-1770897613242",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -504,7 +443,6 @@
     "id": "edge-1771860693376",
     "from": "node-1770897613242",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -512,7 +450,6 @@
     "id": "edge-1771860766457",
     "from": "node-1770894994828",
     "to": "node-1770897613242",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -520,7 +457,6 @@
     "id": "edge-1771860809433",
     "from": "node-1770897625083",
     "to": "node-1770890628791",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -528,7 +464,6 @@
     "id": "edge-1771860827767",
     "from": "node-1770897625083",
     "to": "node-1770897668923",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -536,7 +471,6 @@
     "id": "edge-1771860854056",
     "from": "node-1770897668923",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -544,7 +478,6 @@
     "id": "edge-1771860930889",
     "from": "node-1770897668923",
     "to": "node-1770890609929",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -552,7 +485,6 @@
     "id": "edge-1771860970563",
     "from": "node-1770890609929",
     "to": "node-1770818428222",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -560,7 +492,6 @@
     "id": "edge-1771861051570",
     "from": "node-1770897625083",
     "to": "node-1770907145936",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -568,7 +499,6 @@
     "id": "edge-1771861078460",
     "from": "node-1770907145936",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -576,7 +506,6 @@
     "id": "edge-1771861099491",
     "from": "node-1770907145936",
     "to": "node-1770907142041",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -584,7 +513,6 @@
     "id": "edge-1771861119222",
     "from": "node-1770907142041",
     "to": "node-1770907145936",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -592,7 +520,6 @@
     "id": "edge-1771861141860",
     "from": "node-1770907142041",
     "to": "node-1770911208987",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -600,7 +527,6 @@
     "id": "edge-1771861212892",
     "from": "node-1770911208987",
     "to": "node-1770911202396",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -608,7 +534,6 @@
     "id": "edge-1771861236546",
     "from": "node-1770911202396",
     "to": "node-1770911208987",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -616,7 +541,6 @@
     "id": "edge-1771861267921",
     "from": "node-1770911202396",
     "to": "node-1770818444657",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -624,7 +548,6 @@
     "id": "edge-1771861297656",
     "from": "node-1770897668923",
     "to": "node-1770907100588",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -632,7 +555,6 @@
     "id": "edge-1771861329431",
     "from": "node-1770907100588",
     "to": "node-1770897668923",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -640,7 +562,6 @@
     "id": "edge-1771861394487",
     "from": "node-1770907100588",
     "to": "node-1770907142041",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -648,7 +569,6 @@
     "id": "edge-1771861428432",
     "from": "node-1770907142041",
     "to": "node-1770907100588",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -656,7 +576,6 @@
     "id": "edge-1771861508007",
     "from": "node-1770911208987",
     "to": "node-1770911077601",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -664,7 +583,6 @@
     "id": "edge-1771861526215",
     "from": "node-1770911077601",
     "to": "node-1770911208987",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -672,7 +590,6 @@
     "id": "edge-1771861563265",
     "from": "node-1770911077601",
     "to": "node-1770897770477",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -680,7 +597,6 @@
     "id": "edge-1771861581654",
     "from": "node-1770897770477",
     "to": "node-1770911077601",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -688,7 +604,6 @@
     "id": "edge-1771861661636",
     "from": "node-1770897698221",
     "to": "node-1770897770477",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -696,7 +611,6 @@
     "id": "edge-1771861687437",
     "from": "node-1770897770477",
     "to": "node-1770897698221",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -704,7 +618,6 @@
     "id": "edge-1771861744489",
     "from": "node-1770897698221",
     "to": "node-1770890564956",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -712,7 +625,6 @@
     "id": "edge-1771861758502",
     "from": "node-1770890564956",
     "to": "node-1770897698221",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -720,7 +632,6 @@
     "id": "edge-1771861773958",
     "from": "node-1770890564956",
     "to": "node-1770897668923",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -728,7 +639,6 @@
     "id": "edge-1771861797855",
     "from": "node-1770897668923",
     "to": "node-1770890564956",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -736,7 +646,6 @@
     "id": "edge-1771862140603",
     "from": "node-1770890564956",
     "to": "node-1770890556808",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -744,7 +653,6 @@
     "id": "edge-1771862187158",
     "from": "node-1770890556808",
     "to": "node-1770890564956",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -752,7 +660,6 @@
     "id": "edge-1771862228235",
     "from": "node-1770890556808",
     "to": "node-1770890541178",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -760,7 +667,6 @@
     "id": "edge-1771862262355",
     "from": "node-1770890541178",
     "to": "node-1770890556808",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -768,7 +674,6 @@
     "id": "edge-1771862284485",
     "from": "node-1770890541178",
     "to": "node-1770890523913",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -776,7 +681,6 @@
     "id": "edge-1771862302051",
     "from": "node-1770890523913",
     "to": "node-1770890541178",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -784,7 +688,6 @@
     "id": "edge-1771862318521",
     "from": "node-1770890523913",
     "to": "node-1770890434712",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -792,7 +695,6 @@
     "id": "edge-1771862344310",
     "from": "node-1770890434712",
     "to": "node-1770890523913",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -800,7 +702,6 @@
     "id": "edge-1771862539869",
     "from": "node-1770890541178",
     "to": "node-1770823561872",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -808,7 +709,6 @@
     "id": "edge-1771862589400",
     "from": "node-1770823561872",
     "to": "node-1770890541178",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -816,7 +716,6 @@
     "id": "edge-1771862623067",
     "from": "node-1770823561872",
     "to": "node-1770823595717",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -824,7 +723,6 @@
     "id": "edge-1771862655318",
     "from": "node-1770823595717",
     "to": "node-1770823561872",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -832,7 +730,6 @@
     "id": "edge-1771862679446",
     "from": "node-1770823595717",
     "to": "node-1770823570686",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -840,7 +737,6 @@
     "id": "edge-1771862702866",
     "from": "node-1770823570686",
     "to": "node-1770823595717",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -848,7 +744,6 @@
     "id": "edge-1771862722919",
     "from": "node-1770823570686",
     "to": "node-1770823607384",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -856,7 +751,6 @@
     "id": "edge-1771862739339",
     "from": "node-1770823607384",
     "to": "node-1770823570686",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -864,7 +758,6 @@
     "id": "edge-1771862748856",
     "from": "node-1770823607384",
     "to": "node-1770823621828",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -872,7 +765,6 @@
     "id": "edge-1771862766751",
     "from": "node-1770823621828",
     "to": "node-1770823607384",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -880,7 +772,6 @@
     "id": "edge-1771862781801",
     "from": "node-1770823621828",
     "to": "node-1770823657588",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -888,7 +779,6 @@
     "id": "edge-1771862801474",
     "from": "node-1770823657588",
     "to": "node-1770823621828",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -896,7 +786,6 @@
     "id": "edge-1771862817595",
     "from": "node-1770823657588",
     "to": "node-1770890638355",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -904,7 +793,6 @@
     "id": "edge-1771862833238",
     "from": "node-1770890638355",
     "to": "node-1770823657588",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -912,7 +800,6 @@
     "id": "edge-1771862907051",
     "from": "node-1770890638355",
     "to": "node-1770890809431",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -920,7 +807,6 @@
     "id": "edge-1771862921413",
     "from": "node-1770890809431",
     "to": "node-1770890638355",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -928,7 +814,6 @@
     "id": "edge-1771862934253",
     "from": "node-1770890809431",
     "to": "node-1770890971568",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -936,7 +821,6 @@
     "id": "edge-1771862949036",
     "from": "node-1770890971568",
     "to": "node-1770890809431",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -944,7 +828,6 @@
     "id": "edge-1771929132582",
     "from": "node-1770890904555",
     "to": "node-1770890971568",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -952,7 +835,6 @@
     "id": "edge-1771929161755",
     "from": "node-1770890904555",
     "to": "node-1770891120113",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -960,7 +842,6 @@
     "id": "edge-1771929187798",
     "from": "node-1770890971568",
     "to": "node-1770890904555",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -968,7 +849,6 @@
     "id": "edge-1771929205301",
     "from": "node-1770891120113",
     "to": "node-1770890904555",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -976,7 +856,6 @@
     "id": "edge-1771929236386",
     "from": "node-1770891120113",
     "to": "node-1770891003781",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -984,7 +863,6 @@
     "id": "edge-1771929262343",
     "from": "node-1770891003781",
     "to": "node-1770891120113",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -992,7 +870,6 @@
     "id": "edge-1771929285735",
     "from": "node-1770891003781",
     "to": "node-1770891044281",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1000,7 +877,6 @@
     "id": "edge-1771929321505",
     "from": "node-1770891044281",
     "to": "node-1770891003781",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1008,7 +884,6 @@
     "id": "edge-1771929344959",
     "from": "node-1770891044281",
     "to": "node-1770891148537",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1016,7 +891,6 @@
     "id": "edge-1771929361750",
     "from": "node-1770891148537",
     "to": "node-1770891044281",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1024,7 +898,6 @@
     "id": "edge-1771929404342",
     "from": "node-1770891148537",
     "to": "node-1770808860448",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1032,7 +905,6 @@
     "id": "edge-1771929423214",
     "from": "node-1770808860448",
     "to": "node-1770891148537",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1040,7 +912,6 @@
     "id": "edge-1771929438717",
     "from": "node-1770891148537",
     "to": "node-1770891194672",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1048,7 +919,6 @@
     "id": "edge-1771929466350",
     "from": "node-1770891194672",
     "to": "node-1770891148537",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1056,7 +926,6 @@
     "id": "edge-1771929483055",
     "from": "node-1770808860448",
     "to": "node-1770891194672",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1064,7 +933,6 @@
     "id": "edge-1771929524765",
     "from": "node-1770891194672",
     "to": "node-1770808860448",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1072,7 +940,6 @@
     "id": "edge-1771929585517",
     "from": "node-1770891194672",
     "to": "node-1770891376062",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1080,7 +947,6 @@
     "id": "edge-1771929602500",
     "from": "node-1770891376062",
     "to": "node-1770891194672",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1088,7 +954,6 @@
     "id": "edge-1771929617005",
     "from": "node-1770891376062",
     "to": "node-1770891460324",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1096,7 +961,6 @@
     "id": "edge-1771929627165",
     "from": "node-1770891460324",
     "to": "node-1770891376062",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1104,7 +968,6 @@
     "id": "edge-1771929649098",
     "from": "node-1770891460324",
     "to": "node-1770891474595",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1112,7 +975,6 @@
     "id": "edge-1771929713539",
     "from": "node-1770891474595",
     "to": "node-1770891520064",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1120,7 +982,6 @@
     "id": "edge-1771929745615",
     "from": "node-1770891520064",
     "to": "node-1770891544616",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1128,7 +989,6 @@
     "id": "edge-1771929775268",
     "from": "node-1770891520064",
     "to": "node-1770891474595",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1136,7 +996,6 @@
     "id": "edge-1771929786933",
     "from": "node-1770891544616",
     "to": "node-1770891520064",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1144,7 +1003,6 @@
     "id": "edge-1771929855117",
     "from": "node-1770891544616",
     "to": "node-1770891342495",
-    "transport": "dampfschiff",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1152,7 +1010,6 @@
     "id": "edge-1771930276244",
     "from": "node-1770891342495",
     "to": "node-1770891544616",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1160,7 +1017,6 @@
     "id": "edge-1771930296228",
     "from": "node-1770891342495",
     "to": "node-1770891315316",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1168,7 +1024,6 @@
     "id": "edge-1771930307477",
     "from": "node-1770891315316",
     "to": "node-1770891342495",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1176,7 +1031,6 @@
     "id": "edge-1771930346696",
     "from": "node-1770891315316",
     "to": "node-1770891915773",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1184,7 +1038,6 @@
     "id": "edge-1771930407983",
     "from": "node-1770891315316",
     "to": "node-1770891194672",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1192,7 +1045,6 @@
     "id": "edge-1771931247261",
     "from": "node-1770891194672",
     "to": "node-1770891315316",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1200,7 +1052,6 @@
     "id": "edge-1771931628124",
     "from": "node-1770897770477",
     "to": "node-1770897790722",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1208,7 +1059,6 @@
     "id": "edge-1771932349754",
     "from": "node-1770897625083",
     "to": "node-1770907094109",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1216,7 +1066,6 @@
     "id": "edge-1771932369547",
     "from": "node-1770907094109",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1224,7 +1073,6 @@
     "id": "edge-1771932392512",
     "from": "node-1770907094109",
     "to": "node-1770907045212",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1232,7 +1080,6 @@
     "id": "edge-1771932423149",
     "from": "node-1770907045212",
     "to": "node-1770907094109",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1240,7 +1087,6 @@
     "id": "edge-1771932445622",
     "from": "node-1770907045212",
     "to": "node-1770907088865",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1248,7 +1094,6 @@
     "id": "edge-1771932519742",
     "from": "node-1770907088865",
     "to": "node-1770907045212",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1256,7 +1101,6 @@
     "id": "edge-1771932598748",
     "from": "node-1770907045212",
     "to": "node-1770907154674",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1264,7 +1108,6 @@
     "id": "edge-1771932634548",
     "from": "node-1770907154674",
     "to": "node-1770907045212",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1272,7 +1115,6 @@
     "id": "edge-1771932685049",
     "from": "node-1770907154674",
     "to": "node-1770907161310",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1280,7 +1122,6 @@
     "id": "edge-1771932715165",
     "from": "node-1770907161310",
     "to": "node-1770907154674",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1288,7 +1129,6 @@
     "id": "edge-1771932757317",
     "from": "node-1770907161310",
     "to": "node-1770907151001",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1296,7 +1136,6 @@
     "id": "edge-1771932780354",
     "from": "node-1770907151001",
     "to": "node-1770907161310",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1304,7 +1143,6 @@
     "id": "edge-1771932855966",
     "from": "node-1770907151001",
     "to": "node-1770897625083",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1312,7 +1150,6 @@
     "id": "edge-1771932886864",
     "from": "node-1770897625083",
     "to": "node-1770907151001",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1320,7 +1157,6 @@
     "id": "edge-1771932959869",
     "from": "node-1770894994828",
     "to": "node-1770894880046",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1328,7 +1164,6 @@
     "id": "edge-1771932978402",
     "from": "node-1770894880046",
     "to": "node-1770894994828",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1336,7 +1171,6 @@
     "id": "edge-1771933007450",
     "from": "node-1770894880046",
     "to": "node-1770907094109",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1344,7 +1178,6 @@
     "id": "edge-1771933023809",
     "from": "node-1770907094109",
     "to": "node-1770894880046",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1352,7 +1185,6 @@
     "id": "edge-1771933093995",
     "from": "node-1770894880046",
     "to": "node-1770906973478",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1360,7 +1192,6 @@
     "id": "edge-1771933129641",
     "from": "node-1770906973478",
     "to": "node-1770894880046",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1368,7 +1199,6 @@
     "id": "edge-1771933166475",
     "from": "node-1770906973478",
     "to": "node-1770907045212",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1376,7 +1206,6 @@
     "id": "edge-1771933205695",
     "from": "node-1770907045212",
     "to": "node-1770906973478",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1384,7 +1213,6 @@
     "id": "edge-1771933233116",
     "from": "node-1770907045212",
     "to": "node-1770906804866",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1392,7 +1220,6 @@
     "id": "edge-1771939031483",
     "from": "node-1770894880046",
     "to": "node-1770894852240",
-    "transport": "courier",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1400,7 +1227,6 @@
     "id": "edge-1771939057947",
     "from": "node-1770894852240",
     "to": "node-1770894880046",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1408,7 +1234,6 @@
     "id": "edge-1771939083517",
     "from": "node-1770894852240",
     "to": "node-1770894828775",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1416,7 +1241,6 @@
     "id": "edge-1771939131335",
     "from": "node-1770894828775",
     "to": "node-1770894852240",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1424,7 +1248,6 @@
     "id": "edge-1772008859716",
     "from": "node-1770809183587",
     "to": "node-1770894828775",
-    "transport": "courier",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1432,7 +1255,6 @@
     "id": "edge-1772008911403",
     "from": "node-1770894828775",
     "to": "node-1770809183587",
-    "transport": "messagerie",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1440,7 +1262,6 @@
     "id": "edge-1772009018864",
     "from": "node-1770894828775",
     "to": "node-1770809183587",
-    "transport": "courier",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1448,7 +1269,6 @@
     "id": "edge-1772009087362",
     "from": "node-1770809183587",
     "to": "node-1770894828775",
-    "transport": "messagerie",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1456,7 +1276,6 @@
     "id": "edge-1772009217545",
     "from": "node-1770894828775",
     "to": "node-1770809062251",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1464,7 +1283,6 @@
     "id": "edge-1772009246982",
     "from": "node-1770809062251",
     "to": "node-1770894828775",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1472,7 +1290,6 @@
     "id": "edge-1772009276595",
     "from": "node-1770894828775",
     "to": "node-1770894811224",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1480,7 +1297,6 @@
     "id": "edge-1772009295129",
     "from": "node-1770894811224",
     "to": "node-1770894828775",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   },
@@ -1488,7 +1304,6 @@
     "id": "edge-1772009320112",
     "from": "node-1770894811224",
     "to": "node-1770894880046",
-    "transport": "postkutsche",
     "validFrom": 1852,
     "validTo": null
   }

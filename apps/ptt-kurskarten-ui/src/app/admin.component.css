@@ -163,7 +163,7 @@
 
 .quick-trip-row {
   display: grid;
-  grid-template-columns: minmax(0, 80px) minmax(0, 80px) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 80px) minmax(0, 80px) auto;
   gap: 6px;
   align-items: center;
 }
@@ -173,7 +173,8 @@
   color: #3a3a3a;
 }
 
-.quick-trip-row input {
+.quick-trip-row input,
+.quick-trip-row select {
   border: 2px solid #141414;
   border-radius: 8px;
   padding: 5px 6px;
@@ -500,7 +501,7 @@
 
 .trip-row {
   display: grid;
-  grid-template-columns: minmax(0, 70px) minmax(0, 70px) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 70px) minmax(0, 70px) auto;
   gap: 6px;
   align-items: center;
 }

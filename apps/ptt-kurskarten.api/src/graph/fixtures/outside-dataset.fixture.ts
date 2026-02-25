@@ -12,25 +12,22 @@ export const outsideDatasetSnapshot: GraphSnapshot = {
       id: 'A-B',
       from: 'A',
       to: 'B',
-      transport: 'courier',
       validFrom: 1800,
-      trips: [{ id: 'A-B-1', departs: '08:00', arrives: '08:30' }]
+      trips: [{ id: 'A-B-1', transport: 'courier', departs: '08:00', arrives: '08:30' }]
     },
     {
       id: 'B-C',
       from: 'B',
       to: 'C',
-      transport: 'courier',
       validFrom: 1800,
-      trips: [{ id: 'B-C-1', departs: '08:40', arrives: '09:10' }]
+      trips: [{ id: 'B-C-1', transport: 'courier', departs: '08:40', arrives: '09:10' }]
     },
     {
       id: 'C-D',
       from: 'C',
       to: 'D',
-      transport: 'postkutsche',
       validFrom: 1800,
-      trips: [{ id: 'C-D-1', departs: '09:20', arrives: '10:00' }]
+      trips: [{ id: 'C-D-1', transport: 'postkutsche', departs: '09:20', arrives: '10:00' }]
     }
   ]
 };

@@ -20,6 +20,7 @@ export type DayOffset = 0 | 1 | 2;
 
 export type EdgeTrip = {
   id: string;
+  transport: TransportType;
   departs?: TimeHHMM;
   arrives: TimeHHMM;
   arrivalDayOffset?: DayOffset;
@@ -41,7 +42,6 @@ export type GraphEdge = {
   id: string;
   from: string;
   to: string;
-  transport: TransportType;
   leuge?: number;
   validFrom: Year;
   validTo?: Year;

@@ -58,7 +58,6 @@ type EdgeDraft = {
   id: string;
   from: string | null;
   to: string | null;
-  transport: TransportType;
   leuge?: number;
   validFrom: number;
   validTo?: number;
@@ -121,7 +120,7 @@ export class AdminComponent implements OnDestroy {
   quickLeuge = signal<string>('');
   quickLeugeDirty = signal<boolean>(false);
   quickTrips = signal<EdgeTrip[]>([
-    { id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
+    { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
   ]);
   geoSearchEnabled = signal<boolean>(true);
   geoResults = signal<GeoAdminResult[]>([]);
@@ -212,7 +211,7 @@ export class AdminComponent implements OnDestroy {
         return {
           id: edge.id,
           toName: toNode?.name ?? '—',
-          transport: edge.transport,
+          transport: edge.trips?.[0]?.transport ?? 'postkutsche',
           tripsCount: edge.trips?.length ?? 0,
           validFrom: edge.validFrom,
           validTo: edge.validTo
@@ -278,7 +277,6 @@ export class AdminComponent implements OnDestroy {
       id: edge.id,
       from: edge.from,
       to: edge.to,
-      transport: edge.transport,
       leuge: edge.leuge,
       validFrom: edge.validFrom,
       validTo: edge.validTo,
@@ -313,7 +311,6 @@ export class AdminComponent implements OnDestroy {
         id: draftEdge.id,
         from: draftEdge.from,
         to: draftEdge.to,
-        transport: draftEdge.transport,
         leuge: draftEdge.leuge,
         validFrom: draftEdge.validFrom,
         validTo: draftEdge.validTo,
@@ -650,7 +647,7 @@ export class AdminComponent implements OnDestroy {
     const trips = this.quickTrips();
     const next: EdgeTrip = copyLast && trips.length > 0
       ? { ...trips[trips.length - 1], id: `quick-trip-${Date.now()}` }
-      : { id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 };
+      : { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 };
     this.quickTrips.set([...trips, next]);
   }
 
@@ -714,7 +711,11 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    const trips = this.quickTrips().map((trip) => ({ ...trip, id: trip.id || `trip-${Date.now()}` }));
+    const trips = this.quickTrips().map((trip) => ({
+      ...trip,
+      id: trip.id || `trip-${Date.now()}`,
+      transport: trip.transport ?? 'postkutsche'
+    }));
     if (!this.tripsValid(trips)) {
       return;
     }
@@ -723,7 +724,6 @@ export class AdminComponent implements OnDestroy {
       id: `edge-${Date.now()}`,
       from,
       to,
-      transport: 'postkutsche',
       leuge,
       validFrom: this.year(),
       trips
@@ -752,7 +752,7 @@ export class AdminComponent implements OnDestroy {
         this.quickToQuery.set('');
         this.quickLeuge.set('');
         this.quickLeugeDirty.set(false);
-        this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
+        this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
       },
       error: (error) => {
         this.toastService.addToast({
@@ -1210,16 +1210,6 @@ export class AdminComponent implements OnDestroy {
       });
   }
 
-  updateDraftEdgeTransport(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value as TransportType;
-    const draft = this.draftEdge();
-    if (!draft) {
-      return;
-    }
-      this.draftEdge.set({ ...draft, transport: value });
-    this.dirty.set(true);
-  }
-
   updateDraftEdgeFrom(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
     const draft = this.ensureDraftEdge();
@@ -1288,16 +1278,6 @@ export class AdminComponent implements OnDestroy {
     } else {
       this.draftEdge.set({ ...draft, notes });
     }
-    this.dirty.set(true);
-  }
-
-  updateSelectedEdgeTransport(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value as TransportType;
-    const draft = this.selectedEdgeDraft();
-    if (!draft) {
-      return;
-    }
-    this.updateEdgeLocal(draft.id, { transport: value });
     this.dirty.set(true);
   }
 
@@ -1403,6 +1383,7 @@ export class AdminComponent implements OnDestroy {
     }
     const newTrip: EdgeTrip = {
       id: `trip-${Date.now()}`,
+      transport: 'postkutsche',
       departs: '08:00',
       arrives: '09:00',
       arrivalDayOffset: 0
@@ -1431,7 +1412,6 @@ export class AdminComponent implements OnDestroy {
       .updateEdge(draft.id, {
         from: draft.from,
         to: draft.to,
-        transport: draft.transport,
         leuge: draft.leuge,
         validFrom: draft.validFrom,
         validTo: draft.validTo,
@@ -1473,6 +1453,7 @@ export class AdminComponent implements OnDestroy {
     }
     const newTrip: EdgeTrip = {
       id: `trip-${Date.now()}`,
+      transport: 'postkutsche',
       departs: '08:00',
       arrives: '09:00',
       arrivalDayOffset: 0
@@ -1987,7 +1968,6 @@ export class AdminComponent implements OnDestroy {
       id: `edge-${Date.now()}`,
       from,
       to,
-      transport: 'postkutsche',
       leuge: this.findExistingLeuge(from, to),
       validFrom: this.year(),
       notes: undefined,
@@ -2003,7 +1983,6 @@ export class AdminComponent implements OnDestroy {
       id: draftId,
       from,
       to,
-      transport: 'postkutsche',
       leuge: this.findExistingLeuge(from, to),
       validFrom: this.year(),
       notes: undefined,
@@ -2065,7 +2044,6 @@ export class AdminComponent implements OnDestroy {
         id: `edge-${Date.now()}`,
         from: nodeId,
         to: null,
-        transport: 'postkutsche',
         leuge: undefined,
         validFrom: this.year(),
         trips: []

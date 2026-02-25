@@ -66,6 +66,14 @@ export function formatTime(minutes: number): TimeHHMM {
   return `${hh}:${mm}` as TimeHHMM;
 }
 
+function resolveTripTransport(trip: EdgeTrip | null | undefined): TransportType {
+  return trip?.transport ?? 'postkutsche';
+}
+
+function resolveEdgeTransport(edge: GraphEdge | null | undefined): TransportType {
+  return resolveTripTransport(edge?.trips?.[0]);
+}
+
 export function computeTripChoice(
   edge: GraphEdge,
   currentTime: number,
@@ -216,7 +224,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
           departAbs: choice.departAbs,
           arriveAbs: choice.arriveAbs,
           arriveKnown: choice.arrivesKnown,
-          transport: edge.transport
+          transport: resolveTripTransport(choice.trip)
         });
         heap.push({ nodeId: edge.to, time: choice.arriveAbs });
       }
@@ -251,7 +259,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       tripId: trip.id,
       from: edge.from,
       to: edge.to,
-      transport: edge.transport,
+      transport: resolveTripTransport(trip),
       departs: trip.departs,
       arrives: info.arriveKnown ? trip.arrives : undefined,
       notes: edge.notes,
@@ -457,7 +465,7 @@ function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: str
     tripId: trip?.id ?? `outside:${fromId}->${toId}`,
     from: fromId,
     to: toId,
-    transport: edge?.transport ?? 'postkutsche',
+    transport: resolveTripTransport(trip),
     departs: trip?.departs,
     arrives: undefined,
     continuationOutsideDataset: true
@@ -563,7 +571,7 @@ function computeForeignStartFallback(
         tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
         from: entry.from,
         to: entry.to,
-        transport: entry.edge.transport,
+        transport: resolveEdgeTransport(entry.edge),
         arrives: entry.arrival,
         arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
         notes: entry.edge.notes,
@@ -604,7 +612,7 @@ function computeForeignStartFallback(
       tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
       from: entry.from,
       to: entry.to,
-      transport: entry.edge.transport,
+      transport: resolveEdgeTransport(entry.edge),
       arrives: entry.arrival,
       arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
       notes: entry.edge.notes,

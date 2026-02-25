@@ -505,9 +505,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     edgeGroups.forEach((group) => {
       group.sort((a, b) => {
-        if (a.transport !== b.transport) {
-          return a.transport.localeCompare(b.transport);
-        }
         if (a.validFrom !== b.validFrom) {
           return a.validFrom - b.validFrom;
         }

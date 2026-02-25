@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } from '@ptt-kurskarten/shared';
+import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType, Year } from '@ptt-kurskarten/shared';
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
@@ -288,13 +288,17 @@ export class JsonGraphRepository implements GraphRepository {
     return trips.map((trip) => ({
       ...trip,
       id: trip.id ?? randomUUID(),
+      transport: (trip.transport ?? 'postkutsche') as TransportType,
       edgeId
     }));
   }
 
   private stripTripEdgeId(trip: StoredTrip): EdgeTrip {
     const { edgeId: _edgeId, ...rest } = trip;
-    return rest;
+    return {
+      transport: 'postkutsche',
+      ...rest
+    };
   }
 
   private toStoredNode(node: GraphNode): StoredNode {

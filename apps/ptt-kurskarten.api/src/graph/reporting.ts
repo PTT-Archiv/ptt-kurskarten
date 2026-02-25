@@ -1,4 +1,12 @@
-import type { EdgeTimetableReport, GraphEdge, GraphNode, GraphSnapshot, StationProfileReport, TimeHHMM } from '@ptt-kurskarten/shared';
+import type {
+  EdgeTimetableReport,
+  GraphEdge,
+  GraphNode,
+  GraphSnapshot,
+  StationProfileReport,
+  TimeHHMM,
+  TransportType
+} from '@ptt-kurskarten/shared';
 
 const DAY_MINUTES = 1440;
 
@@ -97,7 +105,7 @@ function buildEdgeStats(
   | {
       toNode: GraphNode;
       edgeId: string;
-      transport: GraphEdge['transport'];
+      transport: TransportType;
       tripsCount: number;
       firstDeparture?: TimeHHMM;
       lastDeparture?: TimeHHMM;
@@ -106,7 +114,7 @@ function buildEdgeStats(
   | {
       fromNode: GraphNode;
       edgeId: string;
-      transport: GraphEdge['transport'];
+      transport: TransportType;
       tripsCount: number;
       firstDeparture?: TimeHHMM;
       lastDeparture?: TimeHHMM;
@@ -123,7 +131,7 @@ function buildEdgeStats(
 
   const base = {
     edgeId: edge.id,
-    transport: edge.transport,
+    transport: edge.trips?.[0]?.transport ?? 'postkutsche',
     tripsCount: trips.length,
     firstDeparture: departures.length
       ? trips[departures.indexOf(Math.min(...departures))].departs

@@ -85,12 +85,21 @@
       </div>
       <div class="quick-trip-table">
         <div class="quick-trip-row header">
+          <span>Transport</span>
           <span>Dep</span>
           <span>Arr</span>
           <span></span>
         </div>
         @for (trip of quickTrips(); track trip.id; let idx = $index) {
           <div class="quick-trip-row">
+            <select
+              [value]="trip.transport"
+              (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
+            >
+              @for (transport of transportOptions; track transport) {
+                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+              }
+            </select>
             <input
               type="text"
               [value]="trip.departs"
@@ -386,14 +395,6 @@
               }
             </select>
           </label>
-          <label class="field">
-            <span>{{ 'label.transport' | transloco }}</span>
-            <select [value]="edgeDraft.transport" (change)="updateSelectedEdgeTransport($event)">
-              @for (transport of transportOptions; track transport) {
-                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
-              }
-            </select>
-          </label>
           <div class="field-grid">
             <label class="field">
               <span>{{ 'label.validFrom' | transloco }}</span>
@@ -451,14 +452,6 @@
               }
             </select>
           </label>
-          <label class="field">
-            <span>{{ 'label.transport' | transloco }}</span>
-            <select [value]="draft.transport" (change)="updateDraftEdgeTransport($event)">
-              @for (transport of transportOptions; track transport) {
-                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
-              }
-            </select>
-          </label>
           <div class="field-grid">
             <label class="field">
               <span>{{ 'label.validFrom' | transloco }}</span>
@@ -509,12 +502,18 @@
           @if (edgeDraft.trips.length > 0) {
             <div class="trip-table">
               <div class="trip-row header">
+                <span>Transport</span>
                 <span>Dep</span>
                 <span>Arr</span>
                 <span></span>
               </div>
               @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
                 <div class="trip-row">
+                  <select [value]="trip.transport" (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)">
+                    @for (transport of transportOptions; track transport) {
+                      <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+                    }
+                  </select>
                   <input
                     type="text"
                     [value]="trip.departs"
@@ -549,12 +548,18 @@
           @if (draft.trips.length > 0) {
             <div class="trip-table">
               <div class="trip-row header">
+                <span>Transport</span>
                 <span>Dep</span>
                 <span>Arr</span>
                 <span></span>
               </div>
               @for (trip of draft.trips; track trip.id; let idx = $index) {
                 <div class="trip-row">
+                  <select [value]="trip.transport" (change)="updateTripField(trip.id, 'transport', $any($event.target).value)">
+                    @for (transport of transportOptions; track transport) {
+                      <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+                    }
+                  </select>
                   <input
                     type="text"
                     [value]="trip.departs"

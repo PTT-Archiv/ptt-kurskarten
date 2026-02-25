@@ -17,12 +17,12 @@ let EDGES: GraphEdge[] = [
     id: 'bern-zurich-coach',
     from: 'bern',
     to: 'zurich',
-    transport: 'postkutsche',
     validFrom: 1845,
     validTo: 1865,
     trips: [
       {
         id: 'bern-zurich-coach-early',
+        transport: 'postkutsche',
         departs: '06:15',
         arrives: '16:15',
         arrivalDayOffset: 0
@@ -33,62 +33,56 @@ let EDGES: GraphEdge[] = [
     id: 'bern-zurich-rail',
     from: 'bern',
     to: 'zurich',
-    transport: 'courier',
     validFrom: 1866,
     trips: [
-      { id: 'bern-zurich-rail-1', departs: '06:15', arrives: '09:10' },
-      { id: 'bern-zurich-rail-2', departs: '12:00', arrives: '14:55' },
-      { id: 'bern-zurich-rail-3', departs: '18:30', arrives: '21:10' }
+      { id: 'bern-zurich-rail-1', transport: 'courier', departs: '06:15', arrives: '09:10' },
+      { id: 'bern-zurich-rail-2', transport: 'courier', departs: '12:00', arrives: '14:55' },
+      { id: 'bern-zurich-rail-3', transport: 'courier', departs: '18:30', arrives: '21:10' }
     ]
   },
   {
     id: 'basel-zurich-rail',
     from: 'basel',
     to: 'zurich',
-    transport: 'courier',
     validFrom: 1855,
     trips: [
-      { id: 'basel-zurich-rail-overnight', departs: '22:40', arrives: '01:20', arrivalDayOffset: 1 }
+      { id: 'basel-zurich-rail-overnight', transport: 'courier', departs: '22:40', arrives: '01:20', arrivalDayOffset: 1 }
     ]
   },
   {
     id: 'bern-geneva-coach',
     from: 'bern',
     to: 'geneva',
-    transport: 'postkutsche',
     validFrom: 1848,
     validTo: 1878,
-    trips: [{ id: 'bern-geneva-coach-1', departs: '07:00', arrives: '16:00' }]
+    trips: [{ id: 'bern-geneva-coach-1', transport: 'postkutsche', departs: '07:00', arrives: '16:00' }]
   },
   {
     id: 'bern-geneva-rail',
     from: 'bern',
     to: 'geneva',
-    transport: 'courier',
     validFrom: 1879,
     trips: [
-      { id: 'bern-geneva-rail-1', departs: '08:00', arrives: '11:10' },
-      { id: 'bern-geneva-rail-2', departs: '14:00', arrives: '17:10' }
+      { id: 'bern-geneva-rail-1', transport: 'courier', departs: '08:00', arrives: '11:10' },
+      { id: 'bern-geneva-rail-2', transport: 'courier', departs: '14:00', arrives: '17:10' }
     ]
   },
   {
     id: 'lucerne-bern-coach',
     from: 'lucerne',
     to: 'bern',
-    transport: 'postkutsche',
     validFrom: 1855,
     validTo: 1885,
-    trips: [{ id: 'lucerne-bern-coach-1', departs: '09:30', arrives: '13:30' }]
+    trips: [{ id: 'lucerne-bern-coach-1', transport: 'postkutsche', departs: '09:30', arrives: '13:30' }]
   },
   {
     id: 'zurich-st-gallen-rail',
     from: 'zurich',
     to: 'st-gallen',
-    transport: 'courier',
     validFrom: 1875,
     trips: [
-      { id: 'zurich-st-gallen-rail-1', departs: '05:50', arrives: '08:20' },
-      { id: 'zurich-st-gallen-rail-2', departs: '17:15', arrives: '19:45' }
+      { id: 'zurich-st-gallen-rail-1', transport: 'courier', departs: '05:50', arrives: '08:20' },
+      { id: 'zurich-st-gallen-rail-2', transport: 'courier', departs: '17:15', arrives: '19:45' }
     ]
   }
 ];

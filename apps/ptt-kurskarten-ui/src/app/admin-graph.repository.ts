@@ -157,13 +157,13 @@ function buildDemoSnapshot(year: number): GraphSnapshot {
         id: 'edge-bern-zurich',
         from: 'bern',
         to: 'zurich',
-        transport: 'courier',
         leuge: 10,
         validFrom: year,
         validTo: undefined,
         trips: [
           {
             id: 'trip-1',
+            transport: 'courier',
             departs: '08:00',
             arrives: '09:10',
             arrivalDayOffset: 0
