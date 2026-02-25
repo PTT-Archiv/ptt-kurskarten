@@ -299,7 +299,7 @@ P0 (kritisch, zuerst lösen)
 (x) Zoom-Limits korrigieren: weniger weit rauszoomen, näher reinzoomen erlauben.
 2. Suche-Retry-Bug fixen: gleiche Suche muss zuverlässig erneut funktionieren.
 3. „Anwenden“-Button zuverlässig machen: klarer Klick-Status, kein „passiert nichts“.
-4. Route zurücksetzen hinzufügen: klarer Route löschen/Reset-Button.
+(x) Route zurücksetzen hinzufügen: klarer Route löschen/Reset-Button.
 5. Klick-Fehlbedienung absichern: definieren, was bei Fehlklick passiert (undo/clear/confirm).
 6. Abstand zwischen + und x vergrößern (Fehlklick vermeiden).
 P1 (wichtig für Verständnis & Usability)
