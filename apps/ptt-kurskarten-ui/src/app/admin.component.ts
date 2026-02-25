@@ -208,10 +208,12 @@ export class AdminComponent implements OnDestroy {
       .filter((edge) => edge.from === nodeId)
       .map((edge) => {
         const toNode = snapshot.nodes.find((node) => node.id === edge.to);
+        const uniqueTransports = Array.from(new Set((edge.trips ?? []).map((trip) => this.toTransportType(trip?.transport))));
+        const transports: TransportType[] = uniqueTransports.length ? uniqueTransports : ['postkutsche'];
         return {
           id: edge.id,
           toName: toNode?.name ?? '—',
-          transport: edge.trips?.[0]?.transport ?? 'postkutsche',
+          transports: this.sortTransportTypes(transports),
           tripsCount: edge.trips?.length ?? 0,
           validFrom: edge.validFrom,
           validTo: edge.validTo
@@ -2228,7 +2230,7 @@ export class AdminComponent implements OnDestroy {
   private normalizeTrip(trip: EdgeTrip): EdgeTrip {
     return {
       ...trip,
-      transport: trip.transport ?? 'postkutsche'
+      transport: this.toTransportType(trip.transport)
     };
   }
 
@@ -2241,6 +2243,25 @@ export class AdminComponent implements OnDestroy {
       ...edge,
       trips: this.normalizeTrips(edge.trips ?? [])
     };
+  }
+
+  private sortTransportTypes(types: TransportType[]): TransportType[] {
+    const order = this.transportOptions;
+    return [...types].sort((a, b) => {
+      const aIndex = order.indexOf(a);
+      const bIndex = order.indexOf(b);
+      if (aIndex === -1 || bIndex === -1) {
+        return a.localeCompare(b);
+      }
+      return aIndex - bIndex;
+    });
+  }
+
+  private toTransportType(value: unknown): TransportType {
+    const candidate = typeof value === 'string' ? value : '';
+    return this.transportOptions.includes(candidate as TransportType)
+      ? (candidate as TransportType)
+      : 'postkutsche';
   }
 
   private removeEdgeLocal(id: string): void {

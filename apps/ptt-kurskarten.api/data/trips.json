@@ -28,7 +28,7 @@
     "departs": "",
     "arrives": "16:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345109013",
+    "edgeId": "edge-1771345024662",
     "transport": "diligence"
   },
   {
@@ -36,7 +36,7 @@
     "departs": "",
     "arrives": "03:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345109013",
+    "edgeId": "edge-1771345024662",
     "transport": "diligence"
   },
   {
@@ -44,7 +44,7 @@
     "departs": "",
     "arrives": "16:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345109013",
+    "edgeId": "edge-1771345024662",
     "transport": "diligence"
   },
   {
@@ -76,7 +76,7 @@
     "departs": "07:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345749118",
+    "edgeId": "edge-1771345655486",
     "transport": "diligence"
   },
   {
@@ -84,7 +84,7 @@
     "departs": "16:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345749118",
+    "edgeId": "edge-1771345655486",
     "transport": "diligence"
   },
   {
@@ -92,7 +92,7 @@
     "departs": "06:45",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345749118",
+    "edgeId": "edge-1771345655486",
     "transport": "diligence"
   },
   {
@@ -108,7 +108,7 @@
     "departs": "",
     "arrives": "02:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345969110",
+    "edgeId": "edge-1771345876135",
     "transport": "diligence"
   },
   {
@@ -116,7 +116,7 @@
     "departs": "",
     "arrives": "05:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345913433",
+    "edgeId": "edge-1771345876135",
     "transport": "diligence"
   },
   {
@@ -124,7 +124,7 @@
     "departs": "",
     "arrives": "17:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345913433",
+    "edgeId": "edge-1771345876135",
     "transport": "diligence"
   },
   {
@@ -132,7 +132,7 @@
     "departs": "",
     "arrives": "17:30",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345913433",
+    "edgeId": "edge-1771345876135",
     "transport": "diligence"
   },
   {
@@ -148,7 +148,7 @@
     "departs": "15:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771346433633",
+    "edgeId": "edge-1771346398463",
     "transport": "diligence"
   },
   {
@@ -156,7 +156,7 @@
     "departs": "10:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771346433633",
+    "edgeId": "edge-1771346398463",
     "transport": "diligence"
   },
   {
@@ -164,7 +164,7 @@
     "departs": "06:30",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771346433633",
+    "edgeId": "edge-1771346398463",
     "transport": "diligence"
   },
   {
@@ -172,7 +172,7 @@
     "departs": "06:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771346433633",
+    "edgeId": "edge-1771346398463",
     "transport": "diligence"
   },
   {
@@ -188,7 +188,7 @@
     "departs": "",
     "arrives": "15:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576698439",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -196,7 +196,7 @@
     "departs": "",
     "arrives": "16:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576698439",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -204,7 +204,7 @@
     "departs": "",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576698439",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -212,7 +212,7 @@
     "departs": "",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576698439",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -220,7 +220,7 @@
     "departs": "",
     "arrives": "22:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576787950",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -228,7 +228,7 @@
     "departs": "",
     "arrives": "16:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576787950",
+    "edgeId": "edge-1771576664336",
     "transport": "diligence"
   },
   {
@@ -244,7 +244,7 @@
     "departs": "07:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576881279",
+    "edgeId": "edge-1771576829790",
     "transport": "diligence"
   },
   {
@@ -252,7 +252,7 @@
     "departs": "09:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576881279",
+    "edgeId": "edge-1771576829790",
     "transport": "diligence"
   },
   {
@@ -260,7 +260,7 @@
     "departs": "10:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576854997",
+    "edgeId": "edge-1771576829790",
     "transport": "diligence"
   },
   {
@@ -268,7 +268,7 @@
     "departs": "09:00",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771576854997",
+    "edgeId": "edge-1771576829790",
     "transport": "diligence"
   },
   {
@@ -324,7 +324,7 @@
     "departs": "12:00",
     "arrives": "13:10",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771345438928",
+    "edgeId": "edge-1771345293296",
     "transport": "postkutsche"
   },
   {
@@ -604,7 +604,7 @@
     "departs": "10:45",
     "arrives": "11:30",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771858295500",
+    "edgeId": "edge-1771858280182",
     "transport": "dampfschiff"
   },
   {
@@ -612,7 +612,7 @@
     "departs": "17:00",
     "arrives": "18:00",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771858295500",
+    "edgeId": "edge-1771858280182",
     "transport": "dampfschiff"
   },
   {
@@ -740,7 +740,7 @@
     "departs": "10:00",
     "arrives": "11:15",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1771860693376",
+    "edgeId": "edge-1771860635841",
     "transport": "postkutsche"
   },
   {
@@ -1964,7 +1964,7 @@
     "departs": "10:30",
     "arrives": "",
     "arrivalDayOffset": 0,
-    "edgeId": "edge-1772009087362",
+    "edgeId": "edge-1772008859716",
     "transport": "messagerie"
   },
   {

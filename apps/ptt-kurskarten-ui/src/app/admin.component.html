@@ -347,7 +347,9 @@
                 >
                   <span>{{ edge.toName }}</span>
                   <span class="edge-meta">
-                    {{ ('transport.' + edge.transport) | transloco }} · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}
+                    @for (transport of edge.transports; track transport; let isLast = $last) {
+                      {{ ('transport.' + (transport || 'postkutsche')) | transloco }}@if (!isLast) {, }
+                    } · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}
                   </span>
                 </button>
               }

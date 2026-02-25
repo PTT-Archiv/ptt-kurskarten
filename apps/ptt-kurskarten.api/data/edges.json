@@ -21,13 +21,6 @@
     "validTo": null
   },
   {
-    "id": "edge-1771345109013",
-    "from": "node-1770808908336",
-    "to": "node-1770809062251",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
     "id": "edge-1771345216914",
     "from": "node-1770809062251",
     "to": "node-1770809018783",
@@ -43,13 +36,6 @@
   },
   {
     "id": "edge-1771345293296",
-    "from": "node-1770809062251",
-    "to": "node-1770809209472",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771345438928",
     "from": "node-1770809062251",
     "to": "node-1770809209472",
     "validFrom": 1852,
@@ -77,45 +63,17 @@
     "validTo": null
   },
   {
-    "id": "edge-1771345749118",
-    "from": "node-1770809062251",
-    "to": "node-1770808908336",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
     "id": "edge-1771345876135",
     "from": "node-1770895016880",
     "to": "node-1770809062251",
     "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771345913433",
-    "from": "node-1770895016880",
-    "to": "node-1770809062251",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771345969110",
-    "from": "node-1770895016880",
-    "to": "node-1770809062251",
-    "validFrom": 1852,
+    "validTo": null,
     "notes": {
       "fr": "p. Seyssel"
-    },
-    "validTo": null
+    }
   },
   {
     "id": "edge-1771346398463",
-    "from": "node-1770809062251",
-    "to": "node-1770895016880",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771346433633",
     "from": "node-1770809062251",
     "to": "node-1770895016880",
     "validFrom": 1852,
@@ -126,48 +84,20 @@
     "from": "node-1770809183587",
     "to": "node-1770809062251",
     "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771576698439",
-    "from": "node-1770809183587",
-    "to": "node-1770809062251",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771576787950",
-    "from": "node-1770809183587",
-    "to": "node-1770809062251",
-    "validFrom": 1852,
+    "validTo": null,
     "notes": {
       "fr": "p. Châlons"
-    },
-    "validTo": null
+    }
   },
   {
     "id": "edge-1771576829790",
     "from": "node-1770809062251",
     "to": "node-1770809183587",
     "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771576854997",
-    "from": "node-1770809062251",
-    "to": "node-1770809183587",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771576881279",
-    "from": "node-1770809062251",
-    "to": "node-1770809183587",
-    "validFrom": 1852,
+    "validTo": null,
     "notes": {
       "fr": "p. Châlons"
-    },
-    "validTo": null
+    }
   },
   {
     "id": "edge-1771577098526",
@@ -342,13 +272,6 @@
     "validTo": null
   },
   {
-    "id": "edge-1771858295500",
-    "from": "node-1770818428222",
-    "to": "node-1770890564956",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
     "id": "edge-1771858415694",
     "from": "node-1770890564956",
     "to": "node-1770818428222",
@@ -434,13 +357,6 @@
   },
   {
     "id": "edge-1771860635841",
-    "from": "node-1770897613242",
-    "to": "node-1770897625083",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1771860693376",
     "from": "node-1770897613242",
     "to": "node-1770897625083",
     "validFrom": 1852,
@@ -1246,13 +1162,6 @@
   },
   {
     "id": "edge-1772008859716",
-    "from": "node-1770809183587",
-    "to": "node-1770894828775",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1772009087362",
     "from": "node-1770809183587",
     "to": "node-1770894828775",
     "validFrom": 1852,
