@@ -24,6 +24,7 @@
   "viewer.noRouteTime": "Aucune liaison trouvée.",
   "viewer.details": "Détails",
   "viewer.resetView": "Réinitialiser la vue",
+  "viewer.resetSearch": "Réinitialiser la recherche",
   "label.from": "De",
   "btn.swap": "Inverser",
   "label.to": "À",

@@ -296,7 +296,7 @@ Einstieg auf seite:
 
    Priorität.
 P0 (kritisch, zuerst lösen)
-1. Zoom-Limits korrigieren: weniger weit rauszoomen, näher reinzoomen erlauben.
+(x) Zoom-Limits korrigieren: weniger weit rauszoomen, näher reinzoomen erlauben.
 2. Suche-Retry-Bug fixen: gleiche Suche muss zuverlässig erneut funktionieren.
 3. „Anwenden“-Button zuverlässig machen: klarer Klick-Status, kein „passiert nichts“.
 4. Route zurücksetzen hinzufügen: klarer Route löschen/Reset-Button.

@@ -364,6 +364,25 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.onSearchConnections();
   }
 
+  resetSearch(): void {
+    this.pickTarget.set(null);
+    this.fromPreviewId.set('');
+    this.toPreviewId.set('');
+    this.fromId.set('');
+    this.toId.set('');
+    this.departTime.set('08:00');
+    this.draftDepartTime.set('08:00');
+    this.hasSearched.set(false);
+    this.connectionResults.set([]);
+    this.selectedConnectionId.set(null);
+    this.routingState.set('idle');
+    this.uiState.set('landing');
+    this.lastSearchParams.set(null);
+    this.lastResultParams.set(null);
+    this.selectedNodeId.set(null);
+    this.sidebarOpen.set(false);
+  }
+
   onFromPreview(id: string): void {
     this.fromPreviewId.set(id);
   }

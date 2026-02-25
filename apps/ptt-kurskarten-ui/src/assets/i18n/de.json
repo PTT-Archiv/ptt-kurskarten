@@ -24,6 +24,7 @@
   "viewer.noRouteTime": "Keine Verbindung gefunden.",
   "viewer.details": "Details",
   "viewer.resetView": "Ansicht zurücksetzen",
+  "viewer.resetSearch": "Suche zurücksetzen",
   "label.from": "Von",
   "btn.swap": "Tauschen",
   "label.to": "Nach",

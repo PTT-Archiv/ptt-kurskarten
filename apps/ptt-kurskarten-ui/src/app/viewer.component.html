@@ -36,6 +36,7 @@
         (fromPreviewChange)="onFromPreview($event)" (toPreviewChange)="onToPreview($event)"
         (pickFrom)="startMapPick('from')" (pickTo)="startMapPick('to')" (departTimeChange)="onDepartTimeDraftChange($event)"
         (applyTime)="applyDepartTime()"
+        (resetSearch)="resetSearch()"
         (swap)="swapConnections()" (plannerFocus)="onPlannerFocus($event)"
         (plannerHover)="onPlannerHover($event)"></app-viewer-route-planner-overlay>
       @if (routingState() === 'searching') {

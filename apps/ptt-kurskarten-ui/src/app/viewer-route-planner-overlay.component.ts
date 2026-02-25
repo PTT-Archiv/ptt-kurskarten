@@ -153,11 +153,16 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
             </div>
           </div>
         </label>
-        @if (canApplyTime) {
-          <button type="button" class="action-btn" (click)="applyTime.emit()">
-            {{ 'btn.apply' | transloco }}
+        <div class="planner-actions">
+          @if (canApplyTime) {
+            <button type="button" class="action-btn" (click)="applyTime.emit()">
+              {{ 'btn.apply' | transloco }}
+            </button>
+          }
+          <button type="button" class="action-btn secondary" (click)="resetSearch.emit()">
+            {{ 'viewer.resetSearch' | transloco }}
           </button>
-        }
+        </div>
         }
       </div>
     </div>
@@ -198,6 +203,12 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .planner-row:last-child {
         grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .planner-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
       }
 
       .field {
@@ -303,6 +314,10 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       .action-btn[disabled] {
         opacity: 0.6;
         cursor: not-allowed;
+      }
+
+      .action-btn.secondary {
+        background: #ffffff;
       }
 
       .planner-card.compact {
@@ -510,6 +525,7 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   @Output() toPreviewChange = new EventEmitter<string>();
   @Output() pickFrom = new EventEmitter<void>();
   @Output() pickTo = new EventEmitter<void>();
+  @Output() resetSearch = new EventEmitter<void>();
 
   @ViewChildren('fromOption', { read: ElementRef }) fromOptions!: QueryList<ElementRef<HTMLElement>>;
   @ViewChildren('toOption', { read: ElementRef }) toOptions!: QueryList<ElementRef<HTMLElement>>;
