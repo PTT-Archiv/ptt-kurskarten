@@ -341,7 +341,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const sy = event.clientY - rect.top;
     const currentZoom = this.viewportZoom;
     const zoomFactor = Math.exp(-event.deltaY * 0.0015);
-    const nextZoom = Math.max(0.7, Math.min(4, currentZoom * zoomFactor));
+    const nextZoom = Math.max(1.0, Math.min(20, currentZoom * zoomFactor));
     if (Math.abs(nextZoom - currentZoom) < 0.0001) {
       return;
     }

@@ -293,3 +293,48 @@ Einstieg auf seite:
    - Toggle Map und ein riesiger IIIF Viewer zum herum naivigeren
    - Slider einbauen, der auf die einzelnen Jahren und der entsprechennde Kurskarte geht. so als drüber lappieren und so. 
    
+
+   Priorität.
+P0 (kritisch, zuerst lösen)
+1. Zoom-Limits korrigieren: weniger weit rauszoomen, näher reinzoomen erlauben.
+2. Suche-Retry-Bug fixen: gleiche Suche muss zuverlässig erneut funktionieren.
+3. „Anwenden“-Button zuverlässig machen: klarer Klick-Status, kein „passiert nichts“.
+4. Route zurücksetzen hinzufügen: klarer Route löschen/Reset-Button.
+5. Klick-Fehlbedienung absichern: definieren, was bei Fehlklick passiert (undo/clear/confirm).
+6. Abstand zwischen + und x vergrößern (Fehlklick vermeiden).
+P1 (wichtig für Verständnis & Usability)
+1. Start/Ziel direkt per Node-Klick wählbar machen (ohne extra Auswahlmodus).
+2. Nodes und Labels klickbar machen; optional auch Edges klickbar.
+3. Sidepanel und Karte stärker koppeln:
+    * Hover/Click in Karte hebt Eintrag im Panel hervor
+    * Klick im Panel markiert Node/Edge auf Karte
+4. Legende für alle Icons sichtbar integrieren (nicht versteckt).
+5. Unbekannte Abfahrtszeiten klar kennzeichnen (Karte + Sidepanel gleiches Symbol/Text).
+6. Zeit-Eingabe verbessern: neben Textfeld ein klares Time-Picker-Icon/Dropdown.
+P2 (Inhalt/Flow verbessern)
+1. Suche sprachrobust machen: deutsch/französische Ortsnamen gegenseitig auffindbar.
+2. Transporttyp-Filter in Suche hinzufügen (z.B. nur Schiff/Coach/etc.).
+3. Hilfe-Texte überarbeiten (kürzer, konkreter, task-basiert).
+4. Route anzeigen als klare primäre Aktion ergänzen.
+5. Zielwahl entlasten: „Ziel setzen“ nicht zu dominant/fehleranfällig gestalten.
+UI/Visual Redesign To-dos
+1. Farbsystem vereinfachen: Schwarz/Weiß als Basis, Gelb nur sehr sparsam (oder entfernen).
+2. Schatten/Outline reduzieren: Karten-Outline + schwere Shadows entschärfen.
+3. Sidebar-Karten flacher machen, klare durchgezogene Linien, volle Opazität.
+4. Karte als „Sternenbild“-Modus prüfen:
+    * kleinere Nodes
+    * weniger Edge-Betonung
+    * Fokusmodus blendet unwichtige Edges aus
+5. Node-Zustände visuell staffeln:
+    * ohne Border
+    * mit Border
+    * mit Doppelborder
+6. Puls nicht nur auf Node, auch auf Label; Label ebenfalls klickbar.
+Produkt-/Konzept To-dos
+1. Routeplanung als eine von mehreren Funktionen positionieren (nicht Hauptfokus).
+2. Guided Experience definieren: Nutzer aktiv durch Karten-Komplexität führen.
+3. Fokus-Filter einführen (z.B. nur Schiffahrten sichtbar).
+Einstieg/Onboarding To-dos
+1. Startscreen mit „Map Loading Tiles“ (historische Kartenfragmente).
+2. Toggle zwischen Karte und großem IIIF-Navigationsmodus.
+3. Jahres-Slider mit direkter Kurskarten-Überblendung.
