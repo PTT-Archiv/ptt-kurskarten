@@ -38,8 +38,8 @@
     "x": 21.115537848605534,
     "y": 414.9561752988048,
     "validFrom": 1852,
-    "iiifCenterX": 1096,
-    "iiifCenterY": 7200,
+    "iiifCenterX": 1090,
+    "iiifCenterY": 7182,
     "validTo": null
   },
   {
@@ -170,8 +170,8 @@
     "y": 271.21323673239726,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6571,
-    "iiifCenterY": 4907
+    "iiifCenterX": 6561,
+    "iiifCenterY": 4881
   },
   {
     "id": "node-1770818481603",
@@ -1014,11 +1014,11 @@
   {
     "id": "node-1770894828775",
     "name": "Dijon",
-    "x": 35.45816733067725,
-    "y": 181.09163346613545,
+    "x": 20.655737704918035,
+    "y": 184.1639344262295,
     "validFrom": 1852,
-    "iiifCenterX": 976,
-    "iiifCenterY": 3669,
+    "iiifCenterX": 1264,
+    "iiifCenterY": 3927,
     "foreign": true,
     "validTo": null
   },
@@ -2334,23 +2334,13 @@
     "validTo": null
   },
   {
-    "id": "node-1770906446590",
-    "name": "Undervelier",
-    "x": 228.34861570755697,
-    "y": 116.95638602093413,
-    "validFrom": 1852,
-    "validTo": null,
-    "iiifCenterX": 4269,
-    "iiifCenterY": 2383
-  },
-  {
     "id": "node-1770906451065",
     "name": "Undervelier",
     "x": 228.34861570755697,
     "y": 116.95638602093413,
     "validFrom": 1852,
-    "iiifCenterX": 4321,
-    "iiifCenterY": 2656,
+    "iiifCenterX": 4333,
+    "iiifCenterY": 2616,
     "validTo": null
   },
   {
@@ -2370,8 +2360,8 @@
     "y": 155.94307052835075,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 3302,
-    "iiifCenterY": 3006
+    "iiifCenterX": 3307,
+    "iiifCenterY": 3010
   },
   {
     "id": "node-1770906644770",
@@ -2380,8 +2370,8 @@
     "y": 173.22126454771046,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 3124,
-    "iiifCenterY": 3297
+    "iiifCenterX": 3112,
+    "iiifCenterY": 3290
   },
   {
     "id": "node-1770906650706",
@@ -2406,12 +2396,12 @@
   {
     "id": "node-1770906731613",
     "name": "Locle",
-    "x": 141.67600056146307,
-    "y": 188.31178017420524,
+    "x": 148.85245901639345,
+    "y": 187.11475409836063,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 2698,
-    "iiifCenterY": 3396
+    "iiifCenterX": 2709,
+    "iiifCenterY": 3408
   },
   {
     "id": "node-1770906799317",
@@ -2758,23 +2748,13 @@
     "validTo": null
   },
   {
-    "id": "node-1770912333324",
-    "name": "Weissenburg",
-    "x": 274.63691192563965,
-    "y": 299.94189846806375,
-    "validFrom": 1852,
-    "validTo": null,
-    "iiifCenterX": 5008,
-    "iiifCenterY": 5376
-  },
-  {
     "id": "node-1770912364302",
     "name": "Weissenburg",
     "x": 274.63691192563965,
     "y": 299.94189846806375,
     "validFrom": 1852,
-    "iiifCenterX": 5046,
-    "iiifCenterY": 5447,
+    "iiifCenterX": 5017,
+    "iiifCenterY": 5371,
     "validTo": null
   },
   {
