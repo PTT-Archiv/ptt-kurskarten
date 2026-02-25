@@ -1952,27 +1952,11 @@
     "transport": "courier"
   },
   {
-    "id": "quick-trip-1772008859755",
-    "departs": "10:55",
-    "arrives": "20:50",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1772008911403",
-    "transport": "messagerie"
-  },
-  {
     "id": "quick-trip-1772008799422",
     "departs": "20:30",
     "arrives": "03:00",
     "arrivalDayOffset": 0,
     "edgeId": "edge-1772008859716",
-    "transport": "courier"
-  },
-  {
-    "id": "quick-trip-1772008911444",
-    "departs": "19:00",
-    "arrives": "04:00",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1772009018864",
     "transport": "courier"
   },
   {
@@ -2022,5 +2006,21 @@
     "arrivalDayOffset": 0,
     "edgeId": "edge-1772009320112",
     "transport": "postkutsche"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1772013183407",
+    "departs": "19:00",
+    "arrives": "04:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772013295958"
+  },
+  {
+    "transport": "messagerie",
+    "id": "quick-trip-1772013246579",
+    "departs": "10:55",
+    "arrives": "20:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772013295958"
   }
 ]

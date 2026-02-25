@@ -281,7 +281,7 @@ export class AdminComponent implements OnDestroy {
       validFrom: edge.validFrom,
       validTo: edge.validTo,
       notes: edge.notes,
-      trips: edge.trips ?? []
+      trips: this.normalizeTrips(edge.trips ?? [])
     };
   });
 
@@ -314,7 +314,7 @@ export class AdminComponent implements OnDestroy {
         leuge: draftEdge.leuge,
         validFrom: draftEdge.validFrom,
         validTo: draftEdge.validTo,
-        trips: draftEdge.trips
+        trips: this.normalizeTrips(draftEdge.trips)
       };
       edges = [...edges, tempEdge];
     }
@@ -1178,9 +1178,20 @@ export class AdminComponent implements OnDestroy {
     if (!draft || !draft.from || !draft.to || !this.tripsValid(draft.trips)) {
       return;
     }
+    const trips = this.normalizeTrips(draft.trips);
+    const payload: GraphEdge = {
+      id: draft.id,
+      from: draft.from,
+      to: draft.to,
+      leuge: draft.leuge,
+      validFrom: draft.validFrom,
+      validTo: draft.validTo,
+      notes: draft.notes,
+      trips
+    };
 
     this.repo
-      .createEdge(draft as GraphEdge)
+      .createEdge(payload)
       .subscribe({
         next: (created) => {
           this.draftEdge.set(null);
@@ -1191,7 +1202,7 @@ export class AdminComponent implements OnDestroy {
             title: 'Strecke erstellt',
             key: 'edge-save'
           });
-          if (draft.trips.length) {
+          if (trips.length) {
             this.toastService.addToast({
               type: 'success',
               title: 'Fahrten gespeichert',
@@ -1407,6 +1418,7 @@ export class AdminComponent implements OnDestroy {
     if (!draft || !draft.from || !draft.to || !this.tripsValid(draft.trips)) {
       return;
     }
+    const trips = this.normalizeTrips(draft.trips);
 
     this.repo
       .updateEdge(draft.id, {
@@ -1416,7 +1428,7 @@ export class AdminComponent implements OnDestroy {
         validFrom: draft.validFrom,
         validTo: draft.validTo,
         notes: draft.notes,
-        trips: draft.trips
+        trips
       } as GraphEdge)
       .subscribe({
         next: (updated) => {
@@ -1427,7 +1439,7 @@ export class AdminComponent implements OnDestroy {
             title: 'Strecke gespeichert',
             key: 'edge-save'
           });
-          if (draft.trips.length) {
+          if (trips.length) {
             this.toastService.addToast({
               type: 'success',
               title: 'Fahrten gespeichert',
@@ -2103,7 +2115,10 @@ export class AdminComponent implements OnDestroy {
   private fetchGraph(year: number): void {
     this.repo.loadGraph(year).subscribe({
       next: (graph) => {
-        this.graph.set(graph);
+        this.graph.set({
+          ...graph,
+          edges: graph.edges.map((edge) => this.normalizeEdge(edge))
+        });
         this.selection.clearSelection();
         this.draftNode.set(null);
         this.draftEdge.set(null);
@@ -2145,7 +2160,7 @@ export class AdminComponent implements OnDestroy {
     if (!snapshot) {
       return;
     }
-    this.graph.set({ ...snapshot, edges: [...snapshot.edges, edge] });
+    this.graph.set({ ...snapshot, edges: [...snapshot.edges, this.normalizeEdge(edge)] });
   }
 
   private removeNodeCascadeLocal(id: string): void {
@@ -2190,7 +2205,8 @@ export class AdminComponent implements OnDestroy {
     if (!snapshot) {
       return;
     }
-    const edges = snapshot.edges.map((candidate) => (candidate.id === edge.id ? edge : candidate));
+    const nextEdge = this.normalizeEdge(edge);
+    const edges = snapshot.edges.map((candidate) => (candidate.id === edge.id ? nextEdge : candidate));
     this.graph.set({ ...snapshot, edges });
   }
 
@@ -2199,8 +2215,32 @@ export class AdminComponent implements OnDestroy {
     if (!snapshot) {
       return;
     }
-    const edges = snapshot.edges.map((edge) => (edge.id === id ? { ...edge, ...patch } : edge));
+    const edges = snapshot.edges.map((edge) => {
+      if (edge.id !== id) {
+        return edge;
+      }
+      const next = { ...edge, ...patch };
+      return this.normalizeEdge(next);
+    });
     this.graph.set({ ...snapshot, edges });
+  }
+
+  private normalizeTrip(trip: EdgeTrip): EdgeTrip {
+    return {
+      ...trip,
+      transport: trip.transport ?? 'postkutsche'
+    };
+  }
+
+  private normalizeTrips(trips: EdgeTrip[]): EdgeTrip[] {
+    return trips.map((trip) => this.normalizeTrip(trip));
+  }
+
+  private normalizeEdge(edge: GraphEdge): GraphEdge {
+    return {
+      ...edge,
+      trips: this.normalizeTrips(edge.trips ?? [])
+    };
   }
 
   private removeEdgeLocal(id: string): void {

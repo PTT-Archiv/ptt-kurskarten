@@ -1252,20 +1252,6 @@
     "validTo": null
   },
   {
-    "id": "edge-1772008911403",
-    "from": "node-1770894828775",
-    "to": "node-1770809183587",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
-    "id": "edge-1772009018864",
-    "from": "node-1770894828775",
-    "to": "node-1770809183587",
-    "validFrom": 1852,
-    "validTo": null
-  },
-  {
     "id": "edge-1772009087362",
     "from": "node-1770809183587",
     "to": "node-1770894828775",
@@ -1304,6 +1290,13 @@
     "id": "edge-1772009320112",
     "from": "node-1770894811224",
     "to": "node-1770894880046",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "edge-1772013295958",
+    "from": "node-1770894828775",
+    "to": "node-1770809183587",
     "validFrom": 1852,
     "validTo": null
   }

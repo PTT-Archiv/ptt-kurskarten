@@ -97,7 +97,9 @@
               (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
             >
               @for (transport of transportOptions; track transport) {
-                <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+                <option [value]="transport" [selected]="transport === trip.transport">
+                  {{ ('transport.' + transport) | transloco }}
+                </option>
               }
             </select>
             <input
@@ -509,9 +511,14 @@
               </div>
               @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
                 <div class="trip-row">
-                  <select [value]="trip.transport" (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)">
+                  <select
+                    [value]="trip.transport"
+                    (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)"
+                  >
                     @for (transport of transportOptions; track transport) {
-                      <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+                      <option [value]="transport" [selected]="transport === trip.transport">
+                        {{ ('transport.' + transport) | transloco }}
+                      </option>
                     }
                   </select>
                   <input
@@ -555,9 +562,14 @@
               </div>
               @for (trip of draft.trips; track trip.id; let idx = $index) {
                 <div class="trip-row">
-                  <select [value]="trip.transport" (change)="updateTripField(trip.id, 'transport', $any($event.target).value)">
+                  <select
+                    [value]="trip.transport"
+                    (change)="updateTripField(trip.id, 'transport', $any($event.target).value)"
+                  >
                     @for (transport of transportOptions; track transport) {
-                      <option [value]="transport">{{ ('transport.' + transport) | transloco }}</option>
+                      <option [value]="transport" [selected]="transport === trip.transport">
+                        {{ ('transport.' + transport) | transloco }}
+                      </option>
                     }
                   </select>
                   <input
