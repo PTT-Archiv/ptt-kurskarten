@@ -335,6 +335,9 @@ Produkt-/Konzept To-dos
 2. Guided Experience definieren: Nutzer aktiv durch Karten-Komplexität führen.
 3. Fokus-Filter einführen (z.B. nur Schiffahrten sichtbar).
 Einstieg/Onboarding To-dos
+
+
+Do it later:
 1. Startscreen mit „Map Loading Tiles“ (historische Kartenfragmente).
 2. Toggle zwischen Karte und großem IIIF-Navigationsmodus.
 3. Jahres-Slider mit direkter Kurskarten-Überblendung.

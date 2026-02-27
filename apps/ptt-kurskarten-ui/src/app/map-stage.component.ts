@@ -19,6 +19,7 @@ import { computeTransform, DEFAULT_VIEWBOX, screenToWorld, worldToScreen } from 
 import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
+import { BorderUncertaintyLayerComponent } from './border-uncertainty-layer.component';
 
 const NODE_RADIUS = 5;
 const NODE_RADIUS_MAX = 9;
@@ -32,6 +33,7 @@ const NODE_COLOR_FOREIGN = '#ffffff';
 @Component({
   selector: 'app-map-stage',
   standalone: true,
+  imports: [BorderUncertaintyLayerComponent],
   template: `
     <div
       class="stage"
@@ -40,6 +42,10 @@ const NODE_COLOR_FOREIGN = '#ffffff';
       (mouseleave)="onStageLeave()"
     >
       <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform()" />
+      <app-border-uncertainty-layer
+        class="border-uncertainty-layer"
+        [mapTransform]="getMapTransform()"
+      ></app-border-uncertainty-layer>
       <div class="overlay">
         <canvas
           #graphCanvas
@@ -97,6 +103,13 @@ const NODE_COLOR_FOREIGN = '#ffffff';
       .map {
         position: relative;
         z-index: 1;
+      }
+
+      .border-uncertainty-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
       }
 
       .overlay {
