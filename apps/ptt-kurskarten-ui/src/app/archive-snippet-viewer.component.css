@@ -78,3 +78,9 @@
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
   font-weight: 600;
 }
+
+.ghost-btn:hover,
+.ghost-btn:focus-visible {
+  background: #141414;
+  color: #ffffff;
+}
