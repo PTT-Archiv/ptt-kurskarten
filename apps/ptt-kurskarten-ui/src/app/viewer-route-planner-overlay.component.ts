@@ -178,8 +178,9 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
   styles: [
     `
       .planner-card {
-        background: #ffffff;
-        border: 2px solid #141414;
+        background: #000000;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         border-radius: 18px;
         padding: 12px 14px;
         box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
@@ -227,10 +228,11 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .field select,
       .field input {
-        border: 2px solid #141414;
+        border: 2px solid #ffffff;
         border-radius: 14px;
         padding: 8px 10px;
-        background: #ffffff;
+        background: #000000;
+        color: #ffffff;
         width: 100%;
         min-width: 0;
         box-sizing: border-box;
@@ -257,7 +259,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .field.minimal span {
         font-size: 12px;
-        color: #6a6a6a;
+        color: #cfcfcf;
       }
 
       .time-field {
@@ -279,15 +281,16 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .time-label {
         font-size: 11px;
-        color: #6a6a6a;
+        color: #cfcfcf;
       }
 
       .time-input {
-        border: 2px solid #141414;
+        border: 2px solid #ffffff;
         border-radius: 14px;
         padding: 10px 8px;
-        background: #ffffff;
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+        background: #000000;
+        color: #ffffff;
+        box-shadow: none;
         font-size: 16px;
         font-weight: 600;
         text-align: center;
@@ -295,9 +298,9 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .swap-btn {
         position: relative;
-        background: #ffffff;
-        border: 2px solid #141414;
-        color: #141414;
+        background: #141414;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         border-radius: 999px;
         height: 56px;
         width: 56px;
@@ -313,8 +316,8 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .swap-btn:hover,
       .swap-btn:focus-visible {
-        background: #141414;
-        color: #ffffff;
+        background: #ffffff;
+        color: #141414;
       }
 
       .swap-icon {
@@ -324,9 +327,9 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       }
 
       .action-btn {
-        background: #ffffff;
-        border: 2px solid #141414;
-        color: #141414;
+        background: #141414;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         padding: 8px 14px;
         border-radius: 14px;
         font-weight: 600;
@@ -337,8 +340,8 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .action-btn:hover,
       .action-btn:focus-visible {
-        background: #141414;
-        color: #ffffff;
+        background: #ffffff;
+        color: #141414;
       }
 
       .action-btn[disabled] {
@@ -347,13 +350,13 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       }
 
       .action-btn.secondary {
-        background: #ffffff;
+        background: #141414;
       }
 
       .action-btn.secondary:hover,
       .action-btn.secondary:focus-visible {
-        background: #141414;
-        color: #ffffff;
+        background: #ffffff;
+        color: #141414;
       }
 
       .planner-card.compact {
@@ -402,7 +405,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .typeahead-input input {
         border: none;
-        border-bottom: 2px solid #d9d9d9;
+        border-bottom: 2px solid #ffffff;
         border-radius: 0;
         padding: 4px 24px 6px 2px;
         background: transparent;
@@ -423,7 +426,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         transform: translateY(-50%);
         border: none;
         background: transparent;
-        color: #7a7a7a;
+        color: #d0d0d0;
         font-size: 18px;
         line-height: 1;
         height: 20px;
@@ -436,9 +439,9 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .pick-btn {
         position: relative;
-        border: 2px solid #141414;
-        background: #ffffff;
-        color: #141414;
+        border: 2px solid #ffffff;
+        background: #141414;
+        color: #ffffff;
         font-size: 14px;
         width: 22px;
         height: 22px;
@@ -452,8 +455,8 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .pick-btn:hover,
       .pick-btn:focus-visible {
-        background: #141414;
-        color: #ffffff;
+        background: #ffffff;
+        color: #141414;
       }
 
       .pick-btn.pulsing {
@@ -478,12 +481,12 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         right: 28px;
         top: 50%;
         transform: translateY(-50%);
-        background: #ffffff;
-        border: 2px solid #141414;
+        background: #000000;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         border-radius: 10px;
         padding: 4px 8px;
         font-size: 11px;
-        color: #141414;
         white-space: nowrap;
         opacity: 0;
         pointer-events: none;
@@ -501,8 +504,9 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         top: calc(100% + 6px);
         left: 0;
         right: 0;
-        background: #ffffff;
-        border: 2px solid #141414;
+        background: #000000;
+        border: 2px solid #ffffff;
+        color: #ffffff;
         border-radius: 14px;
         box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
         padding: 6px 0;
@@ -520,12 +524,14 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         text-align: left;
         padding: 8px 12px;
         font-size: 16px;
+        color: #ffffff;
         cursor: pointer;
       }
 
       .typeahead-list button.active,
       .typeahead-list button:hover {
-        background: #e9e9e9;
+        background: #ffffff;
+        color: #141414;
         font-weight: 600;
       }
 

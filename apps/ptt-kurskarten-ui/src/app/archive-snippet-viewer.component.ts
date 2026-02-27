@@ -167,13 +167,22 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
     }
     const region = this.parseRegion(url);
     if (!region) {
+      this.viewer.viewport.goHome(true);
+      this.viewer.viewport.applyConstraints();
       return;
     }
     const item = this.viewer.world.getItemAt(0);
     if (!item) {
       return;
     }
-    const rect = item.imageToViewportRectangle(region.x, region.y, region.w, region.h);
+    const contentSize = item.getContentSize();
+    const maxW = Math.max(1, Math.round(contentSize.x));
+    const maxH = Math.max(1, Math.round(contentSize.y));
+    const w = Math.max(64, Math.min(region.w, maxW));
+    const h = Math.max(64, Math.min(region.h, maxH));
+    const x = Math.max(0, Math.min(region.x, maxW - w));
+    const y = Math.max(0, Math.min(region.y, maxH - h));
+    const rect = item.imageToViewportRectangle(x, y, w, h);
     this.suppressNextViewportEvent = true;
     this.viewer.viewport.fitBounds(rect, true);
     this.viewer.viewport.applyConstraints();
@@ -183,7 +192,7 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   }
 
   private parseRegion(url: string): { x: number; y: number; w: number; h: number } | null {
-    const match = url.match(/\/(\d+),(\d+),(\d+),(\d+)\//);
+    const match = url.match(/\/(-?\d+),(-?\d+),(\d+),(\d+)\//);
     if (!match) {
       return null;
     }

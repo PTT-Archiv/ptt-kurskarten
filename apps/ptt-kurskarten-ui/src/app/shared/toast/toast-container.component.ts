@@ -42,9 +42,9 @@ import { ToastService } from './toast.service';
         grid-template-columns: 6px 1fr auto;
         gap: 10px;
         align-items: center;
-        background: var(--ptt-white);
-        border: 1px solid var(--ptt-black);
-        color: var(--ptt-black);
+        background: #000000;
+        border: 1px solid #ffffff;
+        color: #ffffff;
         padding: 10px 12px;
         min-width: 220px;
         max-width: 320px;
@@ -57,12 +57,12 @@ import { ToastService } from './toast.service';
       .toast .accent {
         width: 6px;
         height: 100%;
-        background: #dcdcdc;
+        background: #5f5f5f;
       }
 
       .toast.success .accent,
       .toast.warning .accent {
-        background: var(--ptt-yellow);
+        background: #ffffff;
       }
 
       .toast.error {
@@ -76,7 +76,7 @@ import { ToastService } from './toast.service';
 
       .message {
         font-size: 12px;
-        color: #3a3a3a;
+        color: #d0d0d0;
       }
 
       .close {
@@ -85,7 +85,7 @@ import { ToastService } from './toast.service';
         font-size: 16px;
         line-height: 1;
         cursor: pointer;
-        color: var(--ptt-black);
+        color: #ffffff;
       }
 
       @keyframes toast-in {

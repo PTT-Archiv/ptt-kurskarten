@@ -3,10 +3,10 @@
   width: 100%;
   height: 260px;
   border-radius: 12px;
-  border: 2px solid #141414;
+  border: 2px solid #ffffff;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  background: #ffffff;
+  background: #000000;
 }
 
 .osd-container {
@@ -70,9 +70,9 @@
   height: 32px;
   display: grid;
   place-items: center;
-  background: #ffffff;
-  border: 2px solid #141414;
-  color: #141414;
+  background: #141414;
+  border: 2px solid #ffffff;
+  color: #ffffff;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
@@ -81,6 +81,6 @@
 
 .ghost-btn:hover,
 .ghost-btn:focus-visible {
-  background: #141414;
-  color: #ffffff;
+  background: #ffffff;
+  color: #141414;
 }
