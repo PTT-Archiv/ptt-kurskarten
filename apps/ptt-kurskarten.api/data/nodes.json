@@ -166,12 +166,12 @@
   {
     "id": "node-1770818476302",
     "name": "Brienz",
-    "x": 375.1757513400996,
-    "y": 271.21323673239726,
+    "x": 373.98905769723365,
+    "y": 275.8797727491035,
     "validFrom": 1852,
     "validTo": null,
-    "iiifCenterX": 6561,
-    "iiifCenterY": 4881
+    "iiifCenterX": 6565,
+    "iiifCenterY": 4901
   },
   {
     "id": "node-1770818481603",
@@ -2680,14 +2680,6 @@
     "validTo": null,
     "iiifCenterX": 4676,
     "iiifCenterY": 3371
-  },
-  {
-    "id": "node-1770912131031",
-    "name": "Schwanden bei Brienz",
-    "x": 375.1757513400996,
-    "y": 271.21323673239726,
-    "validFrom": 1852,
-    "validTo": null
   },
   {
     "id": "node-1770912196738",

@@ -303,8 +303,8 @@ P0 (kritisch, zuerst lösen)
 5. Klick-Fehlbedienung absichern: definieren, was bei Fehlklick passiert (undo/clear/confirm).
 (x) Abstand zwischen + und x vergrößern (Fehlklick vermeiden).
 P1 (wichtig für Verständnis & Usability)
-1. Start/Ziel direkt per Node-Klick wählbar machen (ohne extra Auswahlmodus).
-2. Nodes und Labels klickbar machen; optional auch Edges klickbar.
+(x) Start/Ziel direkt per Node-Klick wählbar machen (ohne extra Auswahlmodus).
+(x) Nodes und Labels klickbar machen; optional auch Edges klickbar.
 3. Sidepanel und Karte stärker koppeln:
     * Hover/Click in Karte hebt Eintrag im Panel hervor
     * Klick im Panel markiert Node/Edge auf Karte
@@ -320,7 +320,7 @@ P2 (Inhalt/Flow verbessern)
 UI/Visual Redesign To-dos
 1. Farbsystem vereinfachen: Schwarz/Weiß als Basis, Gelb nur sehr sparsam (oder entfernen).
 2. Schatten/Outline reduzieren: Karten-Outline + schwere Shadows entschärfen.
-3. Sidebar-Karten flacher machen, klare durchgezogene Linien, volle Opazität.
+(x) Sidebar-Karten flacher machen, klare durchgezogene Linien, volle Opazität.
 4. Karte als „Sternenbild“-Modus prüfen:
     * kleinere Nodes
     * weniger Edge-Betonung

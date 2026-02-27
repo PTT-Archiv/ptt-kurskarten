@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM } from '@ptt-kurskarten/shared';
+import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faCircleInfo, faCircleXmark, faFlag, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faCircleXmark, faFlag, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import {
@@ -18,6 +18,16 @@ import {
 } from './archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
+type SidebarNodeTrip = {
+  edgeId: string;
+  tripId: string;
+  nodeId: string;
+  nodeName: string;
+  transport: TransportType;
+  departs?: TimeHHMM;
+  arrives?: TimeHHMM;
+  arrivalDayOffset?: number;
+};
 
 @Component({
   selector: 'app-viewer',
@@ -60,11 +70,16 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private fromPreviewId = signal<string>('');
   private toPreviewId = signal<string>('');
   private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
+  private placeSearchBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
   pickTarget = signal<'from' | 'to' | null>(null);
   private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
   hoveredNodeId = signal<string | null>(null);
   hoveredNodeScreen = signal<{ x: number; y: number } | null>(null);
+  routePlannerOpen = signal(false);
+  placeSearchQuery = signal('');
+  placeSearchOpen = signal(false);
+  placeSearchActiveIndex = signal(0);
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -115,8 +130,19 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly circleInfoIcon = faCircleInfo;
   readonly startIcon = faFlag;
   readonly endIcon = faLocationDot;
+  readonly searchIcon = faMagnifyingGlass;
+  readonly routeIcon = faRoute;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
+  placeSearchResults = computed(() => {
+    const q = this.placeSearchQuery().trim().toLowerCase();
+    if (!q) {
+      return this.nodes().slice(0, 12);
+    }
+    return this.nodes()
+      .filter((node) => node.name.toLowerCase().includes(q))
+      .slice(0, 12);
+  });
 
   minYear = computed(() => {
     const years = this.availableYears();
@@ -182,6 +208,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     if (this.plannerBlurHandle) {
       clearTimeout(this.plannerBlurHandle);
+    }
+    if (this.placeSearchBlurHandle) {
+      clearTimeout(this.placeSearchBlurHandle);
     }
   }
 
@@ -323,6 +352,73 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.plannerHovered.set(active);
   }
 
+  onPlaceSearchFocus(): void {
+    if (this.placeSearchBlurHandle) {
+      clearTimeout(this.placeSearchBlurHandle);
+      this.placeSearchBlurHandle = null;
+    }
+    this.placeSearchOpen.set(true);
+  }
+
+  onPlaceSearchBlur(): void {
+    this.placeSearchBlurHandle = setTimeout(() => this.placeSearchOpen.set(false), 120);
+  }
+
+  onPlaceSearchInput(value: string): void {
+    this.placeSearchQuery.set(value);
+    this.placeSearchOpen.set(true);
+    this.placeSearchActiveIndex.set(0);
+  }
+
+  onPlaceSearchKeydown(event: KeyboardEvent): void {
+    const results = this.placeSearchResults();
+    if (!results.length) {
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.placeSearchOpen.set(true);
+      this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() + 1) % results.length);
+      return;
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.placeSearchOpen.set(true);
+      this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() - 1 + results.length) % results.length);
+      return;
+    }
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const pick = results[this.placeSearchActiveIndex()] ?? results[0];
+      if (pick) {
+        this.selectPlaceResult(pick.id);
+      }
+      return;
+    }
+    if (event.key === 'Escape') {
+      this.placeSearchOpen.set(false);
+    }
+  }
+
+  selectPlaceResult(nodeId: string): void {
+    const node = this.getNodeById(nodeId);
+    if (!node) {
+      return;
+    }
+    this.placeSearchQuery.set(node.name);
+    this.placeSearchOpen.set(false);
+    this.onNodeSelected(node.id);
+    this.triggerPulse(node.id);
+  }
+
+  openRoutePlanner(): void {
+    this.routePlannerOpen.set(true);
+  }
+
+  closeRoutePlanner(): void {
+    this.routePlannerOpen.set(false);
+  }
+
   startMapPick(target: 'from' | 'to'): void {
     this.pickTarget.set(target);
   }
@@ -363,11 +459,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   setNodeAsStart(nodeId: string): void {
     this.onFromIdChange(nodeId);
     this.pickTarget.set(null);
+    this.routePlannerOpen.set(true);
   }
 
   setNodeAsEnd(nodeId: string): void {
     this.onToIdChange(nodeId);
     this.pickTarget.set(null);
+    this.routePlannerOpen.set(true);
   }
 
   onDepartTimeDraftChange(time: TimeHHMM): void {
@@ -432,6 +530,60 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return [];
     }
     return buildWaitSegments(selected);
+  });
+
+  outgoingNodeTrips = computed<SidebarNodeTrip[]>(() => {
+    const snapshot = this.graph();
+    const place = this.sidebarPlaceNode();
+    if (!snapshot || !place) {
+      return [];
+    }
+    const rows: SidebarNodeTrip[] = [];
+    snapshot.edges
+      .filter((edge) => edge.from === place.id)
+      .forEach((edge) => {
+        const toNode = snapshot.nodes.find((node) => node.id === edge.to);
+        edge.trips.forEach((trip) => {
+          rows.push({
+            edgeId: edge.id,
+            tripId: trip.id,
+            nodeId: edge.to,
+            nodeName: toNode?.name ?? edge.to,
+            transport: trip.transport,
+            departs: trip.departs,
+            arrives: trip.arrives,
+            arrivalDayOffset: trip.arrivalDayOffset
+          });
+        });
+      });
+    return rows.sort((a, b) => this.tripSortValue(a) - this.tripSortValue(b));
+  });
+
+  incomingNodeTrips = computed<SidebarNodeTrip[]>(() => {
+    const snapshot = this.graph();
+    const place = this.sidebarPlaceNode();
+    if (!snapshot || !place) {
+      return [];
+    }
+    const rows: SidebarNodeTrip[] = [];
+    snapshot.edges
+      .filter((edge) => edge.to === place.id)
+      .forEach((edge) => {
+        const fromNode = snapshot.nodes.find((node) => node.id === edge.from);
+        edge.trips.forEach((trip) => {
+          rows.push({
+            edgeId: edge.id,
+            tripId: trip.id,
+            nodeId: edge.from,
+            nodeName: fromNode?.name ?? edge.from,
+            transport: trip.transport,
+            departs: trip.departs,
+            arrives: trip.arrives,
+            arrivalDayOffset: trip.arrivalDayOffset
+          });
+        });
+      });
+    return rows.sort((a, b) => this.tripSortValue(a) - this.tripSortValue(b));
   });
 
   highlightedEdgeIds = computed(() => {
@@ -632,5 +784,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.pulseTimeouts.delete(nodeId);
     }, 1400);
     this.pulseTimeouts.set(nodeId, handle);
+  }
+
+  private tripSortValue(trip: SidebarNodeTrip): number {
+    if (trip.departs) {
+      return this.parseTimeMinutes(trip.departs);
+    }
+    if (trip.arrives) {
+      return this.parseTimeMinutes(trip.arrives) + 720;
+    }
+    return Number.MAX_SAFE_INTEGER;
   }
 }

@@ -7,27 +7,41 @@
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
       [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
-    @if (hoveredSnippetUrl(); as snippetUrl) {
-    @if (hoveredNodeScreen(); as pos) {
-    <div class="node-snippet-tooltip" [style.left.px]="pos.x + 12" [style.top.px]="pos.y + 12">
-        @if (hoveredSnippetLoading()) {
-          <div class="tooltip-loader">
-            <span class="spinner" aria-hidden="true"></span>
-          </div>
-        }
-        <img
-          [src]="snippetUrl"
-          alt=""
-          (load)="hoveredSnippetLoading.set(false)"
-          (error)="hoveredSnippetLoading.set(false)"
-        />
-    </div>
-    }
-    }
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
     <div class="planner-overlay">
+      @if (!routePlannerOpen()) {
+      <div class="place-search-shell">
+        <fa-icon [icon]="searchIcon"></fa-icon>
+        <input
+          type="text"
+          [value]="placeSearchQuery()"
+          placeholder="Ort auf der Karte suchen"
+          (focus)="onPlaceSearchFocus()"
+          (blur)="onPlaceSearchBlur()"
+          (input)="onPlaceSearchInput($any($event.target).value)"
+          (keydown)="onPlaceSearchKeydown($event)"
+        />
+        <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
+          <fa-icon [icon]="routeIcon"></fa-icon>
+        </button>
+        @if (placeSearchOpen() && placeSearchResults().length > 0) {
+        <div class="place-search-list">
+          @for (node of placeSearchResults(); track node.id; let i = $index) {
+          <button
+            type="button"
+            [class.active]="i === placeSearchActiveIndex()"
+            (mousedown)="selectPlaceResult(node.id)"
+          >
+            {{ node.name }}
+          </button>
+          }
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="route-planner-shell">
       <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
         [departTime]="draftDepartTime()" [showTime]="hasSearched()"
         [canApplyTime]="hasSearched() && draftDepartTime() !== departTime()"
@@ -39,6 +53,10 @@
         (resetSearch)="resetSearch()"
         (swap)="swapConnections()" (plannerFocus)="onPlannerFocus($event)"
         (plannerHover)="onPlannerHover($event)"></app-viewer-route-planner-overlay>
+        <button class="route-close-btn" type="button" (click)="closeRoutePlanner()" aria-label="Routenplaner schließen">
+          <fa-icon [icon]="xmarkIcon"></fa-icon>
+        </button>
+      </div>
       @if (routingState() === 'searching') {
       <div class="planner-status">
         <div class="status-card">
@@ -56,6 +74,7 @@
         <div class="status-card">{{ getPickModeLabel() }}</div>
       </div>
       }
+      }
     </div>
     <button class="reset-view-btn" type="button" (click)="resetMapView()">
       {{ 'viewer.resetView' | transloco }}
@@ -64,7 +83,7 @@
 
   <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">
     <div class="sidebar-header">
-      <div class="section-title">{{ 'viewer.details' | transloco }}</div>
+      <div class="section-title">{{ sidebarPlaceNode()?.name ?? ('viewer.details' | transloco) }}</div>
       <button class="ghost-btn" type="button" (click)="closeSidebar()" [attr.aria-label]="'btn.cancel' | transloco">
         <fa-icon [icon]="xmarkIcon"></fa-icon>
       </button>
@@ -72,10 +91,6 @@
     <section class="panel-section location-section">
       <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
       @if (sidebarPlaceNode(); as place) {
-      <div class="location-meta">
-        <div class="node-name">{{ place.name }}</div>
-        <div class="node-id">{{ place.id }}</div>
-      </div>
       <div class="location-actions">
         <button class="icon-action-btn" type="button" (click)="setNodeAsStart(place.id)"
           [attr.aria-label]="'viewer.setAsStart' | transloco">
@@ -90,6 +105,7 @@
       </div>
       }
     </section>
+    @if (selectedConnection()) {
     <section class="panel-section results-panel">
       <div class="section-title">{{ 'viewer.results' | transloco }}</div>
       @if (routingState() === 'searching') {
@@ -181,6 +197,57 @@
       }
       }
     </section>
+    } @else {
+    <section class="panel-section">
+      <div class="section-title">Ausgehende Verbindungen</div>
+      @if (outgoingNodeTrips().length > 0) {
+      <div class="node-trip-list">
+        @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
+          <div class="node-trip-head">{{ trip.nodeName }}</div>
+          <div class="node-trip-time">
+            @if (trip.departs) {
+            {{ trip.departs }} →
+            }
+            {{ trip.arrives }}
+            @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+            <span>(+{{ trip.arrivalDayOffset }})</span>
+            }
+          </div>
+          <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="muted">Keine ausgehenden Verbindungen</div>
+      }
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Eingehende Verbindungen</div>
+      @if (incomingNodeTrips().length > 0) {
+      <div class="node-trip-list">
+        @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
+          <div class="node-trip-head">{{ trip.nodeName }}</div>
+          <div class="node-trip-time">
+            @if (trip.departs) {
+            {{ trip.departs }} →
+            }
+            {{ trip.arrives }}
+            @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+            <span>(+{{ trip.arrivalDayOffset }})</span>
+            }
+          </div>
+          <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="muted">Keine eingehenden Verbindungen</div>
+      }
+    </section>
+    }
 
     @if (selectedConnection(); as selected) {
     <section class="panel-section detail-panel">

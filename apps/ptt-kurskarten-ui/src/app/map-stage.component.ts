@@ -183,6 +183,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private rafId: number | null = null;
   private resizeObserver?: ResizeObserver;
   private screenNodes = new Map<string, { x: number; y: number; r: number }>();
+  private screenNodeLabels = new Map<string, { x: number; y: number; w: number; h: number }>();
   private screenEdges = new Map<string, { x1: number; y1: number; x2: number; y2: number }>();
   private canvasSize = { width: 0, height: 0 };
   private pendingCanvasSize: { width: number; height: number } | null = null;
@@ -484,6 +485,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const routingActive = this.routingActive;
 
     this.screenNodes.clear();
+    this.screenNodeLabels.clear();
     this.screenEdges.clear();
 
     const edgeCounts = new Map<string, number>();
@@ -617,7 +619,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = screen.x + 10;
         const y = screen.y - size.h - 8;
-        drawLabel(ctx, text, x, y, size.w, size.h);
+        const isHovered = this.hoveredNodeId === node.id;
+        drawLabel(ctx, text, x, y, size.w, size.h, isHovered ? '#141414' : '#ffffff', isHovered ? '#ffffff' : '#141414');
+        this.screenNodeLabels.set(node.id, { x, y, w: size.w, h: size.h });
         ctx.restore();
       });
     }
@@ -638,7 +642,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = node.x + 10;
         const y = node.y - size.h - 8;
-        drawLabel(ctx, text, x, y, size.w, size.h);
+        drawLabel(ctx, text, x, y, size.w, size.h, '#141414', '#ffffff');
+        this.screenNodeLabels.set(this.hoveredNodeId, { x, y, w: size.w, h: size.h });
         ctx.restore();
       }
     }
@@ -721,6 +726,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       const dx = x - node.x;
       const dy = y - node.y;
       if (dx * dx + dy * dy <= node.r * node.r) {
+        return id;
+      }
+    }
+
+    for (const [id, label] of this.screenNodeLabels) {
+      if (x >= label.x && x <= label.x + label.w && y >= label.y && y <= label.y + label.h) {
         return id;
       }
     }
@@ -1047,7 +1058,8 @@ function drawLabel(
   y: number,
   w: number,
   h: number,
-  fillColor = '#ffffff'
+  fillColor = '#ffffff',
+  textColor = '#141414'
 ): void {
   ctx.save();
   ctx.fillStyle = fillColor;
@@ -1056,7 +1068,7 @@ function drawLabel(
   drawRoundedRect(ctx, x, y, w, h, 6);
   ctx.fill();
   ctx.stroke();
-  ctx.fillStyle = '#141414';
+  ctx.fillStyle = textColor;
   ctx.fillText(text, x + 8, y + h / 2);
   ctx.restore();
 }
