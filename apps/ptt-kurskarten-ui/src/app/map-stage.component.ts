@@ -39,8 +39,7 @@ const NODE_COLOR_FOREIGN = '#0000ff';
       (mouseenter)="onStageEnter()"
       (mouseleave)="onStageLeave()"
     >
-      <img class="map map-shadow" src="assets/maps/switzerland.svg" alt="" [style.transform]="getMapTransform(true)" />
-      <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform(false)" />
+      <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform()" />
       <div class="overlay">
         <canvas
           #graphCanvas
@@ -94,15 +93,7 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         transform-origin: 0 0;
       }
 
-      .map-shadow {
-        position: absolute;
-        inset: 0;
-        opacity: 0.35;
-        filter: grayscale(1) brightness(0.2);
-        z-index: 0;
-      }
-
-      .map:not(.map-shadow) {
+      .map {
         position: relative;
         z-index: 1;
       }
@@ -657,9 +648,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     return worldToScreen(node, this.transform);
   }
 
-  getMapTransform(shadow: boolean): string {
-    const tx = this.viewportPan.x + (shadow ? 6 : 0);
-    const ty = this.viewportPan.y + (shadow ? 6 : 0);
+  getMapTransform(): string {
+    const tx = this.viewportPan.x;
+    const ty = this.viewportPan.y;
     return `translate(${tx}px, ${ty}px) scale(${this.viewportZoom})`;
   }
 
