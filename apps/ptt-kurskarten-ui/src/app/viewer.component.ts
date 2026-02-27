@@ -5,6 +5,8 @@ import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, Localiz
 import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faCircleInfo, faCircleXmark, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import {
@@ -20,7 +22,7 @@ const DEFAULT_YEAR = 1852;
 @Component({
   selector: 'app-viewer',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent],
+  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css'
 })
@@ -108,6 +110,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   });
 
   hoveredSnippetLoading = signal(false);
+  readonly xmarkIcon = faXmark;
+  readonly circleXmarkIcon = faCircleXmark;
+  readonly circleInfoIcon = faCircleInfo;
 
   minYear = computed(() => {
     const years = this.availableYears();

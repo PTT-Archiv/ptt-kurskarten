@@ -1,9 +1,12 @@
 import { Component, inject } from '@angular/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ToastService } from './toast.service';
 
 @Component({
   selector: 'app-toast-container',
   standalone: true,
+  imports: [FaIconComponent],
   template: `
     <div class="toast-container" aria-live="polite">
       @for (toast of toasts(); track toast.id) {
@@ -15,7 +18,9 @@ import { ToastService } from './toast.service';
               <div class="message">{{ toast.message }}</div>
             }
           </div>
-          <button class="close" type="button" (click)="remove(toast.id)" aria-label="Close">×</button>
+          <button class="close" type="button" (click)="remove(toast.id)" aria-label="Close">
+            <fa-icon [icon]="xmarkIcon"></fa-icon>
+          </button>
         </div>
       }
     </div>
@@ -94,6 +99,7 @@ import { ToastService } from './toast.service';
 })
 export class ToastContainerComponent {
   private readonly toastService = inject(ToastService);
+  readonly xmarkIcon = faXmark;
 
   toasts = this.toastService.toasts;
 

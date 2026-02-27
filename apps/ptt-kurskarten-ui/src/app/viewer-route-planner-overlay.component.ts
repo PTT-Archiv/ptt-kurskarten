@@ -1,11 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faArrowsLeftRight, faLocationCrosshairs, faXmark } from '@fortawesome/free-solid-svg-icons';
 import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
 @Component({
   selector: 'app-viewer-route-planner-overlay',
   standalone: true,
-  imports: [TranslocoPipe],
+  imports: [TranslocoPipe, FaIconComponent],
   template: `
     <div
       class="planner-card"
@@ -31,7 +33,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
               />
               @if (fromQuery) {
                 <button type="button" class="clear-btn" (mousedown)="clearFrom()">
-                  ×
+                  <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
             </div>
@@ -43,7 +45,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
               aria-label="Pick from map"
               data-tooltip="Auf der Karte wählen"
             >
-              ✛
+              <fa-icon [icon]="pickIcon"></fa-icon>
             </button>
           </div>
           @if (fromOpen && filteredFrom().length) {
@@ -63,7 +65,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           }
         </label>
         <button class="swap-btn" type="button" (click)="swap.emit()">
-          <span class="swap-icon">⇄</span>
+          <fa-icon class="swap-icon" [icon]="swapIcon"></fa-icon>
         </button>
         <label class="field minimal typeahead">
           <span>{{ 'label.to' | transloco }}</span>
@@ -80,7 +82,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
               />
               @if (toQuery) {
                 <button type="button" class="clear-btn" (mousedown)="clearTo()">
-                  ×
+                  <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
             </div>
@@ -92,7 +94,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
               aria-label="Pick to map"
               data-tooltip="Auf der Karte wählen"
             >
-              ✛
+              <fa-icon [icon]="pickIcon"></fa-icon>
             </button>
           </div>
           @if (toOpen && filteredTo().length) {
@@ -554,6 +556,10 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
   ]
 })
 export class ViewerRoutePlannerOverlayComponent implements OnChanges {
+  readonly xmarkIcon = faXmark;
+  readonly pickIcon = faLocationCrosshairs;
+  readonly swapIcon = faArrowsLeftRight;
+
   @Input() variant: 'full' | 'compact' = 'full';
   @Input({ required: true }) nodes: Array<{ id: string; name: string }> = [];
   @Input() fromId = '';

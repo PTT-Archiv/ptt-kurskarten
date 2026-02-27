@@ -65,7 +65,9 @@
   <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">
     <div class="sidebar-header">
       <div class="section-title">{{ 'viewer.details' | transloco }}</div>
-      <button class="ghost-btn" type="button" (click)="closeSidebar()">×</button>
+      <button class="ghost-btn" type="button" (click)="closeSidebar()" [attr.aria-label]="'btn.cancel' | transloco">
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+      </button>
     </div>
     <section class="panel-section results-panel">
       <div class="section-title">{{ 'viewer.results' | transloco }}</div>
@@ -271,18 +273,19 @@
 
   @if (helpOpen()) {
   <section class="help-popup">
-    <div class="help-header">
-      <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
-      <button class="help-close" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
-        ×
-      </button>
-    </div>
+      <div class="help-header">
+        <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+        <button class="help-close" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
+          <fa-icon [icon]="circleXmarkIcon"></fa-icon>
+        </button>
+      </div>
     <p>{{ 'viewer.helpText1' | transloco }}</p>
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
   </section>
   } @else {
   <button class="help-fab" type="button" (click)="helpOpen.set(true)">
+    <fa-icon [icon]="circleInfoIcon"></fa-icon>
     {{ 'viewer.helpOpen' | transloco }}
   </button>
   }

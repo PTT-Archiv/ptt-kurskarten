@@ -12,6 +12,8 @@ import type {
 } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faArrowsLeftRight, faMinus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ToastService } from './shared/toast/toast.service';
 import { AdminSelectionState } from './admin-selection.service';
 import { ADMIN_GRAPH_REPOSITORY, type AdminGraphRepository } from './admin-graph.repository';
@@ -75,7 +77,7 @@ type GeoAdminResult = {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent, ArchiveSnippetViewerComponent],
+  imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -88,6 +90,10 @@ export class AdminComponent implements OnDestroy {
   private readonly hostRef = inject(ElementRef<HTMLElement>);
   private readonly repo = inject<AdminGraphRepository>(ADMIN_GRAPH_REPOSITORY);
   private readonly tour = inject(TourService);
+  readonly plusIcon = faPlus;
+  readonly minusIcon = faMinus;
+  readonly xmarkIcon = faXmark;
+  readonly swapIcon = faArrowsLeftRight;
 
   year = signal<number>(DEFAULT_YEAR);
   graph = signal<GraphSnapshot | null>(null);

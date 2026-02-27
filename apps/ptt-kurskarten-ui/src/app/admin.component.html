@@ -41,7 +41,7 @@
         </label>
 
         <button type="button" class="quick-edge-swap" (click)="swapQuickDirection()" title="Swap direction">
-          ⇄
+          <fa-icon [icon]="swapIcon"></fa-icon>
         </button>
 
         <label class="quick-edge-field">
@@ -81,7 +81,10 @@
       </div>
       <div class="quick-trip-header">
         <span class="quick-trip-title">{{ 'label.trips' | transloco }}</span>
-        <button type="button" class="ghost-btn" (click)="addQuickTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+        <button type="button" class="ghost-btn" (click)="addQuickTrip()">
+          <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+          {{ 'btn.addTrip' | transloco }}
+        </button>
       </div>
       <div class="quick-trip-table">
         <div class="quick-trip-row header">
@@ -121,7 +124,7 @@
               data-quick-trip-field="arrives"
             />
             <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
-              ×
+              <fa-icon [icon]="xmarkIcon"></fa-icon>
             </button>
           </div>
         }
@@ -139,7 +142,11 @@
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
         <button type="button" class="ghost-btn" (click)="toggleShortcuts()">
-          @if (shortcutsCollapsed()) { + } @else { – }
+          @if (shortcutsCollapsed()) {
+            <fa-icon [icon]="plusIcon"></fa-icon>
+          } @else {
+            <fa-icon [icon]="minusIcon"></fa-icon>
+          }
         </button>
       </div>
       @if (!shortcutsCollapsed()) {
@@ -165,11 +172,13 @@
         </div>
         <div class="header-actions">
           <button class="ghost-btn" type="button" (click)="addNodeAtCursor()">
-            + {{ 'admin.addNode' | transloco }}
+            <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+            {{ 'admin.addNode' | transloco }}
           </button>
           @if (selectedNodeId()) {
             <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
-              + {{ 'admin.addEdge' | transloco }}
+              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+              {{ 'admin.addEdge' | transloco }}
             </button>
           }
           @if (isDemo()) {
@@ -217,7 +226,8 @@
         @if (selectedNodeId() && !draftNode()) {
           <div class="node-actions">
             <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
-              + {{ 'admin.addEdge' | transloco }}
+              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+              {{ 'admin.addEdge' | transloco }}
             </button>
             <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
               {{ 'admin.duplicateNode' | transloco }}
@@ -500,7 +510,10 @@
         <div class="section-title">{{ 'label.trips' | transloco }}</div>
         @if (selectedEdgeDraft(); as edgeDraft) {
           <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="addSelectedTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+            <button class="ghost-btn" type="button" (click)="addSelectedTrip()">
+              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+              {{ 'btn.addTrip' | transloco }}
+            </button>
             <button class="ghost-btn" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
           </div>
           @if (edgeDraft.trips.length > 0) {
@@ -541,7 +554,9 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">×</button>
+                  <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
+                    <fa-icon [icon]="xmarkIcon"></fa-icon>
+                  </button>
                 </div>
               }
             </div>
@@ -551,7 +566,10 @@
           }
         } @else if (draftEdge(); as draft) {
           <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="addTrip()">+ {{ 'btn.addTrip' | transloco }}</button>
+            <button class="ghost-btn" type="button" (click)="addTrip()">
+              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+              {{ 'btn.addTrip' | transloco }}
+            </button>
             <button class="ghost-btn" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
           </div>
           @if (draft.trips.length > 0) {
@@ -592,7 +610,9 @@
                     [attr.data-trip-index]="idx"
                     data-trip-field="arrives"
                   />
-                  <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">×</button>
+                  <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
+                    <fa-icon [icon]="xmarkIcon"></fa-icon>
+                  </button>
                 </div>
               }
             </div>

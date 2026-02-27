@@ -6,8 +6,14 @@
     </div>
   }
   <div class="snippet-controls">
-    <button class="ghost-btn" type="button" (click)="zoomIn()">+</button>
-    <button class="ghost-btn" type="button" (click)="zoomOut()">−</button>
-    <button class="ghost-btn" type="button" (click)="reset()">⟲</button>
+    <button class="ghost-btn" type="button" (click)="zoomIn()" aria-label="Zoom in">
+      <fa-icon [icon]="zoomInIcon"></fa-icon>
+    </button>
+    <button class="ghost-btn" type="button" (click)="zoomOut()" aria-label="Zoom out">
+      <fa-icon [icon]="zoomOutIcon"></fa-icon>
+    </button>
+    <button class="ghost-btn" type="button" (click)="reset()" aria-label="Reset view">
+      <fa-icon [icon]="resetIcon"></fa-icon>
+    </button>
   </div>
 </div>

@@ -13,10 +13,13 @@ import {
   inject
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faMagnifyingGlassMinus, faMagnifyingGlassPlus, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-archive-snippet-viewer',
   standalone: true,
+  imports: [FaIconComponent],
   templateUrl: './archive-snippet-viewer.component.html',
   styleUrl: './archive-snippet-viewer.component.css'
 })
@@ -37,6 +40,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   private suppressNextViewportEvent = false;
   private viewportDebounce?: ReturnType<typeof setTimeout>;
   private lastEmittedCenter?: { x: number; y: number };
+  readonly zoomInIcon = faMagnifyingGlassPlus;
+  readonly zoomOutIcon = faMagnifyingGlassMinus;
+  readonly resetIcon = faRotateLeft;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
