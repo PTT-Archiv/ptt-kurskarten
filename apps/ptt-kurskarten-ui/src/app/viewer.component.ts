@@ -6,7 +6,7 @@ import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faCircleInfo, faCircleXmark, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faCircleXmark, faFlag, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import {
@@ -113,6 +113,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly xmarkIcon = faXmark;
   readonly circleXmarkIcon = faCircleXmark;
   readonly circleInfoIcon = faCircleInfo;
+  readonly startIcon = faFlag;
+  readonly endIcon = faLocationDot;
+
+  sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
 
   minYear = computed(() => {
     const years = this.availableYears();

@@ -91,7 +91,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
-  border-left: none;
+  border: 2px solid #141414;
   transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
@@ -105,13 +105,13 @@
 }
 
 .panel-section {
-  border: 2px solid #141414;
-  border-radius: 14px;
-  padding: 12px 14px;
+  border: none;
+  border-bottom: 1px solid #cfcfcf;
+  border-radius: 0;
+  padding: 14px 2px;
   display: grid;
   gap: 12px;
-  background: #ffffff;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  background: transparent;
 }
 
 .section-title {
@@ -239,13 +239,13 @@
 
 .ghost-btn {
   background: var(--ptt-white);
-  border: 2px solid var(--ptt-black);
+  border: 1px solid var(--ptt-black);
   color: var(--ptt-black);
   padding: 6px 10px;
-  border-radius: 10px;
+  border-radius: 999px;
   cursor: pointer;
   width: fit-content;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: none;
 }
 
 .wait-row {
@@ -353,11 +353,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  border: 2px solid #141414;
-  border-radius: 14px;
-  padding: 10px 12px;
-  background: #ffffff;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #cfcfcf;
+  padding: 6px 2px 12px;
+  background: transparent;
 }
 
 .sidebar-handle {
@@ -453,6 +451,8 @@
 .result-card:focus-visible,
 .ghost-btn:hover,
 .ghost-btn:focus-visible,
+.icon-action-btn:hover,
+.icon-action-btn:focus-visible,
 .reset-view-btn:hover,
 .reset-view-btn:focus-visible,
 .sidebar-handle:hover,
@@ -473,6 +473,43 @@
 
 .result-card.active .result-meta {
   color: #3a3a3a;
+}
+
+.location-section {
+  gap: 10px;
+  padding-top: 2px;
+}
+
+.location-section app-archive-snippet-viewer {
+  display: block;
+}
+
+.location-meta {
+  display: grid;
+  gap: 2px;
+}
+
+.location-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.icon-action-btn {
+  border: 1px solid #141414;
+  background: #ffffff;
+  color: #141414;
+  border-radius: 999px;
+  min-height: 36px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.icon-action-btn fa-icon {
+  color: inherit;
 }
 
 

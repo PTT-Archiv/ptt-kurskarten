@@ -69,6 +69,27 @@
         <fa-icon [icon]="xmarkIcon"></fa-icon>
       </button>
     </div>
+    <section class="panel-section location-section">
+      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
+      @if (sidebarPlaceNode(); as place) {
+      <div class="location-meta">
+        <div class="node-name">{{ place.name }}</div>
+        <div class="node-id">{{ place.id }}</div>
+      </div>
+      <div class="location-actions">
+        <button class="icon-action-btn" type="button" (click)="setNodeAsStart(place.id)"
+          [attr.aria-label]="'viewer.setAsStart' | transloco">
+          <fa-icon [icon]="startIcon"></fa-icon>
+          <span>{{ 'viewer.setAsStart' | transloco }}</span>
+        </button>
+        <button class="icon-action-btn" type="button" (click)="setNodeAsEnd(place.id)"
+          [attr.aria-label]="'viewer.setAsEnd' | transloco">
+          <fa-icon [icon]="endIcon"></fa-icon>
+          <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+        </button>
+      </div>
+      }
+    </section>
     <section class="panel-section results-panel">
       <div class="section-title">{{ 'viewer.results' | transloco }}</div>
       @if (routingState() === 'searching') {
@@ -237,32 +258,6 @@
         <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
       </label>
     </section>
-
-    <section class="panel-section">
-      <div class="section-title">{{ 'viewer.archiveSnippet' | transloco }}</div>
-      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
-    </section>
-
-    @if (selectedNodeId(); as nodeId) {
-    @if (getNodeById(nodeId); as node) {
-    <section class="panel-section">
-      <div class="section-title">{{ 'viewer.nodeDetail' | transloco }}</div>
-      <div class="node-name">{{ node.name }}</div>
-      <div class="node-id">{{ node.id }}</div>
-      <div class="node-assign-actions">
-        <button class="ghost-btn" type="button" (click)="setNodeAsStart(node.id)">
-          {{ 'viewer.setAsStart' | transloco }}
-        </button>
-        <button class="ghost-btn" type="button" (click)="setNodeAsEnd(node.id)">
-          {{ 'viewer.setAsEnd' | transloco }}
-        </button>
-      </div>
-      <button class="ghost-btn" type="button" (click)="onNodeSelected(null)">
-        {{ 'btn.cancel' | transloco }}
-      </button>
-    </section>
-    }
-    }
   </aside>
 
   @if (!sidebarOpen()) {
