@@ -26,8 +26,8 @@ const NODE_RADIUS_STEP = .3;
 const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
-const NODE_COLOR_DEFAULT = '#ffff00';
-const NODE_COLOR_FOREIGN = '#0000ff';
+const NODE_COLOR_DEFAULT = '#ffffff';
+const NODE_COLOR_FOREIGN = '#ffffff';
 
 @Component({
   selector: 'app-map-stage',
@@ -76,7 +76,7 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         position: relative;
         width: 100%;
         height: 100%;
-        background: var(--ptt-white);
+        background: #000000;
         border: 1px solid var(--ptt-black);
       }
 
@@ -91,6 +91,7 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         object-fit: contain;
         pointer-events: none;
         transform-origin: 0 0;
+        filter: invert(1) grayscale(1) contrast(1.25) brightness(0.85);
       }
 
       .map {
@@ -119,8 +120,8 @@ const NODE_COLOR_FOREIGN = '#0000ff';
         border-radius: 999px;
         font-size: 12px;
         line-height: 1.2;
-        color: #fff;
-        background: rgba(20, 20, 20, 0.78);
+        color: #000;
+        background: rgba(255, 255, 255, 0.85);
         opacity: 0;
         transform: translateY(4px);
         transition: opacity 140ms ease-out, transform 140ms ease-out;
@@ -566,7 +567,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.globalAlpha = nodeAlpha;
       ctx.beginPath();
       ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = '#141414';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2;
       ctx.stroke();
       ctx.restore();
@@ -574,7 +575,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (isSelected || isHovered) {
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 4 * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = '#141414';
+        ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -583,7 +584,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 8 * sizeScale + pulse * 4 * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(20, 20, 20, 0.5)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
         ctx.lineWidth = 2;
         ctx.stroke();
       }
@@ -610,8 +611,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = screen.x + 10;
         const y = screen.y - size.h - 8;
-        const isHovered = this.hoveredNodeId === node.id;
-        drawLabel(ctx, text, x, y, size.w, size.h, isHovered ? '#141414' : '#ffffff', isHovered ? '#ffffff' : '#141414');
+        const isActive = this.hoveredNodeId === node.id || this.selectedNodeId === node.id;
+        if (isActive) {
+          drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+        } else {
+          drawLabel(ctx, text, x, y, size.w, size.h, '#ffffff');
+        }
         this.screenNodeLabels.set(node.id, { x, y, w: size.w, h: size.h });
         ctx.restore();
       });
@@ -633,8 +638,26 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = node.x + 10;
         const y = node.y - size.h - 8;
-        drawLabel(ctx, text, x, y, size.w, size.h, '#141414', '#ffffff');
+        drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
         this.screenNodeLabels.set(this.hoveredNodeId, { x, y, w: size.w, h: size.h });
+        ctx.restore();
+      }
+    }
+
+    if (this.selectedNodeId && this.selectedNodeId !== this.hoveredNodeId) {
+      const node = this.screenNodes.get(this.selectedNodeId);
+      const data = nodeMap.get(this.selectedNodeId);
+      if (node && data?.name) {
+        ctx.save();
+        ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'left';
+        const text = data.name;
+        const size = measureLabel(ctx, text);
+        const x = node.x + 10;
+        const y = node.y - size.h - 8;
+        drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+        this.screenNodeLabels.set(this.selectedNodeId, { x, y, w: size.w, h: size.h });
         ctx.restore();
       }
     }
@@ -750,9 +773,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const px = -dy / len;
     const py = dx / len;
     const pickDim = this.pickMode !== null;
-    const baseStroke = pickDim ? 'rgba(20, 20, 20, 0.18)' : 'rgba(20, 20, 20, 0.32)';
-    const dimStroke = pickDim ? 'rgba(20, 20, 20, 0.05)' : 'rgba(20, 20, 20, 0.08)';
-    ctx.strokeStyle = isHighlighted ? '#141414' : isDimmed ? dimStroke : baseStroke;
+    const baseStroke = pickDim ? 'rgba(255, 255, 255, 0.24)' : 'rgba(255, 255, 255, 0.48)';
+    const dimStroke = pickDim ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.14)';
+    ctx.strokeStyle = isHighlighted ? '#ffffff' : isDimmed ? dimStroke : baseStroke;
     ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
     const x1 = fromPos.x + px * laneOffsetPx;
     const y1 = fromPos.y + py * laneOffsetPx;
@@ -790,7 +813,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const chevronSpread = 3;
 
     ctx.save();
-    ctx.strokeStyle = '#141414';
+    ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 1.5;
 
     positions.forEach((t) => {
@@ -880,7 +903,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     if (overnightStops.size > 0) {
       ctx.save();
-      ctx.strokeStyle = '#141414';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 2;
       overnightStops.forEach((nodeId) => {
         const node = this.screenNodes.get(nodeId);
@@ -991,7 +1014,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (label.kind === 'wait') {
         drawWaitLabel(ctx, label.text, position.x, position.y, size.w, size.h, label.overnightDelta);
       } else if (label.kind === 'endpoint') {
-        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h, '#ffe600');
+        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h, '#ffffff');
       } else {
         drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
       }
@@ -1049,6 +1072,21 @@ function drawLabel(
   y: number,
   w: number,
   h: number,
+  textColor = '#ffffff'
+): void {
+  ctx.save();
+  ctx.fillStyle = textColor;
+  ctx.fillText(text, x + 8, y + h / 2 + 0.5);
+  ctx.restore();
+}
+
+function drawLabelBox(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
   fillColor = '#ffffff',
   textColor = '#141414'
 ): void {
@@ -1084,12 +1122,6 @@ function drawWaitLabel(
   const iconSize = 12;
   const gap = 6;
   ctx.save();
-  ctx.fillStyle = '#ffffff';
-  ctx.strokeStyle = '#141414';
-  ctx.lineWidth = 1.5;
-  drawRoundedRect(ctx, x, y, w, h, 6);
-  ctx.fill();
-  ctx.stroke();
 
   const iconX = x + 8;
   const iconY = y + h / 2 - iconSize / 2;
