@@ -10,17 +10,17 @@
     @if (hoveredSnippetUrl(); as snippetUrl) {
     @if (hoveredNodeScreen(); as pos) {
     <div class="node-snippet-tooltip" [style.left.px]="pos.x + 12" [style.top.px]="pos.y + 12">
-      @if (hoveredSnippetLoading()) {
-        <div class="tooltip-loader">
-          <span class="spinner" aria-hidden="true"></span>
-        </div>
-      }
-      <img
-        [src]="snippetUrl"
-        alt=""
-        (load)="hoveredSnippetLoading.set(false)"
-        (error)="hoveredSnippetLoading.set(false)"
-      />
+        @if (hoveredSnippetLoading()) {
+          <div class="tooltip-loader">
+            <span class="spinner" aria-hidden="true"></span>
+          </div>
+        }
+        <img
+          [src]="snippetUrl"
+          alt=""
+          (load)="hoveredSnippetLoading.set(false)"
+          (error)="hoveredSnippetLoading.set(false)"
+        />
     </div>
     }
     }
@@ -247,6 +247,14 @@
       <div class="section-title">{{ 'viewer.nodeDetail' | transloco }}</div>
       <div class="node-name">{{ node.name }}</div>
       <div class="node-id">{{ node.id }}</div>
+      <div class="node-assign-actions">
+        <button class="ghost-btn" type="button" (click)="setNodeAsStart(node.id)">
+          {{ 'viewer.setAsStart' | transloco }}
+        </button>
+        <button class="ghost-btn" type="button" (click)="setNodeAsEnd(node.id)">
+          {{ 'viewer.setAsEnd' | transloco }}
+        </button>
+      </div>
       <button class="ghost-btn" type="button" (click)="onNodeSelected(null)">
         {{ 'btn.cancel' | transloco }}
       </button>

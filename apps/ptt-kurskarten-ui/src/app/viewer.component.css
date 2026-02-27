@@ -231,6 +231,12 @@
   color: #3a3a3a;
 }
 
+.node-assign-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .ghost-btn {
   background: var(--ptt-white);
   border: 2px solid var(--ptt-black);

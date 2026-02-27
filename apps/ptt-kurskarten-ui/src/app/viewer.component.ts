@@ -351,6 +351,16 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.triggerPulse(id);
   }
 
+  setNodeAsStart(nodeId: string): void {
+    this.onFromIdChange(nodeId);
+    this.pickTarget.set(null);
+  }
+
+  setNodeAsEnd(nodeId: string): void {
+    this.onToIdChange(nodeId);
+    this.pickTarget.set(null);
+  }
+
   onDepartTimeDraftChange(time: TimeHHMM): void {
     this.draftDepartTime.set(time);
   }

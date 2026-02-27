@@ -145,5 +145,7 @@
   "viewer.detailsOnMap": "Détails sur la carte",
   "label.wait": "Attente",
   "label.overnight": "nuit",
-  "btn.deleteEdge": "Supprimer la liaison"
+  "btn.deleteEdge": "Supprimer la liaison",
+  "viewer.setAsStart": "Définir comme départ",
+  "viewer.setAsEnd": "Définir comme destination"
 }

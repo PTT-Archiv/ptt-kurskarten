@@ -145,5 +145,7 @@
   "viewer.detailsOnMap": "Details auf der Karte",
   "label.wait": "Warten",
   "label.overnight": "über Nacht",
-  "btn.deleteEdge": "Strecke löschen"
+  "btn.deleteEdge": "Strecke löschen",
+  "viewer.setAsStart": "Als Start setzen",
+  "viewer.setAsEnd": "Als Ziel setzen"
 }
