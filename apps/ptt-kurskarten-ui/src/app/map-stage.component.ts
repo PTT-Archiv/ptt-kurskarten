@@ -50,12 +50,19 @@ const NODE_COLOR_FOREIGN = '#ffffff';
         <canvas
           #graphCanvas
           class="graph-canvas"
+          [style.cursor]="getCanvasCursor()"
           (pointerdown)="onPointerDown($event)"
           (pointermove)="onPointerMove($event)"
           (pointerup)="onPointerUp($event)"
           (pointerleave)="onPointerLeave()"
           (wheel)="onWheel($event)"
         ></canvas>
+        @if (showZoomControls()) {
+          <div class="zoom-controls" aria-label="Zoom controls">
+            <button type="button" class="zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">+</button>
+            <button type="button" class="zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">−</button>
+          </div>
+        }
         <div class="zoom-hint" [class.visible]="showZoomHint()">
           {{ getZoomHintLabel() }}
         </div>
@@ -123,6 +130,43 @@ const NODE_COLOR_FOREIGN = '#ffffff';
         width: 100%;
         height: 100%;
         display: block;
+      }
+
+      .zoom-controls {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .zoom-btn {
+        width: 34px;
+        height: 34px;
+        border: 2px solid #ffffff;
+        background: #141414;
+        color: #ffffff;
+        border-radius: 999px;
+        font-size: 22px;
+        line-height: 1;
+        font-weight: 600;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        transition: background 140ms ease-out, color 140ms ease-out, transform 80ms ease-out;
+      }
+
+      .zoom-btn:hover,
+      .zoom-btn:focus-visible {
+        background: #ffffff;
+        color: #141414;
+        outline: none;
+      }
+
+      .zoom-btn:active {
+        transform: translateY(1px);
       }
 
       .zoom-hint {
@@ -348,17 +392,15 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const currentZoom = this.viewportZoom;
     const zoomFactor = Math.exp(-event.deltaY * 0.0015);
     const nextZoom = Math.max(0.7, Math.min(20, currentZoom * zoomFactor));
-    if (Math.abs(nextZoom - currentZoom) < 0.0001) {
-      return;
-    }
+    this.applyZoom(nextZoom, sx, sy);
+  }
 
-    const world = screenToWorld({ x: sx, y: sy }, this.transform);
-    this.viewportZoom = nextZoom;
-    this.viewportPan = {
-      x: sx - (world.x * this.fitTransform.scale + this.fitTransform.offsetX) * this.viewportZoom,
-      y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
-    };
-    this.scheduleRender();
+  onZoomInClick(): void {
+    this.zoomByFactor(1.2);
+  }
+
+  onZoomOutClick(): void {
+    this.zoomByFactor(1 / 1.2);
   }
 
   onStageEnter(): void {
@@ -371,6 +413,17 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   showZoomHint(): boolean {
     return this.interactiveViewport && this.pickMode === null && this.stageHover;
+  }
+
+  showZoomControls(): boolean {
+    return this.interactiveViewport && this.pickMode === null;
+  }
+
+  getCanvasCursor(): string {
+    if (!this.showZoomControls()) {
+      return 'default';
+    }
+    return this.panStart ? 'grabbing' : 'grab';
   }
 
   getZoomHintLabel(): string {
@@ -705,6 +758,34 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private resetViewport(): void {
     this.viewportZoom = 1;
     this.viewportPan = { x: 0, y: 0 };
+  }
+
+  private zoomByFactor(factor: number): void {
+    if (!this.isBrowser || !this.interactiveViewport || this.pickMode !== null) {
+      return;
+    }
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) {
+      return;
+    }
+    const rect = canvas.getBoundingClientRect();
+    const sx = rect.width / 2;
+    const sy = rect.height / 2;
+    const nextZoom = Math.max(0.7, Math.min(20, this.viewportZoom * factor));
+    this.applyZoom(nextZoom, sx, sy);
+  }
+
+  private applyZoom(nextZoom: number, sx: number, sy: number): void {
+    if (Math.abs(nextZoom - this.viewportZoom) < 0.0001) {
+      return;
+    }
+    const world = screenToWorld({ x: sx, y: sy }, this.transform);
+    this.viewportZoom = nextZoom;
+    this.viewportPan = {
+      x: sx - (world.x * this.fitTransform.scale + this.fitTransform.offsetX) * this.viewportZoom,
+      y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
+    };
+    this.scheduleRender();
   }
 
   private getHighlightIds(): { nodeIds: Set<string>; edgeIds: Set<string> } {

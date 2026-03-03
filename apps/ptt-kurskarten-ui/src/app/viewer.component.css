@@ -16,7 +16,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  padding-top: 180px;
+  padding-top: 0;
   box-sizing: border-box;
   width: 100%;
   transition: width 220ms ease-out, height 260ms ease-out;
@@ -29,7 +29,7 @@
 }
 .map-stage > app-map-stage {
   display: block;
-  height: calc(100% - 140px);
+  height: 100%;
 }
 
 
@@ -567,12 +567,12 @@
     position: relative;
     height: 360px;
     border-bottom: var(--border);
-    padding-top: 160px;
+    padding-top: 0;
     width: 100%;
   }
 
   .map-stage > app-map-stage {
-    height: calc(100% - 140px);
+    height: 100%;
   }
 
   .viewer-sidebar {
