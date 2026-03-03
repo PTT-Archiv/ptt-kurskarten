@@ -9,6 +9,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCircleInfo, faCircleXmark, faFlag, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
+import { ViewerDataService } from './viewer-data.service';
+import { environment } from '../environments/environment';
 import {
   ARCHIVE_DEFAULT_REGION,
   buildArchiveSnippetUrlForNode,
@@ -47,6 +49,7 @@ type WikidataEntry = {
 })
 export class ViewerComponent implements AfterViewInit, OnDestroy {
   private readonly http = inject(HttpClient);
+  private readonly viewerData = inject(ViewerDataService);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly transloco = inject(TranslocoService);
@@ -288,10 +291,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.routingState.set('searching');
     this.uiState.set('landing');
     this.lastSearchParams.set({ from, to, time: depart, year });
-    this.http
-      .get<ConnectionOption[]>(
-        `/api/v1/connections?year=${year}&from=${from}&to=${to}&depart=${depart}&k=10&allowForeignStartFallback=true`
-      )
+    this.viewerData
+      .getConnections({
+        year,
+        from,
+        to,
+        depart,
+        k: 10,
+        allowForeignStartFallback: true
+      })
       .subscribe({
         next: (options) => {
           const normalized = (options ?? []).map((option, index) => this.ensureConnectionId(option, index));
@@ -636,14 +644,14 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   });
 
   private fetchYears(): void {
-    this.http.get<number[]>('/api/v1/years').subscribe({
+    this.viewerData.getYears().subscribe({
       next: (years) => this.availableYears.set(years),
       error: () => this.availableYears.set([])
     });
   }
 
   private fetchGraph(year: number): void {
-    this.http.get<GraphSnapshot>(`/api/v1/graph?year=${year}`).subscribe({
+    this.viewerData.getGraph(year).subscribe({
       next: (graph) => {
         this.graph.set(graph);
         this.selectedNodeId.set(null);
@@ -655,7 +663,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   private fetchWikidata(): void {
-    this.http.get<WikidataEntry[]>('/assets/wikidata.json').subscribe({
+    this.http.get<WikidataEntry[]>(environment.staticWikidataPath).subscribe({
       next: (entries) => {
         const byName = new Map<string, Set<string>>();
         for (const entry of entries ?? []) {

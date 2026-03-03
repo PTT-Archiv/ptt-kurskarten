@@ -55,6 +55,40 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "static": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.static.ts"
+                }
+              ],
+              "ssr": false,
+              "prerender": false,
+              "assets": [
+                "public",
+                "src/assets",
+                {
+                  "glob": "nodes.json",
+                  "input": "../ptt-kurskarten.api/data",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "edges.json",
+                  "input": "../ptt-kurskarten.api/data",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "segments.json",
+                  "input": "../ptt-kurskarten.api/data",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "trips.json",
+                  "input": "../ptt-kurskarten.api/data",
+                  "output": "assets/graph-data"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

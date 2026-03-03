@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ToastContainerComponent } from './shared/toast/toast-container.component';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent {
 
   activeLang = signal(this.transloco.getActiveLang());
   availableLangs: Array<'de' | 'fr'> = ['de', 'fr'];
+  readonly readonlyViewer = environment.readonlyViewer;
 
   setLang(event: Event): void {
     const value = (event.target as HTMLSelectElement).value as 'de' | 'fr';
