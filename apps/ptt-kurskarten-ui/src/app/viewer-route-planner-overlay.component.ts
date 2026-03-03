@@ -568,6 +568,7 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   @Input() variant: 'full' | 'compact' = 'full';
   @Input({ required: true }) nodes: Array<{ id: string; name: string }> = [];
+  @Input() nodeAliases: Record<string, string[]> = {};
   @Input() fromId = '';
   @Input() toId = '';
   @Input() departTime: TimeHHMM = '08:00';
@@ -867,7 +868,9 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     if (!q) {
       return list.slice(0, 8);
     }
-    return list.filter((node) => this.normalizeSearch(node.name).includes(q)).slice(0, 8);
+    return list
+      .filter((node) => this.getSearchTerms(node).some((term) => term.includes(q)))
+      .slice(0, 8);
   }
 
   private matchByName(value: string): { id: string; name: string } | null {
@@ -875,7 +878,13 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     if (!v) {
       return null;
     }
-    return this.nodes.find((node) => this.normalizeSearch(node.name) === v) ?? null;
+    return this.nodes.find((node) => this.getSearchTerms(node).some((term) => term === v)) ?? null;
+  }
+
+  private getSearchTerms(node: { id: string; name: string }): string[] {
+    const canonical = this.normalizeSearch(node.name);
+    const aliases = (this.nodeAliases?.[node.id] ?? []).map((alias) => this.normalizeSearch(alias)).filter(Boolean);
+    return [canonical, ...aliases];
   }
 
   private normalizeSearch(value: string): string {

@@ -43,6 +43,7 @@
       } @else {
       <div class="route-planner-shell">
       <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
+        [nodeAliases]="nodeAliasesById()"
         [departTime]="draftDepartTime()" [showTime]="hasSearched()"
         [canApplyTime]="hasSearched() && draftDepartTime() !== departTime()"
         [searching]="routingState() === 'searching'" [variant]="'compact'"

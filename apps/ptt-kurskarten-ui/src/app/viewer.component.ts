@@ -29,6 +29,15 @@ type SidebarNodeTrip = {
   arrivalDayOffset?: number;
 };
 
+type WikidataLabelSet = Partial<Record<'de' | 'fr' | 'it' | 'en', string | null>>;
+type WikidataEntry = {
+  name: string;
+  qNumber: string | null;
+  qNumbers: string[];
+  translations?: WikidataLabelSet | null;
+  translationsByQNumber?: Record<string, WikidataLabelSet | null>;
+};
+
 @Component({
   selector: 'app-viewer',
   standalone: true,
@@ -80,6 +89,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchQuery = signal('');
   placeSearchOpen = signal(false);
   placeSearchActiveIndex = signal(0);
+  private wikidataByName = signal<Map<string, string[]>>(new Map());
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -135,13 +145,20 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
   placeSearchResults = computed(() => {
-    const q = this.placeSearchQuery().trim().toLowerCase();
+    const q = this.normalizeSearch(this.placeSearchQuery());
     if (!q) {
       return this.nodes().slice(0, 12);
     }
-    return this.nodes()
-      .filter((node) => node.name.toLowerCase().includes(q))
-      .slice(0, 12);
+    return this.nodes().filter((node) => this.nodeSearchTerms(node).some((term) => term.includes(q))).slice(0, 12);
+  });
+
+  nodeAliasesById = computed<Record<string, string[]>>(() => {
+    const byName = this.wikidataByName();
+    const aliases: Record<string, string[]> = {};
+    for (const node of this.nodes()) {
+      aliases[node.id] = byName.get(this.normalizeSearch(node.name)) ?? [];
+    }
+    return aliases;
   });
 
   minYear = computed(() => {
@@ -160,6 +177,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.isBrowser) {
       this.fetchYears();
       this.fetchGraph(this.year());
+      this.fetchWikidata();
     }
 
     effect(() => {
@@ -634,6 +652,56 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
         this.graph.set(null);
       }
     });
+  }
+
+  private fetchWikidata(): void {
+    this.http.get<WikidataEntry[]>('/assets/wikidata.json').subscribe({
+      next: (entries) => {
+        const byName = new Map<string, Set<string>>();
+        for (const entry of entries ?? []) {
+          const key = this.normalizeSearch(entry.name);
+          if (!key) {
+            continue;
+          }
+          const labels = new Set<string>();
+          const addLabels = (set?: WikidataLabelSet | null): void => {
+            if (!set) {
+              return;
+            }
+            Object.values(set).forEach((value) => {
+              const normalized = this.normalizeSearch(value ?? '');
+              if (normalized && normalized !== key) {
+                labels.add(normalized);
+              }
+            });
+          };
+          addLabels(entry.translations);
+          Object.values(entry.translationsByQNumber ?? {}).forEach((set) => addLabels(set));
+          const existing = byName.get(key) ?? new Set<string>();
+          labels.forEach((label) => existing.add(label));
+          byName.set(key, existing);
+        }
+        const materialized = new Map<string, string[]>();
+        byName.forEach((value, keyName) => materialized.set(keyName, [...value]));
+        this.wikidataByName.set(materialized);
+      },
+      error: () => this.wikidataByName.set(new Map())
+    });
+  }
+
+  private nodeSearchTerms(node: { name: string }): string[] {
+    const canonical = this.normalizeSearch(node.name);
+    const aliases = this.wikidataByName().get(canonical) ?? [];
+    return [canonical, ...aliases];
+  }
+
+  private normalizeSearch(value: string | null | undefined): string {
+    return (value ?? '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[’']/g, '')
+      .toLowerCase()
+      .trim();
   }
 
   getNodeName(id: string): string {

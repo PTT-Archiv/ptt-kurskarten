@@ -19,6 +19,30 @@ LANGS = ['de', 'it', 'fr', 'en']
 BATCH_SIZE = 50
 USER_AGENT = 'ptt-kurskarten-wikidata-enricher/1.0 (local script)'
 
+# High-signal place classes used for disambiguation.
+PLACE_P31_IDS = {
+    'Q486972',   # human settlement
+    'Q56061',    # administrative territorial entity
+    'Q515',      # city
+    'Q3957',     # town
+    'Q532',      # village
+    'Q15284',    # municipality
+    'Q747074',   # Italian comune
+    'Q70208',    # municipality of Switzerland
+}
+
+# Common non-place classes that often collide with toponyms.
+NON_PLACE_P31_IDS = {
+    'Q101352',   # family name
+    'Q202444',   # given name
+    'Q3305213',  # painting
+    'Q4167410',  # disambiguation page
+    'Q13406463', # Wikimedia list article
+    'Q11266439', # Wikimedia template
+}
+
+_ENTITY_META_CACHE: Dict[str, Dict[str, object]] = {}
+
 
 def normalize(text: str) -> str:
     text = unicodedata.normalize('NFKD', text)
@@ -94,6 +118,12 @@ def search_qids(name: str, limit: int = 10) -> List[str]:
     if not candidates:
         return []
 
+    place_qids = set(filter_place_qids(list(candidates.keys())))
+    if place_qids:
+        # Strongly prefer geographical entities when available.
+        for qid in place_qids:
+            candidates[qid] += 200
+
     ranked = sorted(candidates.items(), key=lambda kv: kv[1], reverse=True)
     top_score = ranked[0][1]
     return sorted([qid for qid, score in ranked if score == top_score])
@@ -135,6 +165,66 @@ def fetch_labels(qids: List[str]) -> Dict[str, Dict[str, Optional[str]]]:
     return out
 
 
+def fetch_entity_metadata(qids: List[str]) -> Dict[str, Dict[str, object]]:
+    out: Dict[str, Dict[str, object]] = {}
+    missing = [qid for qid in qids if qid not in _ENTITY_META_CACHE]
+
+    for i in range(0, len(missing), BATCH_SIZE):
+        batch = missing[i : i + BATCH_SIZE]
+        data = api_get(
+            {
+                'action': 'wbgetentities',
+                'format': 'json',
+                'ids': '|'.join(batch),
+                'props': 'claims',
+            }
+        )
+        entities = data.get('entities', {})
+        for qid in batch:
+            claims = (entities.get(qid) or {}).get('claims') or {}
+            p31_ids = _claim_entity_ids(claims.get('P31') or [])
+            _ENTITY_META_CACHE[qid] = {
+                'p31': p31_ids,
+                'has_p17': bool(claims.get('P17')),
+                'has_p131': bool(claims.get('P131')),
+                'has_p625': bool(claims.get('P625')),
+            }
+        time.sleep(0.03)
+
+    for qid in qids:
+        if qid in _ENTITY_META_CACHE:
+            out[qid] = _ENTITY_META_CACHE[qid]
+    return out
+
+
+def _claim_entity_ids(claims: List[Dict]) -> List[str]:
+    ids: List[str] = []
+    for claim in claims:
+        value = ((claim.get('mainsnak') or {}).get('datavalue') or {}).get('value') or {}
+        qid = value.get('id')
+        if isinstance(qid, str) and qid.startswith('Q'):
+            ids.append(qid)
+    return ids
+
+
+def is_place_entity(meta: Dict[str, object]) -> bool:
+    p31_ids = set(meta.get('p31') or [])
+    has_place_claims = bool(meta.get('has_p17') or meta.get('has_p131') or meta.get('has_p625'))
+
+    if p31_ids & PLACE_P31_IDS:
+        return True
+    if p31_ids & NON_PLACE_P31_IDS:
+        return False
+    return has_place_claims
+
+
+def filter_place_qids(qids: List[str]) -> List[str]:
+    if not qids:
+        return []
+    meta = fetch_entity_metadata(qids)
+    return [qid for qid in qids if is_place_entity(meta.get(qid, {}))]
+
+
 def main() -> None:
     data = json.loads(WIKIDATA_JSON.read_text(encoding='utf-8'))
     search_cache = load_search_cache()
@@ -143,19 +233,33 @@ def main() -> None:
     ambiguous = 0
 
     for entry in data:
-        if entry.get('qNumber') is None and not entry.get('qNumbers'):
-            name = entry.get('name', '')
-            if name in search_cache:
-                qids = search_cache[name]
-            else:
+        if entry.get('qNumber'):
+            continue
+
+        name = entry.get('name', '')
+
+        # Re-evaluate existing ambiguous matches and keep only place entities.
+        existing_qids = [q for q in (entry.get('qNumbers') or []) if isinstance(q, str) and q.startswith('Q')]
+        qids = filter_place_qids(existing_qids)
+
+        # If nothing valid remains, perform (or refresh) search.
+        if not qids:
+            cached = search_cache.get(name)
+            if isinstance(cached, list):
+                qids = filter_place_qids([q for q in cached if isinstance(q, str)])
+            if not qids:
                 qids = search_qids(name)
-                search_cache[name] = qids
-            if len(qids) == 1:
-                entry['qNumber'] = qids[0]
-                resolved += 1
-            elif len(qids) > 1:
-                entry['qNumbers'] = qids
-                ambiguous += 1
+            search_cache[name] = qids
+
+        if len(qids) == 1:
+            entry['qNumber'] = qids[0]
+            entry['qNumbers'] = []
+            resolved += 1
+        elif len(qids) > 1:
+            entry['qNumbers'] = qids
+            ambiguous += 1
+        else:
+            entry['qNumbers'] = []
     save_search_cache(search_cache)
 
     all_qids = sorted(
