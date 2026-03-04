@@ -204,6 +204,9 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 
     const edges = adjacency.get(current.nodeId) ?? [];
     for (const edge of edges) {
+      if (visited.has(edge.to)) {
+        continue;
+      }
       const choice = computeTripChoice(edge, current.time, current.nodeId === params.from ? 0 : minTransferMinutes);
       if (!choice) {
         continue;
@@ -237,8 +240,14 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 
   const legs: ConnectionLeg[] = [];
   let nodeCursor: string | null = params.to;
+  const backtrackVisited = new Set<string>();
 
   while (nodeCursor && nodeCursor !== params.from) {
+    if (backtrackVisited.has(nodeCursor)) {
+      break;
+    }
+    backtrackVisited.add(nodeCursor);
+
     const info = prev.get(nodeCursor);
     if (!info || !info.prevNode || !info.edgeId || !info.tripId || info.departAbs === null || info.arriveAbs === null) {
       break;
