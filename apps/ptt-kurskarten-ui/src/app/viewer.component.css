@@ -261,9 +261,11 @@
   display: grid;
   justify-items: center;
   gap: 10px;
+  pointer-events: none;
 }
 
 .place-search-shell {
+  pointer-events: auto;
   position: relative;
   width: min(720px, 100%);
   background: #000000;
@@ -332,6 +334,7 @@
 }
 
 .route-planner-shell {
+  pointer-events: auto;
   width: min(720px, 100%);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -368,10 +371,15 @@
   width: min(520px, 100%);
   display: grid;
   justify-items: center;
+  pointer-events: none;
 }
 
 .pick-status .status-card {
   font-weight: 600;
+}
+
+.pick-status {
+  margin-top: 260px;
 }
 
 .status-card {

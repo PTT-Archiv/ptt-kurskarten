@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faArrowsLeftRight, faLocationCrosshairs, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsLeftRight, faXmark } from '@fortawesome/free-solid-svg-icons';
 import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
 @Component({
@@ -37,16 +37,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 </button>
               }
             </div>
-            <button
-              type="button"
-              class="pick-btn"
-              [class.pulsing]="pickMode === 'from'"
-              (click)="pickFrom.emit()"
-              aria-label="Pick from map"
-              data-tooltip="Auf der Karte wählen"
-            >
-              <fa-icon [icon]="pickIcon"></fa-icon>
-            </button>
           </div>
           @if (fromOpen && filteredFrom().length) {
             <div class="typeahead-list">
@@ -86,16 +76,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 </button>
               }
             </div>
-            <button
-              type="button"
-              class="pick-btn"
-              [class.pulsing]="pickMode === 'to'"
-              (click)="pickTo.emit()"
-              aria-label="Pick to map"
-              data-tooltip="Auf der Karte wählen"
-            >
-              <fa-icon [icon]="pickIcon"></fa-icon>
-            </button>
           </div>
           @if (toOpen && filteredTo().length) {
             <div class="typeahead-list">
@@ -246,9 +226,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       .swap-btn:focus,
       .swap-btn:focus-visible,
       .clear-btn:focus,
-      .clear-btn:focus-visible,
-      .pick-btn:focus,
-      .pick-btn:focus-visible {
+      .clear-btn:focus-visible {
         outline: none;
         box-shadow: none;
       }
@@ -393,7 +371,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .typeahead-input {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 1fr);
         align-items: center;
         gap: 6px;
       }
@@ -435,68 +413,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         place-items: center;
         cursor: pointer;
         padding: 0;
-      }
-
-      .pick-btn {
-        position: relative;
-        border: 2px solid #ffffff;
-        background: #141414;
-        color: #ffffff;
-        font-size: 14px;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        line-height: 1;
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-        box-shadow: none;
-      }
-
-      .pick-btn:hover,
-      .pick-btn:focus-visible {
-        background: #ffffff;
-        color: #141414;
-      }
-
-      .pick-btn.pulsing {
-        animation: pickPulse 1.2s ease-in-out infinite;
-      }
-
-      @keyframes pickPulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.12);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      .pick-btn::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        right: 28px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #000000;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        border-radius: 10px;
-        padding: 4px 8px;
-        font-size: 11px;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
-        transition: opacity 120ms ease-out;
-      }
-
-      .pick-btn:hover::after,
-      .pick-btn:focus-visible::after {
-        opacity: 1;
       }
 
       .typeahead-list {
@@ -563,7 +479,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 })
 export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   readonly xmarkIcon = faXmark;
-  readonly pickIcon = faLocationCrosshairs;
   readonly swapIcon = faArrowsLeftRight;
 
   @Input() variant: 'full' | 'compact' = 'full';
@@ -575,7 +490,6 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   @Input() showTime = false;
   @Input() canApplyTime = false;
   @Input() searching = false;
-  @Input() pickMode: 'from' | 'to' | null = null;
   @Output() fromIdChange = new EventEmitter<string>();
   @Output() toIdChange = new EventEmitter<string>();
   @Output() departTimeChange = new EventEmitter<TimeHHMM>();
@@ -585,8 +499,7 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   @Output() plannerHover = new EventEmitter<boolean>();
   @Output() fromPreviewChange = new EventEmitter<string>();
   @Output() toPreviewChange = new EventEmitter<string>();
-  @Output() pickFrom = new EventEmitter<void>();
-  @Output() pickTo = new EventEmitter<void>();
+  @Output() pickTargetChange = new EventEmitter<'from' | 'to' | null>();
   @Output() resetSearch = new EventEmitter<void>();
 
   @ViewChildren('fromOption', { read: ElementRef }) fromOptions!: QueryList<ElementRef<HTMLElement>>;
@@ -598,6 +511,7 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   toOpen = false;
   fromActiveIndex = 0;
   toActiveIndex = 0;
+  private activePickTarget: 'from' | 'to' | null = null;
   private hourDraft = '';
   private minuteDraft = '';
   private editingHour = false;
@@ -684,10 +598,15 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ((changes['fromId'] || changes['nodes']) && !this.fromOpen) {
+    const fromIdChanged = !!changes['fromId'];
+    const toIdChanged = !!changes['toId'];
+    const fromMapPickActive = fromIdChanged && !!this.fromId && this.activePickTarget === 'from';
+    const toMapPickActive = toIdChanged && !!this.toId && this.activePickTarget === 'to';
+
+    if ((fromIdChanged || changes['nodes']) && (!this.fromOpen || fromMapPickActive)) {
       this.fromQuery = this.nameForId(this.fromId);
     }
-    if ((changes['toId'] || changes['nodes']) && !this.toOpen) {
+    if ((toIdChanged || changes['nodes']) && (!this.toOpen || toMapPickActive)) {
       this.toQuery = this.nameForId(this.toId);
     }
     if (changes['departTime']) {
@@ -730,12 +649,20 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     this.fromQuery = node.name;
     this.fromIdChange.emit(node.id);
     this.fromOpen = false;
+    if (this.activePickTarget === 'from') {
+      this.activePickTarget = null;
+      this.pickTargetChange.emit(null);
+    }
   }
 
   selectTo(node: { id: string; name: string }): void {
     this.toQuery = node.name;
     this.toIdChange.emit(node.id);
     this.toOpen = false;
+    if (this.activePickTarget === 'to') {
+      this.activePickTarget = null;
+      this.pickTargetChange.emit(null);
+    }
   }
 
   clearFrom(): void {
@@ -753,6 +680,8 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   onFromFocus(): void {
     this.fromOpen = true;
     this.fromActiveIndex = 0;
+    this.activePickTarget = 'from';
+    this.pickTargetChange.emit('from');
     this.scrollFromActive();
     this.emitFromPreview();
   }
@@ -760,6 +689,8 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   onToFocus(): void {
     this.toOpen = true;
     this.toActiveIndex = 0;
+    this.activePickTarget = 'to';
+    this.pickTargetChange.emit('to');
     this.scrollToActive();
     this.emitToPreview();
   }
@@ -768,6 +699,10 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     setTimeout(() => {
       this.fromOpen = false;
       this.fromPreviewChange.emit('');
+      if (this.activePickTarget === 'from') {
+        this.activePickTarget = null;
+        this.pickTargetChange.emit(null);
+      }
     }, 120);
   }
 
@@ -775,6 +710,10 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     setTimeout(() => {
       this.toOpen = false;
       this.toPreviewChange.emit('');
+      if (this.activePickTarget === 'to') {
+        this.activePickTarget = null;
+        this.pickTargetChange.emit(null);
+      }
     }, 120);
   }
 

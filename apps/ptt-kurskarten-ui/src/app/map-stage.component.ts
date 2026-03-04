@@ -138,8 +138,8 @@ const NODE_COLOR_MUTED = '#9a9a9a';
 
       .zoom-controls {
         position: absolute;
-        top: 16px;
-        left: 16px;
+        right: 16px;
+        bottom: 72px;
         display: grid;
         gap: 8px;
       }
@@ -175,7 +175,7 @@ const NODE_COLOR_MUTED = '#9a9a9a';
 
       .zoom-hint {
         position: absolute;
-        left: 12px;
+        left: 50%;
         bottom: 12px;
         padding: 6px 10px;
         border-radius: 999px;
@@ -184,14 +184,14 @@ const NODE_COLOR_MUTED = '#9a9a9a';
         color: #000;
         background: rgba(255, 255, 255, 0.85);
         opacity: 0;
-        transform: translateY(4px);
+        transform: translate(-50%, 4px);
         transition: opacity 140ms ease-out, transform 140ms ease-out;
         pointer-events: none;
       }
 
       .zoom-hint.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, 0);
       }
     `
   ]

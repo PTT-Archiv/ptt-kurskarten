@@ -84,6 +84,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private placeSearchBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  private pendingMapPickTarget: 'from' | 'to' | null = null;
   pickTarget = signal<'from' | 'to' | null>(null);
   private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
   hoveredNodeId = signal<string | null>(null);
@@ -152,6 +153,29 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly routeIcon = faRoute;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
+  routeResultsVisible = computed(() => this.routingState() === 'results' && this.connectionResults().length > 0);
+  routeSidebarTitle = computed(() => {
+    const selected = this.selectedConnection();
+    const from = selected?.from ?? this.fromId();
+    const to = selected?.to ?? this.toId();
+    if (!from || !to) {
+      return this.transloco.translate('viewer.details');
+    }
+    return `${this.getNodeLabel(from)} → ${this.getNodeLabel(to)}`;
+  });
+  routeNodePanelNode = computed(() => this.getNodeById(this.selectedNodeId()));
+  routeNodePanelSnippetUrl = computed(() => {
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return null;
+    }
+    const node = this.getNodeByIdFull(nodeId);
+    if (!node) {
+      return null;
+    }
+    return buildArchiveSnippetUrlForNode(node, this.archiveTransform());
+  });
+  showRouteNodePanel = computed(() => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId());
   placeSearchResults = computed(() => {
     const q = this.normalizeSearch(this.placeSearchQuery());
     if (!q) {
@@ -259,26 +283,33 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   onNodeSelected(nodeId: string | null): void {
-    const pick = this.pickTarget();
+    const routeResultsVisible = this.routeResultsVisible();
+    const pick = this.pickTarget() ?? this.pendingMapPickTarget;
     if (pick && nodeId) {
       if (pick === 'from') {
         this.onFromIdChange(nodeId);
       } else {
         this.onToIdChange(nodeId);
       }
+      this.pendingMapPickTarget = null;
       this.pickTarget.set(null);
       return;
     }
-    this.selectedConnectionId.set(null);
+    this.pendingMapPickTarget = null;
     if (!nodeId) {
       this.selectedNodeId.set(null);
-      this.sidebarOpen.set(false);
+      if (!routeResultsVisible) {
+        this.sidebarOpen.set(false);
+      }
       return;
     }
 
+    if (!routeResultsVisible) {
+      this.selectedConnectionId.set(null);
+      this.uiState.set('details');
+    }
     this.selectedNodeId.set(nodeId);
     this.sidebarOpen.set(true);
-    this.uiState.set('details');
   }
 
   onSearchConnections(): void {
@@ -358,6 +389,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   closeSidebar(): void {
     this.sidebarOpen.set(false);
+    this.selectedNodeId.set(null);
+  }
+
+  closeRouteNodePanel(): void {
     this.selectedNodeId.set(null);
   }
 
@@ -460,9 +495,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   closeRoutePlanner(): void {
     this.routePlannerOpen.set(false);
+    this.pendingMapPickTarget = null;
+    this.pickTarget.set(null);
   }
 
-  startMapPick(target: 'from' | 'to'): void {
+  onRoutePlannerPickTargetChange(target: 'from' | 'to' | null): void {
     this.pickTarget.set(target);
   }
 
@@ -473,18 +510,22 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     hitNodeId: string | null;
     hitEdgeId: string | null;
   }): void {
+    if (payload.type === 'down') {
+      this.pendingMapPickTarget = this.pickTarget();
+    }
     if (payload.type === 'move') {
       this.hoveredNodeId.set(payload.hitNodeId);
       this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
     }
-    if (this.pickTarget() && payload.type === 'up' && !payload.hitNodeId) {
-      this.pickTarget.set(null);
+    if (payload.type === 'up' && !payload.hitNodeId) {
+      this.pendingMapPickTarget = null;
     }
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape' && this.pickTarget()) {
+      this.pendingMapPickTarget = null;
       this.pickTarget.set(null);
     }
   }
@@ -526,6 +567,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   resetSearch(): void {
     this.pickTarget.set(null);
+    this.pendingMapPickTarget = null;
     this.fromPreviewId.set('');
     this.toPreviewId.set('');
     this.fromId.set('');
