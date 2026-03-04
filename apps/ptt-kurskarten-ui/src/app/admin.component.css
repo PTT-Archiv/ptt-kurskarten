@@ -1,13 +1,13 @@
 :host {
   display: block;
-  min-height: calc(100vh - 86px);
+  min-height: 100vh;
 }
 
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  min-height: calc(100vh - 86px);
-  height: calc(100vh - 86px);
+  min-height: 100vh;
+  height: 100vh;
 }
 
 .canvas-area {
@@ -17,7 +17,7 @@
   display: flex;
   height: 100%;
   position: sticky;
-  top: 86px;
+  top: 0;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -229,7 +229,7 @@
 .side-panel.admin-panel {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 86px);
+  height: 100vh;
   background: var(--ptt-white);
   border-left: none;
   box-shadow: none;

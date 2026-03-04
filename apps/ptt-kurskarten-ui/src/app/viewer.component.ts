@@ -1,16 +1,18 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faFlag, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faGear, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
 import { environment } from '../environments/environment';
+import { Subscription } from 'rxjs';
 import {
   ARCHIVE_DEFAULT_REGION,
   buildArchiveSnippetUrlForNode,
@@ -43,7 +45,7 @@ type WikidataEntry = {
 @Component({
   selector: 'app-viewer',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent],
+  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent, RouterLink],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css'
 })
@@ -76,7 +78,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   lastResultParams = signal<{ from: string; to: string; year: number } | null>(null);
   plannerActive = signal(false);
   mapSettled = signal(false);
-  helpOpen = signal(true);
+  helpOpen = signal(false);
+  settingsOpen = signal(false);
+  activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
+  readonly readonlyViewer = environment.readonlyViewer;
   resetViewportToken = signal(0);
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
@@ -84,6 +89,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private placeSearchBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  private langSub?: Subscription;
   private pendingMapPickTarget: 'from' | 'to' | null = null;
   pickTarget = signal<'from' | 'to' | null>(null);
   private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
@@ -145,6 +151,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   hoveredSnippetLoading = signal(false);
   readonly xmarkIcon = faXmark;
+  readonly gearIcon = faGear;
   readonly startIcon = faFlag;
   readonly endIcon = faLocationDot;
   readonly searchIcon = faMagnifyingGlass;
@@ -209,6 +216,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.fetchGraph(this.year());
       this.fetchWikidata();
     }
+    this.langSub = this.transloco.langChanges$.subscribe((lang) => {
+      this.activeLang.set(lang === 'fr' ? 'fr' : 'de');
+    });
 
     effect(() => {
       if (!this.isBrowser) {
@@ -260,6 +270,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.placeSearchBlurHandle) {
       clearTimeout(this.placeSearchBlurHandle);
     }
+    this.langSub?.unsubscribe();
+  }
+
+  setLang(lang: 'de' | 'fr'): void {
+    this.activeLang.set(lang);
+    this.transloco.setActiveLang(lang);
   }
 
   onYearInput(event: Event): void {
@@ -899,10 +915,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   getPickModeLabel(): string {
     const target = this.pickTarget();
     if (target === 'from') {
-      return 'Auswahlmodus: Startpunkt auf der Karte wählen';
+      return this.transloco.translate('viewer.pickModeFrom');
     }
     if (target === 'to') {
-      return 'Auswahlmodus: Zielpunkt auf der Karte wählen';
+      return this.transloco.translate('viewer.pickModeTo');
     }
     return '';
   }

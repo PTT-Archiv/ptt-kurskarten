@@ -1,28 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ToastContainerComponent } from './shared/toast/toast-container.component';
-import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, TranslocoPipe, ToastContainerComponent],
+  imports: [RouterOutlet, ToastContainerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  private readonly transloco = inject(TranslocoService);
-
-  activeLang = signal(this.transloco.getActiveLang());
-  availableLangs: Array<'de' | 'fr'> = ['de', 'fr'];
-  readonly readonlyViewer = environment.readonlyViewer;
-
-  setLang(event: Event): void {
-    const value = (event.target as HTMLSelectElement).value as 'de' | 'fr';
-    if (!value || value === this.activeLang()) {
-      return;
-    }
-    this.transloco.setActiveLang(value);
-    this.activeLang.set(value);
-  }
-}
+export class AppComponent {}

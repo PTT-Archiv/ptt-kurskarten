@@ -1,6 +1,6 @@
 :host {
   display: block;
-  min-height: calc(100vh - 86px);
+  min-height: 100vh;
   padding: 24px;
   background: var(--ptt-white);
 }

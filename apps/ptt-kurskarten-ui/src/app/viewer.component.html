@@ -18,7 +18,7 @@
         <input
           type="text"
           [value]="placeSearchQuery()"
-          placeholder="Ort auf der Karte suchen"
+          [placeholder]="'viewer.searchPlacePlaceholder' | transloco"
           (focus)="onPlaceSearchFocus()"
           (blur)="onPlaceSearchBlur()"
           (input)="onPlaceSearchInput($any($event.target).value)"
@@ -74,13 +74,13 @@
         <div class="status-card">{{ getNoResultsMessage() }}</div>
       </div>
       }
-      @if (pickTarget()) {
-      <div class="planner-status pick-status">
-        <div class="status-card">{{ getPickModeLabel() }}</div>
-      </div>
-      }
       }
     </div>
+    @if (pickTarget()) {
+    <div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
+      <div class="status-card" style="font-weight: 600;">{{ getPickModeLabel() }}</div>
+    </div>
+    }
     <button class="reset-view-btn" type="button" (click)="resetMapView()">
       {{ 'viewer.resetView' | transloco }}
     </button>
@@ -378,12 +378,50 @@
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
   </section>
-  <button class="route-close-btn help-toggle-btn" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
+  <button class="route-close-btn help-toggle-btn" style="left: 58px; z-index: 8;" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
     <fa-icon [icon]="xmarkIcon"></fa-icon>
   </button>
   } @else {
-  <button class="help-fab help-toggle-btn" type="button" (click)="helpOpen.set(true)" [attr.aria-label]="'viewer.helpOpen' | transloco">
+  <button class="help-fab help-toggle-btn" style="left: 58px;" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)" [attr.aria-label]="'viewer.helpOpen' | transloco">
     <span aria-hidden="true">?</span>
+  </button>
+  }
+
+  @if (settingsOpen()) {
+  <section class="help-popup" style="left: 16px; right: auto; width: min(320px, calc(100vw - 32px));">
+    <div class="help-header">
+      <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
+    </div>
+    <div>{{ 'nav.language' | transloco }}</div>
+    <div class="quick-actions">
+      <button class="ghost-btn" type="button" [style.background]="activeLang() === 'de' ? '#ffffff' : '#141414'"
+        [style.color]="activeLang() === 'de' ? '#141414' : '#ffffff'" (click)="setLang('de')">
+        DE
+      </button>
+      <button class="ghost-btn" type="button" [style.background]="activeLang() === 'fr' ? '#ffffff' : '#141414'"
+        [style.color]="activeLang() === 'fr' ? '#141414' : '#ffffff'" (click)="setLang('fr')">
+        FR
+      </button>
+    </div>
+    @if (!readonlyViewer) {
+    <div class="quick-actions">
+      <button class="ghost-btn" type="button" routerLink="/admin" (click)="settingsOpen.set(false)">
+        {{ 'nav.admin' | transloco }}
+      </button>
+      <button class="ghost-btn" type="button" routerLink="/reports" (click)="settingsOpen.set(false)">
+        {{ 'nav.reports' | transloco }}
+      </button>
+    </div>
+    }
+  </section>
+  <button class="route-close-btn help-toggle-btn" style="left: 16px; z-index: 8;" type="button"
+    (click)="settingsOpen.set(false)" [attr.aria-label]="'viewer.settingsClose' | transloco">
+    <fa-icon [icon]="xmarkIcon"></fa-icon>
+  </button>
+  } @else {
+  <button class="route-close-btn help-toggle-btn" style="left: 16px;" type="button"
+    (click)="settingsOpen.set(true); helpOpen.set(false)" [attr.aria-label]="'viewer.settingsOpen' | transloco">
+    <fa-icon [icon]="gearIcon"></fa-icon>
   </button>
   }
 </main>
