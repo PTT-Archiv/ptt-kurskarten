@@ -20,6 +20,8 @@ import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { BorderUncertaintyLayerComponent } from './border-uncertainty-layer.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const NODE_RADIUS = 3;
 const NODE_RADIUS_MAX = 9;
@@ -37,7 +39,7 @@ const NODE_COLOR_MUTED = '#9a9a9a';
 @Component({
   selector: 'app-map-stage',
   standalone: true,
-  imports: [BorderUncertaintyLayerComponent],
+  imports: [BorderUncertaintyLayerComponent, FaIconComponent],
   template: `
     <div
       class="stage"
@@ -63,8 +65,12 @@ const NODE_COLOR_MUTED = '#9a9a9a';
         ></canvas>
         @if (showZoomControls()) {
           <div class="zoom-controls" aria-label="Zoom controls">
-            <button type="button" class="zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">+</button>
-            <button type="button" class="zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">−</button>
+            <button type="button" class="zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">
+              <fa-icon [icon]="plusIcon"></fa-icon>
+            </button>
+            <button type="button" class="zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">
+              <fa-icon [icon]="minusIcon"></fa-icon>
+            </button>
           </div>
         }
         <div class="zoom-hint" [class.visible]="showZoomHint()">
@@ -173,6 +179,10 @@ const NODE_COLOR_MUTED = '#9a9a9a';
         transform: translateY(1px);
       }
 
+      .zoom-btn fa-icon {
+        font-size: 14px;
+      }
+
       .zoom-hint {
         position: absolute;
         left: 50%;
@@ -197,6 +207,9 @@ const NODE_COLOR_MUTED = '#9a9a9a';
   ]
 })
 export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
+  readonly plusIcon = faPlus;
+  readonly minusIcon = faMinus;
+
   @Input({ required: true }) graph: GraphSnapshot | null = null;
   @Input() nodeDetail: NodeDetail | null = null;
   @Input() highlightedEdgeIds: Set<string> | null = null;
