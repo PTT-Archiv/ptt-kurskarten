@@ -356,10 +356,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.sidebarOpen.set(true);
   }
 
-  toggleSidebar(): void {
-    this.sidebarOpen.set(!this.sidebarOpen());
-  }
-
   closeSidebar(): void {
     this.sidebarOpen.set(false);
     this.selectedNodeId.set(null);

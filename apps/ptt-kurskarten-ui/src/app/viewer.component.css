@@ -413,31 +413,6 @@
   background: transparent;
 }
 
-.sidebar-handle {
-  position: absolute;
-  top: 140px;
-  right: 0;
-  width: var(--handle-width, 44px);
-  height: 64px;
-  z-index: 6;
-  background: #141414;
-  border: 2px solid #ffffff;
-  border-right: none;
-  border-radius: 14px 0 0 14px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-.handle-text {
-  font-size: 11px;
-  font-weight: 600;
-  color: #ffffff;
-  transform: rotate(-90deg);
-  white-space: nowrap;
-}
-
 .help-popup {
   position: absolute;
   left: 16px;
@@ -514,8 +489,6 @@
 .route-close-btn:focus-visible,
 .reset-view-btn:hover,
 .reset-view-btn:focus-visible,
-.sidebar-handle:hover,
-.sidebar-handle:focus-visible,
 .help-close:hover,
 .help-close:focus-visible,
 .help-fab:hover,
@@ -600,10 +573,6 @@
   .reset-view-btn {
     right: 12px;
     bottom: 12px;
-  }
-
-  .sidebar-handle {
-    display: none;
   }
 
   .help-popup {
