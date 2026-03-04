@@ -21,9 +21,11 @@ import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { BorderUncertaintyLayerComponent } from './border-uncertainty-layer.component';
 
-const NODE_RADIUS = 5;
+const NODE_RADIUS = 3;
 const NODE_RADIUS_MAX = 9;
 const NODE_RADIUS_STEP = .3;
+const MIN_VIEWPORT_ZOOM = 0.75;
+const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
@@ -391,7 +393,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const sy = event.clientY - rect.top;
     const currentZoom = this.viewportZoom;
     const zoomFactor = Math.exp(-event.deltaY * 0.0015);
-    const nextZoom = Math.max(0.7, Math.min(20, currentZoom * zoomFactor));
+    const nextZoom = Math.max(MIN_VIEWPORT_ZOOM, Math.min(MAX_VIEWPORT_ZOOM, currentZoom * zoomFactor));
     this.applyZoom(nextZoom, sx, sy);
   }
 
@@ -771,7 +773,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const rect = canvas.getBoundingClientRect();
     const sx = rect.width / 2;
     const sy = rect.height / 2;
-    const nextZoom = Math.max(0.7, Math.min(20, this.viewportZoom * factor));
+    const nextZoom = Math.max(MIN_VIEWPORT_ZOOM, Math.min(MAX_VIEWPORT_ZOOM, this.viewportZoom * factor));
     this.applyZoom(nextZoom, sx, sy);
   }
 
@@ -1125,7 +1127,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return 1;
     }
     const scale = minDim / 800;
-    return Math.max(0.7, Math.min(1.4, scale));
+    const viewportScale = Math.max(0.5, Math.min(1.5, this.viewportZoom));
+    return Math.max(0.36, Math.min(1.4, scale * viewportScale));
   }
 
   private getNodeLabel(id: string): string {
