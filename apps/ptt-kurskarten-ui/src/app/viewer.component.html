@@ -32,6 +32,8 @@
           <button
             type="button"
             [class.active]="i === placeSearchActiveIndex()"
+            (mouseenter)="previewPlaceSearchResult(node.id, i)"
+            (focus)="previewPlaceSearchResult(node.id, i)"
             (mousedown)="selectPlaceResult(node.id)"
           >
             {{ node.name }}

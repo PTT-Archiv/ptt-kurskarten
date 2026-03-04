@@ -29,8 +29,10 @@ const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
+const DIM_ALPHA = 0.3;
 const NODE_COLOR_DEFAULT = '#ffffff';
 const NODE_COLOR_FOREIGN = '#ffffff';
+const NODE_COLOR_MUTED = '#9a9a9a';
 
 @Component({
   selector: 'app-map-stage',
@@ -367,8 +369,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const payload = this.buildPointerPayload(event);
     this.mapPointer.emit({ ...payload, type: 'up' });
 
-    if (!wasPanning && payload.hitNodeId) {
-      this.nodeSelected.emit(payload.hitNodeId);
+    if (!wasPanning) {
+      if (payload.hitNodeId) {
+        this.nodeSelected.emit(payload.hitNodeId);
+      } else if (this.pickMode === null && this.selectedNodeId !== null) {
+        this.nodeSelected.emit(null);
+      }
     }
   }
 
@@ -422,10 +428,13 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   getCanvasCursor(): string {
-    if (!this.showZoomControls()) {
-      return 'default';
+    if (this.isPanning) {
+      return 'crosshair';
     }
-    return this.panStart ? 'grabbing' : 'grab';
+    if (this.hoveredNodeId) {
+      return 'pointer';
+    }
+    return 'default';
   }
 
   getZoomHintLabel(): string {
@@ -543,6 +552,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const edgeHighlights = this.highlightedEdgeIds ?? highlightIds.edgeIds;
     const nodeHighlights = this.highlightedNodeIds ?? highlightIds.nodeIds;
     const routingActive = this.routingActive;
+    const selectedFocusActive = !routingActive && this.selectedNodeId !== null;
+    const selectedFocusEdgeIds = this.getSelectedNodeEdgeIds(edges);
 
     this.screenNodes.clear();
     this.screenNodeLabels.clear();
@@ -585,7 +596,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
         const isHighlighted = edgeHighlights.has(edge.id);
         const isDimmed = routingActive && !isHighlighted;
-        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isDimmed);
+        const isSelectionMuted = selectedFocusActive && !selectedFocusEdgeIds.has(edge.id);
+        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isDimmed, isSelectionMuted);
         if (routingActive && isHighlighted && index === centerLaneIndex) {
           this.drawEdgeChevrons(ctx, from, to, laneOffsetPx);
         }
@@ -603,13 +615,16 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         (NODE_RADIUS + degree * NODE_RADIUS_STEP) * sizeScale
       );
       const isSelected = this.selectedNodeId === node.id;
-      const isHighlighted = nodeHighlights.has(node.id) || isSelected;
+      const isHighlighted = selectedFocusActive ? isSelected : nodeHighlights.has(node.id) || isSelected;
       const isHovered = this.hoveredNodeId === node.id;
       const isDimmed = routingActive && !isHighlighted && !isHovered;
-      const radius = baseRadius + (isHighlighted || isHovered ? 2 * sizeScale : 0);
+      const shouldEmphasize = isHighlighted || (!selectedFocusActive && isHovered);
+      const radius = baseRadius + (shouldEmphasize ? 2 * sizeScale : 0);
       const showShadow = this.pickMode !== null;
-      const fillColor = node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
-      const nodeAlpha = isDimmed ? 0.2 : 1;
+      const isSelectionMuted = selectedFocusActive && !isSelected;
+      const fillColor = isSelectionMuted ? NODE_COLOR_MUTED : node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
+      const strokeColor = isSelectionMuted ? NODE_COLOR_MUTED : '#ffffff';
+      const nodeAlpha = isDimmed || isSelectionMuted ? DIM_ALPHA : 1;
       if (showShadow) {
         ctx.save();
         ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
@@ -635,7 +650,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.globalAlpha = nodeAlpha;
       ctx.beginPath();
       ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = strokeColor;
       ctx.lineWidth = 2;
       ctx.stroke();
       ctx.restore();
@@ -730,6 +745,28 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
     }
 
+    pulseIds.forEach((nodeId) => {
+      if (nodeId === this.hoveredNodeId || nodeId === this.selectedNodeId) {
+        return;
+      }
+      const node = this.screenNodes.get(nodeId);
+      const data = nodeMap.get(nodeId);
+      if (!node || !data?.name) {
+        return;
+      }
+      ctx.save();
+      ctx.font = '12px "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+      const text = data.name;
+      const size = measureLabel(ctx, text);
+      const x = node.x + 10;
+      const y = node.y - size.h - 8;
+      drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+      this.screenNodeLabels.set(nodeId, { x, y, w: size.w, h: size.h });
+      ctx.restore();
+    });
+
     if (pulseIds.size > 0) {
       this.scheduleRender();
     }
@@ -804,6 +841,20 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     return { nodeIds, edgeIds };
   }
 
+  private getSelectedNodeEdgeIds(edges: GraphSnapshot['edges']): Set<string> {
+    const selected = this.selectedNodeId;
+    if (!selected) {
+      return new Set<string>();
+    }
+    const ids = new Set<string>();
+    edges.forEach((edge) => {
+      if (edge.from === selected || edge.to === selected) {
+        ids.add(edge.id);
+      }
+    });
+    return ids;
+  }
+
   private getTopConnectedNodes(nodes: GraphNode[], edgeCounts: Map<string, number>, limit: number): GraphNode[] {
     return [...nodes]
       .sort((a, b) => {
@@ -856,7 +907,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     to: GraphNode,
     laneOffsetPx: number,
     isHighlighted: boolean,
-    isDimmed: boolean
+    isDimmed: boolean,
+    isSelectionMuted: boolean
   ): void {
     const fromPos = this.project(from);
     const toPos = this.project(to);
@@ -871,17 +923,21 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const pickDim = this.pickMode !== null;
     const baseStroke = pickDim ? 'rgba(255, 255, 255, 0.24)' : 'rgba(255, 255, 255, 0.48)';
     const dimStroke = pickDim ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.14)';
-    ctx.strokeStyle = isHighlighted ? '#ffffff' : isDimmed ? dimStroke : baseStroke;
-    ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
+    const strokeStyle = isHighlighted ? '#ffffff' : isSelectionMuted ? NODE_COLOR_MUTED : isDimmed ? dimStroke : baseStroke;
     const x1 = fromPos.x + px * laneOffsetPx;
     const y1 = fromPos.y + py * laneOffsetPx;
     const x2 = toPos.x + px * laneOffsetPx;
     const y2 = toPos.y + py * laneOffsetPx;
     this.screenEdges.set(edgeId, { x1, y1, x2, y2 });
+    ctx.save();
+    ctx.globalAlpha = isSelectionMuted ? DIM_ALPHA : 1;
+    ctx.strokeStyle = strokeStyle;
+    ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
+    ctx.restore();
   }
 
   private drawEdgeChevrons(ctx: CanvasRenderingContext2D, from: GraphNode, to: GraphNode, laneOffsetPx: number): void {
@@ -961,10 +1017,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private updateHoverState(hitNodeId: string | null): void {
-    const canvas = this.canvasRef?.nativeElement;
-    if (canvas) {
-      canvas.style.cursor = hitNodeId ? 'pointer' : 'default';
-    }
     if (this.hoveredNodeId === hitNodeId) {
       return;
     }

@@ -92,6 +92,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchQuery = signal('');
   placeSearchOpen = signal(false);
   placeSearchActiveIndex = signal(0);
+  private placeSearchPreviewId = signal<string>('');
   private wikidataByName = signal<Map<string, string[]>>(new Map());
 
   pulseNodeIds = computed(() => {
@@ -103,6 +104,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     if (to) {
       ids.add(to);
+    }
+    const placePreview = this.placeSearchPreviewId();
+    if (placePreview) {
+      ids.add(placePreview);
     }
     return ids;
   });
@@ -267,6 +272,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.selectedConnectionId.set(null);
     if (!nodeId) {
       this.selectedNodeId.set(null);
+      this.sidebarOpen.set(false);
       return;
     }
 
@@ -356,6 +362,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   closeSidebar(): void {
     this.sidebarOpen.set(false);
+    this.selectedNodeId.set(null);
   }
 
   onPlannerFocus(active: boolean): void {
@@ -384,16 +391,21 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.placeSearchBlurHandle = null;
     }
     this.placeSearchOpen.set(true);
+    this.syncPlaceSearchPreview();
   }
 
   onPlaceSearchBlur(): void {
-    this.placeSearchBlurHandle = setTimeout(() => this.placeSearchOpen.set(false), 120);
+    this.placeSearchBlurHandle = setTimeout(() => {
+      this.placeSearchOpen.set(false);
+      this.placeSearchPreviewId.set('');
+    }, 120);
   }
 
   onPlaceSearchInput(value: string): void {
     this.placeSearchQuery.set(value);
     this.placeSearchOpen.set(true);
     this.placeSearchActiveIndex.set(0);
+    this.syncPlaceSearchPreview();
   }
 
   onPlaceSearchKeydown(event: KeyboardEvent): void {
@@ -405,12 +417,14 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       event.preventDefault();
       this.placeSearchOpen.set(true);
       this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() + 1) % results.length);
+      this.syncPlaceSearchPreview();
       return;
     }
     if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.placeSearchOpen.set(true);
       this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() - 1 + results.length) % results.length);
+      this.syncPlaceSearchPreview();
       return;
     }
     if (event.key === 'Enter') {
@@ -423,6 +437,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     if (event.key === 'Escape') {
       this.placeSearchOpen.set(false);
+      this.placeSearchPreviewId.set('');
     }
   }
 
@@ -433,8 +448,14 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     this.placeSearchQuery.set(node.name);
     this.placeSearchOpen.set(false);
+    this.placeSearchPreviewId.set('');
     this.onNodeSelected(node.id);
     this.triggerPulse(node.id);
+  }
+
+  previewPlaceSearchResult(nodeId: string, index: number): void {
+    this.placeSearchActiveIndex.set(index);
+    this.placeSearchPreviewId.set(nodeId);
   }
 
   openRoutePlanner(): void {
@@ -710,6 +731,17 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       .replace(/[’']/g, '')
       .toLowerCase()
       .trim();
+  }
+
+  private syncPlaceSearchPreview(): void {
+    const results = this.placeSearchResults();
+    if (!results.length) {
+      this.placeSearchPreviewId.set('');
+      return;
+    }
+    const index = Math.max(0, Math.min(this.placeSearchActiveIndex(), results.length - 1));
+    this.placeSearchActiveIndex.set(index);
+    this.placeSearchPreviewId.set(results[index]?.id ?? '');
   }
 
   getNodeName(id: string): string {
