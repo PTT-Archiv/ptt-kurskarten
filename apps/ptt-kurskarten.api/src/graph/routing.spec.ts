@@ -78,6 +78,39 @@ describe('routing', () => {
     expect(result?.legs[0].arrivalDayOffset).toBe(1);
   });
 
+  it('normalizes bad overnight offsets instead of producing negative durations', () => {
+    const snapshot: GraphSnapshot = {
+      year: 1852,
+      nodes: [
+        { id: 'a', name: 'A', x: 0, y: 0, validFrom: 1800 },
+        { id: 'b', name: 'B', x: 0, y: 0, validFrom: 1800 }
+      ],
+      edges: [
+        {
+          id: 'a-b',
+          from: 'a',
+          to: 'b',
+          validFrom: 1800,
+          trips: [{ id: 'a-b-1', transport: 'postkutsche', departs: '21:40', arrives: '11:10', arrivalDayOffset: 0 }]
+        }
+      ]
+    };
+
+    const result = computeEarliestArrival(snapshot, {
+      year: 1852,
+      from: 'a',
+      to: 'b',
+      depart: '20:00',
+      minTransferMinutes: 0
+    });
+
+    expect(result).not.toBeNull();
+    expect(result?.durationMinutes).toBe(810);
+    expect(result?.legs[0].durationMinutes).toBe(810);
+    expect(result?.legs[0].arrivalDayOffset).toBe(1);
+    expect(result?.legs[0].arriveDayOffset).toBe(1);
+  });
+
   it('uses actual trip timetable when choosing the fastest path', () => {
     const snapshot: GraphSnapshot = {
       year: 1852,

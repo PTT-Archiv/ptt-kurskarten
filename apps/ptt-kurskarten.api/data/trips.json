@@ -688,22 +688,6 @@
     "transport": "postkutsche"
   },
   {
-    "id": "quick-trip-1771860161343",
-    "departs": "07:40",
-    "arrives": "09:10",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1771860444924",
-    "transport": "postkutsche"
-  },
-  {
-    "id": "quick-trip-1771860415202",
-    "departs": "21:40",
-    "arrives": "11:10",
-    "arrivalDayOffset": 0,
-    "edgeId": "edge-1771860444924",
-    "transport": "postkutsche"
-  },
-  {
     "id": "quick-trip-1771860444954",
     "departs": "07:40",
     "arrives": "08:45",
@@ -3054,5 +3038,21 @@
     "arrives": "16:05",
     "arrivalDayOffset": 0,
     "edgeId": "edge-1772020975985"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1771860161343",
+    "departs": "07:40",
+    "arrives": "09:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860444924"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1771860415202",
+    "departs": "21:40",
+    "arrives": "23:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860444924"
   }
 ]

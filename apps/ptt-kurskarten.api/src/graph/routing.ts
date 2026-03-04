@@ -66,6 +66,17 @@ export function formatTime(minutes: number): TimeHHMM {
   return `${hh}:${mm}` as TimeHHMM;
 }
 
+function resolveArrivalMinutes(dep: number, arrRaw: number, offset?: number): number {
+  let arr = arrRaw + (offset ?? 0) * DAY_MINUTES;
+  if (offset === undefined && arrRaw < dep) {
+    arr += DAY_MINUTES;
+  }
+  while (arr < dep) {
+    arr += DAY_MINUTES;
+  }
+  return arr;
+}
+
 function resolveTripTransport(trip: EdgeTrip | null | undefined): TransportType {
   return trip?.transport ?? 'postkutsche';
 }
@@ -102,7 +113,7 @@ export function computeTripChoice(
     const hasArrive = Boolean(trip.arrives);
     const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
     const offset = hasArrive ? trip.arrivalDayOffset : undefined;
-    const arr = offset !== undefined ? arrRaw + offset * DAY_MINUTES : arrRaw < dep ? arrRaw + DAY_MINUTES : arrRaw;
+    const arr = resolveArrivalMinutes(dep, arrRaw, offset);
 
     if (dep >= inDay && (chosen === null || dep < chosenDep)) {
       chosen = trip;
@@ -122,7 +133,7 @@ export function computeTripChoice(
       const hasArrive = Boolean(trip.arrives);
       const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
       const offset = hasArrive ? trip.arrivalDayOffset : undefined;
-      const arr = offset !== undefined ? arrRaw + offset * DAY_MINUTES : arrRaw < dep ? arrRaw + DAY_MINUTES : arrRaw;
+      const arr = resolveArrivalMinutes(dep, arrRaw, offset);
 
       if (chosen === null || dep < chosenDep) {
         chosen = trip;
@@ -262,6 +273,10 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
 
     const departDayOffset = Math.floor(info.departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
     const arriveDayOffset = Math.floor(info.arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
+    const legArrivalDayOffset = Math.max(
+      0,
+      Math.floor(info.arriveAbs / DAY_MINUTES) - Math.floor(info.departAbs / DAY_MINUTES)
+    );
 
     legs.push({
       edgeId: edge.id,
@@ -272,7 +287,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       departs: trip.departs,
       arrives: info.arriveKnown ? trip.arrives : undefined,
       notes: edge.notes,
-      arrivalDayOffset: info.arriveKnown ? trip.arrivalDayOffset : undefined,
+      arrivalDayOffset: info.arriveKnown ? (legArrivalDayOffset as 0 | 1 | 2) : undefined,
       departDayOffset: departDayOffset as 0 | 1 | 2,
       arriveDayOffset: info.arriveKnown ? (arriveDayOffset as 0 | 1 | 2) : undefined,
       departAbsMinutes: info.departAbs,

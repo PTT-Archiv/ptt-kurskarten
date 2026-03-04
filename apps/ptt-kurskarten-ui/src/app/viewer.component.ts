@@ -862,7 +862,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   private ensureLegDuration(leg: ConnectionLeg): ConnectionLeg {
-    if (leg.durationMinutes !== undefined) {
+    if (leg.durationMinutes !== undefined && leg.durationMinutes >= 0) {
       return leg;
     }
     if (!leg.departs || !leg.arrives) {
