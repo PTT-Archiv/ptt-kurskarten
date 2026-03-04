@@ -3,6 +3,7 @@
   <section class="map-stage">
     <app-map-stage [graph]="graph()" [nodeDetail]="null" [highlightedEdgeIds]="highlightedEdgeIds()"
       [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
+      [endpointNodeIds]="endpointNodeIds()"
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
       [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
@@ -372,18 +373,17 @@
   <section class="help-popup">
       <div class="help-header">
         <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
-        <button class="help-close" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
-          <fa-icon [icon]="circleXmarkIcon"></fa-icon>
-        </button>
       </div>
     <p>{{ 'viewer.helpText1' | transloco }}</p>
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
   </section>
+  <button class="route-close-btn help-toggle-btn" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
+    <fa-icon [icon]="xmarkIcon"></fa-icon>
+  </button>
   } @else {
-  <button class="help-fab" type="button" (click)="helpOpen.set(true)">
-    <fa-icon [icon]="circleInfoIcon"></fa-icon>
-    {{ 'viewer.helpOpen' | transloco }}
+  <button class="help-fab help-toggle-btn" type="button" (click)="helpOpen.set(true)" [attr.aria-label]="'viewer.helpOpen' | transloco">
+    <span aria-hidden="true">?</span>
   </button>
   }
 </main>

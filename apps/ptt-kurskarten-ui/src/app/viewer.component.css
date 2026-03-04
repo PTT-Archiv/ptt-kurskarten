@@ -436,66 +436,57 @@
 
 .help-popup {
   position: absolute;
-  left: 16px;
-  bottom: 16px;
-  width: min(360px, calc(100vw - 32px));
+  left: 30px;
+  right: auto;
+  bottom: 30px;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100% - 32px);
+  overflow: auto;
   background: #000000;
   border: 2px solid #ffffff;
   border-radius: 14px;
-  padding: 10px 12px;
+  padding: 18px 18px 60px;
   z-index: 7;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
   display: grid;
-  gap: 8px;
-}
-
-.help-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
 }
 
 .help-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
 }
 
 .help-popup p {
   margin: 0;
-  font-size: 12px;
-  line-height: 1.45;
-  color: #dfdfdf;
-}
-
-.help-close {
-  border: 2px solid #ffffff;
-  background: #141414;
-  color: #ffffff;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
   font-size: 16px;
-  line-height: 1;
-  display: grid;
-  place-items: center;
+  line-height: 1.35;
+  color: #f5f5f5;
 }
 
 .help-fab {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.help-toggle-btn {
   position: absolute;
   left: 16px;
+  right: auto;
   bottom: 16px;
-  z-index: 7;
+  width: 34px;
+  height: 34px;
   border: 2px solid #ffffff;
   background: #141414;
   color: #ffffff;
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 0;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 7;
 }
 
 .result-card:hover,
@@ -510,12 +501,17 @@
 .route-close-btn:focus-visible,
 .reset-view-btn:hover,
 .reset-view-btn:focus-visible,
-.help-close:hover,
-.help-close:focus-visible,
 .help-fab:hover,
 .help-fab:focus-visible {
   background: #ffffff;
   color: #141414;
+}
+
+.help-toggle-btn:hover,
+.help-toggle-btn:focus-visible {
+  background: #ffffff;
+  color: #141414;
+  border-color: #141414;
 }
 
 .result-card:hover .result-meta,
@@ -601,13 +597,18 @@
   }
 
   .help-popup {
-    width: calc(100vw - 24px);
     left: 12px;
+    right: auto;
     bottom: 12px;
+    width: calc(100vw - 24px);
+    max-height: calc(100% - 24px);
+    padding: 16px 16px 56px;
+    border-radius: 12px;
   }
 
-  .help-fab {
+  .help-toggle-btn {
     left: 12px;
+    right: auto;
     bottom: 12px;
   }
 }

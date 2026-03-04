@@ -6,7 +6,7 @@ import { MapStageComponent } from './map-stage.component';
 import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faCircleInfo, faCircleXmark, faFlag, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faFlag, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from './connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
@@ -145,8 +145,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   hoveredSnippetLoading = signal(false);
   readonly xmarkIcon = faXmark;
-  readonly circleXmarkIcon = faCircleXmark;
-  readonly circleInfoIcon = faCircleInfo;
   readonly startIcon = faFlag;
   readonly endIcon = faLocationDot;
   readonly searchIcon = faMagnifyingGlass;
@@ -608,6 +606,18 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   });
 
   routingActive = computed(() => this.routingState() === 'results' && this.selectedConnectionId() !== null);
+  endpointNodeIds = computed(() => {
+    const ids = new Set<string>();
+    const from = this.fromId();
+    const to = this.toId();
+    if (from) {
+      ids.add(from);
+    }
+    if (to) {
+      ids.add(to);
+    }
+    return ids.size > 0 ? ids : null;
+  });
 
   selectedWaitSegments = computed<WaitSegment[]>(() => {
     const selected = this.selectedConnection();

@@ -54,7 +54,7 @@
   "viewer.helpTitle": "Hilfe",
   "viewer.helpText1": "Dies ist eine interaktive Kurskarte von 1852.",
   "viewer.helpText2": "Sie können eine Route von einer Station zu einer anderen suchen und sehen, wie ein Brief zum Beispiel gereist wäre.",
-  "viewer.helpText3": "Sie können per Eingabe suchen oder direkt auf der Karte auswählen, indem Sie auf das + Symbol klicken.",
+  "viewer.helpText3": "Sie können per Eingabe suchen oder direkt auf der Karte auswählen.",
   "viewer.helpOpen": "Hilfe öffnen",
   "viewer.helpClose": "Hilfe schliessen",
   "viewer.zoomHint": "Scrollen zum Zoomen, ziehen zum Verschieben",

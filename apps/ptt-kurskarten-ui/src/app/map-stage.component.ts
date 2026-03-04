@@ -201,6 +201,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() nodeDetail: NodeDetail | null = null;
   @Input() highlightedEdgeIds: Set<string> | null = null;
   @Input() highlightedNodeIds: Set<string> | null = null;
+  @Input() endpointNodeIds: Set<string> | null = null;
   @Input() pulseNodeIds: Set<string> | null = null;
   @Input() pickMode: 'from' | 'to' | null = null;
   @Input() selectedConnection: ConnectionOption | null = null;
@@ -272,6 +273,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['graph'] ||
       changes['nodeDetail'] ||
       changes['pulseNodeIds'] ||
+      changes['endpointNodeIds'] ||
       changes['pickMode'] ||
       changes['selectedConnection'] ||
       changes['showConnectionDetailsOnMap'] ||
@@ -611,19 +613,30 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         (NODE_RADIUS + degree * NODE_RADIUS_STEP) * sizeScale
       );
       const isSelected = this.selectedNodeId === node.id;
+      const isEndpointPinned = this.endpointNodeIds?.has(node.id) ?? false;
       const isRouteEndpoint =
         this.selectedConnection !== null &&
         (node.id === this.selectedConnection.from || node.id === this.selectedConnection.to);
-      const isHighlighted = selectedFocusActive ? isSelected : nodeHighlights.has(node.id) || isSelected;
+      const isEndpoint = isEndpointPinned || isRouteEndpoint;
+      const isHighlighted = selectedFocusActive
+        ? isSelected || isEndpoint
+        : nodeHighlights.has(node.id) || isSelected || isEndpoint;
       const isHovered = this.hoveredNodeId === node.id;
-      const isDimmed = routingActive && !isHighlighted && !isHovered;
+      const isPulsing = pulseIds.has(node.id);
+      const isDimmed = routingActive && !isHighlighted && !isHovered && !isPulsing;
       const shouldEmphasize = isHighlighted || (!selectedFocusActive && isHovered);
       const radius = baseRadius + (shouldEmphasize ? 2 * sizeScale : 0);
       const showShadow = this.pickMode !== null;
-      const isSelectionMuted = selectedFocusActive && !isSelected;
-      const fillColor = isSelectionMuted ? NODE_COLOR_MUTED : node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
-      const strokeColor = isSelectionMuted ? NODE_COLOR_MUTED : '#ffffff';
-      const nodeAlpha = isDimmed || isSelectionMuted ? DIM_ALPHA : 1;
+      const isSelectionMuted = selectedFocusActive && !isSelected && !isPulsing && !isEndpoint;
+      const fillColor = isPulsing
+        ? NODE_COLOR_DEFAULT
+        : isSelectionMuted
+          ? NODE_COLOR_MUTED
+          : node.foreign
+            ? NODE_COLOR_FOREIGN
+            : NODE_COLOR_DEFAULT;
+      const strokeColor = isPulsing ? '#ffffff' : isSelectionMuted ? NODE_COLOR_MUTED : '#ffffff';
+      const nodeAlpha = isPulsing ? 1 : isDimmed || isSelectionMuted ? DIM_ALPHA : 1;
       if (showShadow) {
         ctx.save();
         ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
@@ -654,7 +667,23 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.stroke();
       ctx.restore();
 
-      if (isSelected || isHovered || isRouteEndpoint) {
+      if (isEndpoint) {
+        const ringRadius = radius + 6 * sizeScale;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, ringRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, ringRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2.25;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      if (isSelected || isHovered) {
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 4 * sizeScale, 0, Math.PI * 2);
         ctx.strokeStyle = '#ffffff';
@@ -662,7 +691,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.stroke();
       }
 
-      if (pulseIds.has(node.id)) {
+      if (isPulsing) {
         const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 8 * sizeScale + pulse * 4 * sizeScale, 0, Math.PI * 2);

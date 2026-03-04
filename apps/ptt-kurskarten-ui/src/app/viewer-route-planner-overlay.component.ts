@@ -697,6 +697,11 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   onFromBlur(): void {
     setTimeout(() => {
+      const resolved = this.resolveNodeFromQuery(this.fromQuery);
+      if (resolved && this.fromId !== resolved.id) {
+        this.fromQuery = resolved.name;
+        this.fromIdChange.emit(resolved.id);
+      }
       this.fromOpen = false;
       this.fromPreviewChange.emit('');
       if (this.activePickTarget === 'from') {
@@ -708,6 +713,11 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   onToBlur(): void {
     setTimeout(() => {
+      const resolved = this.resolveNodeFromQuery(this.toQuery);
+      if (resolved && this.toId !== resolved.id) {
+        this.toQuery = resolved.name;
+        this.toIdChange.emit(resolved.id);
+      }
       this.toOpen = false;
       this.toPreviewChange.emit('');
       if (this.activePickTarget === 'to') {
@@ -818,6 +828,22 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
       return null;
     }
     return this.nodes.find((node) => this.getSearchTerms(node).some((term) => term === v)) ?? null;
+  }
+
+  private resolveNodeFromQuery(query: string): { id: string; name: string } | null {
+    const exact = this.matchByName(query);
+    if (exact) {
+      return exact;
+    }
+    const q = this.normalizeSearch(query);
+    if (!q) {
+      return null;
+    }
+    const candidates = this.filterNodes(query);
+    if (candidates.length === 1) {
+      return candidates[0];
+    }
+    return null;
   }
 
   private getSearchTerms(node: { id: string; name: string }): string[] {
