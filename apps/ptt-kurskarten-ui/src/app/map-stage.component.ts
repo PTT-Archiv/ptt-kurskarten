@@ -585,7 +585,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       });
 
       const count = group.length;
-      const centerLaneIndex = Math.floor((count - 1) / 2);
       group.forEach((edge, index) => {
         const from = nodeMap.get(edge.from);
         const to = nodeMap.get(edge.to);
@@ -598,9 +597,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const isDimmed = routingActive && !isHighlighted;
         const isSelectionMuted = selectedFocusActive && !selectedFocusEdgeIds.has(edge.id);
         this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isDimmed, isSelectionMuted);
-        if (routingActive && isHighlighted && index === centerLaneIndex) {
-          this.drawEdgeChevrons(ctx, from, to, laneOffsetPx);
-        }
       });
     });
 
@@ -615,6 +611,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         (NODE_RADIUS + degree * NODE_RADIUS_STEP) * sizeScale
       );
       const isSelected = this.selectedNodeId === node.id;
+      const isRouteEndpoint =
+        this.selectedConnection !== null &&
+        (node.id === this.selectedConnection.from || node.id === this.selectedConnection.to);
       const isHighlighted = selectedFocusActive ? isSelected : nodeHighlights.has(node.id) || isSelected;
       const isHovered = this.hoveredNodeId === node.id;
       const isDimmed = routingActive && !isHighlighted && !isHovered;
@@ -655,7 +654,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.stroke();
       ctx.restore();
 
-      if (isSelected || isHovered) {
+      if (isSelected || isHovered || isRouteEndpoint) {
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 4 * sizeScale, 0, Math.PI * 2);
         ctx.strokeStyle = '#ffffff';
@@ -937,54 +936,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
-    ctx.restore();
-  }
-
-  private drawEdgeChevrons(ctx: CanvasRenderingContext2D, from: GraphNode, to: GraphNode, laneOffsetPx: number): void {
-    const fromPos = this.project(from);
-    const toPos = this.project(to);
-    const dx = toPos.x - fromPos.x;
-    const dy = toPos.y - fromPos.y;
-    const len = Math.hypot(dx, dy);
-    if (len < 30) {
-      return;
-    }
-
-    const ux = dx / len;
-    const uy = dy / len;
-    const px = -uy;
-    const py = ux;
-
-    const x1 = fromPos.x + px * laneOffsetPx;
-    const y1 = fromPos.y + py * laneOffsetPx;
-    const x2 = toPos.x + px * laneOffsetPx;
-    const y2 = toPos.y + py * laneOffsetPx;
-
-    const positions = len < 120 ? [0.6] : [0.5, 0.7];
-    const chevronSize = 5;
-    const chevronSpread = 3;
-
-    ctx.save();
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 1.5;
-
-    positions.forEach((t) => {
-      const cx = x1 + (x2 - x1) * t;
-      const cy = y1 + (y2 - y1) * t;
-      const tipX = cx + ux * 2;
-      const tipY = cy + uy * 2;
-      const leftX = tipX - ux * chevronSize + px * chevronSpread;
-      const leftY = tipY - uy * chevronSize + py * chevronSpread;
-      const rightX = tipX - ux * chevronSize - px * chevronSpread;
-      const rightY = tipY - uy * chevronSize - py * chevronSpread;
-
-      ctx.beginPath();
-      ctx.moveTo(leftX, leftY);
-      ctx.lineTo(tipX, tipY);
-      ctx.lineTo(rightX, rightY);
-      ctx.stroke();
-    });
-
     ctx.restore();
   }
 
