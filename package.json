@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "@types/openseadragon": "^5.0.2"
+  },
+  "overrides": {
+    "ajv@^8.0.0": "8.18.0"
   }
 }
