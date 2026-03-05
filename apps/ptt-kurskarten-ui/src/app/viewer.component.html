@@ -7,6 +7,7 @@
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
       [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
+      [routeFitTopInset]="routeFitTopInset()"
       [glowingEdgeId]="activeHoveredRouteEdgeId()"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
     @if (!graph()) {

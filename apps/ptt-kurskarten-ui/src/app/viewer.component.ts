@@ -634,6 +634,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   plannerAutoMinimize = computed(() => !this.sidebarOpen() && !this.plannerHovered() && !this.plannerFocused());
+  routeFitTopInset = computed(() => (this.routePlannerOpen() ? 260 : 90));
 
   selectedConnection = computed(() => {
     const id = this.selectedConnectionId();

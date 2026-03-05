@@ -227,6 +227,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() interactiveViewport = false;
   @Input() resetViewportToken = 0;
   @Input() glowingEdgeId: string | null = null;
+  @Input() routeFitTopInset = 0;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -297,6 +298,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['selectedNodeId'] ||
       changes['routingActive'] ||
       changes['glowingEdgeId'] ||
+      changes['routeFitTopInset'] ||
       changes['resetViewportToken']
     ) {
       if (changes['resetViewportToken'] && this.interactiveViewport) {
@@ -305,6 +307,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
       if (this.interactiveViewport && (changes['selectedConnection'] || changes['graph'])) {
         this.pendingRouteFit = this.selectedConnection !== null;
+      }
+      if (this.interactiveViewport && changes['routeFitTopInset'] && this.selectedConnection) {
+        this.pendingRouteFit = true;
       }
       this.scheduleRender();
     }
@@ -926,17 +931,24 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ROUTE_FIT_PADDING_MIN,
       Math.min(ROUTE_FIT_PADDING_MAX, Math.min(this.canvasSize.width, this.canvasSize.height) * 0.12)
     );
-    const availableWidth = Math.max(40, this.canvasSize.width - padding * 2);
-    const availableHeight = Math.max(40, this.canvasSize.height - padding * 2);
+    const clampedTopInset = Math.max(0, Math.min(this.routeFitTopInset, this.canvasSize.height * 0.45));
+    const leftPadding = padding;
+    const rightPadding = padding;
+    const topPadding = padding + clampedTopInset;
+    const bottomPadding = padding;
+    const availableWidth = Math.max(40, this.canvasSize.width - leftPadding - rightPadding);
+    const availableHeight = Math.max(40, this.canvasSize.height - topPadding - bottomPadding);
     const zoomX = availableWidth / boundsWidth;
     const zoomY = availableHeight / boundsHeight;
     const nextZoom = Math.max(MIN_VIEWPORT_ZOOM, Math.min(MAX_VIEWPORT_ZOOM, Math.min(zoomX, zoomY)));
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
+    const targetCenterX = leftPadding + availableWidth / 2;
+    const targetCenterY = topPadding + availableHeight / 2;
     this.viewportZoom = nextZoom;
     this.viewportPan = {
-      x: this.canvasSize.width / 2 - centerX * nextZoom,
-      y: this.canvasSize.height / 2 - centerY * nextZoom
+      x: targetCenterX - centerX * nextZoom,
+      y: targetCenterY - centerY * nextZoom
     };
     return true;
   }
@@ -1124,28 +1136,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const maxLabels = 12;
     const waitSegments = buildWaitSegments(connection);
 
-    const overnightStops = new Set(
-      waitSegments.filter((segment) => segment.overnight).map((segment) => segment.atNodeId)
-    );
-
-    if (overnightStops.size > 0) {
-      ctx.save();
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
-      overnightStops.forEach((nodeId) => {
-        const node = this.screenNodes.get(nodeId);
-        if (!node) {
-          return;
-        }
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, node.r + 6 * this.getSizeScale(), 0, Math.PI * 2);
-        ctx.stroke();
-      });
-      ctx.restore();
-    }
-
-    const overnightLabel = this.transloco.translate('label.overnight');
-
     const labels: Array<{
       text: string;
       anchor: { x: number; y: number };
@@ -1234,7 +1224,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         label.kind === 'wait'
           ? measureWaitLabel(ctx, label.text, label.overnightDelta)
           : measureLabel(ctx, label.text);
-      const position = placeLabel(placed, label.anchor.x, label.anchor.y, size.w, size.h);
+      const position = placeLabel(
+        placed,
+        label.anchor.x,
+        label.anchor.y,
+        size.w,
+        size.h,
+        label.kind === 'wait' ? 28 : 18
+      );
       if (!position) {
         continue;
       }
@@ -1350,6 +1347,12 @@ function drawWaitLabel(
   const iconSize = 12;
   const gap = 6;
   ctx.save();
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 1.2;
+  drawRoundedRect(ctx, x, y, w, h, 7);
+  ctx.fill();
+  ctx.stroke();
 
   const iconX = x + 8;
   const iconY = y + h / 2 - iconSize / 2;
@@ -1361,13 +1364,13 @@ function drawWaitLabel(
     ctx.save();
     ctx.translate(iconX, iconY);
     ctx.scale(scale, scale);
-    ctx.fillStyle = '#141414';
+    ctx.fillStyle = '#ffffff';
     ctx.fill(waitIconPath);
     ctx.restore();
   } else {
     // SSR-safe fallback: draw a simple clock
     ctx.save();
-    ctx.strokeStyle = '#141414';
+    ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 1.2;
     ctx.beginPath();
     ctx.arc(iconX + iconSize / 2, iconY + iconSize / 2, iconSize / 2, 0, Math.PI * 2);
@@ -1381,7 +1384,7 @@ function drawWaitLabel(
     ctx.restore();
   }
 
-  ctx.fillStyle = '#141414';
+  ctx.fillStyle = '#ffffff';
   let textX = x + 8 + iconSize + gap;
   ctx.fillText(text, textX, y + h / 2);
 
@@ -1397,7 +1400,7 @@ function drawWaitLabel(
       ctx.save();
       ctx.translate(overnightX, iconY);
       ctx.scale(scale, scale);
-      ctx.fillStyle = '#141414';
+      ctx.fillStyle = '#ffffff';
       ctx.fill(overnightIconPath);
       ctx.restore();
       ctx.fillText(suffix, overnightX + iconSize + gap, y + h / 2);
@@ -1438,17 +1441,19 @@ function placeLabel(
   anchorX: number,
   anchorY: number,
   w: number,
-  h: number
+  h: number,
+  baseDistance = 18
 ): { x: number; y: number } | null {
+  const d = baseDistance;
   const offsets = [
-    { x: 0, y: -18 },
-    { x: 18, y: 0 },
-    { x: 0, y: 18 },
-    { x: -18, y: 0 },
-    { x: 18, y: -18 },
-    { x: -18, y: -18 },
-    { x: 18, y: 18 },
-    { x: -18, y: 18 }
+    { x: 0, y: -d },
+    { x: d, y: 0 },
+    { x: 0, y: d },
+    { x: -d, y: 0 },
+    { x: d, y: -d },
+    { x: -d, y: -d },
+    { x: d, y: d },
+    { x: -d, y: d }
   ];
 
   for (const offset of offsets) {
