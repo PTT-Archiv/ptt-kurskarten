@@ -586,6 +586,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const highlightIds = this.getHighlightIds();
     const edgeHighlights = this.highlightedEdgeIds ?? highlightIds.edgeIds;
     const nodeHighlights = this.highlightedNodeIds ?? highlightIds.nodeIds;
+    const uncertainRouteEdgeIds = this.getUncertainRouteEdgeIds();
     const routingActive = this.routingActive;
     const selectedFocusActive = !routingActive && this.selectedNodeId !== null;
     const selectedFocusEdgeIds = this.getSelectedNodeEdgeIds(edges);
@@ -630,9 +631,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
         const isHighlighted = edgeHighlights.has(edge.id);
         const isGlowing = this.glowingEdgeId === edge.id;
+        const isDashed = isHighlighted && uncertainRouteEdgeIds.has(edge.id);
         const isDimmed = routingActive && !isHighlighted;
         const isSelectionMuted = selectedFocusActive && !selectedFocusEdgeIds.has(edge.id);
-        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isGlowing, isDimmed, isSelectionMuted);
+        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isGlowing, isDashed, isDimmed, isSelectionMuted);
       });
     });
 
@@ -1034,6 +1036,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     laneOffsetPx: number,
     isHighlighted: boolean,
     isGlowing: boolean,
+    isDashed: boolean,
     isDimmed: boolean,
     isSelectionMuted: boolean
   ): void {
@@ -1056,12 +1059,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const x2 = toPos.x + px * laneOffsetPx;
     const y2 = toPos.y + py * laneOffsetPx;
     this.screenEdges.set(edgeId, { x1, y1, x2, y2 });
+    const dashPattern = isDashed ? [10, 7] : [];
     if (isGlowing) {
       ctx.save();
       ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = EDGE_LINE_WIDTH_HIGHLIGHT + 5;
       ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
       ctx.shadowBlur = 14;
+      ctx.setLineDash(dashPattern);
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
@@ -1072,11 +1077,26 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     ctx.globalAlpha = isSelectionMuted ? DIM_ALPHA : 1;
     ctx.strokeStyle = isGlowing ? '#ffffff' : strokeStyle;
     ctx.lineWidth = isGlowing ? EDGE_LINE_WIDTH_HIGHLIGHT + 1 : isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
+    ctx.setLineDash(dashPattern);
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
     ctx.restore();
+  }
+
+  private getUncertainRouteEdgeIds(): Set<string> {
+    const ids = new Set<string>();
+    const selected = this.selectedConnection;
+    if (!selected) {
+      return ids;
+    }
+    selected.legs.forEach((leg) => {
+      if (leg.continuationOutsideDataset || leg.foreignStartPreface || !leg.departs || !leg.arrives) {
+        ids.add(leg.edgeId);
+      }
+    });
+    return ids;
   }
 
   private buildPointerPayload(event: PointerEvent): {
