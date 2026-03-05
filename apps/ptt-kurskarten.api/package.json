@@ -19,7 +19,7 @@
     "test:e2e": "vitest run --config ./vitest.e2e.config.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^11.0.1",
+    "@nestjs/common": "^11.1.16",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@ptt-kurskarten/shared": "0.0.1",
