@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowsLeftRight, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -23,6 +23,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           <div class="typeahead-input">
             <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(fromQuery)">
               <input
+                #fromInput
                 type="text"
                 [value]="fromQuery"
                 (input)="onFromInput($any($event.target).value)"
@@ -32,7 +33,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 placeholder=" "
               />
               @if (fromQuery) {
-                <button type="button" class="clear-btn" (mousedown)="clearFrom()">
+                <button type="button" class="clear-btn" (mousedown)="clearFrom($event)">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
@@ -62,6 +63,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           <div class="typeahead-input">
             <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(toQuery)">
               <input
+                #toInput
                 type="text"
                 [value]="toQuery"
                 (input)="onToInput($any($event.target).value)"
@@ -71,7 +73,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
                 placeholder=" "
               />
               @if (toQuery) {
-                <button type="button" class="clear-btn" (mousedown)="clearTo()">
+                <button type="button" class="clear-btn" (mousedown)="clearTo($event)">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
@@ -191,13 +193,16 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       }
 
       .planner-row:last-child {
-        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-columns: 240px auto;
+        justify-content: center;
       }
 
       .planner-actions {
         display: flex;
         gap: 8px;
         align-items: center;
+        flex-wrap: wrap;
+        row-gap: 8px;
       }
 
       .field {
@@ -241,7 +246,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       }
 
       .time-field {
-        justify-self: center;
+        justify-self: stretch;
         width: 240px;
         text-align: center;
       }
@@ -477,7 +482,7 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
     `
   ]
 })
-export class ViewerRoutePlannerOverlayComponent implements OnChanges {
+export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChanges {
   readonly xmarkIcon = faXmark;
   readonly swapIcon = faArrowsLeftRight;
 
@@ -490,6 +495,7 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
   @Input() showTime = false;
   @Input() canApplyTime = false;
   @Input() searching = false;
+  @Input() autoFocusFromToken = 0;
   @Output() fromIdChange = new EventEmitter<string>();
   @Output() toIdChange = new EventEmitter<string>();
   @Output() departTimeChange = new EventEmitter<TimeHHMM>();
@@ -504,6 +510,8 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   @ViewChildren('fromOption', { read: ElementRef }) fromOptions!: QueryList<ElementRef<HTMLElement>>;
   @ViewChildren('toOption', { read: ElementRef }) toOptions!: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild('fromInput', { read: ElementRef }) fromInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('toInput', { read: ElementRef }) toInput?: ElementRef<HTMLInputElement>;
 
   fromQuery = '';
   toQuery = '';
@@ -534,6 +542,12 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
 
   get minuteDisplayValue(): string {
     return this.editingMinute ? this.minuteDraft : this.minuteValue;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.autoFocusFromToken > 0) {
+      this.focusFromInput();
+    }
   }
 
   onHourFocus(): void {
@@ -617,6 +631,9 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
         this.minuteDraft = this.minuteValue;
       }
     }
+    if (changes['autoFocusFromToken'] && !changes['autoFocusFromToken'].firstChange) {
+      this.focusFromInput();
+    }
   }
 
   onFromInput(value: string): void {
@@ -665,16 +682,20 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     }
   }
 
-  clearFrom(): void {
+  clearFrom(event: MouseEvent): void {
+    event.preventDefault();
     this.fromQuery = '';
     this.fromIdChange.emit('');
     this.fromOpen = false;
+    this.focusFromInput();
   }
 
-  clearTo(): void {
+  clearTo(event: MouseEvent): void {
+    event.preventDefault();
     this.toQuery = '';
     this.toIdChange.emit('');
     this.toOpen = false;
+    this.focusToInput();
   }
 
   onFromFocus(): void {
@@ -933,5 +954,19 @@ export class ViewerRoutePlannerOverlayComponent implements OnChanges {
     const list = this.filteredTo();
     const node = list[this.toActiveIndex];
     this.toPreviewChange.emit(node?.id ?? '');
+  }
+
+  private focusFromInput(): void {
+    setTimeout(() => {
+      this.fromInput?.nativeElement.focus();
+      this.fromInput?.nativeElement.select();
+    }, 0);
+  }
+
+  private focusToInput(): void {
+    setTimeout(() => {
+      this.toInput?.nativeElement.focus();
+      this.toInput?.nativeElement.select();
+    }, 0);
   }
 }

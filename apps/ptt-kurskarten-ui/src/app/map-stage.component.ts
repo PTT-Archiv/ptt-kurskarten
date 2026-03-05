@@ -1385,12 +1385,17 @@ function boxesIntersect(
 }
 
 function formatDuration(totalMinutes: number): string {
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = Math.max(0, totalMinutes % 60);
+  const normalized = Math.max(0, totalMinutes);
+  const days = Math.floor(normalized / 1440);
+  const hours = Math.floor((normalized % 1440) / 60);
+  const minutes = normalized % 60;
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes.toString().padStart(2, '0')}m`;
+  }
   if (hours <= 0) {
     return `${minutes}m`;
   }
-  return `${hours}h ${minutes > 0 ? ` ${minutes}m` : ''}`;
+  return `${hours}h ${minutes.toString().padStart(2, '0')}m`;
 }
 
 function distanceToSegment(

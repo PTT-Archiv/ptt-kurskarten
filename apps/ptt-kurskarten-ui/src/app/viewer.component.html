@@ -49,7 +49,7 @@
         [nodeAliases]="nodeAliasesById()"
         [departTime]="draftDepartTime()" [showTime]="hasSearched()"
         [canApplyTime]="hasSearched() && draftDepartTime() !== departTime()"
-        [searching]="routingState() === 'searching'" [variant]="'compact'"
+        [searching]="routingState() === 'searching'" [variant]="'compact'" [autoFocusFromToken]="routePlannerFocusToken()"
         (fromIdChange)="onFromIdChange($event)" (toIdChange)="onToIdChange($event)"
         (fromPreviewChange)="onFromPreview($event)" (toPreviewChange)="onToPreview($event)"
         (pickTargetChange)="onRoutePlannerPickTargetChange($event)"

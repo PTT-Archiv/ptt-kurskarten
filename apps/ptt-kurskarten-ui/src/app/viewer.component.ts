@@ -96,6 +96,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   hoveredNodeId = signal<string | null>(null);
   hoveredNodeScreen = signal<{ x: number; y: number } | null>(null);
   routePlannerOpen = signal(false);
+  routePlannerFocusToken = signal(0);
   placeSearchQuery = signal('');
   placeSearchOpen = signal(false);
   placeSearchActiveIndex = signal(0);
@@ -402,6 +403,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   closeSidebar(): void {
+    if (this.routeResultsVisible()) {
+      this.resetSearch();
+      return;
+    }
     this.sidebarOpen.set(false);
     this.selectedNodeId.set(null);
   }
@@ -505,6 +510,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   openRoutePlanner(): void {
     this.routePlannerOpen.set(true);
+    this.routePlannerFocusToken.set(this.routePlannerFocusToken() + 1);
   }
 
   closeRoutePlanner(): void {
@@ -885,8 +891,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (totalMinutes === undefined) {
       return '—';
     }
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
+    const normalized = Math.max(0, totalMinutes);
+    const days = Math.floor(normalized / 1440);
+    const hours = Math.floor((normalized % 1440) / 60);
+    const minutes = normalized % 60;
+    if (days > 0) {
+      return `${days}d ${hours}h ${minutes.toString().padStart(2, '0')}m`;
+    }
     if (hours <= 0) {
       return `${minutes} min`;
     }
