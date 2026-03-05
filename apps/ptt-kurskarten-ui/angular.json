@@ -61,6 +61,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.static.ts"
+                },
+                {
+                  "replace": "src/app/app.routes.ts",
+                  "with": "src/app/app.routes.static.ts"
                 }
               ],
               "ssr": false,
@@ -71,22 +75,22 @@
                 {
                   "glob": "nodes.json",
                   "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data"
+                  "output": "assets/graph-data/v1"
                 },
                 {
                   "glob": "edges.json",
                   "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data"
+                  "output": "assets/graph-data/v1"
                 },
                 {
                   "glob": "segments.json",
                   "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data"
+                  "output": "assets/graph-data/v1"
                 },
                 {
                   "glob": "trips.json",
                   "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data"
+                  "output": "assets/graph-data/v1"
                 }
               ]
             }

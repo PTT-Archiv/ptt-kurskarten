@@ -3,6 +3,7 @@ export const environment = {
   readonlyViewer: true,
   useStaticGraphData: true,
   apiBaseUrl: '/api/v1',
-  staticGraphDataPath: 'assets/graph-data',
+  // Bump this folder version when publishing a new data snapshot.
+  staticGraphDataPath: 'assets/graph-data/v1',
   staticWikidataPath: 'assets/wikidata.json'
 };
