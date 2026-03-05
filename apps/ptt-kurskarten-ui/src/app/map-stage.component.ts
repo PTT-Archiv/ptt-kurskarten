@@ -32,6 +32,8 @@ const EDGE_LINE_WIDTH = 1;
 const EDGE_LINE_WIDTH_HIGHLIGHT = 2;
 const EDGE_LANE_SPACING = 6;
 const DIM_ALPHA = 0.3;
+const ROUTE_FIT_PADDING_MIN = 28;
+const ROUTE_FIT_PADDING_MAX = 84;
 const NODE_COLOR_DEFAULT = '#ffffff';
 const NODE_COLOR_FOREIGN = '#ffffff';
 const NODE_COLOR_MUTED = '#9a9a9a';
@@ -224,6 +226,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() showBorder = true;
   @Input() interactiveViewport = false;
   @Input() resetViewportToken = 0;
+  @Input() glowingEdgeId: string | null = null;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -266,6 +269,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private langSub?: Subscription;
   private hoveredNodeId: string | null = null;
   private stageHover = false;
+  private pendingRouteFit = false;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -292,10 +296,15 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['showConnectionDetailsOnMap'] ||
       changes['selectedNodeId'] ||
       changes['routingActive'] ||
+      changes['glowingEdgeId'] ||
       changes['resetViewportToken']
     ) {
       if (changes['resetViewportToken'] && this.interactiveViewport) {
         this.resetViewport();
+        this.pendingRouteFit = false;
+      }
+      if (this.interactiveViewport && (changes['selectedConnection'] || changes['graph'])) {
+        this.pendingRouteFit = this.selectedConnection !== null;
       }
       this.scheduleRender();
     }
@@ -509,6 +518,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
     this.canvasSize = { width, height };
+    if (this.interactiveViewport && this.selectedConnection) {
+      this.pendingRouteFit = true;
+    }
     this.scheduleRender();
   }
 
@@ -556,6 +568,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     const { nodes, edges } = graph;
     this.fitTransform = computeTransform(width, height, DEFAULT_VIEWBOX);
+    if (this.pendingRouteFit && this.interactiveViewport && this.pickMode === null && this.selectedConnection) {
+      this.pendingRouteFit = !this.fitViewportToConnection(this.selectedConnection, nodes);
+    }
     this.transform = {
       scale: this.fitTransform.scale * this.viewportZoom,
       offsetX: this.fitTransform.offsetX * this.viewportZoom + this.viewportPan.x,
@@ -609,9 +624,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const laneIndex = index - (count - 1) / 2;
         const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
         const isHighlighted = edgeHighlights.has(edge.id);
+        const isGlowing = this.glowingEdgeId === edge.id;
         const isDimmed = routingActive && !isHighlighted;
         const isSelectionMuted = selectedFocusActive && !selectedFocusEdgeIds.has(edge.id);
-        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isDimmed, isSelectionMuted);
+        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isGlowing, isDimmed, isSelectionMuted);
       });
     });
 
@@ -868,6 +884,63 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.scheduleRender();
   }
 
+  private fitViewportToConnection(connection: ConnectionOption, nodes: GraphNode[]): boolean {
+    if (!nodes.length || this.canvasSize.width <= 1 || this.canvasSize.height <= 1) {
+      return false;
+    }
+
+    const nodeById = new Map(nodes.map((node) => [node.id, node]));
+    const routeNodeIds = new Set<string>([connection.from, connection.to]);
+    connection.legs.forEach((leg) => {
+      routeNodeIds.add(leg.from);
+      routeNodeIds.add(leg.to);
+    });
+
+    const routeNodes: GraphNode[] = [];
+    routeNodeIds.forEach((nodeId) => {
+      const node = nodeById.get(nodeId);
+      if (node) {
+        routeNodes.push(node);
+      }
+    });
+    if (!routeNodes.length) {
+      return false;
+    }
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    routeNodes.forEach((node) => {
+      const x = node.x * this.fitTransform.scale + this.fitTransform.offsetX;
+      const y = node.y * this.fitTransform.scale + this.fitTransform.offsetY;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    });
+
+    const boundsWidth = Math.max(1, maxX - minX);
+    const boundsHeight = Math.max(1, maxY - minY);
+    const padding = Math.max(
+      ROUTE_FIT_PADDING_MIN,
+      Math.min(ROUTE_FIT_PADDING_MAX, Math.min(this.canvasSize.width, this.canvasSize.height) * 0.12)
+    );
+    const availableWidth = Math.max(40, this.canvasSize.width - padding * 2);
+    const availableHeight = Math.max(40, this.canvasSize.height - padding * 2);
+    const zoomX = availableWidth / boundsWidth;
+    const zoomY = availableHeight / boundsHeight;
+    const nextZoom = Math.max(MIN_VIEWPORT_ZOOM, Math.min(MAX_VIEWPORT_ZOOM, Math.min(zoomX, zoomY)));
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    this.viewportZoom = nextZoom;
+    this.viewportPan = {
+      x: this.canvasSize.width / 2 - centerX * nextZoom,
+      y: this.canvasSize.height / 2 - centerY * nextZoom
+    };
+    return true;
+  }
+
   private getHighlightIds(): { nodeIds: Set<string>; edgeIds: Set<string> } {
     const nodeIds = new Set<string>();
     const edgeIds = new Set<string>();
@@ -948,6 +1021,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     to: GraphNode,
     laneOffsetPx: number,
     isHighlighted: boolean,
+    isGlowing: boolean,
     isDimmed: boolean,
     isSelectionMuted: boolean
   ): void {
@@ -970,10 +1044,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const x2 = toPos.x + px * laneOffsetPx;
     const y2 = toPos.y + py * laneOffsetPx;
     this.screenEdges.set(edgeId, { x1, y1, x2, y2 });
+    if (isGlowing) {
+      ctx.save();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = EDGE_LINE_WIDTH_HIGHLIGHT + 5;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
+      ctx.shadowBlur = 14;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.restore();
+    }
     ctx.save();
     ctx.globalAlpha = isSelectionMuted ? DIM_ALPHA : 1;
-    ctx.strokeStyle = strokeStyle;
-    ctx.lineWidth = isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
+    ctx.strokeStyle = isGlowing ? '#ffffff' : strokeStyle;
+    ctx.lineWidth = isGlowing ? EDGE_LINE_WIDTH_HIGHLIGHT + 1 : isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);

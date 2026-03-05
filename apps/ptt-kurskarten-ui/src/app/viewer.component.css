@@ -216,6 +216,14 @@
   color: #cfcfcf;
 }
 
+.detail-row:is(:hover,.is-hovered) {
+  background: #ffffff;
+}
+
+.detail-row:is(:hover,.is-hovered) * {
+  color: #141414;
+}
+
 .detail-subtitle {
   font-size: 14px;
   color: #cfcfcf;

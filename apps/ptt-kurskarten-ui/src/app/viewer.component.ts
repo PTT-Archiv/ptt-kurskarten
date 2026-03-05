@@ -102,6 +102,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchActiveIndex = signal(0);
   private placeSearchPreviewId = signal<string>('');
   private wikidataByName = signal<Map<string, string[]>>(new Map());
+  hoveredRouteEdgeId = signal<string | null>(null);
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -536,10 +537,24 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (payload.type === 'move') {
       this.hoveredNodeId.set(payload.hitNodeId);
       this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
+      const hitEdgeId = payload.hitEdgeId;
+      if (hitEdgeId && this.selectedRouteEdgeIds().has(hitEdgeId)) {
+        this.hoveredRouteEdgeId.set(hitEdgeId);
+      } else {
+        this.hoveredRouteEdgeId.set(null);
+      }
     }
     if (payload.type === 'up' && !payload.hitNodeId) {
       this.pendingMapPickTarget = null;
     }
+  }
+
+  onRouteLegHover(edgeId: string | null): void {
+    if (edgeId && this.selectedRouteEdgeIds().has(edgeId)) {
+      this.hoveredRouteEdgeId.set(edgeId);
+      return;
+    }
+    this.hoveredRouteEdgeId.set(null);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -602,6 +617,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.lastSearchParams.set(null);
     this.lastResultParams.set(null);
     this.selectedNodeId.set(null);
+    this.hoveredRouteEdgeId.set(null);
     this.sidebarOpen.set(false);
   }
 
@@ -647,6 +663,22 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return [];
     }
     return buildWaitSegments(selected);
+  });
+
+  selectedRouteEdgeIds = computed(() => {
+    const selected = this.selectedConnection();
+    if (!selected) {
+      return new Set<string>();
+    }
+    return new Set(selected.legs.map((leg) => leg.edgeId));
+  });
+
+  activeHoveredRouteEdgeId = computed(() => {
+    const edgeId = this.hoveredRouteEdgeId();
+    if (!edgeId || !this.selectedRouteEdgeIds().has(edgeId)) {
+      return null;
+    }
+    return edgeId;
   });
 
   outgoingNodeTrips = computed<SidebarNodeTrip[]>(() => {
@@ -706,7 +738,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   highlightedEdgeIds = computed(() => {
     const selected = this.selectedConnection();
     if (selected) {
-      return new Set(selected.legs.map((leg) => leg.edgeId));
+      const ids = new Set(selected.legs.map((leg) => leg.edgeId));
+      const hovered = this.hoveredRouteEdgeId();
+      if (hovered) {
+        ids.add(hovered);
+      }
+      return ids;
     }
     const nodeId = this.selectedNodeId();
     const snapshot = this.graph();

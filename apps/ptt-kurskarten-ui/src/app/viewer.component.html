@@ -7,6 +7,7 @@
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
       [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
+      [glowingEdgeId]="activeHoveredRouteEdgeId()"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
@@ -293,7 +294,12 @@
       <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
       }
       @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
-      <div class="detail-row">
+      <div
+        class="detail-row"
+        [class.is-hovered]="activeHoveredRouteEdgeId() === leg.edgeId"
+        (mouseenter)="onRouteLegHover(leg.edgeId)"
+        (mouseleave)="onRouteLegHover(null)"
+      >
         @if (leg.continuationOutsideDataset) {
         
         } @else {
