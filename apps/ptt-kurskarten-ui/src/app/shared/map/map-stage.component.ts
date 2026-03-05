@@ -16,7 +16,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import type { ConnectionOption, GraphNode, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
 import { computeTransform, DEFAULT_VIEWBOX, screenToWorld, worldToScreen } from './map-coordinates';
-import { buildWaitSegments, getLegAbsTime } from './connection-details.util';
+import { buildWaitSegments, getLegAbsTime } from '../routing/connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { BorderUncertaintyLayerComponent } from './border-uncertainty-layer.component';

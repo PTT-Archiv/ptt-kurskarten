@@ -3,15 +3,15 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
-import { MapStageComponent } from './map-stage.component';
-import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
+import { MapStageComponent } from '../../shared/map/map-stage.component';
+import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFlag, faGear, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { buildWaitSegments, type WaitSegment } from './connection-details.util';
+import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
-import { environment } from '../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
 import {
   ARCHIVE_DEFAULT_REGION,
@@ -19,7 +19,7 @@ import {
   buildArchiveSnippetUrlFromRegion,
   computeArchiveTransform,
   type ArchiveTransform
-} from './archive-snippet.util';
+} from '../../shared/archive/archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
 type SidebarNodeTrip = {

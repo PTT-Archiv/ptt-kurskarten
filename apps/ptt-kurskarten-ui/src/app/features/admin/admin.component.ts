@@ -10,23 +10,23 @@ import type {
   NodeDetail,
   TransportType
 } from '@ptt-kurskarten/shared';
-import { MapStageComponent } from './map-stage.component';
+import { MapStageComponent } from '../../shared/map/map-stage.component';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowsLeftRight, faMinus, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { ToastService } from './shared/toast/toast.service';
+import { ToastService } from '../../shared/toast/toast.service';
 import { AdminSelectionState } from './admin-selection.service';
 import { ADMIN_GRAPH_REPOSITORY, type AdminGraphRepository } from './admin-graph.repository';
 import { TourService } from './tour.service';
 import { TourOverlayComponent } from './tour-overlay.component';
 import { ADMIN_TUTORIAL_STEPS } from './admin-tutorial.steps';
-import { ArchiveSnippetViewerComponent } from './archive-snippet-viewer.component';
+import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import {
   ARCHIVE_DEFAULT_REGION,
   buildArchiveSnippetUrlForNode,
   buildArchiveSnippetUrlFromRegion,
   computeArchiveTransform
-} from './archive-snippet.util';
+} from '../../shared/archive/archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
 const UNDO_LIMIT = 20;

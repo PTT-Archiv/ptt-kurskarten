@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import type { ConnectionOption, EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
 import { Observable, forkJoin, map, shareReplay } from 'rxjs';
 import { computeConnections } from './routing-client';
-import { environment } from '../environments/environment';
+import { environment } from '../../../environments/environment';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: number | null };
 type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'leuge'> & { validTo: number | null };

@@ -1,28 +1,38 @@
 import { Routes } from '@angular/router';
-import { AdminComponent } from './admin.component';
-import { ConnectionsComponent } from './connections.component';
-import { ReportsComponent } from './reports.component';
-import { ViewerComponent } from './viewer.component';
-import { ADMIN_GRAPH_REPOSITORY, DemoGraphRepository, HttpGraphRepository } from './admin-graph.repository';
+import { ADMIN_GRAPH_REPOSITORY, DemoGraphRepository, HttpGraphRepository } from './features/admin/admin-graph.repository';
 import { environment } from '../environments/environment';
 
 const fullRoutes: Routes = [
-  { path: '', component: ViewerComponent },
-  { path: 'connections', component: ConnectionsComponent },
-  { path: 'reports', component: ReportsComponent },
+  {
+    path: '',
+    loadComponent: () => import('./features/viewer/viewer.component').then((m) => m.ViewerComponent)
+  },
+  {
+    path: 'connections',
+    loadComponent: () => import('./features/connections/connections.component').then((m) => m.ConnectionsComponent)
+  },
+  {
+    path: 'reports',
+    loadComponent: () => import('./features/reports/reports.component').then((m) => m.ReportsComponent)
+  },
   {
     path: 'admin/tutorial',
-    component: AdminComponent,
+    loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent),
     providers: [{ provide: ADMIN_GRAPH_REPOSITORY, useClass: DemoGraphRepository }]
   },
   {
     path: 'admin',
-    component: AdminComponent,
+    loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent),
     providers: [{ provide: ADMIN_GRAPH_REPOSITORY, useClass: HttpGraphRepository }]
   }
 ];
 
-const readonlyRoutes: Routes = [{ path: '', component: ViewerComponent }];
+const readonlyRoutes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./features/viewer/viewer.component').then((m) => m.ViewerComponent)
+  }
+];
 
 export const routes: Routes = [
   ...(environment.readonlyViewer ? readonlyRoutes : fullRoutes),
