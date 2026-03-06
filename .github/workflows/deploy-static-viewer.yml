@@ -1,0 +1,108 @@
+name: Deploy Static Viewer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compute base href
+        id: base
+        run: |
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [ "$REPO" = "${OWNER}.github.io" ]; then
+            BASE_HREF="/"
+          else
+            BASE_HREF="/${REPO}/"
+          fi
+          echo "value=$BASE_HREF" >> "$GITHUB_OUTPUT"
+
+      - name: Build shared package
+        run: npm run build --workspace @ptt-kurskarten/shared
+
+      - name: Build static viewer
+        run: npm run build:static --workspace ptt-kurskarten-ui -- --base-href "${{ steps.base.outputs.value }}" --delete-output-path=true
+
+      - name: Verify static-only output
+        run: |
+          DIST_ROOT="apps/ptt-kurskarten-ui/dist/ptt-kurskarten-ui"
+          SITE_DIR="$DIST_ROOT/browser"
+          if [ ! -f "$SITE_DIR/index.html" ]; then
+            SITE_DIR="$DIST_ROOT"
+          fi
+
+          # Static viewer must not publish lazy chunks for admin/reporting tooling.
+          if find "$SITE_DIR" -maxdepth 1 -type f | grep -Eq '/(chunk-.*(admin|reports|connections)-component|admin|reports|connections).*\.js$'; then
+            echo "Unexpected admin/report/connections chunk in static output."
+            find "$SITE_DIR" -maxdepth 1 -type f | sort
+            exit 1
+          fi
+
+          # Static viewer must not ship direct API endpoint strings.
+          if grep -R -nE "/api/v1/(nodes|edges|report|connections|graph|years)" --include="*.js" "$SITE_DIR"; then
+            echo "Unexpected API endpoint references found in static output."
+            exit 1
+          fi
+
+          # Ensure versioned graph data files are present in the final artifact.
+          test -f "$SITE_DIR/assets/graph-data/v1/nodes.json"
+          test -f "$SITE_DIR/assets/graph-data/v1/edges.json"
+          test -f "$SITE_DIR/assets/graph-data/v1/segments.json"
+          test -f "$SITE_DIR/assets/graph-data/v1/trips.json"
+
+      - name: Prepare Pages artifact
+        id: artifact
+        run: |
+          DIST_ROOT="apps/ptt-kurskarten-ui/dist/ptt-kurskarten-ui"
+          SITE_DIR="$DIST_ROOT/browser"
+          if [ ! -f "$SITE_DIR/index.html" ]; then
+            SITE_DIR="$DIST_ROOT"
+          fi
+          cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+          echo "site_dir=$SITE_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.artifact.outputs.site_dir }}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

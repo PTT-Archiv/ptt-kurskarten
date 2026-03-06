@@ -1,0 +1,434 @@
+<main class="viewer-shell planner-minimized" [class.sidebar-open]="sidebarOpen()" [class.map-settled]="mapSettled()"
+  [class.pick-mode]="pickTarget()">
+  <section class="map-stage">
+    <app-map-stage [graph]="graph()" [nodeDetail]="null" [highlightedEdgeIds]="highlightedEdgeIds()"
+      [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
+      [endpointNodeIds]="endpointNodeIds()"
+      [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
+      [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
+      [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
+      [routeFitTopInset]="routeFitTopInset()"
+      [glowingEdgeId]="activeHoveredRouteEdgeId()"
+      (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
+    @if (!graph()) {
+    <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
+    }
+    <div class="planner-overlay">
+      @if (!routePlannerOpen()) {
+      <div class="place-search-shell">
+        <fa-icon [icon]="searchIcon"></fa-icon>
+        <input
+          type="text"
+          [value]="placeSearchQuery()"
+          [placeholder]="'viewer.searchPlacePlaceholder' | transloco"
+          (focus)="onPlaceSearchFocus()"
+          (blur)="onPlaceSearchBlur()"
+          (input)="onPlaceSearchInput($any($event.target).value)"
+          (keydown)="onPlaceSearchKeydown($event)"
+        />
+        <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
+          <fa-icon [icon]="routeIcon"></fa-icon>
+        </button>
+        @if (placeSearchOpen() && placeSearchResults().length > 0) {
+        <div class="place-search-list">
+          @for (node of placeSearchResults(); track node.id; let i = $index) {
+          <button
+            type="button"
+            [class.active]="i === placeSearchActiveIndex()"
+            (mouseenter)="previewPlaceSearchResult(node.id, i)"
+            (focus)="previewPlaceSearchResult(node.id, i)"
+            (mousedown)="selectPlaceResult(node.id)"
+          >
+            {{ node.name }}
+          </button>
+          }
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="route-planner-shell">
+      <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
+        [nodeAliases]="nodeAliasesById()"
+        [departTime]="draftDepartTime()" [showTime]="hasSearched()"
+        [canApplyTime]="hasSearched() && draftDepartTime() !== departTime()"
+        [searching]="routingState() === 'searching'" [variant]="'compact'" [autoFocusFromToken]="routePlannerFocusToken()"
+        (fromIdChange)="onFromIdChange($event)" (toIdChange)="onToIdChange($event)"
+        (fromPreviewChange)="onFromPreview($event)" (toPreviewChange)="onToPreview($event)"
+        (pickTargetChange)="onRoutePlannerPickTargetChange($event)"
+        (departTimeChange)="onDepartTimeDraftChange($event)"
+        (applyTime)="applyDepartTime()"
+        (resetSearch)="resetSearch()"
+        (swap)="swapConnections()" (plannerFocus)="onPlannerFocus($event)"
+        (plannerHover)="onPlannerHover($event)"></app-viewer-route-planner-overlay>
+        <button class="route-close-btn" type="button" (click)="closeRoutePlanner()" aria-label="Routenplaner schließen">
+          <fa-icon [icon]="xmarkIcon"></fa-icon>
+        </button>
+      </div>
+      @if (routingState() === 'searching') {
+      <div class="planner-status">
+        <div class="status-card">
+          <span class="spinner" aria-hidden="true"></span>
+          <span>{{ 'viewer.searching' | transloco }}</span>
+        </div>
+      </div>
+      } @else if (routingState() === 'no_results') {
+      <div class="planner-status">
+        <div class="status-card">{{ getNoResultsMessage() }}</div>
+      </div>
+      }
+      }
+    </div>
+    @if (pickTarget()) {
+    <div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
+      <div class="status-card" style="font-weight: 600;">{{ getPickModeLabel() }}</div>
+    </div>
+    }
+    <button class="reset-view-btn" type="button" (click)="resetMapView()">
+      {{ 'viewer.resetView' | transloco }}
+    </button>
+  </section>
+
+  <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">
+    <div class="sidebar-header">
+      <div class="section-title">
+        @if (routeResultsVisible()) {
+          {{ routeSidebarTitle() }}
+        } @else {
+          {{ sidebarPlaceNode()?.name ?? ('viewer.details' | transloco) }}
+        }
+      </div>
+      <button class="ghost-btn" type="button" (click)="closeSidebar()" [attr.aria-label]="'btn.cancel' | transloco">
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+      </button>
+    </div>
+
+    @if (routeResultsVisible()) {
+    <section class="panel-section results-panel">
+      <div class="section-title">{{ 'viewer.results' | transloco }}</div>
+      @if (routingState() === 'searching') {
+      <div class="muted">{{ 'viewer.searching' | transloco }}</div>
+      } @else if (routingState() === 'error') {
+      <div class="muted">{{ 'viewer.error' | transloco }}</div>
+      } @else if (connectionResults().length > 0) {
+      <div class="result-list">
+        @for (option of connectionResults(); track option.id) {
+        <button class="result-card" [class.active]="selectedConnectionId() === option.id"
+          (click)="selectConnection(option)">
+          @if (option.kind === 'COMPLETE_PREFIX') {
+          <div class="result-time">
+            Reise bis {{ getNodeLabel(option.resolvedTo ?? option.to) }} (Datensatz-Ende)
+          </div>
+          <div class="result-meta badge">
+            Weiterreise ins Ausland: Zeiten unvollständig
+          </div>
+          <div class="result-meta">
+            @if (option.departs) {
+            {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+            @if (option.departDayOffset && option.departDayOffset > 0) {
+            <span>(+{{ option.departDayOffset }})</span>
+            }
+            }
+            @if (option.arrives) {
+            · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+            @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+            <span>(+{{ option.arriveDayOffset }})</span>
+            }
+            }
+            @if (option.durationMinutes !== undefined) {
+            · {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
+            }
+          </div>
+      } @else if (option.kind === 'FOREIGN_START_FALLBACK') {
+      <div class="result-time">
+        {{ getNodeLabel(option.requestedFrom ?? option.from) }} → {{ getNodeLabel(option.to) }}
+      </div>
+      <div class="result-meta badge">
+        @if (option.foreignStartNote) {
+          {{ 'viewer.knownFrom' | transloco }} {{ getNodeLabel(option.effectiveFrom ?? '') }}
+          {{ option.effectiveStartTime }}
+        } @else {
+          {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(option.effectiveFrom ?? '') }}
+          {{ option.effectiveStartTime }}
+        }
+      </div>
+      <div class="result-meta">
+        @if (option.foreignStartNote) {
+          ({{ 'viewer.unknownStartTime' | transloco }})
+        } @else {
+          {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(option.requestedFrom ?? option.from), time: option.departs } }}
+        }
+      </div>
+      } @else {
+          <div class="result-time">
+            {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+            @if (option.departDayOffset && option.departDayOffset > 0) {
+            <span>(+{{ option.departDayOffset }})</span>
+            }
+            · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+            @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+            <span>(+{{ option.arriveDayOffset }})</span>
+            }
+          </div>
+          <div class="result-meta">
+            {{ 'viewer.duration' | transloco: { duration: formatDuration(option.durationMinutes) } }}
+            ·
+            @if ((option.transfers ?? option.legs.length - 1) === 0) {
+            {{ 'viewer.direct' | transloco }}
+            } @else if ((option.transfers ?? option.legs.length - 1) === 1) {
+            {{ 'viewer.oneTransfer' | transloco }}
+            } @else {
+            {{ 'viewer.manyTransfers' | transloco: { count: option.transfers ?? option.legs.length - 1 } }}
+            }
+          </div>
+          }
+        </button>
+        }
+      </div>
+      } @else {
+      <div class="muted">{{ getNoResultsMessage() }}</div>
+      @if (routingState() === 'no_results') {
+      <div class="quick-actions">
+        <button type="button" class="ghost-btn" (click)="shiftTime(-30)">-30 min</button>
+        <button type="button" class="ghost-btn" (click)="shiftTime(30)">+30 min</button>
+      </div>
+      }
+      }
+    </section>
+    } @else {
+    <section class="panel-section location-section">
+      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
+      @if (sidebarPlaceNode(); as place) {
+      <div class="location-actions">
+        <button class="icon-action-btn" type="button" (click)="setNodeAsStart(place.id)"
+          [attr.aria-label]="'viewer.setAsStart' | transloco">
+          <fa-icon [icon]="startIcon"></fa-icon>
+          <span>{{ 'viewer.setAsStart' | transloco }}</span>
+        </button>
+        <button class="icon-action-btn" type="button" (click)="setNodeAsEnd(place.id)"
+          [attr.aria-label]="'viewer.setAsEnd' | transloco">
+          <fa-icon [icon]="endIcon"></fa-icon>
+          <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+        </button>
+      </div>
+      }
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Ausgehende Verbindungen</div>
+      @if (outgoingNodeTrips().length > 0) {
+      <div class="node-trip-list">
+        @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
+          <div class="node-trip-head">{{ trip.nodeName }}</div>
+          <div class="node-trip-time">
+            @if (trip.departs) {
+            {{ trip.departs }} →
+            }
+            {{ trip.arrives }}
+            @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+            <span>(+{{ trip.arrivalDayOffset }})</span>
+            }
+          </div>
+          <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="muted">Keine ausgehenden Verbindungen</div>
+      }
+    </section>
+
+    <section class="panel-section">
+      <div class="section-title">Eingehende Verbindungen</div>
+      @if (incomingNodeTrips().length > 0) {
+      <div class="node-trip-list">
+        @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
+          <div class="node-trip-head">{{ trip.nodeName }}</div>
+          <div class="node-trip-time">
+            @if (trip.departs) {
+            {{ trip.departs }} →
+            }
+            {{ trip.arrives }}
+            @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+            <span>(+{{ trip.arrivalDayOffset }})</span>
+            }
+          </div>
+          <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="muted">Keine eingehenden Verbindungen</div>
+      }
+    </section>
+    }
+
+    @if (selectedConnection(); as selected) {
+    <section class="panel-section detail-panel">
+      <div class="section-title">{{ 'viewer.routeDetails' | transloco }}</div>
+      @if (selected.kind === 'COMPLETE_PREFIX') {
+      <div class="detail-subtitle">
+        Reise bis {{ getNodeLabel(selected.resolvedTo ?? selected.to) }} (Datensatz-Ende)
+      </div>
+      <div class="detail-badge">Weiterreise ins Ausland: Zeiten unvollständig</div>
+      } @else if (selected.kind === 'FOREIGN_START_FALLBACK') {
+      <div class="detail-subtitle">
+        {{ getNodeLabel(selected.requestedFrom ?? selected.from) }} → {{ getNodeLabel(selected.to) }}
+      </div>
+      <div class="detail-badge">
+        @if (selected.foreignStartNote) {
+          {{ 'viewer.knownFrom' | transloco }} {{ getNodeLabel(selected.effectiveFrom ?? '') }}
+          {{ selected.effectiveStartTime }}
+        } @else {
+          {{ 'viewer.startInDataset' | transloco }}: {{ getNodeLabel(selected.effectiveFrom ?? '') }}
+          {{ selected.effectiveStartTime }}
+        }
+      </div>  
+      <div class="detail-line">
+        @if (selected.foreignStartNote) {
+        } @else {
+          {{ 'viewer.departFrom' | transloco: { node: getNodeLabel(selected.requestedFrom ?? selected.from), time: selected.departs } }}
+        }
+      </div>
+      } @else {
+      <div class="detail-subtitle">{{ getNodeName(selected.from) }} → {{ getNodeName(selected.to) }}</div>
+      }
+      @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
+      <div
+        class="detail-row"
+        [class.is-hovered]="activeHoveredRouteEdgeId() === leg.edgeId"
+        (mouseenter)="onRouteLegHover(leg.edgeId)"
+        (mouseleave)="onRouteLegHover(null)"
+      >
+        @if (leg.continuationOutsideDataset) {
+        
+        } @else {
+          <div class="detail-time">
+            {{ leg.departs }} → {{ leg.arrives }}
+            @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
+              <span>(+{{ leg.arrivalDayOffset }})</span>
+            }
+          </div>
+          <div class="detail-line">
+            {{ getNodeName(leg.from) }} → {{ getNodeName(leg.to) }} ({{ ('transport.' + leg.transport) | transloco }})
+          </div>
+          @if (leg.notes) {
+            <div class="detail-note">{{ getLocalizedNote(leg.notes) }}</div>
+          }
+          <div class="detail-duration">{{ formatDuration(leg.durationMinutes) }}</div>
+        }
+      </div>
+      @if (selectedWaitSegments()[idx]; as wait) {
+      <div class="wait-row">
+        <div class="wait-title">
+          {{ 'label.wait' | transloco }} {{ formatDuration(wait.durationMinutes) }}
+        </div>
+        @if (wait.overnight) {
+        <div class="wait-meta">
+          {{ 'label.overnight' | transloco }}
+          @if (wait.endDayOffset - wait.startDayOffset > 0) {
+          <span>(+{{ wait.endDayOffset - wait.startDayOffset }})</span>
+          }
+        </div>
+        }
+      </div>
+      }
+      }
+    </section>
+    }
+
+    <section class="panel-section">
+      <label class="toggle-row">
+        <input type="checkbox" [checked]="showConnectionDetailsOnMap()"
+          (change)="showConnectionDetailsOnMap.set($any($event.target).checked)" />
+        <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
+      </label>
+    </section>
+  </aside>
+  @if (showRouteNodePanel()) {
+    @if (routeNodePanelNode(); as panelNode) {
+    <aside class="route-node-panel is-open">
+      <div class="sidebar-header">
+        <div class="section-title">{{ panelNode.name }}</div>
+        <button class="ghost-btn" type="button" (click)="closeRouteNodePanel()" [attr.aria-label]="'btn.cancel' | transloco">
+          <fa-icon [icon]="xmarkIcon"></fa-icon>
+        </button>
+      </div>
+      <section class="panel-section location-section">
+        @if (routeNodePanelSnippetUrl(); as nodeSnippetUrl) {
+        <app-archive-snippet-viewer [imageUrl]="nodeSnippetUrl" [showCenterMarker]="false"></app-archive-snippet-viewer>
+        }
+        <div class="location-actions">
+          <button class="icon-action-btn" type="button" (click)="setNodeAsStart(panelNode.id)"
+            [attr.aria-label]="'viewer.setAsStart' | transloco">
+            <fa-icon [icon]="startIcon"></fa-icon>
+            <span>{{ 'viewer.setAsStart' | transloco }}</span>
+          </button>
+          <button class="icon-action-btn" type="button" (click)="setNodeAsEnd(panelNode.id)"
+            [attr.aria-label]="'viewer.setAsEnd' | transloco">
+            <fa-icon [icon]="endIcon"></fa-icon>
+            <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+          </button>
+        </div>
+      </section>
+    </aside>
+    }
+  }
+
+  @if (helpOpen()) {
+  <section class="help-popup">
+      <div class="help-header">
+        <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+      </div>
+    <p>{{ 'viewer.helpText1' | transloco }}</p>
+    <p>{{ 'viewer.helpText2' | transloco }}</p>
+    <p>{{ 'viewer.helpText3' | transloco }}</p>
+  </section>
+  <button class="route-close-btn help-toggle-btn" style="left: 58px; z-index: 8;" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
+    <fa-icon [icon]="xmarkIcon"></fa-icon>
+  </button>
+  } @else {
+  <button class="help-fab help-toggle-btn" style="left: 58px;" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)" [attr.aria-label]="'viewer.helpOpen' | transloco">
+    <span aria-hidden="true">?</span>
+  </button>
+  }
+
+  @if (settingsOpen()) {
+  <section class="help-popup" style="left: 16px; right: auto; width: min(320px, calc(100vw - 32px));">
+    <div class="help-header">
+      <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
+    </div>
+    <div>{{ 'nav.language' | transloco }}</div>
+    <div class="quick-actions">
+      <button class="ghost-btn" type="button" [style.background]="activeLang() === 'de' ? '#ffffff' : '#141414'"
+        [style.color]="activeLang() === 'de' ? '#141414' : '#ffffff'" (click)="setLang('de')">
+        DE
+      </button>
+      <button class="ghost-btn" type="button" [style.background]="activeLang() === 'fr' ? '#ffffff' : '#141414'"
+        [style.color]="activeLang() === 'fr' ? '#141414' : '#ffffff'" (click)="setLang('fr')">
+        FR
+      </button>
+    </div>
+    @if (!readonlyViewer) {
+    <div class="quick-actions">
+      <button class="ghost-btn" type="button" routerLink="/admin" (click)="settingsOpen.set(false)">
+        {{ 'nav.admin' | transloco }}
+      </button>
+      <button class="ghost-btn" type="button" routerLink="/reports" (click)="settingsOpen.set(false)">
+        {{ 'nav.reports' | transloco }}
+      </button>
+    </div>
+    }
+  </section>
+  <button class="route-close-btn help-toggle-btn" style="left: 16px; z-index: 8;" type="button"
+    (click)="settingsOpen.set(false)" [attr.aria-label]="'viewer.settingsClose' | transloco">
+    <fa-icon [icon]="xmarkIcon"></fa-icon>
+  </button>
+  } @else {
+  <button class="route-close-btn help-toggle-btn" style="left: 16px;" type="button"
+    (click)="settingsOpen.set(true); helpOpen.set(false)" [attr.aria-label]="'viewer.settingsOpen' | transloco">
+    <fa-icon [icon]="gearIcon"></fa-icon>
+  </button>
+  }
+</main>

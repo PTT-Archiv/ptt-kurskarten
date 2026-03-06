@@ -1,0 +1,7677 @@
+[
+  {
+    "name": "Aadorf",
+    "qNumber": "Q69131",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Aadorf",
+      "it": "Aadorf",
+      "fr": "Aadorf",
+      "en": "Aadorf"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Aarau",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127429423",
+      "Q14274"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127429423": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Aarau"
+      },
+      "Q14274": {
+        "de": "Aarau",
+        "it": "Aarau",
+        "fr": "Aarau",
+        "en": "Aarau"
+      }
+    }
+  },
+  {
+    "name": "Aarberg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q31868071",
+      "Q56434818",
+      "Q64113"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q31868071": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Aarberg"
+      },
+      "Q56434818": {
+        "de": "Aarberg",
+        "it": null,
+        "fr": null,
+        "en": "Aarberg"
+      },
+      "Q64113": {
+        "de": "Aarberg",
+        "it": "Aarberg",
+        "fr": "Aarberg",
+        "en": "Aarberg"
+      }
+    }
+  },
+  {
+    "name": "Aegeri",
+    "qNumber": "Q23850242",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": null,
+      "it": null,
+      "fr": "Aegeri",
+      "en": null
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Aesch",
+    "qNumber": null,
+    "qNumbers": [
+      "Q68342",
+      "Q68367",
+      "Q7120"
+    ],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q68342": {
+        "de": "Aesch",
+        "it": "Aesch",
+        "fr": "Aesch",
+        "en": "Aesch"
+      },
+      "Q68367": {
+        "de": "Aesch",
+        "it": "Aesch",
+        "fr": "Aesch",
+        "en": "Aesch"
+      },
+      "Q7120": {
+        "de": "Aesch",
+        "it": "Aesch",
+        "fr": "Aesch",
+        "en": "Aesch"
+      }
+    }
+  },
+  {
+    "name": "Aigle",
+    "qNumber": "Q43195",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Aigle",
+      "it": "Aigle",
+      "fr": "Aigle",
+      "en": "Aigle"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Airolo",
+    "qNumber": "Q69265",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Airolo",
+      "it": "Airolo",
+      "fr": "Airolo",
+      "en": "Airolo"
+    },
+    "translationsByQNumber": {
+      "Q22140900": {
+        "de": "Airolo",
+        "fr": "Airolo",
+        "it": "Airolo",
+        "en": "Airolo"
+      },
+      "Q23851250": {
+        "de": null,
+        "fr": "Airolo",
+        "it": null,
+        "en": null
+      },
+      "Q69265": {
+        "de": "Airolo",
+        "fr": "Airolo",
+        "it": "Airolo",
+        "en": "Airolo"
+      }
+    }
+  },
+  {
+    "name": "Altdorf",
+    "qNumber": null,
+    "qNumbers": [
+      "Q435231",
+      "Q68150"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q435231": {
+        "de": "Altdorf",
+        "it": "Altdorf",
+        "fr": "Altdorf",
+        "en": "Altdorf"
+      },
+      "Q68150": {
+        "de": "Altdorf",
+        "it": "Altdorf",
+        "fr": "Altdorf",
+        "en": "Altdorf"
+      }
+    }
+  },
+  {
+    "name": "Altstätten",
+    "qNumber": null,
+    "qNumbers": [
+      "Q126710109",
+      "Q56435459",
+      "Q68281"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q126710109": {
+        "de": "Altstätten",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q56435459": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q68281": {
+        "de": "Altstätten",
+        "it": "Altstätten",
+        "fr": "Altstätten",
+        "en": "Altstätten"
+      }
+    }
+  },
+  {
+    "name": "Andeer",
+    "qNumber": "Q64359",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Andeer",
+      "it": "Andeer",
+      "fr": "Andeer",
+      "en": "Andeer"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Andelfingen",
+    "qNumber": "Q68423",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Andelfingen",
+      "it": "Andelfingen",
+      "fr": "Andelfingen",
+      "en": "Andelfingen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Appenzell",
+    "qNumber": "Q67125",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Appenzell",
+      "it": "Appenzello",
+      "fr": "Appenzell",
+      "en": "Appenzell"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Arbon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q4784748",
+      "Q533440",
+      "Q56759769",
+      "Q64156",
+      "Q8203301"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q4784748": {
+        "de": null,
+        "it": null,
+        "fr": "Arbon",
+        "en": "Arbon"
+      },
+      "Q533440": {
+        "de": "Arbon",
+        "it": "Arbon",
+        "fr": "Arbon",
+        "en": "Arbon"
+      },
+      "Q56759769": {
+        "de": "Arbón",
+        "it": "Arbón",
+        "fr": "Arbón",
+        "en": "Arbón"
+      },
+      "Q64156": {
+        "de": "Arbon",
+        "it": "Arbon",
+        "fr": "Arbon",
+        "en": "Arbon"
+      },
+      "Q8203301": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Arbón"
+      }
+    }
+  },
+  {
+    "name": "Arona",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1131132",
+      "Q16351795",
+      "Q22052",
+      "Q30022357",
+      "Q698246"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1131132": {
+        "de": "Arona",
+        "it": null,
+        "fr": "Arona",
+        "en": "Arona"
+      },
+      "Q16351795": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Arona"
+      },
+      "Q22052": {
+        "de": "Arona",
+        "it": "Arona",
+        "fr": "Arona",
+        "en": "Arona"
+      },
+      "Q30022357": {
+        "de": "Arona",
+        "it": "Arona",
+        "fr": "Arona",
+        "en": "Arona"
+      },
+      "Q698246": {
+        "de": "Arona",
+        "it": "Arona",
+        "fr": "Arona",
+        "en": "Arona"
+      }
+    }
+  },
+  {
+    "name": "Arth",
+    "qNumber": "Q69742",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Arth",
+      "it": "Arth",
+      "fr": "Arth",
+      "en": "Arth"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Aubonne",
+    "qNumber": "Q43232",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Aubonne",
+      "it": "Aubonne",
+      "fr": "Aubonne",
+      "en": "Aubonne"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Baden",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127451",
+      "Q47007042",
+      "Q4840744",
+      "Q486450",
+      "Q600967",
+      "Q63939",
+      "Q6877935",
+      "Q798907"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127451": {
+        "de": "Baden",
+        "it": "Baden",
+        "fr": "Baden",
+        "en": "Baden"
+      },
+      "Q47007042": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Baden"
+      },
+      "Q4840744": {
+        "de": "Baden",
+        "it": "Baden",
+        "fr": "Baden",
+        "en": "Baden"
+      },
+      "Q486450": {
+        "de": "Baden bei Wien",
+        "it": "Baden",
+        "fr": "Baden",
+        "en": "Baden"
+      },
+      "Q600967": {
+        "de": "Baden",
+        "it": "Baden",
+        "fr": "Baden",
+        "en": "Baden"
+      },
+      "Q63939": {
+        "de": "Baden",
+        "it": "Baden",
+        "fr": "Baden",
+        "en": "Baden"
+      },
+      "Q6877935": {
+        "de": "Baden",
+        "it": "Baden",
+        "fr": "pays de Bade",
+        "en": "Baden"
+      },
+      "Q798907": {
+        "de": "Baden",
+        "it": null,
+        "fr": "Baden",
+        "en": "Baden"
+      }
+    }
+  },
+  {
+    "name": "Balstall",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Balsthal",
+    "qNumber": null,
+    "qNumbers": [
+      "Q56447134",
+      "Q65455"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q56447134": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q65455": {
+        "de": "Balsthal",
+        "it": "Balsthal",
+        "fr": "Balsthal",
+        "en": "Balsthal"
+      }
+    }
+  },
+  {
+    "name": "Baltenschweil",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Balzers",
+    "qNumber": null,
+    "qNumbers": [
+      "Q125803187",
+      "Q27439073",
+      "Q49663"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q125803187": {
+        "de": "Balzers",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q27439073": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Balzers"
+      },
+      "Q49663": {
+        "de": "Balzers",
+        "it": "Balzers",
+        "fr": "Balzers",
+        "en": "Balzers"
+      }
+    }
+  },
+  {
+    "name": "Basel",
+    "qNumber": null,
+    "qNumbers": [
+      "Q78",
+      "Q99516001"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q78": {
+        "de": "Basel",
+        "it": "Basilea",
+        "fr": "Bâle",
+        "en": "Basel"
+      },
+      "Q99516001": {
+        "de": "Domkapitel Basel",
+        "it": null,
+        "fr": null,
+        "en": "Basel"
+      }
+    }
+  },
+  {
+    "name": "Bauma",
+    "qNumber": "Q67145",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Bauma",
+      "it": "Bauma",
+      "fr": "Bauma",
+      "en": "Bauma"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Baveno",
+    "qNumber": null,
+    "qNumbers": [
+      "Q23238",
+      "Q30022672"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q23238": {
+        "de": "Baveno",
+        "it": "Baveno",
+        "fr": "Baveno",
+        "en": "Baveno"
+      },
+      "Q30022672": {
+        "de": "Baveno",
+        "it": "Baveno",
+        "fr": "Baveno",
+        "en": "Baveno"
+      }
+    }
+  },
+  {
+    "name": "Beckenried",
+    "qNumber": "Q69140",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Beckenried",
+      "it": "Beckenried",
+      "fr": "Beckenried",
+      "en": "Beckenried"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Belfort",
+    "qNumber": null,
+    "qNumbers": [
+      "Q138246019",
+      "Q171545",
+      "Q3637571",
+      "Q4991979",
+      "Q680958"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q138246019": {
+        "de": null,
+        "it": null,
+        "fr": "Belfort",
+        "en": null
+      },
+      "Q171545": {
+        "de": "Belfort",
+        "it": "Belfort",
+        "fr": "Belfort",
+        "en": "Belfort"
+      },
+      "Q3637571": {
+        "de": null,
+        "it": "Belfort",
+        "fr": "Belfort",
+        "en": "Belfort"
+      },
+      "Q4991979": {
+        "de": null,
+        "it": null,
+        "fr": "Belfort",
+        "en": "Belfort"
+      },
+      "Q680958": {
+        "de": "Kreis Belfort",
+        "it": null,
+        "fr": "Belfort",
+        "en": "Belfort"
+      }
+    }
+  },
+  {
+    "name": "Bellinzona",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22380891",
+      "Q64044"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22380891": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Bellinzona"
+      },
+      "Q64044": {
+        "de": "Bellinzona",
+        "it": "Bellinzona",
+        "fr": "Bellinzone",
+        "en": "Bellinzona"
+      }
+    }
+  },
+  {
+    "name": "Belp",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22382662",
+      "Q69678"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22382662": {
+        "de": "Belp",
+        "it": null,
+        "fr": null,
+        "en": "Belp"
+      },
+      "Q69678": {
+        "de": "Belp",
+        "it": "Belp",
+        "fr": "Belp",
+        "en": "Belp"
+      }
+    }
+  },
+  {
+    "name": "Berisal",
+    "qNumber": "Q4891883",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": null,
+      "it": null,
+      "fr": null,
+      "en": "Berisal"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bern",
+    "qNumber": null,
+    "qNumbers": [
+      "Q70",
+      "Q822114"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q70": {
+        "de": "Bern",
+        "it": "Berna",
+        "fr": "Berne",
+        "en": "Bern"
+      },
+      "Q822114": {
+        "de": "Bern",
+        "it": "Bern",
+        "fr": "Bern",
+        "en": "Bern"
+      }
+    }
+  },
+  {
+    "name": "Besancon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q16532378",
+      "Q37776"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q16532378": {
+        "de": null,
+        "it": null,
+        "fr": "Besançon",
+        "en": "Besançon"
+      },
+      "Q37776": {
+        "de": "Besançon",
+        "it": "Besançon",
+        "fr": "Besançon",
+        "en": "Besançon"
+      }
+    }
+  },
+  {
+    "name": "Beuggen",
+    "qNumber": "Q850909",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Beuggen",
+      "it": null,
+      "fr": "Beuggen",
+      "en": null
+    },
+    "translationsByQNumber": {
+      "Q47540490": {
+        "de": "Beuggen",
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q850909": {
+        "de": "Beuggen",
+        "fr": "Beuggen",
+        "it": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Biasca",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22408558",
+      "Q67523"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22408558": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Biasca"
+      },
+      "Q67523": {
+        "de": "Biasca",
+        "it": "Biasca",
+        "fr": "Biasca",
+        "en": "Biasca"
+      }
+    }
+  },
+  {
+    "name": "Biberbruck",
+    "qNumber": "Q679806",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Biberbrugg",
+      "it": null,
+      "fr": "Biberbrugg",
+      "en": "Biberbrugg"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Biel",
+    "qNumber": null,
+    "qNumbers": [
+      "Q15788526",
+      "Q667757"
+    ],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q15788526": {
+        "de": "Biel",
+        "it": "Biel",
+        "fr": "Biel",
+        "en": "Biel"
+      },
+      "Q667757": {
+        "de": "Biel",
+        "it": "Biel",
+        "fr": "Biel",
+        "en": "Biel"
+      }
+    }
+  },
+  {
+    "name": "Bignasco",
+    "qNumber": "Q690206",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Bignasco",
+      "it": "Bignasco",
+      "fr": "Bignasco",
+      "en": "Bignasco"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bilten",
+    "qNumber": "Q661545",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Bilten",
+      "it": "Bilten",
+      "fr": "Bilten",
+      "en": "Bilten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bironico",
+    "qNumber": "Q259939",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Bironico",
+      "it": "Bironico",
+      "fr": "Bironico",
+      "en": "Bironico"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bischofszell",
+    "qNumber": "Q64865",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Bischofszell",
+      "it": "Bischofszell",
+      "fr": "Bischofszell",
+      "en": "Bischofszell"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Blomberg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q10431470",
+      "Q16503230",
+      "Q168646",
+      "Q244660",
+      "Q31535738",
+      "Q31535754",
+      "Q31558978",
+      "Q31916122",
+      "Q480592",
+      "Q502863",
+      "Q884951"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q10431470": {
+        "de": null,
+        "it": null,
+        "fr": "Blomberg",
+        "en": "Blomberg"
+      },
+      "Q16503230": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": "Blomberg",
+        "en": "Blomberg"
+      },
+      "Q168646": {
+        "de": "Blomberg",
+        "it": "Blomberg",
+        "fr": "Blomberg",
+        "en": "Blomberg"
+      },
+      "Q244660": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": null,
+        "en": "Blomberg"
+      },
+      "Q31535738": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Blomberg"
+      },
+      "Q31535754": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": null,
+        "en": "Blomberg"
+      },
+      "Q31558978": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": null,
+        "en": "Blomberg"
+      },
+      "Q31916122": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": null,
+        "en": "Blomberg"
+      },
+      "Q480592": {
+        "de": "Blomberg",
+        "it": null,
+        "fr": "Famille von Blomberg",
+        "en": "Blomberg"
+      },
+      "Q502863": {
+        "de": "Blomberg",
+        "it": "Blomberg",
+        "fr": "Blomberg, Lower Saxony",
+        "en": "Blomberg"
+      },
+      "Q884951": {
+        "de": "Blomberg (Hausgeräte)",
+        "it": "Blomberg",
+        "fr": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Bodio",
+    "qNumber": null,
+    "qNumbers": [
+      "Q18494924",
+      "Q23198982",
+      "Q23198983",
+      "Q69390",
+      "Q99437624"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q18494924": {
+        "de": null,
+        "it": "Bodio",
+        "fr": "Bodio",
+        "en": "Bodio"
+      },
+      "Q23198982": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Bodio"
+      },
+      "Q23198983": {
+        "de": null,
+        "it": null,
+        "fr": "Bodio",
+        "en": "Bodio"
+      },
+      "Q69390": {
+        "de": "Bodio",
+        "it": "Bodio",
+        "fr": "Bodio",
+        "en": "Bodio"
+      },
+      "Q99437624": {
+        "de": "Bodio",
+        "it": "Bodio",
+        "fr": "Bodio",
+        "en": "Bodio"
+      }
+    }
+  },
+  {
+    "name": "Boniswil",
+    "qNumber": "Q64529",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Boniswil",
+      "it": "Boniswil",
+      "fr": "Boniswil",
+      "en": "Boniswil"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bregenz",
+    "qNumber": null,
+    "qNumbers": [
+      "Q125788732",
+      "Q1737",
+      "Q21882134"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q125788732": {
+        "de": "Bregenz",
+        "it": null,
+        "fr": null,
+        "en": "Bregenz"
+      },
+      "Q1737": {
+        "de": "Bregenz",
+        "it": "Bregenz",
+        "fr": "Brégence",
+        "en": "Bregenz"
+      },
+      "Q21882134": {
+        "de": "Bregenz",
+        "it": null,
+        "fr": null,
+        "en": "Bregenz"
+      }
+    }
+  },
+  {
+    "name": "Bremgarten",
+    "qNumber": "Q64139",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Bremgarten",
+      "it": "Bremgarten",
+      "fr": "Bremgarten",
+      "en": "Bremgarten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Brieg",
+    "qNumber": "Q81731327",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Brieg",
+      "it": "Brieg",
+      "fr": "Brieg",
+      "en": "Brieg"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Brienz",
+    "qNumber": "Q65268",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Brienz",
+      "it": "Brienz",
+      "fr": "Brienz",
+      "en": "Brienz"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Brugg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q137645582",
+      "Q31875234",
+      "Q63441058",
+      "Q64099",
+      "Q65182928",
+      "Q69455",
+      "Q992286"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q137645582": {
+        "de": "Brugg",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q31875234": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Brugg"
+      },
+      "Q63441058": {
+        "de": "Brugg",
+        "it": null,
+        "fr": null,
+        "en": "Brugg"
+      },
+      "Q64099": {
+        "de": "Brugg",
+        "it": "Brugg",
+        "fr": "Brugg",
+        "en": "Brugg"
+      },
+      "Q65182928": {
+        "de": "Brugg",
+        "it": null,
+        "fr": null,
+        "en": "Brugg"
+      },
+      "Q69455": {
+        "de": "Brügg",
+        "it": "Brügg",
+        "fr": "Brügg",
+        "en": "Brügg"
+      },
+      "Q992286": {
+        "de": "Brugg",
+        "it": null,
+        "fr": null,
+        "en": "Brugg"
+      }
+    }
+  },
+  {
+    "name": "Brunnen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q108204473",
+      "Q109317748",
+      "Q136324000",
+      "Q136353417",
+      "Q26836573",
+      "Q525915",
+      "Q675405",
+      "Q88645554",
+      "Q91105352",
+      "Q99937550"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q108204473": {
+        "de": "Brunnen",
+        "it": "Brunnen",
+        "fr": "Brunnen",
+        "en": "Brunnen"
+      },
+      "Q109317748": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q136324000": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q136353417": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q26836573": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": null,
+        "en": "Brunnen"
+      },
+      "Q525915": {
+        "de": "Brunnen",
+        "it": "Brunnen",
+        "fr": "Brunnen",
+        "en": "Brunnen"
+      },
+      "Q675405": {
+        "de": "Brunnen",
+        "it": "Brunnen",
+        "fr": "Brunnen",
+        "en": "Brunnen"
+      },
+      "Q88645554": {
+        "de": "Brünnen",
+        "it": "Brünnen",
+        "fr": "Brünnen",
+        "en": "Brünnen"
+      },
+      "Q91105352": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": null,
+        "en": "Brunnen"
+      },
+      "Q99937550": {
+        "de": "Brunnen",
+        "it": null,
+        "fr": "Brunnen",
+        "en": "Brunnen"
+      }
+    }
+  },
+  {
+    "name": "Bukten",
+    "qNumber": "Q66570",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Buckten",
+      "it": "Buckten",
+      "fr": "Buckten",
+      "en": "Buckten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bulle",
+    "qNumber": "Q68308",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Bulle",
+      "it": "Bulle",
+      "fr": "Bulle",
+      "en": "Bulle"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Burgdorf",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1615235",
+      "Q31925725",
+      "Q4099421",
+      "Q555618",
+      "Q634167",
+      "Q68311"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1615235": {
+        "de": "Landkreis Burgdorf",
+        "it": "Circondario di Burgdorf",
+        "fr": "arrondissement de Burgdorf",
+        "en": "Burgdorf"
+      },
+      "Q31925725": {
+        "de": "Burgdorf",
+        "it": null,
+        "fr": null,
+        "en": "Burgdorf"
+      },
+      "Q4099421": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Burgdorf"
+      },
+      "Q555618": {
+        "de": "Burgdorf",
+        "it": "Burgdorf",
+        "fr": "Burgdorf",
+        "en": "Burgdorf"
+      },
+      "Q634167": {
+        "de": "Burgdorf",
+        "it": "Burgdorf",
+        "fr": "Burgdorf",
+        "en": "Burgdorf"
+      },
+      "Q68311": {
+        "de": "Burgdorf",
+        "it": "Burgdorf",
+        "fr": "Berthoud",
+        "en": "Burgdorf"
+      }
+    }
+  },
+  {
+    "name": "Bätterkinden",
+    "qNumber": "Q67596",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Bätterkinden",
+      "it": "Bätterkinden",
+      "fr": "Bätterkinden",
+      "en": "Bätterkinden"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Bötzen",
+    "qNumber": "Q1020173",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Bötzen",
+      "it": null,
+      "fr": "Bötzen",
+      "en": "Bötzen"
+    },
+    "translationsByQNumber": {
+      "Q1020173": {
+        "de": "Bötzen",
+        "fr": "Bötzen",
+        "it": null,
+        "en": "Bötzen"
+      },
+      "Q29450091": {
+        "de": "Botzen",
+        "fr": "Botzen",
+        "it": "Botzen",
+        "en": "Botzen"
+      }
+    }
+  },
+  {
+    "name": "Bülach",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1003453",
+      "Q1090197",
+      "Q1100127",
+      "Q29932522",
+      "Q9093"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1003453": {
+        "de": "Bulach",
+        "it": null,
+        "fr": "Bulach",
+        "en": "Bulach"
+      },
+      "Q1090197": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Bulach"
+      },
+      "Q1100127": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Bulach"
+      },
+      "Q29932522": {
+        "de": "Altstadt mit Mauerring (18 Teilstücke) und Vorstadt",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q9093": {
+        "de": "Bülach",
+        "it": "Bülach",
+        "fr": "Bülach",
+        "en": "Bülach"
+      }
+    }
+  },
+  {
+    "name": "Büren",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1020957",
+      "Q70057"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1020957": {
+        "de": "Büren",
+        "it": "Büren",
+        "fr": "Büren",
+        "en": "Büren"
+      },
+      "Q70057": {
+        "de": "Büren",
+        "it": "Büren",
+        "fr": "Büren",
+        "en": "Büren"
+      }
+    }
+  },
+  {
+    "name": "Cama",
+    "qNumber": "Q66024",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Cama",
+      "it": "Cama",
+      "fr": "Cama",
+      "en": "Cama"
+    },
+    "translationsByQNumber": {
+      "Q1027931": {
+        "de": "Cama",
+        "fr": "Cama",
+        "it": "Cama",
+        "en": "Cama"
+      },
+      "Q1869705": {
+        "de": null,
+        "fr": "Cama",
+        "it": "Cama",
+        "en": "Cama"
+      },
+      "Q37076157": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q66024": {
+        "de": "Cama",
+        "fr": "Cama",
+        "it": "Cama",
+        "en": "Cama"
+      }
+    }
+  },
+  {
+    "name": "Camerlata",
+    "qNumber": "Q3651334",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Camerlata",
+      "it": "Camerlata",
+      "fr": "Camerlata",
+      "en": "Camerlata"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Campodolcino",
+    "qNumber": null,
+    "qNumbers": [
+      "Q30023510",
+      "Q39299"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q30023510": {
+        "de": "Campodolcino",
+        "it": "Campodolcino",
+        "fr": "Campodolcino",
+        "en": "Campodolcino"
+      },
+      "Q39299": {
+        "de": "Campodolcino",
+        "it": "Campodolcino",
+        "fr": "campodolcino",
+        "en": "Campodolcino"
+      }
+    }
+  },
+  {
+    "name": "Carsaniga",
+    "qNumber": "Q118204270",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Carsaniga",
+      "it": "Carsaniga",
+      "fr": "Carsaniga",
+      "en": "Carsaniga"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Chambery",
+    "qNumber": null,
+    "qNumbers": [
+      "Q165090",
+      "Q5069684",
+      "Q61197154"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q165090": {
+        "de": "Chambéry",
+        "it": "Chambéry",
+        "fr": "Chambéry",
+        "en": "Chambéry"
+      },
+      "Q5069684": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Chambery"
+      },
+      "Q61197154": {
+        "de": null,
+        "it": null,
+        "fr": "Chambery",
+        "en": "Chambery"
+      }
+    }
+  },
+  {
+    "name": "Chaux-de-Fonds",
+    "qNumber": "Q68124",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "La Chaux-de-Fonds",
+      "it": "La Chaux-de-Fonds",
+      "fr": "La Chaux-de-Fonds",
+      "en": "La Chaux-de-Fonds"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Chiavenna",
+    "qNumber": null,
+    "qNumbers": [
+      "Q40131",
+      "Q586614"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q40131": {
+        "de": "Cleven",
+        "it": "Chiavenna",
+        "fr": "Chiavenna",
+        "en": "Chiavenna"
+      },
+      "Q586614": {
+        "de": null,
+        "it": "Chiavenna",
+        "fr": "Chiavenna",
+        "en": "Chiavenna"
+      }
+    }
+  },
+  {
+    "name": "Chur",
+    "qNumber": null,
+    "qNumbers": [
+      "Q69007",
+      "Q9753492"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q69007": {
+        "de": "Chur",
+        "it": "Coira",
+        "fr": "Coire",
+        "en": "Chur"
+      },
+      "Q9753492": {
+        "de": "Krater Chur",
+        "it": "Chur",
+        "fr": "Chur",
+        "en": "Chur"
+      }
+    }
+  },
+  {
+    "name": "Churwalden",
+    "qNumber": "Q64363",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Churwalden",
+      "it": "Churwalden",
+      "fr": "Churwalden",
+      "en": "Churwalden"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Châtel-Saint-Denis",
+    "qNumber": "Q69517",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Châtel-Saint-Denis",
+      "it": "Châtel-Saint-Denis",
+      "fr": "Châtel-Saint-Denis",
+      "en": "Châtel-Saint-Denis"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Colico",
+    "qNumber": null,
+    "qNumbers": [
+      "Q42892",
+      "Q5777366"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q42892": {
+        "de": "Colico",
+        "it": "Colico",
+        "fr": "Colico",
+        "en": "Colico"
+      },
+      "Q5777366": {
+        "de": null,
+        "it": null,
+        "fr": "Colico",
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Colmar",
+    "qNumber": null,
+    "qNumbers": [
+      "Q130994",
+      "Q20969306",
+      "Q5147739",
+      "Q5147740",
+      "Q5147742"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q130994": {
+        "de": "Colmar",
+        "it": "Colmar",
+        "fr": "Colmar",
+        "en": "Colmar"
+      },
+      "Q20969306": {
+        "de": "Colmar",
+        "it": null,
+        "fr": "Colmar",
+        "en": "Colmar"
+      },
+      "Q5147739": {
+        "de": null,
+        "it": null,
+        "fr": "Colmar",
+        "en": "Colmar"
+      },
+      "Q5147740": {
+        "de": "Colmar",
+        "it": "Colmar",
+        "fr": "Colmar",
+        "en": "Colmar"
+      },
+      "Q5147742": {
+        "de": null,
+        "it": null,
+        "fr": "Colmar",
+        "en": "Colmar"
+      }
+    }
+  },
+  {
+    "name": "Como",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1308",
+      "Q1570464",
+      "Q1950328",
+      "Q2495698",
+      "Q978182"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1308": {
+        "de": "Como",
+        "it": "Como",
+        "fr": "Côme",
+        "en": "Como"
+      },
+      "Q1570464": {
+        "de": "Como",
+        "it": "Como",
+        "fr": "Como",
+        "en": "Como"
+      },
+      "Q1950328": {
+        "de": "Como",
+        "it": "Como",
+        "fr": "Como",
+        "en": "Como"
+      },
+      "Q2495698": {
+        "de": "Como",
+        "it": "Como",
+        "fr": "Como",
+        "en": "Como"
+      },
+      "Q978182": {
+        "de": "Como",
+        "it": "Como",
+        "fr": "Como",
+        "en": "Como"
+      }
+    }
+  },
+  {
+    "name": "Coppet",
+    "qNumber": "Q57097",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Coppet",
+      "it": "Coppet",
+      "fr": "Coppet",
+      "en": "Coppet"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Cossonay",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22352515",
+      "Q57111",
+      "Q689316",
+      "Q99459909"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22352515": {
+        "de": "Cossonay",
+        "it": "Cossonay",
+        "fr": null,
+        "en": null
+      },
+      "Q57111": {
+        "de": "Cossonay",
+        "it": "Cossonay",
+        "fr": "Cossonay",
+        "en": "Cossonay"
+      },
+      "Q689316": {
+        "de": "Bezirk Cossonay",
+        "it": "distretto di Cossonay",
+        "fr": "district de Cossonay",
+        "en": "Cossonay"
+      },
+      "Q99459909": {
+        "de": "Cossonay",
+        "it": null,
+        "fr": null,
+        "en": "Cossonay"
+      }
+    }
+  },
+  {
+    "name": "Côte-aux-Fées",
+    "qNumber": "Q68526",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "La Côte-aux-Fées",
+      "it": "La Côte-aux-Fées",
+      "fr": "La Côte-aux-Fées",
+      "en": "La Côte-aux-Fées"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Delle",
+    "qNumber": null,
+    "qNumbers": [
+      "Q106396001",
+      "Q113328509",
+      "Q1184412",
+      "Q28034108",
+      "Q5254206",
+      "Q676305"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q106396001": {
+        "de": "Delle",
+        "it": null,
+        "fr": null,
+        "en": "Delle"
+      },
+      "Q113328509": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Delle"
+      },
+      "Q1184412": {
+        "de": "Delle",
+        "it": "Delle",
+        "fr": "Delle",
+        "en": "Delle"
+      },
+      "Q28034108": {
+        "de": "Delle",
+        "it": "Delle",
+        "fr": "Delle",
+        "en": "Delle"
+      },
+      "Q5254206": {
+        "de": "Delle",
+        "it": "Delle",
+        "fr": "Delle",
+        "en": "Delle"
+      },
+      "Q676305": {
+        "de": "Delle",
+        "it": "Delle",
+        "fr": "Delle",
+        "en": "Delle"
+      }
+    }
+  },
+  {
+    "name": "Delémont",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127430110",
+      "Q22620297",
+      "Q63896"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127430110": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Delémont"
+      },
+      "Q22620297": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q63896": {
+        "de": "Delsberg",
+        "it": "Delémont",
+        "fr": "Delémont",
+        "en": "Delémont"
+      }
+    }
+  },
+  {
+    "name": "Dijon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q113067857",
+      "Q7003"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q113067857": {
+        "de": null,
+        "it": null,
+        "fr": "Dijon",
+        "en": "Dijon"
+      },
+      "Q7003": {
+        "de": "Dijon",
+        "it": "Digione",
+        "fr": "Dijon",
+        "en": "Dijon"
+      }
+    }
+  },
+  {
+    "name": "Domo d'Ossola",
+    "qNumber": "Q23325",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Domodossola",
+      "it": "Domodossola",
+      "fr": "Domodossola",
+      "en": "Domodossola"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Douvaine",
+    "qNumber": "Q665450",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Douvaine",
+      "it": "Douvaine",
+      "fr": "Douvaine",
+      "en": "Douvaine"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Dürrmühle",
+    "qNumber": null,
+    "qNumbers": [
+      "Q131190110",
+      "Q21029767"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q131190110": {
+        "de": "Dürrmühle",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q21029767": {
+        "de": "Dürrmühle",
+        "it": null,
+        "fr": "Dürrmühle",
+        "en": "Dürrmühle"
+      }
+    }
+  },
+  {
+    "name": "Ebnat",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1279931",
+      "Q132143050",
+      "Q15807207",
+      "Q64777443"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1279931": {
+        "de": "Ebnat",
+        "it": "Ebnat",
+        "fr": "Ebnat",
+        "en": "Ebnat"
+      },
+      "Q132143050": {
+        "de": "Ebnat",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q15807207": {
+        "de": "Ebnat SG",
+        "it": "Ebnat",
+        "fr": "Ebnat SG",
+        "en": "Ebnat"
+      },
+      "Q64777443": {
+        "de": "Ebnat",
+        "it": null,
+        "fr": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Echallens",
+    "qNumber": "Q70714",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Echallens",
+      "it": "Echallens",
+      "fr": "Echallens",
+      "en": "Echallens"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Eglisau",
+    "qNumber": "Q69175",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Eglisau",
+      "it": "Eglisau",
+      "fr": "Eglisau",
+      "en": "Eglisau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Einsiedeln",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127430171",
+      "Q130543161",
+      "Q22380143",
+      "Q68950"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127430171": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Einsiedeln"
+      },
+      "Q130543161": {
+        "de": "Einsiedeln",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q22380143": {
+        "de": null,
+        "it": "Einsiedeln",
+        "fr": null,
+        "en": "Einsiedeln"
+      },
+      "Q68950": {
+        "de": "Einsiedeln",
+        "it": "Einsiedeln",
+        "fr": "Einsiedeln",
+        "en": "Einsiedeln"
+      }
+    }
+  },
+  {
+    "name": "Entlebuch",
+    "qNumber": "Q14547",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Entlebuch",
+      "it": "Entlebuch",
+      "fr": "Entlebuch",
+      "en": "Entlebuch"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Escholzmatt",
+    "qNumber": "Q66908",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Escholzmatt",
+      "it": "Escholzmatt",
+      "fr": "Escholzmatt",
+      "en": "Escholzmatt"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Estavayer",
+    "qNumber": "Q28035756",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Estavayer",
+      "it": "Estavayer",
+      "fr": "Estavayer",
+      "en": "Estavayer"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Evian",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1050918",
+      "Q18495458"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1050918": {
+        "de": "Evian",
+        "it": "Evian",
+        "fr": "Évian",
+        "en": "Evian"
+      },
+      "Q18495458": {
+        "de": null,
+        "it": "Evian",
+        "fr": "Evian",
+        "en": "Evian"
+      }
+    }
+  },
+  {
+    "name": "Fahrwangen",
+    "qNumber": "Q64982",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Fahrwangen",
+      "it": "Fahrwangen",
+      "fr": "Fahrwangen",
+      "en": "Fahrwangen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Faido",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22981913",
+      "Q69673"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22981913": {
+        "de": null,
+        "it": null,
+        "fr": "Faidu",
+        "en": null
+      },
+      "Q69673": {
+        "de": "Faido",
+        "it": "Faido",
+        "fr": "Faido",
+        "en": "Faido"
+      }
+    }
+  },
+  {
+    "name": "Fehraltorf",
+    "qNumber": "Q70369",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Fehraltorf",
+      "it": "Fehraltorf",
+      "fr": "Fehraltorf",
+      "en": "Fehraltorf"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Feldkirch",
+    "qNumber": null,
+    "qNumbers": [
+      "Q125788802",
+      "Q15217545",
+      "Q183104",
+      "Q21881819",
+      "Q384275"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q125788802": {
+        "de": "Feldkirch",
+        "it": null,
+        "fr": null,
+        "en": "Feldkirch"
+      },
+      "Q15217545": {
+        "de": "Feldkirch",
+        "it": null,
+        "fr": "Feldkirch",
+        "en": "Feldkirch"
+      },
+      "Q183104": {
+        "de": "Feldkirch",
+        "it": "Feldkirch",
+        "fr": "Feldkirch",
+        "en": "Feldkirch"
+      },
+      "Q21881819": {
+        "de": "Feldkirch",
+        "it": null,
+        "fr": null,
+        "en": "Feldkirch"
+      },
+      "Q384275": {
+        "de": "Feldkirch",
+        "it": "Feldkirch",
+        "fr": "Feldkirch",
+        "en": "Feldkirch"
+      }
+    }
+  },
+  {
+    "name": "Fischenthal",
+    "qNumber": "Q65854",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Fischenthal",
+      "it": "Fischenthal",
+      "fr": "Fischenthal",
+      "en": "Fischenthal"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Flawil",
+    "qNumber": "Q65506",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Flawil",
+      "it": "Flawil",
+      "fr": "Flawil",
+      "en": "Flawil"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Flawyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Flüelen",
+    "qNumber": "Q69665",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Flüelen",
+      "it": "Flüelen",
+      "fr": "Flüelen",
+      "en": "Flüelen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Frankfurt",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1794",
+      "Q99727415"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1794": {
+        "de": "Frankfurt am Main",
+        "it": "Francoforte sul Meno",
+        "fr": "Francfort-sur-le-Main",
+        "en": "Frankfurt"
+      },
+      "Q99727415": {
+        "de": "Frankfurt",
+        "it": null,
+        "fr": null,
+        "en": "Frankfurt"
+      }
+    }
+  },
+  {
+    "name": "Frauenfeld",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22508017",
+      "Q68120"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22508017": {
+        "de": "Frauenfeld",
+        "it": null,
+        "fr": null,
+        "en": "Frauenfeld"
+      },
+      "Q68120": {
+        "de": "Frauenfeld",
+        "it": "Frauenfeld",
+        "fr": "Frauenfeld",
+        "en": "Frauenfeld"
+      }
+    }
+  },
+  {
+    "name": "Freiburg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1008181",
+      "Q1693695"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1008181": {
+        "de": "Bundestagswahlkreis Freiburg",
+        "it": null,
+        "fr": null,
+        "en": "Freiburg"
+      },
+      "Q1693695": {
+        "de": "Landkreis Freiburg",
+        "it": null,
+        "fr": "arrondissement de Freiburg",
+        "en": "Freiburg"
+      }
+    }
+  },
+  {
+    "name": "Frick",
+    "qNumber": "Q66617",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Frick",
+      "it": "Frick",
+      "fr": "Frick",
+      "en": "Frick"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Friedrichshafen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q32018553",
+      "Q4051"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q32018553": {
+        "de": "Friedrichshafen",
+        "it": null,
+        "fr": null,
+        "en": "Friedrichshafen"
+      },
+      "Q4051": {
+        "de": "Friedrichshafen",
+        "it": "Friedrichshafen",
+        "fr": "Friedrichshafen",
+        "en": "Friedrichshafen"
+      }
+    }
+  },
+  {
+    "name": "Frutigen",
+    "qNumber": "Q66208",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Frutigen",
+      "it": "Frutigen",
+      "fr": "Frutigen",
+      "en": "Frutigen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Gampelen",
+    "qNumber": "Q67387",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Gampelen",
+      "it": "Gampelen",
+      "fr": "Champion",
+      "en": "Gampelen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Genève",
+    "qNumber": "Q71",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Genf",
+      "it": "Ginevra",
+      "fr": "Genève",
+      "en": "Geneva"
+    },
+    "translationsByQNumber": {
+      "Q106358493": {
+        "de": "Genève",
+        "fr": "Genève",
+        "it": "Genève",
+        "en": "Genève"
+      },
+      "Q106484210": {
+        "de": "Geneve",
+        "fr": "Geneve",
+        "it": "Geneve",
+        "en": "Geneve"
+      },
+      "Q28130740": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Genève"
+      }
+    }
+  },
+  {
+    "name": "Glarus",
+    "qNumber": null,
+    "qNumbers": [
+      "Q15730054",
+      "Q63912"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q15730054": {
+        "de": "Glarus",
+        "it": "Glarona",
+        "fr": "Glaris",
+        "en": "Glarus"
+      },
+      "Q63912": {
+        "de": "Glarus",
+        "it": "Glarona",
+        "fr": "Glaris",
+        "en": "Glarus"
+      }
+    }
+  },
+  {
+    "name": "Gossau",
+    "qNumber": "Q67525",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Gossau",
+      "it": "Gossau",
+      "fr": "Gossau",
+      "en": "Gossau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Grenchen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22440227",
+      "Q68248",
+      "Q83383910"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22440227": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Grenchen"
+      },
+      "Q68248": {
+        "de": "Grenchen",
+        "it": "Grenchen",
+        "fr": "Granges",
+        "en": "Grenchen"
+      },
+      "Q83383910": {
+        "de": "Grenchen",
+        "it": null,
+        "fr": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Grüningen",
+    "qNumber": "Q67120",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Grüningen",
+      "it": "Grüningen",
+      "fr": "Grüningen",
+      "en": "Grüningen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Gümminen",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Haag",
+    "qNumber": null,
+    "qNumbers": [
+      "Q133884400",
+      "Q14538207",
+      "Q22692160",
+      "Q255534",
+      "Q26836864",
+      "Q28162460",
+      "Q511280",
+      "Q65415221"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q133884400": {
+        "de": "Haag",
+        "it": null,
+        "fr": null,
+        "en": "Haag"
+      },
+      "Q14538207": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q22692160": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q255534": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q26836864": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q28162460": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q511280": {
+        "de": "Haag",
+        "it": "Haag",
+        "fr": "Haag",
+        "en": "Haag"
+      },
+      "Q65415221": {
+        "de": "Haag",
+        "it": null,
+        "fr": null,
+        "en": "Haag"
+      }
+    }
+  },
+  {
+    "name": "Hautes Geneveys",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Heiden",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1594131",
+      "Q200275",
+      "Q68315"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1594131": {
+        "de": "Heiden",
+        "it": "Heiden",
+        "fr": "Heiden",
+        "en": "Heiden"
+      },
+      "Q200275": {
+        "de": "Heiden",
+        "it": "Heiden",
+        "fr": "Heiden",
+        "en": "Heiden"
+      },
+      "Q68315": {
+        "de": "Heiden",
+        "it": "Heiden",
+        "fr": "Heiden",
+        "en": "Heiden"
+      }
+    }
+  },
+  {
+    "name": "Heilbronn",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1008267",
+      "Q1594773",
+      "Q32055580",
+      "Q32055584",
+      "Q715",
+      "Q7166"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1008267": {
+        "de": "Bundestagswahlkreis Heilbronn",
+        "it": null,
+        "fr": null,
+        "en": "Heilbronn"
+      },
+      "Q1594773": {
+        "de": "Feuchtwangen-Heilbronn",
+        "it": null,
+        "fr": "Heilbronn",
+        "en": "Heilbronn"
+      },
+      "Q32055580": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Heilbronn"
+      },
+      "Q32055584": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Heilbronn"
+      },
+      "Q715": {
+        "de": "Heilbronn",
+        "it": "Heilbronn",
+        "fr": "Heilbronn",
+        "en": "Heilbronn"
+      },
+      "Q7166": {
+        "de": "Landkreis Heilbronn",
+        "it": "circondario di Heilbronn",
+        "fr": "arrondissement de Heilbronn",
+        "en": "Heilbronn"
+      }
+    }
+  },
+  {
+    "name": "Henniez",
+    "qNumber": "Q68873",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Henniez VD",
+      "it": "Henniez",
+      "fr": "Henniez",
+      "en": "Henniez"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Herisau",
+    "qNumber": "Q63970",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Herisau",
+      "it": "Herisau",
+      "fr": "Herisau",
+      "en": "Herisau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Herzogenbuchsee",
+    "qNumber": "Q67499",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Herzogenbuchsee",
+      "it": "Herzogenbuchsee",
+      "fr": "Herzogenbuchsee",
+      "en": "Herzogenbuchsee"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Hildisrieden",
+    "qNumber": "Q7153",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Hildisrieden",
+      "it": "Hildisrieden",
+      "fr": "Hildisrieden",
+      "en": "Hildisrieden"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Hinterhein",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Hochdorf",
+    "qNumber": null,
+    "qNumbers": [
+      "Q134543280",
+      "Q135002714",
+      "Q136596767",
+      "Q1621722",
+      "Q25158437",
+      "Q534187",
+      "Q62068962",
+      "Q7102",
+      "Q81277",
+      "Q87333638",
+      "Q885057"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q134543280": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q135002714": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q136596767": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q1621722": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      },
+      "Q25158437": {
+        "de": "Hochdorf",
+        "it": "Hochdorf",
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      },
+      "Q534187": {
+        "de": "Hochdorf",
+        "it": "Hochdorf",
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      },
+      "Q62068962": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": null,
+        "en": "Hochdorf"
+      },
+      "Q7102": {
+        "de": "Hochdorf",
+        "it": "Hochdorf",
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      },
+      "Q81277": {
+        "de": "Hochdorf",
+        "it": "Hochdorf",
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      },
+      "Q87333638": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": null,
+        "en": "Hochdorf"
+      },
+      "Q885057": {
+        "de": "Hochdorf",
+        "it": null,
+        "fr": "Hochdorf",
+        "en": "Hochdorf"
+      }
+    }
+  },
+  {
+    "name": "Honau",
+    "qNumber": "Q14569",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Honau",
+      "it": "Honau",
+      "fr": "Honau",
+      "en": "Honau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Horgen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q20180025",
+      "Q68286",
+      "Q98073967"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q20180025": {
+        "de": "Horgen",
+        "it": "Horgen",
+        "fr": "Horgen",
+        "en": "Horgen"
+      },
+      "Q68286": {
+        "de": "Horgen",
+        "it": "Horgen",
+        "fr": "Horgen",
+        "en": "Horgen"
+      },
+      "Q98073967": {
+        "de": "FS Horgen",
+        "it": null,
+        "fr": null,
+        "en": "Horgen"
+      }
+    }
+  },
+  {
+    "name": "Hospitz",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1624267",
+      "Q56071790"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1624267": {
+        "de": "Holany",
+        "it": "Holany",
+        "fr": "Holany",
+        "en": "Holany"
+      },
+      "Q56071790": {
+        "de": null,
+        "it": null,
+        "fr": "hôtel Hospitz",
+        "en": "Hotelli Hospitz"
+      }
+    }
+  },
+  {
+    "name": "Huttwyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Höchstetten",
+    "qNumber": "Q67792",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Höchstetten",
+      "it": "Höchstetten",
+      "fr": "Höchstetten",
+      "en": "Höchstetten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Ilanz",
+    "qNumber": null,
+    "qNumbers": [
+      "Q15056824",
+      "Q64213"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q15056824": {
+        "de": "Ilanz/Glion",
+        "it": "Ilanz/Glion",
+        "fr": "Ilanz/Glion",
+        "en": "Ilanz/Glion"
+      },
+      "Q64213": {
+        "de": "Ilanz/Glion",
+        "it": "Ilanz",
+        "fr": "Ilanz",
+        "en": "Ilanz"
+      }
+    }
+  },
+  {
+    "name": "Ins",
+    "qNumber": "Q69487",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Ins",
+      "it": "Ins",
+      "fr": "Anet",
+      "en": "Ins"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Inschi",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Jougne",
+    "qNumber": "Q923421",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Jougne",
+      "it": "Jougne",
+      "fr": "Jougne",
+      "en": "Jougne"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Jsella",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Kaiserstuhl",
+    "qNumber": "Q67094",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Kaiserstuhl",
+      "it": "Kaiserstuhl",
+      "fr": "Kaiserstuhl",
+      "en": "Kaiserstuhl"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Karlsruhe",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1026577",
+      "Q1040",
+      "Q28109559"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1026577": {
+        "de": "Karlsruhe",
+        "it": "Karlsruhe",
+        "fr": "Karlsruhe",
+        "en": "Karlsruhe"
+      },
+      "Q1040": {
+        "de": "Karlsruhe",
+        "it": "Karlsruhe",
+        "fr": "Karlsruhe",
+        "en": "Karlsruhe"
+      },
+      "Q28109559": {
+        "de": "Sohland-Karlsruhe",
+        "it": "Karlsruhe",
+        "fr": "Karlsruhe",
+        "en": "Karlsruhe"
+      }
+    }
+  },
+  {
+    "name": "Kirchberg",
+    "qNumber": "Q64860",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Kirchberg",
+      "it": "Kirchberg",
+      "fr": "Kirchberg",
+      "en": "Kirchberg"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Kirchleerau",
+    "qNumber": "Q64453",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Kirchleerau",
+      "it": "Kirchleerau",
+      "fr": "Kirchleerau",
+      "en": "Kirchleerau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Knonau",
+    "qNumber": "Q66328",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Knonau",
+      "it": "Knonau",
+      "fr": "Knonau",
+      "en": "Knonau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Konstanz",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127430523",
+      "Q1782863",
+      "Q32066622",
+      "Q60745922",
+      "Q8206"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127430523": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Konstanz"
+      },
+      "Q1782863": {
+        "de": "Konstanz (1928)",
+        "it": null,
+        "fr": null,
+        "en": "Konstanz"
+      },
+      "Q32066622": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Konstanz"
+      },
+      "Q60745922": {
+        "de": "Bundestagswahlkreis Konstanz",
+        "it": null,
+        "fr": null,
+        "en": "Konstanz"
+      },
+      "Q8206": {
+        "de": "Landkreis Konstanz",
+        "it": "circondario di Costanza",
+        "fr": "arrondissement de Constance",
+        "en": "Konstanz"
+      }
+    }
+  },
+  {
+    "name": "Kreuzstrasse",
+    "qNumber": null,
+    "qNumbers": [
+      "Q100535918",
+      "Q101087805",
+      "Q104028385",
+      "Q111259824",
+      "Q112186897",
+      "Q114422706",
+      "Q130562800",
+      "Q133310025",
+      "Q135657011",
+      "Q26836565",
+      "Q27325839",
+      "Q52556939",
+      "Q65769711",
+      "Q67542903",
+      "Q99738307",
+      "Q99740150"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q100535918": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": "Kreuzstraße",
+        "en": "Kreuzstraße"
+      },
+      "Q101087805": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q104028385": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q111259824": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q112186897": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": "Kreuzstraße",
+        "en": "Kreuzstraße"
+      },
+      "Q114422706": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q130562800": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q133310025": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q135657011": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q26836565": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q27325839": {
+        "de": "Kreuzstrasse",
+        "it": "Kreuzstrasse",
+        "fr": "Kreuzstrasse",
+        "en": "Kreuzstrasse"
+      },
+      "Q52556939": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q65769711": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      },
+      "Q67542903": {
+        "de": "Kreuzstraße",
+        "it": "Kreuzstraße",
+        "fr": "Kreuzstraße",
+        "en": "Kreuzstraße"
+      },
+      "Q99738307": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": "Kreuzstraße",
+        "en": "Kreuzstraße"
+      },
+      "Q99740150": {
+        "de": "Kreuzstraße",
+        "it": null,
+        "fr": null,
+        "en": "Kreuzstraße"
+      }
+    }
+  },
+  {
+    "name": "Köpplishaus",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Küblis",
+    "qNumber": "Q64639",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Küblis",
+      "it": "Küblis",
+      "fr": "Küblis",
+      "en": "Küblis"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "La Brévine",
+    "qNumber": null,
+    "qNumbers": [
+      "Q124985412",
+      "Q22653703",
+      "Q68838"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q124985412": {
+        "de": "La Brévine",
+        "it": "La Brévine",
+        "fr": "La Brévine",
+        "en": "La Brévine"
+      },
+      "Q22653703": {
+        "de": "La Brévine",
+        "it": null,
+        "fr": "La Brévine",
+        "en": "La Brévine"
+      },
+      "Q68838": {
+        "de": "La Brévine",
+        "it": "La Brévine",
+        "fr": "La Brévine",
+        "en": "La Brévine"
+      }
+    }
+  },
+  {
+    "name": "La Neuveville",
+    "qNumber": "Q69476",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "La Neuveville",
+      "it": "La Neuveville",
+      "fr": "La Neuveville",
+      "en": "La Neuveville"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "La Roche",
+    "qNumber": "Q67686",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "La Roche",
+      "it": "La Roche",
+      "fr": "La Roche",
+      "en": "La Roche"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Lachen",
+    "qNumber": "Q67100",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Lachen",
+      "it": "Lachen",
+      "fr": "Lachen",
+      "en": "Lachen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Langenthal",
+    "qNumber": "Q69726",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Langenthal",
+      "it": "Langenthal",
+      "fr": "Langenthal",
+      "en": "Langenthal"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Langnau im Emmental",
+    "qNumber": null,
+    "qNumbers": [
+      "Q35642023",
+      "Q66300"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q35642023": {
+        "de": "Langnau im Emmental",
+        "it": null,
+        "fr": null,
+        "en": "Langnau im Emmental"
+      },
+      "Q66300": {
+        "de": "Langnau im Emmental",
+        "it": "Langnau im Emmental",
+        "fr": "Langnau im Emmental",
+        "en": "Langnau im Emmental"
+      }
+    }
+  },
+  {
+    "name": "Lauchringen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q32089131",
+      "Q527855"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q32089131": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Lauchringen"
+      },
+      "Q527855": {
+        "de": "Lauchringen",
+        "it": "Lauchringen",
+        "fr": "Lauchringen",
+        "en": "Lauchringen"
+      }
+    }
+  },
+  {
+    "name": "Laufen",
+    "qNumber": "Q68363",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Laufen",
+      "it": "Laufen",
+      "fr": "Laufon",
+      "en": "Laufen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Lauffenburg",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Lausanne",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22374786",
+      "Q3219696",
+      "Q807"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22374786": {
+        "de": "Lausanne",
+        "it": "Losanna",
+        "fr": "Lausanne",
+        "en": "Lausanne"
+      },
+      "Q3219696": {
+        "de": null,
+        "it": null,
+        "fr": "Lausanne",
+        "en": "Lausanne"
+      },
+      "Q807": {
+        "de": "Lausanne",
+        "it": "Losanna",
+        "fr": "Lausanne",
+        "en": "Lausanne"
+      }
+    }
+  },
+  {
+    "name": "Le Brassus",
+    "qNumber": null,
+    "qNumbers": [
+      "Q108204838",
+      "Q962246"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q108204838": {
+        "de": "Le Brassus",
+        "it": "Le Brassus",
+        "fr": "Le Brassus",
+        "en": "Le Brassus"
+      },
+      "Q962246": {
+        "de": "Le Brassus",
+        "it": "Le Brassus",
+        "fr": "Le Brassus",
+        "en": "Le Brassus"
+      }
+    }
+  },
+  {
+    "name": "Le Pont",
+    "qNumber": null,
+    "qNumbers": [
+      "Q137467820",
+      "Q52637852"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q137467820": {
+        "de": null,
+        "it": null,
+        "fr": "Le Pont",
+        "en": "Le Pont"
+      },
+      "Q52637852": {
+        "de": "Le Pont",
+        "it": "Le Pont",
+        "fr": "Le Pont",
+        "en": "Le Pont"
+      }
+    }
+  },
+  {
+    "name": "Lecco",
+    "qNumber": null,
+    "qNumbers": [
+      "Q52810853",
+      "Q6237"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q52810853": {
+        "de": null,
+        "it": "Lecco",
+        "fr": null,
+        "en": "Lecco"
+      },
+      "Q6237": {
+        "de": "Lecco",
+        "it": "Lecco",
+        "fr": "Lecco",
+        "en": "Lecco"
+      }
+    }
+  },
+  {
+    "name": "Leimbach",
+    "qNumber": null,
+    "qNumbers": [
+      "Q65975",
+      "Q691367"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q65975": {
+        "de": "Leimbach",
+        "it": "Leimbach",
+        "fr": "Leimbach",
+        "en": "Leimbach"
+      },
+      "Q691367": {
+        "de": "Leimbach",
+        "it": "Leimbach",
+        "fr": "Leimbach",
+        "en": "Leimbach"
+      }
+    }
+  },
+  {
+    "name": "Lenzburg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q2672041",
+      "Q69433",
+      "Q93294941"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q2672041": {
+        "de": "Lenzburg",
+        "it": "Lenzburg",
+        "fr": "Lenzburg",
+        "en": "Lenzburg"
+      },
+      "Q69433": {
+        "de": "Lenzburg",
+        "it": "Lenzburg",
+        "fr": "Lenzbourg",
+        "en": "Lenzburg"
+      },
+      "Q93294941": {
+        "de": "Lenzburg",
+        "it": null,
+        "fr": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Les Bois",
+    "qNumber": "Q70232",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Les Bois",
+      "it": "Les Bois",
+      "fr": "Les Bois",
+      "en": "Les Bois"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Les Brenets",
+    "qNumber": "Q68703",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Les Brenets",
+      "it": "Les Brenets",
+      "fr": "Les Brenets",
+      "en": "Les Brenets"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Les Malettes",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Les Ponts",
+    "qNumber": "Q3830847",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Les Ponts",
+      "it": "Les Ponts",
+      "fr": "Les Ponts",
+      "en": "Les Ponts"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Les Rangiers",
+    "qNumber": "Q391710",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Col des Rangiers",
+      "it": "Col des Rangiers",
+      "fr": "col des Rangiers",
+      "en": "Col des Rangiers"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Les Rousses",
+    "qNumber": "Q818555",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Les Rousses",
+      "it": "Les Rousses",
+      "fr": "Les Rousses",
+      "en": "Les Rousses"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Liestal",
+    "qNumber": "Q68972",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Liestal",
+      "it": "Liestal",
+      "fr": "Liestal",
+      "en": "Liestal"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Lindau",
+    "qNumber": "Q65759",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Lindau",
+      "it": "Lindau",
+      "fr": "Lindau",
+      "en": "Lindau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Linththal",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Locarno",
+    "qNumber": null,
+    "qNumbers": [
+      "Q111876893",
+      "Q11935",
+      "Q2008656"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q111876893": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Locarno"
+      },
+      "Q11935": {
+        "de": "Locarno",
+        "it": "Locarno",
+        "fr": "Locarno",
+        "en": "Locarno"
+      },
+      "Q2008656": {
+        "de": "Locarno",
+        "it": "Locarno",
+        "fr": "Locarno",
+        "en": "Locarno"
+      }
+    }
+  },
+  {
+    "name": "Locle",
+    "qNumber": "Q1867663",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Locle",
+      "it": "Locle",
+      "fr": "Locle",
+      "en": "Locle"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Lugano",
+    "qNumber": null,
+    "qNumbers": [
+      "Q25417679",
+      "Q7024"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q25417679": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Lugano"
+      },
+      "Q7024": {
+        "de": "Lugano",
+        "it": "Lugano",
+        "fr": "Lugano",
+        "en": "Lugano"
+      }
+    }
+  },
+  {
+    "name": "Lungern",
+    "qNumber": "Q64292",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Lungern",
+      "it": "Lungern",
+      "fr": "Lungern",
+      "en": "Lungern"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Luzern",
+    "qNumber": "Q22611852",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": null,
+      "it": null,
+      "fr": null,
+      "en": "Luzern"
+    },
+    "translationsByQNumber": {
+      "Q133956097": {
+        "de": "Luzern",
+        "fr": null,
+        "it": null,
+        "en": "Luzern"
+      },
+      "Q22611852": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Luzern"
+      },
+      "Q52351486": {
+        "de": "MS Luzern",
+        "fr": null,
+        "it": null,
+        "en": "Luzern"
+      },
+      "Q95596292": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Luzern"
+      }
+    }
+  },
+  {
+    "name": "Lyon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q456",
+      "Q867818"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q456": {
+        "de": "Lyon",
+        "it": "Lione",
+        "fr": "Lyon",
+        "en": "Lyon"
+      },
+      "Q867818": {
+        "de": "Lyon",
+        "it": "Lyon",
+        "fr": "Lyon",
+        "en": "Lyon"
+      }
+    }
+  },
+  {
+    "name": "Magadino",
+    "qNumber": "Q661679",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Magadino",
+      "it": "Magadino",
+      "fr": "Magadino",
+      "en": "Magadino"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Maiche",
+    "qNumber": "Q837560",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Maîche",
+      "it": "Maîche",
+      "fr": "Maîche",
+      "en": "Maîche"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Mailand",
+    "qNumber": "Q6735756",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": null,
+      "it": null,
+      "fr": null,
+      "en": "Mailand"
+    },
+    "translationsByQNumber": {
+      "Q107067280": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Mailand"
+      },
+      "Q131343028": {
+        "de": "Mailand",
+        "fr": null,
+        "it": null,
+        "en": "Mailand"
+      },
+      "Q1885419": {
+        "de": "Mailand",
+        "fr": "Mailand",
+        "it": "Mailand",
+        "en": "Mailand"
+      },
+      "Q37515087": {
+        "de": "Mailand",
+        "fr": "Mailand",
+        "it": "Mailand",
+        "en": "Mailand"
+      },
+      "Q6735756": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Mailand"
+      }
+    }
+  },
+  {
+    "name": "Malleray",
+    "qNumber": "Q67544",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Malleray",
+      "it": "Malleray",
+      "fr": "Malleray",
+      "en": "Malleray"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Mannheim",
+    "qNumber": null,
+    "qNumbers": [
+      "Q111205834",
+      "Q1803318",
+      "Q2119",
+      "Q6750819"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q111205834": {
+        "de": "Mannheim",
+        "it": "Mannheim",
+        "fr": "Mannheim",
+        "en": "Mannheim"
+      },
+      "Q1803318": {
+        "de": "Landkreis Mannheim",
+        "it": null,
+        "fr": "arrondissement de Mannheim",
+        "en": "Mannheim"
+      },
+      "Q2119": {
+        "de": "Mannheim",
+        "it": "Mannheim",
+        "fr": "Mannheim",
+        "en": "Mannheim"
+      },
+      "Q6750819": {
+        "de": null,
+        "it": null,
+        "fr": "Mannheim",
+        "en": "Mannheim"
+      }
+    }
+  },
+  {
+    "name": "Martigny",
+    "qNumber": "Q68956",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Martigny",
+      "it": "Martigny",
+      "fr": "Martigny",
+      "en": "Martigny"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Meiringen",
+    "qNumber": "Q64123",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Meiringen",
+      "it": "Meiringen",
+      "fr": "Meiringen",
+      "en": "Meiringen"
+    },
+    "translationsByQNumber": {
+      "Q110551872": {
+        "de": "Meiringen",
+        "fr": "Meiringen",
+        "it": "Meiringen",
+        "en": "Meiringen"
+      },
+      "Q127044124": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "MEIRINGEN"
+      },
+      "Q22200111": {
+        "de": "Meiringen",
+        "fr": "Meiringen",
+        "it": "Meiringen",
+        "en": "Meiringen"
+      },
+      "Q64123": {
+        "de": "Meiringen",
+        "fr": "Meiringen",
+        "it": "Meiringen",
+        "en": "Meiringen"
+      }
+    }
+  },
+  {
+    "name": "Mendrisio",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22495247",
+      "Q69041"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22495247": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Mendrisio"
+      },
+      "Q69041": {
+        "de": "Mendrisio",
+        "it": "Mendrisio",
+        "fr": "Mendrisio",
+        "en": "Mendrisio"
+      }
+    }
+  },
+  {
+    "name": "Misocco",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Montbovon",
+    "qNumber": "Q1945652",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Montbovon",
+      "it": "Montbovon",
+      "fr": "Montbovon",
+      "en": "Montbovon"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Montpreveyres",
+    "qNumber": "Q70617",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Montpreveyres",
+      "it": "Montpreveyres",
+      "fr": "Montpreveyres",
+      "en": "Montpreveyres"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Monza",
+    "qNumber": null,
+    "qNumbers": [
+      "Q18443860",
+      "Q3724183",
+      "Q4301734",
+      "Q52853562",
+      "Q6252"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q18443860": {
+        "de": null,
+        "it": "Monza",
+        "fr": "Monza",
+        "en": "Monza"
+      },
+      "Q3724183": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Monza"
+      },
+      "Q4301734": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Monza"
+      },
+      "Q52853562": {
+        "de": null,
+        "it": "Monza",
+        "fr": null,
+        "en": "Monza"
+      },
+      "Q6252": {
+        "de": "Monza",
+        "it": "Monza",
+        "fr": "Monza",
+        "en": "Monza"
+      }
+    }
+  },
+  {
+    "name": "Morges",
+    "qNumber": null,
+    "qNumbers": [
+      "Q109573489",
+      "Q110598650",
+      "Q22388872",
+      "Q684805",
+      "Q6912038",
+      "Q69401"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q109573489": {
+        "de": null,
+        "it": null,
+        "fr": "Morges",
+        "en": "Morges"
+      },
+      "Q110598650": {
+        "de": null,
+        "it": null,
+        "fr": "Morges",
+        "en": null
+      },
+      "Q22388872": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Morges"
+      },
+      "Q684805": {
+        "de": "Morges",
+        "it": null,
+        "fr": "Morges",
+        "en": "Morges"
+      },
+      "Q6912038": {
+        "de": null,
+        "it": null,
+        "fr": "Morges",
+        "en": "Morges"
+      },
+      "Q69401": {
+        "de": "Morges",
+        "it": "Morges",
+        "fr": "Morges",
+        "en": "Morges"
+      }
+    }
+  },
+  {
+    "name": "Morteau",
+    "qNumber": null,
+    "qNumbers": [
+      "Q200832",
+      "Q86659373",
+      "Q96756207"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q200832": {
+        "de": "Morteau",
+        "it": "Morteau",
+        "fr": "Morteau",
+        "en": "Morteau"
+      },
+      "Q86659373": {
+        "de": null,
+        "it": null,
+        "fr": "Morteau",
+        "en": "Morteau"
+      },
+      "Q96756207": {
+        "de": "Morteau",
+        "it": null,
+        "fr": "Ancienne Sambre",
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Motiers",
+    "qNumber": "Q689691",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Môtiers",
+      "it": "Môtiers",
+      "fr": "Môtiers",
+      "en": "Môtiers"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Moudon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22409836",
+      "Q70202"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22409836": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q70202": {
+        "de": "Moudon",
+        "it": "Moudon",
+        "fr": "Moudon",
+        "en": "Moudon"
+      }
+    }
+  },
+  {
+    "name": "Moutier",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22560112",
+      "Q67157"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22560112": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Moutier"
+      },
+      "Q67157": {
+        "de": "Moutier",
+        "it": "Moutier",
+        "fr": "Moutier",
+        "en": "Moutier"
+      }
+    }
+  },
+  {
+    "name": "Murgenthal",
+    "qNumber": "Q64478",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Murgenthal",
+      "it": "Murgenthal",
+      "fr": "Murgenthal",
+      "en": "Murgenthal"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Muri",
+    "qNumber": "Q69011",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Muri",
+      "it": "Muri",
+      "fr": "Muri",
+      "en": "Muri"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Murten",
+    "qNumber": "Q68283",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Murten",
+      "it": "Morat",
+      "fr": "Morat",
+      "en": "Murten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Mühlen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q133281690",
+      "Q134380784",
+      "Q1666627",
+      "Q1958411",
+      "Q695912",
+      "Q974527"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q133281690": {
+        "de": "Mühlen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q134380784": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q1666627": {
+        "de": "Mühlen",
+        "it": "Mühlen",
+        "fr": "Mühlen",
+        "en": "Mühlen"
+      },
+      "Q1958411": {
+        "de": "Mühlen",
+        "it": null,
+        "fr": null,
+        "en": "Mühlen"
+      },
+      "Q695912": {
+        "de": "Mühlen",
+        "it": "Mühlen",
+        "fr": "Mühlen",
+        "en": "Mühlen"
+      },
+      "Q974527": {
+        "de": "Mühlen",
+        "it": null,
+        "fr": "Mühlen",
+        "en": "Mühlen"
+      }
+    }
+  },
+  {
+    "name": "Münsingen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1413186",
+      "Q33465326",
+      "Q557809",
+      "Q69783"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1413186": {
+        "de": "Landkreis Münsingen",
+        "it": null,
+        "fr": "arrondissement de Münsingen",
+        "en": "Münsingen"
+      },
+      "Q33465326": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Münsingen"
+      },
+      "Q557809": {
+        "de": "Münsingen (Württemberg)",
+        "it": "Münsingen",
+        "fr": "Münsingen (Württemberg)",
+        "en": "Münsingen"
+      },
+      "Q69783": {
+        "de": "Münsingen",
+        "it": "Münsingen",
+        "fr": "Münsingen",
+        "en": "Münsingen"
+      }
+    }
+  },
+  {
+    "name": "Nauders",
+    "qNumber": null,
+    "qNumbers": [
+      "Q18476584",
+      "Q21881864",
+      "Q663202"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q18476584": {
+        "de": "Nauders",
+        "it": "San Benedetto",
+        "fr": "San Benedetto",
+        "en": "Nauders"
+      },
+      "Q21881864": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Nauders"
+      },
+      "Q663202": {
+        "de": "Nauders",
+        "it": "Nauders",
+        "fr": "Nauders",
+        "en": "Nauders"
+      }
+    }
+  },
+  {
+    "name": "Nesslau",
+    "qNumber": null,
+    "qNumbers": [
+      "Q61721821",
+      "Q70720"
+    ],
+    "matchedIn": [
+      "Gemeinden ",
+      "ehem. Gemeinden"
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q61721821": {
+        "de": "Nesslau",
+        "it": "Nesslau",
+        "fr": "Nesslau",
+        "en": "Nesslau"
+      },
+      "Q70720": {
+        "de": "Nesslau",
+        "it": "Nesslau",
+        "fr": "Nesslau",
+        "en": "Nesslau"
+      }
+    }
+  },
+  {
+    "name": "Neuchâtel",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127430828",
+      "Q138011309",
+      "Q1441314",
+      "Q15836575",
+      "Q33696908",
+      "Q66765716",
+      "Q69345"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127430828": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Neuchâtel"
+      },
+      "Q138011309": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Neuchâtel"
+      },
+      "Q1441314": {
+        "de": "Neuchatel",
+        "it": null,
+        "fr": "Neuchatel",
+        "en": "Neuchatel"
+      },
+      "Q15836575": {
+        "de": "Neuchâtel",
+        "it": null,
+        "fr": null,
+        "en": "Neuchâtel"
+      },
+      "Q33696908": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Neuchâtel"
+      },
+      "Q66765716": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Neuchatel"
+      },
+      "Q69345": {
+        "de": "Neuenburg",
+        "it": "Neuchâtel",
+        "fr": "Neuchâtel",
+        "en": "Neuchâtel"
+      }
+    }
+  },
+  {
+    "name": "Neueneck",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Niederweningen",
+    "qNumber": "Q66411",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Niederweningen",
+      "it": "Niederweningen",
+      "fr": "Niederweningen",
+      "en": "Niederweningen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Nyon",
+    "qNumber": "Q64027",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Nyon",
+      "it": "Nyon",
+      "fr": "Nyon",
+      "en": "Nyon"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Ob. Albis",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Oensingen",
+    "qNumber": "Q65846",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Oensingen",
+      "it": "Oensingen",
+      "fr": "Oensingen",
+      "en": "Oensingen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Offenburg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1008493",
+      "Q112675180",
+      "Q1622452",
+      "Q32205491",
+      "Q4044",
+      "Q99365145"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1008493": {
+        "de": "Bundestagswahlkreis Offenburg",
+        "it": null,
+        "fr": null,
+        "en": "Offenburg"
+      },
+      "Q112675180": {
+        "de": "Pfarrei Offenburg",
+        "it": "Offenburg",
+        "fr": "Offenburg",
+        "en": "Offenburg"
+      },
+      "Q1622452": {
+        "de": "Landkreis Offenburg",
+        "it": null,
+        "fr": "arrondissement d'Offenburg",
+        "en": "Offenburg"
+      },
+      "Q32205491": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Offenburg"
+      },
+      "Q4044": {
+        "de": "Offenburg",
+        "it": "Offenburg",
+        "fr": "Offenbourg",
+        "en": "Offenburg"
+      },
+      "Q99365145": {
+        "de": "Offenburg",
+        "it": null,
+        "fr": null,
+        "en": "Offenburg"
+      }
+    }
+  },
+  {
+    "name": "Olivone",
+    "qNumber": "Q690142",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Olivone",
+      "it": "Olivone",
+      "fr": "Olivone",
+      "en": "Olivone"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Olten",
+    "qNumber": "Q68129",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Olten",
+      "it": "Olten",
+      "fr": "Olten",
+      "en": "Olten"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Orbe",
+    "qNumber": "Q68213",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Orbe",
+      "it": "Orbe",
+      "fr": "Orbe",
+      "en": "Orbe"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Oron",
+    "qNumber": "Q70734",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Oron",
+      "it": "Oron",
+      "fr": "Oron",
+      "en": "Oron"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Osogna",
+    "qNumber": "Q67336",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Osogna",
+      "it": "Osogna",
+      "fr": "Osogna",
+      "en": "Osogna"
+    },
+    "translationsByQNumber": {
+      "Q29346246": {
+        "de": "Osogna",
+        "fr": "Osogna",
+        "it": "Osogna",
+        "en": "Osogna"
+      },
+      "Q67336": {
+        "de": "Osogna",
+        "fr": "Osogna",
+        "it": "Osogna",
+        "en": "Osogna"
+      }
+    }
+  },
+  {
+    "name": "Othmarsingen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22452667",
+      "Q65124"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22452667": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q65124": {
+        "de": "Othmarsingen",
+        "it": "Othmarsingen",
+        "fr": "Othmarsingen",
+        "en": "Othmarsingen"
+      }
+    }
+  },
+  {
+    "name": "Paris",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1018504",
+      "Q3181341",
+      "Q576584",
+      "Q79917",
+      "Q830149",
+      "Q90",
+      "Q984459"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1018504": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q3181341": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q576584": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q79917": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q830149": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q90": {
+        "de": "Paris",
+        "it": "Parigi",
+        "fr": "Paris",
+        "en": "Paris"
+      },
+      "Q984459": {
+        "de": "Paris",
+        "it": "Paris",
+        "fr": "Paris",
+        "en": "Paris"
+      }
+    }
+  },
+  {
+    "name": "Payerne",
+    "qNumber": "Q69525",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Payerne",
+      "it": "Payerne",
+      "fr": "Payerne",
+      "en": "Payerne"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Pfyn",
+    "qNumber": "Q64843",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Pfyn",
+      "it": "Pfyn",
+      "fr": "Pfyn",
+      "en": "Pfyn"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Pontarlier",
+    "qNumber": null,
+    "qNumbers": [
+      "Q214540",
+      "Q3397680"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q214540": {
+        "de": "Pontarlier",
+        "it": "Pontarlier",
+        "fr": "Pontarlier",
+        "en": "Pontarlier"
+      },
+      "Q3397680": {
+        "de": null,
+        "it": null,
+        "fr": "Pontarlier",
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Porrentruy",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127431057",
+      "Q22553629",
+      "Q22553635",
+      "Q68256"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127431057": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Porrentruy"
+      },
+      "Q22553629": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Porrentruy"
+      },
+      "Q22553635": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Porrentruy"
+      },
+      "Q68256": {
+        "de": "Pruntrut",
+        "it": "Porrentruy",
+        "fr": "Porrentruy",
+        "en": "Porrentruy"
+      }
+    }
+  },
+  {
+    "name": "Posieux",
+    "qNumber": "Q2105633",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Posieux",
+      "it": "Posieux",
+      "fr": "Posieux",
+      "en": "Posieux"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Rafz",
+    "qNumber": "Q66457",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Rafz",
+      "it": "Rafz",
+      "fr": "Rafz",
+      "en": "Rafz"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Ragaz",
+    "qNumber": "Q95759",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Bad Ragaz",
+      "it": "Bad Ragaz",
+      "fr": "Bad Ragaz",
+      "en": "Bad Ragaz"
+    },
+    "translationsByQNumber": {
+      "Q124615920": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Ragaz"
+      },
+      "Q62615450": {
+        "de": "Ragaz",
+        "fr": null,
+        "it": null,
+        "en": "Ragaz"
+      },
+      "Q76417795": {
+        "de": "Ragaz",
+        "fr": "Ragaz",
+        "it": "Ragaz",
+        "en": "Ragaz"
+      }
+    }
+  },
+  {
+    "name": "Randegg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q113138298",
+      "Q113138486",
+      "Q47501728",
+      "Q674430"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q113138298": {
+        "de": "Randegg",
+        "it": null,
+        "fr": null,
+        "en": "Randegg"
+      },
+      "Q113138486": {
+        "de": "Randegg",
+        "it": null,
+        "fr": null,
+        "en": "Randegg"
+      },
+      "Q47501728": {
+        "de": "Randegg",
+        "it": null,
+        "fr": "Randegg",
+        "en": "Randegg"
+      },
+      "Q674430": {
+        "de": "Randegg",
+        "it": "Randegg",
+        "fr": "Randegg",
+        "en": "Randegg"
+      }
+    }
+  },
+  {
+    "name": "Rapperschmyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Realp",
+    "qNumber": "Q67161",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Realp",
+      "it": "Realp",
+      "fr": "Realp",
+      "en": "Realp"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Reichenau",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1262375",
+      "Q1331148",
+      "Q2139125",
+      "Q502716",
+      "Q632880",
+      "Q662068"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1262375": {
+        "de": "Reichenau",
+        "it": null,
+        "fr": "Reichenau",
+        "en": "Reichenau"
+      },
+      "Q1331148": {
+        "de": "Reichenau",
+        "it": "Reichenau",
+        "fr": "Reichenau",
+        "en": "Reichenau"
+      },
+      "Q2139125": {
+        "de": "Reichenau",
+        "it": "Reichenau",
+        "fr": null,
+        "en": "Reichenau"
+      },
+      "Q502716": {
+        "de": "Reichenau",
+        "it": "Reichenau",
+        "fr": "Reichenau",
+        "en": "Reichenau"
+      },
+      "Q632880": {
+        "de": "Reichenau",
+        "it": "Reichenau",
+        "fr": "Reichenau",
+        "en": "Reichenau"
+      },
+      "Q662068": {
+        "de": "Reichenau",
+        "it": "Reichenau",
+        "fr": "Reichenau",
+        "en": "Reichenau"
+      }
+    }
+  },
+  {
+    "name": "Reiden",
+    "qNumber": "Q14614",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Reiden",
+      "it": "Reiden",
+      "fr": "Reiden",
+      "en": "Reiden"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Rheineck",
+    "qNumber": "Q69595",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Rheineck",
+      "it": "Rheineck",
+      "fr": "Rheineck",
+      "en": "Rheineck"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Rheinfelden",
+    "qNumber": null,
+    "qNumbers": [
+      "Q16077",
+      "Q22372648",
+      "Q269667"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q16077": {
+        "de": "Rheinfelden (Baden)",
+        "it": "Rheinfelden (Baden)",
+        "fr": "Rheinfelden (Baden)",
+        "en": "Rheinfelden"
+      },
+      "Q22372648": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Rheinfelden"
+      },
+      "Q269667": {
+        "de": "Rheinfelden",
+        "it": "Rheinfelden",
+        "fr": "Rheinfelden",
+        "en": "Rheinfelden"
+      }
+    }
+  },
+  {
+    "name": "Richterschwyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Riddes",
+    "qNumber": "Q68504",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Riddes",
+      "it": "Riddes",
+      "fr": "Riddes",
+      "en": "Riddes"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Riedern",
+    "qNumber": "Q660077",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Riedern",
+      "it": "Riedern",
+      "fr": "Riedern",
+      "en": "Riedern"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Riedwyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Riva",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1701765",
+      "Q18490782",
+      "Q18510467",
+      "Q19979018",
+      "Q7336944",
+      "Q754654",
+      "Q914108"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1701765": {
+        "de": "Riva",
+        "it": null,
+        "fr": null,
+        "en": "Riva"
+      },
+      "Q18490782": {
+        "de": null,
+        "it": "Riva",
+        "fr": "Riva",
+        "en": "Riva"
+      },
+      "Q18510467": {
+        "de": null,
+        "it": "Riva",
+        "fr": "Riva",
+        "en": "Riva"
+      },
+      "Q19979018": {
+        "de": "Riva",
+        "it": "Riva",
+        "fr": null,
+        "en": "Riva"
+      },
+      "Q7336944": {
+        "de": "Riva Records",
+        "it": "Riva (casa discografica)",
+        "fr": "Riva",
+        "en": "Riva"
+      },
+      "Q754654": {
+        "de": "Riva",
+        "it": "Riva",
+        "fr": "Riva",
+        "en": "Riva"
+      },
+      "Q914108": {
+        "de": "Riva",
+        "it": "Riva",
+        "fr": "Riva",
+        "en": "Riva"
+      }
+    }
+  },
+  {
+    "name": "Rochefort",
+    "qNumber": "Q70219",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Rochefort",
+      "it": "Rochefort",
+      "fr": "Rochefort",
+      "en": "Rochefort"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Rolle",
+    "qNumber": "Q69570",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Rolle",
+      "it": "Rolle",
+      "fr": "Rolle",
+      "en": "Rolle"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Romanshorn",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22460440",
+      "Q65125"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22460440": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Romanshorn"
+      },
+      "Q65125": {
+        "de": "Romanshorn",
+        "it": "Romanshorn",
+        "fr": "Romanshorn",
+        "en": "Romanshorn"
+      }
+    }
+  },
+  {
+    "name": "Romont",
+    "qNumber": null,
+    "qNumbers": [
+      "Q67103",
+      "Q70281"
+    ],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q67103": {
+        "de": "Romont",
+        "it": "Romont",
+        "fr": "Romont",
+        "en": "Romont"
+      },
+      "Q70281": {
+        "de": "Romont",
+        "it": "Romont",
+        "fr": "Romont",
+        "en": "Romont"
+      }
+    }
+  },
+  {
+    "name": "Rorschach",
+    "qNumber": "Q68250",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Rorschach",
+      "it": "Rorschach",
+      "fr": "Rorschach",
+      "en": "Rorschach"
+    },
+    "translationsByQNumber": {
+      "Q115118936": {
+        "de": null,
+        "fr": "Rorschach",
+        "it": "Rorschach",
+        "en": "Rorschach"
+      },
+      "Q122133226": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q122133228": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q19888774": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Rorschach"
+      },
+      "Q2346769": {
+        "de": "Rorschach",
+        "fr": "Rorschach",
+        "it": "Rorschach",
+        "en": "Rorschach"
+      },
+      "Q30081522": {
+        "de": "Rorschach",
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q30083041": {
+        "de": "Rorschach",
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q30083048": {
+        "de": "Rorschach",
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q30087565": {
+        "de": "Rorschach",
+        "fr": null,
+        "it": null,
+        "en": null
+      },
+      "Q64522437": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Rorschach"
+      },
+      "Q68250": {
+        "de": "Rorschach",
+        "fr": "Rorschach",
+        "it": "Rorschach",
+        "en": "Rorschach"
+      },
+      "Q73241932": {
+        "de": null,
+        "fr": "Rorschach",
+        "it": null,
+        "en": "Rorschach"
+      },
+      "Q7366844": {
+        "de": "Rorschach",
+        "fr": "Rorschach",
+        "it": "Rorschach",
+        "en": "Rorschach"
+      },
+      "Q77979731": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": "Rorschach"
+      }
+    }
+  },
+  {
+    "name": "Saanen",
+    "qNumber": "Q66629",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saanen",
+      "it": "Saanen",
+      "fr": "Saanen",
+      "en": "Saanen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saignelégier",
+    "qNumber": "Q67666",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saignelégier",
+      "it": "Saignelégier",
+      "fr": "Saignelégier",
+      "en": "Saignelégier"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saint-Aubin",
+    "qNumber": "Q70403",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saint-Aubin",
+      "it": "Saint-Aubin",
+      "fr": "Saint-Aubin",
+      "en": "Saint-Aubin"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saint-Cergue",
+    "qNumber": "Q69335",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saint-Cergue",
+      "it": "Saint-Cergue",
+      "fr": "Saint-Cergue",
+      "en": "Saint-Cergue"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saint-Gingolph",
+    "qNumber": "Q70528",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saint-Gingolph",
+      "it": "Saint-Gingolph",
+      "fr": "Saint-Gingolph",
+      "en": "Saint-Gingolph"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saint-Imier",
+    "qNumber": "Q66390",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saint-Imier",
+      "it": "Saint-Imier",
+      "fr": "Saint-Imier",
+      "en": "Saint-Imier"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Saint-Maurice",
+    "qNumber": "Q69545",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Saint-Maurice",
+      "it": "Saint-Maurice",
+      "fr": "Saint-Maurice",
+      "en": "Saint-Maurice"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sainte-Croix",
+    "qNumber": "Q70090",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sainte-Croix",
+      "it": "Sainte-Croix",
+      "fr": "Sainte-Croix",
+      "en": "Sainte-Croix"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Salins",
+    "qNumber": null,
+    "qNumbers": [
+      "Q242092",
+      "Q2532501",
+      "Q3469811",
+      "Q689668"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q242092": {
+        "de": "Salins",
+        "it": "Salins",
+        "fr": "Salins",
+        "en": "Salins"
+      },
+      "Q2532501": {
+        "de": "Salins",
+        "it": "Salins",
+        "fr": "Salins",
+        "en": "Salins"
+      },
+      "Q3469811": {
+        "de": "Salins",
+        "it": null,
+        "fr": "Salins",
+        "en": "Salins"
+      },
+      "Q689668": {
+        "de": "Salins VS",
+        "it": "Salins",
+        "fr": "Salins",
+        "en": "Salins"
+      }
+    }
+  },
+  {
+    "name": "Sallenches Chamouny",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Samedan",
+    "qNumber": "Q69085",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Samedan",
+      "it": "Samedan",
+      "fr": "Samedan",
+      "en": "Samedan"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "San Bernhardino",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sarmenstorf",
+    "qNumber": "Q65217",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sarmenstorf",
+      "it": "Sarmenstorf",
+      "fr": "Sarmenstorf",
+      "en": "Sarmenstorf"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sarnen",
+    "qNumber": "Q63964",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sarnen",
+      "it": "Sarnen",
+      "fr": "Sarnen",
+      "en": "Sarnen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sattel",
+    "qNumber": "Q65465",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sattel",
+      "it": "Sattel",
+      "fr": "Sattel",
+      "en": "Sattel"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Savagnier",
+    "qNumber": "Q70483",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Savagnier",
+      "it": "Savagnier",
+      "fr": "Savagnier",
+      "en": "Savagnier"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Scanfs",
+    "qNumber": "Q65552",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "S-chanf",
+      "it": "S-chanf",
+      "fr": "S-chanf",
+      "en": "S-chanf"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Schachen",
+    "qNumber": "Q99408795",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Schachen",
+      "it": null,
+      "fr": null,
+      "en": "Schachen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Schaffhausen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127431204",
+      "Q135447863",
+      "Q136544623",
+      "Q1531820",
+      "Q9009"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127431204": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Schaffhausen"
+      },
+      "Q135447863": {
+        "de": "Schaffhausen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q136544623": {
+        "de": "Schaffhausen",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q1531820": {
+        "de": "Schaffhausen",
+        "it": "Schaffhausen",
+        "fr": "Schaffhausen",
+        "en": "Schaffhausen"
+      },
+      "Q9009": {
+        "de": "Schaffhausen",
+        "it": "Sciaffusa",
+        "fr": "Schaffhouse",
+        "en": "Schaffhausen"
+      }
+    }
+  },
+  {
+    "name": "Schirmensee",
+    "qNumber": "Q56284756",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Feldbach / Schirmensee",
+      "it": "Feldbach / Schirmensee",
+      "fr": "Feldbach / Schirmensee",
+      "en": "Feldbach / Schirmensee"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Schmerikon",
+    "qNumber": "Q66684",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Schmerikon",
+      "it": "Schmerikon",
+      "fr": "Schmerikon",
+      "en": "Schmerikon"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Schuls",
+    "qNumber": null,
+    "qNumbers": [
+      "Q20617002",
+      "Q69079"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q20617002": {
+        "de": "Scuol (Ort)",
+        "it": null,
+        "fr": null,
+        "en": "Scuol"
+      },
+      "Q69079": {
+        "de": "Scuol",
+        "it": "Scuol",
+        "fr": "Scuol",
+        "en": "Scuol"
+      }
+    }
+  },
+  {
+    "name": "Schwanden",
+    "qNumber": null,
+    "qNumbers": [
+      "Q2253008",
+      "Q56257485",
+      "Q659947"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q2253008": {
+        "de": "Schwanden",
+        "it": "Schwandeninglese",
+        "fr": null,
+        "en": "Schwanden"
+      },
+      "Q56257485": {
+        "de": "Schwanden",
+        "it": "Schwanden",
+        "fr": "Schwanden",
+        "en": "Schwanden"
+      },
+      "Q659947": {
+        "de": "Schwanden",
+        "it": "Schwanden",
+        "fr": "Schwanden",
+        "en": "Schwanden"
+      }
+    }
+  },
+  {
+    "name": "Schwarzenburg",
+    "qNumber": "Q70708",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Schwarzenburg",
+      "it": "Schwarzenburg",
+      "fr": "Schwarzenburg",
+      "en": "Schwarzenburg"
+    },
+    "translationsByQNumber": {
+      "Q240237": {
+        "de": "Schwarzenburg",
+        "fr": "Schwarzenburg",
+        "it": "Schwarzenburg",
+        "en": "Schwarzenburg"
+      },
+      "Q70708": {
+        "de": "Schwarzenburg",
+        "fr": "Schwarzenburg",
+        "it": "Schwarzenburg",
+        "en": "Schwarzenburg"
+      }
+    }
+  },
+  {
+    "name": "Schwyz",
+    "qNumber": "Q68155",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Schwyz",
+      "it": "Svitto",
+      "fr": "Schwytz",
+      "en": "Schwyz"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Schönbühl",
+    "qNumber": null,
+    "qNumbers": [
+      "Q108086659",
+      "Q113989171",
+      "Q124323426",
+      "Q30611459",
+      "Q30618122",
+      "Q31324844",
+      "Q31324859",
+      "Q31324875",
+      "Q31324892",
+      "Q50836310",
+      "Q51507751",
+      "Q99437668"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q108086659": {
+        "de": "Schönbühl",
+        "it": "Schönbühl",
+        "fr": "Schönbühl",
+        "en": "Schönbühl"
+      },
+      "Q113989171": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q124323426": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q30611459": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q30618122": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q31324844": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q31324859": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q31324875": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q31324892": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q50836310": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q51507751": {
+        "de": "Schönbühl",
+        "it": null,
+        "fr": null,
+        "en": "Schönbühl"
+      },
+      "Q99437668": {
+        "de": "Schönbühl",
+        "it": "Schönbühl",
+        "fr": "Schönbühl",
+        "en": "Schönbühl"
+      }
+    }
+  },
+  {
+    "name": "Schönengrund",
+    "qNumber": "Q64296",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Schönengrund",
+      "it": "Schönengrund",
+      "fr": "Schönengrund",
+      "en": "Schönengrund"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sennwald",
+    "qNumber": "Q69393",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sennwald",
+      "it": "Sennwald",
+      "fr": "Sennwald",
+      "en": "Sennwald"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sevelen",
+    "qNumber": "Q69612",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sevelen SG",
+      "it": "Sevelen",
+      "fr": "Sevelen",
+      "en": "Sevelen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Siders",
+    "qNumber": "Q68297",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Siders",
+      "it": "Sierre",
+      "fr": "Sierre",
+      "en": "Sierre"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Silvaplana",
+    "qNumber": "Q65254",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Silvaplana",
+      "it": "Silvaplana",
+      "fr": "Silvaplana",
+      "en": "Silvaplana"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Simplon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q163879",
+      "Q19515196",
+      "Q2288364",
+      "Q3484785",
+      "Q48645110",
+      "Q685048",
+      "Q69194"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q163879": {
+        "de": "Simplon",
+        "it": "Simplon",
+        "fr": "Simplon",
+        "en": "Simplon"
+      },
+      "Q19515196": {
+        "de": "Simplon",
+        "it": null,
+        "fr": null,
+        "en": "Simplon"
+      },
+      "Q2288364": {
+        "de": "Simplon",
+        "it": null,
+        "fr": "Simplon",
+        "en": "Simplon"
+      },
+      "Q3484785": {
+        "de": "Simplon",
+        "it": "Simplon",
+        "fr": "Simplon",
+        "en": "Simplon"
+      },
+      "Q48645110": {
+        "de": "Simplon",
+        "it": null,
+        "fr": "Simplon",
+        "en": "Simplon"
+      },
+      "Q685048": {
+        "de": "Simplon",
+        "it": "Dipartimento del Sempione",
+        "fr": "Simplon",
+        "en": "Simplon"
+      },
+      "Q69194": {
+        "de": "Simplon",
+        "it": "Sempione",
+        "fr": "Simplon",
+        "en": "Simplon"
+      }
+    }
+  },
+  {
+    "name": "Sins",
+    "qNumber": "Q64372",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sins",
+      "it": "Sins",
+      "fr": "Sins",
+      "en": "Sins"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sion",
+    "qNumber": null,
+    "qNumbers": [
+      "Q19734253",
+      "Q339533",
+      "Q68136",
+      "Q934795"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q19734253": {
+        "de": null,
+        "it": null,
+        "fr": "Sion",
+        "en": "Sion"
+      },
+      "Q339533": {
+        "de": "Sion",
+        "it": "Sion",
+        "fr": "Sion",
+        "en": "Sion"
+      },
+      "Q68136": {
+        "de": "Sitten",
+        "it": "Sion",
+        "fr": "Sion",
+        "en": "Sion"
+      },
+      "Q934795": {
+        "de": null,
+        "it": null,
+        "fr": "Sion",
+        "en": "Sion"
+      }
+    }
+  },
+  {
+    "name": "Solothurn",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127431307",
+      "Q68965"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127431307": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Solothurn"
+      },
+      "Q68965": {
+        "de": "Solothurn",
+        "it": "Soletta",
+        "fr": "Soleure",
+        "en": "Solothurn"
+      }
+    }
+  },
+  {
+    "name": "Sonceboz",
+    "qNumber": "Q67292",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Sonceboz-Sombeval",
+      "it": "Sonceboz-Sombeval",
+      "fr": "Sonceboz-Sombeval",
+      "en": "Sonceboz-Sombeval"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Splügen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22571875",
+      "Q64195"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22571875": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Splügen"
+      },
+      "Q64195": {
+        "de": "Splügen",
+        "it": "Splügen",
+        "fr": "Splügen",
+        "en": "Splügen"
+      }
+    }
+  },
+  {
+    "name": "St. Gallen",
+    "qNumber": "Q25607",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "St. Gallen",
+      "it": "San Gallo",
+      "fr": "Saint-Gall",
+      "en": "St. Gallen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Stammheim",
+    "qNumber": "Q60322693",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Stammheim",
+      "it": "Stammheim",
+      "fr": "Stammheim",
+      "en": "Stammheim"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Steckborn",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22386241",
+      "Q67123"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22386241": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Steckborn"
+      },
+      "Q67123": {
+        "de": "Steckborn",
+        "it": "Steckborn",
+        "fr": "Steckborn",
+        "en": "Steckborn"
+      }
+    }
+  },
+  {
+    "name": "Stein",
+    "qNumber": null,
+    "qNumbers": [
+      "Q65914",
+      "Q67193"
+    ],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q65914": {
+        "de": "Stein",
+        "it": "Stein",
+        "fr": "Stein",
+        "en": "Stein"
+      },
+      "Q67193": {
+        "de": "Stein",
+        "it": "Stein",
+        "fr": "Stein",
+        "en": "Stein"
+      }
+    }
+  },
+  {
+    "name": "Stockach",
+    "qNumber": null,
+    "qNumbers": [
+      "Q106881106",
+      "Q110954832",
+      "Q111008868",
+      "Q111240573",
+      "Q133268933",
+      "Q133278981",
+      "Q133296698",
+      "Q135317316",
+      "Q1803482",
+      "Q2350567",
+      "Q58054974",
+      "Q61752",
+      "Q69634072"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q106881106": {
+        "de": "Stöckach",
+        "it": null,
+        "fr": "Stökach",
+        "en": "Stöckach"
+      },
+      "Q110954832": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q111008868": {
+        "de": "Stockach",
+        "it": null,
+        "fr": "Stockach",
+        "en": "Stockach"
+      },
+      "Q111240573": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": "Stockach"
+      },
+      "Q133268933": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q133278981": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q133296698": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q135317316": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": null
+      },
+      "Q1803482": {
+        "de": "Landkreis Stockach",
+        "it": null,
+        "fr": "arrondissement de Stockach",
+        "en": "Stockach"
+      },
+      "Q2350567": {
+        "de": "Stockach (Gomaringen)",
+        "it": null,
+        "fr": "Stockach",
+        "en": "Stockach"
+      },
+      "Q58054974": {
+        "de": "Stockach",
+        "it": null,
+        "fr": null,
+        "en": "Stockach"
+      },
+      "Q61752": {
+        "de": "Stockach",
+        "it": "Stockach",
+        "fr": "Stockach",
+        "en": "Stockach"
+      },
+      "Q69634072": {
+        "de": "Stockach",
+        "it": null,
+        "fr": "Stockach",
+        "en": "Stockach"
+      }
+    }
+  },
+  {
+    "name": "Strassburg-Sarreburg",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Stühlingen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q27510766",
+      "Q32749734",
+      "Q527783"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q27510766": {
+        "de": "Bahnhof Stühlingen",
+        "it": null,
+        "fr": "Stühlingen",
+        "en": null
+      },
+      "Q32749734": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Stühlingen"
+      },
+      "Q527783": {
+        "de": "Stühlingen",
+        "it": "Stühlingen",
+        "fr": "Stühlingen",
+        "en": "Stühlingen"
+      }
+    }
+  },
+  {
+    "name": "Sulgen",
+    "qNumber": "Q65971",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sulgen",
+      "it": "Sulgen",
+      "fr": "Sulgen",
+      "en": "Sulgen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Sumiswald",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22434595",
+      "Q68167"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22434595": {
+        "de": "Sumiswald",
+        "it": null,
+        "fr": "Sumiswald",
+        "en": "Sumiswald"
+      },
+      "Q68167": {
+        "de": "Sumiswald",
+        "it": "Sumiswald",
+        "fr": "Sumiswald",
+        "en": "Sumiswald"
+      }
+    }
+  },
+  {
+    "name": "Sursee",
+    "qNumber": "Q7123",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Sursee",
+      "it": "Sursee",
+      "fr": "Sursee",
+      "en": "Sursee"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Säckingen",
+    "qNumber": "Q1803490",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Landkreis Säckingen",
+      "it": null,
+      "fr": "arrondissement de Säckingen",
+      "en": "Säckingen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Tavannes",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22467577",
+      "Q67203"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22467577": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Tavannes"
+      },
+      "Q67203": {
+        "de": "Tavannes",
+        "it": "Tavannes",
+        "fr": "Tavannes",
+        "en": "Tavannes"
+      }
+    }
+  },
+  {
+    "name": "Thonon",
+    "qNumber": null,
+    "qNumbers": [
+      "Q126690826",
+      "Q16103865"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q126690826": {
+        "de": null,
+        "it": null,
+        "fr": "Thonon",
+        "en": "Thonon"
+      },
+      "Q16103865": {
+        "de": "Thonon",
+        "it": "Thonon",
+        "fr": "Thonon",
+        "en": "Thonon"
+      }
+    }
+  },
+  {
+    "name": "Thun",
+    "qNumber": null,
+    "qNumbers": [
+      "Q3990930",
+      "Q68978"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q3990930": {
+        "de": "THUN",
+        "it": "Thun",
+        "fr": null,
+        "en": "Thun"
+      },
+      "Q68978": {
+        "de": "Thun",
+        "it": "Thun",
+        "fr": "Thoune",
+        "en": "Thun"
+      }
+    }
+  },
+  {
+    "name": "Thusis",
+    "qNumber": null,
+    "qNumbers": [
+      "Q66171",
+      "Q664541"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q66171": {
+        "de": "Thusis",
+        "it": "Thusis",
+        "fr": "Thusis",
+        "en": "Thusis"
+      },
+      "Q664541": {
+        "de": "Kreis Thusis",
+        "it": null,
+        "fr": "Thusis",
+        "en": "Thusis"
+      }
+    }
+  },
+  {
+    "name": "Tiefenkasten",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Trogen",
+    "qNumber": "Q68189",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Trogen",
+      "it": "Trogen",
+      "fr": "Trogen",
+      "en": "Trogen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Truns",
+    "qNumber": "Q64951",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Trun",
+      "it": "Trun",
+      "fr": "Trun",
+      "en": "Trun"
+    },
+    "translationsByQNumber": {
+      "Q359267": {
+        "de": "Trun",
+        "fr": "Trun",
+        "it": "Trun",
+        "en": "Trun"
+      },
+      "Q64951": {
+        "de": "Trun",
+        "fr": "Trun",
+        "it": "Trun",
+        "en": "Trun"
+      }
+    }
+  },
+  {
+    "name": "Turin",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1938221",
+      "Q2239935",
+      "Q2779405",
+      "Q3452617",
+      "Q495",
+      "Q7854947"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1938221": {
+        "de": "Turin",
+        "it": "Turin",
+        "fr": "Turin",
+        "en": "Turin"
+      },
+      "Q2239935": {
+        "de": "Turin",
+        "it": "Turin",
+        "fr": "Turin",
+        "en": "Turin"
+      },
+      "Q2779405": {
+        "de": "Turín",
+        "it": "Turín",
+        "fr": "Turín",
+        "en": "Turín"
+      },
+      "Q3452617": {
+        "de": null,
+        "it": null,
+        "fr": "Turin",
+        "en": "Turin"
+      },
+      "Q495": {
+        "de": "Turin",
+        "it": "Torino",
+        "fr": "Turin",
+        "en": "Turin"
+      },
+      "Q7854947": {
+        "de": "Turin",
+        "it": "Turin",
+        "fr": "Turin",
+        "en": "Turin"
+      }
+    }
+  },
+  {
+    "name": "Turtmann",
+    "qNumber": "Q70054",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Turtmann",
+      "it": "Turtmann",
+      "fr": "Tourtemagne",
+      "en": "Turtmann"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Tägerwilen",
+    "qNumber": "Q66188",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Tägerwilen",
+      "it": "Tägerwilen",
+      "fr": "Tägerwilen",
+      "en": "Tägerwilen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Ulm",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1877375",
+      "Q2475296",
+      "Q2943804",
+      "Q3012",
+      "Q964370"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1877375": {
+        "de": "Ulm",
+        "it": "Ulm",
+        "fr": "Ulm",
+        "en": "Ulm"
+      },
+      "Q2475296": {
+        "de": "Ulm",
+        "it": null,
+        "fr": "Ulm",
+        "en": "Ulm"
+      },
+      "Q2943804": {
+        "de": null,
+        "it": "Ulm",
+        "fr": "Ulm",
+        "en": "Ulm"
+      },
+      "Q3012": {
+        "de": "Ulm",
+        "it": "Ulm",
+        "fr": "Ulm",
+        "en": "Ulm"
+      },
+      "Q964370": {
+        "de": "Ulm,  Montana",
+        "it": "Ulm",
+        "fr": "Ulm",
+        "en": "Ulm"
+      }
+    }
+  },
+  {
+    "name": "Undervelier",
+    "qNumber": "Q70416",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Undervelier",
+      "it": "Undervelier",
+      "fr": "Undervelier",
+      "en": "Undervelier"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Unterhallau",
+    "qNumber": "Q69172",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Hallau",
+      "it": "Hallau",
+      "fr": "Hallau",
+      "en": "Hallau"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Unterseen",
+    "qNumber": "Q67097",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Unterseen",
+      "it": "Unterseen",
+      "fr": "Unterseen",
+      "en": "Unterseen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Urseren",
+    "qNumber": "Q675685",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Urseren",
+      "it": "Valle di Orsera",
+      "fr": "Urseren",
+      "en": "Urseren"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Uster",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22400120",
+      "Q64032"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22400120": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Uster"
+      },
+      "Q64032": {
+        "de": "Uster",
+        "it": "Uster",
+        "fr": "Uster",
+        "en": "Uster"
+      }
+    }
+  },
+  {
+    "name": "Uznach",
+    "qNumber": "Q67106",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Uznach",
+      "it": "Uznach",
+      "fr": "Uznach",
+      "en": "Uznach"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Varenna",
+    "qNumber": null,
+    "qNumbers": [
+      "Q30031556",
+      "Q4008701",
+      "Q42776"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q30031556": {
+        "de": "Varenna",
+        "it": "Varenna",
+        "fr": "Varenna",
+        "en": "Varenna"
+      },
+      "Q4008701": {
+        "de": "Varenna",
+        "it": "Varenna",
+        "fr": null,
+        "en": "Varenna"
+      },
+      "Q42776": {
+        "de": "Varenna",
+        "it": "Varenna",
+        "fr": "Varenne",
+        "en": "Varenna"
+      }
+    }
+  },
+  {
+    "name": "Verrières",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1110239",
+      "Q1228957",
+      "Q1418934",
+      "Q1626408",
+      "Q245014",
+      "Q587714",
+      "Q751295",
+      "Q780175"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1110239": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q1228957": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q1418934": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q1626408": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q245014": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q587714": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q751295": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      },
+      "Q780175": {
+        "de": "Verrières",
+        "it": "Verrières",
+        "fr": "Verrières",
+        "en": "Verrières"
+      }
+    }
+  },
+  {
+    "name": "Vevey",
+    "qNumber": null,
+    "qNumbers": [
+      "Q21031199",
+      "Q68160"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q21031199": {
+        "de": "Vevey",
+        "it": null,
+        "fr": "Vevey",
+        "en": "Vevey"
+      },
+      "Q68160": {
+        "de": "Vevey",
+        "it": "Vevey",
+        "fr": "Vevey",
+        "en": "Vevey"
+      }
+    }
+  },
+  {
+    "name": "Viesch",
+    "qNumber": "Q68051",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Fiesch",
+      "it": "Fiesch",
+      "fr": "Fiesch",
+      "en": "Fiesch"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Vionnaz",
+    "qNumber": "Q69549",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Vionnaz",
+      "it": "Vionnaz",
+      "fr": "Vionnaz",
+      "en": "Vionnaz"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Vogogna",
+    "qNumber": null,
+    "qNumbers": [
+      "Q23735",
+      "Q30031936"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q23735": {
+        "de": "Vogogna",
+        "it": "Vogogna",
+        "fr": "Vogogna",
+        "en": "Vogogna"
+      },
+      "Q30031936": {
+        "de": "Vogogna",
+        "it": "Vogogna",
+        "fr": "Vogogna",
+        "en": "Vogogna"
+      }
+    }
+  },
+  {
+    "name": "Wald",
+    "qNumber": null,
+    "qNumbers": [
+      "Q67175",
+      "Q67251",
+      "Q67272"
+    ],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q67175": {
+        "de": "Wald",
+        "it": "Wald",
+        "fr": "Wald",
+        "en": "Wald"
+      },
+      "Q67251": {
+        "de": "Wald",
+        "it": "Wald",
+        "fr": "Wald",
+        "en": "Wald"
+      },
+      "Q67272": {
+        "de": "Wald",
+        "it": "Wald",
+        "fr": "Wald",
+        "en": "Wald"
+      }
+    }
+  },
+  {
+    "name": "Waldenburg",
+    "qNumber": "Q67092",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Waldenburg",
+      "it": "Waldenburg",
+      "fr": "Waldenburg",
+      "en": "Waldenburg"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Waldshut",
+    "qNumber": null,
+    "qNumbers": [
+      "Q1008694",
+      "Q47501200",
+      "Q8200"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q1008694": {
+        "de": "Bundestagswahlkreis Waldshut",
+        "it": null,
+        "fr": null,
+        "en": "Waldshut"
+      },
+      "Q47501200": {
+        "de": "Waldshut",
+        "it": null,
+        "fr": "Waldshut",
+        "en": "Waldshut"
+      },
+      "Q8200": {
+        "de": "Landkreis Waldshut",
+        "it": "circondario di Waldshut",
+        "fr": "Waldshut",
+        "en": "Waldshut"
+      }
+    }
+  },
+  {
+    "name": "Walkringen",
+    "qNumber": "Q67460",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Walkringen",
+      "it": "Walkringen",
+      "fr": "Walkringen",
+      "en": "Walkringen"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Wallenstadt",
+    "qNumber": "Q64191",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Walenstadt",
+      "it": "Walenstadt",
+      "fr": "Walenstadt",
+      "en": "Walenstadt"
+    },
+    "translationsByQNumber": {
+      "Q134879040": {
+        "de": null,
+        "fr": null,
+        "it": "Wallenstadt",
+        "en": null
+      },
+      "Q85451529": {
+        "de": null,
+        "fr": null,
+        "it": null,
+        "en": null
+      }
+    }
+  },
+  {
+    "name": "Wattwyl",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Weesen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22559178",
+      "Q2554090",
+      "Q69644"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22559178": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Weesen"
+      },
+      "Q2554090": {
+        "de": "Weesen",
+        "it": "Weesen (Südheide)",
+        "fr": "Weesen",
+        "en": "Weesen"
+      },
+      "Q69644": {
+        "de": "Weesen",
+        "it": "Weesen",
+        "fr": "Weesen",
+        "en": "Weesen"
+      }
+    }
+  },
+  {
+    "name": "Weinfelden",
+    "qNumber": "Q68258",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Weinfelden",
+      "it": "Weinfelden",
+      "fr": "Weinfelden",
+      "en": "Weinfelden"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Weissenburg",
+    "qNumber": null,
+    "qNumbers": [
+      "Q15134717",
+      "Q2556968",
+      "Q2556971",
+      "Q29561134",
+      "Q49594"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q15134717": {
+        "de": "Weißenburg",
+        "it": null,
+        "fr": null,
+        "en": "Weißenburg"
+      },
+      "Q2556968": {
+        "de": "Weißenburg",
+        "it": "Weißenburg",
+        "fr": "Weißenburg",
+        "en": "Weißenburg"
+      },
+      "Q2556971": {
+        "de": "Weißenburg",
+        "it": null,
+        "fr": null,
+        "en": "Weißenburg"
+      },
+      "Q29561134": {
+        "de": "Weissenburg",
+        "it": "Weissenburg",
+        "fr": "Weissenburg",
+        "en": "Weissenburg"
+      },
+      "Q49594": {
+        "de": "Landkreis Weißenburg in Bayern",
+        "it": null,
+        "fr": "arrondissement de Weißenburg in Bayern",
+        "en": "Weißenburg"
+      }
+    }
+  },
+  {
+    "name": "Welschenrohr",
+    "qNumber": "Q66376",
+    "qNumbers": [],
+    "matchedIn": [
+      "ehem. Gemeinden"
+    ],
+    "translations": {
+      "de": "Welschenrohr",
+      "it": "Welschenrohr",
+      "fr": "Welschenrohr",
+      "en": "Welschenrohr"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Wezikon",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Wildhaus",
+    "qNumber": "Q597413",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Wildhaus",
+      "it": "Wildhaus",
+      "fr": "Wildhaus",
+      "en": "Wildhaus"
+    },
+    "translationsByQNumber": {
+      "Q2570720": {
+        "de": "Wildhaus",
+        "fr": "Wildhaus",
+        "it": "Wildhaus",
+        "en": "Wildhaus"
+      },
+      "Q597413": {
+        "de": "Wildhaus",
+        "fr": "Wildhaus",
+        "it": "Wildhaus",
+        "en": "Wildhaus"
+      }
+    }
+  },
+  {
+    "name": "Winterthur",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22628095",
+      "Q2585164",
+      "Q9125"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22628095": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Winterthur"
+      },
+      "Q2585164": {
+        "de": "Winterthur",
+        "it": null,
+        "fr": "Winterthur",
+        "en": "Winterthur"
+      },
+      "Q9125": {
+        "de": "Winterthur",
+        "it": "Winterthur",
+        "fr": "Winterthour",
+        "en": "Winterthur"
+      }
+    }
+  },
+  {
+    "name": "Wohlen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q22630188",
+      "Q22630200",
+      "Q68244"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q22630188": {
+        "de": "Wohlen AG",
+        "it": null,
+        "fr": "Wohlen AG",
+        "en": "Wohlen"
+      },
+      "Q22630200": {
+        "de": "Wohlen BE",
+        "it": null,
+        "fr": null,
+        "en": "Wohlen"
+      },
+      "Q68244": {
+        "de": "Wohlen",
+        "it": "Wohlen",
+        "fr": "Wohlen",
+        "en": "Wohlen"
+      }
+    }
+  },
+  {
+    "name": "Wohlhausen",
+    "qNumber": "Q1625287",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Wohlhausen",
+      "it": "Wohlhausen",
+      "fr": "Wohlhausen",
+      "en": "Wohlhausen"
+    },
+    "translationsByQNumber": {
+      "Q110653365": {
+        "de": "Wohlhausen",
+        "fr": null,
+        "it": null,
+        "en": "Wohlhausen"
+      },
+      "Q1625287": {
+        "de": "Wohlhausen",
+        "fr": "Wohlhausen",
+        "it": "Wohlhausen",
+        "en": "Wohlhausen"
+      }
+    }
+  },
+  {
+    "name": "Wyl",
+    "qNumber": "Q113245285",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": null,
+      "it": null,
+      "fr": null,
+      "en": "Westbury East Loop"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Yverdon",
+    "qNumber": "Q683081",
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": {
+      "de": "Schloss Yverdon",
+      "it": "castello di Yverdon",
+      "fr": "château d'Yverdon",
+      "en": "Yverdon-les-Bains Castle"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Zernetz",
+    "qNumber": null,
+    "qNumbers": [],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Zofingen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q127431726",
+      "Q63986"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q127431726": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Zofingen"
+      },
+      "Q63986": {
+        "de": "Zofingen",
+        "it": "Zofingen",
+        "fr": "Zofingue",
+        "en": "Zofingen"
+      }
+    }
+  },
+  {
+    "name": "Zug",
+    "qNumber": null,
+    "qNumbers": [
+      "Q108093967",
+      "Q131824717",
+      "Q228253",
+      "Q228257",
+      "Q3100850",
+      "Q68144"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q108093967": {
+        "de": "Zug",
+        "it": "Zug",
+        "fr": "Zug",
+        "en": "Zug"
+      },
+      "Q131824717": {
+        "de": "Zug",
+        "it": null,
+        "fr": null,
+        "en": "Zug"
+      },
+      "Q228253": {
+        "de": "Zug",
+        "it": null,
+        "fr": "zug",
+        "en": "zug"
+      },
+      "Q228257": {
+        "de": "Zug",
+        "it": null,
+        "fr": "Zug",
+        "en": "Zug"
+      },
+      "Q3100850": {
+        "de": "Zuk",
+        "it": "Zoug",
+        "fr": "Zoug",
+        "en": "Zug"
+      },
+      "Q68144": {
+        "de": "Zug",
+        "it": "Zugo",
+        "fr": "Zoug",
+        "en": "Zug"
+      }
+    }
+  },
+  {
+    "name": "Zurzach",
+    "qNumber": "Q65246908",
+    "qNumbers": [],
+    "matchedIn": [
+      "Gemeinden "
+    ],
+    "translations": {
+      "de": "Zurzach",
+      "it": "Zurzach",
+      "fr": "Zurzach",
+      "en": "Zurzach"
+    },
+    "translationsByQNumber": {}
+  },
+  {
+    "name": "Zweisimmen",
+    "qNumber": null,
+    "qNumbers": [
+      "Q12379369",
+      "Q69417"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q12379369": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Zweisimmen"
+      },
+      "Q69417": {
+        "de": "Zweisimmen",
+        "it": "Zweisimmen",
+        "fr": "Zweisimmen",
+        "en": "Zweisimmen"
+      }
+    }
+  },
+  {
+    "name": "Zürich",
+    "qNumber": null,
+    "qNumbers": [
+      "Q230406",
+      "Q230417",
+      "Q33729618",
+      "Q3576300",
+      "Q72"
+    ],
+    "matchedIn": [],
+    "translations": null,
+    "translationsByQNumber": {
+      "Q230406": {
+        "de": "Zurich",
+        "it": null,
+        "fr": "Zurich (Pays-Bas)",
+        "en": "Zurich"
+      },
+      "Q230417": {
+        "de": "Zurich",
+        "it": "Zurich",
+        "fr": "Zurich",
+        "en": "Zurich"
+      },
+      "Q33729618": {
+        "de": null,
+        "it": null,
+        "fr": null,
+        "en": "Zürich"
+      },
+      "Q3576300": {
+        "de": null,
+        "it": null,
+        "fr": "Zurich",
+        "en": "Zurich"
+      },
+      "Q72": {
+        "de": "Zürich",
+        "it": "Zurigo",
+        "fr": "Zurich",
+        "en": "Zurich"
+      }
+    }
+  }
+]

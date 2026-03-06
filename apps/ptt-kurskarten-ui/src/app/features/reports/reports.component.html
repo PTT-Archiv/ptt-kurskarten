@@ -1,0 +1,166 @@
+<main class="page">
+  <header class="page-header">
+    <h1>{{ 'reports.title' | transloco }}</h1>
+  </header>
+
+  <section class="panel">
+    <div class="tab-row">
+      <button class="tab-btn" [class.active]="tab() === 'station'" (click)="setTab('station')">
+        <span>{{ 'reports.stationProfile' | transloco }}</span>
+      </button>
+    </div>
+
+    <div class="controls">
+      <label class="field">
+        <span>{{ 'label.year' | transloco }}</span>
+        <input type="number" [value]="year()" (input)="onYearInput($event)" />
+      </label>
+
+      @if (tab() === 'station') {
+        <label class="field">
+          <span>{{ 'label.station' | transloco }}</span>
+          <select [value]="stationId()" (change)="stationId.set($any($event.target).value)">
+            @for (node of nodes(); track node.id) {
+              <option [value]="node.id">{{ node.name }}</option>
+            }
+          </select>
+        </label>
+        <button class="action-btn" (click)="runStationReport()">{{ 'btn.runReport' | transloco }}</button>
+        <button class="action-btn secondary" (click)="exportStationCsv()">{{ 'btn.exportCsv' | transloco }}</button>
+      }
+
+      @if (tab() === 'edge') {
+        <label class="field">
+          <span>{{ 'label.edge' | transloco }}</span>
+          <select [value]="edgeId()" (change)="edgeId.set($any($event.target).value)">
+            @for (edge of edges(); track edge.id) {
+              <option [value]="edge.id">{{ edge.label }}</option>
+            }
+          </select>
+        </label>
+        <button class="action-btn" (click)="runEdgeReport()">{{ 'btn.runReport' | transloco }}</button>
+        <button class="action-btn secondary" (click)="exportEdgeCsv()">{{ 'btn.exportCsv' | transloco }}</button>
+      }
+    </div>
+  </section>
+
+  @if (tab() === 'station') {
+    <section class="panel">
+      <h2>{{ 'reports.stationProfile' | transloco }}</h2>
+      @if (stationReport(); as report) {
+        <div class="summary">
+          {{
+            'reports.stationSummary'
+              | transloco
+                : {
+                    outgoingEdges: report.totals.outgoingEdges,
+                    outgoingTrips: report.totals.outgoingTrips,
+                    incomingEdges: report.totals.incomingEdges,
+                    incomingTrips: report.totals.incomingTrips
+                  }
+          }}
+        </div>
+
+        <h3>{{ 'reports.outgoing' | transloco }}</h3>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>{{ 'reports.destination' | transloco }}</th>
+              <th>{{ 'label.transport' | transloco }}</th>
+              <th>{{ 'reports.tripsCount' | transloco }}</th>
+              <th>{{ 'reports.firstDeparture' | transloco }}</th>
+              <th>{{ 'reports.lastDeparture' | transloco }}</th>
+              <th>{{ 'reports.minDuration' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of report.outgoing; track row.edgeId) {
+              <tr>
+                <td>{{ row.toNode.name }}</td>
+                <td>{{ ('transport.' + row.transport) | transloco }}</td>
+                <td>{{ row.tripsCount }}</td>
+                <td>{{ row.firstDeparture ?? '—' }}</td>
+                <td>{{ row.lastDeparture ?? '—' }}</td>
+                <td>{{ row.minDurationMinutes ?? '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <h3>{{ 'reports.incoming' | transloco }}</h3>
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>{{ 'reports.origin' | transloco }}</th>
+              <th>{{ 'label.transport' | transloco }}</th>
+              <th>{{ 'reports.tripsCount' | transloco }}</th>
+              <th>{{ 'reports.firstDeparture' | transloco }}</th>
+              <th>{{ 'reports.lastDeparture' | transloco }}</th>
+              <th>{{ 'reports.minDuration' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of report.incoming; track row.edgeId) {
+              <tr>
+                <td>{{ row.fromNode.name }}</td>
+                <td>{{ ('transport.' + row.transport) | transloco }}</td>
+                <td>{{ row.tripsCount }}</td>
+                <td>{{ row.firstDeparture ?? '—' }}</td>
+                <td>{{ row.lastDeparture ?? '—' }}</td>
+                <td>{{ row.minDurationMinutes ?? '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="muted">{{ 'reports.runToSee' | transloco }}</div>
+      }
+    </section>
+  }
+
+  @if (tab() === 'edge') {
+    <section class="panel">
+      <h2>{{ 'reports.edgeTimetable' | transloco }}</h2>
+      @if (edgeReport(); as report) {
+        <div class="summary">
+          {{
+            'reports.edgeSummary'
+              | transloco
+                : {
+                    tripsCount: report.summary.tripsCount,
+                    firstDeparture: report.summary.firstDeparture ?? '—',
+                    lastDeparture: report.summary.lastDeparture ?? '—',
+                    minDuration: report.summary.minDurationMinutes ?? '—',
+                    maxDuration: report.summary.maxDurationMinutes ?? '—'
+                  }
+          }}
+        </div>
+        @if (getLocalizedNote(report.edge?.notes); as note) {
+          <div class="summary">{{ 'label.notes' | transloco }}: {{ note }}</div>
+        }
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>{{ 'label.departure' | transloco }}</th>
+              <th>{{ 'label.arrival' | transloco }}</th>
+              <th>{{ 'label.dayOffset' | transloco }}</th>
+              <th>{{ 'reports.durationMinutes' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (trip of report.trips; track trip.tripId) {
+              <tr>
+                <td>{{ trip.departs }}</td>
+                <td>{{ trip.arrives }}</td>
+                <td>{{ trip.arrivalDayOffset ?? 0 }}</td>
+                <td>{{ trip.durationMinutes }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <div class="muted">{{ 'reports.runToSee' | transloco }}</div>
+      }
+    </section>
+  }
+</main>

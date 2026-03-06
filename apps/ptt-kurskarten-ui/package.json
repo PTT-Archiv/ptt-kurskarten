@@ -1,0 +1,43 @@
+{
+  "name": "ptt-kurskarten-ui",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:static": "ng build --configuration static",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:ptt-kurskarten-ui": "node dist/ptt-kurskarten-ui/server/server.mjs"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "21.2.0",
+    "@angular/compiler": "21.2.0",
+    "@angular/core": "21.2.0",
+    "@angular/platform-browser": "21.2.0",
+    "@angular/platform-server": "21.2.0",
+    "@angular/router": "21.2.0",
+    "@angular/ssr": "21.2.0",
+    "@fortawesome/angular-fontawesome": "^4.0.0",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@jsverse/transloco": "^8.2.0",
+    "@ptt-kurskarten/shared": "0.0.1",
+    "express": "^4.18.2",
+    "openseadragon": "^5.0.1",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "^0.16.0"
+  },
+  "devDependencies": {
+    "@angular/build": "21.2.0",
+    "@angular/cli": "21.2.0",
+    "@angular/compiler-cli": "21.2.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.18.0",
+    "jsdom": "^27.0.1",
+    "typescript": "~5.9.3",
+    "vitest": "^4.0.8"
+  }
+}

@@ -1,0 +1,3058 @@
+[
+  {
+    "id": "trip-1771344947216",
+    "departs": "17:00",
+    "arrives": "13:00",
+    "arrivalDayOffset": 1,
+    "edgeId": "edge-1771344899514",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771344987563",
+    "departs": "07:00",
+    "arrives": "05:00",
+    "arrivalDayOffset": 1,
+    "edgeId": "edge-1771344976481",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345032281",
+    "departs": "14:00",
+    "arrives": "23:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345024662",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771345114279",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345024662",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345150248",
+    "departs": "",
+    "arrives": "03:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345024662",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345159297",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345024662",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345236115",
+    "departs": "07:00",
+    "arrives": "12:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345216914",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345256413",
+    "departs": "14:00",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345247729",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345677137",
+    "departs": "20:30",
+    "arrives": "06:00",
+    "arrivalDayOffset": 1,
+    "edgeId": "edge-1771345655486",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771345760749",
+    "departs": "07:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345655486",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345769149",
+    "departs": "16:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345655486",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345778600",
+    "departs": "06:45",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345655486",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345890434",
+    "departs": "",
+    "arrives": "06:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345876135",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771345970733",
+    "departs": "",
+    "arrives": "02:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345876135",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345921452",
+    "departs": "",
+    "arrives": "05:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345876135",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345932451",
+    "departs": "",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345876135",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771345951951",
+    "departs": "",
+    "arrives": "17:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345876135",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771346404733",
+    "departs": "18:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771346398463",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771346454415",
+    "departs": "15:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771346398463",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771346461732",
+    "departs": "10:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771346398463",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771346480180",
+    "departs": "06:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771346398463",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771346492633",
+    "departs": "06:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771346398463",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576674159",
+    "departs": "",
+    "arrives": "18:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771576708318",
+    "departs": "",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576718078",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576727695",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576746662",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576805823",
+    "departs": "",
+    "arrives": "22:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576814502",
+    "departs": "",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576664336",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576838559",
+    "departs": "02:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790",
+    "transport": "mallepost"
+  },
+  {
+    "id": "trip-1771576900439",
+    "departs": "07:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576915567",
+    "departs": "09:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576859718",
+    "departs": "10:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771576942026",
+    "departs": "09:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771576829790",
+    "transport": "diligence"
+  },
+  {
+    "id": "trip-1771577208734",
+    "departs": "10:50",
+    "arrives": "12:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577198343",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577314318",
+    "departs": "10:00",
+    "arrives": "10:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577297069",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577364510",
+    "departs": "08:25",
+    "arrives": "09:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577355662",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345323563",
+    "departs": "22:30",
+    "arrives": "23:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345293296",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577887053",
+    "departs": "12:15",
+    "arrives": "13:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577877405",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577908244",
+    "departs": "00:15",
+    "arrives": "01:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577877405",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345440746",
+    "departs": "12:00",
+    "arrives": "13:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345293296",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345476314",
+    "departs": "7:00",
+    "arrives": "08:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345464111",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577109061",
+    "departs": "09:05",
+    "arrives": "10:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577098526",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577234839",
+    "departs": "10:35",
+    "arrives": "11:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577226142",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771577345034",
+    "departs": "11:30",
+    "arrives": "13:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771577336894",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771578105060",
+    "departs": "23:55",
+    "arrives": "00:50",
+    "arrivalDayOffset": 1,
+    "edgeId": "edge-1771578091020",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771579304429",
+    "departs": "13:15",
+    "arrives": "14:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771578091020",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771579356395",
+    "departs": "23:15",
+    "arrives": "12:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771579350347",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771579370900",
+    "departs": "11:15",
+    "arrives": "12:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771579350347",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589368021",
+    "departs": "03:30",
+    "arrives": "04:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589362261",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589392517",
+    "departs": "14:00",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589389836",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589506066",
+    "departs": "01:00",
+    "arrives": "03:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589492845",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589525518",
+    "departs": "15:00",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589520364",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589602276",
+    "departs": "00:55",
+    "arrives": "02:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589587421",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771589625524",
+    "departs": "14:10",
+    "arrives": "15:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771589587421",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771845070759",
+    "departs": "22:05",
+    "arrives": "23:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857760117",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857727077",
+    "departs": "10:05",
+    "arrives": "11:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857760117",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857760162",
+    "departs": "02:05",
+    "arrives": "03:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857875917",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857849436",
+    "departs": "15:05",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857875917",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857875948",
+    "departs": "08:40",
+    "arrives": "10:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857925066",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857889875",
+    "departs": "20:40",
+    "arrives": "22:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857925066",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857925098",
+    "departs": "03:35",
+    "arrives": "04:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857959700",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857941297",
+    "departs": "16:35",
+    "arrives": "17:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771857959700",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857959731",
+    "departs": "07:30",
+    "arrives": "08:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858005565",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771857980808",
+    "departs": "19:30",
+    "arrives": "20:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858005565",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858106323",
+    "departs": "10:40",
+    "arrives": "12:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858124615",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858124645",
+    "departs": "06:00",
+    "arrives": "07:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858158531",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858134898",
+    "departs": "20:00",
+    "arrives": "21:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858158531",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858158566",
+    "departs": "06:00",
+    "arrives": "07:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858218215",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858180129",
+    "departs": "18:15",
+    "arrives": "17:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858218215",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858218248",
+    "departs": "09:00",
+    "arrives": "11:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858236394",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858236422",
+    "departs": "06:30",
+    "arrives": "08:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858280182",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771858258512",
+    "departs": "15:40",
+    "arrives": "17:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858280182",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771345594449",
+    "departs": "14:00",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345591565",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "trip-1771858354484",
+    "departs": "08:00",
+    "arrives": "10:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771345591565",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "quick-trip-1771858280214",
+    "departs": "10:45",
+    "arrives": "11:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858280182",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "trip-1771858395932",
+    "departs": "17:00",
+    "arrives": "18:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858280182",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "trip-1771858421780",
+    "departs": "08:30",
+    "arrives": "09:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858415694",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "trip-1771858423430",
+    "departs": "14:15",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771858415694",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "quick-trip-1771858295531",
+    "departs": "13:20",
+    "arrives": "14:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771859991473",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771859991505",
+    "departs": "14:00",
+    "arrives": "17:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860017727",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860017759",
+    "departs": "12:35",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860044843",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860044877",
+    "departs": "17:50",
+    "arrives": "19:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860071262",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860071292",
+    "departs": "06:00",
+    "arrives": "08:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860090803",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860090841",
+    "departs": "08:05",
+    "arrives": "11",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860136577",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860136608",
+    "departs": "08:15",
+    "arrives": "11:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860161310",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860444954",
+    "departs": "07:40",
+    "arrives": "08:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860492924",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860467038",
+    "departs": "19:55",
+    "arrives": "23:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860492924",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860492960",
+    "departs": "11:05",
+    "arrives": "13:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860526445",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860608570",
+    "departs": "14:30",
+    "arrives": "15:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860635841",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860635874",
+    "departs": "10:00",
+    "arrives": "11:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860635841",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860526482",
+    "departs": "14:10",
+    "arrives": "16:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860608534",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860693409",
+    "departs": "10:00",
+    "arrives": "11:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860766457",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860766492",
+    "departs": "01:45",
+    "arrives": "03:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860809433",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860787739",
+    "departs": "14:20",
+    "arrives": "16:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860809433",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860809467",
+    "departs": "05:00",
+    "arrives": "08:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860827767",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860827798",
+    "departs": "16:00",
+    "arrives": "17:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860854056",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860854087",
+    "departs": "03:45",
+    "arrives": "05:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860930889",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860897342",
+    "departs": "15:45",
+    "arrives": "17:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860930889",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860930917",
+    "departs": "05:35",
+    "arrives": "06:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860970563",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860947108",
+    "departs": "17:35",
+    "arrives": "18:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860970563",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771860970599",
+    "departs": "06:00",
+    "arrives": "08:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861051570",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861051606",
+    "departs": "16:00",
+    "arrives": "18:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861078460",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861078496",
+    "departs": "08:30",
+    "arrives": "10:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861099491",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861099525",
+    "departs": "14:30",
+    "arrives": "15:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861119222",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861119257",
+    "departs": "11:30",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861141860",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771861159908",
+    "departs": "00:30",
+    "arrives": "02:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861141860",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861149065",
+    "departs": "12:15",
+    "arrives": "15:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861212892",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861212922",
+    "departs": "13:10",
+    "arrives": "16:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861236546",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861236590",
+    "departs": "15:20",
+    "arrives": "17:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861267921",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861267951",
+    "departs": "08:50",
+    "arrives": "09:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861297656",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861281456",
+    "departs": "21:05",
+    "arrives": "22:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861297656",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861297692",
+    "departs": "02:45",
+    "arrives": "03:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861329431",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861318487",
+    "departs": "14:45",
+    "arrives": "15:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861329431",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861329465",
+    "departs": "09:55",
+    "arrives": "10:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861394487",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861382640",
+    "departs": "22:10",
+    "arrives": "23:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861394487",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861394513",
+    "departs": "01:50",
+    "arrives": "02:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861428432",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861418598",
+    "departs": "13:50",
+    "arrives": "14:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861428432",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861428473",
+    "departs": "12:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861508007",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861508042",
+    "departs": "",
+    "arrives": "16:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861526215",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861526246",
+    "departs": "",
+    "arrives": "15:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861563265",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861563303",
+    "departs": "13:50",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861581654",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861581680",
+    "departs": "11:25",
+    "arrives": "13:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861661636",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861661661",
+    "departs": "15:55",
+    "arrives": "17:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861687437",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861687465",
+    "departs": "18:00",
+    "arrives": "19:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861744489",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861744520",
+    "departs": "09:15",
+    "arrives": "11:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861758502",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861758539",
+    "departs": "16:30",
+    "arrives": "20:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861773958",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861773992",
+    "departs": "04:30",
+    "arrives": "08:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771861797855",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771861797879",
+    "departs": "08:35",
+    "arrives": "10:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862140603",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862125646",
+    "departs": "17:40",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862140603",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862140646",
+    "departs": "05:30",
+    "arrives": "07:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862187158",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862171300",
+    "departs": "13:00",
+    "arrives": "15:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862187158",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862187187",
+    "departs": "11:00",
+    "arrives": "12:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862228235",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862213155",
+    "departs": "20:05",
+    "arrives": "21:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862228235",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862228262",
+    "departs": "04:05",
+    "arrives": "05:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862262355",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862253670",
+    "departs": "11:35",
+    "arrives": "12:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862262355",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862262389",
+    "departs": "05:15",
+    "arrives": "06:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862284485",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862284519",
+    "departs": "14:40",
+    "arrives": "16:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862302051",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862302089",
+    "departs": "06:50",
+    "arrives": "08:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862318521",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862318556",
+    "departs": "13:05",
+    "arrives": "14:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862344310",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862344340",
+    "departs": "12:45",
+    "arrives": "14:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862539869",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862514872",
+    "departs": "21:40",
+    "arrives": "23:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862539869",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862539902",
+    "departs": "02:20",
+    "arrives": "03:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862589400",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862572538",
+    "departs": "09:40",
+    "arrives": "11:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862589400",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862589437",
+    "departs": "14:20",
+    "arrives": "15:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862623067",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862601073",
+    "departs": "23:15",
+    "arrives": "00:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862623067",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862623101",
+    "departs": "08:05",
+    "arrives": "09:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862655318",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862635366",
+    "departs": "00:45",
+    "arrives": "02:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862655318",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862655350",
+    "departs": "15:55",
+    "arrives": "17:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862679446",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862661818",
+    "departs": "00:50",
+    "arrives": "02:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862679446",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862679478",
+    "departs": "06:30",
+    "arrives": "08:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862702866",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862695122",
+    "departs": "23:10",
+    "arrives": "00:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862702866",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862702903",
+    "departs": "02:30",
+    "arrives": "04:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862722919",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862722957",
+    "departs": "21:45",
+    "arrives": "22:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862739339",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862739372",
+    "departs": "04:10",
+    "arrives": "05:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862748856",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862748885",
+    "departs": "17:30",
+    "arrives": "21:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862766751",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862766786",
+    "departs": "05:55",
+    "arrives": "07:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862781801",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862781838",
+    "departs": "17:55",
+    "arrives": "19:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862801474",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862801506",
+    "departs": "07:30",
+    "arrives": "08:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862817595",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862817629",
+    "departs": "16:50",
+    "arrives": "17:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862833238",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862833270",
+    "departs": "09:15",
+    "arrives": "12:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862907051",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862907088",
+    "departs": "14:25",
+    "arrives": "15:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862921413",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862921443",
+    "departs": "12:50",
+    "arrives": "16:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862934253",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771862934288",
+    "departs": "10:50",
+    "arrives": "14:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771862949036",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929087307",
+    "departs": "07:15",
+    "arrives": "10:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929132582",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929132621",
+    "departs": "18:55",
+    "arrives": "20:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929161755",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929161800",
+    "departs": "16:55",
+    "arrives": "18:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929187798",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929187835",
+    "departs": "04:00",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929205301",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929205337",
+    "departs": "22:00",
+    "arrives": "23:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929236386",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929236421",
+    "departs": "17:15",
+    "arrives": "19:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929262343",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929262383",
+    "departs": "23:50",
+    "arrives": "02:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929285735",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929285770",
+    "departs": "14:45",
+    "arrives": "17:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929321505",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929321544",
+    "departs": "02:50",
+    "arrives": "05:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929344959",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929344993",
+    "departs": "12:00",
+    "arrives": "14:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929361750",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929361786",
+    "departs": "09:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929404342",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929404383",
+    "departs": "",
+    "arrives": "13:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929423214",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929423240",
+    "departs": "07:00",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929438717",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929438751",
+    "departs": "00:00",
+    "arrives": "08:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929466350",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929466389",
+    "departs": "",
+    "arrives": "08:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929483055",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929483090",
+    "departs": "14:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929524765",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929524802",
+    "departs": "07:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929585517",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929585548",
+    "departs": "",
+    "arrives": "15:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929602500",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929602535",
+    "departs": "15:45",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929617005",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929617043",
+    "departs": "",
+    "arrives": "08:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929627165",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929627198",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929649098",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929649128",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929713539",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929713578",
+    "departs": "22:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929745615",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929745645",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929775268",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929775300",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929786933",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771929786964",
+    "departs": "14:00",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771929855117",
+    "transport": "dampfschiff"
+  },
+  {
+    "id": "quick-trip-1771929855151",
+    "departs": "08:30",
+    "arrives": "10:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930276244",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930276279",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930296228",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930296265",
+    "departs": "",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930307477",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930307512",
+    "departs": "18:00",
+    "arrives": "19:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930346696",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771930446828",
+    "departs": "07:30",
+    "arrives": "09:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930346696",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930362798",
+    "departs": "07:45",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930407983",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771930497111",
+    "departs": "18:45",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771930407983",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930408019",
+    "departs": "06:00",
+    "arrives": "07:18",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771931247261",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771930557091",
+    "departs": "16:30",
+    "arrives": "17:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771931247261",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771931576040",
+    "departs": "15:50",
+    "arrives": "16:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771931628124",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932278447",
+    "departs": "23:30",
+    "arrives": "02:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932349754",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932349790",
+    "departs": "21:05",
+    "arrives": "23:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932369547",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932369580",
+    "departs": "03:00",
+    "arrives": "04:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932392512",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932392546",
+    "departs": "16:35",
+    "arrives": "20:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932423149",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932423182",
+    "departs": "18:35",
+    "arrives": "20:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932445622",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932445654",
+    "departs": "03:00",
+    "arrives": "04:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932519742",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932566431",
+    "departs": "20:35",
+    "arrives": "21:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932598748",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932580716",
+    "departs": "09:55",
+    "arrives": "11:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932598748",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932598781",
+    "departs": "14:45",
+    "arrives": "16:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932634548",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932622181",
+    "departs": "23:40",
+    "arrives": "01:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932634548",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932634582",
+    "departs": "21:20",
+    "arrives": "22:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932685049",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932664833",
+    "departs": "11:55",
+    "arrives": "12:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932685049",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932685075",
+    "departs": "22:00",
+    "arrives": "23:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932715165",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932693266",
+    "departs": "13:00",
+    "arrives": "14:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932715165",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932715210",
+    "departs": "22:00",
+    "arrives": "23:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932757317",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932739771",
+    "departs": "10:45",
+    "arrives": "12:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932757317",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932757351",
+    "departs": "11:15",
+    "arrives": "12:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932780354",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "trip-1771932788965",
+    "departs": "01:10",
+    "arrives": "02:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932780354",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932780384",
+    "departs": "23:50",
+    "arrives": "01:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932855966",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932839442",
+    "departs": "12:40",
+    "arrives": "14:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932855966",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932856004",
+    "departs": "09:20",
+    "arrives": "11:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932886864",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932868832",
+    "departs": "23:20",
+    "arrives": "01:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932886864",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932943182",
+    "departs": "17:40",
+    "arrives": "19:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932959869",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932959897",
+    "departs": "07:45",
+    "arrives": "09:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771932978402",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771932978439",
+    "departs": "14:00",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933007450",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933007491",
+    "departs": "04:00",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933023809",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933023851",
+    "departs": "17:00",
+    "arrives": "18:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933093995",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933079957",
+    "departs": "07:30",
+    "arrives": "08:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933093995",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933094018",
+    "departs": "18:25",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933129641",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933122536",
+    "departs": "03:15",
+    "arrives": "04:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933129641",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933129678",
+    "departs": "08:50",
+    "arrives": "09:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933166475",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933147254",
+    "departs": "18:35",
+    "arrives": "19:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933166475",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933166515",
+    "departs": "16:50",
+    "arrives": "18:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933205695",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933175086",
+    "departs": "01:25",
+    "arrives": "02:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933205695",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771933205730",
+    "departs": "04:35",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771933233116",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771939057983",
+    "departs": "03:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939083517",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771939072218",
+    "departs": "18:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939083517",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771939083560",
+    "departs": "",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939131335",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1771939104556",
+    "departs": "",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939131335",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1772008799422",
+    "departs": "20:30",
+    "arrives": "03:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772008859716",
+    "transport": "courier"
+  },
+  {
+    "id": "quick-trip-1772009018897",
+    "departs": "10:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772008859716",
+    "transport": "messagerie"
+  },
+  {
+    "id": "quick-trip-1772009217574",
+    "departs": "",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772009246982",
+    "transport": "postkutsche"
+  },
+  {
+    "id": "quick-trip-1772009087387",
+    "departs": "03:30",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772009217545",
+    "transport": "postkutsche"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1772013183407",
+    "departs": "19:00",
+    "arrives": "04:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772013295958"
+  },
+  {
+    "transport": "messagerie",
+    "id": "quick-trip-1772013246579",
+    "departs": "10:55",
+    "arrives": "20:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772013295958"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1772009247017",
+    "departs": "04:00",
+    "arrives": "09:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772009276595"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1772009276631",
+    "departs": "12:00",
+    "arrives": "18:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772009295129"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1771939031521",
+    "departs": "08:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939057947"
+  },
+  {
+    "transport": "messagerie",
+    "id": "quick-trip-1771939045333",
+    "departs": "21:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939057947"
+  },
+  {
+    "transport": "courier",
+    "id": "quick-trip-1771937460098",
+    "departs": "",
+    "arrives": "13:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939031483"
+  },
+  {
+    "id": "trip-1772014870589",
+    "transport": "messagerie",
+    "departs": "",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771939031483"
+  },
+  {
+    "id": "quick-trip-1772014686938",
+    "transport": "messagerie",
+    "departs": "21:00",
+    "arrives": "05:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772014942308"
+  },
+  {
+    "id": "quick-trip-1772014929713",
+    "transport": "courier",
+    "departs": "06:00",
+    "arrives": "12:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772014942308"
+  },
+  {
+    "id": "quick-trip-1772014942336",
+    "transport": "messagerie",
+    "departs": "22:00",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772014985274"
+  },
+  {
+    "id": "quick-trip-1772014960109",
+    "transport": "courier",
+    "departs": "10:00",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772014985274"
+  },
+  {
+    "id": "quick-trip-1772014985308",
+    "transport": "postkutsche",
+    "departs": "11:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015113049"
+  },
+  {
+    "id": "quick-trip-1772015113086",
+    "transport": "postkutsche",
+    "departs": "",
+    "arrives": "09:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015127486"
+  },
+  {
+    "id": "quick-trip-1772015127511",
+    "transport": "courier",
+    "departs": "10:00",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015160206"
+  },
+  {
+    "id": "quick-trip-1772015138672",
+    "transport": "messagerie",
+    "departs": "05:00",
+    "arrives": "15:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015160206"
+  },
+  {
+    "id": "quick-trip-1772015160242",
+    "transport": "courier",
+    "departs": "04:30",
+    "arrives": "11:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015188438"
+  },
+  {
+    "id": "quick-trip-1772015165714",
+    "transport": "messagerie",
+    "departs": "08:00",
+    "arrives": "18:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015188438"
+  },
+  {
+    "id": "quick-trip-1772015188474",
+    "transport": "messagerie",
+    "departs": "16:00",
+    "arrives": "17:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015214758"
+  },
+  {
+    "id": "quick-trip-1772015214792",
+    "transport": "messagerie",
+    "departs": "06:00",
+    "arrives": "07:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015231499"
+  },
+  {
+    "id": "quick-trip-1772015231530",
+    "transport": "postkutsche",
+    "departs": "18:30",
+    "arrives": "19:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015256139"
+  },
+  {
+    "id": "quick-trip-1772015256176",
+    "transport": "postkutsche",
+    "departs": "02:30",
+    "arrives": "03:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015271551"
+  },
+  {
+    "id": "quick-trip-1772015271587",
+    "transport": "postkutsche",
+    "departs": "20:15",
+    "arrives": "21:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015304011"
+  },
+  {
+    "id": "quick-trip-1772015286740",
+    "transport": "postkutsche",
+    "departs": "13:00",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015304011"
+  },
+  {
+    "id": "quick-trip-1772015304043",
+    "transport": "postkutsche",
+    "departs": "09:10",
+    "arrives": "10:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015327154"
+  },
+  {
+    "id": "quick-trip-1772015315107",
+    "transport": "postkutsche",
+    "departs": "01:00",
+    "arrives": "02:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015327154"
+  },
+  {
+    "id": "quick-trip-1772015327185",
+    "transport": "postkutsche",
+    "departs": "13:00",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015378940"
+  },
+  {
+    "id": "quick-trip-1772015378977",
+    "transport": "postkutsche",
+    "departs": "07:25",
+    "arrives": "09:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015396438"
+  },
+  {
+    "id": "quick-trip-1772015396475",
+    "transport": "postkutsche",
+    "departs": "15:10",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015408889"
+  },
+  {
+    "id": "quick-trip-1772015408925",
+    "transport": "postkutsche",
+    "departs": "05:00",
+    "arrives": "07:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015427444"
+  },
+  {
+    "id": "quick-trip-1772015427476",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015464921"
+  },
+  {
+    "id": "quick-trip-1772015464955",
+    "transport": "postkutsche",
+    "departs": "07:10",
+    "arrives": "08:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015481889"
+  },
+  {
+    "id": "quick-trip-1772015481919",
+    "transport": "postkutsche",
+    "departs": "16:40",
+    "arrives": "19:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015530064"
+  },
+  {
+    "id": "quick-trip-1772015530104",
+    "transport": "postkutsche",
+    "departs": "03:30",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015548390"
+  },
+  {
+    "id": "quick-trip-1772015548423",
+    "transport": "postkutsche",
+    "departs": "07:10",
+    "arrives": "08:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015570461"
+  },
+  {
+    "id": "quick-trip-1772015570497",
+    "transport": "postkutsche",
+    "departs": "16:40",
+    "arrives": "18:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015606857"
+  },
+  {
+    "id": "quick-trip-1772015606889",
+    "transport": "postkutsche",
+    "departs": "21:15",
+    "arrives": "22:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015729886"
+  },
+  {
+    "id": "quick-trip-1772015684775",
+    "transport": "postkutsche",
+    "departs": "13:00",
+    "arrives": "14:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015729886"
+  },
+  {
+    "id": "quick-trip-1772015685267",
+    "transport": "postkutsche",
+    "departs": "03:00",
+    "arrives": "03:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015729886"
+  },
+  {
+    "id": "quick-trip-1772015685751",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "15:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015729886"
+  },
+  {
+    "id": "quick-trip-1772015686580",
+    "transport": "postkutsche",
+    "departs": "19:00",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015729886"
+  },
+  {
+    "id": "quick-trip-1772015729919",
+    "transport": "postkutsche",
+    "departs": "00:00",
+    "arrives": "01:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015784072"
+  },
+  {
+    "id": "quick-trip-1772015737336",
+    "transport": "postkutsche",
+    "departs": "19:30",
+    "arrives": "20:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015784072"
+  },
+  {
+    "id": "quick-trip-1772015738663",
+    "transport": "postkutsche",
+    "departs": "12:00",
+    "arrives": "12:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015784072"
+  },
+  {
+    "id": "quick-trip-1772015738930",
+    "transport": "postkutsche",
+    "departs": "08:10",
+    "arrives": "09:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015784072"
+  },
+  {
+    "id": "quick-trip-1772015740005",
+    "transport": "postkutsche",
+    "departs": "05:00",
+    "arrives": "06:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015784072"
+  },
+  {
+    "id": "quick-trip-1772015784104",
+    "transport": "postkutsche",
+    "departs": "14:00",
+    "arrives": "15:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015828984"
+  },
+  {
+    "id": "quick-trip-1772015909259",
+    "transport": "postkutsche",
+    "departs": "04:00",
+    "arrives": "05:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015993937"
+  },
+  {
+    "id": "quick-trip-1772015980006",
+    "transport": "postkutsche",
+    "departs": "16:00",
+    "arrives": "17:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772015993937"
+  },
+  {
+    "id": "quick-trip-1772015993966",
+    "transport": "postkutsche",
+    "departs": "10:20",
+    "arrives": "11:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016032547"
+  },
+  {
+    "id": "quick-trip-1772016011551",
+    "transport": "postkutsche",
+    "departs": "17:50",
+    "arrives": "19:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016032547"
+  },
+  {
+    "id": "quick-trip-1772016032588",
+    "transport": "postkutsche",
+    "departs": "14:30",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016055449"
+  },
+  {
+    "id": "quick-trip-1772016055481",
+    "transport": "postkutsche",
+    "departs": "14:30",
+    "arrives": "16:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016102363"
+  },
+  {
+    "id": "quick-trip-1772016091656",
+    "transport": "postkutsche",
+    "departs": "06:30",
+    "arrives": "08:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016102363"
+  },
+  {
+    "id": "quick-trip-1772016102400",
+    "transport": "postkutsche",
+    "departs": "05:50",
+    "arrives": "08:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016127012"
+  },
+  {
+    "id": "quick-trip-1772016110150",
+    "transport": "postkutsche",
+    "departs": "16:50",
+    "arrives": "19:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016127012"
+  },
+  {
+    "id": "quick-trip-1772016127043",
+    "transport": "postkutsche",
+    "departs": "06:00",
+    "arrives": "07:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016147054"
+  },
+  {
+    "id": "quick-trip-1772016147087",
+    "transport": "postkutsche",
+    "departs": "03:30",
+    "arrives": "05:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772016160254"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772016160288",
+    "departs": "05:45",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017562487"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772017548837",
+    "departs": "17:75",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017562487"
+  },
+  {
+    "id": "quick-trip-1772017562531",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "17:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017603634"
+  },
+  {
+    "id": "quick-trip-1772017588522",
+    "transport": "postkutsche",
+    "departs": "07:30",
+    "arrives": "10:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017603634"
+  },
+  {
+    "id": "quick-trip-1772017623129",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "15:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017645576"
+  },
+  {
+    "id": "quick-trip-1772017632451",
+    "transport": "postkutsche",
+    "departs": "06:00",
+    "arrives": "07:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017645576"
+  },
+  {
+    "id": "quick-trip-1772017645613",
+    "transport": "postkutsche",
+    "departs": "08:40",
+    "arrives": "10:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017685510"
+  },
+  {
+    "id": "quick-trip-1772017652924",
+    "transport": "postkutsche",
+    "departs": "18:30",
+    "arrives": "20:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017685510"
+  },
+  {
+    "id": "quick-trip-1772017685543",
+    "transport": "postkutsche",
+    "departs": "04:00",
+    "arrives": "05:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017731984"
+  },
+  {
+    "id": "quick-trip-1772017732018",
+    "transport": "postkutsche",
+    "departs": "20:15",
+    "arrives": "21:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017759810"
+  },
+  {
+    "id": "quick-trip-1772017759845",
+    "transport": "postkutsche",
+    "departs": "23:00",
+    "arrives": "00:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017829591"
+  },
+  {
+    "id": "quick-trip-1772017779577",
+    "transport": "postkutsche",
+    "departs": "13:30",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017829591"
+  },
+  {
+    "id": "quick-trip-1772017829624",
+    "transport": "postkutsche",
+    "departs": "19:50",
+    "arrives": "21:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017855874"
+  },
+  {
+    "id": "quick-trip-1772017848155",
+    "transport": "postkutsche",
+    "departs": "10:35",
+    "arrives": "12:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017855874"
+  },
+  {
+    "id": "quick-trip-1772017855908",
+    "transport": "postkutsche",
+    "departs": "05:15",
+    "arrives": "06:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017879303"
+  },
+  {
+    "id": "quick-trip-1772017879337",
+    "transport": "postkutsche",
+    "departs": "18:45",
+    "arrives": "20:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017894400"
+  },
+  {
+    "id": "quick-trip-1772017894429",
+    "transport": "postkutsche",
+    "departs": "23:55",
+    "arrives": "01:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017964052"
+  },
+  {
+    "id": "quick-trip-1772017944357",
+    "transport": "postkutsche",
+    "departs": "11:55",
+    "arrives": "13:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017964052"
+  },
+  {
+    "id": "quick-trip-1772017964086",
+    "transport": "postkutsche",
+    "departs": "11:00",
+    "arrives": "12:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017983056"
+  },
+  {
+    "id": "quick-trip-1772017969874",
+    "transport": "postkutsche",
+    "departs": "23:15",
+    "arrives": "01:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772017983056"
+  },
+  {
+    "id": "quick-trip-1772017983090",
+    "transport": "postkutsche",
+    "departs": "18:25",
+    "arrives": "22:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018041519"
+  },
+  {
+    "id": "quick-trip-1772018041551",
+    "transport": "postkutsche",
+    "departs": "05:00",
+    "arrives": "09:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018060132"
+  },
+  {
+    "id": "quick-trip-1772018068380",
+    "transport": "postkutsche",
+    "departs": "08:00",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018077874"
+  },
+  {
+    "id": "quick-trip-1772018077900",
+    "transport": "postkutsche",
+    "departs": "",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018093174"
+  },
+  {
+    "id": "quick-trip-1772018120700",
+    "transport": "postkutsche",
+    "departs": "",
+    "arrives": "13:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018137873"
+  },
+  {
+    "id": "quick-trip-1772018137914",
+    "transport": "postkutsche",
+    "departs": "11:40",
+    "arrives": "",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018153999"
+  },
+  {
+    "id": "quick-trip-1772018154027",
+    "transport": "postkutsche",
+    "departs": "13:15",
+    "arrives": "16:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018183873"
+  },
+  {
+    "id": "quick-trip-1772018183906",
+    "transport": "postkutsche",
+    "departs": "08:30",
+    "arrives": "11:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018194792"
+  },
+  {
+    "id": "quick-trip-1772018194827",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "18:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018213025"
+  },
+  {
+    "id": "quick-trip-1772018213057",
+    "transport": "postkutsche",
+    "departs": "06:00",
+    "arrives": "09:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772018226464"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772018226501",
+    "departs": "15:00",
+    "arrives": "18:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019006606"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019006645",
+    "departs": "06:00",
+    "arrives": "09:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019027824"
+  },
+  {
+    "transport": "segelboot",
+    "id": "quick-trip-1772019117996",
+    "departs": "12:30",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019144838"
+  },
+  {
+    "transport": "segelboot",
+    "id": "quick-trip-1772019027858",
+    "departs": "06:00",
+    "arrives": "10:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019117957"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019274688",
+    "departs": "11:00",
+    "arrives": "12:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019306522"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019281886",
+    "departs": "16:00",
+    "arrives": "17:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019306522"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019144877",
+    "departs": "08:30",
+    "arrives": "09:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019274657"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019228314",
+    "departs": "14:00",
+    "arrives": "15:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019274657"
+  },
+  {
+    "transport": "segelboot",
+    "id": "quick-trip-1772019372615",
+    "departs": "07:00",
+    "arrives": "09:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019405399"
+  },
+  {
+    "transport": "segelboot",
+    "id": "quick-trip-1772019306558",
+    "departs": "14:00",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019372583"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019472561",
+    "departs": "16:30",
+    "arrives": "17:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019501989"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019481691",
+    "departs": "10:45",
+    "arrives": "12:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019501989"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019405437",
+    "departs": "13:30",
+    "arrives": "14:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019472527"
+  },
+  {
+    "transport": "dampfschiff",
+    "id": "quick-trip-1772019440852",
+    "departs": "18:00",
+    "arrives": "19:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019472527"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772019502022",
+    "departs": "17:00",
+    "arrives": "19:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019571234"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772019553204",
+    "departs": "13:00",
+    "arrives": "15:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019571234"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772019571268",
+    "departs": "05:00",
+    "arrives": "07:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019592436"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772019581112",
+    "departs": "10:00",
+    "arrives": "12:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019592436"
+  },
+  {
+    "id": "quick-trip-1772019654718",
+    "transport": "postkutsche",
+    "departs": "15:35",
+    "arrives": "17:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019835586"
+  },
+  {
+    "id": "quick-trip-1772019835621",
+    "transport": "postkutsche",
+    "departs": "05:15",
+    "arrives": "06:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019856820"
+  },
+  {
+    "id": "quick-trip-1772019856854",
+    "transport": "postkutsche",
+    "departs": "06:55",
+    "arrives": "08:40",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019896203"
+  },
+  {
+    "id": "quick-trip-1772019896239",
+    "transport": "postkutsche",
+    "departs": "14:00",
+    "arrives": "16:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019917680"
+  },
+  {
+    "id": "quick-trip-1772019917720",
+    "transport": "postkutsche",
+    "departs": "05:00",
+    "arrives": "07:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019938487"
+  },
+  {
+    "id": "quick-trip-1772019969720",
+    "transport": "postkutsche",
+    "departs": "17:15",
+    "arrives": "18:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019996886"
+  },
+  {
+    "id": "quick-trip-1772019996918",
+    "transport": "postkutsche",
+    "departs": "18:55",
+    "arrives": "21:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020019777"
+  },
+  {
+    "id": "quick-trip-1772020019805",
+    "transport": "postkutsche",
+    "departs": "16:55",
+    "arrives": "21:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020053037"
+  },
+  {
+    "id": "quick-trip-1772020053076",
+    "transport": "postkutsche",
+    "departs": "18:15",
+    "arrives": "19:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020077131"
+  },
+  {
+    "id": "quick-trip-1772020077157",
+    "transport": "postkutsche",
+    "departs": "08:00",
+    "arrives": "10:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020132085"
+  },
+  {
+    "id": "quick-trip-1772020132116",
+    "transport": "postkutsche",
+    "departs": "19:00",
+    "arrives": "21:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020145031"
+  },
+  {
+    "id": "quick-trip-1772020145067",
+    "transport": "postkutsche",
+    "departs": "20:00",
+    "arrives": "22:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020177108"
+  },
+  {
+    "id": "quick-trip-1772020177143",
+    "transport": "postkutsche",
+    "departs": "04:00",
+    "arrives": "06:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020198470"
+  },
+  {
+    "id": "quick-trip-1772020198501",
+    "transport": "postkutsche",
+    "departs": "06:15",
+    "arrives": "07:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020214955"
+  },
+  {
+    "id": "quick-trip-1772020214989",
+    "transport": "postkutsche",
+    "departs": "16:05",
+    "arrives": "17:25",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020244968"
+  },
+  {
+    "id": "quick-trip-1772020275251",
+    "transport": "postkutsche",
+    "departs": "10:15",
+    "arrives": "11:35",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020311570"
+  },
+  {
+    "id": "quick-trip-1772020311604",
+    "transport": "postkutsche",
+    "departs": "21:20",
+    "arrives": "22:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020537149"
+  },
+  {
+    "id": "quick-trip-1772020537180",
+    "transport": "postkutsche",
+    "departs": "00:00",
+    "arrives": "02:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020566451"
+  },
+  {
+    "id": "quick-trip-1772020566487",
+    "transport": "postkutsche",
+    "departs": "16:25",
+    "arrives": "17:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020660462"
+  },
+  {
+    "id": "quick-trip-1772020642033",
+    "transport": "postkutsche",
+    "departs": "08:25",
+    "arrives": "09:55",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020660462"
+  },
+  {
+    "id": "quick-trip-1772020660494",
+    "transport": "postkutsche",
+    "departs": "04:00",
+    "arrives": "05:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020684603"
+  },
+  {
+    "id": "quick-trip-1772020669282",
+    "transport": "postkutsche",
+    "departs": "15:00",
+    "arrives": "16:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020684603"
+  },
+  {
+    "id": "quick-trip-1772020684632",
+    "transport": "postkutsche",
+    "departs": "17:20",
+    "arrives": "17:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020724069"
+  },
+  {
+    "id": "quick-trip-1772020709020",
+    "transport": "postkutsche",
+    "departs": "11:20",
+    "arrives": "11:45",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020724069"
+  },
+  {
+    "id": "quick-trip-1772020724103",
+    "transport": "postkutsche",
+    "departs": "14:25",
+    "arrives": "15:50",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020755401"
+  },
+  {
+    "id": "quick-trip-1772020746437",
+    "transport": "postkutsche",
+    "departs": "02:50",
+    "arrives": "03:15",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020755401"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772019938524",
+    "departs": "17:45",
+    "arrives": "19:30",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772019969686"
+  },
+  {
+    "id": "quick-trip-1772020833570",
+    "transport": "postkutsche",
+    "departs": "02:00",
+    "arrives": "05:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020847192"
+  },
+  {
+    "id": "quick-trip-1772020847230",
+    "transport": "postkutsche",
+    "departs": "03:25",
+    "arrives": "05:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020890086"
+  },
+  {
+    "id": "quick-trip-1772020890122",
+    "transport": "postkutsche",
+    "departs": "00:00",
+    "arrives": "03:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020922817"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1772020922856",
+    "departs": "14:15",
+    "arrives": "16:05",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772020975985"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1771860161343",
+    "departs": "07:40",
+    "arrives": "09:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860444924"
+  },
+  {
+    "transport": "postkutsche",
+    "id": "quick-trip-1771860415202",
+    "departs": "21:40",
+    "arrives": "23:10",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1771860444924"
+  }
+]
