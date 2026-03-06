@@ -1888,5 +1888,12 @@
     "to": "node-1770906362386",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "edge-1772791301396",
+    "from": "node-1770809870824",
+    "to": "node-1770818451614",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]

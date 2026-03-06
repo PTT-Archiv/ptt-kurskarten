@@ -3054,5 +3054,21 @@
     "arrives": "23:10",
     "arrivalDayOffset": 0,
     "edgeId": "edge-1771860444924"
+  },
+  {
+    "id": "quick-trip-1772791224790",
+    "transport": "postkutsche",
+    "departs": "09:00",
+    "arrives": "10:00",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772791301396"
+  },
+  {
+    "id": "quick-trip-1772791286528",
+    "transport": "postkutsche",
+    "departs": "05:20",
+    "arrives": "06:20",
+    "arrivalDayOffset": 0,
+    "edgeId": "edge-1772791301396"
   }
 ]
