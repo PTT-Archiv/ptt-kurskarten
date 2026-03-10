@@ -10,7 +10,8 @@
     "dev:api": "npm run start:dev --workspace ptt-kurskarten.api",
     "dev": "npm run dev:web",
     "build": "npm run build --workspace @ptt-kurskarten/shared && npm run build --workspace ptt-kurskarten.api && npm run build --workspace ptt-kurskarten-ui",
-    "build:static": "npm run build --workspace @ptt-kurskarten/shared && npm run build:static --workspace ptt-kurskarten-ui"
+    "build:static": "npm run build --workspace @ptt-kurskarten/shared && npm run build:static --workspace ptt-kurskarten-ui",
+    "migrate:data:v2": "node scripts/migrate_data_v2.js"
   },
   "dependencies": {
     "openseadragon": "^5.0.1"

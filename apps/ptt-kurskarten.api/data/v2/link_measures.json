@@ -1,0 +1,1082 @@
+[
+  {
+    "id": "link-measure-node-1770809062251__node-1770809209472-distance-leuge",
+    "linkId": "node-1770809062251__node-1770809209472",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770809062251__node-1770890387454-distance-leuge",
+    "linkId": "node-1770809062251__node-1770890387454",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770809209472__node-1770812117179-distance-leuge",
+    "linkId": "node-1770809209472__node-1770812117179",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770809870824__node-1770818451614-distance-leuge",
+    "linkId": "node-1770809870824__node-1770818451614",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770812117179__node-1770890162679-distance-leuge",
+    "linkId": "node-1770812117179__node-1770890162679",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770812117179__node-1770890297820-distance-leuge",
+    "linkId": "node-1770812117179__node-1770890297820",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770818436737-distance-leuge",
+    "linkId": "node-1770818428222__node-1770818436737",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770818444657-distance-leuge",
+    "linkId": "node-1770818428222__node-1770818444657",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770890564956-distance-leuge",
+    "linkId": "node-1770818428222__node-1770890564956",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770890609929-distance-leuge",
+    "linkId": "node-1770818428222__node-1770890609929",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770890628791-distance-leuge",
+    "linkId": "node-1770818428222__node-1770890628791",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818428222__node-1770897442282-distance-leuge",
+    "linkId": "node-1770818428222__node-1770897442282",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818436737__node-1770890297820-distance-leuge",
+    "linkId": "node-1770818436737__node-1770890297820",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818444657__node-1770911202396-distance-leuge",
+    "linkId": "node-1770818444657__node-1770911202396",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818476302__node-1770912401064-distance-leuge",
+    "linkId": "node-1770818476302__node-1770912401064",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818476302__node-1770912408628-distance-leuge",
+    "linkId": "node-1770818476302__node-1770912408628",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770818483826__node-1770907161310-distance-leuge",
+    "linkId": "node-1770818483826__node-1770907161310",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823561872__node-1770823595717-distance-leuge",
+    "linkId": "node-1770823561872__node-1770823595717",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823561872__node-1770890541178-distance-leuge",
+    "linkId": "node-1770823561872__node-1770890541178",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823570686__node-1770823595717-distance-leuge",
+    "linkId": "node-1770823570686__node-1770823595717",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823570686__node-1770823607384-distance-leuge",
+    "linkId": "node-1770823570686__node-1770823607384",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823607384__node-1770823621828-distance-leuge",
+    "linkId": "node-1770823607384__node-1770823621828",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823621828__node-1770823657588-distance-leuge",
+    "linkId": "node-1770823621828__node-1770823657588",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770823657588__node-1770890638355-distance-leuge",
+    "linkId": "node-1770823657588__node-1770890638355",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890162679__node-1770890186709-distance-leuge",
+    "linkId": "node-1770890162679__node-1770890186709",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890387454__node-1770890410235-distance-leuge",
+    "linkId": "node-1770890387454__node-1770890410235",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890410235__node-1770890490883-distance-leuge",
+    "linkId": "node-1770890410235__node-1770890490883",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890434712__node-1770890490883-distance-leuge",
+    "linkId": "node-1770890434712__node-1770890490883",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890434712__node-1770890523913-distance-leuge",
+    "linkId": "node-1770890434712__node-1770890523913",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890523913__node-1770890541178-distance-leuge",
+    "linkId": "node-1770890523913__node-1770890541178",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890541178__node-1770890556808-distance-leuge",
+    "linkId": "node-1770890541178__node-1770890556808",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890556808__node-1770890564956-distance-leuge",
+    "linkId": "node-1770890556808__node-1770890564956",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890564956__node-1770897668923-distance-leuge",
+    "linkId": "node-1770890564956__node-1770897668923",
+    "measureKey": "distance.leuge",
+    "valueNumber": 6,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890564956__node-1770897698221-distance-leuge",
+    "linkId": "node-1770890564956__node-1770897698221",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890609929__node-1770897668923-distance-leuge",
+    "linkId": "node-1770890609929__node-1770897668923",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890628791__node-1770897625083-distance-leuge",
+    "linkId": "node-1770890628791__node-1770897625083",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890638355__node-1770890809431-distance-leuge",
+    "linkId": "node-1770890638355__node-1770890809431",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890809431__node-1770890971568-distance-leuge",
+    "linkId": "node-1770890809431__node-1770890971568",
+    "measureKey": "distance.leuge",
+    "valueNumber": 5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890904555__node-1770890971568-distance-leuge",
+    "linkId": "node-1770890904555__node-1770890971568",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770890904555__node-1770891120113-distance-leuge",
+    "linkId": "node-1770890904555__node-1770891120113",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770891003781__node-1770891044281-distance-leuge",
+    "linkId": "node-1770891003781__node-1770891044281",
+    "measureKey": "distance.leuge",
+    "valueNumber": 5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770891003781__node-1770891120113-distance-leuge",
+    "linkId": "node-1770891003781__node-1770891120113",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770891044281__node-1770891148537-distance-leuge",
+    "linkId": "node-1770891044281__node-1770891148537",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770891194672__node-1770891315316-distance-leuge",
+    "linkId": "node-1770891194672__node-1770891315316",
+    "measureKey": "distance.leuge",
+    "valueNumber": 8,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770891315316__node-1770891915773-distance-leuge",
+    "linkId": "node-1770891315316__node-1770891915773",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894673248__node-1770894704650-distance-leuge",
+    "linkId": "node-1770894673248__node-1770894704650",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894673248__node-1770906293087-distance-leuge",
+    "linkId": "node-1770894673248__node-1770906293087",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894787749__node-1770906712573-distance-leuge",
+    "linkId": "node-1770894787749__node-1770906712573",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894880046__node-1770894994828-distance-leuge",
+    "linkId": "node-1770894880046__node-1770894994828",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894880046__node-1770906973478-distance-leuge",
+    "linkId": "node-1770894880046__node-1770906973478",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770894994828__node-1770897613242-distance-leuge",
+    "linkId": "node-1770894994828__node-1770897613242",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897442282__node-1770897530894-distance-leuge",
+    "linkId": "node-1770897442282__node-1770897530894",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897442282__node-1770897613242-distance-leuge",
+    "linkId": "node-1770897442282__node-1770897613242",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897530894__node-1770897613242-distance-leuge",
+    "linkId": "node-1770897530894__node-1770897613242",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897613242__node-1770897625083-distance-leuge",
+    "linkId": "node-1770897613242__node-1770897625083",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897625083__node-1770897668923-distance-leuge",
+    "linkId": "node-1770897625083__node-1770897668923",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897625083__node-1770907094109-distance-leuge",
+    "linkId": "node-1770897625083__node-1770907094109",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897625083__node-1770907145936-distance-leuge",
+    "linkId": "node-1770897625083__node-1770907145936",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897625083__node-1770907151001-distance-leuge",
+    "linkId": "node-1770897625083__node-1770907151001",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897668923__node-1770907100588-distance-leuge",
+    "linkId": "node-1770897668923__node-1770907100588",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897698221__node-1770897770477-distance-leuge",
+    "linkId": "node-1770897698221__node-1770897770477",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897770477__node-1770897790722-distance-leuge",
+    "linkId": "node-1770897770477__node-1770897790722",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897770477__node-1770911077601-distance-leuge",
+    "linkId": "node-1770897770477__node-1770911077601",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897790722__node-1770897856386-distance-leuge",
+    "linkId": "node-1770897790722__node-1770897856386",
+    "measureKey": "distance.leuge",
+    "valueNumber": 5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897856386__node-1770897860152-distance-leuge",
+    "linkId": "node-1770897856386__node-1770897860152",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897860152__node-1770912364302-distance-leuge",
+    "linkId": "node-1770897860152__node-1770912364302",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770897868165__node-1770912385928-distance-leuge",
+    "linkId": "node-1770897868165__node-1770912385928",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906150586__node-1770906278302-distance-leuge",
+    "linkId": "node-1770906150586__node-1770906278302",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906150586__node-1770906301641-distance-leuge",
+    "linkId": "node-1770906150586__node-1770906301641",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906199277__node-1770906213725-distance-leuge",
+    "linkId": "node-1770906199277__node-1770906213725",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906199277__node-1770912050316-distance-leuge",
+    "linkId": "node-1770906199277__node-1770912050316",
+    "measureKey": "distance.leuge",
+    "valueNumber": 0.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906213725__node-1770906278302-distance-leuge",
+    "linkId": "node-1770906213725__node-1770906278302",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.675,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906213725__node-1770906638289-distance-leuge",
+    "linkId": "node-1770906213725__node-1770906638289",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906278302__node-1770906293087-distance-leuge",
+    "linkId": "node-1770906278302__node-1770906293087",
+    "measureKey": "distance.leuge",
+    "valueNumber": 5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906293087__node-1770906301641-distance-leuge",
+    "linkId": "node-1770906293087__node-1770906301641",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906293087__node-1770906362386-distance-leuge",
+    "linkId": "node-1770906293087__node-1770906362386",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906362386__node-1770906451065-distance-leuge",
+    "linkId": "node-1770906362386__node-1770906451065",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.675,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906638289__node-1770906644770-distance-leuge",
+    "linkId": "node-1770906638289__node-1770906644770",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906644770__node-1770906650706-distance-leuge",
+    "linkId": "node-1770906644770__node-1770906650706",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906644770__node-1770906731613-distance-leuge",
+    "linkId": "node-1770906644770__node-1770906731613",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906644770__node-1770906804866-distance-leuge",
+    "linkId": "node-1770906644770__node-1770906804866",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906644770__node-1770912043726-distance-leuge",
+    "linkId": "node-1770906644770__node-1770912043726",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906650706__node-1770906927681-distance-leuge",
+    "linkId": "node-1770906650706__node-1770906927681",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906650706__node-1770907161310-distance-leuge",
+    "linkId": "node-1770906650706__node-1770907161310",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906712573__node-1770906731613-distance-leuge",
+    "linkId": "node-1770906712573__node-1770906731613",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906731613__node-1770906799317-distance-leuge",
+    "linkId": "node-1770906731613__node-1770906799317",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906731613__node-1770906804866-distance-leuge",
+    "linkId": "node-1770906731613__node-1770906804866",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906799317__node-1770906973478-distance-leuge",
+    "linkId": "node-1770906799317__node-1770906973478",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906804866__node-1770907045212-distance-leuge",
+    "linkId": "node-1770906804866__node-1770907045212",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.626,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906804866__node-1770907161310-distance-leuge",
+    "linkId": "node-1770906804866__node-1770907161310",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770906973478__node-1770907045212-distance-leuge",
+    "linkId": "node-1770906973478__node-1770907045212",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.875,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907045212__node-1770907088865-distance-leuge",
+    "linkId": "node-1770907045212__node-1770907088865",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907045212__node-1770907094109-distance-leuge",
+    "linkId": "node-1770907045212__node-1770907094109",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907045212__node-1770907154674-distance-leuge",
+    "linkId": "node-1770907045212__node-1770907154674",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907100588__node-1770907142041-distance-leuge",
+    "linkId": "node-1770907100588__node-1770907142041",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907142041__node-1770907145936-distance-leuge",
+    "linkId": "node-1770907142041__node-1770907145936",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907142041__node-1770911208987-distance-leuge",
+    "linkId": "node-1770907142041__node-1770911208987",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907142041__node-1770911217459-distance-leuge",
+    "linkId": "node-1770907142041__node-1770911217459",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907151001__node-1770907161310-distance-leuge",
+    "linkId": "node-1770907151001__node-1770907161310",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.625,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907154674__node-1770907161310-distance-leuge",
+    "linkId": "node-1770907154674__node-1770907161310",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907161310__node-1770911222493-distance-leuge",
+    "linkId": "node-1770907161310__node-1770911222493",
+    "measureKey": "distance.leuge",
+    "valueNumber": 2.375,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770907161310__node-1770911226606-distance-leuge",
+    "linkId": "node-1770907161310__node-1770911226606",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770911077601__node-1770911208987-distance-leuge",
+    "linkId": "node-1770911077601__node-1770911208987",
+    "measureKey": "distance.leuge",
+    "valueNumber": 1.5,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770911202396__node-1770911208987-distance-leuge",
+    "linkId": "node-1770911202396__node-1770911208987",
+    "measureKey": "distance.leuge",
+    "valueNumber": 5.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770911217459__node-1770911222493-distance-leuge",
+    "linkId": "node-1770911217459__node-1770911222493",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.125,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770912043726__node-1770912050316-distance-leuge",
+    "linkId": "node-1770912043726__node-1770912050316",
+    "measureKey": "distance.leuge",
+    "valueNumber": 3.25,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770912364302__node-1770912385928-distance-leuge",
+    "linkId": "node-1770912364302__node-1770912385928",
+    "measureKey": "distance.leuge",
+    "valueNumber": 4.75,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "link-measure-node-1770912385928__node-1770912401064-distance-leuge",
+    "linkId": "node-1770912385928__node-1770912401064",
+    "measureKey": "distance.leuge",
+    "valueNumber": 6,
+    "unit": "leuge",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json"
+  }
+]

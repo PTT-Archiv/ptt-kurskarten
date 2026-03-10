@@ -137,6 +137,152 @@ By default the API uses the JSON-backed repository (`GRAPH_REPO=json`) and persi
 - `apps/ptt-kurskarten.api/data/segments.json`
 - `apps/ptt-kurskarten.api/data/trips.json`
 
+### Normalized v2 export (for future DB migration)
+
+To generate a normalized canonical dataset from legacy JSON files:
+
+```bash
+npm run migrate:data:v2
+```
+
+Output folder:
+
+- `apps/ptt-kurskarten.api/data/v2`
+
+This export keeps IDs traceable, separates places/anchors/links/services/trips, and writes migration diagnostics to `migration_report.json`.
+
+### Canonical `v2` data model (normalized)
+
+The `data/v2` folder is the canonical edit model. It is normalized so that:
+
+- one real-world place is stored once
+- map coordinates can be reused across years/editions
+- route structure is separated from timetable rows
+- metadata is extensible through generic facts/assertions
+- migration to SQL later is straightforward (one JSON file ~= one table)
+
+`v2` files and roles:
+
+- `places.json`: stable place identities
+- `place_names.json`: multilingual/historical names and aliases
+- `map_templates.json`: reusable base map definitions
+- `map_anchors.json`: place coordinates on a map template (reused across editions)
+- `edition_anchor_overrides.json`: only store coordinates when an edition differs
+- `editions.json`: year/version context for a Kurskarte
+- `links.json`: undirected relation between two places
+- `link_measures.json`: link-level values such as `distance.leuge`
+- `services.json`: directed route/service variants (`from` -> `to`)
+- `service_trips.json`: timetable rows attached to one service
+- `assertions.json`: generic facts/identifiers (including Wikidata)
+- `sources.json`: provenance and citation records
+- `migration_report.json`: counts and warnings from conversion
+
+Conceptually:
+
+```text
+Place --< PlaceName
+Place --< MapAnchor >-- MapTemplate
+Edition --< EditionAnchorOverride >-- Place
+Place --< Link(placeA/placeB) >-- Place
+Link --< LinkMeasure
+Link --< Service(direction)
+Service --< ServiceTrip
+Any entity --< Assertion >-- Source
+```
+
+#### How to work with it (archive-oriented workflow)
+
+1. Create or find the `Place`.
+2. Add canonical and alternate names in `place_names.json`.
+3. Set default map position in `map_anchors.json` (once per template).
+4. For a new year/version, create an `Edition`.
+5. Reuse anchors; only add `edition_anchor_overrides.json` when needed.
+6. Create `links.json` between place pairs.
+7. Add `link_measures.json` (`distance.leuge`, etc.).
+8. Add directed `services.json` variants.
+9. Add timetable rows in `service_trips.json`.
+10. Add metadata/IDs as `assertions.json` and always reference `sources.json`.
+
+This keeps editing understandable for archivists: identity, map placement, route, timetable, and evidence are separate concerns.
+
+#### Future-proofing rules
+
+- Keep IDs stable and human-reviewable.
+- Never duplicate place identity per year; use edition context instead.
+- Keep `links` undirected; direction belongs in `services`.
+- Keep unknown values as `null` (not guessed placeholders).
+- Attach provenance (`sourceId`) to important assertions and edits.
+
+### Migration path to PostgreSQL
+
+Because `v2` is table-shaped JSON, PostgreSQL migration can be direct:
+
+1. Create SQL tables matching `v2` files.
+2. Preserve IDs as `TEXT` primary keys.
+3. Import JSON into staging tables.
+4. Run referential/integrity checks.
+5. Promote to production tables and add API repository for Postgres.
+
+Suggested SQL mapping:
+
+- `places`, `place_names`, `map_templates`, `map_anchors`, `edition_anchor_overrides`
+- `editions`, `links`, `link_measures`, `services`, `service_trips`
+- `assertions`, `sources`
+
+Recommended constraints/indexes:
+
+- foreign keys on all `...Id` references
+- unique `(mapTemplateId, placeId)` on anchors
+- check `placeAId < placeBId` for undirected links
+- index `services(fromPlaceId)`, `services(toPlaceId)`, `service_trips(serviceId)`
+- index `assertions(targetType, targetId, schemaKey)`
+- optional `GIN` index for JSON fields like `assertions.valueJson` and `services.note`
+
+Recommended rollout:
+
+1. Keep JSON as source of truth, import to Postgres nightly.
+2. Validate parity (`counts`, sampled records, route outputs).
+3. Move API reads to Postgres.
+4. Move writes to Postgres.
+5. Keep JSON export as backup/static artifact.
+
+### Document store vs relational store (evaluation)
+
+#### Document store strengths
+
+- very flexible schema changes
+- easy to store heterogeneous metadata payloads
+- convenient for full-document reads/writes
+
+#### Document store risks for this project
+
+- weaker enforcement of graph integrity (orphan refs, duplicates)
+- harder multi-entity transactional updates
+- more custom logic needed for archival consistency rules
+- joins across place/link/service/trip are less transparent
+
+#### Relational store strengths
+
+- strong referential integrity and constraints
+- clear normalization for archive entities
+- efficient joins for reports, routing prep, QA checks
+- easier long-term governance and auditability
+
+#### Relational store risks
+
+- more upfront schema work
+- requires migration/version discipline
+
+#### Recommendation
+
+Use a hybrid architecture:
+
+- relational (PostgreSQL) for canonical model and integrity
+- JSON/JSONB fields for flexible metadata payloads (`assertions.valueJson`, localized notes)
+- generated document snapshots for static UI/runtime speed
+
+For this domain (historical network + provenance + multi-year editions), relational-first is the safer long-term core.
+
 You can run with ephemeral in-memory data using:
 
 ```bash

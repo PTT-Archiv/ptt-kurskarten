@@ -1,0 +1,8 @@
+[
+  {
+    "id": "map-template-switzerland-base-v1",
+    "label": "Swiss base map template",
+    "description": "Default reusable map template migrated from legacy node coordinates.",
+    "sourceId": "source-legacy-graph-json"
+  }
+]

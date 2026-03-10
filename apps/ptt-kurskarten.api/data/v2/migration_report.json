@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-03-10T10:56:08.034Z",
+  "counts": {
+    "places": 332,
+    "placeNames": 552,
+    "mapTemplates": 1,
+    "mapAnchors": 332,
+    "anchorOverrides": 0,
+    "editions": 1,
+    "links": 136,
+    "linkMeasures": 108,
+    "services": 264,
+    "serviceTrips": 384,
+    "assertions": 734,
+    "sources": 3
+  },
+  "warnings": {
+    "duplicateWikidataNameKeys": [],
+    "duplicatePlaceNameKeysLinkedToOneWikidataEntry": [
+      "balzers",
+      "brunnen",
+      "kirchberg",
+      "lyon",
+      "moutier",
+      "murgenthal",
+      "sennwald",
+      "stein",
+      "urseren",
+      "wohlhausen"
+    ],
+    "missingTripServices": [],
+    "servicesWithoutLink": []
+  }
+}

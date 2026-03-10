@@ -1,0 +1,3322 @@
+[
+  {
+    "id": "node-1770808860448",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Turin",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770808860448"
+  },
+  {
+    "id": "node-1770808908336",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Chambery",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770808908336"
+  },
+  {
+    "id": "node-1770809018783",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sallenches Chamouny",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809018783"
+  },
+  {
+    "id": "node-1770809062251",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Genève",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809062251"
+  },
+  {
+    "id": "node-1770809102948",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lyon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809102948"
+  },
+  {
+    "id": "node-1770809183587",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Paris",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809183587"
+  },
+  {
+    "id": "node-1770809209472",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Coppet",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809209472"
+  },
+  {
+    "id": "node-1770809870824",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bern",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770809870824"
+  },
+  {
+    "id": "node-1770811420932",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bellinzona",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770811420932"
+  },
+  {
+    "id": "node-1770811785314",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Chur",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770811785314"
+  },
+  {
+    "id": "node-1770812095922",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Basel",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770812095922"
+  },
+  {
+    "id": "node-1770812117179",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Nyon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770812117179"
+  },
+  {
+    "id": "node-1770818428222",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lausanne",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818428222"
+  },
+  {
+    "id": "node-1770818436737",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Morges",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818436737"
+  },
+  {
+    "id": "node-1770818444657",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Oron",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818444657"
+  },
+  {
+    "id": "node-1770818451614",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schönbühl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818451614"
+  },
+  {
+    "id": "node-1770818476302",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Brienz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818476302"
+  },
+  {
+    "id": "node-1770818481603",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aarberg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818481603"
+  },
+  {
+    "id": "node-1770818483826",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ins",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818483826"
+  },
+  {
+    "id": "node-1770818487149",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Walkringen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818487149"
+  },
+  {
+    "id": "node-1770818509015",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Münsingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770818509015"
+  },
+  {
+    "id": "node-1770823561872",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Martigny",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823561872"
+  },
+  {
+    "id": "node-1770823570686",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sion",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823570686"
+  },
+  {
+    "id": "node-1770823595717",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Riddes",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823595717"
+  },
+  {
+    "id": "node-1770823607384",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Siders",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823607384"
+  },
+  {
+    "id": "node-1770823621828",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Turtmann",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823621828"
+  },
+  {
+    "id": "node-1770823657588",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Viesch",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770823657588"
+  },
+  {
+    "id": "node-1770890162679",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saint-Cergue",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890162679"
+  },
+  {
+    "id": "node-1770890186709",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Rousses",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890186709"
+  },
+  {
+    "id": "node-1770890297820",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rolle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890297820"
+  },
+  {
+    "id": "node-1770890321232",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aubonne",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890321232"
+  },
+  {
+    "id": "node-1770890387454",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Douvaine",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890387454"
+  },
+  {
+    "id": "node-1770890410235",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Thonon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890410235"
+  },
+  {
+    "id": "node-1770890434712",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saint-Gingolph",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890434712"
+  },
+  {
+    "id": "node-1770890490883",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Evian",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890490883"
+  },
+  {
+    "id": "node-1770890523913",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Vionnaz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890523913"
+  },
+  {
+    "id": "node-1770890541178",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saint-Maurice",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890541178"
+  },
+  {
+    "id": "node-1770890556808",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aigle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890556808"
+  },
+  {
+    "id": "node-1770890564956",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Vevey",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890564956"
+  },
+  {
+    "id": "node-1770890609929",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Montpreveyres",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890609929"
+  },
+  {
+    "id": "node-1770890628791",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Echallens",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890628791"
+  },
+  {
+    "id": "node-1770890638355",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Brieg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890638355"
+  },
+  {
+    "id": "node-1770890809431",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Berisal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890809431"
+  },
+  {
+    "id": "node-1770890904555",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Jsella",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890904555"
+  },
+  {
+    "id": "node-1770890971568",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Simplon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770890971568"
+  },
+  {
+    "id": "node-1770891003781",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Vogogna",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891003781"
+  },
+  {
+    "id": "node-1770891044281",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Baveno",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891044281"
+  },
+  {
+    "id": "node-1770891120113",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Domo d'Ossola",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891120113"
+  },
+  {
+    "id": "node-1770891148537",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Arona",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891148537"
+  },
+  {
+    "id": "node-1770891194672",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Mailand",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891194672"
+  },
+  {
+    "id": "node-1770891315316",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Camerlata",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891315316"
+  },
+  {
+    "id": "node-1770891342495",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Como",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891342495"
+  },
+  {
+    "id": "node-1770891376062",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Monza",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891376062"
+  },
+  {
+    "id": "node-1770891460324",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Carsaniga",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891460324"
+  },
+  {
+    "id": "node-1770891474595",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lecco",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891474595"
+  },
+  {
+    "id": "node-1770891520064",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Varenna",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891520064"
+  },
+  {
+    "id": "node-1770891544616",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Colico",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891544616"
+  },
+  {
+    "id": "node-1770891568712",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Riva",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891568712"
+  },
+  {
+    "id": "node-1770891635575",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Chiavenna",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891635575"
+  },
+  {
+    "id": "node-1770891674893",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Campodolcino",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891674893"
+  },
+  {
+    "id": "node-1770891915773",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Mendrisio",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891915773"
+  },
+  {
+    "id": "node-1770891950032",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lugano",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891950032"
+  },
+  {
+    "id": "node-1770891985133",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bironico",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770891985133"
+  },
+  {
+    "id": "node-1770892074771",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Balzers",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892074771"
+  },
+  {
+    "id": "node-1770892131647",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Feldkirch",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892131647"
+  },
+  {
+    "id": "node-1770892169658",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sennwald",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892169658"
+  },
+  {
+    "id": "node-1770892196035",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sevelen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892196035"
+  },
+  {
+    "id": "node-1770892203535",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sennwald",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892203535"
+  },
+  {
+    "id": "node-1770892276405",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Haag",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892276405"
+  },
+  {
+    "id": "node-1770892402501",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bregenz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892402501"
+  },
+  {
+    "id": "node-1770892435872",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lindau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892435872"
+  },
+  {
+    "id": "node-1770892475913",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Friedrichshafen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892475913"
+  },
+  {
+    "id": "node-1770892528135",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ulm",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892528135"
+  },
+  {
+    "id": "node-1770892536449",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Heilbronn",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892536449"
+  },
+  {
+    "id": "node-1770892604502",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Konstanz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892604502"
+  },
+  {
+    "id": "node-1770892624111",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Stockach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892624111"
+  },
+  {
+    "id": "node-1770892703699",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Randegg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892703699"
+  },
+  {
+    "id": "node-1770892936569",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Blomberg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892936569"
+  },
+  {
+    "id": "node-1770892944989",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Stühlingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892944989"
+  },
+  {
+    "id": "node-1770892959172",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Unterhallau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770892959172"
+  },
+  {
+    "id": "node-1770893096455",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lauchringen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893096455"
+  },
+  {
+    "id": "node-1770893139038",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Riedern",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893139038"
+  },
+  {
+    "id": "node-1770893174287",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Waldshut",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893174287"
+  },
+  {
+    "id": "node-1770893232957",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Säckingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893232957"
+  },
+  {
+    "id": "node-1770893253800",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Beuggen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893253800"
+  },
+  {
+    "id": "node-1770893270491",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Offenburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893270491"
+  },
+  {
+    "id": "node-1770893284200",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Karlsruhe",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893284200"
+  },
+  {
+    "id": "node-1770893304119",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Mannheim",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893304119"
+  },
+  {
+    "id": "node-1770893503712",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Frankfurt",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893503712"
+  },
+  {
+    "id": "node-1770893573469",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Colmar",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893573469"
+  },
+  {
+    "id": "node-1770893582974",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Strassburg-Sarreburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770893582974"
+  },
+  {
+    "id": "node-1770894673248",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Delle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894673248"
+  },
+  {
+    "id": "node-1770894704650",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Belfort",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894704650"
+  },
+  {
+    "id": "node-1770894747352",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Maiche",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894747352"
+  },
+  {
+    "id": "node-1770894787749",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Morteau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894787749"
+  },
+  {
+    "id": "node-1770894811224",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Besancon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894811224"
+  },
+  {
+    "id": "node-1770894828775",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Dijon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894828775"
+  },
+  {
+    "id": "node-1770894852240",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Salins",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894852240"
+  },
+  {
+    "id": "node-1770894880046",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Pontarlier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894880046"
+  },
+  {
+    "id": "node-1770894994828",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Jougne",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770894994828"
+  },
+  {
+    "id": "node-1770895016880",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lyon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770895016880"
+  },
+  {
+    "id": "node-1770895112907",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Nauders",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770895112907"
+  },
+  {
+    "id": "node-1770897442282",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Cossonay",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897442282"
+  },
+  {
+    "id": "node-1770897530894",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Le Pont",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897530894"
+  },
+  {
+    "id": "node-1770897591288",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Le Brassus",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897591288"
+  },
+  {
+    "id": "node-1770897613242",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Orbe",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897613242"
+  },
+  {
+    "id": "node-1770897625083",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Yverdon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897625083"
+  },
+  {
+    "id": "node-1770897668923",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Moudon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897668923"
+  },
+  {
+    "id": "node-1770897698221",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Châtel-Saint-Denis",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897698221"
+  },
+  {
+    "id": "node-1770897770477",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bulle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897770477"
+  },
+  {
+    "id": "node-1770897790722",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Montbovon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897790722"
+  },
+  {
+    "id": "node-1770897856386",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saanen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897856386"
+  },
+  {
+    "id": "node-1770897860152",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zweisimmen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897860152"
+  },
+  {
+    "id": "node-1770897868165",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Frutigen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897868165"
+  },
+  {
+    "id": "node-1770897884517",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Hospitz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897884517"
+  },
+  {
+    "id": "node-1770897945287",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Airolo",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897945287"
+  },
+  {
+    "id": "node-1770897948683",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bignasco",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897948683"
+  },
+  {
+    "id": "node-1770897993209",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Locarno",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770897993209"
+  },
+  {
+    "id": "node-1770898030151",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Magadino",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898030151"
+  },
+  {
+    "id": "node-1770898099050",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Osogna",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898099050"
+  },
+  {
+    "id": "node-1770898134797",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Biasca",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898134797"
+  },
+  {
+    "id": "node-1770898144757",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bodio",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898144757"
+  },
+  {
+    "id": "node-1770898184274",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Olivone",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898184274"
+  },
+  {
+    "id": "node-1770898221637",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Cama",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898221637"
+  },
+  {
+    "id": "node-1770898228869",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Misocco",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898228869"
+  },
+  {
+    "id": "node-1770898312719",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "San Bernhardino",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898312719"
+  },
+  {
+    "id": "node-1770898350997",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Hinterhein",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898350997"
+  },
+  {
+    "id": "node-1770898396116",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Faido",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898396116"
+  },
+  {
+    "id": "node-1770898495591",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Splügen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898495591"
+  },
+  {
+    "id": "node-1770898535921",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Andeer",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898535921"
+  },
+  {
+    "id": "node-1770898587206",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Mühlen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898587206"
+  },
+  {
+    "id": "node-1770898624681",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Silvaplana",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898624681"
+  },
+  {
+    "id": "node-1770898631981",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Samedan",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898631981"
+  },
+  {
+    "id": "node-1770898668601",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Scanfs",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898668601"
+  },
+  {
+    "id": "node-1770898704049",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zernetz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898704049"
+  },
+  {
+    "id": "node-1770898723871",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schuls",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898723871"
+  },
+  {
+    "id": "node-1770898741949",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770898741949"
+  },
+  {
+    "id": "node-1770903887400",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Tiefenkasten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770903887400"
+  },
+  {
+    "id": "node-1770903938583",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Thusis",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770903938583"
+  },
+  {
+    "id": "node-1770903942187",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Churwalden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770903942187"
+  },
+  {
+    "id": "node-1770903965292",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Reichenau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770903965292"
+  },
+  {
+    "id": "node-1770904030276",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Küblis",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904030276"
+  },
+  {
+    "id": "node-1770904033887",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ragaz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904033887"
+  },
+  {
+    "id": "node-1770904042006",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Balzers",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904042006"
+  },
+  {
+    "id": "node-1770904127514",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rheineck",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904127514"
+  },
+  {
+    "id": "node-1770904139063",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Altstätten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904139063"
+  },
+  {
+    "id": "node-1770904186342",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rorschach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904186342"
+  },
+  {
+    "id": "node-1770904191097",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Romanshorn",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904191097"
+  },
+  {
+    "id": "node-1770904214236",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Arbon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904214236"
+  },
+  {
+    "id": "node-1770904220319",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Heiden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904220319"
+  },
+  {
+    "id": "node-1770904231733",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Trogen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904231733"
+  },
+  {
+    "id": "node-1770904285550",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Appenzell",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904285550"
+  },
+  {
+    "id": "node-1770904291181",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "St. Gallen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904291181"
+  },
+  {
+    "id": "node-1770904296483",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Herisau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904296483"
+  },
+  {
+    "id": "node-1770904323878",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schönengrund",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904323878"
+  },
+  {
+    "id": "node-1770904329965",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wattwyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904329965"
+  },
+  {
+    "id": "node-1770904350948",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wald",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904350948"
+  },
+  {
+    "id": "node-1770904356934",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Uster",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904356934"
+  },
+  {
+    "id": "node-1770904366395",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Fehraltorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904366395"
+  },
+  {
+    "id": "node-1770904371435",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bauma",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904371435"
+  },
+  {
+    "id": "node-1770904374540",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Fischenthal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904374540"
+  },
+  {
+    "id": "node-1770904442341",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Gossau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904442341"
+  },
+  {
+    "id": "node-1770904535478",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Flawil",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904535478"
+  },
+  {
+    "id": "node-1770904544888",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Flawyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904544888"
+  },
+  {
+    "id": "node-1770904555537",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bischofszell",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904555537"
+  },
+  {
+    "id": "node-1770904561366",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sulgen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904561366"
+  },
+  {
+    "id": "node-1770904580735",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Weinfelden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904580735"
+  },
+  {
+    "id": "node-1770904587781",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Frauenfeld",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904587781"
+  },
+  {
+    "id": "node-1770904633393",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904633393"
+  },
+  {
+    "id": "node-1770904637851",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aadorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904637851"
+  },
+  {
+    "id": "node-1770904695836",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Pfyn",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904695836"
+  },
+  {
+    "id": "node-1770904703884",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Stammheim",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904703884"
+  },
+  {
+    "id": "node-1770904724487",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Stein",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904724487"
+  },
+  {
+    "id": "node-1770904765130",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Stein",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904765130"
+  },
+  {
+    "id": "node-1770904820100",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Steckborn",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904820100"
+  },
+  {
+    "id": "node-1770904839764",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Tägerwilen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904839764"
+  },
+  {
+    "id": "node-1770904950535",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Köpplishaus",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904950535"
+  },
+  {
+    "id": "node-1770904980483",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wezikon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770904980483"
+  },
+  {
+    "id": "node-1770905078881",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Grüningen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905078881"
+  },
+  {
+    "id": "node-1770905083669",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ob. Albis",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905083669"
+  },
+  {
+    "id": "node-1770905146525",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Muri",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905146525"
+  },
+  {
+    "id": "node-1770905217644",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sarmenstorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905217644"
+  },
+  {
+    "id": "node-1770905227821",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lenzburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905227821"
+  },
+  {
+    "id": "node-1770905233782",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wohlen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905233782"
+  },
+  {
+    "id": "node-1770905238902",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bremgarten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905238902"
+  },
+  {
+    "id": "node-1770905243649",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Othmarsingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905243649"
+  },
+  {
+    "id": "node-1770905249596",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Brugg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905249596"
+  },
+  {
+    "id": "node-1770905254016",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Baden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905254016"
+  },
+  {
+    "id": "node-1770905257484",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zurzach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905257484"
+  },
+  {
+    "id": "node-1770905262003",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wildhaus",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905262003"
+  },
+  {
+    "id": "node-1770905399229",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Kaiserstuhl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905399229"
+  },
+  {
+    "id": "node-1770905419544",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Eglisau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905419544"
+  },
+  {
+    "id": "node-1770905423781",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Niederweningen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905423781"
+  },
+  {
+    "id": "node-1770905432489",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bülach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905432489"
+  },
+  {
+    "id": "node-1770905441164",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Baltenschweil",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905441164"
+  },
+  {
+    "id": "node-1770905554809",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Winterthur",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905554809"
+  },
+  {
+    "id": "node-1770905559674",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Andelfingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905559674"
+  },
+  {
+    "id": "node-1770905563396",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rafz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905563396"
+  },
+  {
+    "id": "node-1770905568056",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schaffhausen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905568056"
+  },
+  {
+    "id": "node-1770905648479",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zürich",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905648479"
+  },
+  {
+    "id": "node-1770905682253",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lauffenburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905682253"
+  },
+  {
+    "id": "node-1770905779983",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rheinfelden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905779983"
+  },
+  {
+    "id": "node-1770905794500",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Frick",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905794500"
+  },
+  {
+    "id": "node-1770905800343",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bötzen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905800343"
+  },
+  {
+    "id": "node-1770905848259",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Liestal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905848259"
+  },
+  {
+    "id": "node-1770905858716",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bukten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905858716"
+  },
+  {
+    "id": "node-1770905871252",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Olten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905871252"
+  },
+  {
+    "id": "node-1770905878879",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aarau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905878879"
+  },
+  {
+    "id": "node-1770905882167",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Leimbach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905882167"
+  },
+  {
+    "id": "node-1770905886053",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zofingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905886053"
+  },
+  {
+    "id": "node-1770905890445",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Kreuzstrasse",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905890445"
+  },
+  {
+    "id": "node-1770905940014",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Murgenthal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905940014"
+  },
+  {
+    "id": "node-1770905944274",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Balsthal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905944274"
+  },
+  {
+    "id": "node-1770905962102",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Balstall",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905962102"
+  },
+  {
+    "id": "node-1770905973449",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Waldenburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905973449"
+  },
+  {
+    "id": "node-1770905979601",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Oensingen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770905979601"
+  },
+  {
+    "id": "node-1770906061553",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Dürrmühle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906061553"
+  },
+  {
+    "id": "node-1770906108849",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aesch",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906108849"
+  },
+  {
+    "id": "node-1770906124944",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Laufen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906124944"
+  },
+  {
+    "id": "node-1770906150586",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Delémont",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906150586"
+  },
+  {
+    "id": "node-1770906161164",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Welschenrohr",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906161164"
+  },
+  {
+    "id": "node-1770906194376",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Moutier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906194376"
+  },
+  {
+    "id": "node-1770906199277",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Tavannes",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906199277"
+  },
+  {
+    "id": "node-1770906213725",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saignelégier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906213725"
+  },
+  {
+    "id": "node-1770906278302",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "La Roche",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906278302"
+  },
+  {
+    "id": "node-1770906293087",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Porrentruy",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906293087"
+  },
+  {
+    "id": "node-1770906301641",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Rangiers",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906301641"
+  },
+  {
+    "id": "node-1770906362386",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Malettes",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906362386"
+  },
+  {
+    "id": "node-1770906451065",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Undervelier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906451065"
+  },
+  {
+    "id": "node-1770906500293",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Malleray",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906500293"
+  },
+  {
+    "id": "node-1770906638289",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Bois",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906638289"
+  },
+  {
+    "id": "node-1770906644770",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Chaux-de-Fonds",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906644770"
+  },
+  {
+    "id": "node-1770906650706",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Hautes Geneveys",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906650706"
+  },
+  {
+    "id": "node-1770906712573",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Brenets",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906712573"
+  },
+  {
+    "id": "node-1770906731613",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Locle",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906731613"
+  },
+  {
+    "id": "node-1770906799317",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "La Brévine",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906799317"
+  },
+  {
+    "id": "node-1770906804866",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Les Ponts",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906804866"
+  },
+  {
+    "id": "node-1770906927681",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Savagnier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906927681"
+  },
+  {
+    "id": "node-1770906973478",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Verrières",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906973478"
+  },
+  {
+    "id": "node-1770906982068",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Moutier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770906982068"
+  },
+  {
+    "id": "node-1770907045212",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Motiers",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907045212"
+  },
+  {
+    "id": "node-1770907088865",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Côte-aux-Fées",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907088865"
+  },
+  {
+    "id": "node-1770907094109",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sainte-Croix",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907094109"
+  },
+  {
+    "id": "node-1770907100588",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Henniez",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907100588"
+  },
+  {
+    "id": "node-1770907142041",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Payerne",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907142041"
+  },
+  {
+    "id": "node-1770907145936",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Estavayer",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907145936"
+  },
+  {
+    "id": "node-1770907151001",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saint-Aubin",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907151001"
+  },
+  {
+    "id": "node-1770907154674",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rochefort",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907154674"
+  },
+  {
+    "id": "node-1770907161310",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Neuchâtel",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907161310"
+  },
+  {
+    "id": "node-1770907246859",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Belp",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770907246859"
+  },
+  {
+    "id": "node-1770911077601",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Posieux",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911077601"
+  },
+  {
+    "id": "node-1770911202396",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Romont",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911202396"
+  },
+  {
+    "id": "node-1770911208987",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Freiburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911208987"
+  },
+  {
+    "id": "node-1770911217459",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Murten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911217459"
+  },
+  {
+    "id": "node-1770911222493",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Gampelen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911222493"
+  },
+  {
+    "id": "node-1770911226606",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "La Neuveville",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770911226606"
+  },
+  {
+    "id": "node-1770912043726",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Saint-Imier",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912043726"
+  },
+  {
+    "id": "node-1770912050316",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sonceboz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912050316"
+  },
+  {
+    "id": "node-1770912067754",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Biel",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912067754"
+  },
+  {
+    "id": "node-1770912080230",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Grenchen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912080230"
+  },
+  {
+    "id": "node-1770912100324",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Solothurn",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912100324"
+  },
+  {
+    "id": "node-1770912118654",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bätterkinden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912118654"
+  },
+  {
+    "id": "node-1770912128082",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Büren",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912128082"
+  },
+  {
+    "id": "node-1770912196738",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Kirchberg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912196738"
+  },
+  {
+    "id": "node-1770912202211",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Höchstetten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912202211"
+  },
+  {
+    "id": "node-1770912220114",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schwarzenburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912220114"
+  },
+  {
+    "id": "node-1770912227271",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Neueneck",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912227271"
+  },
+  {
+    "id": "node-1770912277124",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schwanden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912277124"
+  },
+  {
+    "id": "node-1770912305962",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Gümminen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912305962"
+  },
+  {
+    "id": "node-1770912364302",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Weissenburg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912364302"
+  },
+  {
+    "id": "node-1770912385928",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Thun",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912385928"
+  },
+  {
+    "id": "node-1770912401064",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Unterseen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912401064"
+  },
+  {
+    "id": "node-1770912408628",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Meiringen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912408628"
+  },
+  {
+    "id": "node-1770912412950",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Langnau im Emmental",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912412950"
+  },
+  {
+    "id": "node-1770912420029",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Escholzmatt",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912420029"
+  },
+  {
+    "id": "node-1770912450080",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wohlhausen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912450080"
+  },
+  {
+    "id": "node-1770912454275",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Entlebuch",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912454275"
+  },
+  {
+    "id": "node-1770912479656",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wohlhausen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912479656"
+  },
+  {
+    "id": "node-1770912516959",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Huttwyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912516959"
+  },
+  {
+    "id": "node-1770912543968",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sumiswald",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912543968"
+  },
+  {
+    "id": "node-1770912548392",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Burgdorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912548392"
+  },
+  {
+    "id": "node-1770912553971",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Kirchberg",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912553971"
+  },
+  {
+    "id": "node-1770912564452",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Herzogenbuchsee",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912564452"
+  },
+  {
+    "id": "node-1770912569156",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Langenthal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912569156"
+  },
+  {
+    "id": "node-1770912572454",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Murgenthal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912572454"
+  },
+  {
+    "id": "node-1770912580537",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Kirchleerau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912580537"
+  },
+  {
+    "id": "node-1770912586038",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Reiden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912586038"
+  },
+  {
+    "id": "node-1770912594808",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sursee",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912594808"
+  },
+  {
+    "id": "node-1770912606182",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Riedwyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912606182"
+  },
+  {
+    "id": "node-1770912625900",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Realp",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912625900"
+  },
+  {
+    "id": "node-1770912658453",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Urseren",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912658453"
+  },
+  {
+    "id": "node-1770912672117",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Inschi",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912672117"
+  },
+  {
+    "id": "node-1770912689899",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Altdorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912689899"
+  },
+  {
+    "id": "node-1770912696547",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Flüelen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912696547"
+  },
+  {
+    "id": "node-1770912699696",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lungern",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912699696"
+  },
+  {
+    "id": "node-1770912704041",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sarnen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912704041"
+  },
+  {
+    "id": "node-1770912707032",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Beckenried",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912707032"
+  },
+  {
+    "id": "node-1770912711681",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Brunnen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912711681"
+  },
+  {
+    "id": "node-1770912798782",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Brunnen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912798782"
+  },
+  {
+    "id": "node-1770912818126",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schwyz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912818126"
+  },
+  {
+    "id": "node-1770912823042",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Arth",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912823042"
+  },
+  {
+    "id": "node-1770912826245",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sattel",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912826245"
+  },
+  {
+    "id": "node-1770912829695",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Luzern",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912829695"
+  },
+  {
+    "id": "node-1770912845895",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schachen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912845895"
+  },
+  {
+    "id": "node-1770912913255",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Hildisrieden",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912913255"
+  },
+  {
+    "id": "node-1770912961774",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Hochdorf",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912961774"
+  },
+  {
+    "id": "node-1770912969831",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Honau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770912969831"
+  },
+  {
+    "id": "node-1770913006672",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Zug",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913006672"
+  },
+  {
+    "id": "node-1770913010028",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Aegeri",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913010028"
+  },
+  {
+    "id": "node-1770913090657",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Einsiedeln",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913090657"
+  },
+  {
+    "id": "node-1770913131646",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Biberbruck",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913131646"
+  },
+  {
+    "id": "node-1770913159270",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Richterschwyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913159270"
+  },
+  {
+    "id": "node-1770913186861",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Horgen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913186861"
+  },
+  {
+    "id": "node-1770913221426",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Knonau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913221426"
+  },
+  {
+    "id": "node-1770913225645",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Sins",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913225645"
+  },
+  {
+    "id": "node-1770913233135",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Fahrwangen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913233135"
+  },
+  {
+    "id": "node-1770913265492",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ilanz",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913265492"
+  },
+  {
+    "id": "node-1770913292189",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Truns",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913292189"
+  },
+  {
+    "id": "node-1770913331792",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Linththal",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913331792"
+  },
+  {
+    "id": "node-1770913368260",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Glarus",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913368260"
+  },
+  {
+    "id": "node-1770913438620",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Wallenstadt",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913438620"
+  },
+  {
+    "id": "node-1770913459973",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Weesen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913459973"
+  },
+  {
+    "id": "node-1770913468653",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Bilten",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913468653"
+  },
+  {
+    "id": "node-1770913525543",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Lachen",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913525543"
+  },
+  {
+    "id": "node-1770913567237",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Rapperschmyl",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913567237"
+  },
+  {
+    "id": "node-1770913587997",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schirmensee",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913587997"
+  },
+  {
+    "id": "node-1770913659038",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Schmerikon",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913659038"
+  },
+  {
+    "id": "node-1770913663546",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Ebnat",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913663546"
+  },
+  {
+    "id": "node-1770913685913",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Nesslau",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913685913"
+  },
+  {
+    "id": "node-1770913715054",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Uznach",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770913715054"
+  },
+  {
+    "id": "node-1770991540696",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Urseren",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1770991540696"
+  },
+  {
+    "id": "node-1771596256944",
+    "kind": "place",
+    "status": "active",
+    "defaultName": "Boniswil",
+    "validFrom": 1852,
+    "validTo": null,
+    "sourceId": "source-legacy-graph-json",
+    "legacyNodeId": "node-1771596256944"
+  }
+]
