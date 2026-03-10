@@ -88,11 +88,6 @@
                   "output": "assets/graph-data"
                 },
                 {
-                  "glob": "edition_anchor_overrides.json",
-                  "input": "../ptt-kurskarten.api/data/v2",
-                  "output": "assets/graph-data"
-                },
-                {
                   "glob": "editions.json",
                   "input": "../ptt-kurskarten.api/data/v2",
                   "output": "assets/graph-data"

@@ -8,7 +8,7 @@
 
 .context-bar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) auto;
   align-items: end;
   gap: 10px;
   padding: 10px 16px;
@@ -21,8 +21,8 @@
   gap: 4px;
 }
 
-.context-group-template {
-  min-width: 0;
+.context-group-year {
+  min-width: 180px;
 }
 
 .context-label {
@@ -50,6 +50,14 @@
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.context-public-note {
+  border: 1px dashed #141414;
+  border-radius: 10px;
+  padding: 6px 10px;
+  background: #fffef4;
+  font-size: 12px;
 }
 
 .layout {

@@ -1,7 +1,6 @@
 [
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770808860448",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770808860448",
     "placeId": "node-1770808860448",
     "x": 201.59362549800795,
     "y": 540.0557768924303,
@@ -12,8 +11,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770808908336",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770808908336",
     "placeId": "node-1770808908336",
     "x": 23.505976095617488,
     "y": 466.7490039840638,
@@ -24,8 +22,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809018783",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809018783",
     "placeId": "node-1770809018783",
     "x": 82.47011952191231,
     "y": 444.8366533864542,
@@ -36,8 +33,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809062251",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809062251",
     "placeId": "node-1770809062251",
     "x": 21.115537848605534,
     "y": 414.9561752988048,
@@ -48,8 +44,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809102948",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809102948",
     "placeId": "node-1770809102948",
     "x": -18.977491961414792,
     "y": 417.30321294165117,
@@ -60,8 +55,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809183587",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809183587",
     "placeId": "node-1770809183587",
     "x": 2.6655948553054634,
     "y": 144.55948553054662,
@@ -72,8 +66,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809209472",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809209472",
     "placeId": "node-1770809209472",
     "x": 33.29260450160771,
     "y": 383.4501607717042,
@@ -84,8 +77,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770809870824",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770809870824",
     "placeId": "node-1770809870824",
     "x": 267.72908366533864,
     "y": 218.9402390438247,
@@ -96,8 +88,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770811420932",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770811420932",
     "placeId": "node-1770811420932",
     "x": 544.5991509454054,
     "y": 424.89066442315243,
@@ -108,8 +99,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770811785314",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770811785314",
     "placeId": "node-1770811785314",
     "x": 630.2788844621515,
     "y": 243.24302788844622,
@@ -120,8 +110,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770812095922",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770812095922",
     "placeId": "node-1770812095922",
     "x": 293.62549800796813,
     "y": 59.577689243027876,
@@ -132,8 +121,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770812117179",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770812117179",
     "placeId": "node-1770812117179",
     "x": 47.13692946058091,
     "y": 364.2074688796681,
@@ -144,8 +132,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818428222",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818428222",
     "placeId": "node-1770818428222",
     "x": 120.15438711655293,
     "y": 332.91631737615245,
@@ -156,8 +143,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818436737",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818436737",
     "placeId": "node-1770818436737",
     "x": 97.324807864685,
     "y": 345.8993597064011,
@@ -168,8 +154,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818444657",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818444657",
     "placeId": "node-1770818444657",
     "x": 154.23709120026865,
     "y": 326.2896336420434,
@@ -180,8 +165,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818451614",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818451614",
     "placeId": "node-1770818451614",
     "x": 276.64047369502896,
     "y": 201.49603921814935,
@@ -192,8 +176,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818476302",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818476302",
     "placeId": "node-1770818476302",
     "x": 373.98905769723365,
     "y": 275.8797727491035,
@@ -204,8 +187,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818481603",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818481603",
     "placeId": "node-1770818481603",
     "x": 233.49593495934957,
     "y": 191.88617886178864,
@@ -216,8 +198,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818483826",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818483826",
     "placeId": "node-1770818483826",
     "x": 206.01302610130415,
     "y": 204.9880259471533,
@@ -228,8 +209,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818487149",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818487149",
     "placeId": "node-1770818487149",
     "x": 298.87433752283346,
     "y": 218.37087641441144,
@@ -240,8 +220,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770818509015",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770818509015",
     "placeId": "node-1770818509015",
     "x": 287.51407911701585,
     "y": 239.06785766189853,
@@ -252,8 +231,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823561872",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823561872",
     "placeId": "node-1770823561872",
     "x": 202.18837100988685,
     "y": 450.5509644189274,
@@ -264,8 +242,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823570686",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823570686",
     "placeId": "node-1770823570686",
     "x": 246.4059271597555,
     "y": 421.2355426888281,
@@ -276,8 +253,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823595717",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823595717",
     "placeId": "node-1770823595717",
     "x": 227.1315464486256,
     "y": 441.9127301588046,
@@ -288,8 +264,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823607384",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823607384",
     "placeId": "node-1770823607384",
     "x": 276.5036008958991,
     "y": 405.405106157098,
@@ -300,8 +275,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823621828",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823621828",
     "placeId": "node-1770823621828",
     "x": 309.1633466135458,
     "y": 396.23107569721117,
@@ -312,8 +286,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770823657588",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770823657588",
     "placeId": "node-1770823657588",
     "x": 352.58964143426294,
     "y": 387.06772908366537,
@@ -324,8 +297,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890162679",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890162679",
     "placeId": "node-1770890162679",
     "x": 27.936838334828053,
     "y": 351.2398810267862,
@@ -336,8 +308,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890186709",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890186709",
     "placeId": "node-1770890186709",
     "x": 15.936254980079637,
     "y": 328.9003984063745,
@@ -348,8 +319,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890297820",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890297820",
     "placeId": "node-1770890297820",
     "x": 67.44663525827491,
     "y": 359.58362391672375,
@@ -360,8 +330,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890321232",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890321232",
     "placeId": "node-1770890321232",
     "x": 70.45330016399248,
     "y": 340.22026391417893,
@@ -372,8 +341,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890387454",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890387454",
     "placeId": "node-1770890387454",
     "x": 69.72111553784856,
     "y": 406.988047808765,
@@ -384,8 +352,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890410235",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890410235",
     "placeId": "node-1770890410235",
     "x": 86.05577689243025,
     "y": 397.0278884462152,
@@ -396,8 +363,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890434712",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890434712",
     "placeId": "node-1770890434712",
     "x": 153.21807575365096,
     "y": 372.5552381642288,
@@ -408,8 +374,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890490883",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890490883",
     "placeId": "node-1770890490883",
     "x": 112.35059760956172,
     "y": 386.27091633466136,
@@ -420,8 +385,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890523913",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890523913",
     "placeId": "node-1770890523913",
     "x": 161.86007348669455,
     "y": 394.86265748097384,
@@ -432,8 +396,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890541178",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890541178",
     "placeId": "node-1770890541178",
     "x": 185.20029433230366,
     "y": 425.72834963019073,
@@ -444,8 +407,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890556808",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890556808",
     "placeId": "node-1770890556808",
     "x": 179.13082289861154,
     "y": 392.60385948018086,
@@ -456,8 +418,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890564956",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890564956",
     "placeId": "node-1770890564956",
     "x": 154.8001190206894,
     "y": 357.56157230654657,
@@ -468,8 +429,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890609929",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890609929",
     "placeId": "node-1770890609929",
     "x": 138.34412272326108,
     "y": 318.73366724859613,
@@ -480,8 +440,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890628791",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890628791",
     "placeId": "node-1770890628791",
     "x": 119.99426406385078,
     "y": 302.9711729613187,
@@ -492,8 +451,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890638355",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890638355",
     "placeId": "node-1770890638355",
     "x": 372.9083665338645,
     "y": 379.8964143426295,
@@ -504,8 +462,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890809431",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890809431",
     "placeId": "node-1770890809431",
     "x": 370.93921045202796,
     "y": 412.9790924487976,
@@ -516,8 +473,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890904555",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890904555",
     "placeId": "node-1770890904555",
     "x": 401.59362549800795,
     "y": 424.1195219123506,
@@ -528,8 +484,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770890971568",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770890971568",
     "placeId": "node-1770890971568",
     "x": 375.20230650274493,
     "y": 428.2757431363713,
@@ -540,8 +495,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891003781",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891003781",
     "placeId": "node-1770891003781",
     "x": 422.31075697211156,
     "y": 481.0916334661355,
@@ -552,8 +506,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891044281",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891044281",
     "placeId": "node-1770891044281",
     "x": 460.15936254980085,
     "y": 509.7768924302789,
@@ -564,8 +517,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891120113",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891120113",
     "placeId": "node-1770891120113",
     "x": 419.92031872509966,
     "y": 450.4143426294821,
@@ -576,8 +528,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891148537",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891148537",
     "placeId": "node-1770891148537",
     "x": 489.6414342629482,
     "y": 532.8844621513945,
@@ -588,8 +539,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891194672",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891194672",
     "placeId": "node-1770891194672",
     "x": 539.0438247011953,
     "y": 568.3426294820717,
@@ -600,8 +550,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891315316",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891315316",
     "placeId": "node-1770891315316",
     "x": 545.4183266932272,
     "y": 548.0239043824702,
@@ -612,8 +561,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891342495",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891342495",
     "placeId": "node-1770891342495",
     "x": 568.9243027888447,
     "y": 542.4462151394423,
@@ -624,8 +572,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891376062",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891376062",
     "placeId": "node-1770891376062",
     "x": 583.2669322709164,
     "y": 557.98406374502,
@@ -636,8 +583,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891460324",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891460324",
     "placeId": "node-1770891460324",
     "x": 594.0239043824702,
     "y": 543.6414342629482,
@@ -648,8 +594,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891474595",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891474595",
     "placeId": "node-1770891474595",
     "x": 625.8964143426296,
     "y": 524.9163346613547,
@@ -660,8 +605,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891520064",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891520064",
     "placeId": "node-1770891520064",
     "x": 606.3745019920319,
     "y": 479.09960159362555,
@@ -672,8 +616,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891544616",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891544616",
     "placeId": "node-1770891544616",
     "x": 623.1075697211156,
     "y": 444.8366533864542,
@@ -684,8 +627,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891568712",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891568712",
     "placeId": "node-1770891568712",
     "x": 640.2390438247013,
     "y": 413.7609561752988,
@@ -696,8 +638,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891635575",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891635575",
     "placeId": "node-1770891635575",
     "x": 629.0836653386455,
     "y": 391.45019920318725,
@@ -708,8 +649,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891674893",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891674893",
     "placeId": "node-1770891674893",
     "x": 616.7330677290837,
     "y": 368.7410358565737,
@@ -720,8 +660,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891915773",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891915773",
     "placeId": "node-1770891915773",
     "x": 543.4262948207172,
     "y": 497.0278884462152,
@@ -732,8 +671,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891950032",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891950032",
     "placeId": "node-1770891950032",
     "x": 540.6374501992033,
     "y": 475.1155378486056,
@@ -744,8 +682,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770891985133",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770891985133",
     "placeId": "node-1770891985133",
     "x": 537.1590746331435,
     "y": 453.01271112670935,
@@ -756,8 +693,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892074771",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892074771",
     "placeId": "node-1770892074771",
     "x": 635.4581673306774,
     "y": 179.89641434262947,
@@ -768,8 +704,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892131647",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892131647",
     "placeId": "node-1770892131647",
     "x": 651.394422310757,
     "y": 138.8605577689243,
@@ -780,8 +715,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892169658",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892169658",
     "placeId": "node-1770892169658",
     "x": 625.2679258694022,
     "y": 141.4002244453916,
@@ -792,8 +726,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892196035",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892196035",
     "placeId": "node-1770892196035",
     "x": 621.5139442231076,
     "y": 190.25498007968127,
@@ -804,8 +737,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892203535",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892203535",
     "placeId": "node-1770892203535",
     "x": 625.2679258694022,
     "y": 141.4002244453916,
@@ -816,8 +748,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892276405",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892276405",
     "placeId": "node-1770892276405",
     "x": 620.3187250996017,
     "y": 169.5378486055777,
@@ -828,8 +759,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892402501",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892402501",
     "placeId": "node-1770892402501",
     "x": 666.1354581673307,
     "y": 80.29482071713147,
@@ -840,8 +770,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892435872",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892435872",
     "placeId": "node-1770892435872",
     "x": 666.1354581673307,
     "y": 41.250996015936245,
@@ -852,8 +781,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892475913",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892475913",
     "placeId": "node-1770892475913",
     "x": 632.6693227091635,
     "y": 7.386454183266919,
@@ -864,8 +792,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892528135",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892528135",
     "placeId": "node-1770892528135",
     "x": 663.3466135458168,
     "y": -24.884462151394438,
@@ -876,8 +803,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892536449",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892536449",
     "placeId": "node-1770892536449",
     "x": 680.8764940239045,
     "y": -2.9721115537848752,
@@ -888,8 +814,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892604502",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892604502",
     "placeId": "node-1770892604502",
     "x": 554.5816733067729,
     "y": -0.18326693227093085,
@@ -900,8 +825,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892624111",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892624111",
     "placeId": "node-1770892624111",
     "x": 540.2390438247012,
     "y": -30.86055776892432,
@@ -912,8 +836,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892703699",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892703699",
     "placeId": "node-1770892703699",
     "x": 511.5537848605578,
     "y": -28.470119521912366,
@@ -924,8 +847,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892936569",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892936569",
     "placeId": "node-1770892936569",
     "x": 476.4940239043825,
     "y": -25.282868525896433,
@@ -936,8 +858,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892944989",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892944989",
     "placeId": "node-1770892944989",
     "x": 439.04382470119526,
     "y": -23.689243027888462,
@@ -948,8 +869,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770892959172",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770892959172",
     "placeId": "node-1770892959172",
     "x": 429.48207171314743,
     "y": 4.996015936254966,
@@ -960,8 +880,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893096455",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893096455",
     "placeId": "node-1770893096455",
     "x": 392.0318725099601,
     "y": 36.07171314741035,
@@ -972,8 +891,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893139038",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893139038",
     "placeId": "node-1770893139038",
     "x": 419.92031872509966,
     "y": 30.89243027888445,
@@ -984,8 +902,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893174287",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893174287",
     "placeId": "node-1770893174287",
     "x": 378.0876494023904,
     "y": 40.45418326693226,
@@ -996,8 +913,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893232957",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893232957",
     "placeId": "node-1770893232957",
     "x": 344.62151394422307,
     "y": 43.641434262948195,
@@ -1008,8 +924,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893253800",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893253800",
     "placeId": "node-1770893253800",
     "x": 325.89641434262944,
     "y": 46.03187250996015,
@@ -1020,8 +935,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893270491",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893270491",
     "placeId": "node-1770893270491",
     "x": 300.79681274900395,
     "y": 40.45418326693226,
@@ -1032,8 +946,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893284200",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893284200",
     "placeId": "node-1770893284200",
     "x": 299.203187250996,
     "y": 16.549800796812736,
@@ -1044,8 +957,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893304119",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893304119",
     "placeId": "node-1770893304119",
     "x": 294.0239043824701,
     "y": -1.776892430278899,
@@ -1056,8 +968,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893503712",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893503712",
     "placeId": "node-1770893503712",
     "x": 285.2589641434263,
     "y": -16.517928286852605,
@@ -1068,8 +979,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893573469",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893573469",
     "placeId": "node-1770893573469",
     "x": 258.9641434262948,
     "y": 14.956175298804768,
@@ -1080,8 +990,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770893582974",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770893582974",
     "placeId": "node-1770893582974",
     "x": 275.2988047808765,
     "y": 22.127490039840623,
@@ -1092,8 +1001,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894673248",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894673248",
     "placeId": "node-1770894673248",
     "x": 175.29880478087645,
     "y": 77.90438247011951,
@@ -1104,8 +1012,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894704650",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894704650",
     "placeId": "node-1770894704650",
     "x": 145.41832669322707,
     "y": 53.203187250996,
@@ -1116,8 +1023,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894747352",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894747352",
     "placeId": "node-1770894747352",
     "x": 131.47410358565733,
     "y": 151.60956175298804,
@@ -1128,8 +1034,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894787749",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894787749",
     "placeId": "node-1770894787749",
     "x": 106.37450199203184,
     "y": 197.42629482071715,
@@ -1140,8 +1045,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894811224",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894811224",
     "placeId": "node-1770894811224",
     "x": 70.11952191235056,
     "y": 197.82470119521912,
@@ -1152,8 +1056,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894828775",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894828775",
     "placeId": "node-1770894828775",
     "x": 20.655737704918035,
     "y": 184.1639344262295,
@@ -1164,8 +1067,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894852240",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894852240",
     "placeId": "node-1770894852240",
     "x": 29.482071713147366,
     "y": 217.34661354581672,
@@ -1176,8 +1078,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894880046",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894880046",
     "placeId": "node-1770894880046",
     "x": 47.01195219123502,
     "y": 225.31474103585657,
@@ -1188,8 +1089,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770894994828",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770894994828",
     "placeId": "node-1770894994828",
     "x": 79.28286852589638,
     "y": 263.56175298804783,
@@ -1200,8 +1100,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770895016880",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770895016880",
     "placeId": "node-1770895016880",
     "x": 2.352941176470544,
     "y": 453.99999999999994,
@@ -1212,8 +1111,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770895112907",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770895112907",
     "placeId": "node-1770895112907",
     "x": 800.7968127490041,
     "y": 226.11155378486058,
@@ -1224,8 +1122,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897442282",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897442282",
     "placeId": "node-1770897442282",
     "x": 95.85822303460077,
     "y": 309.17777238155395,
@@ -1236,8 +1133,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897530894",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897530894",
     "placeId": "node-1770897530894",
     "x": 61.35458167330673,
     "y": 304.996015936255,
@@ -1248,8 +1144,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897591288",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897591288",
     "placeId": "node-1770897591288",
     "x": 41.03585657370514,
     "y": 332.8844621513944,
@@ -1260,8 +1155,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897613242",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897613242",
     "placeId": "node-1770897613242",
     "x": 103.89723322277405,
     "y": 279.22533537734967,
@@ -1272,8 +1166,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897625083",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897625083",
     "placeId": "node-1770897625083",
     "x": 120.17682942676151,
     "y": 267.2082974661679,
@@ -1284,8 +1177,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897668923",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897668923",
     "placeId": "node-1770897668923",
     "x": 147.20335395584107,
     "y": 294.71416741256456,
@@ -1296,8 +1188,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897698221",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897698221",
     "placeId": "node-1770897698221",
     "x": 176.04137963994663,
     "y": 336.69810700148383,
@@ -1308,8 +1199,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897770477",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897770477",
     "placeId": "node-1770897770477",
     "x": 197.54353540477132,
     "y": 313.7720135077093,
@@ -1320,8 +1210,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897790722",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897790722",
     "placeId": "node-1770897790722",
     "x": 193.6254980079681,
     "y": 343.6414342629482,
@@ -1332,8 +1221,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897856386",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897856386",
     "placeId": "node-1770897856386",
     "x": 236.97987658146099,
     "y": 343.35504193430825,
@@ -1344,8 +1232,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897860152",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897860152",
     "placeId": "node-1770897860152",
     "x": 254.463581502539,
     "y": 331.4109086042778,
@@ -1356,8 +1243,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897868165",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897868165",
     "placeId": "node-1770897868165",
     "x": 295.0091873528538,
     "y": 328.1093514393866,
@@ -1368,8 +1254,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897884517",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897884517",
     "placeId": "node-1770897884517",
     "x": 472.9083665338646,
     "y": 318.54183266932273,
@@ -1380,8 +1265,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897945287",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897945287",
     "placeId": "node-1770897945287",
     "x": 472.16790497409715,
     "y": 335.0457824125791,
@@ -1392,8 +1276,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897948683",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897948683",
     "placeId": "node-1770897948683",
     "x": 462.9693019132096,
     "y": 379.78146246012625,
@@ -1404,8 +1287,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770897993209",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770897993209",
     "placeId": "node-1770897993209",
     "x": 525.5549398877265,
     "y": 437.6268282812067,
@@ -1416,8 +1298,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898030151",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898030151",
     "placeId": "node-1770898030151",
     "x": 512.7339825125534,
     "y": 450.2822802763659,
@@ -1428,8 +1309,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898099050",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898099050",
     "placeId": "node-1770898099050",
     "x": 543.6557687754084,
     "y": 399.184957584982,
@@ -1440,8 +1320,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898134797",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898134797",
     "placeId": "node-1770898134797",
     "x": 551.0762859121432,
     "y": 383.13638170748044,
@@ -1452,8 +1331,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898144757",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898144757",
     "placeId": "node-1770898144757",
     "x": 521.8012043168274,
     "y": 374.75358918419056,
@@ -1464,8 +1342,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898184274",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898184274",
     "placeId": "node-1770898184274",
     "x": 527.672283111398,
     "y": 331.2664421113636,
@@ -1476,8 +1353,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898221637",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898221637",
     "placeId": "node-1770898221637",
     "x": 583.0790820194543,
     "y": 410.7841375173422,
@@ -1488,8 +1364,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898228869",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898228869",
     "placeId": "node-1770898228869",
     "x": 580.67242848818,
     "y": 360.9933089572764,
@@ -1500,8 +1375,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898312719",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898312719",
     "placeId": "node-1770898312719",
     "x": 578.8844621513945,
     "y": 339.2589641434263,
@@ -1512,8 +1386,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898350997",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898350997",
     "placeId": "node-1770898350997",
     "x": 582.0717131474104,
     "y": 326.1115537848606,
@@ -1524,8 +1397,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898396116",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898396116",
     "placeId": "node-1770898396116",
     "x": 513.1474103585658,
     "y": 348.8207171314741,
@@ -1536,8 +1408,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898495591",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898495591",
     "placeId": "node-1770898495591",
     "x": 603.187250996016,
     "y": 325.31474103585657,
@@ -1548,8 +1419,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898535921",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898535921",
     "placeId": "node-1770898535921",
     "x": 623.9886906368231,
     "y": 322.252550128647,
@@ -1560,8 +1430,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898587206",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898587206",
     "placeId": "node-1770898587206",
     "x": 642.2310756972112,
     "y": 338.06374501992036,
@@ -1572,8 +1441,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898624681",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898624681",
     "placeId": "node-1770898624681",
     "x": 689.9974865133956,
     "y": 354.9918263226693,
@@ -1584,8 +1452,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898631981",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898631981",
     "placeId": "node-1770898631981",
     "x": 697.8812168056729,
     "y": 334.1892292645333,
@@ -1596,8 +1463,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898668601",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898668601",
     "placeId": "node-1770898668601",
     "x": 722.3107569721116,
     "y": 304.996015936255,
@@ -1608,8 +1474,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898704049",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898704049",
     "placeId": "node-1770898704049",
     "x": 732.4160468335713,
     "y": 280.5155821038793,
@@ -1620,8 +1485,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898723871",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898723871",
     "placeId": "node-1770898723871",
     "x": 772.6346869601261,
     "y": 262.64158777734275,
@@ -1632,8 +1496,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770898741949",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770898741949",
     "placeId": "node-1770898741949",
     "x": 772.6346869601261,
     "y": 262.64158777734275,
@@ -1644,8 +1507,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770903887400",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770903887400",
     "placeId": "node-1770903887400",
     "x": 658.227343341232,
     "y": 291.7683912568473,
@@ -1656,8 +1518,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770903938583",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770903938583",
     "placeId": "node-1770903938583",
     "x": 633.8760069212574,
     "y": 298.3900186074272,
@@ -1668,8 +1529,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770903942187",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770903942187",
     "placeId": "node-1770903942187",
     "x": 640.9768473113886,
     "y": 264.29817556289873,
@@ -1680,8 +1540,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770903965292",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770903965292",
     "placeId": "node-1770903965292",
     "x": 609.5617529880478,
     "y": 257.9840637450199,
@@ -1692,8 +1551,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904030276",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904030276",
     "placeId": "node-1770904030276",
     "x": 685.9248856755432,
     "y": 227.49871699861922,
@@ -1704,8 +1562,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904033887",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904033887",
     "placeId": "node-1770904033887",
     "x": 628.2560724069483,
     "y": 208.43001619503508,
@@ -1716,8 +1573,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904042006",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904042006",
     "placeId": "node-1770904042006",
     "x": 645.0199203187251,
     "y": 193.04382470119523,
@@ -1728,8 +1584,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904127514",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904127514",
     "placeId": "node-1770904127514",
     "x": 640.2390438247013,
     "y": 85.87250996015935,
@@ -1740,8 +1595,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904139063",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904139063",
     "placeId": "node-1770904139063",
     "x": 638.9777594407622,
     "y": 107.7265123418473,
@@ -1752,8 +1606,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904186342",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904186342",
     "placeId": "node-1770904186342",
     "x": 629.5788849739954,
     "y": 77.03781419462564,
@@ -1764,8 +1617,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904191097",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904191097",
     "placeId": "node-1770904191097",
     "x": 605.4017412657493,
     "y": 52.73911217033162,
@@ -1776,8 +1628,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904214236",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904214236",
     "placeId": "node-1770904214236",
     "x": 617.2632718352645,
     "y": 66.20456319527455,
@@ -1788,8 +1639,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904220319",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904220319",
     "placeId": "node-1770904220319",
     "x": 626.2948207171315,
     "y": 90.65338645418326,
@@ -1800,8 +1650,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904231733",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904231733",
     "placeId": "node-1770904231733",
     "x": 625.0996015936256,
     "y": 103.800796812749,
@@ -1812,8 +1661,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904285550",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904285550",
     "placeId": "node-1770904285550",
     "x": 612.9922483854584,
     "y": 116.35631975038973,
@@ -1824,8 +1672,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904291181",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904291181",
     "placeId": "node-1770904291181",
     "x": 611.1841147962273,
     "y": 91.49149541912573,
@@ -1836,8 +1683,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904296483",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904296483",
     "placeId": "node-1770904296483",
     "x": 590.7380470726412,
     "y": 103.53411018051168,
@@ -1848,8 +1694,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904323878",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904323878",
     "placeId": "node-1770904323878",
     "x": 583.6459387734171,
     "y": 120.07328060386124,
@@ -1860,8 +1705,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904329965",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904329965",
     "placeId": "node-1770904329965",
     "x": 558.0948636515006,
     "y": 127.5275379959354,
@@ -1872,8 +1716,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904350948",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904350948",
     "placeId": "node-1770904350948",
     "x": 527.9848094977056,
     "y": 130.44864027331596,
@@ -1884,8 +1727,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904356934",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904356934",
     "placeId": "node-1770904356934",
     "x": 493.4308904117454,
     "y": 111.8457630540928,
@@ -1896,8 +1738,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904366395",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904366395",
     "placeId": "node-1770904366395",
     "x": 498.41716687168105,
     "y": 102.7874222626217,
@@ -1908,8 +1749,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904371435",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904371435",
     "placeId": "node-1770904371435",
     "x": 523.6705889288994,
     "y": 105.50855454826592,
@@ -1920,8 +1760,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904374540",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904374540",
     "placeId": "node-1770904374540",
     "x": 531.9406918631025,
     "y": 114.51234750102014,
@@ -1932,8 +1771,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904442341",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904442341",
     "placeId": "node-1770904442341",
     "x": 588.8959682602563,
     "y": 91.27867724127441,
@@ -1944,8 +1782,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904535478",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904535478",
     "placeId": "node-1770904535478",
     "x": 576.8419566144066,
     "y": 96.46301921937379,
@@ -1956,8 +1793,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904544888",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904544888",
     "placeId": "node-1770904544888",
     "x": 576.8419566144066,
     "y": 96.46301921937379,
@@ -1968,8 +1804,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904555537",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904555537",
     "placeId": "node-1770904555537",
     "x": 577.511964317039,
     "y": 71.65950924972663,
@@ -1980,8 +1815,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904561366",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904561366",
     "placeId": "node-1770904561366",
     "x": 575.0577023463179,
     "y": 58.73556843864583,
@@ -1992,8 +1826,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904580735",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904580735",
     "placeId": "node-1770904580735",
     "x": 560.4856308737412,
     "y": 52.10847588614854,
@@ -2004,8 +1837,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904587781",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904587781",
     "placeId": "node-1770904587781",
     "x": 525.3817687303351,
     "y": 55.55661672589633,
@@ -2016,8 +1848,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904633393",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904633393",
     "placeId": "node-1770904633393",
     "x": 549.2484193851567,
     "y": 78.90051688902611,
@@ -2028,8 +1859,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904637851",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904637851",
     "placeId": "node-1770904637851",
     "x": 527.4455156076174,
     "y": 71.08454492349699,
@@ -2040,8 +1870,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904695836",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904695836",
     "placeId": "node-1770904695836",
     "x": 535.8565737051794,
     "y": 46.43027888446214,
@@ -2052,8 +1881,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904703884",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904703884",
     "placeId": "node-1770904703884",
     "x": 503.552798826978,
     "y": 34.545621455578726,
@@ -2064,8 +1892,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904724487",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904724487",
     "placeId": "node-1770904724487",
     "x": 357.37051792828686,
     "y": 66.74900398406373,
@@ -2076,8 +1903,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904765130",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904765130",
     "placeId": "node-1770904765130",
     "x": 519.1235059760957,
     "y": 37.26693227091632,
@@ -2088,8 +1914,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904820100",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904820100",
     "placeId": "node-1770904820100",
     "x": 532.6693227091633,
     "y": 35.673306772908354,
@@ -2100,8 +1925,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904839764",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904839764",
     "placeId": "node-1770904839764",
     "x": 555.776892430279,
     "y": 33.282868525896404,
@@ -2112,8 +1936,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904950535",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904950535",
     "placeId": "node-1770904950535",
     "x": 589.6414342629482,
     "y": 67.94422310756971,
@@ -2124,8 +1947,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770904980483",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770904980483",
     "placeId": "node-1770904980483",
     "x": 511.5537848605578,
     "y": 116.94820717131473,
@@ -2136,8 +1958,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905078881",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905078881",
     "placeId": "node-1770905078881",
     "x": 500.60830435575326,
     "y": 131.71856305491178,
@@ -2148,8 +1969,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905083669",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905083669",
     "placeId": "node-1770905083669",
     "x": 462.9482071713148,
     "y": 130.09561752988049,
@@ -2160,8 +1980,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905146525",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905146525",
     "placeId": "node-1770905146525",
     "x": 425.46201778175055,
     "y": 133.73003833066525,
@@ -2172,8 +1991,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905217644",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905217644",
     "placeId": "node-1770905217644",
     "x": 409.75967991388666,
     "y": 122.81706475811939,
@@ -2184,8 +2002,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905227821",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905227821",
     "placeId": "node-1770905227821",
     "x": 398.4544717641513,
     "y": 102.39682446852896,
@@ -2196,8 +2013,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905233782",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905233782",
     "placeId": "node-1770905233782",
     "x": 415.4309207188928,
     "y": 111.09567587447941,
@@ -2208,8 +2024,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905238902",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905238902",
     "placeId": "node-1770905238902",
     "x": 424.4615173990105,
     "y": 113.26003243597881,
@@ -2220,8 +2035,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905243649",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905243649",
     "placeId": "node-1770905243649",
     "x": 403.4702012539328,
     "y": 97.62755220173779,
@@ -2232,8 +2046,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905249596",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905249596",
     "placeId": "node-1770905249596",
     "x": 395.2684154485323,
     "y": 77.80938080313285,
@@ -2244,8 +2057,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905254016",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905254016",
     "placeId": "node-1770905254016",
     "x": 416.9112893314955,
     "y": 79.2385605763485,
@@ -2256,8 +2068,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905257484",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905257484",
     "placeId": "node-1770905257484",
     "x": 420.31872509960164,
     "y": 57.98406374501991,
@@ -2268,8 +2079,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905262003",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905262003",
     "placeId": "node-1770905262003",
     "x": 599.1119078219733,
     "y": 153.91919431002032,
@@ -2280,8 +2090,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905399229",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905399229",
     "placeId": "node-1770905399229",
     "x": 432.6693227091634,
     "y": 63.5617529880478,
@@ -2292,8 +2101,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905419544",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905419544",
     "placeId": "node-1770905419544",
     "x": 457.5816238101236,
     "y": 51.31899678883008,
@@ -2304,8 +2112,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905423781",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905423781",
     "placeId": "node-1770905423781",
     "x": 431.1937816575187,
     "y": 69.76642838634211,
@@ -2316,8 +2123,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905432489",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905432489",
     "placeId": "node-1770905432489",
     "x": 460.88066220859423,
     "y": 62.9182453190333,
@@ -2328,8 +2134,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905441164",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905441164",
     "placeId": "node-1770905441164",
     "x": 482.0717131474104,
     "y": 93.8406374501992,
@@ -2340,8 +2145,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905554809",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905554809",
     "placeId": "node-1770905554809",
     "x": 492.60551087440035,
     "y": 71.44377326184258,
@@ -2352,8 +2156,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905559674",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905559674",
     "placeId": "node-1770905559674",
     "x": 487.0744453995428,
     "y": 47.885268509533944,
@@ -2364,8 +2167,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905563396",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905563396",
     "placeId": "node-1770905563396",
     "x": 469.32270916334664,
     "y": 39.65737051792828,
@@ -2376,8 +2178,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905568056",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905568056",
     "placeId": "node-1770905568056",
     "x": 477.93614540793897,
     "y": 11.124331570137997,
@@ -2388,20 +2189,18 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905648479",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905648479",
     "placeId": "node-1770905648479",
     "x": 458.16733067729086,
     "y": 105.79282868525895,
-    "iiifCenterX": 7966,
+    "iiifCenterX": 8110,
     "iiifCenterY": 2322,
     "validFrom": 1852,
     "validTo": null,
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905682253",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905682253",
     "placeId": "node-1770905682253",
     "x": 382.09026757328274,
     "y": 59.61593806851113,
@@ -2412,8 +2211,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905779983",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905779983",
     "placeId": "node-1770905779983",
     "x": 332.5808403665703,
     "y": 53.940859019355344,
@@ -2424,8 +2222,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905794500",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905794500",
     "placeId": "node-1770905794500",
     "x": 367.30624448137246,
     "y": 68.5654237240052,
@@ -2436,8 +2233,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905800343",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905800343",
     "placeId": "node-1770905800343",
     "x": 380.49507629194113,
     "y": 71.80198249231603,
@@ -2448,8 +2244,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905848259",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905848259",
     "placeId": "node-1770905848259",
     "x": 316.53703679567457,
     "y": 74.74682504798932,
@@ -2460,8 +2255,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905858716",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905858716",
     "placeId": "node-1770905858716",
     "x": 338.3801754404176,
     "y": 94.52808480406964,
@@ -2472,8 +2266,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905871252",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905871252",
     "placeId": "node-1770905871252",
     "x": 346.33333976120684,
     "y": 114.44720327821472,
@@ -2484,8 +2277,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905878879",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905878879",
     "placeId": "node-1770905878879",
     "x": 373.38650099934443,
     "y": 100.68051232821563,
@@ -2496,8 +2288,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905882167",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905882167",
     "placeId": "node-1770905882167",
     "x": 395.06795039629446,
     "y": 132.7663265039788,
@@ -2508,8 +2299,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905886053",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905886053",
     "placeId": "node-1770905886053",
     "x": 357.8026685358752,
     "y": 127.90122694050251,
@@ -2520,8 +2310,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905890445",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905890445",
     "placeId": "node-1770905890445",
     "x": 339.4422310756972,
     "y": 126.90836653386454,
@@ -2532,8 +2321,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905940014",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905940014",
     "placeId": "node-1770905940014",
     "x": 338.31430030964657,
     "y": 135.98012119292707,
@@ -2544,8 +2332,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905944274",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905944274",
     "placeId": "node-1770905944274",
     "x": 313.4134613612446,
     "y": 121.47058868859597,
@@ -2556,8 +2343,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905962102",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905962102",
     "placeId": "node-1770905962102",
     "x": 313.4134613612446,
     "y": 121.47058868859597,
@@ -2568,8 +2354,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905973449",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905973449",
     "placeId": "node-1770905973449",
     "x": 318.8545973712446,
     "y": 103.88551687059419,
@@ -2580,8 +2365,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770905979601",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770905979601",
     "placeId": "node-1770905979601",
     "x": 315.7897816201487,
     "y": 129.48291311480432,
@@ -2592,8 +2376,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906061553",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906061553",
     "placeId": "node-1770906061553",
     "x": 312.15876811408225,
     "y": 134.08937919497544,
@@ -2604,8 +2387,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906108849",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906108849",
     "placeId": "node-1770906108849",
     "x": 291.6291293352979,
     "y": 76.8330025770839,
@@ -2616,8 +2398,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906124944",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906124944",
     "placeId": "node-1770906124944",
     "x": 273.87332095235,
     "y": 95.03330606945701,
@@ -2628,8 +2409,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906150586",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906150586",
     "placeId": "node-1770906150586",
     "x": 246.60140575500395,
     "y": 104.38756117929108,
@@ -2640,8 +2420,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906161164",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906161164",
     "placeId": "node-1770906161164",
     "x": 276.4749422537668,
     "y": 133.27945055374119,
@@ -2652,8 +2431,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906194376",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906194376",
     "placeId": "node-1770906194376",
     "x": 253.49295047465034,
     "y": 130.51172087608757,
@@ -2664,8 +2442,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906199277",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906199277",
     "placeId": "node-1770906199277",
     "x": 219.30197241828796,
     "y": 145.67259090283767,
@@ -2676,8 +2453,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906213725",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906213725",
     "placeId": "node-1770906213725",
     "x": 183.30595742378773,
     "y": 132.70622980831774,
@@ -2688,8 +2464,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906278302",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906278302",
     "placeId": "node-1770906278302",
     "x": 198.804780876494,
     "y": 114.15936254980079,
@@ -2700,8 +2475,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906293087",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906293087",
     "placeId": "node-1770906293087",
     "x": 200.16282742246972,
     "y": 89.94734186092035,
@@ -2712,8 +2486,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906301641",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906301641",
     "placeId": "node-1770906301641",
     "x": 220.31872509960158,
     "y": 100.61354581673307,
@@ -2724,8 +2497,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906362386",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906362386",
     "placeId": "node-1770906362386",
     "x": 211.55378486055776,
     "y": 108.18326693227091,
@@ -2736,8 +2508,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906451065",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906451065",
     "placeId": "node-1770906451065",
     "x": 228.34861570755697,
     "y": 116.95638602093413,
@@ -2748,8 +2519,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906500293",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906500293",
     "placeId": "node-1770906500293",
     "x": 235.9090424702049,
     "y": 140.72372740444268,
@@ -2760,8 +2530,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906638289",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906638289",
     "placeId": "node-1770906638289",
     "x": 169.17802565820193,
     "y": 155.94307052835075,
@@ -2772,8 +2541,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906644770",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906644770",
     "placeId": "node-1770906644770",
     "x": 159.2574916818553,
     "y": 173.22126454771046,
@@ -2784,8 +2552,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906650706",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906650706",
     "placeId": "node-1770906650706",
     "x": 171.0078768220178,
     "y": 188.93374380385194,
@@ -2796,8 +2563,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906712573",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906712573",
     "placeId": "node-1770906712573",
     "x": 140.23904382470116,
     "y": 183.4820717131474,
@@ -2808,8 +2574,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906731613",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906731613",
     "placeId": "node-1770906731613",
     "x": 148.85245901639345,
     "y": 187.11475409836063,
@@ -2820,8 +2585,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906799317",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906799317",
     "placeId": "node-1770906799317",
     "x": 113.73927606091479,
     "y": 211.09810134453988,
@@ -2832,8 +2596,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906804866",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906804866",
     "placeId": "node-1770906804866",
     "x": 138.6788696146723,
     "y": 204.7322831341757,
@@ -2844,8 +2607,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906927681",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906927681",
     "placeId": "node-1770906927681",
     "x": 178.8844621513944,
     "y": 179.4980079681275,
@@ -2856,8 +2618,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906973478",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906973478",
     "placeId": "node-1770906973478",
     "x": 92.0616153723804,
     "y": 225.89672482397083,
@@ -2868,8 +2629,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770906982068",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770906982068",
     "placeId": "node-1770906982068",
     "x": 253.49295047465034,
     "y": 130.51172087608757,
@@ -2880,8 +2640,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907045212",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907045212",
     "placeId": "node-1770907045212",
     "x": 111.74897258638566,
     "y": 225.92037806692264,
@@ -2892,8 +2651,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907088865",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907088865",
     "placeId": "node-1770907088865",
     "x": 94.89262324509286,
     "y": 240.05625426574125,
@@ -2904,8 +2662,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907094109",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907094109",
     "placeId": "node-1770907094109",
     "x": 94.216363441981,
     "y": 250.98316469816666,
@@ -2916,8 +2673,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907100588",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907100588",
     "placeId": "node-1770907100588",
     "x": 165.69608606077418,
     "y": 275.40634322238054,
@@ -2928,8 +2684,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907142041",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907142041",
     "placeId": "node-1770907142041",
     "x": 173.9278568155064,
     "y": 253.95644263927136,
@@ -2940,8 +2695,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907145936",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907145936",
     "placeId": "node-1770907145936",
     "x": 159.81358871874477,
     "y": 241.0636663647478,
@@ -2952,8 +2706,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907151001",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907151001",
     "placeId": "node-1770907151001",
     "x": 134.75409836065575,
     "y": 236.95081967213113,
@@ -2964,8 +2717,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907154674",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907154674",
     "placeId": "node-1770907154674",
     "x": 152.71472392439296,
     "y": 209.33713059853773,
@@ -2976,8 +2728,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907161310",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907161310",
     "placeId": "node-1770907161310",
     "x": 177.53215707139134,
     "y": 199.23507156214788,
@@ -2988,8 +2739,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770907246859",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770907246859",
     "placeId": "node-1770907246859",
     "x": 276.0956175298804,
     "y": 244.4382470119522,
@@ -3000,8 +2750,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911077601",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911077601",
     "placeId": "node-1770911077601",
     "x": 203.66590185964492,
     "y": 269.93655803144475,
@@ -3012,8 +2761,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911202396",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911202396",
     "placeId": "node-1770911202396",
     "x": 171.99694764845867,
     "y": 287.54231728439936,
@@ -3024,8 +2772,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911208987",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911208987",
     "placeId": "node-1770911208987",
     "x": 215.11366308529364,
     "y": 259.74295026834716,
@@ -3036,8 +2783,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911217459",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911217459",
     "placeId": "node-1770911217459",
     "x": 217.7869880362657,
     "y": 221.70631263623534,
@@ -3048,8 +2794,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911222493",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911222493",
     "placeId": "node-1770911222493",
     "x": 197.20203216580717,
     "y": 205.2464727658549,
@@ -3060,8 +2805,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770911226606",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770911226606",
     "placeId": "node-1770911226606",
     "x": 204.25523180732807,
     "y": 185.2559007737924,
@@ -3072,8 +2816,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912043726",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912043726",
     "placeId": "node-1770912043726",
     "x": 185.62726237908305,
     "y": 163.2920742296476,
@@ -3084,8 +2827,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912050316",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912050316",
     "placeId": "node-1770912050316",
     "x": 219.13213539688877,
     "y": 153.44047484714258,
@@ -3096,8 +2838,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912067754",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912067754",
     "placeId": "node-1770912067754",
     "x": 235.09999176076235,
     "y": 165.14925113050072,
@@ -3108,8 +2849,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912080230",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912080230",
     "placeId": "node-1770912080230",
     "x": 254.97084315028405,
     "y": 151.6621083653755,
@@ -3120,8 +2860,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912100324",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912100324",
     "placeId": "node-1770912100324",
     "x": 281.61701507427597,
     "y": 149.84762295792598,
@@ -3132,8 +2871,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912118654",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912118654",
     "placeId": "node-1770912118654",
     "x": 281.67360453750393,
     "y": 169.27081737383583,
@@ -3144,8 +2882,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912128082",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912128082",
     "placeId": "node-1770912128082",
     "x": 254.082900042323,
     "y": 167.562781543926,
@@ -3156,8 +2893,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912196738",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912196738",
     "placeId": "node-1770912196738",
     "x": 295.46285573528667,
     "y": 183.68946481623573,
@@ -3168,8 +2904,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912202211",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912202211",
     "placeId": "node-1770912202211",
     "x": 299.79739754631487,
     "y": 167.79573651223382,
@@ -3180,8 +2915,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912220114",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912220114",
     "placeId": "node-1770912220114",
     "x": 250.85872313353275,
     "y": 254.58619663972485,
@@ -3192,8 +2926,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912227271",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912227271",
     "placeId": "node-1770912227271",
     "x": 239.72366029947625,
     "y": 232.1856759106559,
@@ -3204,8 +2937,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912277124",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912277124",
     "placeId": "node-1770912277124",
     "x": 258.5657370517928,
     "y": 206.58964143426294,
@@ -3216,8 +2948,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912305962",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912305962",
     "placeId": "node-1770912305962",
     "x": 233.46613545816732,
     "y": 217.34661354581672,
@@ -3228,8 +2959,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912364302",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912364302",
     "placeId": "node-1770912364302",
     "x": 274.63691192563965,
     "y": 299.94189846806375,
@@ -3240,8 +2970,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912385928",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912385928",
     "placeId": "node-1770912385928",
     "x": 294.95247129969994,
     "y": 278.3458454630586,
@@ -3252,8 +2981,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912401064",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912401064",
     "placeId": "node-1770912401064",
     "x": 336.8348953619725,
     "y": 291.2635336869815,
@@ -3264,8 +2992,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912408628",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912408628",
     "placeId": "node-1770912408628",
     "x": 388.3236386582487,
     "y": 286.9301080987397,
@@ -3276,8 +3003,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912412950",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912412950",
     "placeId": "node-1770912412950",
     "x": 330.36114479101684,
     "y": 219.9885986348741,
@@ -3288,8 +3014,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912420029",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912420029",
     "placeId": "node-1770912420029",
     "x": 350.5879585692078,
     "y": 237.7972202768409,
@@ -3300,8 +3025,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912450080",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912450080",
     "placeId": "node-1770912450080",
     "x": 390.83665338645415,
     "y": 197.02788844621514,
@@ -3312,8 +3036,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912454275",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912454275",
     "placeId": "node-1770912454275",
     "x": 389.0540710367736,
     "y": 218.0262278884548,
@@ -3324,8 +3047,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912479656",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912479656",
     "placeId": "node-1770912479656",
     "x": 389.0540710367736,
     "y": 218.0262278884548,
@@ -3336,8 +3058,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912516959",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912516959",
     "placeId": "node-1770912516959",
     "x": 337.76157934538924,
     "y": 177.46745711541166,
@@ -3348,8 +3069,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912543968",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912543968",
     "placeId": "node-1770912543968",
     "x": 331.033369272782,
     "y": 199.12365164442423,
@@ -3360,8 +3080,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912548392",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912548392",
     "placeId": "node-1770912548392",
     "x": 297.0124080252847,
     "y": 191.6224484900705,
@@ -3372,8 +3091,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912553971",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912553971",
     "placeId": "node-1770912553971",
     "x": 295.46285573528667,
     "y": 183.68946481623573,
@@ -3384,8 +3102,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912564452",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912564452",
     "placeId": "node-1770912564452",
     "x": 313.98818636866486,
     "y": 156.3988586063101,
@@ -3396,8 +3113,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912569156",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912569156",
     "placeId": "node-1770912569156",
     "x": 330.97950791540325,
     "y": 149.15451632791644,
@@ -3408,8 +3124,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912572454",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912572454",
     "placeId": "node-1770912572454",
     "x": 338.31430030964657,
     "y": 135.98012119292707,
@@ -3420,8 +3135,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912580537",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912580537",
     "placeId": "node-1770912580537",
     "x": 378.22794085902615,
     "y": 132.05382000984946,
@@ -3432,8 +3146,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912586038",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912586038",
     "placeId": "node-1770912586038",
     "x": 356.29362418960454,
     "y": 144.90372167101282,
@@ -3444,8 +3157,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912594808",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912594808",
     "placeId": "node-1770912594808",
     "x": 383.59773498044933,
     "y": 159.16252023011123,
@@ -3456,8 +3168,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912606182",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912606182",
     "placeId": "node-1770912606182",
     "x": 319.5219123505976,
     "y": 180.29482071713147,
@@ -3468,8 +3179,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912625900",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912625900",
     "placeId": "node-1770912625900",
     "x": 449.1953878539489,
     "y": 324.3334658965595,
@@ -3480,8 +3190,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912658453",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912658453",
     "placeId": "node-1770912658453",
     "x": 449.1953878539489,
     "y": 324.3334658965595,
@@ -3492,8 +3201,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912672117",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912672117",
     "placeId": "node-1770912672117",
     "x": 478.25794495832633,
     "y": 280.9506927732951,
@@ -3504,8 +3212,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912689899",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912689899",
     "placeId": "node-1770912689899",
     "x": 479.5349108940841,
     "y": 239.4358804139647,
@@ -3516,8 +3223,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912696547",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912696547",
     "placeId": "node-1770912696547",
     "x": 480.35665895601915,
     "y": 232.56244782915297,
@@ -3528,8 +3234,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912699696",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912699696",
     "placeId": "node-1770912699696",
     "x": 393.55431469484097,
     "y": 266.50134916051906,
@@ -3540,8 +3245,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912704041",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912704041",
     "placeId": "node-1770912704041",
     "x": 398.74037657198846,
     "y": 237.31473135266663,
@@ -3552,8 +3256,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912707032",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912707032",
     "placeId": "node-1770912707032",
     "x": 447.12949464245116,
     "y": 223.5999025226788,
@@ -3564,8 +3267,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912711681",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912711681",
     "placeId": "node-1770912711681",
     "x": 471.6234663009627,
     "y": 207.83239735954953,
@@ -3576,8 +3278,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912798782",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912798782",
     "placeId": "node-1770912798782",
     "x": 471.6234663009627,
     "y": 207.83239735954953,
@@ -3588,8 +3289,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912818126",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912818126",
     "placeId": "node-1770912818126",
     "x": 482.326752567408,
     "y": 201.3118259057851,
@@ -3600,8 +3300,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912823042",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912823042",
     "placeId": "node-1770912823042",
     "x": 459.64782097413126,
     "y": 192.43524586376958,
@@ -3612,8 +3311,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912826245",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912826245",
     "placeId": "node-1770912826245",
     "x": 477.1479341255167,
     "y": 185.9938909541699,
@@ -3624,8 +3322,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912829695",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912829695",
     "placeId": "node-1770912829695",
     "x": 418.96269792094427,
     "y": 193.2479099829079,
@@ -3636,8 +3333,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912845895",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912845895",
     "placeId": "node-1770912845895",
     "x": 402.39043824701196,
     "y": 203.00398406374504,
@@ -3648,8 +3344,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912913255",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912913255",
     "placeId": "node-1770912913255",
     "x": 407.0672066666266,
     "y": 167.9448113571342,
@@ -3660,8 +3355,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912961774",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912961774",
     "placeId": "node-1770912961774",
     "x": 417.67388749504903,
     "y": 163.01251571623368,
@@ -3672,8 +3366,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770912969831",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770912969831",
     "placeId": "node-1770912969831",
     "x": 436.0004661737007,
     "y": 175.7251053392805,
@@ -3684,8 +3377,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913006672",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913006672",
     "placeId": "node-1770913006672",
     "x": 458.08663041108184,
     "y": 166.79893021551982,
@@ -3696,8 +3388,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913010028",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913010028",
     "placeId": "node-1770913010028",
     "x": 479.87242672649836,
     "y": 173.33946448421932,
@@ -3708,8 +3399,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913090657",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913090657",
     "placeId": "node-1770913090657",
     "x": 509.16334661354585,
     "y": 179.4980079681275,
@@ -3720,8 +3410,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913131646",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913131646",
     "placeId": "node-1770913131646",
     "x": 498.8047808764941,
     "y": 162.36653386454182,
@@ -3732,8 +3421,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913159270",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913159270",
     "placeId": "node-1770913159270",
     "x": 487.4567417553492,
     "y": 153.17588865044684,
@@ -3744,8 +3432,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913186861",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913186861",
     "placeId": "node-1770913186861",
     "x": 473.7051792828686,
     "y": 137.26693227091633,
@@ -3756,8 +3443,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913221426",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913221426",
     "placeId": "node-1770913221426",
     "x": 446.90330233802774,
     "y": 146.17161662160538,
@@ -3768,8 +3454,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913225645",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913225645",
     "placeId": "node-1770913225645",
     "x": 432.74818513531454,
     "y": 158.49119252556875,
@@ -3780,8 +3465,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913233135",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913233135",
     "placeId": "node-1770913233135",
     "x": 408.4665743858443,
     "y": 130.29652136011634,
@@ -3792,8 +3476,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913265492",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913265492",
     "placeId": "node-1770913265492",
     "x": 585.3135254019605,
     "y": 272.50691079940685,
@@ -3804,8 +3487,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913292189",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913292189",
     "placeId": "node-1770913292189",
     "x": 557.768924302789,
     "y": 284.2788844621514,
@@ -3816,8 +3498,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913331792",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913331792",
     "placeId": "node-1770913331792",
     "x": 547.0119521912351,
     "y": 224.1195219123506,
@@ -3828,8 +3509,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913368260",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913368260",
     "placeId": "node-1770913368260",
     "x": 555.378486055777,
     "y": 188.66135458167332,
@@ -3840,8 +3520,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913438620",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913438620",
     "placeId": "node-1770913438620",
     "x": 605.3761125639899,
     "y": 174.58907773920419,
@@ -3852,8 +3531,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913459973",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913459973",
     "placeId": "node-1770913459973",
     "x": 560.2284174729805,
     "y": 168.0724818817382,
@@ -3864,8 +3542,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913468653",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913468653",
     "placeId": "node-1770913468653",
     "x": 541.8326693227092,
     "y": 171.13147410358565,
@@ -3876,8 +3553,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913525543",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913525543",
     "placeId": "node-1770913525543",
     "x": 517.2511185950582,
     "y": 154.31948639873633,
@@ -3888,8 +3564,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913567237",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913567237",
     "placeId": "node-1770913567237",
     "x": 527.0916334661355,
     "y": 141.25099601593627,
@@ -3900,8 +3575,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913587997",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913587997",
     "placeId": "node-1770913587997",
     "x": 501.8274242683076,
     "y": 139.22879674078956,
@@ -3912,8 +3586,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913659038",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913659038",
     "placeId": "node-1770913659038",
     "x": 532.2278628777153,
     "y": 146.41038024917816,
@@ -3924,8 +3597,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913663546",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913663546",
     "placeId": "node-1770913663546",
     "x": 565.4829239316239,
     "y": 143.69323695078674,
@@ -3936,8 +3608,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913685913",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913685913",
     "placeId": "node-1770913685913",
     "x": 582.6037939039957,
     "y": 145.48028126435065,
@@ -3948,8 +3619,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770913715054",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770913715054",
     "placeId": "node-1770913715054",
     "x": 540.5308704256813,
     "y": 146.52917123543102,
@@ -3960,8 +3630,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1770991540696",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1770991540696",
     "placeId": "node-1770991540696",
     "x": 491.6334661354582,
     "y": 293.0438247011952,
@@ -3972,8 +3641,7 @@
     "sourceId": "source-legacy-graph-json"
   },
   {
-    "id": "anchor-map-template-switzerland-base-v1-node-1771596256944",
-    "mapTemplateId": "map-template-switzerland-base-v1",
+    "id": "anchor-node-1771596256944",
     "placeId": "node-1771596256944",
     "x": 497.910447761194,
     "y": 417.98009950248763,

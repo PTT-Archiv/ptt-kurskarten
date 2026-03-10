@@ -12,12 +12,10 @@ Normalized canonical dataset exported from legacy graph JSON files.
 
 ## Files
 
-- editions.json: time/edition context records
-- map_templates.json: reusable base map templates
+- editions.json: time context records (year/provenance only)
 - places.json: stable place entities
 - place_names.json: multilingual and alternate place names
-- map_anchors.json: default place coordinates per map template
-- edition_anchor_overrides.json: per-edition coordinate overrides (usually empty)
+- map_anchors.json: place coordinates on the single canonical simplified map
 - links.json: undirected place pairs
 - link_measures.json: link-level measures (e.g. distance.leuge)
 - services.json: directed route variants between places

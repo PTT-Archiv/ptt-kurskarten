@@ -26,7 +26,6 @@ type StoredPlaceName = {
 
 type StoredMapAnchor = {
   id: string;
-  mapTemplateId: string;
   placeId: string;
   x: number;
   y: number;
@@ -36,22 +35,9 @@ type StoredMapAnchor = {
   validTo: NullableYear;
 };
 
-type StoredEditionAnchorOverride = {
-  id: string;
-  editionId: string;
-  placeId: string;
-  x: number;
-  y: number;
-  iiifCenterX: number | null;
-  iiifCenterY: number | null;
-  validFrom?: NullableYear;
-  validTo?: NullableYear;
-};
-
 type StoredEdition = {
   id: string;
   year: number;
-  mapTemplateId: string;
 };
 
 type StoredService = {
@@ -107,7 +93,6 @@ type StaticGraphData = {
   places: StoredPlace[];
   placeNames: StoredPlaceName[];
   mapAnchors: StoredMapAnchor[];
-  editionAnchorOverrides: StoredEditionAnchorOverride[];
   editions: StoredEdition[];
   services: StoredService[];
   serviceTrips: StoredServiceTrip[];
@@ -192,7 +177,6 @@ export class ViewerDataService {
         places: this.http.get<StoredPlace[]>(`${base}/places.json`),
         placeNames: this.http.get<StoredPlaceName[]>(`${base}/place_names.json`),
         mapAnchors: this.http.get<StoredMapAnchor[]>(`${base}/map_anchors.json`),
-        editionAnchorOverrides: this.http.get<StoredEditionAnchorOverride[]>(`${base}/edition_anchor_overrides.json`),
         editions: this.http.get<StoredEdition[]>(`${base}/editions.json`),
         services: this.http.get<StoredService[]>(`${base}/services.json`),
         serviceTrips: this.http.get<StoredServiceTrip[]>(`${base}/service_trips.json`),
@@ -204,7 +188,6 @@ export class ViewerDataService {
           places: raw.places ?? [],
           placeNames: raw.placeNames ?? [],
           mapAnchors: raw.mapAnchors ?? [],
-          editionAnchorOverrides: raw.editionAnchorOverrides ?? [],
           editions: raw.editions ?? [],
           services: raw.services ?? [],
           serviceTrips: raw.serviceTrips ?? [],
@@ -221,8 +204,7 @@ export class ViewerDataService {
 
 function materializeNodesForYear(data: StaticGraphData, year: number): GraphNode[] {
   return data.places.map((place) => {
-    const edition = resolveEditionForYear(data.editions, year);
-    const anchor = resolveAnchorForPlace(place.id, edition, data, year);
+    const anchor = resolveAnchorForPlace(place.id, data, year);
     const placeName = resolvePlaceName(place, data.placeNames, year);
     const foreign = data.assertions.some((assertion) => {
       if (assertion.targetType !== 'place' || assertion.targetId !== place.id) {
@@ -320,7 +302,6 @@ function resolvePlaceName(place: StoredPlace, placeNames: StoredPlaceName[], yea
 
 function resolveAnchorForPlace(
   placeId: string,
-  edition: StoredEdition | null,
   data: StaticGraphData,
   year: number
 ): {
@@ -331,44 +312,13 @@ function resolveAnchorForPlace(
   validFrom: NullableYear;
   validTo: NullableYear;
 } | null {
-  if (edition) {
-    const override = data.editionAnchorOverrides.find((entry) => entry.editionId === edition.id && entry.placeId === placeId);
-    if (override) {
-      return {
-        x: override.x,
-        y: override.y,
-        iiifCenterX: override.iiifCenterX ?? null,
-        iiifCenterY: override.iiifCenterY ?? null,
-        validFrom: override.validFrom ?? edition.year,
-        validTo: override.validTo ?? null
-      };
-    }
-  }
-
-  const templateId = edition?.mapTemplateId ?? data.mapAnchors[0]?.mapTemplateId;
   const matching = data.mapAnchors
-    .filter((anchor) => anchor.placeId === placeId && (!templateId || anchor.mapTemplateId === templateId))
+    .filter((anchor) => anchor.placeId === placeId)
     .filter((anchor) => isStoredActive(anchor.validFrom, anchor.validTo, year));
   if (matching.length) {
     return matching[0];
   }
   return data.mapAnchors.find((anchor) => anchor.placeId === placeId) ?? null;
-}
-
-function resolveEditionForYear(editions: StoredEdition[], year: number): StoredEdition | null {
-  if (!editions.length) {
-    return null;
-  }
-  const exact = editions.find((edition) => edition.year === year);
-  if (exact) {
-    return exact;
-  }
-  const sorted = [...editions].sort((a, b) => a.year - b.year);
-  const before = sorted.filter((edition) => edition.year <= year);
-  if (before.length) {
-    return before[before.length - 1];
-  }
-  return sorted[0];
 }
 
 function pickValidFrom(...values: Array<NullableYear | undefined>): number {

@@ -26,13 +26,8 @@ type StoredPlaceName = {
   sourceId?: string;
 };
 
-type StoredMapTemplate = {
-  id: string;
-};
-
 type StoredMapAnchor = {
   id: string;
-  mapTemplateId: string;
   placeId: string;
   x: number;
   y: number;
@@ -42,22 +37,9 @@ type StoredMapAnchor = {
   validTo: NullableYear;
 };
 
-type StoredEditionAnchorOverride = {
-  id: string;
-  editionId: string;
-  placeId: string;
-  x: number;
-  y: number;
-  iiifCenterX: number | null;
-  iiifCenterY: number | null;
-  validFrom?: NullableYear;
-  validTo?: NullableYear;
-};
-
 type StoredEdition = {
   id: string;
   year: number;
-  mapTemplateId: string;
 };
 
 type StoredLink = {
@@ -111,9 +93,7 @@ type StoredAssertion = {
 type V2Data = {
   places: StoredPlace[];
   placeNames: StoredPlaceName[];
-  mapTemplates: StoredMapTemplate[];
   mapAnchors: StoredMapAnchor[];
-  editionAnchorOverrides: StoredEditionAnchorOverride[];
   editions: StoredEdition[];
   links: StoredLink[];
   linkMeasures: StoredLinkMeasure[];
@@ -123,7 +103,6 @@ type V2Data = {
 };
 
 const DEFAULT_SOURCE_ID = 'source-v2-api';
-const DEFAULT_TEMPLATE_ID = 'map-template-switzerland-base-v1';
 const DEFAULT_YEAR = 1852;
 const FOREIGN_SCHEMA_KEY = 'place.is_foreign';
 const DISTANCE_LEUGE_KEY = 'distance.leuge';
@@ -132,9 +111,7 @@ export class JsonV2GraphRepository implements GraphRepository {
   private readonly dataDir: string;
   private readonly placesPath: string;
   private readonly placeNamesPath: string;
-  private readonly mapTemplatesPath: string;
   private readonly mapAnchorsPath: string;
-  private readonly editionAnchorOverridesPath: string;
   private readonly editionsPath: string;
   private readonly linksPath: string;
   private readonly linkMeasuresPath: string;
@@ -149,9 +126,7 @@ export class JsonV2GraphRepository implements GraphRepository {
     this.dataDir = path.join(rootDataDir, 'v2');
     this.placesPath = path.join(this.dataDir, 'places.json');
     this.placeNamesPath = path.join(this.dataDir, 'place_names.json');
-    this.mapTemplatesPath = path.join(this.dataDir, 'map_templates.json');
     this.mapAnchorsPath = path.join(this.dataDir, 'map_anchors.json');
-    this.editionAnchorOverridesPath = path.join(this.dataDir, 'edition_anchor_overrides.json');
     this.editionsPath = path.join(this.dataDir, 'editions.json');
     this.linksPath = path.join(this.dataDir, 'links.json');
     this.linkMeasuresPath = path.join(this.dataDir, 'link_measures.json');
@@ -289,10 +264,8 @@ export class JsonV2GraphRepository implements GraphRepository {
         sourceId: DEFAULT_SOURCE_ID
       });
 
-      const templateId = this.resolveTemplateId(data, validFrom);
       data.mapAnchors.push({
-        id: `anchor-${templateId}-${node.id}`,
-        mapTemplateId: templateId,
+        id: `anchor-${node.id}-${validFrom ?? DEFAULT_YEAR}`,
         placeId: node.id,
         x: node.x ?? 0,
         y: node.y ?? 0,
@@ -337,12 +310,11 @@ export class JsonV2GraphRepository implements GraphRepository {
         patch.iiifCenterX !== undefined ||
         patch.iiifCenterY !== undefined
       ) {
-        const templateId = this.resolveTemplateId(data, place.validFrom);
-        let anchor = data.mapAnchors.find((candidate) => candidate.placeId === id && candidate.mapTemplateId === templateId);
+        const writeYear = this.toNullableYear(patch.validFrom) ?? place.validFrom ?? DEFAULT_YEAR;
+        let anchor = this.resolveAnchorForPlace(id, data, writeYear ?? undefined);
         if (!anchor) {
           anchor = {
-            id: `anchor-${templateId}-${id}`,
-            mapTemplateId: templateId,
+            id: `anchor-${id}-${writeYear ?? DEFAULT_YEAR}`,
             placeId: id,
             x: patch.x ?? 0,
             y: patch.y ?? 0,
@@ -393,7 +365,6 @@ export class JsonV2GraphRepository implements GraphRepository {
 
       data.placeNames = data.placeNames.filter((name) => name.placeId !== id);
       data.mapAnchors = data.mapAnchors.filter((anchor) => anchor.placeId !== id);
-      data.editionAnchorOverrides = data.editionAnchorOverrides.filter((entry) => entry.placeId !== id);
       data.assertions = data.assertions.filter((assertion) => !(assertion.targetType === 'place' && assertion.targetId === id));
 
       const removedLinkIds = new Set(
@@ -602,50 +573,13 @@ export class JsonV2GraphRepository implements GraphRepository {
   }
 
   private resolveAnchorForPlace(placeId: string, data: V2Data, year?: number): StoredMapAnchor | null {
-    const edition = year !== undefined ? this.resolveEditionForYear(data.editions, year) : null;
-    if (edition) {
-      const override = data.editionAnchorOverrides.find(
-        (entry) => entry.editionId === edition.id && entry.placeId === placeId
-      );
-      if (override) {
-        return {
-          id: override.id,
-          mapTemplateId: edition.mapTemplateId,
-          placeId,
-          x: override.x,
-          y: override.y,
-          iiifCenterX: override.iiifCenterX ?? null,
-          iiifCenterY: override.iiifCenterY ?? null,
-          validFrom: override.validFrom ?? edition.year,
-          validTo: override.validTo ?? null
-        };
-      }
-    }
-
-    const preferredTemplateId = edition?.mapTemplateId ?? data.mapTemplates[0]?.id ?? DEFAULT_TEMPLATE_ID;
     const candidates = data.mapAnchors
-      .filter((anchor) => anchor.placeId === placeId && anchor.mapTemplateId === preferredTemplateId)
+      .filter((anchor) => anchor.placeId === placeId)
       .filter((anchor) => (year !== undefined ? this.isStoredActive(anchor.validFrom, anchor.validTo, year) : true));
     if (candidates.length) {
       return candidates[0];
     }
     return data.mapAnchors.find((anchor) => anchor.placeId === placeId) ?? null;
-  }
-
-  private resolveEditionForYear(editions: StoredEdition[], year: number): StoredEdition | null {
-    if (!editions.length) {
-      return null;
-    }
-    const exact = editions.find((edition) => edition.year === year);
-    if (exact) {
-      return exact;
-    }
-    const sorted = [...editions].sort((a, b) => a.year - b.year);
-    const before = sorted.filter((edition) => edition.year <= year);
-    if (before.length) {
-      return before[before.length - 1];
-    }
-    return sorted[0];
   }
 
   private isNodeActive(node: GraphNode, year: Year): boolean {
@@ -860,19 +794,6 @@ export class JsonV2GraphRepository implements GraphRepository {
     });
   }
 
-  private resolveTemplateId(data: V2Data, preferredYear: NullableYear): string {
-    if (!data.mapTemplates.length) {
-      data.mapTemplates.push({ id: DEFAULT_TEMPLATE_ID });
-    }
-    if (preferredYear !== null && preferredYear !== undefined) {
-      const edition = data.editions.find((candidate) => candidate.year === preferredYear);
-      if (edition?.mapTemplateId) {
-        return edition.mapTemplateId;
-      }
-    }
-    return data.mapTemplates[0].id;
-  }
-
   private normalizeName(value: string): string {
     return value
       .normalize('NFD')
@@ -887,9 +808,7 @@ export class JsonV2GraphRepository implements GraphRepository {
     return {
       places: await this.readArrayFile<StoredPlace>(this.placesPath),
       placeNames: await this.readArrayFile<StoredPlaceName>(this.placeNamesPath),
-      mapTemplates: await this.readArrayFile<StoredMapTemplate>(this.mapTemplatesPath),
       mapAnchors: await this.readArrayFile<StoredMapAnchor>(this.mapAnchorsPath),
-      editionAnchorOverrides: await this.readArrayFile<StoredEditionAnchorOverride>(this.editionAnchorOverridesPath),
       editions: await this.readArrayFile<StoredEdition>(this.editionsPath),
       links: await this.readArrayFile<StoredLink>(this.linksPath),
       linkMeasures: await this.readArrayFile<StoredLinkMeasure>(this.linkMeasuresPath),
@@ -902,9 +821,7 @@ export class JsonV2GraphRepository implements GraphRepository {
   private async persistData(data: V2Data): Promise<void> {
     await this.writeJsonAtomic(this.placesPath, data.places);
     await this.writeJsonAtomic(this.placeNamesPath, data.placeNames);
-    await this.writeJsonAtomic(this.mapTemplatesPath, data.mapTemplates);
     await this.writeJsonAtomic(this.mapAnchorsPath, data.mapAnchors);
-    await this.writeJsonAtomic(this.editionAnchorOverridesPath, data.editionAnchorOverrides);
     await this.writeJsonAtomic(this.editionsPath, data.editions);
     await this.writeJsonAtomic(this.linksPath, data.links);
     await this.writeJsonAtomic(this.linkMeasuresPath, data.linkMeasures);
@@ -924,9 +841,7 @@ export class JsonV2GraphRepository implements GraphRepository {
     await fs.mkdir(this.dataDir, { recursive: true });
     await this.ensureFile(this.placesPath);
     await this.ensureFile(this.placeNamesPath);
-    await this.ensureFile(this.mapTemplatesPath);
     await this.ensureFile(this.mapAnchorsPath);
-    await this.ensureFile(this.editionAnchorOverridesPath);
     await this.ensureFile(this.editionsPath);
     await this.ensureFile(this.linksPath);
     await this.ensureFile(this.linkMeasuresPath);

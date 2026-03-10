@@ -1,11 +1,9 @@
 {
-  "generatedAt": "2026-03-10T10:56:08.034Z",
+  "generatedAt": "2026-03-10T16:32:05.036Z",
   "counts": {
     "places": 332,
     "placeNames": 552,
-    "mapTemplates": 1,
     "mapAnchors": 332,
-    "anchorOverrides": 0,
     "editions": 1,
     "links": 136,
     "linkMeasures": 108,

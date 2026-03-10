@@ -11,7 +11,6 @@ const WIKIDATA_PATH = path.join(ROOT, 'wikidata.json');
 const LEGACY_SOURCE_ID = 'source-legacy-graph-json';
 const WIKIDATA_SOURCE_ID = 'source-wikidata-json';
 const IMPORT_SOURCE_ID = 'source-v2-migration-script';
-const TEMPLATE_ID = 'map-template-switzerland-base-v1';
 
 function readJson(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
@@ -145,25 +144,13 @@ function main() {
   const editions = years.map((year) => ({
     id: `edition-${year}`,
     year,
-    version: 1,
     title: `Kurskarte ${year}`,
-    mapTemplateId: TEMPLATE_ID,
     sourceId: LEGACY_SOURCE_ID
   }));
-
-  const mapTemplates = [
-    {
-      id: TEMPLATE_ID,
-      label: 'Swiss base map template',
-      description: 'Default reusable map template migrated from legacy node coordinates.',
-      sourceId: LEGACY_SOURCE_ID
-    }
-  ];
 
   const places = [];
   const placeNames = [];
   const mapAnchors = [];
-  const anchorOverrides = [];
   const links = [];
   const linkMeasures = [];
   const services = [];
@@ -260,8 +247,7 @@ function main() {
     });
 
     mapAnchors.push({
-      id: `anchor-${TEMPLATE_ID}-${node.id}`,
-      mapTemplateId: TEMPLATE_ID,
+      id: `anchor-${node.id}`,
       placeId: node.id,
       x: Number(node.x),
       y: Number(node.y),
@@ -458,9 +444,7 @@ function main() {
     counts: {
       places: places.length,
       placeNames: placeNames.length,
-      mapTemplates: mapTemplates.length,
       mapAnchors: mapAnchors.length,
-      anchorOverrides: anchorOverrides.length,
       editions: editions.length,
       links: links.length,
       linkMeasures: linkMeasures.length,
@@ -493,12 +477,10 @@ Normalized canonical dataset exported from legacy graph JSON files.
 
 ## Files
 
-- editions.json: time/edition context records
-- map_templates.json: reusable base map templates
+- editions.json: time context records (year/provenance only)
 - places.json: stable place entities
 - place_names.json: multilingual and alternate place names
-- map_anchors.json: default place coordinates per map template
-- edition_anchor_overrides.json: per-edition coordinate overrides (usually empty)
+- map_anchors.json: place coordinates on the single canonical simplified map
 - links.json: undirected place pairs
 - link_measures.json: link-level measures (e.g. distance.leuge)
 - services.json: directed route variants between places
@@ -516,11 +498,9 @@ Normalized canonical dataset exported from legacy graph JSON files.
 
   writeText(path.join(OUTPUT_DIR, 'README.md'), readme);
   writeJson(path.join(OUTPUT_DIR, 'editions.json'), sortById(editions));
-  writeJson(path.join(OUTPUT_DIR, 'map_templates.json'), sortById(mapTemplates));
   writeJson(path.join(OUTPUT_DIR, 'places.json'), sortById(places));
   writeJson(path.join(OUTPUT_DIR, 'place_names.json'), sortById(placeNames));
   writeJson(path.join(OUTPUT_DIR, 'map_anchors.json'), sortById(mapAnchors));
-  writeJson(path.join(OUTPUT_DIR, 'edition_anchor_overrides.json'), sortById(anchorOverrides));
   writeJson(path.join(OUTPUT_DIR, 'links.json'), sortById(links));
   writeJson(path.join(OUTPUT_DIR, 'link_measures.json'), sortById(linkMeasures));
   writeJson(path.join(OUTPUT_DIR, 'services.json'), sortById(services));

@@ -143,8 +143,6 @@ export class AdminComponent implements OnDestroy {
   ]);
   quickEntityMode = signal<QuickEntityMode>('service');
   inspectorTab = signal<InspectorTab>('core');
-  editionVersion = signal<string>('main');
-  mapTemplateId = signal<string>('map-template-switzerland-base-v1');
   quickPlaceName = signal<string>('');
   quickServiceNoteDe = signal<string>('');
   quickServiceNoteFr = signal<string>('');
@@ -186,12 +184,6 @@ export class AdminComponent implements OnDestroy {
     { id: 'facts', label: 'Facts' },
     { id: 'anchors', label: 'Anchors' },
     { id: 'source', label: 'Source' }
-  ];
-  readonly editionVersionOptions = ['main', 'draft'];
-  readonly mapTemplateOptions = [
-    'map-template-switzerland-base-v1',
-    'map-template-switzerland-base-v2',
-    'map-template-switzerland-generalized-v1'
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
@@ -548,14 +540,6 @@ export class AdminComponent implements OnDestroy {
       this.draftEdge.set(null);
       this.dragState = null;
     }
-  }
-
-  onEditionVersionSelect(event: Event): void {
-    this.editionVersion.set((event.target as HTMLSelectElement).value || 'main');
-  }
-
-  onMapTemplateSelect(event: Event): void {
-    this.mapTemplateId.set((event.target as HTMLSelectElement).value || this.mapTemplateOptions[0]);
   }
 
   setQuickEntityMode(mode: QuickEntityMode): void {

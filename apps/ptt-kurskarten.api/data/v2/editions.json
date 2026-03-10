@@ -2,9 +2,7 @@
   {
     "id": "edition-1852",
     "year": 1852,
-    "version": 1,
     "title": "Kurskarte 1852",
-    "mapTemplateId": "map-template-switzerland-base-v1",
     "sourceId": "source-legacy-graph-json"
   }
 ]

@@ -1,6 +1,6 @@
 <header class="context-bar">
-  <div class="context-group">
-    <span class="context-label">Edition</span>
+  <div class="context-group context-group-year">
+    <span class="context-label">Year</span>
     <div class="context-controls">
       <select [value]="year()" (change)="onEditionYearSelect($event)">
         @if (availableYears().length > 0) {
@@ -11,21 +11,12 @@
           <option [value]="year()">{{ year() }}</option>
         }
       </select>
-      <select [value]="editionVersion()" (change)="onEditionVersionSelect($event)">
-        @for (version of editionVersionOptions; track version) {
-          <option [value]="version" [selected]="version === editionVersion()">{{ version }}</option>
-        }
-      </select>
     </div>
   </div>
 
-  <div class="context-group context-group-template">
-    <span class="context-label">Map template</span>
-    <select [value]="mapTemplateId()" (change)="onMapTemplateSelect($event)">
-      @for (template of mapTemplateOptions; track template) {
-        <option [value]="template" [selected]="template === mapTemplateId()">{{ template }}</option>
-      }
-    </select>
+  <div class="context-group">
+    <span class="context-label">Publishing</span>
+    <div class="context-public-note">Every change is public immediately (no draft/main).</div>
   </div>
 
   <div class="context-year-range">Years {{ minYear() }}-{{ maxYear() }}</div>

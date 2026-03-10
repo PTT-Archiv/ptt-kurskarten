@@ -131,7 +131,6 @@ By default the API uses the JSON-backed repository (`GRAPH_REPO=json`) and persi
 - `apps/ptt-kurskarten.api/data/v2/places.json`
 - `apps/ptt-kurskarten.api/data/v2/place_names.json`
 - `apps/ptt-kurskarten.api/data/v2/map_anchors.json`
-- `apps/ptt-kurskarten.api/data/v2/edition_anchor_overrides.json`
 - `apps/ptt-kurskarten.api/data/v2/editions.json`
 - `apps/ptt-kurskarten.api/data/v2/links.json`
 - `apps/ptt-kurskarten.api/data/v2/link_measures.json`
@@ -158,7 +157,7 @@ This export keeps IDs traceable, separates places/anchors/links/services/trips, 
 The `data/v2` folder is the canonical edit model. It is normalized so that:
 
 - one real-world place is stored once
-- map coordinates can be reused across years/editions
+- map coordinates are managed on one canonical simplified map via validity windows
 - route structure is separated from timetable rows
 - metadata is extensible through generic facts/assertions
 - migration to SQL later is straightforward (one JSON file ~= one table)
@@ -167,10 +166,8 @@ The `data/v2` folder is the canonical edit model. It is normalized so that:
 
 - `places.json`: stable place identities
 - `place_names.json`: multilingual/historical names and aliases
-- `map_templates.json`: reusable base map definitions
-- `map_anchors.json`: place coordinates on a map template (reused across editions)
-- `edition_anchor_overrides.json`: only store coordinates when an edition differs
-- `editions.json`: year/version context for a Kurskarte
+- `map_anchors.json`: place coordinates on the canonical simplified map (temporal via validity)
+- `editions.json`: year context / provenance for a Kurskarte
 - `links.json`: undirected relation between two places
 - `link_measures.json`: link-level values such as `distance.leuge`
 - `services.json`: directed route/service variants (`from` -> `to`)
@@ -183,8 +180,8 @@ Conceptually:
 
 ```text
 Place --< PlaceName
-Place --< MapAnchor >-- MapTemplate
-Edition --< EditionAnchorOverride >-- Place
+Place --< MapAnchor(validFrom/validTo)
+Edition(year/provenance)
 Place --< Link(placeA/placeB) >-- Place
 Link --< LinkMeasure
 Link --< Service(direction)
@@ -196,14 +193,13 @@ Any entity --< Assertion >-- Source
 
 1. Create or find the `Place`.
 2. Add canonical and alternate names in `place_names.json`.
-3. Set default map position in `map_anchors.json` (once per template).
-4. For a new year/version, create an `Edition`.
-5. Reuse anchors; only add `edition_anchor_overrides.json` when needed.
-6. Create `links.json` between place pairs.
-7. Add `link_measures.json` (`distance.leuge`, etc.).
-8. Add directed `services.json` variants.
-9. Add timetable rows in `service_trips.json`.
-10. Add metadata/IDs as `assertions.json` and always reference `sources.json`.
+3. Maintain map positions in `map_anchors.json` and control timeline with `validFrom` / `validTo`.
+4. Create or update `editions.json` for catalog/provenance context.
+5. Create `links.json` between place pairs.
+6. Add `link_measures.json` (`distance.leuge`, etc.).
+7. Add directed `services.json` variants.
+8. Add timetable rows in `service_trips.json`.
+9. Add metadata/IDs as `assertions.json` and always reference `sources.json`.
 
 This keeps editing understandable for archivists: identity, map placement, route, timetable, and evidence are separate concerns.
 
@@ -227,14 +223,14 @@ Because `v2` is table-shaped JSON, PostgreSQL migration can be direct:
 
 Suggested SQL mapping:
 
-- `places`, `place_names`, `map_templates`, `map_anchors`, `edition_anchor_overrides`
+- `places`, `place_names`, `map_anchors`
 - `editions`, `links`, `link_measures`, `services`, `service_trips`
 - `assertions`, `sources`
 
 Recommended constraints/indexes:
 
 - foreign keys on all `...Id` references
-- unique `(mapTemplateId, placeId)` on anchors
+- index `map_anchors(placeId, validFrom, validTo)`
 - check `placeAId < placeBId` for undirected links
 - index `services(fromPlaceId)`, `services(toPlaceId)`, `service_trips(serviceId)`
 - index `assertions(targetType, targetId, schemaKey)`
