@@ -8,7 +8,7 @@
 
 .context-bar {
   display: grid;
-  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
   align-items: end;
   gap: 10px;
   padding: 10px 16px;
@@ -50,14 +50,7 @@
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
-}
-
-.context-public-note {
-  border: 1px dashed #141414;
-  border-radius: 10px;
-  padding: 6px 10px;
-  background: #fffef4;
-  font-size: 12px;
+  justify-self: end;
 }
 
 .layout {
@@ -196,6 +189,9 @@
 }
 
 .quick-edge-list button {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
   width: 100%;
   text-align: left;
   border: 1px solid #141414;
@@ -630,20 +626,44 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.confirm-row {
-  border: 1px dashed var(--ptt-black);
-  border-radius: 6px;
-  padding: 6px 8px;
-  font-size: 12px;
+.danger-action-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.delete-popover {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  min-width: 240px;
+  max-width: min(340px, calc(100vw - 48px));
+  border: 2px solid #141414;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px;
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  z-index: 12;
 }
 
-.confirm-actions {
+.delete-popover-text {
+  font-size: 12px;
+}
+
+.delete-popover-actions {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sticky-danger .delete-popover {
+  left: 0;
+  right: auto;
 }
 
 .ghost-btn.danger {
@@ -780,6 +800,7 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .action-btn {

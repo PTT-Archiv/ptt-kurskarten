@@ -14,11 +14,6 @@
     </div>
   </div>
 
-  <div class="context-group">
-    <span class="context-label">Publishing</span>
-    <div class="context-public-note">Every change is public immediately (no draft/main).</div>
-  </div>
-
   <div class="context-year-range">Years {{ minYear() }}-{{ maxYear() }}</div>
 </header>
 
@@ -58,13 +53,35 @@
         <div class="quick-mode-note">Create a stable place identity. Coordinates use current map cursor.</div>
         <label class="quick-edge-field">
           <span>Name</span>
-          <input
-            type="text"
-            [value]="quickPlaceName()"
-            placeholder="Place name"
-            (input)="quickPlaceName.set($any($event.target).value)"
-          />
+          <div class="quick-edge-typeahead">
+            <input
+              type="text"
+              [value]="quickPlaceName()"
+              placeholder="Place name"
+              (focus)="quickPlaceGeoOpen.set(true)"
+              (input)="onQuickPlaceInput($event)"
+              (keydown)="onQuickPlaceKeydown($event)"
+              (blur)="closeQuickPlaceList()"
+            />
+            @if (geoSearchEnabled() && quickPlaceGeoOpen() && quickPlaceGeoResults().length > 0) {
+              <div class="quick-edge-list">
+                @for (result of quickPlaceGeoResults(); track result.id; let idx = $index) {
+                  <button
+                    type="button"
+                    [class.active]="idx === quickPlaceGeoActiveIndex()"
+                    (mousedown)="selectQuickPlaceGeoResult(result)"
+                  >
+                    <span>{{ result.label }}</span>
+                    <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                  </button>
+                }
+              </div>
+            }
+          </div>
         </label>
+        @if (quickPlaceGeoPoint(); as point) {
+          <div class="quick-mode-note">GeoAdmin anchor: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}</div>
+        }
         <button type="button" class="quick-edge-create" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
           Create Place
         </button>
@@ -466,20 +483,22 @@
               <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
                 Duplicate Place
               </button>
-              <button class="ghost-btn danger" type="button" (click)="requestDeleteNode()">
-                Delete Place
-              </button>
-            </div>
-          }
-          @if (confirmDeleteNode()) {
-            <div class="confirm-row">
-              <span>{{ 'admin.confirmDeleteNode' | transloco }}</span>
-              <div class="confirm-actions">
-                <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+              <div class="danger-action-wrap">
+                @if (confirmDeleteNode() && deleteConfirmAnchor() === 'inline') {
+                  <div class="delete-popover">
+                    <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
+                    <div class="delete-popover-actions">
+                      <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                        Delete Place
+                      </button>
+                      <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                        {{ 'btn.cancel' | transloco }}
+                      </button>
+                    </div>
+                  </div>
+                }
+                <button class="ghost-btn danger" type="button" (click)="requestDeleteNode('inline')">
                   Delete Place
-                </button>
-                <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
-                  {{ 'btn.cancel' | transloco }}
                 </button>
               </div>
             </div>
@@ -929,9 +948,24 @@
           <button class="action-btn" disabled>{{ 'btn.save' | transloco }}</button>
         }
         @if (selectedType() === 'node') {
-          <button class="action-btn secondary" [disabled]="!selectedNodeId()" (click)="requestDeleteNode()">
-            Delete Place
-          </button>
+          <div class="danger-action-wrap sticky-danger">
+            @if (confirmDeleteNode() && deleteConfirmAnchor() === 'sticky') {
+              <div class="delete-popover">
+                <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
+                <div class="delete-popover-actions">
+                  <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                    Delete Place
+                  </button>
+                  <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                    {{ 'btn.cancel' | transloco }}
+                  </button>
+                </div>
+              </div>
+            }
+            <button class="action-btn secondary" [disabled]="!selectedNodeId()" (click)="requestDeleteNode('sticky')">
+              Delete Place
+            </button>
+          </div>
         } @else {
           <button class="action-btn secondary" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
             Delete Service

@@ -3318,5 +3318,11 @@
     "validTo": null,
     "sourceId": "source-legacy-graph-json",
     "legacyNodeId": "node-1771596256944"
+  },
+  {
+    "id": "node-1773161385523",
+    "defaultName": "Kreuzlingen",
+    "validFrom": 1999,
+    "validTo": null
   }
 ]

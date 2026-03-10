@@ -6622,5 +6622,17 @@
     "validFrom": 1852,
     "validTo": null,
     "sourceId": "source-wikidata-json"
+  },
+  {
+    "id": "09d87e71-55ab-4b98-879d-c8ef260a50d8",
+    "placeId": "node-1773161385523",
+    "lang": "und",
+    "name": "Kreuzlingen",
+    "normalized": "kreuzlingen",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1999,
+    "validTo": null,
+    "sourceId": "source-v2-api"
   }
 ]

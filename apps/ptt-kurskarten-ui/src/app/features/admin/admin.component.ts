@@ -76,6 +76,7 @@ type GeoAdminResult = {
 
 type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact' | 'anchor';
 type InspectorTab = 'core' | 'facts' | 'anchors' | 'source';
+type DeleteConfirmAnchor = 'inline' | 'sticky';
 type PendingFact = {
   id: string;
   targetType: 'place';
@@ -127,6 +128,7 @@ export class AdminComponent implements OnDestroy {
   isDemo = signal<boolean>(this.repo.isDemo);
   shortcutsCollapsed = signal<boolean>(false);
   confirmDeleteNode = signal<boolean>(false);
+  deleteConfirmAnchor = signal<DeleteConfirmAnchor | null>(null);
   isDragging = signal<boolean>(false);
   quickFromQuery = signal<string>('');
   quickToQuery = signal<string>('');
@@ -144,6 +146,10 @@ export class AdminComponent implements OnDestroy {
   quickEntityMode = signal<QuickEntityMode>('service');
   inspectorTab = signal<InspectorTab>('core');
   quickPlaceName = signal<string>('');
+  quickPlaceGeoResults = signal<GeoAdminResult[]>([]);
+  quickPlaceGeoOpen = signal<boolean>(false);
+  quickPlaceGeoActiveIndex = signal<number>(0);
+  quickPlaceGeoPoint = signal<{ x: number; y: number } | null>(null);
   quickServiceNoteDe = signal<string>('');
   quickServiceNoteFr = signal<string>('');
   quickFactSchemaKey = signal<string>('identifier.wikidata');
@@ -160,6 +166,7 @@ export class AdminComponent implements OnDestroy {
   geoLoading = signal<boolean>(false);
   geoActiveIndex = signal<number>(0);
   private geoSearchHandle: ReturnType<typeof setTimeout> | null = null;
+  private quickPlaceGeoSearchHandle: ReturnType<typeof setTimeout> | null = null;
   private archiveSaveHandle: ReturnType<typeof setTimeout> | null = null;
   private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number } | null = null;
   readonly transportOptions: TransportType[] = [
@@ -512,6 +519,14 @@ export class AdminComponent implements OnDestroy {
     if (this.graphFetchHandle) {
       clearTimeout(this.graphFetchHandle);
     }
+    if (this.geoSearchHandle) {
+      clearTimeout(this.geoSearchHandle);
+      this.geoSearchHandle = null;
+    }
+    if (this.quickPlaceGeoSearchHandle) {
+      clearTimeout(this.quickPlaceGeoSearchHandle);
+      this.quickPlaceGeoSearchHandle = null;
+    }
     if (this.isBrowser) {
       window.removeEventListener('keydown', this.onKeyDown);
     }
@@ -544,6 +559,16 @@ export class AdminComponent implements OnDestroy {
 
   setQuickEntityMode(mode: QuickEntityMode): void {
     this.quickEntityMode.set(mode);
+    if (mode !== 'place') {
+      this.quickPlaceGeoOpen.set(false);
+      this.quickPlaceGeoResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+      this.quickPlaceGeoPoint.set(null);
+      if (this.quickPlaceGeoSearchHandle) {
+        clearTimeout(this.quickPlaceGeoSearchHandle);
+        this.quickPlaceGeoSearchHandle = null;
+      }
+    }
     if (mode === 'anchor') {
       this.inspectorTab.set('anchors');
       return;
@@ -576,12 +601,12 @@ export class AdminComponent implements OnDestroy {
   selectEdge(edgeId: string): void {
     this.draftEdge.set(null);
     this.selection.selectEdge(edgeId);
-    this.confirmDeleteNode.set(false);
+    this.closeDeleteConfirm();
   }
 
   clearEdgeSelection(): void {
     this.selection.clearSelection();
-    this.confirmDeleteNode.set(false);
+    this.closeDeleteConfirm();
   }
 
   addNodeAtCursor(): void {
@@ -602,6 +627,77 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.selection.startEdgeFrom(nodeId);
+  }
+
+  onQuickPlaceInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.quickPlaceName.set(value);
+    this.quickPlaceGeoPoint.set(null);
+    this.quickPlaceGeoOpen.set(true);
+    this.quickPlaceGeoActiveIndex.set(0);
+    this.queueQuickPlaceGeoSearch(value);
+  }
+
+  onQuickPlaceKeydown(event: KeyboardEvent): void {
+    const isArrowDown = event.key === 'ArrowDown' || event.key === 'Down';
+    const isArrowUp = event.key === 'ArrowUp' || event.key === 'Up';
+    const isEnter = event.key === 'Enter';
+    const isEscape = event.key === 'Escape';
+    const results = this.quickPlaceGeoResults();
+    if (isArrowDown) {
+      if (!results.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickPlaceGeoOpen.set(true);
+      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() + 1) % results.length);
+      return;
+    }
+    if (isArrowUp) {
+      if (!results.length) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      this.quickPlaceGeoOpen.set(true);
+      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() - 1 + results.length) % results.length);
+      return;
+    }
+    if (isEnter && results.length) {
+      event.preventDefault();
+      event.stopPropagation();
+      const picked = results[this.quickPlaceGeoActiveIndex()] ?? results[0];
+      if (picked) {
+        this.selectQuickPlaceGeoResult(picked);
+      }
+      return;
+    }
+    if (isEnter && this.quickPlaceName().trim()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.saveQuickPlace();
+      return;
+    }
+    if (isEscape) {
+      event.stopPropagation();
+      this.quickPlaceGeoOpen.set(false);
+      this.quickPlaceGeoResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+    }
+  }
+
+  closeQuickPlaceList(): void {
+    setTimeout(() => this.quickPlaceGeoOpen.set(false), 80);
+  }
+
+  selectQuickPlaceGeoResult(result: GeoAdminResult): void {
+    const mapped = this.mapGeoAdminToLocal(result.x, result.y);
+    this.quickPlaceName.set(result.label || this.quickPlaceName());
+    this.quickPlaceGeoPoint.set(mapped);
+    this.quickPlaceGeoOpen.set(false);
+    this.quickPlaceGeoResults.set([]);
+    this.quickPlaceGeoActiveIndex.set(0);
   }
 
   onQuickFromInput(event: Event): void {
@@ -945,7 +1041,7 @@ export class AdminComponent implements OnDestroy {
     if (!name) {
       return;
     }
-    const point = this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
+    const point = this.quickPlaceGeoPoint() ?? this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
     const node: NodeDraft = {
       id: `node-${Date.now()}`,
       name,
@@ -958,6 +1054,10 @@ export class AdminComponent implements OnDestroy {
         this.addNode(created);
         this.selection.selectNode(created.id);
         this.quickPlaceName.set('');
+        this.quickPlaceGeoPoint.set(null);
+        this.quickPlaceGeoOpen.set(false);
+        this.quickPlaceGeoResults.set([]);
+        this.quickPlaceGeoActiveIndex.set(0);
         this.quickFromId.set(created.id);
         this.quickFromQuery.set(created.name);
         this.quickAnchorX.set(String(Math.round(created.x * 10) / 10));
@@ -1128,18 +1228,20 @@ export class AdminComponent implements OnDestroy {
     this.selection.clearPendingEdge();
   }
 
-  requestDeleteNode(): void {
+  requestDeleteNode(anchor: DeleteConfirmAnchor = 'sticky'): void {
     if (!this.selectedNodeId()) {
       return;
     }
+    if (this.confirmDeleteNode() && this.deleteConfirmAnchor() === anchor) {
+      this.closeDeleteConfirm();
+      return;
+    }
+    this.deleteConfirmAnchor.set(anchor);
     this.confirmDeleteNode.set(true);
-    requestAnimationFrame(() => {
-      this.nodePanelRef?.nativeElement?.scrollIntoView({ block: 'start', behavior: 'smooth' });
-    });
   }
 
   cancelDeleteNode(): void {
-    this.confirmDeleteNode.set(false);
+    this.closeDeleteConfirm();
   }
 
   deleteSelectedNode(): void {
@@ -1161,7 +1263,7 @@ export class AdminComponent implements OnDestroy {
         this.removeNodeCascadeLocal(nodeId);
         this.pushUndo({ type: 'DELETE_NODE', node, edges });
         this.selection.clearSelection();
-        this.confirmDeleteNode.set(false);
+        this.closeDeleteConfirm();
         this.dirty.set(true);
         this.toastService.addToast({
           type: 'success',
@@ -1446,9 +1548,16 @@ export class AdminComponent implements OnDestroy {
     if (!value) {
       this.geoResults.set([]);
       this.geoActiveIndex.set(0);
+      this.quickPlaceGeoResults.set([]);
+      this.quickPlaceGeoOpen.set(false);
+      this.quickPlaceGeoActiveIndex.set(0);
       if (this.geoSearchHandle) {
         clearTimeout(this.geoSearchHandle);
         this.geoSearchHandle = null;
+      }
+      if (this.quickPlaceGeoSearchHandle) {
+        clearTimeout(this.quickPlaceGeoSearchHandle);
+        this.quickPlaceGeoSearchHandle = null;
       }
     }
   }
@@ -1949,15 +2058,15 @@ export class AdminComponent implements OnDestroy {
         this.scrollArchivePanelIntoView();
         this.selection.selectNode(node.id);
         this.draftEdge.set(null);
-        this.confirmDeleteNode.set(false);
+        this.closeDeleteConfirm();
       } else if (event.hitEdgeId) {
         this.selection.selectEdge(event.hitEdgeId);
         this.draftEdge.set(null);
-        this.confirmDeleteNode.set(false);
+        this.closeDeleteConfirm();
         this.isDragging.set(false);
       } else {
         this.selection.clearSelection();
-        this.confirmDeleteNode.set(false);
+        this.closeDeleteConfirm();
         this.isDragging.set(false);
       }
       return;
@@ -2170,10 +2279,45 @@ export class AdminComponent implements OnDestroy {
     this.geoSearchHandle = setTimeout(() => this.fetchGeoAdminResults(cleaned), 250);
   }
 
+  private queueQuickPlaceGeoSearch(query: string): void {
+    if (!this.geoSearchEnabled() || !this.isBrowser) {
+      this.quickPlaceGeoResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+      return;
+    }
+    const cleaned = query.replace(/\([^)]*\)$/, '').trim();
+    if (cleaned.length < 2) {
+      this.quickPlaceGeoResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+      return;
+    }
+    if (this.quickPlaceGeoSearchHandle) {
+      clearTimeout(this.quickPlaceGeoSearchHandle);
+    }
+    this.quickPlaceGeoSearchHandle = setTimeout(() => this.fetchQuickPlaceGeoAdminResults(cleaned), 250);
+  }
+
   private fetchGeoAdminResults(query: string): void {
     if (!this.geoSearchEnabled() || !this.isBrowser) {
       return;
     }
+    this.fetchGeoAdminSearch(query, (results) => {
+      this.geoResults.set(results);
+      this.geoActiveIndex.set(0);
+    });
+  }
+
+  private fetchQuickPlaceGeoAdminResults(query: string): void {
+    if (!this.geoSearchEnabled() || !this.isBrowser) {
+      return;
+    }
+    this.fetchGeoAdminSearch(query, (results) => {
+      this.quickPlaceGeoResults.set(results);
+      this.quickPlaceGeoActiveIndex.set(0);
+    });
+  }
+
+  private fetchGeoAdminSearch(query: string, applyResults: (results: GeoAdminResult[]) => void): void {
     this.geoLoading.set(true);
     const url =
       'https://api3.geo.admin.ch/rest/services/api/SearchServer' +
@@ -2198,13 +2342,11 @@ export class AdminComponent implements OnDestroy {
               } satisfies GeoAdminResult;
             })
             .filter((entry): entry is GeoAdminResult => Boolean(entry)) ?? [];
-        this.geoResults.set(results);
-        this.geoActiveIndex.set(0);
+        applyResults(results);
         this.geoLoading.set(false);
       },
       error: () => {
-        this.geoResults.set([]);
-        this.geoActiveIndex.set(0);
+        applyResults([]);
         this.geoLoading.set(false);
       }
     });
@@ -2348,8 +2490,13 @@ export class AdminComponent implements OnDestroy {
       trips: []
     });
     this.selection.selectEdge(draftId);
-    this.confirmDeleteNode.set(false);
+    this.closeDeleteConfirm();
     this.dirty.set(true);
+  }
+
+  private closeDeleteConfirm(): void {
+    this.confirmDeleteNode.set(false);
+    this.deleteConfirmAnchor.set(null);
   }
 
   private applyQuickLeugePrefill(): void {

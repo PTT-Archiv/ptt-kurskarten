@@ -3650,5 +3650,15 @@
     "validFrom": 1852,
     "validTo": null,
     "sourceId": "source-legacy-graph-json"
+  },
+  {
+    "id": "anchor-node-1773161385523-1852",
+    "placeId": "node-1773161385523",
+    "x": 572.571885345242,
+    "y": 32.26147291905511,
+    "iiifCenterX": null,
+    "iiifCenterY": null,
+    "validFrom": 1999,
+    "validTo": null
   }
 ]
