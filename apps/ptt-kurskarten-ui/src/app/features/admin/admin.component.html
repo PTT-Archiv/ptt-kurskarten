@@ -1,3 +1,36 @@
+<header class="context-bar">
+  <div class="context-group">
+    <span class="context-label">Edition</span>
+    <div class="context-controls">
+      <select [value]="year()" (change)="onEditionYearSelect($event)">
+        @if (availableYears().length > 0) {
+          @for (item of availableYears(); track item) {
+            <option [value]="item" [selected]="item === year()">{{ item }}</option>
+          }
+        } @else {
+          <option [value]="year()">{{ year() }}</option>
+        }
+      </select>
+      <select [value]="editionVersion()" (change)="onEditionVersionSelect($event)">
+        @for (version of editionVersionOptions; track version) {
+          <option [value]="version" [selected]="version === editionVersion()">{{ version }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="context-group context-group-template">
+    <span class="context-label">Map template</span>
+    <select [value]="mapTemplateId()" (change)="onMapTemplateSelect($event)">
+      @for (template of mapTemplateOptions; track template) {
+        <option [value]="template" [selected]="template === mapTemplateId()">{{ template }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="context-year-range">Years {{ minYear() }}-{{ maxYear() }}</div>
+</header>
+
 <main class="layout">
   <section class="canvas-area">
     <app-map-stage
@@ -8,17 +41,262 @@
       [showBorder]="false"
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
-    <section class="quick-edge-panel">
-      <div class="quick-edge-title">Quick Edge</div>
-      <div class="quick-edge-row">
+
+    <section class="quick-edge-panel quick-entity-panel">
+      <div class="quick-entity-header">
+        <div class="quick-edge-title">Quick Entity</div>
+        <div class="quick-entity-active">Mode: {{ quickEntityMode() }}</div>
+      </div>
+
+      <div class="quick-mode-switch" role="tablist" aria-label="Quick entity mode">
+        @for (mode of quickEntityModes; track mode.id) {
+          <button
+            type="button"
+            class="quick-mode-btn"
+            [class.active]="quickEntityMode() === mode.id"
+            (click)="setQuickEntityMode(mode.id)"
+            [attr.title]="'Shortcut ' + mode.shortcut"
+          >
+            <span>{{ mode.label }}</span>
+            <span class="keycap small">{{ mode.shortcut }}</span>
+          </button>
+        }
+      </div>
+
+      @if (quickEntityMode() === 'place') {
+        <div class="quick-mode-note">Create a stable place identity. Coordinates use current map cursor.</div>
         <label class="quick-edge-field">
-          <span>{{ 'label.from' | transloco }}</span>
+          <span>Name</span>
+          <input
+            type="text"
+            [value]="quickPlaceName()"
+            placeholder="Place name"
+            (input)="quickPlaceName.set($any($event.target).value)"
+          />
+        </label>
+        <button type="button" class="quick-edge-create" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
+          Create Place
+        </button>
+      }
+
+      @if (quickEntityMode() === 'link' || quickEntityMode() === 'service') {
+        <div class="quick-edge-row">
+          <label class="quick-edge-field">
+            <span>{{ 'label.from' | transloco }}</span>
+            <div class="quick-edge-typeahead">
+              <input
+                #quickFromInput
+                type="text"
+                [value]="quickFromQuery()"
+                placeholder="Type station..."
+                (focus)="quickFromOpen.set(true)"
+                (input)="onQuickFromInput($event)"
+                (keydown)="onQuickFromKeydown($event)"
+                (blur)="closeQuickFromList()"
+              />
+              @if (quickFromOpen() && quickFromSuggestions().length > 0) {
+                <div class="quick-edge-list">
+                  @for (node of quickFromSuggestions(); track node.id; let idx = $index) {
+                    <button
+                      type="button"
+                      [class.active]="idx === quickFromActiveIndex()"
+                      (mousedown)="selectQuickFrom(node.id)"
+                    >
+                      {{ node.name }}
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </label>
+
+          <button type="button" class="quick-edge-swap" (click)="swapQuickDirection()" title="Swap direction">
+            <fa-icon [icon]="swapIcon"></fa-icon>
+          </button>
+
+          <label class="quick-edge-field">
+            <span>{{ 'label.to' | transloco }}</span>
+            <div class="quick-edge-typeahead">
+              <input
+                #quickToInput
+                type="text"
+                [value]="quickToQuery()"
+                placeholder="Type station..."
+                (focus)="quickToOpen.set(true)"
+                (input)="onQuickToInput($event)"
+                (keydown)="onQuickToKeydown($event)"
+                (blur)="closeQuickToList()"
+              />
+              @if (quickToOpen() && quickToSuggestions().length > 0) {
+                <div class="quick-edge-list">
+                  @for (node of quickToSuggestions(); track node.id; let idx = $index) {
+                    <button
+                      type="button"
+                      [class.active]="idx === quickToActiveIndex()"
+                      (mousedown)="selectQuickTo(node.id)"
+                    >
+                      {{ node.name }}
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </label>
+        </div>
+
+        <div class="quick-edge-row quick-edge-meta">
+          <label class="quick-edge-field">
+            <span>{{ 'label.leuge' | transloco }}</span>
+            <input #quickLeugeInput type="number" [value]="quickLeuge()" (input)="updateQuickLeuge($event)" />
+          </label>
+        </div>
+
+        @if (quickEntityMode() === 'service') {
+          <div class="quick-service-notes">
+            <label class="quick-edge-field">
+              <span>Note DE</span>
+              <input
+                type="text"
+                [value]="quickServiceNoteDe()"
+                placeholder="Service note (DE)"
+                (input)="quickServiceNoteDe.set($any($event.target).value)"
+              />
+            </label>
+            <label class="quick-edge-field">
+              <span>Note FR</span>
+              <input
+                type="text"
+                [value]="quickServiceNoteFr()"
+                placeholder="Service note (FR)"
+                (input)="quickServiceNoteFr.set($any($event.target).value)"
+              />
+            </label>
+          </div>
+
+          <div class="quick-trip-header">
+            <span class="quick-trip-title">Trips</span>
+            <button type="button" class="ghost-btn" (click)="addQuickTrip()">
+              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+              {{ 'btn.addTrip' | transloco }}
+            </button>
+          </div>
+          <div class="quick-trip-table">
+            <div class="quick-trip-row header">
+              <span>Transport</span>
+              <span>Dep</span>
+              <span>Arr</span>
+              <span></span>
+            </div>
+            @for (trip of quickTrips(); track trip.id; let idx = $index) {
+              <div class="quick-trip-row">
+                <select
+                  [value]="trip.transport"
+                  (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
+                >
+                  @for (transport of transportOptions; track transport) {
+                    <option [value]="transport" [selected]="transport === trip.transport">
+                      {{ ('transport.' + transport) | transloco }}
+                    </option>
+                  }
+                </select>
+                <input
+                  type="text"
+                  [value]="trip.departs"
+                  placeholder="HH:MM"
+                  (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
+                  (keydown)="onQuickTripKeydown($event, idx, 'departs')"
+                  [attr.data-quick-trip-index]="idx"
+                  data-quick-trip-field="departs"
+                />
+                <input
+                  type="text"
+                  [value]="trip.arrives"
+                  placeholder="HH:MM"
+                  (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
+                  (keydown)="onQuickTripKeydown($event, idx, 'arrives')"
+                  [attr.data-quick-trip-index]="idx"
+                  data-quick-trip-field="arrives"
+                />
+                <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+                  <fa-icon [icon]="xmarkIcon"></fa-icon>
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+        @if (quickEntityMode() === 'link') {
+          <button
+            type="button"
+            class="quick-edge-create"
+            [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
+            (click)="saveQuickLink()"
+          >
+            Create Link Draft
+          </button>
+        }
+
+        @if (quickEntityMode() === 'service') {
+          <button
+            type="button"
+            class="quick-edge-create"
+            [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
+            (click)="saveQuickEdge()"
+          >
+            Create Service
+          </button>
+        }
+      }
+
+      @if (quickEntityMode() === 'trip') {
+        <div class="quick-mode-note">
+          Add trips fast, then append into current selected/draft service.
+        </div>
+        <div class="trip-header">
+          <button class="ghost-btn" type="button" (click)="addQuickTrip()">
+            <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+            Add row
+          </button>
+          <button class="ghost-btn" type="button" (click)="appendQuickTripsToCurrentService()">Append to Service</button>
+        </div>
+        <div class="quick-trip-table">
+          <div class="quick-trip-row header">
+            <span>Transport</span>
+            <span>Dep</span>
+            <span>Arr</span>
+            <span></span>
+          </div>
+          @for (trip of quickTrips(); track trip.id; let idx = $index) {
+            <div class="quick-trip-row">
+              <select [value]="trip.transport" (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)">
+                @for (transport of transportOptions; track transport) {
+                  <option [value]="transport" [selected]="transport === trip.transport">{{ ('transport.' + transport) | transloco }}</option>
+                }
+              </select>
+              <input type="text" [value]="trip.departs" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)" />
+              <input type="text" [value]="trip.arrives" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)" />
+              <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+                <fa-icon [icon]="xmarkIcon"></fa-icon>
+              </button>
+            </div>
+          }
+        </div>
+        <label class="field quick-paste-field">
+          <span>Paste rows (e.g. <code>postkutsche;08:00;09:15</code>)</span>
+          <textarea rows="4" [value]="quickTripPasteText()" (input)="onQuickTripPasteInput($event)"></textarea>
+        </label>
+        <button type="button" class="ghost-btn" (click)="applyQuickTripPaste()">Parse Pasted Trips</button>
+      }
+
+      @if (quickEntityMode() === 'fact' || quickEntityMode() === 'anchor') {
+        <label class="quick-edge-field">
+          <span>Target place</span>
           <div class="quick-edge-typeahead">
             <input
               #quickFromInput
               type="text"
               [value]="quickFromQuery()"
-              placeholder="Type station..."
+              placeholder="Type place..."
               (focus)="quickFromOpen.set(true)"
               (input)="onQuickFromInput($event)"
               (keydown)="onQuickFromKeydown($event)"
@@ -39,105 +317,63 @@
             }
           </div>
         </label>
-
-        <button type="button" class="quick-edge-swap" (click)="swapQuickDirection()" title="Swap direction">
-          <fa-icon [icon]="swapIcon"></fa-icon>
+        <button type="button" class="ghost-btn" (click)="useSelectedPlaceAsQuickTarget()" [disabled]="!selectedNodeId()">
+          Use selected place
         </button>
+      }
 
-        <label class="quick-edge-field">
-          <span>{{ 'label.to' | transloco }}</span>
-          <div class="quick-edge-typeahead">
-            <input
-              #quickToInput
-              type="text"
-              [value]="quickToQuery()"
-              placeholder="Type station..."
-              (focus)="quickToOpen.set(true)"
-              (input)="onQuickToInput($event)"
-              (keydown)="onQuickToKeydown($event)"
-              (blur)="closeQuickToList()"
-            />
-            @if (quickToOpen() && quickToSuggestions().length > 0) {
-              <div class="quick-edge-list">
-                @for (node of quickToSuggestions(); track node.id; let idx = $index) {
-                  <button
-                    type="button"
-                    [class.active]="idx === quickToActiveIndex()"
-                    (mousedown)="selectQuickTo(node.id)"
-                  >
-                    {{ node.name }}
-                  </button>
-                }
-              </div>
-            }
-          </div>
-        </label>
-      </div>
-      <div class="quick-edge-row quick-edge-meta">
-        <label class="quick-edge-field">
-          <span>{{ 'label.leuge' | transloco }}</span>
-          <input #quickLeugeInput type="number" [value]="quickLeuge()" (input)="updateQuickLeuge($event)" />
-        </label>
-      </div>
-      <div class="quick-trip-header">
-        <span class="quick-trip-title">{{ 'label.trips' | transloco }}</span>
-        <button type="button" class="ghost-btn" (click)="addQuickTrip()">
-          <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-          {{ 'btn.addTrip' | transloco }}
-        </button>
-      </div>
-      <div class="quick-trip-table">
-        <div class="quick-trip-row header">
-          <span>Transport</span>
-          <span>Dep</span>
-          <span>Arr</span>
-          <span></span>
-        </div>
-        @for (trip of quickTrips(); track trip.id; let idx = $index) {
-          <div class="quick-trip-row">
-            <select
-              [value]="trip.transport"
-              (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
-            >
-              @for (transport of transportOptions; track transport) {
-                <option [value]="transport" [selected]="transport === trip.transport">
-                  {{ ('transport.' + transport) | transloco }}
-                </option>
-              }
+      @if (quickEntityMode() === 'fact') {
+        <div class="quick-fact-grid">
+          <label class="quick-edge-field">
+            <span>Schema key</span>
+            <input type="text" [value]="quickFactSchemaKey()" (input)="quickFactSchemaKey.set($any($event.target).value)" />
+          </label>
+          <label class="quick-edge-field">
+            <span>Value type</span>
+            <select [value]="quickFactValueType()" (change)="quickFactValueType.set($any($event.target).value)">
+              <option value="string">string</option>
+              <option value="number">number</option>
+              <option value="boolean">boolean</option>
             </select>
-            <input
-              type="text"
-              [value]="trip.departs"
-              placeholder="HH:MM"
-              (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
-              (keydown)="onQuickTripKeydown($event, idx, 'departs')"
-              [attr.data-quick-trip-index]="idx"
-              data-quick-trip-field="departs"
-            />
-            <input
-              type="text"
-              [value]="trip.arrives"
-              placeholder="HH:MM"
-              (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
-              (keydown)="onQuickTripKeydown($event, idx, 'arrives')"
-              [attr.data-quick-trip-index]="idx"
-              data-quick-trip-field="arrives"
-            />
-            <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
-              <fa-icon [icon]="xmarkIcon"></fa-icon>
-            </button>
-          </div>
-        }
-      </div>
-      <button
-        type="button"
-        class="quick-edge-create"
-        [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
-        (click)="saveQuickEdge()"
-      >
-        {{ 'btn.createEdge' | transloco }}
-      </button>
+          </label>
+          <label class="quick-edge-field">
+            <span>Status</span>
+            <input type="text" [value]="quickFactStatus()" (input)="quickFactStatus.set($any($event.target).value)" />
+          </label>
+          <label class="quick-edge-field">
+            <span>Confidence (0..1)</span>
+            <input type="number" min="0" max="1" step="0.1" [value]="quickFactConfidence()" (input)="quickFactConfidence.set(+$any($event.target).value || 0)" />
+          </label>
+        </div>
+        <label class="quick-edge-field">
+          <span>Value</span>
+          <input type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
+        </label>
+        <button type="button" class="quick-edge-create" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
+          Add Fact
+        </button>
+      }
+
+      @if (quickEntityMode() === 'anchor') {
+        <div class="quick-anchor-grid">
+          <label class="quick-edge-field">
+            <span>x</span>
+            <input type="number" [value]="quickAnchorX()" (input)="quickAnchorX.set($any($event.target).value)" />
+          </label>
+          <label class="quick-edge-field">
+            <span>y</span>
+            <input type="number" [value]="quickAnchorY()" (input)="quickAnchorY.set($any($event.target).value)" />
+          </label>
+        </div>
+        <div class="quick-anchor-actions">
+          <button type="button" class="ghost-btn" (click)="setQuickAnchorFromPointer()">Use map pointer</button>
+          <button type="button" class="quick-edge-create" [disabled]="!quickAnchorX().trim() || !quickAnchorY().trim()" (click)="applyQuickAnchor()">
+            Apply Anchor
+          </button>
+        </div>
+      }
     </section>
+
     <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
@@ -151,8 +387,12 @@
       </div>
       @if (!shortcutsCollapsed()) {
         <div class="shortcuts-list">
-          <div><span class="keycap">N</span> {{ 'admin.shortcut.addNode' | transloco }}</div>
-          <div><span class="keycap">E</span> {{ 'admin.shortcut.addEdge' | transloco }}</div>
+          <div><span class="keycap">P</span> Place mode</div>
+          <div><span class="keycap">L</span> Link mode</div>
+          <div><span class="keycap">S</span> Service mode</div>
+          <div><span class="keycap">T</span> Trip mode</div>
+          <div><span class="keycap">F</span> Fact mode</div>
+          <div><span class="keycap">A</span> Anchor mode</div>
           <div><span class="keycap">Esc</span> {{ 'admin.shortcut.escape' | transloco }}</div>
           <div><span class="keycap">Ctrl/Cmd+S</span> {{ 'admin.shortcut.save' | transloco }}</div>
           <div><span class="keycap">Ctrl/Cmd+Z</span> {{ 'admin.shortcut.undo' | transloco }}</div>
@@ -173,12 +413,12 @@
         <div class="header-actions">
           <button class="ghost-btn" type="button" (click)="addNodeAtCursor()">
             <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-            {{ 'admin.addNode' | transloco }}
+            Add Place
           </button>
           @if (selectedNodeId()) {
             <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-              {{ 'admin.addEdge' | transloco }}
+              Add Link/Service
             </button>
           }
           @if (isDemo()) {
@@ -188,440 +428,493 @@
           }
         </div>
       </div>
+
       @if (isDemo()) {
         <div class="demo-note">{{ 'admin.demoNotice' | transloco }}</div>
       }
+
       @if (selection.pendingCreateEdgeFromNodeId(); as fromId) {
         <div class="pending-row">
-          <span>{{ 'admin.addEdge' | transloco }}: {{ getNodeName(fromId) }} → …</span>
+          <span>Service from {{ getNodeName(fromId) }} - pick destination</span>
           <button class="ghost-btn" type="button" (click)="cancelPendingEdge()">Esc</button>
         </div>
       }
-      <div class="year-row">
-        <div class="year-title">{{ 'label.year' | transloco }}</div>
-        <div class="year-value">{{ year() }}</div>
-        <input
-          class="year-slider"
-          type="range"
-          [min]="minYear()"
-          [max]="maxYear()"
-          [value]="year()"
-          (input)="onYearInput($event)"
-        />
-        <div class="year-range">{{ minYear() }}–{{ maxYear() }}</div>
+
+      <div class="inspector-tabs" role="tablist" aria-label="Inspector tabs">
+        @for (tab of inspectorTabs; track tab.id) {
+          <button
+            type="button"
+            class="inspector-tab"
+            [class.active]="inspectorTab() === tab.id"
+            (click)="setInspectorTab(tab.id)"
+          >
+            {{ tab.label }}
+          </button>
+        }
       </div>
     </div>
 
     <div class="sidebar-body">
-      @if (!selectedNodeId() && !selectedEdgeId() && !draftNode() && !draftEdge()) {
-        <section class="panel-section empty-state">
-          <div class="section-title">{{ 'admin.selectMode' | transloco }}</div>
-          <div class="muted">{{ 'admin.emptyState' | transloco }}</div>
-          <div class="hint">{{ 'admin.shortcuts' | transloco }}</div>
+      @if (inspectorTab() === 'core') {
+        @if (!selectedNodeId() && !selectedEdgeId() && !draftNode() && !draftEdge()) {
+          <section class="panel-section empty-state">
+            <div class="section-title">Core Inspector</div>
+            <div class="muted">Select a place or service on the map to edit core fields.</div>
+            <div class="hint">Use quick modes (P/L/S/T/F/A) for fast creation.</div>
+          </section>
+        }
+
+        <section class="panel-section compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
+          <div class="section-title">Place (Core)</div>
+          @if (selectedNodeId() && !draftNode()) {
+            <div class="node-actions">
+              <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
+                <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+                Add Service
+              </button>
+              <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
+                Duplicate Place
+              </button>
+              <button class="ghost-btn danger" type="button" (click)="requestDeleteNode()">
+                Delete Place
+              </button>
+            </div>
+          }
+          @if (confirmDeleteNode()) {
+            <div class="confirm-row">
+              <span>{{ 'admin.confirmDeleteNode' | transloco }}</span>
+              <div class="confirm-actions">
+                <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                  Delete Place
+                </button>
+                <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                  {{ 'btn.cancel' | transloco }}
+                </button>
+              </div>
+            </div>
+          }
+          @if (draftNode(); as draft) {
+            <label class="field">
+              <span>{{ 'label.name' | transloco }}</span>
+              <div class="typeahead">
+                <input
+                  #nodeNameInput
+                  type="text"
+                  [value]="draft.name"
+                  (input)="updateDraftName($event)"
+                  (keydown)="onNodeNameKeydown($event, 'draft')"
+                />
+                @if (geoSearchEnabled() && geoResults().length > 0) {
+                  <div class="typeahead-list">
+                    @for (result of geoResults(); track result.id; let idx = $index) {
+                      <button
+                        type="button"
+                        [class.active]="idx === geoActiveIndex()"
+                        (click)="applyGeoResult(result)"
+                      >
+                        <span>{{ result.label }}</span>
+                        <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                      </button>
+                    }
+                  </div>
+                }
+              </div>
+            </label>
+            <label class="field checkbox-row">
+              <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+              <span>{{ 'admin.geoSearch' | transloco }}</span>
+            </label>
+            <label class="field checkbox-row">
+              <input
+                type="checkbox"
+                [checked]="draft.foreign ?? false"
+                (change)="updateDraftForeign($event)"
+              />
+              <span>{{ 'label.foreign' | transloco }}</span>
+            </label>
+            <label class="field">
+              <span>{{ 'label.validFrom' | transloco }}</span>
+              <input type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.validTo' | transloco }}</span>
+              <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
+            </label>
+            <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
+          } @else if (nodeDetail(); as detail) {
+            <label class="field">
+              <span>{{ 'label.name' | transloco }}</span>
+              <div class="typeahead">
+                <input
+                  #nodeNameInput
+                  type="text"
+                  [value]="detail.node?.name"
+                  (input)="updateSelectedName($event)"
+                  (keydown)="onNodeNameKeydown($event, 'selected')"
+                />
+                @if (geoSearchEnabled() && geoResults().length > 0) {
+                  <div class="typeahead-list">
+                    @for (result of geoResults(); track result.id; let idx = $index) {
+                      <button
+                        type="button"
+                        [class.active]="idx === geoActiveIndex()"
+                        (click)="applyGeoResult(result)"
+                      >
+                        <span>{{ result.label }}</span>
+                        <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                      </button>
+                    }
+                  </div>
+                }
+              </div>
+            </label>
+            <label class="field checkbox-row">
+              <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+              <span>{{ 'admin.geoSearch' | transloco }}</span>
+            </label>
+            <label class="field checkbox-row">
+              <input
+                type="checkbox"
+                [checked]="detail.node?.foreign ?? false"
+                (change)="updateSelectedForeign($event)"
+              />
+              <span>{{ 'label.foreign' | transloco }}</span>
+            </label>
+            <label class="field">
+              <span>{{ 'label.validFrom' | transloco }}</span>
+              <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
+            </label>
+            <label class="field">
+              <span>{{ 'label.validTo' | transloco }}</span>
+              <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
+            </label>
+            <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
+            @if (outgoingEdges().length > 0) {
+              <div class="edge-list dense">
+                @for (edge of outgoingEdges(); track edge.id) {
+                  <button
+                    type="button"
+                    class="edge-row"
+                    [class.active]="selectedEdgeId() === edge.id"
+                    (click)="selectEdge(edge.id)"
+                  >
+                    <span>{{ edge.toName }}</span>
+                    <span class="edge-meta">
+                      @for (transport of edge.transports; track transport; let isLast = $last) {
+                        {{ ('transport.' + (transport || 'postkutsche')) | transloco }}@if (!isLast) {, }
+                      } - {{ edge.validFrom }}-{{ edge.validTo ?? '∞' }}
+                    </span>
+                  </button>
+                }
+              </div>
+            }
+          } @else {
+            <div class="muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
+          }
+        </section>
+
+        <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
+          <div class="section-title">Service (Core)</div>
+          @if (selectedEdgeDraft(); as edgeDraft) {
+            <div class="coord">{{ getNodeName(edgeDraft.from) }} -> {{ getNodeName(edgeDraft.to) }}</div>
+            <label class="field">
+              <span>{{ 'label.from' | transloco }}</span>
+              <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id" [selected]="node.id === edgeDraft.from">{{ node.name }}</option>
+                }
+              </select>
+            </label>
+            <label class="field">
+              <span>{{ 'label.to' | transloco }}</span>
+              <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id" [selected]="node.id === edgeDraft.to">{{ node.name }}</option>
+                }
+              </select>
+            </label>
+            <div class="field-grid">
+              <label class="field">
+                <span>{{ 'label.validFrom' | transloco }}</span>
+                <input type="number" [value]="edgeDraft.validFrom" (input)="updateSelectedEdgeValidFrom($event)" />
+              </label>
+              <label class="field">
+                <span>{{ 'label.validTo' | transloco }}</span>
+                <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
+              </label>
+              <label class="field">
+                <span>{{ 'label.leuge' | transloco }}</span>
+                <input type="number" [value]="edgeDraft.leuge ?? ''" (input)="updateSelectedEdgeLeuge($event)" />
+              </label>
+            </div>
+            <div class="field">
+              <span>{{ 'label.notes' | transloco }}</span>
+              <div class="notes-grid">
+                <label class="notes-field">
+                  <span>DE</span>
+                  <textarea
+                    rows="3"
+                    [value]="edgeDraft.notes?.de ?? ''"
+                    (input)="updateSelectedEdgeNotes('de', $event)"
+                  ></textarea>
+                </label>
+                <label class="notes-field">
+                  <span>FR</span>
+                  <textarea
+                    rows="3"
+                    [value]="edgeDraft.notes?.fr ?? ''"
+                    (input)="updateSelectedEdgeNotes('fr', $event)"
+                  ></textarea>
+                </label>
+              </div>
+            </div>
+          } @else if (draftEdge(); as draft) {
+            <div class="coord">
+              {{ 'admin.edgeFromTo' | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) } }}
+            </div>
+            <label class="field">
+              <span>{{ 'label.from' | transloco }}</span>
+              <select [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
+                <option value="">-</option>
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id" [selected]="node.id === draft.from">{{ node.name }}</option>
+                }
+              </select>
+            </label>
+            <label class="field">
+              <span>{{ 'label.to' | transloco }}</span>
+              <select [value]="draft.to" (change)="updateDraftEdgeTo($event)">
+                <option value="">-</option>
+                @for (node of nodeOptions(); track node.id) {
+                  <option [value]="node.id" [selected]="node.id === draft.to">{{ node.name }}</option>
+                }
+              </select>
+            </label>
+            <div class="field-grid">
+              <label class="field">
+                <span>{{ 'label.validFrom' | transloco }}</span>
+                <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
+              </label>
+              <label class="field">
+                <span>{{ 'label.validTo' | transloco }}</span>
+                <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
+              </label>
+              <label class="field">
+                <span>{{ 'label.leuge' | transloco }}</span>
+                <input type="number" [value]="draft.leuge ?? ''" (input)="updateDraftEdgeLeuge($event)" />
+              </label>
+            </div>
+            <div class="field">
+              <span>{{ 'label.notes' | transloco }}</span>
+              <div class="notes-grid">
+                <label class="notes-field">
+                  <span>DE</span>
+                  <textarea
+                    rows="3"
+                    [value]="draft.notes?.de ?? ''"
+                    (input)="updateDraftEdgeNotes('de', $event)"
+                  ></textarea>
+                </label>
+                <label class="notes-field">
+                  <span>FR</span>
+                  <textarea
+                    rows="3"
+                    [value]="draft.notes?.fr ?? ''"
+                    (input)="updateDraftEdgeNotes('fr', $event)"
+                  ></textarea>
+                </label>
+              </div>
+            </div>
+          } @else {
+            <div class="muted">Pick two places or use quick Link mode.</div>
+          }
+        </section>
+
+        <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
+          <div class="section-title">Trip Table</div>
+          @if (selectedEdgeDraft(); as edgeDraft) {
+            <div class="trip-header">
+              <button class="ghost-btn" type="button" (click)="addSelectedTrip()">
+                <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+                {{ 'btn.addTrip' | transloco }}
+              </button>
+              <button class="ghost-btn" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
+            </div>
+            @if (edgeDraft.trips.length > 0) {
+              <div class="trip-table">
+                <div class="trip-row header">
+                  <span>Transport</span>
+                  <span>Dep</span>
+                  <span>Arr</span>
+                  <span></span>
+                </div>
+                @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
+                  <div class="trip-row">
+                    <select
+                      [value]="trip.transport"
+                      (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)"
+                    >
+                      @for (transport of transportOptions; track transport) {
+                        <option [value]="transport" [selected]="transport === trip.transport">
+                          {{ ('transport.' + transport) | transloco }}
+                        </option>
+                      }
+                    </select>
+                    <input
+                      type="text"
+                      [value]="trip.departs"
+                      placeholder="HH:MM"
+                      (input)="updateSelectedTripField(trip.id, 'departs', $any($event.target).value)"
+                      (keydown.enter)="handleTripEnter(true, idx, 'departs')"
+                      [attr.data-trip-index]="idx"
+                      data-trip-field="departs"
+                    />
+                    <input
+                      type="text"
+                      [value]="trip.arrives"
+                      placeholder="HH:MM"
+                      (input)="updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)"
+                      (keydown.enter)="handleTripEnter(true, idx, 'arrives')"
+                      [attr.data-trip-index]="idx"
+                      data-trip-field="arrives"
+                    />
+                    <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
+                      <fa-icon [icon]="xmarkIcon"></fa-icon>
+                    </button>
+                  </div>
+                }
+              </div>
+              <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
+            } @else {
+              <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+            }
+          } @else if (draftEdge(); as draft) {
+            <div class="trip-header">
+              <button class="ghost-btn" type="button" (click)="addTrip()">
+                <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
+                {{ 'btn.addTrip' | transloco }}
+              </button>
+              <button class="ghost-btn" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
+            </div>
+            @if (draft.trips.length > 0) {
+              <div class="trip-table">
+                <div class="trip-row header">
+                  <span>Transport</span>
+                  <span>Dep</span>
+                  <span>Arr</span>
+                  <span></span>
+                </div>
+                @for (trip of draft.trips; track trip.id; let idx = $index) {
+                  <div class="trip-row">
+                    <select
+                      [value]="trip.transport"
+                      (change)="updateTripField(trip.id, 'transport', $any($event.target).value)"
+                    >
+                      @for (transport of transportOptions; track transport) {
+                        <option [value]="transport" [selected]="transport === trip.transport">
+                          {{ ('transport.' + transport) | transloco }}
+                        </option>
+                      }
+                    </select>
+                    <input
+                      type="text"
+                      [value]="trip.departs"
+                      placeholder="HH:MM"
+                      (input)="updateTripField(trip.id, 'departs', $any($event.target).value)"
+                      (keydown.enter)="handleTripEnter(false, idx, 'departs')"
+                      [attr.data-trip-index]="idx"
+                      data-trip-field="departs"
+                    />
+                    <input
+                      type="text"
+                      [value]="trip.arrives"
+                      placeholder="HH:MM"
+                      (input)="updateTripField(trip.id, 'arrives', $any($event.target).value)"
+                      (keydown.enter)="handleTripEnter(false, idx, 'arrives')"
+                      [attr.data-trip-index]="idx"
+                      data-trip-field="arrives"
+                    />
+                    <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
+                      <fa-icon [icon]="xmarkIcon"></fa-icon>
+                    </button>
+                  </div>
+                }
+              </div>
+              <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
+            } @else {
+              <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+            }
+          }
+
+          <label class="field quick-paste-field">
+            <span>Paste trips into quick table and append</span>
+            <textarea rows="4" [value]="quickTripPasteText()" (input)="onQuickTripPasteInput($event)"></textarea>
+          </label>
+          <div class="trip-header">
+            <button class="ghost-btn" type="button" (click)="applyQuickTripPaste()">Parse Pasted Trips</button>
+            <button class="ghost-btn" type="button" (click)="appendQuickTripsToCurrentService()">Append Quick Trips</button>
+          </div>
         </section>
       }
 
-      <section class="panel-section compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
-        <div class="section-title">{{ 'admin.selectedNode' | transloco }}</div>
-        @if (selectedNodeId() && !draftNode()) {
-          <div class="node-actions">
-            <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
-              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-              {{ 'admin.addEdge' | transloco }}
-            </button>
-            <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
-              {{ 'admin.duplicateNode' | transloco }}
-            </button>
-            <button class="ghost-btn danger" type="button" (click)="requestDeleteNode()">
-              {{ 'admin.deleteNode' | transloco }}
-            </button>
-          </div>
-        }
-        @if (confirmDeleteNode()) {
-          <div class="confirm-row">
-            <span>{{ 'admin.confirmDeleteNode' | transloco }}</span>
-            <div class="confirm-actions">
-              <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
-                {{ 'admin.deleteNode' | transloco }}
-              </button>
-              <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
-                {{ 'btn.cancel' | transloco }}
-              </button>
-            </div>
-          </div>
-        }
-        @if (draftNode(); as draft) {
-          <label class="field">
-            <span>{{ 'label.name' | transloco }}</span>
-            <div class="typeahead">
-              <input
-                #nodeNameInput
-                type="text"
-                [value]="draft.name"
-                (input)="updateDraftName($event)"
-                (keydown)="onNodeNameKeydown($event, 'draft')"
-              />
-              @if (geoSearchEnabled() && geoResults().length > 0) {
-                <div class="typeahead-list">
-                  @for (result of geoResults(); track result.id; let idx = $index) {
-                    <button
-                      type="button"
-                      [class.active]="idx === geoActiveIndex()"
-                      (click)="applyGeoResult(result)"
-                    >
-                      <span>{{ result.label }}</span>
-                      <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
-                    </button>
-                  }
-                </div>
-              }
-            </div>
-          </label>
-          <label class="field checkbox-row">
-            <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
-            <span>{{ 'admin.geoSearch' | transloco }}</span>
-          </label>
-          <label class="field checkbox-row">
-            <input
-              type="checkbox"
-              [checked]="draft.foreign ?? false"
-              (change)="updateDraftForeign($event)"
-            />
-            <span>{{ 'label.foreign' | transloco }}</span>
-          </label>
-          <label class="field">
-            <span>{{ 'label.validFrom' | transloco }}</span>
-            <input type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.validTo' | transloco }}</span>
-            <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
-          </label>
-          <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
-        } @else if (nodeDetail(); as detail) {
-          <label class="field">
-            <span>{{ 'label.name' | transloco }}</span>
-            <div class="typeahead">
-              <input
-                #nodeNameInput
-                type="text"
-                [value]="detail.node?.name"
-                (input)="updateSelectedName($event)"
-                (keydown)="onNodeNameKeydown($event, 'selected')"
-              />
-              @if (geoSearchEnabled() && geoResults().length > 0) {
-                <div class="typeahead-list">
-                  @for (result of geoResults(); track result.id; let idx = $index) {
-                    <button
-                      type="button"
-                      [class.active]="idx === geoActiveIndex()"
-                      (click)="applyGeoResult(result)"
-                    >
-                      <span>{{ result.label }}</span>
-                      <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
-                    </button>
-                  }
-                </div>
-              }
-            </div>
-          </label>
-          <label class="field checkbox-row">
-            <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
-            <span>{{ 'admin.geoSearch' | transloco }}</span>
-          </label>
-          <label class="field checkbox-row">
-            <input
-              type="checkbox"
-              [checked]="detail.node?.foreign ?? false"
-              (change)="updateSelectedForeign($event)"
-            />
-            <span>{{ 'label.foreign' | transloco }}</span>
-          </label>
-          <label class="field">
-            <span>{{ 'label.validFrom' | transloco }}</span>
-            <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
-          </label>
-          <label class="field">
-            <span>{{ 'label.validTo' | transloco }}</span>
-            <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
-          </label>
-          <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
-          @if (outgoingEdges().length > 0) {
-            <div class="edge-list dense">
-              @for (edge of outgoingEdges(); track edge.id) {
-                <button
-                  type="button"
-                  class="edge-row"
-                  [class.active]="selectedEdgeId() === edge.id"
-                  (click)="selectEdge(edge.id)"
-                >
-                  <span>{{ edge.toName }}</span>
-                  <span class="edge-meta">
-                    @for (transport of edge.transports; track transport; let isLast = $last) {
-                      {{ ('transport.' + (transport || 'postkutsche')) | transloco }}@if (!isLast) {, }
-                    } · {{ edge.validFrom }}–{{ edge.validTo ?? '∞' }}
-                  </span>
-                </button>
-              }
-            </div>
-          }
-        } @else {
-          <div class="muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
-        }
-      </section>
-
-      <section class="panel-section" #archivePanel>
-        <div class="section-title">{{ 'viewer.archiveSnippet' | transloco }}</div>
-        @if (selectedNodeId(); as nodeId) {
-          @if (getNodeById(nodeId); as node) {
-            <div class="archive-debug">
-              iiifCenter: {{ node.iiifCenterX ?? '—' }}, {{ node.iiifCenterY ?? '—' }}
-            </div>
-          }
-        }
-        <app-archive-snippet-viewer
-          [imageUrl]="archiveSnippetUrl()"
-          [allowWrite]="!isDragging()"
-          [showCenterMarker]="true"
-          [autoFit]="true"
-          [emitOnAutoFit]="true"
-          (regionChange)="onArchiveRegionChange($event)"
-        ></app-archive-snippet-viewer>
-      </section>
-
-      <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
-        <div class="section-title">{{ 'admin.editEdge' | transloco }}</div>
-        @if (selectedEdgeDraft(); as edgeDraft) {
-          <div class="coord">{{ getNodeName(edgeDraft.from) }} → {{ getNodeName(edgeDraft.to) }}</div>
-          <label class="field">
-            <span>{{ 'label.from' | transloco }}</span>
-            <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
-              @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id" [selected]="node.id === edgeDraft.from">{{ node.name }}</option>
-              }
-            </select>
-          </label>
-          <label class="field">
-            <span>{{ 'label.to' | transloco }}</span>
-            <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
-              @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id" [selected]="node.id === edgeDraft.to">{{ node.name }}</option>
-              }
-            </select>
-          </label>
-          <div class="field-grid">
-            <label class="field">
-              <span>{{ 'label.validFrom' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.validFrom" (input)="updateSelectedEdgeValidFrom($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.validTo' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.leuge' | transloco }}</span>
-              <input type="number" [value]="edgeDraft.leuge ?? ''" (input)="updateSelectedEdgeLeuge($event)" />
-            </label>
-          </div>
-          <div class="field">
-            <span>{{ 'label.notes' | transloco }}</span>
-            <div class="notes-grid">
-              <label class="notes-field">
-                <span>DE</span>
-                <textarea
-                  rows="3"
-                  [value]="edgeDraft.notes?.de ?? ''"
-                  (input)="updateSelectedEdgeNotes('de', $event)"
-                ></textarea>
-              </label>
-              <label class="notes-field">
-                <span>FR</span>
-                <textarea
-                  rows="3"
-                  [value]="edgeDraft.notes?.fr ?? ''"
-                  (input)="updateSelectedEdgeNotes('fr', $event)"
-                ></textarea>
-              </label>
-            </div>
-          </div>
-        } @else if (draftEdge(); as draft) {
-          <div class="coord">
-            {{ 'admin.edgeFromTo' | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) } }}
-          </div>
-          <label class="field">
-            <span>{{ 'label.from' | transloco }}</span>
-            <select [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
-              <option value="">—</option>
-              @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id" [selected]="node.id === draft.from">{{ node.name }}</option>
-              }
-            </select>
-          </label>
-          <label class="field">
-            <span>{{ 'label.to' | transloco }}</span>
-            <select [value]="draft.to" (change)="updateDraftEdgeTo($event)">
-              <option value="">—</option>
-              @for (node of nodeOptions(); track node.id) {
-                <option [value]="node.id" [selected]="node.id === draft.to">{{ node.name }}</option>
-              }
-            </select>
-          </label>
-          <div class="field-grid">
-            <label class="field">
-              <span>{{ 'label.validFrom' | transloco }}</span>
-              <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.validTo' | transloco }}</span>
-              <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
-            </label>
-            <label class="field">
-              <span>{{ 'label.leuge' | transloco }}</span>
-              <input type="number" [value]="draft.leuge ?? ''" (input)="updateDraftEdgeLeuge($event)" />
-            </label>
-          </div>
-          <div class="field">
-            <span>{{ 'label.notes' | transloco }}</span>
-            <div class="notes-grid">
-              <label class="notes-field">
-                <span>DE</span>
-                <textarea
-                  rows="3"
-                  [value]="draft.notes?.de ?? ''"
-                  (input)="updateDraftEdgeNotes('de', $event)"
-                ></textarea>
-              </label>
-              <label class="notes-field">
-                <span>FR</span>
-                <textarea
-                  rows="3"
-                  [value]="draft.notes?.fr ?? ''"
-                  (input)="updateDraftEdgeNotes('fr', $event)"
-                ></textarea>
-              </label>
-            </div>
-          </div>
-        } @else {
-          <div class="muted">{{ 'admin.clickTwoNodes' | transloco }}</div>
-        }
-      </section>
-
-      <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
-        <div class="section-title">{{ 'label.trips' | transloco }}</div>
-        @if (selectedEdgeDraft(); as edgeDraft) {
-          <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="addSelectedTrip()">
-              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-              {{ 'btn.addTrip' | transloco }}
-            </button>
-            <button class="ghost-btn" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
-          </div>
-          @if (edgeDraft.trips.length > 0) {
-            <div class="trip-table">
-              <div class="trip-row header">
-                <span>Transport</span>
-                <span>Dep</span>
-                <span>Arr</span>
-                <span></span>
-              </div>
-              @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
-                <div class="trip-row">
-                  <select
-                    [value]="trip.transport"
-                    (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)"
-                  >
-                    @for (transport of transportOptions; track transport) {
-                      <option [value]="transport" [selected]="transport === trip.transport">
-                        {{ ('transport.' + transport) | transloco }}
-                      </option>
+      @if (inspectorTab() === 'facts') {
+        <section class="panel-section">
+          <div class="section-title">Facts</div>
+          @if (selectedNodeId(); as nodeId) {
+            <div class="coord">Target place: {{ getNodeName(nodeId) }}</div>
+            @if (selectedNodeFacts().length > 0) {
+              <div class="fact-list">
+                @for (fact of selectedNodeFacts(); track fact.id) {
+                  <div class="fact-row">
+                    <div class="fact-main">
+                      <code>{{ fact.schemaKey }}</code>
+                      <span>{{ fact.value }}</span>
+                    </div>
+                    <div class="fact-meta">{{ fact.status }} · {{ fact.confidence }}</div>
+                    @if (!fact.id.startsWith('derived-')) {
+                      <button class="ghost-btn" type="button" (click)="removePendingFact(fact.id)">Remove</button>
                     }
-                  </select>
-                  <input
-                    type="text"
-                    [value]="trip.departs"
-                    placeholder="HH:MM"
-                    (input)="updateSelectedTripField(trip.id, 'departs', $any($event.target).value)"
-                    (keydown.enter)="handleTripEnter(true, idx, 'departs')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="departs"
-                  />
-                  <input
-                    type="text"
-                    [value]="trip.arrives"
-                    placeholder="HH:MM"
-                    (input)="updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)"
-                    (keydown.enter)="handleTripEnter(true, idx, 'arrives')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="arrives"
-                  />
-                  <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
-                    <fa-icon [icon]="xmarkIcon"></fa-icon>
-                  </button>
-                </div>
-              }
-            </div>
-            <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
-          } @else {
-            <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
-          }
-        } @else if (draftEdge(); as draft) {
-          <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="addTrip()">
-              <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
-              {{ 'btn.addTrip' | transloco }}
-            </button>
-            <button class="ghost-btn" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
-          </div>
-          @if (draft.trips.length > 0) {
-            <div class="trip-table">
-              <div class="trip-row header">
-                <span>Transport</span>
-                <span>Dep</span>
-                <span>Arr</span>
-                <span></span>
+                  </div>
+                }
               </div>
-              @for (trip of draft.trips; track trip.id; let idx = $index) {
-                <div class="trip-row">
-                  <select
-                    [value]="trip.transport"
-                    (change)="updateTripField(trip.id, 'transport', $any($event.target).value)"
-                  >
-                    @for (transport of transportOptions; track transport) {
-                      <option [value]="transport" [selected]="transport === trip.transport">
-                        {{ ('transport.' + transport) | transloco }}
-                      </option>
-                    }
-                  </select>
-                  <input
-                    type="text"
-                    [value]="trip.departs"
-                    placeholder="HH:MM"
-                    (input)="updateTripField(trip.id, 'departs', $any($event.target).value)"
-                    (keydown.enter)="handleTripEnter(false, idx, 'departs')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="departs"
-                  />
-                  <input
-                    type="text"
-                    [value]="trip.arrives"
-                    placeholder="HH:MM"
-                    (input)="updateTripField(trip.id, 'arrives', $any($event.target).value)"
-                    (keydown.enter)="handleTripEnter(false, idx, 'arrives')"
-                    [attr.data-trip-index]="idx"
-                    data-trip-field="arrives"
-                  />
-                  <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
-                    <fa-icon [icon]="xmarkIcon"></fa-icon>
-                  </button>
-                </div>
-              }
-            </div>
-            <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
+            } @else {
+              <div class="muted">No facts for this place yet.</div>
+            }
           } @else {
-            <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+            <div class="muted">Select a place and add facts via Quick Mode F.</div>
           }
-        }
-      </section>
+        </section>
+      }
+
+      @if (inspectorTab() === 'anchors') {
+        <section class="panel-section" #archivePanel>
+          <div class="section-title">Anchors</div>
+          @if (selectedNodeId(); as nodeId) {
+            @if (getNodeById(nodeId); as node) {
+              <div class="archive-debug">
+                map: x={{ node.x.toFixed(1) }}, y={{ node.y.toFixed(1) }} | iiifCenter={{ node.iiifCenterX ?? '—' }}, {{ node.iiifCenterY ?? '—' }}
+              </div>
+            }
+          }
+          <app-archive-snippet-viewer
+            [imageUrl]="archiveSnippetUrl()"
+            [allowWrite]="!isDragging()"
+            [showCenterMarker]="true"
+            [autoFit]="true"
+            [emitOnAutoFit]="true"
+            (regionChange)="onArchiveRegionChange($event)"
+          ></app-archive-snippet-viewer>
+          <div class="hint">Use Quick Mode A to apply map anchors for current edition/template.</div>
+        </section>
+      }
+
+      @if (inspectorTab() === 'source') {
+        <section class="panel-section">
+          <div class="section-title">Source</div>
+          <div class="muted">Current entity payload preview (for migration/debugging).</div>
+          <pre class="source-preview">{{ selectedEntitySourceJson() }}</pre>
+        </section>
+      }
     </div>
 
     <div class="sticky-bar">
@@ -633,24 +926,24 @@
             [disabled]="!draftEdge()?.from || !draftEdge()?.to || !tripsValid(draftEdge()?.trips ?? [])"
             (click)="saveDraftEdge()"
           >
-            {{ 'btn.createEdge' | transloco }}
+            Save Service Draft
           </button>
         } @else if (selectedEdgeDraft()) {
-          <button class="action-btn" (click)="saveSelectedEdge()">{{ 'btn.updateEdge' | transloco }}</button>
+          <button class="action-btn" (click)="saveSelectedEdge()">Update Service</button>
         } @else if (draftNode()) {
-          <button class="action-btn" (click)="saveDraftNode()">{{ 'btn.createNode' | transloco }}</button>
+          <button class="action-btn" (click)="saveDraftNode()">Create Place</button>
         } @else if (selectedNodeId()) {
-          <button class="action-btn" (click)="saveSelectedNode()">{{ 'btn.save' | transloco }}</button>
+          <button class="action-btn" (click)="saveSelectedNode()">Save Place</button>
         } @else {
           <button class="action-btn" disabled>{{ 'btn.save' | transloco }}</button>
         }
         @if (selectedType() === 'node') {
           <button class="action-btn secondary" [disabled]="!selectedNodeId()" (click)="requestDeleteNode()">
-            {{ 'admin.deleteNode' | transloco }}
+            Delete Place
           </button>
         } @else {
           <button class="action-btn secondary" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
-            {{ 'btn.deleteEdge' | transloco }}
+            Delete Service
           </button>
         }
         <button class="action-btn secondary" [disabled]="undoStack().length === 0" (click)="undoMove()">

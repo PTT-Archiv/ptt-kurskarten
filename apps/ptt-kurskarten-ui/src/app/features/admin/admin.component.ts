@@ -74,6 +74,19 @@ type GeoAdminResult = {
   y: number;
 };
 
+type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact' | 'anchor';
+type InspectorTab = 'core' | 'facts' | 'anchors' | 'source';
+type PendingFact = {
+  id: string;
+  targetType: 'place';
+  targetId: string;
+  schemaKey: string;
+  valueType: 'string' | 'number' | 'boolean';
+  value: string;
+  status: string;
+  confidence: number;
+};
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -128,6 +141,22 @@ export class AdminComponent implements OnDestroy {
   quickTrips = signal<EdgeTrip[]>([
     { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
   ]);
+  quickEntityMode = signal<QuickEntityMode>('service');
+  inspectorTab = signal<InspectorTab>('core');
+  editionVersion = signal<string>('main');
+  mapTemplateId = signal<string>('map-template-switzerland-base-v1');
+  quickPlaceName = signal<string>('');
+  quickServiceNoteDe = signal<string>('');
+  quickServiceNoteFr = signal<string>('');
+  quickFactSchemaKey = signal<string>('identifier.wikidata');
+  quickFactValue = signal<string>('');
+  quickFactValueType = signal<'string' | 'number' | 'boolean'>('string');
+  quickFactStatus = signal<string>('observed');
+  quickFactConfidence = signal<number>(1);
+  pendingFacts = signal<PendingFact[]>([]);
+  quickAnchorX = signal<string>('');
+  quickAnchorY = signal<string>('');
+  quickTripPasteText = signal<string>('');
   geoSearchEnabled = signal<boolean>(true);
   geoResults = signal<GeoAdminResult[]>([]);
   geoLoading = signal<boolean>(false);
@@ -143,6 +172,26 @@ export class AdminComponent implements OnDestroy {
     'messagerie',
     'mallepost',
     'diligence'
+  ];
+  readonly quickEntityModes: Array<{ id: QuickEntityMode; label: string; shortcut: string }> = [
+    { id: 'place', label: 'Place', shortcut: 'P' },
+    { id: 'link', label: 'Link', shortcut: 'L' },
+    { id: 'service', label: 'Service', shortcut: 'S' },
+    { id: 'trip', label: 'Trip', shortcut: 'T' },
+    { id: 'fact', label: 'Fact', shortcut: 'F' },
+    { id: 'anchor', label: 'Anchor', shortcut: 'A' }
+  ];
+  readonly inspectorTabs: Array<{ id: InspectorTab; label: string }> = [
+    { id: 'core', label: 'Core' },
+    { id: 'facts', label: 'Facts' },
+    { id: 'anchors', label: 'Anchors' },
+    { id: 'source', label: 'Source' }
+  ];
+  readonly editionVersionOptions = ['main', 'draft'];
+  readonly mapTemplateOptions = [
+    'map-template-switzerland-base-v1',
+    'map-template-switzerland-base-v2',
+    'map-template-switzerland-generalized-v1'
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
@@ -293,6 +342,48 @@ export class AdminComponent implements OnDestroy {
     };
   });
 
+  selectedNodeFacts = computed(() => {
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return [];
+    }
+    const facts = this.pendingFacts().filter((fact) => fact.targetId === nodeId);
+    const node = this.getNodeById(nodeId);
+    if (node?.foreign) {
+      facts.unshift({
+        id: `derived-${node.id}-foreign`,
+        targetType: 'place',
+        targetId: node.id,
+        schemaKey: 'place.is_foreign',
+        valueType: 'boolean',
+        value: 'true',
+        status: 'observed',
+        confidence: 1
+      });
+    }
+    return facts;
+  });
+
+  selectedEntitySourceJson = computed(() => {
+    const draftNode = this.draftNode();
+    if (draftNode) {
+      return JSON.stringify({ entity: 'place-draft', payload: draftNode }, null, 2);
+    }
+    const node = this.getNodeById(this.selectedNodeId());
+    if (node) {
+      return JSON.stringify({ entity: 'place', payload: node, facts: this.selectedNodeFacts() }, null, 2);
+    }
+    const draftEdge = this.draftEdge();
+    if (draftEdge) {
+      return JSON.stringify({ entity: 'service-draft', payload: draftEdge }, null, 2);
+    }
+    const edge = this.selectedEdgeDraft();
+    if (edge) {
+      return JSON.stringify({ entity: 'service', payload: edge }, null, 2);
+    }
+    return JSON.stringify({ entity: null }, null, 2);
+  });
+
   displayGraph = computed<GraphSnapshot | null>(() => {
     const snapshot = this.graph();
     if (!snapshot) {
@@ -401,6 +492,20 @@ export class AdminComponent implements OnDestroy {
         this.draftEdge.set({ ...draft, from, to });
       }
     });
+
+    effect(() => {
+      const nodeId = this.selectedNodeId();
+      const node = this.getNodeById(nodeId);
+      if (!node) {
+        return;
+      }
+      this.quickAnchorX.set(String(Math.round(node.x * 10) / 10));
+      this.quickAnchorY.set(String(Math.round(node.y * 10) / 10));
+      if (!this.quickFromId()) {
+        this.quickFromId.set(node.id);
+        this.quickFromQuery.set(node.name);
+      }
+    });
   }
 
   toggleShortcuts(): void {
@@ -431,6 +536,43 @@ export class AdminComponent implements OnDestroy {
       this.draftEdge.set(null);
       this.dragState = null;
     }
+  }
+
+  onEditionYearSelect(event: Event): void {
+    const nextYear = Number((event.target as HTMLSelectElement).value);
+    if (!Number.isNaN(nextYear)) {
+      this.year.set(nextYear);
+      this.selection.clearSelection();
+      this.selection.clearPendingEdge();
+      this.draftNode.set(null);
+      this.draftEdge.set(null);
+      this.dragState = null;
+    }
+  }
+
+  onEditionVersionSelect(event: Event): void {
+    this.editionVersion.set((event.target as HTMLSelectElement).value || 'main');
+  }
+
+  onMapTemplateSelect(event: Event): void {
+    this.mapTemplateId.set((event.target as HTMLSelectElement).value || this.mapTemplateOptions[0]);
+  }
+
+  setQuickEntityMode(mode: QuickEntityMode): void {
+    this.quickEntityMode.set(mode);
+    if (mode === 'anchor') {
+      this.inspectorTab.set('anchors');
+      return;
+    }
+    if (mode === 'fact') {
+      this.inspectorTab.set('facts');
+      return;
+    }
+    this.inspectorTab.set('core');
+  }
+
+  setInspectorTab(tab: InspectorTab): void {
+    this.inspectorTab.set(tab);
   }
 
   onMapPointer(event: {
@@ -728,12 +870,19 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
+    const noteDe = this.quickServiceNoteDe().trim();
+    const noteFr = this.quickServiceNoteFr().trim();
+    const notes: LocalizedText | undefined = noteDe || noteFr
+      ? { de: noteDe || undefined, fr: noteFr || undefined }
+      : undefined;
+
     const edge: GraphEdge = {
       id: `edge-${Date.now()}`,
       from,
       to,
       leuge,
       validFrom: this.year(),
+      notes,
       trips
     };
 
@@ -761,6 +910,8 @@ export class AdminComponent implements OnDestroy {
         this.quickLeuge.set('');
         this.quickLeugeDirty.set(false);
         this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
+        this.quickServiceNoteDe.set('');
+        this.quickServiceNoteFr.set('');
       },
       error: (error) => {
         this.toastService.addToast({
@@ -770,6 +921,210 @@ export class AdminComponent implements OnDestroy {
           key: 'edge-save'
         });
       }
+    });
+  }
+
+  saveQuickLink(): void {
+    const from = this.quickFromId();
+    const to = this.quickToId();
+    if (!from || !to || from === to) {
+      return;
+    }
+
+    const leugeRaw = this.quickLeuge().trim();
+    const leuge = leugeRaw === '' ? undefined : Number(leugeRaw);
+    if (leuge !== undefined && Number.isNaN(leuge)) {
+      return;
+    }
+
+    this.draftEdge.set({
+      id: `edge-${Date.now()}`,
+      from,
+      to,
+      leuge,
+      validFrom: this.year(),
+      notes: undefined,
+      trips: []
+    });
+    this.selection.clearSelection();
+    this.setQuickEntityMode('service');
+    this.toastService.addToast({
+      type: 'info',
+      title: 'Link vorbereitet',
+      message: 'Service-Richtung, Notizen und Fahrten jetzt ergänzen.',
+      key: 'link-draft'
+    });
+  }
+
+  saveQuickPlace(): void {
+    const name = this.quickPlaceName().trim();
+    if (!name) {
+      return;
+    }
+    const point = this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
+    const node: NodeDraft = {
+      id: `node-${Date.now()}`,
+      name,
+      x: point.x,
+      y: point.y,
+      validFrom: this.year()
+    };
+    this.repo.createNode(node).subscribe({
+      next: (created) => {
+        this.addNode(created);
+        this.selection.selectNode(created.id);
+        this.quickPlaceName.set('');
+        this.quickFromId.set(created.id);
+        this.quickFromQuery.set(created.name);
+        this.quickAnchorX.set(String(Math.round(created.x * 10) / 10));
+        this.quickAnchorY.set(String(Math.round(created.y * 10) / 10));
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Place erstellt',
+          key: 'node-save'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'node-save'
+        });
+      }
+    });
+  }
+
+  useSelectedPlaceAsQuickTarget(): void {
+    const nodeId = this.selectedNodeId();
+    if (!nodeId) {
+      return;
+    }
+    const node = this.getNodeById(nodeId);
+    if (!node) {
+      return;
+    }
+    this.quickFromId.set(node.id);
+    this.quickFromQuery.set(node.name);
+  }
+
+  addQuickFact(): void {
+    const target = this.resolveQuickTargetPlaceId();
+    const schemaKey = this.quickFactSchemaKey().trim();
+    const value = this.quickFactValue().trim();
+    if (!target || !schemaKey || !value) {
+      return;
+    }
+    const next: PendingFact = {
+      id: `fact-${Date.now()}`,
+      targetType: 'place',
+      targetId: target,
+      schemaKey,
+      valueType: this.quickFactValueType(),
+      value,
+      status: this.quickFactStatus().trim() || 'observed',
+      confidence: Math.max(0, Math.min(1, this.quickFactConfidence()))
+    };
+    this.pendingFacts.set([...this.pendingFacts(), next]);
+    this.quickFactValue.set('');
+    this.inspectorTab.set('facts');
+    this.toastService.addToast({
+      type: 'info',
+      title: 'Fact hinzugefügt',
+      message: 'Fact ist lokal im UI vorgemerkt.',
+      key: 'fact-add'
+    });
+  }
+
+  removePendingFact(factId: string): void {
+    this.pendingFacts.set(this.pendingFacts().filter((fact) => fact.id !== factId));
+  }
+
+  setQuickAnchorFromPointer(): void {
+    const point = this.selection.lastMapPointerPosition();
+    if (!point) {
+      return;
+    }
+    this.quickAnchorX.set(String(Math.round(point.x * 10) / 10));
+    this.quickAnchorY.set(String(Math.round(point.y * 10) / 10));
+  }
+
+  applyQuickAnchor(): void {
+    const target = this.resolveQuickTargetPlaceId();
+    if (!target) {
+      return;
+    }
+    const x = Number(this.quickAnchorX().trim());
+    const y = Number(this.quickAnchorY().trim());
+    if (Number.isNaN(x) || Number.isNaN(y)) {
+      return;
+    }
+    this.updateNodeLocal(target, { x, y, iiifCenterX: undefined, iiifCenterY: undefined });
+    this.dirty.set(true);
+    this.repo.updateNode(target, { x, y, iiifCenterX: undefined, iiifCenterY: undefined }).subscribe({
+      next: () => {
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Anchor aktualisiert',
+          key: 'anchor-save'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'anchor-save'
+        });
+      }
+    });
+  }
+
+  onQuickTripPasteInput(event: Event): void {
+    this.quickTripPasteText.set((event.target as HTMLTextAreaElement).value);
+  }
+
+  applyQuickTripPaste(): void {
+    const parsed = this.parseTripLines(this.quickTripPasteText());
+    if (!parsed.length) {
+      return;
+    }
+    this.quickTrips.set([...this.quickTrips(), ...parsed]);
+    this.quickTripPasteText.set('');
+  }
+
+  appendQuickTripsToCurrentService(): void {
+    const trips = this.normalizeTrips(this.quickTrips()).filter((trip) => this.isTimeValid(trip.departs ?? '') && this.isTimeValid(trip.arrives ?? ''));
+    if (!trips.length) {
+      return;
+    }
+    const selected = this.selectedEdgeDraft();
+    if (selected) {
+      this.updateEdgeLocal(selected.id, { trips: [...selected.trips, ...trips] });
+      this.dirty.set(true);
+      this.toastService.addToast({
+        type: 'success',
+        title: 'Trips ergänzt',
+        key: 'trip-append'
+      });
+      return;
+    }
+    const draft = this.draftEdge();
+    if (draft) {
+      this.draftEdge.set({ ...draft, trips: [...draft.trips, ...trips] });
+      this.dirty.set(true);
+      this.toastService.addToast({
+        type: 'success',
+        title: 'Trips ergänzt',
+        key: 'trip-append'
+      });
+      return;
+    }
+    this.toastService.addToast({
+      type: 'info',
+      title: 'Kein Service ausgewählt',
+      message: 'Wähle zuerst einen Service oder erstelle einen Link/Service.',
+      key: 'trip-append'
     });
   }
 
@@ -2366,6 +2721,42 @@ export class AdminComponent implements OnDestroy {
       if (nodeId) {
         this.selection.startEdgeFrom(nodeId);
       }
+      return;
+    }
+
+    if (key === 'p') {
+      event.preventDefault();
+      this.setQuickEntityMode('place');
+      return;
+    }
+
+    if (key === 'l') {
+      event.preventDefault();
+      this.setQuickEntityMode('link');
+      return;
+    }
+
+    if (key === 's') {
+      event.preventDefault();
+      this.setQuickEntityMode('service');
+      return;
+    }
+
+    if (key === 't') {
+      event.preventDefault();
+      this.setQuickEntityMode('trip');
+      return;
+    }
+
+    if (key === 'f') {
+      event.preventDefault();
+      this.setQuickEntityMode('fact');
+      return;
+    }
+
+    if (key === 'a') {
+      event.preventDefault();
+      this.setQuickEntityMode('anchor');
     }
   };
 
@@ -2379,9 +2770,67 @@ export class AdminComponent implements OnDestroy {
   }
 
   private isTimeValid(value: string): boolean {
-    console.log('Validating time:', value, /^\\d{2}:\\d{2}$/.test(value));
-    return true;
-    // return /^d{2}:d{2}$/.test(value?.trim());
+    return /^\d{2}:\d{2}$/.test(value?.trim());
+  }
+
+  private resolveQuickTargetPlaceId(): string | null {
+    if (this.quickFromId()) {
+      return this.quickFromId();
+    }
+    if (this.selectedNodeId()) {
+      return this.selectedNodeId();
+    }
+    const draft = this.draftNode();
+    if (draft) {
+      return draft.id;
+    }
+    return null;
+  }
+
+  private parseTripLines(raw: string): EdgeTrip[] {
+    const lines = raw
+      .split(/\r?\n/g)
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0);
+    const rows: EdgeTrip[] = [];
+    for (const line of lines) {
+      const parts = line.split(/[;\t,]/).map((part) => part.trim()).filter((part) => part.length > 0);
+      let transport: TransportType = 'postkutsche';
+      let departs = '';
+      let arrives = '';
+
+      if (parts.length >= 3) {
+        const maybeTransport = this.toTransportType(parts[0]);
+        const maybeTimeStart = this.isTimeValid(parts[0]);
+        if (!maybeTimeStart) {
+          transport = maybeTransport;
+          departs = parts[1] ?? '';
+          arrives = parts[2] ?? '';
+        } else {
+          departs = parts[0] ?? '';
+          arrives = parts[1] ?? '';
+          transport = this.toTransportType(parts[2]);
+        }
+      } else if (parts.length === 2) {
+        departs = parts[0];
+        arrives = parts[1];
+      } else {
+        continue;
+      }
+
+      if (!this.isTimeValid(departs) || !this.isTimeValid(arrives)) {
+        continue;
+      }
+
+      rows.push({
+        id: `trip-${Date.now()}-${rows.length}`,
+        transport,
+        departs: departs as EdgeTrip['departs'],
+        arrives: arrives as EdgeTrip['arrives'],
+        arrivalDayOffset: 0
+      });
+    }
+    return rows;
   }
 
   private extractErrorMessage(error: any): string {
