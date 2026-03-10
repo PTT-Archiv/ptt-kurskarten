@@ -14,7 +14,7 @@
     "migrate:data:v2": "node scripts/migrate_data_v2.js"
   },
   "dependencies": {
-    "openseadragon": "^5.0.1"
+    "openseadragon": "^6.0.1"
   },
   "devDependencies": {
     "@types/openseadragon": "^5.0.2"
