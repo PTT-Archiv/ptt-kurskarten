@@ -97,6 +97,10 @@ export class InMemoryGraphRepository implements GraphRepository {
     };
   }
 
+  async getNodeAliases(_year: number): Promise<Record<string, string[]>> {
+    return {};
+  }
+
   async getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail> {
     const y = this.coerceYear(year);
     const nodes = this.filterNodes(y);

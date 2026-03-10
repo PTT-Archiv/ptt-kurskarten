@@ -30,6 +30,13 @@ export class GraphController {
     return this.graphRepository.getAvailableYears();
   }
 
+  @Get('place-aliases')
+  async getPlaceAliases(@Query('year') year?: string): Promise<Record<string, string[]>> {
+    const parsedYear = Number(year);
+    const targetYear = Number.isFinite(parsedYear) ? parsedYear : 1852;
+    return this.graphRepository.getNodeAliases(targetYear);
+  }
+
   @Get('nodes/:id')
   async getNodeDetail(@Param('id') nodeId: string, @Query('year') year?: string): Promise<NodeDetail> {
     const parsedYear = Number(year);

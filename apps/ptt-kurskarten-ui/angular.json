@@ -73,24 +73,49 @@
                 "public",
                 "src/assets",
                 {
-                  "glob": "nodes.json",
-                  "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data/v1"
+                  "glob": "places.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
                 },
                 {
-                  "glob": "edges.json",
-                  "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data/v1"
+                  "glob": "place_names.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
                 },
                 {
-                  "glob": "segments.json",
-                  "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data/v1"
+                  "glob": "map_anchors.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
                 },
                 {
-                  "glob": "trips.json",
-                  "input": "../ptt-kurskarten.api/data",
-                  "output": "assets/graph-data/v1"
+                  "glob": "edition_anchor_overrides.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "editions.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "services.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "service_trips.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "link_measures.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
+                },
+                {
+                  "glob": "assertions.json",
+                  "input": "../ptt-kurskarten.api/data/v2",
+                  "output": "assets/graph-data"
                 }
               ]
             }

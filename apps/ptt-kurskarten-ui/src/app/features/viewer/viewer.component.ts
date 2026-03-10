@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
 import { MapStageComponent } from '../../shared/map/map-stage.component';
@@ -33,15 +32,6 @@ type SidebarNodeTrip = {
   arrivalDayOffset?: number;
 };
 
-type WikidataLabelSet = Partial<Record<'de' | 'fr' | 'it' | 'en', string | null>>;
-type WikidataEntry = {
-  name: string;
-  qNumber: string | null;
-  qNumbers: string[];
-  translations?: WikidataLabelSet | null;
-  translationsByQNumber?: Record<string, WikidataLabelSet | null>;
-};
-
 @Component({
   selector: 'app-viewer',
   standalone: true,
@@ -50,7 +40,6 @@ type WikidataEntry = {
   styleUrl: './viewer.component.css'
 })
 export class ViewerComponent implements AfterViewInit, OnDestroy {
-  private readonly http = inject(HttpClient);
   private readonly viewerData = inject(ViewerDataService);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
@@ -101,7 +90,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchOpen = signal(false);
   placeSearchActiveIndex = signal(0);
   private placeSearchPreviewId = signal<string>('');
-  private wikidataByName = signal<Map<string, string[]>>(new Map());
+  private nodeAliases = signal<Record<string, string[]>>({});
   hoveredRouteEdgeId = signal<string | null>(null);
 
   pulseNodeIds = computed(() => {
@@ -192,10 +181,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   });
 
   nodeAliasesById = computed<Record<string, string[]>>(() => {
-    const byName = this.wikidataByName();
+    const aliasesById = this.nodeAliases();
     const aliases: Record<string, string[]> = {};
     for (const node of this.nodes()) {
-      aliases[node.id] = byName.get(this.normalizeSearch(node.name)) ?? [];
+      aliases[node.id] = aliasesById[node.id] ?? [];
     }
     return aliases;
   });
@@ -216,7 +205,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.isBrowser) {
       this.fetchYears();
       this.fetchGraph(this.year());
-      this.fetchWikidata();
     }
     this.langSub = this.transloco.langChanges$.subscribe((lang) => {
       this.activeLang.set(lang === 'fr' ? 'fr' : 'de');
@@ -780,6 +768,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   private fetchGraph(year: number): void {
+    this.fetchNodeAliases(year);
     this.viewerData.getGraph(year).subscribe({
       next: (graph) => {
         this.graph.set(graph);
@@ -791,44 +780,18 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private fetchWikidata(): void {
-    this.http.get<WikidataEntry[]>(environment.staticWikidataPath).subscribe({
-      next: (entries) => {
-        const byName = new Map<string, Set<string>>();
-        for (const entry of entries ?? []) {
-          const key = this.normalizeSearch(entry.name);
-          if (!key) {
-            continue;
-          }
-          const labels = new Set<string>();
-          const addLabels = (set?: WikidataLabelSet | null): void => {
-            if (!set) {
-              return;
-            }
-            Object.values(set).forEach((value) => {
-              const normalized = this.normalizeSearch(value ?? '');
-              if (normalized && normalized !== key) {
-                labels.add(normalized);
-              }
-            });
-          };
-          addLabels(entry.translations);
-          Object.values(entry.translationsByQNumber ?? {}).forEach((set) => addLabels(set));
-          const existing = byName.get(key) ?? new Set<string>();
-          labels.forEach((label) => existing.add(label));
-          byName.set(key, existing);
-        }
-        const materialized = new Map<string, string[]>();
-        byName.forEach((value, keyName) => materialized.set(keyName, [...value]));
-        this.wikidataByName.set(materialized);
-      },
-      error: () => this.wikidataByName.set(new Map())
+  private fetchNodeAliases(year: number): void {
+    this.viewerData.getNodeAliases(year).subscribe({
+      next: (aliases) => this.nodeAliases.set(aliases ?? {}),
+      error: () => this.nodeAliases.set({})
     });
   }
 
-  private nodeSearchTerms(node: { name: string }): string[] {
+  private nodeSearchTerms(node: { id: string; name: string }): string[] {
     const canonical = this.normalizeSearch(node.name);
-    const aliases = this.wikidataByName().get(canonical) ?? [];
+    const aliases = (this.nodeAliases()[node.id] ?? [])
+      .map((alias) => this.normalizeSearch(alias))
+      .filter((alias) => alias && alias !== canonical);
     return [canonical, ...aliases];
   }
 

@@ -7,6 +7,10 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
+  async getNodeAliases(_year: number): Promise<Record<string, string[]>> {
+    throw new Error('Graph DB repository not wired yet.');
+  }
+
   async getNodeNeighborhood(_nodeId: string, _year: number): Promise<NodeDetail> {
     throw new Error('Graph DB repository not wired yet.');
   }

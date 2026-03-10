@@ -4,6 +4,7 @@ export const GRAPH_REPOSITORY = 'GRAPH_REPOSITORY';
 
 export interface GraphRepository {
   getGraphSnapshot(year: number): Promise<GraphSnapshot>;
+  getNodeAliases(year: number): Promise<Record<string, string[]>>;
   getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail>;
   getAvailableYears(): Promise<number[]>;
   getAllNodes(): Promise<GraphNode[]>;

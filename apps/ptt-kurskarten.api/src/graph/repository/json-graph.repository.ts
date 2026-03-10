@@ -55,6 +55,10 @@ export class JsonGraphRepository implements GraphRepository {
     };
   }
 
+  async getNodeAliases(_year: number): Promise<Record<string, string[]>> {
+    return {};
+  }
+
   async getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail> {
     const snapshot = await this.getGraphSnapshot(year);
     const edges = snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId);

@@ -71,11 +71,15 @@ jobs:
             exit 1
           fi
 
-          # Ensure versioned graph data files are present in the final artifact.
-          test -f "$SITE_DIR/assets/graph-data/v1/nodes.json"
-          test -f "$SITE_DIR/assets/graph-data/v1/edges.json"
-          test -f "$SITE_DIR/assets/graph-data/v1/segments.json"
-          test -f "$SITE_DIR/assets/graph-data/v1/trips.json"
+          # Ensure normalized graph data files are present in the final artifact.
+          test -f "$SITE_DIR/assets/graph-data/places.json"
+          test -f "$SITE_DIR/assets/graph-data/place_names.json"
+          test -f "$SITE_DIR/assets/graph-data/map_anchors.json"
+          test -f "$SITE_DIR/assets/graph-data/editions.json"
+          test -f "$SITE_DIR/assets/graph-data/services.json"
+          test -f "$SITE_DIR/assets/graph-data/service_trips.json"
+          test -f "$SITE_DIR/assets/graph-data/link_measures.json"
+          test -f "$SITE_DIR/assets/graph-data/assertions.json"
 
       - name: Prepare Pages artifact
         id: artifact

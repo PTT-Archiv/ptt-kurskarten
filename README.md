@@ -66,19 +66,15 @@ Shared model types live in `packages/shared/src/index.ts`.
 - `GraphSnapshot`: graph state for one year (`year`, `nodes[]`, `edges[]`)
 - `ConnectionOption`/`ConnectionLeg`: computed route-planning result objects
 
-## Wikidata Q-number linkage
+## Place aliases and Wikidata facts
 
-Wikidata metadata is loaded from `apps/ptt-kurskarten-ui/src/assets/wikidata.json` (via `environment.staticWikidataPath`).
+The viewer now reads aliases from the normalized v2 model:
 
-Current linkage behavior:
+- API mode: `GET /api/v1/place-aliases?year=...`
+- Static mode: aliases are derived from `data/v2/place_names.json` for the selected year
+- Canonical place label comes from preferred active `place_names`; additional active names are search aliases
 
-- `GraphNode` itself does not store `qNumber`
-- viewer code (`fetchWikidata` in `viewer.component.ts`) normalizes `entry.name` and node names
-- linkage is therefore name-based: `node.name` -> matching Wikidata `entry.name`
-- `qNumber` = single resolved item; `qNumbers` = ambiguous candidates
-- translations from `translations` and `translationsByQNumber` are used as search aliases
-
-The enrichment helper script `scripts/enrich_wikidata.py` resolves and updates Q-number data in repository-root `wikidata.json` (including label translations). If you use this script, sync/export the result to `apps/ptt-kurskarten-ui/src/assets/wikidata.json` for the viewer/static build.
+Wikidata should be stored as facts in `data/v2/assertions.json` (for example a `schemaKey` such as `place.wikidata_qid` on a `targetType: "place"` record), rather than via a separate viewer-only JSON file.
 
 ## ICA-aligned extension (context + records)
 
@@ -132,10 +128,16 @@ Base prefix: `/api/v1`
 
 By default the API uses the JSON-backed repository (`GRAPH_REPO=json`) and persists edits into:
 
-- `apps/ptt-kurskarten.api/data/nodes.json`
-- `apps/ptt-kurskarten.api/data/edges.json`
-- `apps/ptt-kurskarten.api/data/segments.json`
-- `apps/ptt-kurskarten.api/data/trips.json`
+- `apps/ptt-kurskarten.api/data/v2/places.json`
+- `apps/ptt-kurskarten.api/data/v2/place_names.json`
+- `apps/ptt-kurskarten.api/data/v2/map_anchors.json`
+- `apps/ptt-kurskarten.api/data/v2/edition_anchor_overrides.json`
+- `apps/ptt-kurskarten.api/data/v2/editions.json`
+- `apps/ptt-kurskarten.api/data/v2/links.json`
+- `apps/ptt-kurskarten.api/data/v2/link_measures.json`
+- `apps/ptt-kurskarten.api/data/v2/services.json`
+- `apps/ptt-kurskarten.api/data/v2/service_trips.json`
+- `apps/ptt-kurskarten.api/data/v2/assertions.json`
 
 ### Normalized v2 export (for future DB migration)
 
@@ -294,7 +296,7 @@ GRAPH_REPO=memory npm run dev:api
 `npm run build:static` builds the UI in static mode:
 
 - no server-side API required at runtime
-- graph data is bundled from `apps/ptt-kurskarten.api/data/*.json` into UI assets
+- graph data is bundled from `apps/ptt-kurskarten.api/data/v2/*.json` into UI assets
 - viewer runs in read-only mode
 
 Build output:

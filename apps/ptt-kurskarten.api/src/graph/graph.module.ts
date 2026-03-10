@@ -3,7 +3,7 @@ import { GraphController } from './graph.controller';
 import { GRAPH_REPOSITORY } from './graph.repository';
 import { InMemoryGraphRepository } from './in-memory-graph.repository';
 import { GraphDbGraphRepository } from './graph-db-graph.repository';
-import { JsonGraphRepository } from './repository/json-graph.repository';
+import { JsonV2GraphRepository } from './repository/json-v2-graph.repository';
 
 @Module({
   controllers: [GraphController],
@@ -16,7 +16,7 @@ import { JsonGraphRepository } from './repository/json-graph.repository';
         if (repo === 'memory') {
           return new InMemoryGraphRepository();
         }
-        return new JsonGraphRepository();
+        return new JsonV2GraphRepository();
       }
     }
   ]

@@ -3,6 +3,5 @@ export const environment = {
   readonlyViewer: false,
   useStaticGraphData: false,
   apiBaseUrl: '/api/v1',
-  staticGraphDataPath: '/assets/graph-data',
-  staticWikidataPath: '/assets/wikidata.json'
+  staticGraphDataPath: '/assets/graph-data'
 };
