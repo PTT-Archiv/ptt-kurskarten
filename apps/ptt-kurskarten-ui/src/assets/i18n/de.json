@@ -24,6 +24,8 @@
   "viewer.noRouteNotYet": "Diese Verbindung existiert im Jahr {{year}} noch nicht.",
   "viewer.noRouteTime": "Keine Verbindung gefunden.",
   "viewer.details": "Details",
+  "viewer.facts": "Fakten",
+  "viewer.noFacts": "Keine Fakten vorhanden.",
   "viewer.resetView": "Ansicht zurücksetzen",
   "viewer.resetSearch": "Suche zurücksetzen",
   "label.from": "Von",

@@ -218,6 +218,30 @@
     </section>
 
     <section class="panel-section">
+      <div class="section-title">{{ 'viewer.facts' | transloco }}</div>
+      @if (sidebarFacts().length > 0) {
+      <div class="fact-list">
+        @for (fact of sidebarFacts(); track fact.id) {
+        <div class="fact-row">
+          <div class="fact-schema"><code>{{ fact.schemaKey }}</code></div>
+          <div class="fact-value">
+            @if (fact.url) {
+            <a class="fact-link" [href]="fact.url" target="_blank" rel="noopener noreferrer">
+              {{ fact.label }}
+            </a>
+            } @else {
+            {{ fact.label }}
+            }
+          </div>
+        </div>
+        }
+      </div>
+      } @else {
+      <div class="muted">{{ 'viewer.noFacts' | transloco }}</div>
+      }
+    </section>
+
+    <section class="panel-section">
       <div class="section-title">Ausgehende Verbindungen</div>
       @if (outgoingNodeTrips().length > 0) {
       <div class="node-trip-list">

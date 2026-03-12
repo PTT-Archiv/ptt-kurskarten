@@ -24,6 +24,8 @@
   "viewer.noRouteNotYet": "Cette liaison n’existe pas encore en {{year}}.",
   "viewer.noRouteTime": "Aucune liaison trouvée.",
   "viewer.details": "Détails",
+  "viewer.facts": "Faits",
+  "viewer.noFacts": "Aucun fait disponible.",
   "viewer.resetView": "Réinitialiser la vue",
   "viewer.resetSearch": "Réinitialiser la recherche",
   "label.from": "De",

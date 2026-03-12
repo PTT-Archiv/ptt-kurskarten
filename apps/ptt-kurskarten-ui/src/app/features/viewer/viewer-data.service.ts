@@ -4,6 +4,7 @@ import type {
   ConnectionOption,
   EdgeTrip,
   EditionEntry,
+  GraphAssertion,
   GraphEdge,
   GraphNode,
   GraphSnapshot,
@@ -84,7 +85,11 @@ type StoredAssertion = {
   targetType: string;
   targetId: string;
   schemaKey: string;
+  valueType?: GraphAssertion['valueType'];
+  valueText?: string | null;
+  valueNumber?: number | null;
   valueBoolean?: boolean | null;
+  valueJson?: unknown | null;
   validFrom?: NullableYear;
   validTo?: NullableYear;
 };
@@ -96,6 +101,12 @@ type ConnectionsRequest = {
   depart: TimeHHMM;
   k?: number;
   allowForeignStartFallback?: boolean;
+};
+
+type AssertionFilters = {
+  year?: number;
+  targetType?: string;
+  targetId?: string;
 };
 
 type StaticGraphData = {
@@ -193,6 +204,37 @@ export class ViewerDataService {
           k: request.k,
           allowForeignStartFallback: request.allowForeignStartFallback
         })
+      )
+    );
+  }
+
+  getAssertions(filters?: AssertionFilters): Observable<GraphAssertion[]> {
+    if (!environment.useStaticGraphData) {
+      let params = new HttpParams();
+      if (Number.isFinite(filters?.year)) {
+        params = params.set('year', String(filters?.year));
+      }
+      const targetType = filters?.targetType?.trim();
+      if (targetType) {
+        params = params.set('targetType', targetType);
+      }
+      const targetId = filters?.targetId?.trim();
+      if (targetId) {
+        params = params.set('targetId', targetId);
+      }
+      return this.http.get<GraphAssertion[]>(`${environment.apiBaseUrl}/assertions`, { params });
+    }
+    return this.loadStaticData().pipe(
+      map((data) =>
+        (data.assertions ?? [])
+          .filter((assertion) => (filters?.targetType ? assertion.targetType === filters.targetType : true))
+          .filter((assertion) => (filters?.targetId ? assertion.targetId === filters.targetId : true))
+          .filter((assertion) =>
+            Number.isFinite(filters?.year)
+              ? isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, Number(filters?.year))
+              : true
+          )
+          .map((assertion) => materializeAssertion(assertion))
       )
     );
   }
@@ -309,6 +351,47 @@ function materializeEdgeForYear(service: StoredService, data: StaticGraphData, y
     notes: service.note ?? undefined,
     trips
   };
+}
+
+function materializeAssertion(assertion: StoredAssertion): GraphAssertion {
+  const valueType = normalizeAssertionValueType(assertion);
+  return {
+    id: assertion.id,
+    targetType: assertion.targetType,
+    targetId: assertion.targetId,
+    schemaKey: assertion.schemaKey,
+    valueType,
+    valueText: assertion.valueText ?? null,
+    valueNumber: assertion.valueNumber ?? null,
+    valueBoolean: assertion.valueBoolean ?? null,
+    valueJson: assertion.valueJson ?? null,
+    validFrom: assertion.validFrom ?? null,
+    validTo: assertion.validTo ?? null
+  };
+}
+
+function normalizeAssertionValueType(assertion: StoredAssertion): GraphAssertion['valueType'] {
+  if (
+    assertion.valueType === 'string' ||
+    assertion.valueType === 'number' ||
+    assertion.valueType === 'boolean' ||
+    assertion.valueType === 'json'
+  ) {
+    return assertion.valueType;
+  }
+  if (assertion.valueText !== null && assertion.valueText !== undefined) {
+    return 'string';
+  }
+  if (assertion.valueNumber !== null && assertion.valueNumber !== undefined) {
+    return 'number';
+  }
+  if (assertion.valueBoolean !== null && assertion.valueBoolean !== undefined) {
+    return 'boolean';
+  }
+  if (assertion.valueJson !== null && assertion.valueJson !== undefined) {
+    return 'json';
+  }
+  return undefined;
 }
 
 function buildNodeAliasesForYear(data: StaticGraphData, year: number): Record<string, string[]> {

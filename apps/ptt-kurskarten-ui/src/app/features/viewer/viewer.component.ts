@@ -1,7 +1,16 @@
 import { AfterViewInit, Component, HostListener, OnDestroy, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import type { ConnectionLeg, ConnectionOption, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
+import type {
+  ConnectionLeg,
+  ConnectionOption,
+  GraphAssertion,
+  GraphNode,
+  GraphSnapshot,
+  LocalizedText,
+  TimeHHMM,
+  TransportType
+} from '@ptt-kurskarten/shared';
 import { MapStageComponent } from '../../shared/map/map-stage.component';
 import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
@@ -23,6 +32,16 @@ import {
 } from '../../shared/archive/archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
+const FACT_LINK_TEMPLATES: Record<string, string> = {
+  wikidata: 'https://www.wikidata.org/wiki/{value}',
+  mfk: 'https://mfk.rechercheonline.ch/{value}'
+};
+const FACT_SCHEMA_LINK_PROVIDER: Record<string, string> = {
+  'identifier.wikidata': 'wikidata',
+  'identifier.mfk': 'mfk',
+  'identifier.mfk_permalink': 'mfk',
+  'identifier.rechercheonline': 'mfk'
+};
 type SidebarNodeTrip = {
   edgeId: string;
   tripId: string;
@@ -32,6 +51,12 @@ type SidebarNodeTrip = {
   departs?: TimeHHMM;
   arrives?: TimeHHMM;
   arrivalDayOffset?: number;
+};
+type SidebarFact = {
+  id: string;
+  schemaKey: string;
+  label: string;
+  url: string | null;
 };
 
 @Component({
@@ -80,6 +105,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private placeSearchBlurHandle: ReturnType<typeof setTimeout> | null = null;
   private pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  private nodeFactsRequestSeq = 0;
   private langSub?: Subscription;
   private pendingMapPickTarget: 'from' | 'to' | null = null;
   pickTarget = signal<'from' | 'to' | null>(null);
@@ -94,6 +120,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchActiveIndex = signal(0);
   private placeSearchPreviewId = signal<string>('');
   private nodeAliases = signal<Record<string, string[]>>({});
+  private nodeFacts = signal<GraphAssertion[]>([]);
   hoveredRouteEdgeId = signal<string | null>(null);
 
   pulseNodeIds = computed(() => {
@@ -155,6 +182,29 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly routeIcon = faRoute;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
+  sidebarFacts = computed<SidebarFact[]>(() => {
+    const place = this.sidebarPlaceNode();
+    if (!place) {
+      return [];
+    }
+    return this.nodeFacts()
+      .filter((assertion) => assertion.targetType === 'place' && assertion.targetId === place.id)
+      .filter((assertion) => assertion.schemaKey !== 'place.hidden' && assertion.schemaKey !== 'place.is_foreign')
+      .map((assertion) => {
+        const rawValue = this.assertionValueToString(assertion);
+        if (!rawValue) {
+          return null;
+        }
+        const link = this.resolveFactLink(assertion.schemaKey, rawValue);
+        return {
+          id: assertion.id,
+          schemaKey: assertion.schemaKey,
+          label: link.label,
+          url: link.url
+        } satisfies SidebarFact;
+      })
+      .filter((fact): fact is SidebarFact => fact !== null);
+  });
   routeResultsVisible = computed(() => this.routingState() === 'results' && this.connectionResults().length > 0);
   routeSidebarTitle = computed(() => {
     const selected = this.selectedConnection();
@@ -243,6 +293,19 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     effect(() => {
       const url = this.hoveredSnippetUrl();
       this.hoveredSnippetLoading.set(!!url);
+    });
+
+    effect(() => {
+      if (!this.isBrowser) {
+        return;
+      }
+      const nodeId = this.selectedNodeId();
+      const year = this.year();
+      if (!nodeId) {
+        this.nodeFacts.set([]);
+        return;
+      }
+      this.fetchNodeFacts(nodeId, year);
     });
 
     // Transform is derived from fixed anchors; no need to recompute on graph changes.
@@ -809,6 +872,30 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+  private fetchNodeFacts(nodeId: string, year: number): void {
+    const requestSeq = ++this.nodeFactsRequestSeq;
+    this.viewerData
+      .getAssertions({
+        year,
+        targetType: 'place',
+        targetId: nodeId
+      })
+      .subscribe({
+        next: (facts) => {
+          if (requestSeq !== this.nodeFactsRequestSeq) {
+            return;
+          }
+          this.nodeFacts.set(facts ?? []);
+        },
+        error: () => {
+          if (requestSeq !== this.nodeFactsRequestSeq) {
+            return;
+          }
+          this.nodeFacts.set([]);
+        }
+      });
+  }
+
   private nodeSearchTerms(node: { id: string; name: string }): string[] {
     const canonical = this.normalizeSearch(node.name);
     const aliases = (this.nodeAliases()[node.id] ?? [])
@@ -879,6 +966,105 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const lang = this.transloco.getActiveLang();
     const value = (note as Record<string, string | undefined>)[lang] ?? note.de ?? note.fr;
     return value?.trim() ? value : null;
+  }
+
+  private assertionValueToString(assertion: GraphAssertion): string | null {
+    if (assertion.valueType === 'string' && assertion.valueText !== null && assertion.valueText !== undefined) {
+      const value = assertion.valueText.trim();
+      return value.length ? value : null;
+    }
+    if (assertion.valueType === 'number' && assertion.valueNumber !== null && assertion.valueNumber !== undefined) {
+      return String(assertion.valueNumber);
+    }
+    if (assertion.valueType === 'boolean' && assertion.valueBoolean !== null && assertion.valueBoolean !== undefined) {
+      return assertion.valueBoolean ? 'true' : 'false';
+    }
+    if (assertion.valueType === 'json' && assertion.valueJson !== null && assertion.valueJson !== undefined) {
+      return JSON.stringify(assertion.valueJson);
+    }
+
+    if (assertion.valueText !== null && assertion.valueText !== undefined) {
+      const value = assertion.valueText.trim();
+      return value.length ? value : null;
+    }
+    if (assertion.valueNumber !== null && assertion.valueNumber !== undefined) {
+      return String(assertion.valueNumber);
+    }
+    if (assertion.valueBoolean !== null && assertion.valueBoolean !== undefined) {
+      return assertion.valueBoolean ? 'true' : 'false';
+    }
+    if (assertion.valueJson !== null && assertion.valueJson !== undefined) {
+      return JSON.stringify(assertion.valueJson);
+    }
+    return null;
+  }
+
+  private resolveFactLink(schemaKey: string, rawValue: string): { label: string; url: string | null } {
+    const [rawLabel, rawLinkToken] = rawValue.split(';', 2);
+    const label = rawLabel?.trim() || rawValue.trim();
+    const linkToken = rawLinkToken?.trim() || null;
+    const providerFromSchema = this.resolveFactProviderFromSchemaKey(schemaKey);
+
+    if (linkToken) {
+      return {
+        label,
+        url: this.resolveFactLinkFromToken(label, linkToken, providerFromSchema)
+      };
+    }
+
+    return {
+      label,
+      url: this.resolveFactLinkFromToken(label, providerFromSchema ?? label, providerFromSchema)
+    };
+  }
+
+  private resolveFactLinkFromToken(label: string, token: string, fallbackProvider?: string | null): string | null {
+    if (/^https?:\/\//i.test(token)) {
+      return token;
+    }
+    const provider = token.trim().toLowerCase() || (fallbackProvider?.trim().toLowerCase() ?? '');
+    const template = FACT_LINK_TEMPLATES[provider];
+    const normalizedValue = this.normalizeFactLinkValueForProvider(label, provider);
+    if (!template) {
+      if (/^https?:\/\//i.test(label)) {
+        return label;
+      }
+      return token.includes('{value}') ? token.replace('{value}', normalizedValue ?? label) : null;
+    }
+    if (!normalizedValue) {
+      return null;
+    }
+    return template.replace('{value}', normalizedValue);
+  }
+
+  private resolveFactProviderFromSchemaKey(schemaKey: string): string | null {
+    const normalized = schemaKey.trim().toLowerCase();
+    if (!normalized) {
+      return null;
+    }
+    return FACT_SCHEMA_LINK_PROVIDER[normalized] ?? null;
+  }
+
+  private normalizeFactLinkValueForProvider(value: string, provider: string): string | null {
+    const normalized = value.trim();
+    if (!normalized) {
+      return null;
+    }
+    if (provider === 'wikidata') {
+      const qid = normalized.match(/Q\d+/i)?.[0];
+      return qid ? qid.toUpperCase() : null;
+    }
+    if (provider === 'mfk') {
+      const objectId = normalized.match(/mfkobject:\d+/i)?.[0];
+      if (objectId) {
+        return objectId.toLowerCase();
+      }
+      if (/^\d+$/.test(normalized)) {
+        return `mfkobject:${normalized}`;
+      }
+      return normalized;
+    }
+    return normalized;
   }
 
 

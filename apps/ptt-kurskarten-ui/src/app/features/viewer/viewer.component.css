@@ -169,6 +169,45 @@
   gap: 8px;
 }
 
+.fact-list {
+  display: grid;
+  gap: 8px;
+}
+
+.fact-row {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #5f5f5f;
+}
+
+.fact-row:last-child {
+  border-bottom: none;
+}
+
+.fact-schema code {
+  font-size: 12px;
+  border: 1px solid #5f5f5f;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color: #ffffff;
+}
+
+.fact-value {
+  font-size: 14px;
+  color: #ffffff;
+  overflow-wrap: anywhere;
+}
+
+.fact-link {
+  color: #79b8ff;
+  text-decoration: underline;
+}
+
+.fact-link:hover {
+  color: #ffffff;
+}
+
 .node-trip-row {
   display: grid;
   gap: 2px;
