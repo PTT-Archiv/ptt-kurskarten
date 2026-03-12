@@ -325,31 +325,29 @@ function main() {
     }
     normalizedPlaceNameHitCount.set(key, (normalizedPlaceNameHitCount.get(key) ?? 0) + 1);
 
+    const wikidataQNumbers = new Set();
     if (typeof entry.qNumber === 'string' && /^Q\d+$/.test(entry.qNumber)) {
+      wikidataQNumbers.add(entry.qNumber.trim().toUpperCase());
+    }
+    const qNumbers = Array.isArray(entry.qNumbers) ? entry.qNumbers : [];
+    for (const qid of qNumbers) {
+      if (typeof qid === 'string' && /^Q\d+$/.test(qid)) {
+        wikidataQNumbers.add(qid.trim().toUpperCase());
+      }
+    }
+    if (wikidataQNumbers.size) {
+      const lowestQid = [...wikidataQNumbers].sort(
+        (a, b) => Number(a.slice(1)) - Number(b.slice(1))
+      )[0];
       addAssertion({
         targetType: 'place',
         targetId: place.id,
         schemaKey: 'identifier.wikidata',
         valueType: 'string',
-        valueText: entry.qNumber,
+        valueText: lowestQid,
         validFrom: place.validFrom,
         validTo: place.validTo
       });
-    }
-
-    const qNumbers = Array.isArray(entry.qNumbers) ? entry.qNumbers : [];
-    for (const qid of qNumbers) {
-      if (typeof qid === 'string' && /^Q\d+$/.test(qid)) {
-        addAssertion({
-          targetType: 'place',
-          targetId: place.id,
-          schemaKey: 'identifier.wikidata',
-          valueType: 'string',
-          valueText: qid,
-          validFrom: place.validFrom,
-          validTo: place.validTo
-        });
-      }
     }
 
     for (const labelSet of getLabelSets(entry)) {
