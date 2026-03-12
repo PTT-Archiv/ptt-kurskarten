@@ -8,10 +8,6 @@ const API_DATA_DIR = path.join(ROOT, 'apps', 'ptt-kurskarten.api', 'data');
 const OUTPUT_DIR = path.join(API_DATA_DIR, 'v2');
 const WIKIDATA_PATH = path.join(ROOT, 'wikidata.json');
 
-const LEGACY_SOURCE_ID = 'source-legacy-graph-json';
-const WIKIDATA_SOURCE_ID = 'source-wikidata-json';
-const IMPORT_SOURCE_ID = 'source-v2-migration-script';
-
 function readJson(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const parsed = JSON.parse(raw);
@@ -144,8 +140,7 @@ function main() {
   const editions = years.map((year) => ({
     id: `edition-${year}`,
     year,
-    title: `Kurskarte ${year}`,
-    sourceId: LEGACY_SOURCE_ID
+    title: `Kurskarte ${year}`
   }));
 
   const places = [];
@@ -161,7 +156,7 @@ function main() {
   let assertionCounter = 0;
   const placeNameDedup = new Set();
 
-  const addPlaceName = ({ placeId, lang, name, preferred, sourceId, validFrom, validTo, nameType }) => {
+  const addPlaceName = ({ placeId, lang, name, preferred, validFrom, validTo, nameType }) => {
     const normalized = normalizeName(name);
     if (!normalized) {
       return;
@@ -181,8 +176,7 @@ function main() {
       preferred: Boolean(preferred),
       nameType,
       validFrom,
-      validTo,
-      sourceId
+      validTo
     });
   };
 
@@ -196,10 +190,7 @@ function main() {
     valueBoolean = null,
     valueJson = null,
     validFrom = null,
-    validTo = null,
-    sourceId = IMPORT_SOURCE_ID,
-    status = 'asserted',
-    confidence = null
+    validTo = null
   }) => {
     assertionCounter += 1;
     assertions.push({
@@ -213,10 +204,7 @@ function main() {
       valueBoolean,
       valueJson,
       validFrom,
-      validTo,
-      sourceId,
-      status,
-      confidence
+      validTo
     });
   };
 
@@ -230,9 +218,7 @@ function main() {
       status: 'active',
       defaultName: node.name,
       validFrom,
-      validTo,
-      sourceId: LEGACY_SOURCE_ID,
-      legacyNodeId: node.id
+      validTo
     });
 
     addPlaceName({
@@ -240,7 +226,6 @@ function main() {
       lang: 'und',
       name: node.name,
       preferred: true,
-      sourceId: LEGACY_SOURCE_ID,
       validFrom,
       validTo,
       nameType: 'primary'
@@ -254,8 +239,7 @@ function main() {
       iiifCenterX: node.iiifCenterX ?? null,
       iiifCenterY: node.iiifCenterY ?? null,
       validFrom,
-      validTo,
-      sourceId: LEGACY_SOURCE_ID
+      validTo
     });
 
     if (node.foreign === true) {
@@ -266,10 +250,7 @@ function main() {
         valueType: 'boolean',
         valueBoolean: true,
         validFrom,
-        validTo,
-        sourceId: LEGACY_SOURCE_ID,
-        status: 'observed',
-        confidence: 1
+        validTo
       });
     }
   }
@@ -287,41 +268,38 @@ function main() {
       placeAId: segment.a,
       placeBId: segment.b,
       validFrom,
-      validTo,
-      sourceId: LEGACY_SOURCE_ID,
-      legacySegmentId: segment.id
+      validTo
     });
 
-    if (segment.leuge !== null && segment.leuge !== undefined) {
+    const segmentDistance = segment.distance ?? segment.leuge;
+    if (segmentDistance !== null && segmentDistance !== undefined) {
       linkMeasures.push({
-        id: `link-measure-${segment.id}-distance-leuge`,
+        id: `link-measure-${segment.id}-distance`,
         linkId: segment.id,
-        measureKey: 'distance.leuge',
-        valueNumber: Number(segment.leuge),
-        unit: 'leuge',
+        measureKey: 'distance',
+        valueNumber: Number(segmentDistance),
+        unit: 'distance',
         validFrom,
-        validTo,
-        sourceId: LEGACY_SOURCE_ID
+        validTo
       });
     }
   }
 
   for (const edge of edges) {
+    const serviceYear = yearOrNull(edge.validFrom) ?? 1852;
     services.push({
       id: edge.id,
       linkId: segmentIdFor(edge.from, edge.to),
       fromPlaceId: edge.from,
       toPlaceId: edge.to,
-      validFrom: yearOrNull(edge.validFrom),
-      validTo: yearOrNull(edge.validTo),
-      note: edge.notes ?? null,
-      sourceId: LEGACY_SOURCE_ID,
-      legacyEdgeId: edge.id
+      year: serviceYear,
+      note: edge.notes ?? null
     });
   }
 
   for (const trip of trips) {
     const parentService = edgesById.get(trip.edgeId);
+    const serviceYear = parentService ? yearOrNull(parentService.validFrom) ?? 1852 : 1852;
     serviceTrips.push({
       id: trip.id,
       serviceId: trip.edgeId,
@@ -329,10 +307,7 @@ function main() {
       departs: normalizeTime(trip.departs),
       arrives: normalizeTime(trip.arrives),
       arrivalDayOffset: Number.isFinite(trip.arrivalDayOffset) ? trip.arrivalDayOffset : 0,
-      validFrom: parentService ? yearOrNull(parentService.validFrom) : null,
-      validTo: parentService ? yearOrNull(parentService.validTo) : null,
-      sourceId: LEGACY_SOURCE_ID,
-      legacyTripId: trip.id
+      year: serviceYear
     });
   }
 
@@ -358,10 +333,7 @@ function main() {
         valueType: 'string',
         valueText: entry.qNumber,
         validFrom: place.validFrom,
-        validTo: place.validTo,
-        sourceId: WIKIDATA_SOURCE_ID,
-        status: 'resolved',
-        confidence: 1
+        validTo: place.validTo
       });
     }
 
@@ -371,14 +343,11 @@ function main() {
         addAssertion({
           targetType: 'place',
           targetId: place.id,
-          schemaKey: 'identifier.wikidata.candidate',
+          schemaKey: 'identifier.wikidata',
           valueType: 'string',
           valueText: qid,
           validFrom: place.validFrom,
-          validTo: place.validTo,
-          sourceId: WIKIDATA_SOURCE_ID,
-          status: 'candidate',
-          confidence: 0.5
+          validTo: place.validTo
         });
       }
     }
@@ -396,7 +365,6 @@ function main() {
           lang,
           name: label,
           preferred: false,
-          sourceId: WIKIDATA_SOURCE_ID,
           validFrom: place.validFrom,
           validTo: place.validTo,
           nameType: 'alias'
@@ -418,27 +386,6 @@ function main() {
     .filter((service) => !segments.some((segment) => segment.id === service.linkId))
     .map((service) => service.id);
 
-  const sources = [
-    {
-      id: LEGACY_SOURCE_ID,
-      kind: 'dataset',
-      citation: 'Legacy JSON graph repository (nodes/edges/segments/trips)',
-      detail: 'apps/ptt-kurskarten.api/data/*.json'
-    },
-    {
-      id: WIKIDATA_SOURCE_ID,
-      kind: 'dataset',
-      citation: 'Wikidata enrichment export',
-      detail: 'wikidata.json'
-    },
-    {
-      id: IMPORT_SOURCE_ID,
-      kind: 'process',
-      citation: 'v2 migration script execution',
-      detail: 'scripts/migrate_data_v2.js'
-    }
-  ];
-
   const report = {
     generatedAt: new Date().toISOString(),
     counts: {
@@ -450,8 +397,7 @@ function main() {
       linkMeasures: linkMeasures.length,
       services: services.length,
       serviceTrips: serviceTrips.length,
-      assertions: assertions.length,
-      sources: sources.length
+      assertions: assertions.length
     },
     warnings: {
       duplicateWikidataNameKeys: duplicateWikidataNames,
@@ -465,33 +411,32 @@ function main() {
 
   const readme = `# data/v2
 
-Normalized canonical dataset exported from legacy graph JSON files.
+Normalized canonical dataset exported from graph JSON files.
 
 ## Design Goals
 
 - Stable place identity separate from map coordinates
 - Undirected links separate from directed services
-- Trips attached to services
+- Services and trips are year-bound (one year per service)
 - Generic assertions for metadata (including Wikidata references)
 - JSON layout that can be migrated 1:1 into relational DB tables later
 
 ## Files
 
-- editions.json: time context records (year/provenance only)
+- editions.json: time context records (year metadata)
 - places.json: stable place entities
 - place_names.json: multilingual and alternate place names
 - map_anchors.json: place coordinates on the single canonical simplified map
 - links.json: undirected place pairs
-- link_measures.json: link-level measures (e.g. distance.leuge)
-- services.json: directed route variants between places
-- service_trips.json: timetable rows attached to services
+- link_measures.json: link-level measures (e.g. distance)
+- services.json: directed route variants between places (year-bound)
+- service_trips.json: timetable rows attached to services (same year as parent service)
 - assertions.json: generic metadata assertions (booleans, strings, numbers, JSON)
-- sources.json: provenance/source catalog
 - migration_report.json: row counts and migration warnings
 
 ## Notes
 
-- IDs from legacy data are preserved where possible for traceability.
+- IDs from source data are preserved where possible for traceability.
 - Duplicate names are not auto-merged into one place entity during migration.
 - Wikidata is mapped name-based from repository-root wikidata.json.
 `;
@@ -506,7 +451,6 @@ Normalized canonical dataset exported from legacy graph JSON files.
   writeJson(path.join(OUTPUT_DIR, 'services.json'), sortById(services));
   writeJson(path.join(OUTPUT_DIR, 'service_trips.json'), sortById(serviceTrips));
   writeJson(path.join(OUTPUT_DIR, 'assertions.json'), sortById(assertions));
-  writeJson(path.join(OUTPUT_DIR, 'sources.json'), sortById(sources));
   writeJson(path.join(OUTPUT_DIR, 'migration_report.json'), report);
 
   console.log('v2 migration complete.');

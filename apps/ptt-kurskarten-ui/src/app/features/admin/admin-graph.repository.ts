@@ -1,17 +1,32 @@
 import { InjectionToken, inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import type { GraphEdge, GraphNode, GraphSnapshot } from '@ptt-kurskarten/shared';
+import type {
+  EditionEntry,
+  GraphAssertion,
+  GraphEdge,
+  GraphNode,
+  GraphNodePatch,
+  GraphSnapshot
+} from '@ptt-kurskarten/shared';
 
 export type AdminGraphRepository = {
   loadYears(): Observable<number[]>;
+  loadEditions(): Observable<EditionEntry[]>;
   loadGraph(year: number): Observable<GraphSnapshot>;
+  loadAssertions(filters?: { year?: number; targetType?: string; targetId?: string }): Observable<GraphAssertion[]>;
+  createAssertion(assertion: GraphAssertion): Observable<GraphAssertion>;
+  updateAssertion(id: string, patch: Partial<GraphAssertion>): Observable<GraphAssertion>;
+  deleteAssertion(id: string): Observable<{ deleted: boolean }>;
+  searchPlaces(query: string, year: number): Observable<Array<{ id: string; name: string; x: number; y: number; active: boolean; hidden: boolean }>>;
   createNode(node: GraphNode): Observable<GraphNode>;
-  updateNode(id: string, patch: Partial<GraphNode>): Observable<GraphNode>;
-  deleteNode(id: string): Observable<{ deleted: boolean }>;
+  updateNode(id: string, patch: GraphNodePatch): Observable<GraphNode>;
+  setNodeVisibility(id: string, year: number, hidden: boolean): Observable<{ updated: boolean; id: string; year: number; hidden: boolean }>;
+  deleteNode(id: string, year?: number): Observable<{ deleted: boolean }>;
   createEdge(edge: GraphEdge): Observable<GraphEdge>;
   updateEdge(id: string, edge: GraphEdge): Observable<GraphEdge>;
   deleteEdge(id: string): Observable<{ deleted: boolean }>;
+  updateEdition(year: number, patch: Partial<EditionEntry>): Observable<EditionEntry>;
   reset(): Observable<void>;
   isDemo: boolean;
 };
@@ -31,16 +46,67 @@ export class HttpGraphRepository implements AdminGraphRepository {
     return this.http.get<GraphSnapshot>(`/api/v1/graph?year=${year}`);
   }
 
+  loadEditions(): Observable<EditionEntry[]> {
+    return this.http.get<EditionEntry[]>('/api/v1/editions');
+  }
+
+  loadAssertions(filters?: { year?: number; targetType?: string; targetId?: string }): Observable<GraphAssertion[]> {
+    let params = new HttpParams();
+    if (filters?.year !== undefined) {
+      params = params.set('year', String(filters.year));
+    }
+    if (filters?.targetType) {
+      params = params.set('targetType', filters.targetType);
+    }
+    if (filters?.targetId) {
+      params = params.set('targetId', filters.targetId);
+    }
+    return this.http.get<GraphAssertion[]>('/api/v1/assertions', { params });
+  }
+
+  createAssertion(assertion: GraphAssertion): Observable<GraphAssertion> {
+    return this.http.post<GraphAssertion>('/api/v1/assertions', assertion);
+  }
+
+  updateAssertion(id: string, patch: Partial<GraphAssertion>): Observable<GraphAssertion> {
+    return this.http.put<GraphAssertion>(`/api/v1/assertions/${id}`, patch);
+  }
+
+  deleteAssertion(id: string): Observable<{ deleted: boolean }> {
+    return this.http.delete<{ deleted: boolean }>(`/api/v1/assertions/${id}`);
+  }
+
+  searchPlaces(
+    query: string,
+    year: number
+  ): Observable<Array<{ id: string; name: string; x: number; y: number; active: boolean; hidden: boolean }>> {
+    const params = new HttpParams().set('q', query).set('year', String(year));
+    return this.http.get<Array<{ id: string; name: string; x: number; y: number; active: boolean; hidden: boolean }>>(
+      '/api/v1/places/search',
+      { params }
+    );
+  }
+
   createNode(node: GraphNode): Observable<GraphNode> {
     return this.http.post<GraphNode>('/api/v1/nodes', node);
   }
 
-  updateNode(id: string, patch: Partial<GraphNode>): Observable<GraphNode> {
+  updateNode(id: string, patch: GraphNodePatch): Observable<GraphNode> {
     return this.http.put<GraphNode>(`/api/v1/nodes/${id}`, patch);
   }
 
-  deleteNode(id: string): Observable<{ deleted: boolean }> {
-    return this.http.delete<{ deleted: boolean }>(`/api/v1/nodes/${id}`);
+  setNodeVisibility(id: string, year: number, hidden: boolean): Observable<{ updated: boolean; id: string; year: number; hidden: boolean }> {
+    const params = new HttpParams().set('year', String(year));
+    return this.http.put<{ updated: boolean; id: string; year: number; hidden: boolean }>(
+      `/api/v1/nodes/${id}/visibility`,
+      { hidden },
+      { params }
+    );
+  }
+
+  deleteNode(id: string, year?: number): Observable<{ deleted: boolean }> {
+    const query = year !== undefined ? `?year=${year}` : '';
+    return this.http.delete<{ deleted: boolean }>(`/api/v1/nodes/${id}${query}`);
   }
 
   createEdge(edge: GraphEdge): Observable<GraphEdge> {
@@ -55,6 +121,10 @@ export class HttpGraphRepository implements AdminGraphRepository {
     return this.http.delete<{ deleted: boolean }>(`/api/v1/edges/${id}`);
   }
 
+  updateEdition(year: number, patch: Partial<EditionEntry>): Observable<EditionEntry> {
+    return this.http.put<EditionEntry>(`/api/v1/editions/${year}`, patch);
+  }
+
   reset(): Observable<void> {
     return of(undefined);
   }
@@ -64,7 +134,9 @@ export class HttpGraphRepository implements AdminGraphRepository {
 export class DemoGraphRepository implements AdminGraphRepository {
   readonly isDemo = true;
   private readonly years = [1852];
+  private editions: EditionEntry[] = [{ id: 'edition-1852', year: 1852 }];
   private snapshot: GraphSnapshot = buildDemoSnapshot(1852);
+  private assertions: GraphAssertion[] = [];
 
   loadYears(): Observable<number[]> {
     return of([...this.years]);
@@ -77,6 +149,62 @@ export class DemoGraphRepository implements AdminGraphRepository {
     return of(cloneSnapshot(this.snapshot));
   }
 
+  loadEditions(): Observable<EditionEntry[]> {
+    return of([...this.editions]);
+  }
+
+  loadAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Observable<GraphAssertion[]> {
+    const filters = _filters ?? {};
+    const list = this.assertions
+      .filter((item) => (filters.targetType ? item.targetType === filters.targetType : true))
+      .filter((item) => (filters.targetId ? item.targetId === filters.targetId : true));
+    return of([...list]);
+  }
+
+  createAssertion(assertion: GraphAssertion): Observable<GraphAssertion> {
+    const next: GraphAssertion = {
+      ...assertion,
+      id: assertion.id || `assertion-${Date.now()}`
+    };
+    this.assertions = [...this.assertions, next];
+    return of(next);
+  }
+
+  updateAssertion(id: string, patch: Partial<GraphAssertion>): Observable<GraphAssertion> {
+    const index = this.assertions.findIndex((item) => item.id === id);
+    if (index === -1) {
+      return of({ id, targetType: 'place', targetId: '', schemaKey: '', ...patch } as GraphAssertion);
+    }
+    const next = { ...this.assertions[index], ...patch, id };
+    this.assertions = [...this.assertions.slice(0, index), next, ...this.assertions.slice(index + 1)];
+    return of(next);
+  }
+
+  deleteAssertion(id: string): Observable<{ deleted: boolean }> {
+    const before = this.assertions.length;
+    this.assertions = this.assertions.filter((item) => item.id !== id);
+    return of({ deleted: this.assertions.length < before });
+  }
+
+  searchPlaces(
+    query: string,
+    _year: number
+  ): Observable<Array<{ id: string; name: string; x: number; y: number; active: boolean; hidden: boolean }>> {
+    const cleaned = query.trim().toLowerCase();
+    const matches = (this.snapshot.nodes ?? [])
+      .filter((node) => !cleaned || node.name.toLowerCase().includes(cleaned))
+      .slice(0, 12)
+      .map((node) => ({
+        id: node.id,
+        name: node.name,
+        x: node.x,
+        y: node.y,
+        active: true,
+        hidden: false
+      }));
+    return of(matches);
+  }
+
   createNode(node: GraphNode): Observable<GraphNode> {
     this.snapshot = {
       ...this.snapshot,
@@ -85,12 +213,14 @@ export class DemoGraphRepository implements AdminGraphRepository {
     return of(node);
   }
 
-  updateNode(id: string, patch: Partial<GraphNode>): Observable<GraphNode> {
+  updateNode(id: string, patch: GraphNodePatch): Observable<GraphNode> {
     const updated = this.snapshot.nodes.find((node) => node.id === id);
     if (!updated) {
-      return of(patch as GraphNode);
+      const { anchorYear: _anchorYear, ...nodePatch } = patch;
+      return of(nodePatch as GraphNode);
     }
-    const merged = { ...updated, ...patch };
+    const { anchorYear: _anchorYear, ...nodePatch } = patch;
+    const merged = { ...updated, ...nodePatch };
     this.snapshot = {
       ...this.snapshot,
       nodes: this.snapshot.nodes.map((node) => (node.id === id ? merged : node))
@@ -98,7 +228,16 @@ export class DemoGraphRepository implements AdminGraphRepository {
     return of(merged);
   }
 
-  deleteNode(id: string): Observable<{ deleted: boolean }> {
+  setNodeVisibility(id: string, _year: number, hidden: boolean): Observable<{ updated: boolean; id: string; year: number; hidden: boolean }> {
+    return of({
+      updated: false,
+      id,
+      year: this.snapshot.year,
+      hidden
+    });
+  }
+
+  deleteNode(id: string, _year?: number): Observable<{ deleted: boolean }> {
     const node = this.snapshot.nodes.find((candidate) => candidate.id === id);
     if (!node) {
       return of({ deleted: false });
@@ -138,6 +277,30 @@ export class DemoGraphRepository implements AdminGraphRepository {
     return of({ deleted: true });
   }
 
+  updateEdition(year: number, patch: Partial<EditionEntry>): Observable<EditionEntry> {
+    const index = this.editions.findIndex((entry) => entry.year === year);
+    const normalizedRoute =
+      typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length
+        ? patch.iiifRoute.trim().replace(/\/+$/, '')
+        : undefined;
+    const next: EditionEntry = {
+      id: patch.id ?? this.editions[index]?.id ?? `edition-${year}`,
+      year,
+      title: patch.title ?? this.editions[index]?.title,
+      iiifRoute: patch.iiifRoute !== undefined ? normalizedRoute : this.editions[index]?.iiifRoute
+    };
+    if (index === -1) {
+      this.editions = [...this.editions, next];
+      if (!this.years.includes(year)) {
+        this.years.push(year);
+        this.years.sort((a, b) => a - b);
+      }
+    } else {
+      this.editions = [...this.editions.slice(0, index), next, ...this.editions.slice(index + 1)];
+    }
+    return of(next);
+  }
+
   reset(): Observable<void> {
     this.snapshot = buildDemoSnapshot(this.snapshot.year);
     return of(undefined);
@@ -157,7 +320,7 @@ function buildDemoSnapshot(year: number): GraphSnapshot {
         id: 'edge-bern-zurich',
         from: 'bern',
         to: 'zurich',
-        leuge: 10,
+        distance: 10,
         validFrom: year,
         validTo: undefined,
         trips: [

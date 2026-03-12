@@ -35,11 +35,35 @@ export function buildArchiveRegion(x: number, y: number, transform: ArchiveTrans
 }
 
 export function buildArchiveSnippetUrlFromRegion(region: string): string {
-  return `${ARCHIVE_IIIF_BASE}/${region}/${ARCHIVE_OUTPUT_SIZE},${ARCHIVE_OUTPUT_SIZE}/0/default.jpg`;
+  return buildArchiveSnippetUrlFromRegionWithBase(region, ARCHIVE_IIIF_BASE);
 }
 
-export function buildArchiveSnippetUrl(x: number, y: number, transform: ArchiveTransform): string {
-  return buildArchiveSnippetUrlFromRegion(buildArchiveRegion(x, y, transform));
+export function normalizeIiifRoute(iiifRoute: string | null | undefined): string {
+  if (typeof iiifRoute !== 'string') {
+    return ARCHIVE_IIIF_BASE;
+  }
+  const trimmed = iiifRoute.trim();
+  if (!trimmed.length) {
+    return ARCHIVE_IIIF_BASE;
+  }
+  return trimmed.replace(/\/+$/, '');
+}
+
+export function buildArchiveIiifInfoUrl(iiifRoute: string | null | undefined): string {
+  return `${normalizeIiifRoute(iiifRoute)}/info.json`;
+}
+
+export function buildArchiveSnippetUrlFromRegionWithBase(region: string, iiifRoute: string | null | undefined): string {
+  return `${normalizeIiifRoute(iiifRoute)}/${region}/${ARCHIVE_OUTPUT_SIZE},${ARCHIVE_OUTPUT_SIZE}/0/default.jpg`;
+}
+
+export function buildArchiveSnippetUrl(
+  x: number,
+  y: number,
+  transform: ArchiveTransform,
+  iiifRoute: string | null | undefined = ARCHIVE_IIIF_BASE
+): string {
+  return buildArchiveSnippetUrlFromRegionWithBase(buildArchiveRegion(x, y, transform), iiifRoute);
 }
 
 export function buildArchiveRegionFromOverride(override: IiifOverride): string | null {
@@ -54,11 +78,12 @@ export function buildArchiveRegionFromOverride(override: IiifOverride): string |
 
 export function buildArchiveSnippetUrlForNode(
   node: { x: number; y: number } & IiifOverride,
-  transform: ArchiveTransform
+  transform: ArchiveTransform,
+  iiifRoute: string | null | undefined = ARCHIVE_IIIF_BASE
 ): string {
   const overrideRegion = buildArchiveRegionFromOverride(node);
   if (overrideRegion) {
-    return buildArchiveSnippetUrlFromRegion(overrideRegion);
+    return buildArchiveSnippetUrlFromRegionWithBase(overrideRegion, iiifRoute);
   }
-  return buildArchiveSnippetUrl(node.x, node.y, transform);
+  return buildArchiveSnippetUrl(node.x, node.y, transform, iiifRoute);
 }

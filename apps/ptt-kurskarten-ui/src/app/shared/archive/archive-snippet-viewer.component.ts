@@ -27,6 +27,7 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   @Input({ required: true }) imageUrl = '';
+  @Input() iiifInfoUrl = 'https://iiif.ptt-archiv.ch/iiif/3/P-38-2-1852-07.jp2/info.json';
   @Input() autoFit = true;
   @Input() allowWrite = false;
   @Input() showCenterMarker = true;
@@ -35,7 +36,6 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   @ViewChild('osdContainer') private osdContainer?: ElementRef<HTMLDivElement>;
 
   private viewer: OpenSeadragon.Viewer | null = null;
-  private readonly iiifInfoUrl = 'https://iiif.ptt-archiv.ch/iiif/3/P-38-2-1852-07.jp2/info.json';
   private pendingRegionUrl: string | null = null;
   private suppressNextViewportEvent = false;
   private viewportDebounce?: ReturnType<typeof setTimeout>;
@@ -54,6 +54,10 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['imageUrl']) {
       this.pendingRegionUrl = this.imageUrl;
+    }
+    if (changes['iiifInfoUrl'] && this.viewer) {
+      this.viewer.open(this.iiifInfoUrl);
+      return;
     }
     if (!this.isBrowser || !this.viewer) {
       return;

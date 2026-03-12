@@ -196,7 +196,11 @@
     </section>
     } @else {
     <section class="panel-section location-section">
-      <app-archive-snippet-viewer [imageUrl]="archiveSnippetUrl()" [showCenterMarker]="false"></app-archive-snippet-viewer>
+      <app-archive-snippet-viewer
+        [imageUrl]="archiveSnippetUrl()"
+        [iiifInfoUrl]="archiveIiifInfoUrl()"
+        [showCenterMarker]="false"
+      ></app-archive-snippet-viewer>
       @if (sidebarPlaceNode(); as place) {
       <div class="location-actions">
         <button class="icon-action-btn" type="button" (click)="setNodeAsStart(place.id)"
@@ -357,7 +361,11 @@
       </div>
       <section class="panel-section location-section">
         @if (routeNodePanelSnippetUrl(); as nodeSnippetUrl) {
-        <app-archive-snippet-viewer [imageUrl]="nodeSnippetUrl" [showCenterMarker]="false"></app-archive-snippet-viewer>
+        <app-archive-snippet-viewer
+          [imageUrl]="nodeSnippetUrl"
+          [iiifInfoUrl]="archiveIiifInfoUrl()"
+          [showCenterMarker]="false"
+        ></app-archive-snippet-viewer>
         }
         <div class="location-actions">
           <button class="icon-action-btn" type="button" (click)="setNodeAsStart(panelNode.id)"

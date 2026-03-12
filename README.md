@@ -61,7 +61,7 @@ Then open:
 Shared model types live in `packages/shared/src/index.ts`.
 
 - `GraphNode`: station/place (`id`, `name`, map coordinates `x`/`y`, `validFrom`/`validTo`, optional `foreign`, optional IIIF center)
-- `GraphEdge`: connection between nodes (`from`, `to`, `leuge`, validity window, multilingual `notes`, `trips`)
+- `GraphEdge`: connection between nodes (`from`, `to`, `distance`, validity window, multilingual `notes`, `trips`)
 - `EdgeTrip`: timetable entry on an edge (`transport`, `departs`, `arrives`, optional day offset)
 - `GraphSnapshot`: graph state for one year (`year`, `nodes[]`, `edges[]`)
 - `ConnectionOption`/`ConnectionLeg`: computed route-planning result objects
@@ -169,11 +169,10 @@ The `data/v2` folder is the canonical edit model. It is normalized so that:
 - `map_anchors.json`: place coordinates on the canonical simplified map (temporal via validity)
 - `editions.json`: year context / provenance for a Kurskarte
 - `links.json`: undirected relation between two places
-- `link_measures.json`: link-level values such as `distance.leuge`
-- `services.json`: directed route/service variants (`from` -> `to`)
-- `service_trips.json`: timetable rows attached to one service
+- `link_measures.json`: link-level values such as `distance`
+- `services.json`: directed route/service variants (`from` -> `to`), one year per record
+- `service_trips.json`: timetable rows attached to one service (same year as service)
 - `assertions.json`: generic facts/identifiers (including Wikidata)
-- `sources.json`: provenance and citation records
 - `migration_report.json`: counts and warnings from conversion
 
 Conceptually:
@@ -185,8 +184,8 @@ Edition(year/provenance)
 Place --< Link(placeA/placeB) >-- Place
 Link --< LinkMeasure
 Link --< Service(direction)
-Service --< ServiceTrip
-Any entity --< Assertion >-- Source
+Service(year-bound) --< ServiceTrip
+Any entity --< Assertion
 ```
 
 #### How to work with it (archive-oriented workflow)
@@ -194,12 +193,12 @@ Any entity --< Assertion >-- Source
 1. Create or find the `Place`.
 2. Add canonical and alternate names in `place_names.json`.
 3. Maintain map positions in `map_anchors.json` and control timeline with `validFrom` / `validTo`.
-4. Create or update `editions.json` for catalog/provenance context.
+4. Create or update `editions.json` for yearly context.
 5. Create `links.json` between place pairs.
-6. Add `link_measures.json` (`distance.leuge`, etc.).
+6. Add `link_measures.json` (`distance`, etc.).
 7. Add directed `services.json` variants.
 8. Add timetable rows in `service_trips.json`.
-9. Add metadata/IDs as `assertions.json` and always reference `sources.json`.
+9. Add metadata/IDs as `assertions.json`.
 
 This keeps editing understandable for archivists: identity, map placement, route, timetable, and evidence are separate concerns.
 
@@ -209,7 +208,6 @@ This keeps editing understandable for archivists: identity, map placement, route
 - Never duplicate place identity per year; use edition context instead.
 - Keep `links` undirected; direction belongs in `services`.
 - Keep unknown values as `null` (not guessed placeholders).
-- Attach provenance (`sourceId`) to important assertions and edits.
 
 ### Migration path to PostgreSQL
 
@@ -225,7 +223,7 @@ Suggested SQL mapping:
 
 - `places`, `place_names`, `map_anchors`
 - `editions`, `links`, `link_measures`, `services`, `service_trips`
-- `assertions`, `sources`
+- `assertions`
 
 Recommended constraints/indexes:
 

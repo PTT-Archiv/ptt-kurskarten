@@ -26,6 +26,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 const NODE_RADIUS = 3;
 const NODE_RADIUS_MAX = 9;
 const NODE_RADIUS_STEP = .3;
+const DEFAULT_VIEWPORT_ZOOM = 1.0;
 const MIN_VIEWPORT_ZOOM = 0.75;
 const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
@@ -261,7 +262,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private resizeRafId: number | null = null;
   private transform = computeTransform(1, 1, DEFAULT_VIEWBOX);
   private fitTransform = computeTransform(1, 1, DEFAULT_VIEWBOX);
-  private viewportZoom = 1;
+  private viewportZoom = DEFAULT_VIEWPORT_ZOOM;
   private viewportPan = { x: 0, y: 0 };
   private needsRender = false;
   private activePointerId: number | null = null;
@@ -859,7 +860,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private resetViewport(): void {
-    this.viewportZoom = 1;
+    this.viewportZoom = DEFAULT_VIEWPORT_ZOOM;
     this.viewportPan = { x: 0, y: 0 };
   }
 

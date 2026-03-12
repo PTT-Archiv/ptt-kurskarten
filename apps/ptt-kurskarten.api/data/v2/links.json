@@ -4,1223 +4,944 @@
     "placeAId": "node-1770808860448",
     "placeBId": "node-1770808908336",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770808860448__node-1770808908336"
+    "validTo": null
   },
   {
     "id": "node-1770808860448__node-1770891148537",
     "placeAId": "node-1770808860448",
     "placeBId": "node-1770891148537",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770808860448__node-1770891148537"
+    "validTo": null
   },
   {
     "id": "node-1770808860448__node-1770891194672",
     "placeAId": "node-1770808860448",
     "placeBId": "node-1770891194672",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770808860448__node-1770891194672"
+    "validTo": null
   },
   {
     "id": "node-1770808908336__node-1770809062251",
     "placeAId": "node-1770808908336",
     "placeBId": "node-1770809062251",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770808908336__node-1770809062251"
+    "validTo": null
   },
   {
     "id": "node-1770809018783__node-1770809062251",
     "placeAId": "node-1770809018783",
     "placeBId": "node-1770809062251",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809018783__node-1770809062251"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770809183587",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770809183587",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770809183587"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770809209472",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770809209472",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770809209472"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770818428222",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770818428222",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770818428222"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770890387454",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770890387454",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770890387454"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770894828775",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770894828775",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770894828775"
+    "validTo": null
   },
   {
     "id": "node-1770809062251__node-1770895016880",
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770895016880",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809062251__node-1770895016880"
+    "validTo": null
   },
   {
     "id": "node-1770809183587__node-1770894828775",
     "placeAId": "node-1770809183587",
     "placeBId": "node-1770894828775",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809183587__node-1770894828775"
+    "validTo": null
   },
   {
     "id": "node-1770809209472__node-1770812117179",
     "placeAId": "node-1770809209472",
     "placeBId": "node-1770812117179",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809209472__node-1770812117179"
-  },
-  {
-    "id": "node-1770809870824__node-1770818451614",
-    "placeAId": "node-1770809870824",
-    "placeBId": "node-1770818451614",
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770809870824__node-1770818451614"
+    "validTo": null
   },
   {
     "id": "node-1770812117179__node-1770890162679",
     "placeAId": "node-1770812117179",
     "placeBId": "node-1770890162679",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770812117179__node-1770890162679"
+    "validTo": null
   },
   {
     "id": "node-1770812117179__node-1770890297820",
     "placeAId": "node-1770812117179",
     "placeBId": "node-1770890297820",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770812117179__node-1770890297820"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770818436737",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770818436737",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770818436737"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770818444657",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770818444657",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770818444657"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770890564956",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770890564956",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770890564956"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770890609929",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770890609929",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770890609929"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770890628791",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770890628791",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770890628791"
+    "validTo": null
   },
   {
     "id": "node-1770818428222__node-1770897442282",
     "placeAId": "node-1770818428222",
     "placeBId": "node-1770897442282",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818428222__node-1770897442282"
+    "validTo": null
   },
   {
     "id": "node-1770818436737__node-1770890297820",
     "placeAId": "node-1770818436737",
     "placeBId": "node-1770890297820",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818436737__node-1770890297820"
+    "validTo": null
   },
   {
     "id": "node-1770818444657__node-1770911202396",
     "placeAId": "node-1770818444657",
     "placeBId": "node-1770911202396",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818444657__node-1770911202396"
+    "validTo": null
   },
   {
     "id": "node-1770818476302__node-1770912401064",
     "placeAId": "node-1770818476302",
     "placeBId": "node-1770912401064",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818476302__node-1770912401064"
+    "validTo": null
   },
   {
     "id": "node-1770818476302__node-1770912408628",
     "placeAId": "node-1770818476302",
     "placeBId": "node-1770912408628",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818476302__node-1770912408628"
+    "validTo": null
   },
   {
     "id": "node-1770818483826__node-1770907161310",
     "placeAId": "node-1770818483826",
     "placeBId": "node-1770907161310",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770818483826__node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770823561872__node-1770823595717",
     "placeAId": "node-1770823561872",
     "placeBId": "node-1770823595717",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823561872__node-1770823595717"
+    "validTo": null
   },
   {
     "id": "node-1770823561872__node-1770890541178",
     "placeAId": "node-1770823561872",
     "placeBId": "node-1770890541178",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823561872__node-1770890541178"
+    "validTo": null
   },
   {
     "id": "node-1770823570686__node-1770823595717",
     "placeAId": "node-1770823570686",
     "placeBId": "node-1770823595717",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823570686__node-1770823595717"
+    "validTo": null
   },
   {
     "id": "node-1770823570686__node-1770823607384",
     "placeAId": "node-1770823570686",
     "placeBId": "node-1770823607384",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823570686__node-1770823607384"
+    "validTo": null
   },
   {
     "id": "node-1770823607384__node-1770823621828",
     "placeAId": "node-1770823607384",
     "placeBId": "node-1770823621828",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823607384__node-1770823621828"
+    "validTo": null
   },
   {
     "id": "node-1770823621828__node-1770823657588",
     "placeAId": "node-1770823621828",
     "placeBId": "node-1770823657588",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823621828__node-1770823657588"
+    "validTo": null
   },
   {
     "id": "node-1770823657588__node-1770890638355",
     "placeAId": "node-1770823657588",
     "placeBId": "node-1770890638355",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770823657588__node-1770890638355"
+    "validTo": null
   },
   {
     "id": "node-1770890162679__node-1770890186709",
     "placeAId": "node-1770890162679",
     "placeBId": "node-1770890186709",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890162679__node-1770890186709"
+    "validTo": null
   },
   {
     "id": "node-1770890387454__node-1770890410235",
     "placeAId": "node-1770890387454",
     "placeBId": "node-1770890410235",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890387454__node-1770890410235"
+    "validTo": null
   },
   {
     "id": "node-1770890410235__node-1770890490883",
     "placeAId": "node-1770890410235",
     "placeBId": "node-1770890490883",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890410235__node-1770890490883"
+    "validTo": null
   },
   {
     "id": "node-1770890434712__node-1770890490883",
     "placeAId": "node-1770890434712",
     "placeBId": "node-1770890490883",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890434712__node-1770890490883"
+    "validTo": null
   },
   {
     "id": "node-1770890434712__node-1770890523913",
     "placeAId": "node-1770890434712",
     "placeBId": "node-1770890523913",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890434712__node-1770890523913"
+    "validTo": null
   },
   {
     "id": "node-1770890523913__node-1770890541178",
     "placeAId": "node-1770890523913",
     "placeBId": "node-1770890541178",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890523913__node-1770890541178"
+    "validTo": null
   },
   {
     "id": "node-1770890541178__node-1770890556808",
     "placeAId": "node-1770890541178",
     "placeBId": "node-1770890556808",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890541178__node-1770890556808"
+    "validTo": null
   },
   {
     "id": "node-1770890556808__node-1770890564956",
     "placeAId": "node-1770890556808",
     "placeBId": "node-1770890564956",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890556808__node-1770890564956"
+    "validTo": null
   },
   {
     "id": "node-1770890564956__node-1770897668923",
     "placeAId": "node-1770890564956",
     "placeBId": "node-1770897668923",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890564956__node-1770897668923"
+    "validTo": null
   },
   {
     "id": "node-1770890564956__node-1770897698221",
     "placeAId": "node-1770890564956",
     "placeBId": "node-1770897698221",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890564956__node-1770897698221"
+    "validTo": null
   },
   {
     "id": "node-1770890609929__node-1770897668923",
     "placeAId": "node-1770890609929",
     "placeBId": "node-1770897668923",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890609929__node-1770897668923"
+    "validTo": null
   },
   {
     "id": "node-1770890628791__node-1770897625083",
     "placeAId": "node-1770890628791",
     "placeBId": "node-1770897625083",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890628791__node-1770897625083"
+    "validTo": null
   },
   {
     "id": "node-1770890638355__node-1770890809431",
     "placeAId": "node-1770890638355",
     "placeBId": "node-1770890809431",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890638355__node-1770890809431"
+    "validTo": null
   },
   {
     "id": "node-1770890809431__node-1770890971568",
     "placeAId": "node-1770890809431",
     "placeBId": "node-1770890971568",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890809431__node-1770890971568"
+    "validTo": null
   },
   {
     "id": "node-1770890904555__node-1770890971568",
     "placeAId": "node-1770890904555",
     "placeBId": "node-1770890971568",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890904555__node-1770890971568"
+    "validTo": null
   },
   {
     "id": "node-1770890904555__node-1770891120113",
     "placeAId": "node-1770890904555",
     "placeBId": "node-1770891120113",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770890904555__node-1770891120113"
+    "validTo": null
   },
   {
     "id": "node-1770891003781__node-1770891044281",
     "placeAId": "node-1770891003781",
     "placeBId": "node-1770891044281",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891003781__node-1770891044281"
+    "validTo": null
   },
   {
     "id": "node-1770891003781__node-1770891120113",
     "placeAId": "node-1770891003781",
     "placeBId": "node-1770891120113",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891003781__node-1770891120113"
+    "validTo": null
   },
   {
     "id": "node-1770891044281__node-1770891148537",
     "placeAId": "node-1770891044281",
     "placeBId": "node-1770891148537",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891044281__node-1770891148537"
+    "validTo": null
   },
   {
     "id": "node-1770891148537__node-1770891194672",
     "placeAId": "node-1770891148537",
     "placeBId": "node-1770891194672",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891148537__node-1770891194672"
+    "validTo": null
   },
   {
     "id": "node-1770891194672__node-1770891315316",
     "placeAId": "node-1770891194672",
     "placeBId": "node-1770891315316",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891194672__node-1770891315316"
+    "validTo": null
   },
   {
     "id": "node-1770891194672__node-1770891376062",
     "placeAId": "node-1770891194672",
     "placeBId": "node-1770891376062",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891194672__node-1770891376062"
+    "validTo": null
   },
   {
     "id": "node-1770891315316__node-1770891342495",
     "placeAId": "node-1770891315316",
     "placeBId": "node-1770891342495",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891315316__node-1770891342495"
+    "validTo": null
   },
   {
     "id": "node-1770891315316__node-1770891915773",
     "placeAId": "node-1770891315316",
     "placeBId": "node-1770891915773",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891315316__node-1770891915773"
+    "validTo": null
   },
   {
     "id": "node-1770891342495__node-1770891544616",
     "placeAId": "node-1770891342495",
     "placeBId": "node-1770891544616",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891342495__node-1770891544616"
+    "validTo": null
   },
   {
     "id": "node-1770891376062__node-1770891460324",
     "placeAId": "node-1770891376062",
     "placeBId": "node-1770891460324",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891376062__node-1770891460324"
+    "validTo": null
   },
   {
     "id": "node-1770891460324__node-1770891474595",
     "placeAId": "node-1770891460324",
     "placeBId": "node-1770891474595",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891460324__node-1770891474595"
+    "validTo": null
   },
   {
     "id": "node-1770891474595__node-1770891520064",
     "placeAId": "node-1770891474595",
     "placeBId": "node-1770891520064",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891474595__node-1770891520064"
+    "validTo": null
   },
   {
     "id": "node-1770891520064__node-1770891544616",
     "placeAId": "node-1770891520064",
     "placeBId": "node-1770891544616",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770891520064__node-1770891544616"
+    "validTo": null
   },
   {
     "id": "node-1770894673248__node-1770894704650",
     "placeAId": "node-1770894673248",
     "placeBId": "node-1770894704650",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894673248__node-1770894704650"
+    "validTo": null
   },
   {
     "id": "node-1770894673248__node-1770906293087",
     "placeAId": "node-1770894673248",
     "placeBId": "node-1770906293087",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894673248__node-1770906293087"
+    "validTo": null
   },
   {
     "id": "node-1770894747352__node-1770894811224",
     "placeAId": "node-1770894747352",
     "placeBId": "node-1770894811224",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894747352__node-1770894811224"
+    "validTo": null
   },
   {
     "id": "node-1770894747352__node-1770906213725",
     "placeAId": "node-1770894747352",
     "placeBId": "node-1770906213725",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894747352__node-1770906213725"
+    "validTo": null
   },
   {
     "id": "node-1770894787749__node-1770894811224",
     "placeAId": "node-1770894787749",
     "placeBId": "node-1770894811224",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894787749__node-1770894811224"
+    "validTo": null
   },
   {
     "id": "node-1770894787749__node-1770906712573",
     "placeAId": "node-1770894787749",
     "placeBId": "node-1770906712573",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894787749__node-1770906712573"
+    "validTo": null
   },
   {
     "id": "node-1770894787749__node-1770906731613",
     "placeAId": "node-1770894787749",
     "placeBId": "node-1770906731613",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894787749__node-1770906731613"
+    "validTo": null
   },
   {
     "id": "node-1770894811224__node-1770894828775",
     "placeAId": "node-1770894811224",
     "placeBId": "node-1770894828775",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894811224__node-1770894828775"
+    "validTo": null
   },
   {
     "id": "node-1770894811224__node-1770894880046",
     "placeAId": "node-1770894811224",
     "placeBId": "node-1770894880046",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894811224__node-1770894880046"
+    "validTo": null
   },
   {
     "id": "node-1770894828775__node-1770894852240",
     "placeAId": "node-1770894828775",
     "placeBId": "node-1770894852240",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894828775__node-1770894852240"
+    "validTo": null
   },
   {
     "id": "node-1770894852240__node-1770894880046",
     "placeAId": "node-1770894852240",
     "placeBId": "node-1770894880046",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894852240__node-1770894880046"
+    "validTo": null
   },
   {
     "id": "node-1770894880046__node-1770894994828",
     "placeAId": "node-1770894880046",
     "placeBId": "node-1770894994828",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894880046__node-1770894994828"
+    "validTo": null
   },
   {
     "id": "node-1770894880046__node-1770906973478",
     "placeAId": "node-1770894880046",
     "placeBId": "node-1770906973478",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894880046__node-1770906973478"
+    "validTo": null
   },
   {
     "id": "node-1770894880046__node-1770907094109",
     "placeAId": "node-1770894880046",
     "placeBId": "node-1770907094109",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894880046__node-1770907094109"
+    "validTo": null
   },
   {
     "id": "node-1770894994828__node-1770897613242",
     "placeAId": "node-1770894994828",
     "placeBId": "node-1770897613242",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770894994828__node-1770897613242"
+    "validTo": null
   },
   {
     "id": "node-1770897442282__node-1770897530894",
     "placeAId": "node-1770897442282",
     "placeBId": "node-1770897530894",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897442282__node-1770897530894"
+    "validTo": null
   },
   {
     "id": "node-1770897442282__node-1770897613242",
     "placeAId": "node-1770897442282",
     "placeBId": "node-1770897613242",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897442282__node-1770897613242"
+    "validTo": null
   },
   {
     "id": "node-1770897530894__node-1770897591288",
     "placeAId": "node-1770897530894",
     "placeBId": "node-1770897591288",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897530894__node-1770897591288"
+    "validTo": null
   },
   {
     "id": "node-1770897530894__node-1770897613242",
     "placeAId": "node-1770897530894",
     "placeBId": "node-1770897613242",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897530894__node-1770897613242"
+    "validTo": null
   },
   {
     "id": "node-1770897613242__node-1770897625083",
     "placeAId": "node-1770897613242",
     "placeBId": "node-1770897625083",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897613242__node-1770897625083"
+    "validTo": null
   },
   {
     "id": "node-1770897625083__node-1770897668923",
     "placeAId": "node-1770897625083",
     "placeBId": "node-1770897668923",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897625083__node-1770897668923"
+    "validTo": null
   },
   {
     "id": "node-1770897625083__node-1770907094109",
     "placeAId": "node-1770897625083",
     "placeBId": "node-1770907094109",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897625083__node-1770907094109"
+    "validTo": null
   },
   {
     "id": "node-1770897625083__node-1770907145936",
     "placeAId": "node-1770897625083",
     "placeBId": "node-1770907145936",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897625083__node-1770907145936"
+    "validTo": null
   },
   {
     "id": "node-1770897625083__node-1770907151001",
     "placeAId": "node-1770897625083",
     "placeBId": "node-1770907151001",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897625083__node-1770907151001"
+    "validTo": null
   },
   {
     "id": "node-1770897668923__node-1770907100588",
     "placeAId": "node-1770897668923",
     "placeBId": "node-1770907100588",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897668923__node-1770907100588"
+    "validTo": null
   },
   {
     "id": "node-1770897698221__node-1770897770477",
     "placeAId": "node-1770897698221",
     "placeBId": "node-1770897770477",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897698221__node-1770897770477"
+    "validTo": null
   },
   {
     "id": "node-1770897770477__node-1770897790722",
     "placeAId": "node-1770897770477",
     "placeBId": "node-1770897790722",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897770477__node-1770897790722"
+    "validTo": null
   },
   {
     "id": "node-1770897770477__node-1770911077601",
     "placeAId": "node-1770897770477",
     "placeBId": "node-1770911077601",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897770477__node-1770911077601"
+    "validTo": null
   },
   {
     "id": "node-1770897790722__node-1770897856386",
     "placeAId": "node-1770897790722",
     "placeBId": "node-1770897856386",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897790722__node-1770897856386"
+    "validTo": null
   },
   {
     "id": "node-1770897856386__node-1770897860152",
     "placeAId": "node-1770897856386",
     "placeBId": "node-1770897860152",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897856386__node-1770897860152"
+    "validTo": null
   },
   {
     "id": "node-1770897860152__node-1770912364302",
     "placeAId": "node-1770897860152",
     "placeBId": "node-1770912364302",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897860152__node-1770912364302"
+    "validTo": null
   },
   {
     "id": "node-1770897868165__node-1770912385928",
     "placeAId": "node-1770897868165",
     "placeBId": "node-1770912385928",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770897868165__node-1770912385928"
+    "validTo": null
   },
   {
     "id": "node-1770906150586__node-1770906278302",
     "placeAId": "node-1770906150586",
     "placeBId": "node-1770906278302",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906150586__node-1770906278302"
+    "validTo": null
   },
   {
     "id": "node-1770906150586__node-1770906301641",
     "placeAId": "node-1770906150586",
     "placeBId": "node-1770906301641",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906150586__node-1770906301641"
+    "validTo": null
   },
   {
     "id": "node-1770906199277__node-1770906213725",
     "placeAId": "node-1770906199277",
     "placeBId": "node-1770906213725",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906199277__node-1770906213725"
+    "validTo": null
   },
   {
     "id": "node-1770906199277__node-1770912050316",
     "placeAId": "node-1770906199277",
     "placeBId": "node-1770912050316",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906199277__node-1770912050316"
+    "validTo": null
   },
   {
     "id": "node-1770906213725__node-1770906278302",
     "placeAId": "node-1770906213725",
     "placeBId": "node-1770906278302",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906213725__node-1770906278302"
+    "validTo": null
   },
   {
     "id": "node-1770906213725__node-1770906638289",
     "placeAId": "node-1770906213725",
     "placeBId": "node-1770906638289",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906213725__node-1770906638289"
+    "validTo": null
   },
   {
     "id": "node-1770906278302__node-1770906293087",
     "placeAId": "node-1770906278302",
     "placeBId": "node-1770906293087",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906278302__node-1770906293087"
+    "validTo": null
   },
   {
     "id": "node-1770906293087__node-1770906301641",
     "placeAId": "node-1770906293087",
     "placeBId": "node-1770906301641",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906293087__node-1770906301641"
+    "validTo": null
   },
   {
     "id": "node-1770906293087__node-1770906362386",
     "placeAId": "node-1770906293087",
     "placeBId": "node-1770906362386",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906293087__node-1770906362386"
+    "validTo": null
   },
   {
     "id": "node-1770906362386__node-1770906451065",
     "placeAId": "node-1770906362386",
     "placeBId": "node-1770906451065",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906362386__node-1770906451065"
+    "validTo": null
   },
   {
     "id": "node-1770906638289__node-1770906644770",
     "placeAId": "node-1770906638289",
     "placeBId": "node-1770906644770",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906638289__node-1770906644770"
+    "validTo": null
   },
   {
     "id": "node-1770906644770__node-1770906650706",
     "placeAId": "node-1770906644770",
     "placeBId": "node-1770906650706",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906644770__node-1770906650706"
+    "validTo": null
   },
   {
     "id": "node-1770906644770__node-1770906731613",
     "placeAId": "node-1770906644770",
     "placeBId": "node-1770906731613",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906644770__node-1770906731613"
+    "validTo": null
   },
   {
     "id": "node-1770906644770__node-1770906804866",
     "placeAId": "node-1770906644770",
     "placeBId": "node-1770906804866",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906644770__node-1770906804866"
+    "validTo": null
   },
   {
     "id": "node-1770906644770__node-1770912043726",
     "placeAId": "node-1770906644770",
     "placeBId": "node-1770912043726",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906644770__node-1770912043726"
+    "validTo": null
   },
   {
     "id": "node-1770906650706__node-1770906927681",
     "placeAId": "node-1770906650706",
     "placeBId": "node-1770906927681",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906650706__node-1770906927681"
+    "validTo": null
   },
   {
     "id": "node-1770906650706__node-1770907161310",
     "placeAId": "node-1770906650706",
     "placeBId": "node-1770907161310",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906650706__node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770906712573__node-1770906731613",
     "placeAId": "node-1770906712573",
     "placeBId": "node-1770906731613",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906712573__node-1770906731613"
+    "validTo": null
   },
   {
     "id": "node-1770906731613__node-1770906799317",
     "placeAId": "node-1770906731613",
     "placeBId": "node-1770906799317",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906731613__node-1770906799317"
+    "validTo": null
   },
   {
     "id": "node-1770906731613__node-1770906804866",
     "placeAId": "node-1770906731613",
     "placeBId": "node-1770906804866",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906731613__node-1770906804866"
+    "validTo": null
   },
   {
     "id": "node-1770906799317__node-1770906973478",
     "placeAId": "node-1770906799317",
     "placeBId": "node-1770906973478",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906799317__node-1770906973478"
+    "validTo": null
   },
   {
     "id": "node-1770906804866__node-1770907045212",
     "placeAId": "node-1770906804866",
     "placeBId": "node-1770907045212",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906804866__node-1770907045212"
+    "validTo": null
   },
   {
     "id": "node-1770906804866__node-1770907161310",
     "placeAId": "node-1770906804866",
     "placeBId": "node-1770907161310",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906804866__node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770906973478__node-1770907045212",
     "placeAId": "node-1770906973478",
     "placeBId": "node-1770907045212",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770906973478__node-1770907045212"
+    "validTo": null
   },
   {
     "id": "node-1770907045212__node-1770907088865",
     "placeAId": "node-1770907045212",
     "placeBId": "node-1770907088865",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907045212__node-1770907088865"
+    "validTo": null
   },
   {
     "id": "node-1770907045212__node-1770907094109",
     "placeAId": "node-1770907045212",
     "placeBId": "node-1770907094109",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907045212__node-1770907094109"
+    "validTo": null
   },
   {
     "id": "node-1770907045212__node-1770907154674",
     "placeAId": "node-1770907045212",
     "placeBId": "node-1770907154674",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907045212__node-1770907154674"
+    "validTo": null
   },
   {
     "id": "node-1770907100588__node-1770907142041",
     "placeAId": "node-1770907100588",
     "placeBId": "node-1770907142041",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907100588__node-1770907142041"
+    "validTo": null
   },
   {
     "id": "node-1770907142041__node-1770907145936",
     "placeAId": "node-1770907142041",
     "placeBId": "node-1770907145936",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907142041__node-1770907145936"
+    "validTo": null
   },
   {
     "id": "node-1770907142041__node-1770911208987",
     "placeAId": "node-1770907142041",
     "placeBId": "node-1770911208987",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907142041__node-1770911208987"
+    "validTo": null
   },
   {
     "id": "node-1770907142041__node-1770911217459",
     "placeAId": "node-1770907142041",
     "placeBId": "node-1770911217459",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907142041__node-1770911217459"
+    "validTo": null
   },
   {
     "id": "node-1770907151001__node-1770907161310",
     "placeAId": "node-1770907151001",
     "placeBId": "node-1770907161310",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907151001__node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770907154674__node-1770907161310",
     "placeAId": "node-1770907154674",
     "placeBId": "node-1770907161310",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907154674__node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770907161310__node-1770911222493",
     "placeAId": "node-1770907161310",
     "placeBId": "node-1770911222493",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907161310__node-1770911222493"
+    "validTo": null
   },
   {
     "id": "node-1770907161310__node-1770911226606",
     "placeAId": "node-1770907161310",
     "placeBId": "node-1770911226606",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770907161310__node-1770911226606"
+    "validTo": null
   },
   {
     "id": "node-1770911077601__node-1770911208987",
     "placeAId": "node-1770911077601",
     "placeBId": "node-1770911208987",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770911077601__node-1770911208987"
+    "validTo": null
   },
   {
     "id": "node-1770911202396__node-1770911208987",
     "placeAId": "node-1770911202396",
     "placeBId": "node-1770911208987",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770911202396__node-1770911208987"
+    "validTo": null
   },
   {
     "id": "node-1770911217459__node-1770911222493",
     "placeAId": "node-1770911217459",
     "placeBId": "node-1770911222493",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770911217459__node-1770911222493"
+    "validTo": null
   },
   {
     "id": "node-1770912043726__node-1770912050316",
     "placeAId": "node-1770912043726",
     "placeBId": "node-1770912050316",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770912043726__node-1770912050316"
+    "validTo": null
   },
   {
     "id": "node-1770912364302__node-1770912385928",
     "placeAId": "node-1770912364302",
     "placeBId": "node-1770912385928",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770912364302__node-1770912385928"
+    "validTo": null
   },
   {
     "id": "node-1770912385928__node-1770912401064",
     "placeAId": "node-1770912385928",
     "placeBId": "node-1770912401064",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacySegmentId": "node-1770912385928__node-1770912401064"
+    "validTo": null
   }
 ]

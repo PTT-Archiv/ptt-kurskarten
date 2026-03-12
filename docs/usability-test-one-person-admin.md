@@ -131,7 +131,7 @@ Aufgabe: Erstellen Sie eine neue Kante zwischen zwei Knoten.
 Erfolgskriterien:
 - Von/Nach-Knoten korrekt gewählt
 - Transporttyp gesetzt
-- `validFrom`, `validTo`, `leuge` gesetzt
+- `validFrom`, `validTo`, `distance` gesetzt
 - Kante gespeichert
 
 Feedback:
@@ -173,7 +173,7 @@ Ergebnis: [ ] Erfolg  [ ] Teilweise  [ ] Kein Erfolg
 ---
 
 ### Szenario 7: Kante bearbeiten
-Aufgabe: Öffnen Sie eine bestehende Kante und ändern Sie Transport, `leuge` und Notizen (DE/FR). Speichern Sie.
+Aufgabe: Öffnen Sie eine bestehende Kante und ändern Sie Transport, `distance` und Notizen (DE/FR). Speichern Sie.
 
 Erfolgskriterien:
 - Kante wird aus Liste oder Karte gewählt
@@ -328,4 +328,3 @@ Priorität für Umsetzung:
 - [ ] Niedrig
 
 Nachtest erforderlich: [ ] Ja  [ ] Nein
-

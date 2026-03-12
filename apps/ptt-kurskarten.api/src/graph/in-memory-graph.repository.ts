@@ -1,7 +1,20 @@
-import type { GraphEdge, GraphNode, GraphSnapshot, NodeDetail, Year } from '@ptt-kurskarten/shared';
+import type {
+  EditionEntry,
+  GraphAssertion,
+  GraphEdge,
+  GraphNode,
+  GraphNodePatch,
+  GraphSnapshot,
+  NodeDetail,
+  Year
+} from '@ptt-kurskarten/shared';
 import type { GraphRepository } from './graph.repository';
 
 const YEARS: number[] = [1840, 1855, 1852, 1888, 1900];
+let EDITIONS: EditionEntry[] = YEARS.map((year) => ({
+  id: `edition-${year}`,
+  year
+}));
 
 let NODES: GraphNode[] = [
   { id: 'bern', name: 'Bern', x: 300, y: 200, validFrom: 1800 },
@@ -117,8 +130,50 @@ export class InMemoryGraphRepository implements GraphRepository {
     };
   }
 
+  async getAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+    return [];
+  }
+
+  async createAssertion(assertion: GraphAssertion): Promise<GraphAssertion> {
+    return assertion;
+  }
+
+  async updateAssertion(_id: string, _patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+    return null;
+  }
+
+  async deleteAssertion(_id: string): Promise<boolean> {
+    return false;
+  }
+
   async getAvailableYears(): Promise<number[]> {
     return YEARS;
+  }
+
+  async getEditions(): Promise<EditionEntry[]> {
+    return [...EDITIONS].sort((a, b) => a.year - b.year);
+  }
+
+  async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
+    const y = this.coerceYear(year);
+    const index = EDITIONS.findIndex((entry) => entry.year === y);
+    const normalizedRoute = typeof patch.iiifRoute === 'string' ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined;
+    const next: EditionEntry = {
+      id: patch.id ?? EDITIONS[index]?.id ?? `edition-${y}`,
+      year: y,
+      title: patch.title ?? EDITIONS[index]?.title,
+      iiifRoute: normalizedRoute || undefined
+    };
+    if (index === -1) {
+      EDITIONS = [...EDITIONS, next];
+    } else {
+      EDITIONS = [...EDITIONS.slice(0, index), next, ...EDITIONS.slice(index + 1)];
+    }
+    if (!YEARS.includes(y)) {
+      YEARS.push(y);
+      YEARS.sort((a, b) => a - b);
+    }
+    return next;
   }
 
   async getAllNodes(): Promise<GraphNode[]> {
@@ -134,17 +189,22 @@ export class InMemoryGraphRepository implements GraphRepository {
     return node;
   }
 
-  async updateNode(id: string, patch: Partial<GraphNode>): Promise<GraphNode | null> {
+  async updateNode(id: string, patch: GraphNodePatch): Promise<GraphNode | null> {
     const index = NODES.findIndex((candidate) => candidate.id === id);
     if (index === -1) {
       return null;
     }
-    const updated = { ...NODES[index], ...patch, id } satisfies GraphNode;
+    const { anchorYear: _anchorYear, ...nodePatch } = patch;
+    const updated = { ...NODES[index], ...nodePatch, id } satisfies GraphNode;
     NODES = [...NODES.slice(0, index), updated, ...NODES.slice(index + 1)];
     return updated;
   }
 
-  async deleteNode(id: string): Promise<boolean> {
+  async setNodeHidden(_id: string, _year: number, _hidden: boolean): Promise<boolean> {
+    return false;
+  }
+
+  async deleteNode(id: string, _year?: number): Promise<boolean> {
     const index = NODES.findIndex((candidate) => candidate.id === id);
     if (index === -1) {
       return false;

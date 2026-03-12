@@ -8,8 +8,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000002",
@@ -20,8 +19,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000003",
@@ -32,8 +30,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000004",
@@ -44,8 +41,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000005",
@@ -56,8 +52,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000006",
@@ -68,8 +63,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000007",
@@ -80,20 +74,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
-  },
-  {
-    "id": "place-name-000008",
-    "placeId": "node-1770809870824",
-    "lang": "und",
-    "name": "Bern",
-    "normalized": "bern",
-    "preferred": true,
-    "nameType": "primary",
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000009",
@@ -104,8 +85,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000010",
@@ -116,8 +96,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000011",
@@ -128,8 +107,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000012",
@@ -140,8 +118,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000013",
@@ -152,8 +129,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000014",
@@ -164,8 +140,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000015",
@@ -176,8 +151,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000016",
@@ -188,8 +162,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000017",
@@ -200,8 +173,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000018",
@@ -212,8 +184,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000019",
@@ -224,8 +195,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000020",
@@ -236,8 +206,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000021",
@@ -248,8 +217,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000022",
@@ -260,8 +228,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000023",
@@ -272,8 +239,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000024",
@@ -284,8 +250,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000025",
@@ -296,8 +261,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000026",
@@ -308,8 +272,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000027",
@@ -320,8 +283,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000028",
@@ -332,8 +294,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000029",
@@ -344,8 +305,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000030",
@@ -356,8 +316,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000031",
@@ -368,8 +327,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000032",
@@ -380,8 +338,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000033",
@@ -392,8 +349,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000034",
@@ -404,8 +360,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000035",
@@ -416,8 +371,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000036",
@@ -428,8 +382,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000037",
@@ -440,8 +393,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000038",
@@ -452,8 +404,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000039",
@@ -464,8 +415,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000040",
@@ -476,8 +426,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000041",
@@ -488,8 +437,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000042",
@@ -500,8 +448,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000043",
@@ -512,8 +459,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000044",
@@ -524,8 +470,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000045",
@@ -536,8 +481,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000046",
@@ -548,8 +492,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000047",
@@ -560,8 +503,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000048",
@@ -572,8 +514,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000049",
@@ -584,8 +525,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000050",
@@ -596,8 +536,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000051",
@@ -608,8 +547,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000052",
@@ -620,8 +558,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000053",
@@ -632,8 +569,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000054",
@@ -644,8 +580,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000055",
@@ -656,8 +591,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000056",
@@ -668,8 +602,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000057",
@@ -680,8 +613,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000058",
@@ -692,8 +624,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000059",
@@ -704,8 +635,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000060",
@@ -716,8 +646,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000061",
@@ -728,8 +657,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000062",
@@ -740,8 +668,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000063",
@@ -752,8 +679,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000064",
@@ -764,8 +690,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000065",
@@ -776,8 +701,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000066",
@@ -788,8 +712,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000067",
@@ -800,8 +723,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000068",
@@ -812,8 +734,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000069",
@@ -824,8 +745,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000070",
@@ -836,8 +756,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000071",
@@ -848,8 +767,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000072",
@@ -860,8 +778,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000073",
@@ -872,8 +789,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000074",
@@ -884,8 +800,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000075",
@@ -896,8 +811,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000076",
@@ -908,8 +822,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000077",
@@ -920,8 +833,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000078",
@@ -932,8 +844,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000079",
@@ -944,8 +855,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000080",
@@ -956,8 +866,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000081",
@@ -968,8 +877,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000082",
@@ -980,8 +888,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000083",
@@ -992,8 +899,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000084",
@@ -1004,8 +910,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000085",
@@ -1016,8 +921,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000086",
@@ -1028,8 +932,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000087",
@@ -1040,8 +943,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000088",
@@ -1052,8 +954,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000089",
@@ -1064,8 +965,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000090",
@@ -1076,8 +976,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000091",
@@ -1088,8 +987,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000092",
@@ -1100,8 +998,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000093",
@@ -1112,8 +1009,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000094",
@@ -1124,8 +1020,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000095",
@@ -1136,8 +1031,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000096",
@@ -1148,8 +1042,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000097",
@@ -1160,8 +1053,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000098",
@@ -1172,8 +1064,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000099",
@@ -1184,8 +1075,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000100",
@@ -1196,8 +1086,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000101",
@@ -1208,8 +1097,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000102",
@@ -1220,8 +1108,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000103",
@@ -1232,8 +1119,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000104",
@@ -1244,8 +1130,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000105",
@@ -1256,8 +1141,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000106",
@@ -1268,8 +1152,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000107",
@@ -1280,8 +1163,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000108",
@@ -1292,8 +1174,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000109",
@@ -1304,8 +1185,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000110",
@@ -1316,8 +1196,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000111",
@@ -1328,8 +1207,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000112",
@@ -1340,8 +1218,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000113",
@@ -1352,8 +1229,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000114",
@@ -1364,8 +1240,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000115",
@@ -1376,8 +1251,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000116",
@@ -1388,8 +1262,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000117",
@@ -1400,8 +1273,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000118",
@@ -1412,8 +1284,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000119",
@@ -1424,8 +1295,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000120",
@@ -1436,8 +1306,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000121",
@@ -1448,8 +1317,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000122",
@@ -1460,8 +1328,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000123",
@@ -1472,8 +1339,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000124",
@@ -1484,8 +1350,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000125",
@@ -1496,8 +1361,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000126",
@@ -1508,8 +1372,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000127",
@@ -1520,8 +1383,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000128",
@@ -1532,8 +1394,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000129",
@@ -1544,8 +1405,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000130",
@@ -1556,8 +1416,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000131",
@@ -1568,8 +1427,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000132",
@@ -1580,8 +1438,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000133",
@@ -1592,8 +1449,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000134",
@@ -1604,8 +1460,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000135",
@@ -1616,8 +1471,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000136",
@@ -1628,8 +1482,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000137",
@@ -1640,8 +1493,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000138",
@@ -1652,8 +1504,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000139",
@@ -1664,8 +1515,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000140",
@@ -1676,8 +1526,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000141",
@@ -1688,8 +1537,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000142",
@@ -1700,8 +1548,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000143",
@@ -1712,8 +1559,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000144",
@@ -1724,8 +1570,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000145",
@@ -1736,8 +1581,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000146",
@@ -1748,8 +1592,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000147",
@@ -1760,8 +1603,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000148",
@@ -1772,8 +1614,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000149",
@@ -1784,8 +1625,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000150",
@@ -1796,8 +1636,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000151",
@@ -1808,8 +1647,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000152",
@@ -1820,8 +1658,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000153",
@@ -1832,8 +1669,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000154",
@@ -1844,8 +1680,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000155",
@@ -1856,8 +1691,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000156",
@@ -1868,8 +1702,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000157",
@@ -1880,8 +1713,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000158",
@@ -1892,8 +1724,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000159",
@@ -1904,8 +1735,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000160",
@@ -1916,8 +1746,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000161",
@@ -1928,8 +1757,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000162",
@@ -1940,8 +1768,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000163",
@@ -1952,8 +1779,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000164",
@@ -1964,8 +1790,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000165",
@@ -1976,8 +1801,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000166",
@@ -1988,8 +1812,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000167",
@@ -2000,8 +1823,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000168",
@@ -2012,8 +1834,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000169",
@@ -2024,8 +1845,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000170",
@@ -2036,8 +1856,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000171",
@@ -2048,8 +1867,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000172",
@@ -2060,8 +1878,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000173",
@@ -2072,8 +1889,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000174",
@@ -2084,8 +1900,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000175",
@@ -2096,8 +1911,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000176",
@@ -2108,8 +1922,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000177",
@@ -2120,8 +1933,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000178",
@@ -2132,8 +1944,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000179",
@@ -2144,8 +1955,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000180",
@@ -2156,8 +1966,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000181",
@@ -2168,8 +1977,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000182",
@@ -2180,8 +1988,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000183",
@@ -2192,8 +1999,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000184",
@@ -2204,8 +2010,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000185",
@@ -2216,8 +2021,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000186",
@@ -2228,8 +2032,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000187",
@@ -2240,8 +2043,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000188",
@@ -2252,8 +2054,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000189",
@@ -2264,8 +2065,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000190",
@@ -2276,8 +2076,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000191",
@@ -2288,8 +2087,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000192",
@@ -2300,8 +2098,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000193",
@@ -2312,8 +2109,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000194",
@@ -2324,8 +2120,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000195",
@@ -2336,8 +2131,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000196",
@@ -2348,8 +2142,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000197",
@@ -2360,8 +2153,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000198",
@@ -2372,8 +2164,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000199",
@@ -2384,8 +2175,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000200",
@@ -2396,8 +2186,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000201",
@@ -2408,8 +2197,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000202",
@@ -2420,8 +2208,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000203",
@@ -2432,8 +2219,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000204",
@@ -2444,8 +2230,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000205",
@@ -2456,8 +2241,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000206",
@@ -2468,8 +2252,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000207",
@@ -2480,8 +2263,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000208",
@@ -2492,8 +2274,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000209",
@@ -2504,8 +2285,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000210",
@@ -2516,8 +2296,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000211",
@@ -2528,8 +2307,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000212",
@@ -2540,8 +2318,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000213",
@@ -2552,8 +2329,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000214",
@@ -2564,8 +2340,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000215",
@@ -2576,8 +2351,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000216",
@@ -2588,8 +2362,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000217",
@@ -2600,8 +2373,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000218",
@@ -2612,8 +2384,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000219",
@@ -2624,8 +2395,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000220",
@@ -2636,8 +2406,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000221",
@@ -2648,8 +2417,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000222",
@@ -2660,8 +2428,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000223",
@@ -2672,8 +2439,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000224",
@@ -2684,8 +2450,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000225",
@@ -2696,8 +2461,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000226",
@@ -2708,8 +2472,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000227",
@@ -2720,8 +2483,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000228",
@@ -2732,8 +2494,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000229",
@@ -2744,8 +2505,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000230",
@@ -2756,8 +2516,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000231",
@@ -2768,8 +2527,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000232",
@@ -2780,8 +2538,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000233",
@@ -2792,8 +2549,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000234",
@@ -2804,8 +2560,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000235",
@@ -2816,8 +2571,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000236",
@@ -2828,8 +2582,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000237",
@@ -2840,8 +2593,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000238",
@@ -2852,8 +2604,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000239",
@@ -2864,8 +2615,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000240",
@@ -2876,8 +2626,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000241",
@@ -2888,8 +2637,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000242",
@@ -2900,8 +2648,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000243",
@@ -2912,8 +2659,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000244",
@@ -2924,8 +2670,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000245",
@@ -2936,8 +2681,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000246",
@@ -2948,8 +2692,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000247",
@@ -2960,8 +2703,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000248",
@@ -2972,8 +2714,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000249",
@@ -2984,8 +2725,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000250",
@@ -2996,8 +2736,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000251",
@@ -3008,8 +2747,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000252",
@@ -3020,8 +2758,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000253",
@@ -3032,8 +2769,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000254",
@@ -3044,8 +2780,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000255",
@@ -3056,8 +2791,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000256",
@@ -3068,8 +2802,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000257",
@@ -3080,8 +2813,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000258",
@@ -3092,8 +2824,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000259",
@@ -3104,8 +2835,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000260",
@@ -3116,8 +2846,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000261",
@@ -3128,8 +2857,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000262",
@@ -3140,8 +2868,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000263",
@@ -3152,8 +2879,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000264",
@@ -3164,8 +2890,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000265",
@@ -3176,8 +2901,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000266",
@@ -3188,8 +2912,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000267",
@@ -3200,8 +2923,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000268",
@@ -3212,8 +2934,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000269",
@@ -3224,8 +2945,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000270",
@@ -3236,8 +2956,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000271",
@@ -3248,8 +2967,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000272",
@@ -3260,8 +2978,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000273",
@@ -3272,8 +2989,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000274",
@@ -3284,8 +3000,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000275",
@@ -3296,8 +3011,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000276",
@@ -3308,8 +3022,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000277",
@@ -3320,8 +3033,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000278",
@@ -3332,8 +3044,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000279",
@@ -3344,8 +3055,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000280",
@@ -3356,8 +3066,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000281",
@@ -3368,8 +3077,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000282",
@@ -3380,8 +3088,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000283",
@@ -3392,8 +3099,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000284",
@@ -3404,8 +3110,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000285",
@@ -3416,8 +3121,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000286",
@@ -3428,8 +3132,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000287",
@@ -3440,8 +3143,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000288",
@@ -3452,8 +3154,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000289",
@@ -3464,8 +3165,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000290",
@@ -3476,8 +3176,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000291",
@@ -3488,8 +3187,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000292",
@@ -3500,8 +3198,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000293",
@@ -3512,8 +3209,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000294",
@@ -3524,8 +3220,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000295",
@@ -3536,8 +3231,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000296",
@@ -3548,8 +3242,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000297",
@@ -3560,8 +3253,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000298",
@@ -3572,8 +3264,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000299",
@@ -3584,8 +3275,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000300",
@@ -3596,8 +3286,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000301",
@@ -3608,8 +3297,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000302",
@@ -3620,8 +3308,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000303",
@@ -3632,8 +3319,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000304",
@@ -3644,8 +3330,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000305",
@@ -3656,8 +3341,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000306",
@@ -3668,8 +3352,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000307",
@@ -3680,8 +3363,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000308",
@@ -3692,8 +3374,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000309",
@@ -3704,8 +3385,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000310",
@@ -3716,8 +3396,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000311",
@@ -3728,8 +3407,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000312",
@@ -3740,8 +3418,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000313",
@@ -3752,8 +3429,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000314",
@@ -3764,8 +3440,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000315",
@@ -3776,8 +3451,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000316",
@@ -3788,8 +3462,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000317",
@@ -3800,8 +3473,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000318",
@@ -3812,8 +3484,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000319",
@@ -3824,8 +3495,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000320",
@@ -3836,8 +3506,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000321",
@@ -3848,8 +3517,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000322",
@@ -3860,8 +3528,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000323",
@@ -3872,8 +3539,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000324",
@@ -3884,8 +3550,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000325",
@@ -3896,8 +3561,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000326",
@@ -3908,8 +3572,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000327",
@@ -3920,8 +3583,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000328",
@@ -3932,8 +3594,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000329",
@@ -3944,8 +3605,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000330",
@@ -3956,8 +3616,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000331",
@@ -3968,8 +3627,7 @@
     "preferred": true,
     "nameType": "primary",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "place-name-000332",
@@ -3980,8 +3638,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000333",
@@ -3992,8 +3649,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000334",
@@ -4004,8 +3660,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000335",
@@ -4016,8 +3671,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000336",
@@ -4028,8 +3682,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000337",
@@ -4040,32 +3693,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
-  },
-  {
-    "id": "place-name-000338",
-    "placeId": "node-1770809870824",
-    "lang": "it",
-    "name": "Berna",
-    "normalized": "berna",
-    "preferred": false,
-    "nameType": "alias",
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
-  },
-  {
-    "id": "place-name-000339",
-    "placeId": "node-1770809870824",
-    "lang": "fr",
-    "name": "Berne",
-    "normalized": "berne",
-    "preferred": false,
-    "nameType": "alias",
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000340",
@@ -4076,8 +3704,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000341",
@@ -4088,8 +3715,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000342",
@@ -4100,8 +3726,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000343",
@@ -4112,8 +3737,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000344",
@@ -4124,8 +3748,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000345",
@@ -4136,8 +3759,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000346",
@@ -4148,8 +3770,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000347",
@@ -4160,8 +3781,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000348",
@@ -4172,8 +3792,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000349",
@@ -4184,8 +3803,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000350",
@@ -4196,8 +3814,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000351",
@@ -4208,8 +3825,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000352",
@@ -4220,8 +3836,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000353",
@@ -4232,8 +3847,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000354",
@@ -4244,8 +3858,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000355",
@@ -4256,8 +3869,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000356",
@@ -4268,8 +3880,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000357",
@@ -4280,8 +3891,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000358",
@@ -4292,8 +3902,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000359",
@@ -4304,8 +3913,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000360",
@@ -4316,8 +3924,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000361",
@@ -4328,8 +3935,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000362",
@@ -4340,8 +3946,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000363",
@@ -4352,8 +3957,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000364",
@@ -4364,8 +3968,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000365",
@@ -4376,8 +3979,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000366",
@@ -4388,8 +3990,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000367",
@@ -4400,8 +4001,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000368",
@@ -4412,8 +4012,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000369",
@@ -4424,8 +4023,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000370",
@@ -4436,8 +4034,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000371",
@@ -4448,8 +4045,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000372",
@@ -4460,8 +4056,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000373",
@@ -4472,8 +4067,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000374",
@@ -4484,8 +4078,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000375",
@@ -4496,8 +4089,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000376",
@@ -4508,8 +4100,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000377",
@@ -4520,8 +4111,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000378",
@@ -4532,8 +4122,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000379",
@@ -4544,8 +4133,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000380",
@@ -4556,8 +4144,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000381",
@@ -4568,8 +4155,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000382",
@@ -4580,8 +4166,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000383",
@@ -4592,8 +4177,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000384",
@@ -4604,8 +4188,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000385",
@@ -4616,8 +4199,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000386",
@@ -4628,8 +4210,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000387",
@@ -4640,8 +4221,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000388",
@@ -4652,8 +4232,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000389",
@@ -4664,8 +4243,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000390",
@@ -4676,8 +4254,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000391",
@@ -4688,8 +4265,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000392",
@@ -4700,8 +4276,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000393",
@@ -4712,8 +4287,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000394",
@@ -4724,8 +4298,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000395",
@@ -4736,8 +4309,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000396",
@@ -4748,8 +4320,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000397",
@@ -4760,8 +4331,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000398",
@@ -4772,8 +4342,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000399",
@@ -4784,8 +4353,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000400",
@@ -4796,8 +4364,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000401",
@@ -4808,8 +4375,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000402",
@@ -4820,8 +4386,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000403",
@@ -4832,8 +4397,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000404",
@@ -4844,8 +4408,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000405",
@@ -4856,8 +4419,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000406",
@@ -4868,8 +4430,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000407",
@@ -4880,8 +4441,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000408",
@@ -4892,8 +4452,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000409",
@@ -4904,8 +4463,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000410",
@@ -4916,8 +4474,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000411",
@@ -4928,8 +4485,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000412",
@@ -4940,8 +4496,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000413",
@@ -4952,8 +4507,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000414",
@@ -4964,8 +4518,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000415",
@@ -4976,8 +4529,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000416",
@@ -4988,8 +4540,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000417",
@@ -5000,8 +4551,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000418",
@@ -5012,8 +4562,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000419",
@@ -5024,8 +4573,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000420",
@@ -5036,8 +4584,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000421",
@@ -5048,8 +4595,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000422",
@@ -5060,8 +4606,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000423",
@@ -5072,8 +4617,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000424",
@@ -5084,8 +4628,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000425",
@@ -5096,8 +4639,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000426",
@@ -5108,8 +4650,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000427",
@@ -5120,8 +4661,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000428",
@@ -5132,8 +4672,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000429",
@@ -5144,8 +4683,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000430",
@@ -5156,8 +4694,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000431",
@@ -5168,8 +4705,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000432",
@@ -5180,8 +4716,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000433",
@@ -5192,8 +4727,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000434",
@@ -5204,8 +4738,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000435",
@@ -5216,8 +4749,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000436",
@@ -5228,8 +4760,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000437",
@@ -5240,8 +4771,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000438",
@@ -5252,8 +4782,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000439",
@@ -5264,8 +4793,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000440",
@@ -5276,8 +4804,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000441",
@@ -5288,8 +4815,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000442",
@@ -5300,8 +4826,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000443",
@@ -5312,8 +4837,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000444",
@@ -5324,8 +4848,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000445",
@@ -5336,8 +4859,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000446",
@@ -5348,8 +4870,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000447",
@@ -5360,8 +4881,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000448",
@@ -5372,8 +4892,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000449",
@@ -5384,8 +4903,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000450",
@@ -5396,8 +4914,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000451",
@@ -5408,8 +4925,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000452",
@@ -5420,8 +4936,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000453",
@@ -5432,8 +4947,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000454",
@@ -5444,8 +4958,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000455",
@@ -5456,8 +4969,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000456",
@@ -5468,8 +4980,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000457",
@@ -5480,8 +4991,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000458",
@@ -5492,8 +5002,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000459",
@@ -5504,8 +5013,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000460",
@@ -5516,8 +5024,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000461",
@@ -5528,8 +5035,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000462",
@@ -5540,8 +5046,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000463",
@@ -5552,8 +5057,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000464",
@@ -5564,8 +5068,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000465",
@@ -5576,8 +5079,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000466",
@@ -5588,8 +5090,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000467",
@@ -5600,8 +5101,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000468",
@@ -5612,8 +5112,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000469",
@@ -5624,8 +5123,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000470",
@@ -5636,8 +5134,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000471",
@@ -5648,8 +5145,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000472",
@@ -5660,8 +5156,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000473",
@@ -5672,8 +5167,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000474",
@@ -5684,8 +5178,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000475",
@@ -5696,8 +5189,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000476",
@@ -5708,8 +5200,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000477",
@@ -5720,8 +5211,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000478",
@@ -5732,8 +5222,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000479",
@@ -5744,8 +5233,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000480",
@@ -5756,8 +5244,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000481",
@@ -5768,8 +5255,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000482",
@@ -5780,8 +5266,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000483",
@@ -5792,8 +5277,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000484",
@@ -5804,8 +5288,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000485",
@@ -5816,8 +5299,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000486",
@@ -5828,8 +5310,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000487",
@@ -5840,8 +5321,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000488",
@@ -5852,8 +5332,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000489",
@@ -5864,8 +5343,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000490",
@@ -5876,8 +5354,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000491",
@@ -5888,8 +5365,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000492",
@@ -5900,8 +5376,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000493",
@@ -5912,8 +5387,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000494",
@@ -5924,8 +5398,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000495",
@@ -5936,8 +5409,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000496",
@@ -5948,8 +5420,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000497",
@@ -5960,8 +5431,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000498",
@@ -5972,8 +5442,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000499",
@@ -5984,8 +5453,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000500",
@@ -5996,8 +5464,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000501",
@@ -6008,8 +5475,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000502",
@@ -6020,8 +5486,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000503",
@@ -6032,8 +5497,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000504",
@@ -6044,8 +5508,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000505",
@@ -6056,8 +5519,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000506",
@@ -6068,8 +5530,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000507",
@@ -6080,8 +5541,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000508",
@@ -6092,8 +5552,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000509",
@@ -6104,8 +5563,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000510",
@@ -6116,8 +5574,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000511",
@@ -6128,8 +5585,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000512",
@@ -6140,8 +5596,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000513",
@@ -6152,8 +5607,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000514",
@@ -6164,8 +5618,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000515",
@@ -6176,8 +5629,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000516",
@@ -6188,8 +5640,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000517",
@@ -6200,8 +5651,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000518",
@@ -6212,8 +5662,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000519",
@@ -6224,8 +5673,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000520",
@@ -6236,8 +5684,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000521",
@@ -6248,8 +5695,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000522",
@@ -6260,8 +5706,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000523",
@@ -6272,8 +5717,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000524",
@@ -6284,8 +5728,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000525",
@@ -6296,8 +5739,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000526",
@@ -6308,8 +5750,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000527",
@@ -6320,8 +5761,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000528",
@@ -6332,8 +5772,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000529",
@@ -6344,8 +5783,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000530",
@@ -6356,8 +5794,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000531",
@@ -6368,8 +5805,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000532",
@@ -6380,8 +5816,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000533",
@@ -6392,8 +5827,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000534",
@@ -6404,8 +5838,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000535",
@@ -6416,8 +5849,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000536",
@@ -6428,8 +5860,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000537",
@@ -6440,8 +5871,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000538",
@@ -6452,8 +5882,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000539",
@@ -6464,8 +5893,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000540",
@@ -6476,8 +5904,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000541",
@@ -6488,8 +5915,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000542",
@@ -6500,8 +5926,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000543",
@@ -6512,8 +5937,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000544",
@@ -6524,8 +5948,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000545",
@@ -6536,8 +5959,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000546",
@@ -6548,8 +5970,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000547",
@@ -6560,8 +5981,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000548",
@@ -6572,8 +5992,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000549",
@@ -6584,8 +6003,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000550",
@@ -6596,8 +6014,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000551",
@@ -6608,8 +6025,7 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
     "id": "place-name-000552",
@@ -6620,19 +6036,61 @@
     "preferred": false,
     "nameType": "alias",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-wikidata-json"
+    "validTo": null
   },
   {
-    "id": "09d87e71-55ab-4b98-879d-c8ef260a50d8",
-    "placeId": "node-1773161385523",
+    "id": "ff77bcbd-539e-40b3-8d91-1c7ef7ccd710",
+    "placeId": "node-1773305543455",
     "lang": "und",
-    "name": "Kreuzlingen",
-    "normalized": "kreuzlingen",
+    "name": "Bern",
+    "normalized": "bern",
     "preferred": true,
     "nameType": "primary",
-    "validFrom": 1999,
-    "validTo": null,
-    "sourceId": "source-v2-api"
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "bcafe9a1-2587-4c0f-b1de-01d793af210f",
+    "placeId": "node-1773305687121",
+    "lang": "und",
+    "name": "Bern",
+    "normalized": "bern",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "837b3549-d485-422f-9ae8-ed5b87ca2fb8",
+    "placeId": "node-1773320558440",
+    "lang": "und",
+    "name": "Realp",
+    "normalized": "realp",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "a08dd6ff-e28e-4ec8-994f-a6aca0289523",
+    "placeId": "node-1773321719997",
+    "lang": "und",
+    "name": "Crassier",
+    "normalized": "crassier",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "e64dca5c-e381-49e5-812b-2b9f5d272c0b",
+    "placeId": "node-1773321898703",
+    "lang": "und",
+    "name": "Crassier",
+    "normalized": "crassier",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1892,
+    "validTo": null
   }
 ]

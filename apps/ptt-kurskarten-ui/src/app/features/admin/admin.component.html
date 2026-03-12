@@ -14,6 +14,36 @@
     </div>
   </div>
 
+  <div class="context-group context-group-iiif">
+    <span class="context-label">IIIF Route (per year)</span>
+    <div class="context-controls">
+      <input
+        type="text"
+        [value]="iiifRouteDraft()"
+        placeholder="https://iiif.ptt-archiv.ch/iiif/3/..."
+        (input)="onIiifRouteInput($event)"
+        (blur)="onIiifRouteBlur()"
+        (keydown)="onIiifRouteKeydown($event)"
+      />
+    </div>
+  </div>
+
+  <div class="context-group context-group-new-edition">
+    <span class="context-label">New Edition</span>
+    <div class="context-controls context-controls-new-edition">
+      <input
+        type="number"
+        [value]="newEditionYearDraft()"
+        placeholder="e.g. 1865"
+        (input)="onNewEditionYearInput($event)"
+        (keydown)="onNewEditionYearKeydown($event)"
+      />
+      <button type="button" class="context-add-btn" [disabled]="!canAddNewEdition()" (click)="addNewEdition()">
+        Add
+      </button>
+    </div>
+  </div>
+
   <div class="context-year-range">Years {{ minYear() }}-{{ maxYear() }}</div>
 </header>
 
@@ -50,7 +80,7 @@
       </div>
 
       @if (quickEntityMode() === 'place') {
-        <div class="quick-mode-note">Create a stable place identity. Coordinates use current map cursor.</div>
+        <div class="quick-mode-note">Prefer existing places first to reuse anchors and avoid duplicates.</div>
         <label class="quick-edge-field">
           <span>Name</span>
           <div class="quick-edge-typeahead">
@@ -63,27 +93,54 @@
               (keydown)="onQuickPlaceKeydown($event)"
               (blur)="closeQuickPlaceList()"
             />
-            @if (geoSearchEnabled() && quickPlaceGeoOpen() && quickPlaceGeoResults().length > 0) {
+            @if (quickPlaceGeoOpen() && quickPlaceSuggestions().length > 0) {
               <div class="quick-edge-list">
-                @for (result of quickPlaceGeoResults(); track result.id; let idx = $index) {
+                @for (suggestion of quickPlaceSuggestions(); track suggestion.id; let idx = $index) {
                   <button
                     type="button"
                     [class.active]="idx === quickPlaceGeoActiveIndex()"
-                    (mousedown)="selectQuickPlaceGeoResult(result)"
+                    (mousedown)="selectQuickPlaceSuggestion(suggestion)"
                   >
-                    <span>{{ result.label }}</span>
-                    <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                    <span>{{ suggestion.label }}</span>
+                    @if (suggestion.kind === 'existing') {
+                      @if (suggestion.value.hidden) {
+                        <span class="muted">Existing · hidden in {{ year() }}</span>
+                      } @else if (!suggestion.value.active) {
+                        <span class="muted">Existing · not active in {{ year() }}</span>
+                      } @else {
+                        <span class="muted">Existing · visible</span>
+                      }
+                    } @else {
+                      <span class="muted">GeoAdmin · {{ suggestion.x.toFixed(0) }}, {{ suggestion.y.toFixed(0) }}</span>
+                    }
                   </button>
                 }
               </div>
             }
           </div>
         </label>
+        @if (selectedQuickPlaceExisting(); as selected) {
+          @if (selected.hidden) {
+            <div class="quick-mode-note">Existing place selected: hidden in {{ year() }}.</div>
+          } @else if (!selected.active) {
+            <div class="quick-mode-note">Existing place selected: not active in {{ year() }}.</div>
+          } @else {
+            <div class="quick-mode-note">Existing place selected: will reuse current anchor history.</div>
+          }
+        }
         @if (quickPlaceGeoPoint(); as point) {
-          <div class="quick-mode-note">GeoAdmin anchor: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}</div>
+          <div class="quick-mode-note">Anchor preview: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}</div>
         }
         <button type="button" class="quick-edge-create" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
-          Create Place
+          @if (selectedQuickPlaceExisting(); as selected) {
+            @if (selected.hidden) {
+              Unhide & Use Place
+            } @else {
+              Use Existing Place
+            }
+          } @else {
+            Create Place
+          }
         </button>
       }
 
@@ -154,8 +211,8 @@
 
         <div class="quick-edge-row quick-edge-meta">
           <label class="quick-edge-field">
-            <span>{{ 'label.leuge' | transloco }}</span>
-            <input #quickLeugeInput type="number" [value]="quickLeuge()" (input)="updateQuickLeuge($event)" />
+            <span>{{ 'label.distance' | transloco }}</span>
+            <input type="number" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
           </label>
         </div>
 
@@ -289,14 +346,9 @@
             </div>
           }
         </div>
-        <label class="field quick-paste-field">
-          <span>Paste rows (e.g. <code>postkutsche;08:00;09:15</code>)</span>
-          <textarea rows="4" [value]="quickTripPasteText()" (input)="onQuickTripPasteInput($event)"></textarea>
-        </label>
-        <button type="button" class="ghost-btn" (click)="applyQuickTripPaste()">Parse Pasted Trips</button>
       }
 
-      @if (quickEntityMode() === 'fact' || quickEntityMode() === 'anchor') {
+      @if (quickEntityMode() === 'fact') {
         <label class="quick-edge-field">
           <span>Target place</span>
           <div class="quick-edge-typeahead">
@@ -344,42 +396,19 @@
               <option value="boolean">boolean</option>
             </select>
           </label>
-          <label class="quick-edge-field">
-            <span>Status</span>
-            <input type="text" [value]="quickFactStatus()" (input)="quickFactStatus.set($any($event.target).value)" />
-          </label>
-          <label class="quick-edge-field">
-            <span>Confidence (0..1)</span>
-            <input type="number" min="0" max="1" step="0.1" [value]="quickFactConfidence()" (input)="quickFactConfidence.set(+$any($event.target).value || 0)" />
-          </label>
         </div>
         <label class="quick-edge-field">
           <span>Value</span>
           <input type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
         </label>
         <button type="button" class="quick-edge-create" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
-          Add Fact
+          {{ editingFactId() ? 'Save Fact' : 'Add Fact' }}
         </button>
+        @if (editingFactId()) {
+          <button type="button" class="ghost-btn" (click)="cancelFactEdit()">Cancel Edit</button>
+        }
       }
 
-      @if (quickEntityMode() === 'anchor') {
-        <div class="quick-anchor-grid">
-          <label class="quick-edge-field">
-            <span>x</span>
-            <input type="number" [value]="quickAnchorX()" (input)="quickAnchorX.set($any($event.target).value)" />
-          </label>
-          <label class="quick-edge-field">
-            <span>y</span>
-            <input type="number" [value]="quickAnchorY()" (input)="quickAnchorY.set($any($event.target).value)" />
-          </label>
-        </div>
-        <div class="quick-anchor-actions">
-          <button type="button" class="ghost-btn" (click)="setQuickAnchorFromPointer()">Use map pointer</button>
-          <button type="button" class="quick-edge-create" [disabled]="!quickAnchorX().trim() || !quickAnchorY().trim()" (click)="applyQuickAnchor()">
-            Apply Anchor
-          </button>
-        </div>
-      }
     </section>
 
     <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
@@ -400,7 +429,6 @@
           <div><span class="keycap">S</span> Service mode</div>
           <div><span class="keycap">T</span> Trip mode</div>
           <div><span class="keycap">F</span> Fact mode</div>
-          <div><span class="keycap">A</span> Anchor mode</div>
           <div><span class="keycap">Esc</span> {{ 'admin.shortcut.escape' | transloco }}</div>
           <div><span class="keycap">Ctrl/Cmd+S</span> {{ 'admin.shortcut.save' | transloco }}</div>
           <div><span class="keycap">Ctrl/Cmd+Z</span> {{ 'admin.shortcut.undo' | transloco }}</div>
@@ -612,7 +640,7 @@
                     <span class="edge-meta">
                       @for (transport of edge.transports; track transport; let isLast = $last) {
                         {{ ('transport.' + (transport || 'postkutsche')) | transloco }}@if (!isLast) {, }
-                      } - {{ edge.validFrom }}-{{ edge.validTo ?? '∞' }}
+                      } - Year {{ edge.validFrom }}
                     </span>
                   </button>
                 }
@@ -645,16 +673,12 @@
             </label>
             <div class="field-grid">
               <label class="field">
-                <span>{{ 'label.validFrom' | transloco }}</span>
-                <input type="number" [value]="edgeDraft.validFrom" (input)="updateSelectedEdgeValidFrom($event)" />
+                <span>Year</span>
+                <input type="number" [value]="edgeDraft.validFrom" readonly />
               </label>
               <label class="field">
-                <span>{{ 'label.validTo' | transloco }}</span>
-                <input type="number" [value]="edgeDraft.validTo ?? ''" (input)="updateSelectedEdgeValidTo($event)" />
-              </label>
-              <label class="field">
-                <span>{{ 'label.leuge' | transloco }}</span>
-                <input type="number" [value]="edgeDraft.leuge ?? ''" (input)="updateSelectedEdgeLeuge($event)" />
+                <span>{{ 'label.distance' | transloco }}</span>
+                <input type="number" [value]="edgeDraft.distance ?? ''" (input)="updateSelectedEdgeDistance($event)" />
               </label>
             </div>
             <div class="field">
@@ -702,16 +726,12 @@
             </label>
             <div class="field-grid">
               <label class="field">
-                <span>{{ 'label.validFrom' | transloco }}</span>
-                <input type="number" [value]="draft.validFrom" (input)="updateDraftEdgeValidFrom($event)" />
+                <span>Year</span>
+                <input type="number" [value]="draft.validFrom" readonly />
               </label>
               <label class="field">
-                <span>{{ 'label.validTo' | transloco }}</span>
-                <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftEdgeValidTo($event)" />
-              </label>
-              <label class="field">
-                <span>{{ 'label.leuge' | transloco }}</span>
-                <input type="number" [value]="draft.leuge ?? ''" (input)="updateDraftEdgeLeuge($event)" />
+                <span>{{ 'label.distance' | transloco }}</span>
+                <input type="number" [value]="draft.distance ?? ''" (input)="updateDraftEdgeDistance($event)" />
               </label>
             </div>
             <div class="field">
@@ -856,12 +876,7 @@
             }
           }
 
-          <label class="field quick-paste-field">
-            <span>Paste trips into quick table and append</span>
-            <textarea rows="4" [value]="quickTripPasteText()" (input)="onQuickTripPasteInput($event)"></textarea>
-          </label>
           <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="applyQuickTripPaste()">Parse Pasted Trips</button>
             <button class="ghost-btn" type="button" (click)="appendQuickTripsToCurrentService()">Append Quick Trips</button>
           </div>
         </section>
@@ -878,11 +893,22 @@
                   <div class="fact-row">
                     <div class="fact-main">
                       <code>{{ fact.schemaKey }}</code>
-                      <span>{{ fact.value }}</span>
+                      @if (factLink(fact); as link) {
+                        @if (link.url) {
+                          <a class="fact-link" [href]="link.url" target="_blank" rel="noopener noreferrer">
+                            {{ link.label }}
+                          </a>
+                        } @else {
+                          <span>{{ link.label }}</span>
+                        }
+                      }
                     </div>
-                    <div class="fact-meta">{{ fact.status }} · {{ fact.confidence }}</div>
-                    @if (!fact.id.startsWith('derived-')) {
-                      <button class="ghost-btn" type="button" (click)="removePendingFact(fact.id)">Remove</button>
+                    <div class="fact-meta">{{ fact.valueType }}</div>
+                    @if (fact.editable) {
+                      <button class="ghost-btn" type="button" (click)="startEditFact(fact)">Edit</button>
+                    }
+                    @if (fact.removable) {
+                      <button class="ghost-btn" type="button" (click)="removeFact(fact.id)">Remove</button>
                     }
                   </div>
                 }
@@ -908,13 +934,14 @@
           }
           <app-archive-snippet-viewer
             [imageUrl]="archiveSnippetUrl()"
+            [iiifInfoUrl]="archiveIiifInfoUrl()"
             [allowWrite]="!isDragging()"
             [showCenterMarker]="true"
             [autoFit]="true"
             [emitOnAutoFit]="true"
             (regionChange)="onArchiveRegionChange($event)"
           ></app-archive-snippet-viewer>
-          <div class="hint">Use Quick Mode A to apply map anchors for current edition/template.</div>
+          <div class="hint">Adjust map anchors directly in this tab for the selected place.</div>
         </section>
       }
 

@@ -8,7 +8,7 @@
 
 .context-bar {
   display: grid;
-  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  grid-template-columns: minmax(150px, 220px) minmax(240px, 1fr) minmax(180px, 260px) auto;
   align-items: end;
   gap: 10px;
   padding: 10px 16px;
@@ -25,6 +25,14 @@
   min-width: 180px;
 }
 
+.context-group-iiif {
+  min-width: 280px;
+}
+
+.context-group-new-edition {
+  min-width: 220px;
+}
+
 .context-label {
   font-size: 11px;
   font-weight: 700;
@@ -37,13 +45,21 @@
   gap: 8px;
 }
 
-.context-bar select {
+.context-controls-new-edition {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.context-bar select,
+.context-bar input {
   border: 2px solid #141414;
   border-radius: 10px;
   padding: 6px 10px;
   background: #ffffff;
   font-size: 12px;
   min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .context-year-range {
@@ -51,6 +67,22 @@
   font-weight: 600;
   white-space: nowrap;
   justify-self: end;
+}
+
+.context-add-btn {
+  border: 2px solid #141414;
+  border-radius: 10px;
+  background: var(--ptt-yellow);
+  color: #141414;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.context-add-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .layout {
@@ -574,7 +606,7 @@
 .field-grid {
   display: grid;
   gap: 8px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .notes-grid {
@@ -769,6 +801,16 @@
   padding: 1px 5px;
 }
 
+.fact-link {
+  color: #0b57d0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.fact-link:hover {
+  text-decoration-thickness: 2px;
+}
+
 .fact-meta {
   font-size: 11px;
   color: #3a3a3a;
@@ -838,9 +880,8 @@
     align-items: stretch;
   }
 
-  .context-controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .context-controls-new-edition {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .layout {

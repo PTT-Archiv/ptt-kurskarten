@@ -7,8 +7,7 @@
     "iiifCenterX": 2236,
     "iiifCenterY": 8522,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770808908336",
@@ -18,8 +17,7 @@
     "iiifCenterX": 1113,
     "iiifCenterY": 7991,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770809018783",
@@ -29,8 +27,7 @@
     "iiifCenterX": 2036,
     "iiifCenterY": 7657,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770809062251",
@@ -40,8 +37,7 @@
     "iiifCenterX": 1090,
     "iiifCenterY": 7182,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770809102948",
@@ -51,8 +47,7 @@
     "iiifCenterX": 402,
     "iiifCenterY": 6908,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770809183587",
@@ -62,8 +57,7 @@
     "iiifCenterX": 786,
     "iiifCenterY": 3077,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770809209472",
@@ -73,19 +67,7 @@
     "iiifCenterX": 4630,
     "iiifCenterY": 4089,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
-  },
-  {
-    "id": "anchor-node-1770809870824",
-    "placeId": "node-1770809870824",
-    "x": 267.72908366533864,
-    "y": 218.9402390438247,
-    "iiifCenterX": 4862,
-    "iiifCenterY": 4112,
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770811420932",
@@ -95,8 +77,7 @@
     "iiifCenterX": 9451,
     "iiifCenterY": 7393,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770811785314",
@@ -106,8 +87,7 @@
     "iiifCenterX": 10934,
     "iiifCenterY": 4576,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770812095922",
@@ -117,8 +97,7 @@
     "iiifCenterX": 5336,
     "iiifCenterY": 1532,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770812117179",
@@ -128,8 +107,7 @@
     "iiifCenterX": 1410,
     "iiifCenterY": 6398,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818428222",
@@ -139,8 +117,7 @@
     "iiifCenterX": 2542,
     "iiifCenterY": 5878,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818436737",
@@ -150,8 +127,7 @@
     "iiifCenterX": 2145,
     "iiifCenterY": 5949,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818444657",
@@ -161,8 +137,7 @@
     "iiifCenterX": 3234,
     "iiifCenterY": 5586,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818451614",
@@ -172,8 +147,7 @@
     "iiifCenterX": 4554,
     "iiifCenterY": 3855,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818476302",
@@ -183,8 +157,7 @@
     "iiifCenterX": 6565,
     "iiifCenterY": 4901,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818481603",
@@ -194,8 +167,7 @@
     "iiifCenterX": 4338,
     "iiifCenterY": 3731,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818483826",
@@ -205,8 +177,7 @@
     "iiifCenterX": 3918,
     "iiifCenterY": 3859,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818487149",
@@ -216,8 +187,7 @@
     "iiifCenterX": 5369,
     "iiifCenterY": 4048,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770818509015",
@@ -227,8 +197,7 @@
     "iiifCenterX": 5133,
     "iiifCenterY": 4545,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823561872",
@@ -238,8 +207,7 @@
     "iiifCenterX": 3791,
     "iiifCenterY": 7700,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823570686",
@@ -249,8 +217,7 @@
     "iiifCenterX": 4862,
     "iiifCenterY": 4112,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823595717",
@@ -260,8 +227,7 @@
     "iiifCenterX": 4200,
     "iiifCenterY": 7415,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823607384",
@@ -271,8 +237,7 @@
     "iiifCenterX": 5085,
     "iiifCenterY": 6936,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823621828",
@@ -282,8 +247,7 @@
     "iiifCenterX": 5587,
     "iiifCenterY": 6916,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770823657588",
@@ -293,8 +257,7 @@
     "iiifCenterX": 6088,
     "iiifCenterY": 6937,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890162679",
@@ -304,8 +267,7 @@
     "iiifCenterX": 1179,
     "iiifCenterY": 6128,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890186709",
@@ -315,8 +277,7 @@
     "iiifCenterX": 936,
     "iiifCenterY": 5978,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890297820",
@@ -326,8 +287,7 @@
     "iiifCenterX": 2004,
     "iiifCenterY": 6518,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890321232",
@@ -337,8 +297,7 @@
     "iiifCenterX": 1848,
     "iiifCenterY": 5815,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890387454",
@@ -348,8 +307,7 @@
     "iiifCenterX": 1836,
     "iiifCenterY": 7080,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890410235",
@@ -359,8 +317,7 @@
     "iiifCenterX": 2092,
     "iiifCenterY": 6928,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890434712",
@@ -370,8 +327,7 @@
     "iiifCenterX": 3031,
     "iiifCenterY": 6463,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890490883",
@@ -381,8 +337,7 @@
     "iiifCenterX": 2451,
     "iiifCenterY": 6399,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890523913",
@@ -392,8 +347,7 @@
     "iiifCenterX": 3272,
     "iiifCenterY": 6824,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890541178",
@@ -403,8 +357,7 @@
     "iiifCenterX": 3583,
     "iiifCenterY": 7197,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890556808",
@@ -414,8 +367,7 @@
     "iiifCenterX": 3490,
     "iiifCenterY": 6773,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890564956",
@@ -425,8 +377,7 @@
     "iiifCenterX": 3130,
     "iiifCenterY": 6179,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890609929",
@@ -436,8 +387,7 @@
     "iiifCenterX": 2844,
     "iiifCenterY": 5611,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890628791",
@@ -447,8 +397,7 @@
     "iiifCenterX": 2551,
     "iiifCenterY": 5365,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890638355",
@@ -458,8 +407,7 @@
     "iiifCenterX": 6421,
     "iiifCenterY": 6852,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890809431",
@@ -469,8 +417,7 @@
     "iiifCenterX": 6664,
     "iiifCenterY": 6976,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890904555",
@@ -480,8 +427,7 @@
     "iiifCenterX": 7034,
     "iiifCenterY": 7341,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770890971568",
@@ -491,8 +437,7 @@
     "iiifCenterX": 6621,
     "iiifCenterY": 7405,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891003781",
@@ -502,8 +447,7 @@
     "iiifCenterX": 7359,
     "iiifCenterY": 8210,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891044281",
@@ -513,8 +457,7 @@
     "iiifCenterX": 8580,
     "iiifCenterY": 9274,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891120113",
@@ -524,8 +467,7 @@
     "iiifCenterX": 7619,
     "iiifCenterY": 7529,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891148537",
@@ -535,8 +477,7 @@
     "iiifCenterX": 8594,
     "iiifCenterY": 9251,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891194672",
@@ -546,8 +487,7 @@
     "iiifCenterX": 9458,
     "iiifCenterY": 10031,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891315316",
@@ -557,8 +497,7 @@
     "iiifCenterX": 9640,
     "iiifCenterY": 9126,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891342495",
@@ -568,8 +507,7 @@
     "iiifCenterX": 9787,
     "iiifCenterY": 9072,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891376062",
@@ -579,8 +517,7 @@
     "iiifCenterX": 9911,
     "iiifCenterY": 9681,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891460324",
@@ -590,8 +527,7 @@
     "iiifCenterX": 10240,
     "iiifCenterY": 9261,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891474595",
@@ -601,8 +537,7 @@
     "iiifCenterX": 10548,
     "iiifCenterY": 8879,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891520064",
@@ -612,8 +547,7 @@
     "iiifCenterX": 10242,
     "iiifCenterY": 8180,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891544616",
@@ -623,8 +557,7 @@
     "iiifCenterX": 10504,
     "iiifCenterY": 7657,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891568712",
@@ -634,8 +567,7 @@
     "iiifCenterX": 10735,
     "iiifCenterY": 7260,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891635575",
@@ -645,8 +577,7 @@
     "iiifCenterX": 10598,
     "iiifCenterY": 6843,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891674893",
@@ -656,8 +587,7 @@
     "iiifCenterX": 10470,
     "iiifCenterY": 6496,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891915773",
@@ -667,8 +597,7 @@
     "iiifCenterX": 9356,
     "iiifCenterY": 8780,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891950032",
@@ -678,8 +607,7 @@
     "iiifCenterX": 9258,
     "iiifCenterY": 8231,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770891985133",
@@ -689,8 +617,7 @@
     "iiifCenterX": 9179,
     "iiifCenterY": 7814,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892074771",
@@ -700,8 +627,7 @@
     "iiifCenterX": 10689,
     "iiifCenterY": 3777,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892131647",
@@ -711,19 +637,17 @@
     "iiifCenterX": 11082,
     "iiifCenterY": 2757,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892169658",
     "placeId": "node-1770892169658",
-    "x": 625.2679258694022,
-    "y": 141.4002244453916,
+    "x": 615.0819672131148,
+    "y": 134.655737704918,
     "iiifCenterX": 10686,
     "iiifCenterY": 2650,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892196035",
@@ -733,8 +657,7 @@
     "iiifCenterX": 10655,
     "iiifCenterY": 3348,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892203535",
@@ -744,8 +667,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892276405",
@@ -755,8 +677,7 @@
     "iiifCenterX": 10660,
     "iiifCenterY": 2957,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892402501",
@@ -766,8 +687,7 @@
     "iiifCenterX": 11178,
     "iiifCenterY": 2097,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892435872",
@@ -777,8 +697,7 @@
     "iiifCenterX": 11178,
     "iiifCenterY": 1501,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892475913",
@@ -788,8 +707,7 @@
     "iiifCenterX": 10654,
     "iiifCenterY": 985,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892528135",
@@ -799,8 +717,7 @@
     "iiifCenterX": 10964,
     "iiifCenterY": 639,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892536449",
@@ -810,8 +727,7 @@
     "iiifCenterX": 11064,
     "iiifCenterY": 764,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892604502",
@@ -821,8 +737,7 @@
     "iiifCenterX": 9709,
     "iiifCenterY": 1035,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892624111",
@@ -832,8 +747,7 @@
     "iiifCenterX": 9729,
     "iiifCenterY": 652,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892703699",
@@ -843,8 +757,7 @@
     "iiifCenterX": 8504,
     "iiifCenterY": 743,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892936569",
@@ -854,8 +767,7 @@
     "iiifCenterX": 8286,
     "iiifCenterY": 547,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892944989",
@@ -865,8 +777,7 @@
     "iiifCenterX": 8031,
     "iiifCenterY": 625,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770892959172",
@@ -876,8 +787,7 @@
     "iiifCenterX": 7869,
     "iiifCenterY": 779,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893096455",
@@ -887,8 +797,7 @@
     "iiifCenterX": 7403,
     "iiifCenterY": 1234,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893139038",
@@ -898,8 +807,7 @@
     "iiifCenterX": 7734,
     "iiifCenterY": 1210,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893174287",
@@ -909,8 +817,7 @@
     "iiifCenterX": 6666,
     "iiifCenterY": 1489,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893232957",
@@ -920,8 +827,7 @@
     "iiifCenterX": 6309,
     "iiifCenterY": 1389,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893253800",
@@ -931,8 +837,7 @@
     "iiifCenterX": 5921,
     "iiifCenterY": 1315,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893270491",
@@ -942,8 +847,7 @@
     "iiifCenterX": 5474,
     "iiifCenterY": 1113,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893284200",
@@ -953,8 +857,7 @@
     "iiifCenterX": 5431,
     "iiifCenterY": 1124,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893304119",
@@ -964,8 +867,7 @@
     "iiifCenterX": 5385,
     "iiifCenterY": 913,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893503712",
@@ -975,8 +877,7 @@
     "iiifCenterX": 4862,
     "iiifCenterY": 4112,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893573469",
@@ -986,8 +887,7 @@
     "iiifCenterX": 4801,
     "iiifCenterY": 1100,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770893582974",
@@ -997,8 +897,7 @@
     "iiifCenterX": 5056,
     "iiifCenterY": 1210,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894673248",
@@ -1008,8 +907,7 @@
     "iiifCenterX": 3311,
     "iiifCenterY": 1782,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894704650",
@@ -1019,8 +917,7 @@
     "iiifCenterX": 3022,
     "iiifCenterY": 1684,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894747352",
@@ -1030,8 +927,7 @@
     "iiifCenterX": 2804,
     "iiifCenterY": 3185,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894787749",
@@ -1041,8 +937,7 @@
     "iiifCenterX": 2115,
     "iiifCenterY": 3463,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894811224",
@@ -1052,8 +947,7 @@
     "iiifCenterX": 1530,
     "iiifCenterY": 3599,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894828775",
@@ -1063,8 +957,7 @@
     "iiifCenterX": 1264,
     "iiifCenterY": 3927,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894852240",
@@ -1074,8 +967,7 @@
     "iiifCenterX": 1206,
     "iiifCenterY": 4187,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894880046",
@@ -1085,8 +977,7 @@
     "iiifCenterX": 1702,
     "iiifCenterY": 4173,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770894994828",
@@ -1096,8 +987,7 @@
     "iiifCenterX": 1986,
     "iiifCenterY": 4892,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770895016880",
@@ -1107,8 +997,7 @@
     "iiifCenterX": 512,
     "iiifCenterY": 7201,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770895112907",
@@ -1118,8 +1007,7 @@
     "iiifCenterX": 13367,
     "iiifCenterY": 4457,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897442282",
@@ -1129,8 +1017,7 @@
     "iiifCenterX": 2179,
     "iiifCenterY": 5493,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897530894",
@@ -1140,8 +1027,7 @@
     "iiifCenterX": 1644,
     "iiifCenterY": 5237,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897591288",
@@ -1151,8 +1037,7 @@
     "iiifCenterX": 1293,
     "iiifCenterY": 5585,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897613242",
@@ -1162,8 +1047,7 @@
     "iiifCenterX": 2265,
     "iiifCenterY": 5001,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897625083",
@@ -1173,8 +1057,7 @@
     "iiifCenterX": 2583,
     "iiifCenterY": 4779,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897668923",
@@ -1184,8 +1067,7 @@
     "iiifCenterX": 3001,
     "iiifCenterY": 5247,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897698221",
@@ -1195,8 +1077,7 @@
     "iiifCenterX": 3333,
     "iiifCenterY": 5842,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897770477",
@@ -1206,8 +1087,7 @@
     "iiifCenterX": 3768,
     "iiifCenterY": 5486,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897790722",
@@ -1217,8 +1097,7 @@
     "iiifCenterX": 3715,
     "iiifCenterY": 6104,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897856386",
@@ -1228,8 +1107,7 @@
     "iiifCenterX": 4325,
     "iiifCenterY": 6082,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897860152",
@@ -1239,8 +1117,7 @@
     "iiifCenterX": 4650,
     "iiifCenterY": 5816,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897868165",
@@ -1250,8 +1127,7 @@
     "iiifCenterX": 5463,
     "iiifCenterY": 5668,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897884517",
@@ -1261,8 +1137,7 @@
     "iiifCenterX": 8185,
     "iiifCenterY": 5759,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897945287",
@@ -1272,8 +1147,7 @@
     "iiifCenterX": 8431,
     "iiifCenterY": 6018,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897948683",
@@ -1283,8 +1157,7 @@
     "iiifCenterX": 8265,
     "iiifCenterY": 6754,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770897993209",
@@ -1294,8 +1167,7 @@
     "iiifCenterX": 8838,
     "iiifCenterY": 7424,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898030151",
@@ -1305,8 +1177,7 @@
     "iiifCenterX": 9000,
     "iiifCenterY": 7615,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898099050",
@@ -1316,8 +1187,7 @@
     "iiifCenterX": 9412,
     "iiifCenterY": 6956,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898134797",
@@ -1327,8 +1197,7 @@
     "iiifCenterX": 9326,
     "iiifCenterY": 6677,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898144757",
@@ -1338,8 +1207,7 @@
     "iiifCenterX": 9050,
     "iiifCenterY": 6513,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898184274",
@@ -1349,8 +1217,7 @@
     "iiifCenterX": 9218,
     "iiifCenterY": 6020,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898221637",
@@ -1360,8 +1227,7 @@
     "iiifCenterX": 9877,
     "iiifCenterY": 7138,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898228869",
@@ -1371,8 +1237,7 @@
     "iiifCenterX": 10008,
     "iiifCenterY": 6606,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898312719",
@@ -1382,8 +1247,7 @@
     "iiifCenterX": 9888,
     "iiifCenterY": 6258,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898350997",
@@ -1393,8 +1257,7 @@
     "iiifCenterX": 9963,
     "iiifCenterY": 5965,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898396116",
@@ -1404,8 +1267,7 @@
     "iiifCenterX": 8836,
     "iiifCenterY": 6188,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898495591",
@@ -1415,8 +1277,7 @@
     "iiifCenterX": 10301,
     "iiifCenterY": 5861,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898535921",
@@ -1426,8 +1287,7 @@
     "iiifCenterX": 10654,
     "iiifCenterY": 5662,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898587206",
@@ -1437,8 +1297,7 @@
     "iiifCenterX": 11224,
     "iiifCenterY": 5949,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898624681",
@@ -1448,8 +1307,7 @@
     "iiifCenterX": 11722,
     "iiifCenterY": 6210,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898631981",
@@ -1459,8 +1317,7 @@
     "iiifCenterX": 11957,
     "iiifCenterY": 5897,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898668601",
@@ -1470,8 +1327,7 @@
     "iiifCenterX": 12236,
     "iiifCenterY": 5615,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898704049",
@@ -1481,8 +1337,7 @@
     "iiifCenterX": 12521,
     "iiifCenterY": 5293,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898723871",
@@ -1492,8 +1347,7 @@
     "iiifCenterX": 4862,
     "iiifCenterY": 4112,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770898741949",
@@ -1503,8 +1357,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770903887400",
@@ -1514,8 +1367,7 @@
     "iiifCenterX": 11054,
     "iiifCenterY": 5322,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770903938583",
@@ -1525,8 +1377,7 @@
     "iiifCenterX": 10650,
     "iiifCenterY": 5253,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770903942187",
@@ -1536,8 +1387,7 @@
     "iiifCenterX": 11008,
     "iiifCenterY": 5003,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770903965292",
@@ -1547,8 +1397,7 @@
     "iiifCenterX": 10585,
     "iiifCenterY": 4725,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904030276",
@@ -1558,8 +1407,7 @@
     "iiifCenterX": 11573,
     "iiifCenterY": 4201,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904033887",
@@ -1569,8 +1417,7 @@
     "iiifCenterX": 10675,
     "iiifCenterY": 3813,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904042006",
@@ -1580,8 +1427,7 @@
     "iiifCenterX": 11028,
     "iiifCenterY": 3523,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904127514",
@@ -1591,8 +1437,7 @@
     "iiifCenterX": 11001,
     "iiifCenterY": 1899,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904139063",
@@ -1602,8 +1447,7 @@
     "iiifCenterX": 10918,
     "iiifCenterY": 2252,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904186342",
@@ -1613,8 +1457,7 @@
     "iiifCenterX": 10709,
     "iiifCenterY": 1760,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904191097",
@@ -1624,8 +1467,7 @@
     "iiifCenterX": 10386,
     "iiifCenterY": 1361,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904214236",
@@ -1635,8 +1477,7 @@
     "iiifCenterX": 10445,
     "iiifCenterY": 1599,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904220319",
@@ -1646,8 +1487,7 @@
     "iiifCenterX": 10720,
     "iiifCenterY": 2014,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904231733",
@@ -1657,8 +1497,7 @@
     "iiifCenterX": 10584,
     "iiifCenterY": 2244,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904285550",
@@ -1668,8 +1507,7 @@
     "iiifCenterX": 10417,
     "iiifCenterY": 2422,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904291181",
@@ -1679,8 +1517,7 @@
     "iiifCenterX": 10315,
     "iiifCenterY": 2038,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904296483",
@@ -1690,8 +1527,7 @@
     "iiifCenterX": 10109,
     "iiifCenterY": 2344,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904323878",
@@ -1701,8 +1537,7 @@
     "iiifCenterX": 9811,
     "iiifCenterY": 2515,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904329965",
@@ -1712,8 +1547,7 @@
     "iiifCenterX": 9512,
     "iiifCenterY": 2567,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904350948",
@@ -1723,8 +1557,7 @@
     "iiifCenterX": 9001,
     "iiifCenterY": 2661,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904356934",
@@ -1734,8 +1567,7 @@
     "iiifCenterX": 8620,
     "iiifCenterY": 2436,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904366395",
@@ -1745,8 +1577,7 @@
     "iiifCenterX": 8732,
     "iiifCenterY": 2213,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904371435",
@@ -1756,8 +1587,7 @@
     "iiifCenterX": 9049,
     "iiifCenterY": 2234,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904374540",
@@ -1767,8 +1597,7 @@
     "iiifCenterX": 9232,
     "iiifCenterY": 2394,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904442341",
@@ -1778,8 +1607,7 @@
     "iiifCenterX": 9904,
     "iiifCenterY": 2047,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904535478",
@@ -1789,8 +1617,7 @@
     "iiifCenterX": 9614,
     "iiifCenterY": 2009,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904544888",
@@ -1800,8 +1627,7 @@
     "iiifCenterX": 9779,
     "iiifCenterY": 2343,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904555537",
@@ -1811,8 +1637,7 @@
     "iiifCenterX": 9878,
     "iiifCenterY": 1758,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904561366",
@@ -1822,8 +1647,7 @@
     "iiifCenterX": 9683,
     "iiifCenterY": 1475,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904580735",
@@ -1833,8 +1657,7 @@
     "iiifCenterX": 9393,
     "iiifCenterY": 1483,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904587781",
@@ -1844,8 +1667,7 @@
     "iiifCenterX": 8973,
     "iiifCenterY": 1529,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904633393",
@@ -1855,8 +1677,7 @@
     "iiifCenterX": 9248,
     "iiifCenterY": 1977,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904637851",
@@ -1866,8 +1687,7 @@
     "iiifCenterX": 8906,
     "iiifCenterY": 1865,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904695836",
@@ -1877,8 +1697,7 @@
     "iiifCenterX": 9126,
     "iiifCenterY": 1368,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904703884",
@@ -1888,8 +1707,7 @@
     "iiifCenterX": 8765,
     "iiifCenterY": 1245,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904724487",
@@ -1899,8 +1717,7 @@
     "iiifCenterX": 6208,
     "iiifCenterY": 1611,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904765130",
@@ -1910,8 +1727,7 @@
     "iiifCenterX": 8967,
     "iiifCenterY": 974,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904820100",
@@ -1921,8 +1737,7 @@
     "iiifCenterX": 9201,
     "iiifCenterY": 1039,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904839764",
@@ -1932,8 +1747,7 @@
     "iiifCenterX": 9533,
     "iiifCenterY": 1117,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904950535",
@@ -1943,8 +1757,7 @@
     "iiifCenterX": 10000,
     "iiifCenterY": 1476,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770904980483",
@@ -1954,8 +1767,7 @@
     "iiifCenterX": 8931,
     "iiifCenterY": 2494,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905078881",
@@ -1965,8 +1777,7 @@
     "iiifCenterX": 8497,
     "iiifCenterY": 2633,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905083669",
@@ -1976,8 +1787,7 @@
     "iiifCenterX": 7877,
     "iiifCenterY": 2722,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905146525",
@@ -1987,8 +1797,7 @@
     "iiifCenterX": 7562,
     "iiifCenterY": 2735,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905217644",
@@ -1998,8 +1807,7 @@
     "iiifCenterX": 7239,
     "iiifCenterY": 2698,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905227821",
@@ -2009,8 +1817,7 @@
     "iiifCenterX": 6992,
     "iiifCenterY": 2238,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905233782",
@@ -2020,8 +1827,7 @@
     "iiifCenterX": 7341,
     "iiifCenterY": 2466,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905238902",
@@ -2031,8 +1837,7 @@
     "iiifCenterX": 7645,
     "iiifCenterY": 2450,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905243649",
@@ -2042,8 +1847,7 @@
     "iiifCenterX": 7219,
     "iiifCenterY": 2159,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905249596",
@@ -2053,8 +1857,7 @@
     "iiifCenterX": 7064,
     "iiifCenterY": 1784,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905254016",
@@ -2064,8 +1867,7 @@
     "iiifCenterX": 7403,
     "iiifCenterY": 1890,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905257484",
@@ -2075,8 +1877,7 @@
     "iiifCenterX": 7280,
     "iiifCenterY": 1487,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905262003",
@@ -2086,8 +1887,7 @@
     "iiifCenterX": 10290,
     "iiifCenterY": 2997,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905399229",
@@ -2097,8 +1897,7 @@
     "iiifCenterX": 7691,
     "iiifCenterY": 1441,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905419544",
@@ -2108,8 +1907,7 @@
     "iiifCenterX": 7973,
     "iiifCenterY": 1498,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905423781",
@@ -2119,8 +1917,7 @@
     "iiifCenterX": 7638,
     "iiifCenterY": 1750,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905432489",
@@ -2130,8 +1927,7 @@
     "iiifCenterX": 7975,
     "iiifCenterY": 1767,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905441164",
@@ -2141,8 +1937,7 @@
     "iiifCenterX": 8247,
     "iiifCenterY": 2059,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905554809",
@@ -2152,8 +1947,7 @@
     "iiifCenterX": 8486,
     "iiifCenterY": 1765,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905559674",
@@ -2163,8 +1957,7 @@
     "iiifCenterX": 8338,
     "iiifCenterY": 1358,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905563396",
@@ -2174,8 +1967,7 @@
     "iiifCenterX": 8054,
     "iiifCenterY": 1255,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905568056",
@@ -2185,19 +1977,17 @@
     "iiifCenterX": 8217,
     "iiifCenterY": 958,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905648479",
     "placeId": "node-1770905648479",
     "x": 458.16733067729086,
     "y": 105.79282868525895,
-    "iiifCenterX": 8110,
-    "iiifCenterY": 2322,
+    "iiifCenterX": 7974,
+    "iiifCenterY": 2316,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905682253",
@@ -2207,8 +1997,7 @@
     "iiifCenterX": 6632,
     "iiifCenterY": 1474,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905779983",
@@ -2218,8 +2007,7 @@
     "iiifCenterX": 5809,
     "iiifCenterY": 1529,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905794500",
@@ -2229,8 +2017,7 @@
     "iiifCenterX": 6466,
     "iiifCenterY": 1748,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905800343",
@@ -2240,8 +2027,7 @@
     "iiifCenterX": 6740,
     "iiifCenterY": 1834,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905848259",
@@ -2251,8 +2037,7 @@
     "iiifCenterX": 5537,
     "iiifCenterY": 1892,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905858716",
@@ -2262,8 +2047,7 @@
     "iiifCenterX": 5863,
     "iiifCenterY": 2046,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905871252",
@@ -2273,8 +2057,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905878879",
@@ -2284,8 +2067,7 @@
     "iiifCenterX": 6525,
     "iiifCenterY": 2259,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905882167",
@@ -2295,8 +2077,7 @@
     "iiifCenterX": 6773,
     "iiifCenterY": 2687,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905886053",
@@ -2306,8 +2087,7 @@
     "iiifCenterX": 6329,
     "iiifCenterY": 2751,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905890445",
@@ -2317,19 +2097,17 @@
     "iiifCenterX": 6174,
     "iiifCenterY": 2512,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905940014",
     "placeId": "node-1770905940014",
-    "x": 338.31430030964657,
-    "y": 135.98012119292707,
+    "x": 343.27868852459017,
+    "y": 150.0655737704918,
     "iiifCenterX": 5913,
     "iiifCenterY": 2750,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905944274",
@@ -2339,8 +2117,7 @@
     "iiifCenterX": 5379,
     "iiifCenterY": 2475,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905962102",
@@ -2350,8 +2127,7 @@
     "iiifCenterX": 5653,
     "iiifCenterY": 2725,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905973449",
@@ -2361,8 +2137,7 @@
     "iiifCenterX": 5478,
     "iiifCenterY": 2226,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770905979601",
@@ -2372,8 +2147,7 @@
     "iiifCenterX": 5449,
     "iiifCenterY": 2765,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906061553",
@@ -2383,8 +2157,7 @@
     "iiifCenterX": 5341,
     "iiifCenterY": 2745,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906108849",
@@ -2394,8 +2167,7 @@
     "iiifCenterX": 5183,
     "iiifCenterY": 1818,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906124944",
@@ -2405,8 +2177,7 @@
     "iiifCenterX": 4906,
     "iiifCenterY": 1984,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906150586",
@@ -2416,8 +2187,7 @@
     "iiifCenterX": 4603,
     "iiifCenterY": 2137,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906161164",
@@ -2427,8 +2197,7 @@
     "iiifCenterX": 4971,
     "iiifCenterY": 2467,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906194376",
@@ -2438,8 +2207,7 @@
     "iiifCenterX": 4619,
     "iiifCenterY": 2443,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906199277",
@@ -2449,8 +2217,7 @@
     "iiifCenterX": 4091,
     "iiifCenterY": 2709,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906213725",
@@ -2460,8 +2227,7 @@
     "iiifCenterX": 3567,
     "iiifCenterY": 2640,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906278302",
@@ -2471,8 +2237,7 @@
     "iiifCenterX": 3902,
     "iiifCenterY": 2422,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906293087",
@@ -2482,8 +2247,7 @@
     "iiifCenterX": 3812,
     "iiifCenterY": 1938,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906301641",
@@ -2493,8 +2257,7 @@
     "iiifCenterX": 4238,
     "iiifCenterY": 2033,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906362386",
@@ -2504,8 +2267,7 @@
     "iiifCenterX": 4073,
     "iiifCenterY": 2169,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906451065",
@@ -2515,8 +2277,7 @@
     "iiifCenterX": 4333,
     "iiifCenterY": 2616,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906500293",
@@ -2526,8 +2287,7 @@
     "iiifCenterX": 4331,
     "iiifCenterY": 2621,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906638289",
@@ -2537,8 +2297,7 @@
     "iiifCenterX": 3307,
     "iiifCenterY": 3010,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906644770",
@@ -2548,8 +2307,7 @@
     "iiifCenterX": 3112,
     "iiifCenterY": 3290,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906650706",
@@ -2559,8 +2317,7 @@
     "iiifCenterX": 3251,
     "iiifCenterY": 3561,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906712573",
@@ -2570,8 +2327,7 @@
     "iiifCenterX": 2457,
     "iiifCenterY": 3250,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906731613",
@@ -2581,8 +2337,7 @@
     "iiifCenterX": 2709,
     "iiifCenterY": 3408,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906799317",
@@ -2592,8 +2347,7 @@
     "iiifCenterX": 2397,
     "iiifCenterY": 3777,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906804866",
@@ -2603,8 +2357,7 @@
     "iiifCenterX": 2828,
     "iiifCenterY": 3773,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906927681",
@@ -2614,8 +2367,7 @@
     "iiifCenterX": 3564,
     "iiifCenterY": 3409,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906973478",
@@ -2625,8 +2377,7 @@
     "iiifCenterX": 2114,
     "iiifCenterY": 4167,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770906982068",
@@ -2636,8 +2387,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907045212",
@@ -2647,8 +2397,7 @@
     "iiifCenterX": 4606,
     "iiifCenterY": 2457,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907088865",
@@ -2658,8 +2407,7 @@
     "iiifCenterX": 2191,
     "iiifCenterY": 4357,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907094109",
@@ -2669,8 +2417,7 @@
     "iiifCenterX": 2181,
     "iiifCenterY": 4557,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907100588",
@@ -2680,8 +2427,7 @@
     "iiifCenterX": 3260,
     "iiifCenterY": 4941,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907142041",
@@ -2691,8 +2437,7 @@
     "iiifCenterX": 3445,
     "iiifCenterY": 4642,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907145936",
@@ -2702,8 +2447,7 @@
     "iiifCenterX": 3120,
     "iiifCenterY": 4505,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907151001",
@@ -2713,8 +2457,7 @@
     "iiifCenterX": 2964,
     "iiifCenterY": 4306,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907154674",
@@ -2724,8 +2467,7 @@
     "iiifCenterX": 3026,
     "iiifCenterY": 3948,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907161310",
@@ -2735,8 +2477,7 @@
     "iiifCenterX": 3413,
     "iiifCenterY": 3893,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770907246859",
@@ -2746,8 +2487,7 @@
     "iiifCenterX": 4875,
     "iiifCenterY": 4605,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911077601",
@@ -2757,8 +2497,7 @@
     "iiifCenterX": 3929,
     "iiifCenterY": 5073,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911202396",
@@ -2768,8 +2507,7 @@
     "iiifCenterX": 3508,
     "iiifCenterY": 5025,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911208987",
@@ -2779,8 +2517,7 @@
     "iiifCenterX": 4114,
     "iiifCenterY": 4834,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911217459",
@@ -2790,8 +2527,7 @@
     "iiifCenterX": 3881,
     "iiifCenterY": 4252,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911222493",
@@ -2801,8 +2537,7 @@
     "iiifCenterX": 3751,
     "iiifCenterY": 3939,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770911226606",
@@ -2812,8 +2547,7 @@
     "iiifCenterX": 3838,
     "iiifCenterY": 3494,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912043726",
@@ -2823,8 +2557,7 @@
     "iiifCenterX": 3609,
     "iiifCenterY": 3131,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912050316",
@@ -2834,8 +2567,7 @@
     "iiifCenterX": 4005,
     "iiifCenterY": 2988,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912067754",
@@ -2845,8 +2577,7 @@
     "iiifCenterX": 4192,
     "iiifCenterY": 3306,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912080230",
@@ -2856,8 +2587,7 @@
     "iiifCenterX": 4613,
     "iiifCenterY": 3097,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912100324",
@@ -2867,8 +2597,7 @@
     "iiifCenterX": 4948,
     "iiifCenterY": 2939,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912118654",
@@ -2878,8 +2607,7 @@
     "iiifCenterX": 4953,
     "iiifCenterY": 3326,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912128082",
@@ -2889,19 +2617,17 @@
     "iiifCenterX": 4676,
     "iiifCenterY": 3371,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912196738",
     "placeId": "node-1770912196738",
-    "x": 295.46285573528667,
-    "y": 183.68946481623573,
+    "x": 280,
+    "y": 184.81967213114754,
     "iiifCenterX": 5288,
     "iiifCenterY": 3480,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912202211",
@@ -2911,8 +2637,7 @@
     "iiifCenterX": 5434,
     "iiifCenterY": 4289,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912220114",
@@ -2922,8 +2647,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912227271",
@@ -2933,8 +2657,7 @@
     "iiifCenterX": 4499,
     "iiifCenterY": 4414,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912277124",
@@ -2944,8 +2667,7 @@
     "iiifCenterX": 4684,
     "iiifCenterY": 3726,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912305962",
@@ -2955,8 +2677,7 @@
     "iiifCenterX": 4315,
     "iiifCenterY": 4106,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912364302",
@@ -2966,8 +2687,7 @@
     "iiifCenterX": 5017,
     "iiifCenterY": 5371,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912385928",
@@ -2977,19 +2697,17 @@
     "iiifCenterX": 5436,
     "iiifCenterY": 4930,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912401064",
     "placeId": "node-1770912401064",
     "x": 336.8348953619725,
     "y": 291.2635336869815,
-    "iiifCenterX": 6068,
-    "iiifCenterY": 5182,
+    "iiifCenterX": 6070,
+    "iiifCenterY": 5187,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912408628",
@@ -2999,8 +2717,7 @@
     "iiifCenterX": 7091,
     "iiifCenterY": 5053,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912412950",
@@ -3010,8 +2727,7 @@
     "iiifCenterX": 5823,
     "iiifCenterY": 4146,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912420029",
@@ -3021,8 +2737,7 @@
     "iiifCenterX": 6280,
     "iiifCenterY": 4244,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912450080",
@@ -3032,8 +2747,7 @@
     "iiifCenterX": 6733,
     "iiifCenterY": 3843,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912454275",
@@ -3043,19 +2757,17 @@
     "iiifCenterX": 6630,
     "iiifCenterY": 4008,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912479656",
     "placeId": "node-1770912479656",
-    "x": 389.0540710367736,
-    "y": 218.0262278884548,
+    "x": 380.9125820445366,
+    "y": 233.31138251687392,
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912516959",
@@ -3065,8 +2777,7 @@
     "iiifCenterX": 6091,
     "iiifCenterY": 3558,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912543968",
@@ -3076,8 +2787,7 @@
     "iiifCenterX": 5731,
     "iiifCenterY": 3780,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912548392",
@@ -3087,8 +2797,7 @@
     "iiifCenterX": 5438,
     "iiifCenterY": 3658,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912553971",
@@ -3098,8 +2807,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912564452",
@@ -3109,8 +2817,7 @@
     "iiifCenterX": 5610,
     "iiifCenterY": 3075,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912569156",
@@ -3120,8 +2827,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912572454",
@@ -3131,8 +2837,7 @@
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912580537",
@@ -3142,8 +2847,7 @@
     "iiifCenterX": 6619,
     "iiifCenterY": 2842,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912586038",
@@ -3153,8 +2857,7 @@
     "iiifCenterX": 6497,
     "iiifCenterY": 2988,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912594808",
@@ -3164,8 +2867,7 @@
     "iiifCenterX": 6753,
     "iiifCenterY": 3300,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912606182",
@@ -3175,8 +2877,7 @@
     "iiifCenterX": 5709,
     "iiifCenterY": 3417,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912625900",
@@ -3186,8 +2887,7 @@
     "iiifCenterX": 8735,
     "iiifCenterY": 6161,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912658453",
@@ -3197,8 +2897,7 @@
     "iiifCenterX": 7780,
     "iiifCenterY": 5819,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912672117",
@@ -3208,8 +2907,7 @@
     "iiifCenterX": 8318,
     "iiifCenterY": 4998,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912689899",
@@ -3219,8 +2917,7 @@
     "iiifCenterX": 8303,
     "iiifCenterY": 4604,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912696547",
@@ -3230,8 +2927,7 @@
     "iiifCenterX": 8229,
     "iiifCenterY": 4319,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912699696",
@@ -3241,8 +2937,7 @@
     "iiifCenterX": 7195,
     "iiifCenterY": 4680,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912704041",
@@ -3252,8 +2947,7 @@
     "iiifCenterX": 7395,
     "iiifCenterY": 4341,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912707032",
@@ -3263,19 +2957,17 @@
     "iiifCenterX": 7810,
     "iiifCenterY": 4055,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912711681",
     "placeId": "node-1770912711681",
-    "x": 471.6234663009627,
-    "y": 207.83239735954953,
+    "x": 450.81967213114757,
+    "y": 210.0655737704918,
     "iiifCenterX": 8163,
     "iiifCenterY": 3948,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912798782",
@@ -3285,8 +2977,7 @@
     "iiifCenterX": 8131,
     "iiifCenterY": 4042,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912818126",
@@ -3296,8 +2987,7 @@
     "iiifCenterX": 8387,
     "iiifCenterY": 3795,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912823042",
@@ -3307,8 +2997,7 @@
     "iiifCenterX": 7956,
     "iiifCenterY": 3658,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912826245",
@@ -3318,8 +3007,7 @@
     "iiifCenterX": 8339,
     "iiifCenterY": 3519,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912829695",
@@ -3329,8 +3017,7 @@
     "iiifCenterX": 7285,
     "iiifCenterY": 3693,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912845895",
@@ -3340,8 +3027,7 @@
     "iiifCenterX": 7047,
     "iiifCenterY": 3969,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912913255",
@@ -3351,8 +3037,7 @@
     "iiifCenterX": 7074,
     "iiifCenterY": 3282,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912961774",
@@ -3362,8 +3047,7 @@
     "iiifCenterX": 7314,
     "iiifCenterY": 3159,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770912969831",
@@ -3373,8 +3057,7 @@
     "iiifCenterX": 7601,
     "iiifCenterY": 3390,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913006672",
@@ -3384,8 +3067,7 @@
     "iiifCenterX": 7911,
     "iiifCenterY": 3203,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913010028",
@@ -3395,8 +3077,7 @@
     "iiifCenterX": 8130,
     "iiifCenterY": 3330,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913090657",
@@ -3406,8 +3087,7 @@
     "iiifCenterX": 8750,
     "iiifCenterY": 3618,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913131646",
@@ -3417,8 +3097,7 @@
     "iiifCenterX": 8552,
     "iiifCenterY": 3312,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913159270",
@@ -3428,8 +3107,7 @@
     "iiifCenterX": 8358,
     "iiifCenterY": 3042,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913186861",
@@ -3439,8 +3117,7 @@
     "iiifCenterX": 8096,
     "iiifCenterY": 2792,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913221426",
@@ -3450,8 +3127,7 @@
     "iiifCenterX": 7711,
     "iiifCenterY": 2849,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913225645",
@@ -3461,8 +3137,7 @@
     "iiifCenterX": 7599,
     "iiifCenterY": 3074,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913233135",
@@ -3472,8 +3147,7 @@
     "iiifCenterX": 7120,
     "iiifCenterY": 2861,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913265492",
@@ -3483,8 +3157,7 @@
     "iiifCenterX": 10016,
     "iiifCenterY": 4916,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913292189",
@@ -3494,8 +3167,7 @@
     "iiifCenterX": 9455,
     "iiifCenterY": 5081,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913331792",
@@ -3505,8 +3177,7 @@
     "iiifCenterX": 9250,
     "iiifCenterY": 4260,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913368260",
@@ -3516,8 +3187,7 @@
     "iiifCenterX": 9474,
     "iiifCenterY": 3707,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913438620",
@@ -3527,8 +3197,7 @@
     "iiifCenterX": 10165,
     "iiifCenterY": 3350,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913459973",
@@ -3538,8 +3207,7 @@
     "iiifCenterX": 9536,
     "iiifCenterY": 3342,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913468653",
@@ -3549,8 +3217,7 @@
     "iiifCenterX": 9236,
     "iiifCenterY": 3341,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913525543",
@@ -3560,8 +3227,7 @@
     "iiifCenterX": 8910,
     "iiifCenterY": 3169,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913567237",
@@ -3571,8 +3237,7 @@
     "iiifCenterX": 8803,
     "iiifCenterY": 2955,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913587997",
@@ -3582,8 +3247,7 @@
     "iiifCenterX": 8598,
     "iiifCenterY": 2807,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913659038",
@@ -3593,8 +3257,7 @@
     "iiifCenterX": 9066,
     "iiifCenterY": 3015,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913663546",
@@ -3604,8 +3267,7 @@
     "iiifCenterX": 9729,
     "iiifCenterY": 2828,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913685913",
@@ -3615,8 +3277,7 @@
     "iiifCenterX": 9970,
     "iiifCenterY": 2964,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770913715054",
@@ -3626,8 +3287,7 @@
     "iiifCenterX": 9301,
     "iiifCenterY": 2928,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1770991540696",
@@ -3637,8 +3297,7 @@
     "iiifCenterX": 8445,
     "iiifCenterY": 5342,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
     "id": "anchor-node-1771596256944",
@@ -3648,17 +3307,386 @@
     "iiifCenterX": 8701,
     "iiifCenterY": 7229,
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json"
+    "validTo": null
   },
   {
-    "id": "anchor-node-1773161385523-1852",
-    "placeId": "node-1773161385523",
-    "x": 572.571885345242,
-    "y": 32.26147291905511,
+    "id": "anchor-node-1770912454275-1892",
+    "placeId": "node-1770912454275",
+    "x": 389.0540710367736,
+    "y": 218.0262278884548,
+    "iiifCenterX": 6630,
+    "iiifCenterY": 4008,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912625900-1892",
+    "placeId": "node-1770912625900",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 8735,
+    "iiifCenterY": 6161,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912707032-1892",
+    "placeId": "node-1770912707032",
+    "x": 447.12949464245116,
+    "y": 223.5999025226788,
+    "iiifCenterX": 7810,
+    "iiifCenterY": 4055,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912711681-1892",
+    "placeId": "node-1770912711681",
+    "x": 471.6234663009627,
+    "y": 207.83239735954953,
+    "iiifCenterX": 8163,
+    "iiifCenterY": 3948,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770905648479-1892",
+    "placeId": "node-1770905648479",
+    "x": 458.16733067729086,
+    "y": 105.79282868525895,
+    "iiifCenterX": 10253,
+    "iiifCenterY": 3338,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912277124-1892",
+    "placeId": "node-1770912277124",
+    "x": 258.5657370517928,
+    "y": 206.58964143426294,
+    "iiifCenterX": 4684,
+    "iiifCenterY": 3726,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912305962-1892",
+    "placeId": "node-1770912305962",
+    "x": 233.46613545816732,
+    "y": 217.34661354581672,
+    "iiifCenterX": 4315,
+    "iiifCenterY": 4106,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1773305543455-1852",
+    "placeId": "node-1773305543455",
+    "x": 261.77372662945777,
+    "y": 219.09886772550544,
     "iiifCenterX": null,
     "iiifCenterY": null,
-    "validFrom": 1999,
+    "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "anchor-node-1773305543455-1852-9432180d",
+    "placeId": "node-1773305543455",
+    "x": 261.77372662945777,
+    "y": 219.09886772550544,
+    "iiifCenterX": 4881,
+    "iiifCenterY": 4116,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1773305687121-1892",
+    "placeId": "node-1773305687121",
+    "x": 263.27868852459017,
+    "y": 224.81967213114754,
+    "iiifCenterX": null,
+    "iiifCenterY": null,
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "anchor-node-1773305687121-1892-db1d1a4b",
+    "placeId": "node-1773305687121",
+    "x": 263.27868852459017,
+    "y": 224.81967213114754,
+    "iiifCenterX": 5885,
+    "iiifCenterY": 5934,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912672117-1892",
+    "placeId": "node-1770912672117",
+    "x": 478.25794495832633,
+    "y": 280.9506927732951,
+    "iiifCenterX": 8318,
+    "iiifCenterY": 4998,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770809062251-1892",
+    "placeId": "node-1770809062251",
+    "x": 21.115537848605534,
+    "y": 414.9561752988048,
+    "iiifCenterX": 1430,
+    "iiifCenterY": 9198,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770892074771-1852",
+    "placeId": "node-1770892074771",
+    "x": 635.4581673306774,
+    "y": 179.89641434262947,
+    "iiifCenterX": 10689,
+    "iiifCenterY": 3777,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770809102948-1852",
+    "placeId": "node-1770809102948",
+    "x": -18.977491961414792,
+    "y": 417.30321294165117,
+    "iiifCenterX": 512,
+    "iiifCenterY": 6908,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770906194376-1852",
+    "placeId": "node-1770906194376",
+    "x": 244.54739932105656,
+    "y": 122.27710102107248,
+    "iiifCenterX": 4619,
+    "iiifCenterY": 2443,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770906982068-1852",
+    "placeId": "node-1770906982068",
+    "x": 253.49295047465034,
+    "y": 130.51172087608757,
+    "iiifCenterX": 4621,
+    "iiifCenterY": 2470,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770906194376-1892",
+    "placeId": "node-1770906194376",
+    "x": 253.49295047465034,
+    "y": 130.51172087608757,
+    "iiifCenterX": 3869,
+    "iiifCenterY": 2470,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912625900-1852",
+    "placeId": "node-1770912625900",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 8735,
+    "iiifCenterY": 6161,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1773320558440-1852",
+    "placeId": "node-1773320558440",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": null,
+    "iiifCenterY": null,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "anchor-node-1773320558440-1852-c014eb0c",
+    "placeId": "node-1773320558440",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 8475,
+    "iiifCenterY": 5759,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770897945287-1852",
+    "placeId": "node-1770897945287",
+    "x": 472.16790497409715,
+    "y": 335.0457824125791,
+    "iiifCenterX": 8431,
+    "iiifCenterY": 6018,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770897884517-1852",
+    "placeId": "node-1770897884517",
+    "x": 472.9083665338646,
+    "y": 318.54183266932273,
+    "iiifCenterX": 8185,
+    "iiifCenterY": 5759,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770912658453-1852",
+    "placeId": "node-1770912658453",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 7515,
+    "iiifCenterY": 5163,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1771596256944-1852",
+    "placeId": "node-1771596256944",
+    "x": 497.910447761194,
+    "y": 417.98009950248763,
+    "iiifCenterX": 8701,
+    "iiifCenterY": 7229,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770897948683-1852",
+    "placeId": "node-1770897948683",
+    "x": 462.9693019132096,
+    "y": 379.78146246012625,
+    "iiifCenterX": 8265,
+    "iiifCenterY": 6754,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770912658453-1892",
+    "placeId": "node-1770912658453",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 7780,
+    "iiifCenterY": 5819,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1773320558440-1892",
+    "placeId": "node-1773320558440",
+    "x": 449.1953878539489,
+    "y": 324.3334658965595,
+    "iiifCenterX": 7780,
+    "iiifCenterY": 5819,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912450080-1852",
+    "placeId": "node-1770912450080",
+    "x": 390.83665338645415,
+    "y": 197.02788844621514,
+    "iiifCenterX": 6733,
+    "iiifCenterY": 3843,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770912454275-1852",
+    "placeId": "node-1770912454275",
+    "x": 386.44183374521685,
+    "y": 217.77187857076422,
+    "iiifCenterX": 6626,
+    "iiifCenterY": 4008,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770912479656-1852",
+    "placeId": "node-1770912479656",
+    "x": 380.9125820445366,
+    "y": 233.31138251687392,
+    "iiifCenterX": 6711,
+    "iiifCenterY": 4431,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770912479656-1892",
+    "placeId": "node-1770912479656",
+    "x": 380.9125820445366,
+    "y": 233.31138251687392,
+    "iiifCenterX": 6711,
+    "iiifCenterY": 4431,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770905441164-1892",
+    "placeId": "node-1770905441164",
+    "x": 482.0717131474104,
+    "y": 93.8406374501992,
+    "iiifCenterX": 8247,
+    "iiifCenterY": 2059,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1773321719997-1852",
+    "placeId": "node-1773321719997",
+    "x": 34.42918513291443,
+    "y": 372.3452571623663,
+    "iiifCenterX": null,
+    "iiifCenterY": null,
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "anchor-node-1773321719997-1852-377521c1",
+    "placeId": "node-1773321719997",
+    "x": 34.42918513291443,
+    "y": 372.3452571623663,
+    "iiifCenterX": 1284,
+    "iiifCenterY": 6552,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1773321898703-1892",
+    "placeId": "node-1773321898703",
+    "x": 34.42918513291443,
+    "y": 372.3452571623663,
+    "iiifCenterX": null,
+    "iiifCenterY": null,
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "anchor-node-1773321898703-1892-f693fdd7",
+    "placeId": "node-1773321898703",
+    "x": 34.42918513291443,
+    "y": 372.3452571623663,
+    "iiifCenterX": 1284,
+    "iiifCenterY": 6552,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "anchor-node-1770912385928-1852",
+    "placeId": "node-1770912385928",
+    "x": 294.95247129969994,
+    "y": 278.3458454630586,
+    "iiifCenterX": 5430,
+    "iiifCenterY": 4930,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]

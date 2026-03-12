@@ -1,18 +1,30 @@
 import { randomUUID } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import type { EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, NodeDetail, TransportType, Year } from '@ptt-kurskarten/shared';
+import type {
+  EdgeTrip,
+  EditionEntry,
+  GraphAssertion,
+  GraphEdge,
+  GraphNode,
+  GraphNodePatch,
+  GraphSnapshot,
+  NodeDetail,
+  TransportType,
+  Year
+} from '@ptt-kurskarten/shared';
 import type { GraphRepository } from '../graph.repository';
 
 type StoredNode = Omit<GraphNode, 'validTo'> & { validTo: Year | null };
-type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'leuge'> & {
+type StoredEdge = Omit<GraphEdge, 'validTo' | 'trips' | 'distance'> & {
   validTo: Year | null;
 };
 type StoredSegment = {
   id: string;
   a: string;
   b: string;
-  leuge: number | null;
+  distance?: number | null;
+  leuge?: number | null;
 };
 type StoredTrip = EdgeTrip & { edgeId: string };
 
@@ -74,6 +86,22 @@ export class JsonGraphRepository implements GraphRepository {
     };
   }
 
+  async getAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+    return [];
+  }
+
+  async createAssertion(assertion: GraphAssertion): Promise<GraphAssertion> {
+    return assertion;
+  }
+
+  async updateAssertion(_id: string, _patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+    return null;
+  }
+
+  async deleteAssertion(_id: string): Promise<boolean> {
+    return false;
+  }
+
   async getAvailableYears(): Promise<number[]> {
     await this.writeQueue;
     const { nodes, edges } = await this.loadGraphData();
@@ -100,6 +128,21 @@ export class JsonGraphRepository implements GraphRepository {
     return [...years].sort((a, b) => a - b);
   }
 
+  async getEditions(): Promise<EditionEntry[]> {
+    const years = await this.getAvailableYears();
+    return years.map((year) => ({ id: `edition-${year}`, year }));
+  }
+
+  async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
+    const y = Number.isFinite(year) ? year : 1852;
+    return {
+      id: patch.id ?? `edition-${y}`,
+      year: y,
+      title: patch.title,
+      iiifRoute: typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined
+    };
+  }
+
   async getAllNodes(): Promise<GraphNode[]> {
     await this.writeQueue;
     await this.ensureInitialized();
@@ -121,7 +164,7 @@ export class JsonGraphRepository implements GraphRepository {
     });
   }
 
-  async updateNode(id: string, patch: Partial<GraphNode>): Promise<GraphNode | null> {
+  async updateNode(id: string, patch: GraphNodePatch): Promise<GraphNode | null> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
@@ -129,14 +172,19 @@ export class JsonGraphRepository implements GraphRepository {
       if (index === -1) {
         return null;
       }
-      const updated = { ...this.fromStoredNode(nodes[index]), ...patch, id } satisfies GraphNode;
+      const { anchorYear: _anchorYear, ...nodePatch } = patch;
+      const updated = { ...this.fromStoredNode(nodes[index]), ...nodePatch, id } satisfies GraphNode;
       nodes[index] = this.toStoredNode(updated);
       await this.writeJsonAtomic(this.nodesPath, nodes);
       return updated;
     });
   }
 
-  async deleteNode(id: string): Promise<boolean> {
+  async setNodeHidden(_id: string, _year: number, _hidden: boolean): Promise<boolean> {
+    return false;
+  }
+
+  async deleteNode(id: string, _year?: number): Promise<boolean> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
@@ -177,7 +225,7 @@ export class JsonGraphRepository implements GraphRepository {
 
       const normalizedTrips = this.normalizeTrips(edge.id, edge.trips ?? []);
       const storedEdge = this.toStoredEdge({ ...edge, trips: [] });
-      const nextSegments = this.upsertSegment(segments, edge.from, edge.to, edge.leuge);
+      const nextSegments = this.upsertSegment(segments, edge.from, edge.to, edge.distance);
       const nextTrips = trips.filter((trip) => trip.edgeId !== edge.id).concat(normalizedTrips);
 
       edges.push(storedEdge);
@@ -185,8 +233,8 @@ export class JsonGraphRepository implements GraphRepository {
       await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      const leuge = this.getSegmentLeuge(nextSegments, edge.from, edge.to);
-      return { ...edge, leuge, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const distance = this.getSegmentDistance(nextSegments, edge.from, edge.to);
+      return { ...edge, distance, trips: normalizedTrips.map(this.stripTripEdgeId) };
     });
   }
 
@@ -205,7 +253,7 @@ export class JsonGraphRepository implements GraphRepository {
       const updated = { ...existing, ...patch, id } satisfies GraphEdge;
       const nextTripsPayload = patch.trips ?? existing.trips ?? [];
       const normalizedTrips = this.normalizeTrips(id, nextTripsPayload);
-      const nextSegments = this.upsertSegment(segments, updated.from, updated.to, patch.leuge);
+      const nextSegments = this.upsertSegment(segments, updated.from, updated.to, patch.distance);
 
       edges[index] = this.toStoredEdge(updated);
       const nextTrips = trips.filter((trip) => trip.edgeId !== id).concat(normalizedTrips);
@@ -214,8 +262,8 @@ export class JsonGraphRepository implements GraphRepository {
       await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      const leuge = this.getSegmentLeuge(nextSegments, updated.from, updated.to);
-      return { ...updated, leuge, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const distance = this.getSegmentDistance(nextSegments, updated.from, updated.to);
+      return { ...updated, distance, trips: normalizedTrips.map(this.stripTripEdgeId) };
     });
   }
 
@@ -279,10 +327,10 @@ export class JsonGraphRepository implements GraphRepository {
 
   private assembleEdge(edge: StoredEdge, trips: StoredTrip[], segments: StoredSegment[]): GraphEdge {
     const edgeTrips = trips.filter((trip) => trip.edgeId === edge.id).map(this.stripTripEdgeId);
-    const leuge = this.getSegmentLeuge(segments, edge.from, edge.to);
+    const distance = this.getSegmentDistance(segments, edge.from, edge.to);
     return {
       ...edge,
-      leuge,
+      distance,
       validTo: edge.validTo ?? undefined,
       trips: edgeTrips
     };
@@ -320,7 +368,7 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private toStoredEdge(edge: GraphEdge): StoredEdge {
-    const { trips: _trips, leuge: _leuge, ...rest } = edge;
+    const { trips: _trips, distance: _distance, ...rest } = edge;
     return {
       ...rest,
       validTo: edge.validTo ?? null
@@ -351,14 +399,16 @@ export class JsonGraphRepository implements GraphRepository {
     const migrated = edges.map((edge) => {
       const {
         durationMinutes: _durationMinutes,
-        leuge: legacyLeuge,
+        distance: edgeDistance,
+        leuge: edgeLeuge,
         ...base
-      } = edge as StoredEdge & { durationMinutes?: number; leuge?: number };
+      } = edge as StoredEdge & { durationMinutes?: number; distance?: number; leuge?: number };
+      const segmentDistance = edgeDistance ?? edgeLeuge;
       let next: StoredEdge = { ...base };
       if (_durationMinutes !== undefined) {
         changed = true;
       }
-      if (legacyLeuge !== undefined) {
+      if (edgeLeuge !== undefined || edgeDistance !== undefined) {
         changed = true;
       }
 
@@ -384,12 +434,12 @@ export class JsonGraphRepository implements GraphRepository {
         }
       }
 
-      const segment = this.createStoredSegment(next.from, next.to, legacyLeuge);
+      const segment = this.createStoredSegment(next.from, next.to, segmentDistance);
       const existing = segments.get(segment.id);
       if (!existing) {
         changed = true;
         segments.set(segment.id, segment);
-      } else if (existing.leuge === null && segment.leuge !== null) {
+      } else if (this.getStoredSegmentDistance(existing) === null && this.getStoredSegmentDistance(segment) !== null) {
         changed = true;
         segments.set(segment.id, segment);
       }
@@ -415,26 +465,26 @@ export class JsonGraphRepository implements GraphRepository {
     await this.ensureFile(this.tripsPath);
   }
 
-  private getSegmentLeuge(segments: StoredSegment[], from: string, to: string): number | undefined {
+  private getSegmentDistance(segments: StoredSegment[], from: string, to: string): number | undefined {
     const id = this.segmentIdFor(from, to);
     const segment = segments.find((candidate) => candidate.id === id);
-    return segment?.leuge ?? undefined;
+    return this.getStoredSegmentDistance(segment) ?? undefined;
   }
 
   private upsertSegment(
     segments: StoredSegment[],
     from: string,
     to: string,
-    leuge: number | undefined
+    distance: number | undefined
   ): StoredSegment[] {
     const next = [...segments];
-    const segment = this.createStoredSegment(from, to, leuge);
+    const segment = this.createStoredSegment(from, to, distance);
     const index = next.findIndex((candidate) => candidate.id === segment.id);
     if (index === -1) {
       next.push(segment);
       return next;
     }
-    if (leuge !== undefined) {
+    if (distance !== undefined) {
       next[index] = segment;
     }
     return next;
@@ -445,14 +495,24 @@ export class JsonGraphRepository implements GraphRepository {
     return segments.filter((segment) => used.has(segment.id));
   }
 
-  private createStoredSegment(from: string, to: string, leuge?: number): StoredSegment {
+  private createStoredSegment(from: string, to: string, distance?: number): StoredSegment {
     const [a, b] = this.normalizeSegmentNodes(from, to);
     return {
       id: this.segmentIdFor(from, to),
       a,
       b,
-      leuge: leuge ?? null
+      distance: distance ?? null
     };
+  }
+
+  private getStoredSegmentDistance(segment: StoredSegment | undefined): number | null | undefined {
+    if (!segment) {
+      return undefined;
+    }
+    if (segment.distance !== undefined) {
+      return segment.distance;
+    }
+    return segment.leuge;
   }
 
   private normalizeSegmentNodes(from: string, to: string): [string, string] {

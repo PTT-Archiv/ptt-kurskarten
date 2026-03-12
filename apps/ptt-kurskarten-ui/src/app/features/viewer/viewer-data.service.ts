@@ -1,6 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import type { ConnectionOption, EdgeTrip, GraphEdge, GraphNode, GraphSnapshot, LocalizedText, TimeHHMM } from '@ptt-kurskarten/shared';
+import type {
+  ConnectionOption,
+  EdgeTrip,
+  EditionEntry,
+  GraphEdge,
+  GraphNode,
+  GraphSnapshot,
+  LocalizedText,
+  TimeHHMM
+} from '@ptt-kurskarten/shared';
 import { Observable, forkJoin, map, shareReplay } from 'rxjs';
 import { computeConnections } from './routing-client';
 import { environment } from '../../../environments/environment';
@@ -38,6 +47,8 @@ type StoredMapAnchor = {
 type StoredEdition = {
   id: string;
   year: number;
+  title?: string;
+  iiifRoute?: string;
 };
 
 type StoredService = {
@@ -45,8 +56,7 @@ type StoredService = {
   linkId: string;
   fromPlaceId: string;
   toPlaceId: string;
-  validFrom: NullableYear;
-  validTo: NullableYear;
+  year: number;
   note?: LocalizedText | null;
 };
 
@@ -57,8 +67,7 @@ type StoredServiceTrip = {
   departs: string | null;
   arrives: string | null;
   arrivalDayOffset: number;
-  validFrom: NullableYear;
-  validTo: NullableYear;
+  year: number;
 };
 
 type StoredLinkMeasure = {
@@ -123,12 +132,30 @@ export class ViewerDataService {
         const activeNodes = materializeNodesForYear(data, y).filter((node) => isNodeActive(node, y));
         const activeNodeIds = new Set(activeNodes.map((node) => node.id));
         const activeEdges = data.services
-          .filter((service) => isStoredActive(service.validFrom, service.validTo, y))
+          .filter((service) => coerceStoredServiceYear(service) === y)
           .filter((service) => activeNodeIds.has(service.fromPlaceId) && activeNodeIds.has(service.toPlaceId))
           .map((service) => materializeEdgeForYear(service, data, y))
           .filter((edge) => isEdgeActive(edge, y));
         return { year: y, nodes: activeNodes, edges: activeEdges };
       })
+    );
+  }
+
+  getEditions(): Observable<EditionEntry[]> {
+    if (!environment.useStaticGraphData) {
+      return this.http.get<EditionEntry[]>(`${environment.apiBaseUrl}/editions`);
+    }
+    return this.loadStaticData().pipe(
+      map((data) =>
+        (data.editions ?? [])
+          .map((edition) => ({
+            id: edition.id,
+            year: coerceYear(edition.year),
+            title: edition.title,
+            iiifRoute: typeof edition.iiifRoute === 'string' ? edition.iiifRoute.trim().replace(/\/+$/, '') : undefined
+          }))
+          .sort((a, b) => a.year - b.year)
+      )
     );
   }
 
@@ -203,7 +230,8 @@ export class ViewerDataService {
 }
 
 function materializeNodesForYear(data: StaticGraphData, year: number): GraphNode[] {
-  return data.places.map((place) => {
+  const nodes: GraphNode[] = [];
+  for (const place of data.places) {
     const anchor = resolveAnchorForPlace(place.id, data, year);
     const placeName = resolvePlaceName(place, data.placeNames, year);
     const foreign = data.assertions.some((assertion) => {
@@ -215,25 +243,38 @@ function materializeNodesForYear(data: StaticGraphData, year: number): GraphNode
       }
       return isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, year);
     });
-
-    return {
+    const hidden = data.assertions.some((assertion) => {
+      if (assertion.targetType !== 'place' || assertion.targetId !== place.id) {
+        return false;
+      }
+      if (assertion.schemaKey !== 'place.hidden' || assertion.valueBoolean !== true) {
+        return false;
+      }
+      return isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, year);
+    });
+    if (hidden) {
+      continue;
+    }
+    nodes.push({
       id: place.id,
       name: placeName,
       x: anchor?.x ?? 0,
       y: anchor?.y ?? 0,
-      validFrom: pickValidFrom(place.validFrom, anchor?.validFrom),
-      validTo: pickValidTo(place.validTo, anchor?.validTo) ?? undefined,
+      validFrom: place.validFrom ?? 1852,
+      validTo: place.validTo ?? undefined,
       foreign: foreign ? true : undefined,
       iiifCenterX: anchor?.iiifCenterX ?? undefined,
       iiifCenterY: anchor?.iiifCenterY ?? undefined
-    };
-  });
+    });
+  }
+  return nodes;
 }
 
 function materializeEdgeForYear(service: StoredService, data: StaticGraphData, year: number): GraphEdge {
+  const serviceYear = coerceStoredServiceYear(service);
   const trips = data.serviceTrips
     .filter((trip) => trip.serviceId === service.id)
-    .filter((trip) => isStoredActive(trip.validFrom, trip.validTo, year))
+    .filter((trip) => coerceStoredTripYear(trip, serviceYear) === year)
     .map((trip) => ({
       id: trip.id,
       transport: trip.transport ?? 'postkutsche',
@@ -241,17 +282,30 @@ function materializeEdgeForYear(service: StoredService, data: StaticGraphData, y
       arrives: (trip.arrives ?? '') as EdgeTrip['arrives'],
       arrivalDayOffset: normalizeDayOffset(trip.arrivalDayOffset)
     }));
-  const leuge = data.linkMeasures
-    .filter((measure) => measure.linkId === service.linkId && measure.measureKey === 'distance.leuge')
+  const distance = data.linkMeasures
+    .filter((measure) =>
+      measure.linkId === service.linkId &&
+      (measure.measureKey === 'distance' || measure.measureKey === 'distance.leuge')
+    )
     .filter((measure) => isStoredActive(measure.validFrom, measure.validTo, year))
+    .sort((a, b) => {
+      const aExact = a.validFrom === year && a.validTo === year ? 1 : 0;
+      const bExact = b.validFrom === year && b.validTo === year ? 1 : 0;
+      if (aExact !== bExact) {
+        return bExact - aExact;
+      }
+      const aFrom = a.validFrom ?? Number.NEGATIVE_INFINITY;
+      const bFrom = b.validFrom ?? Number.NEGATIVE_INFINITY;
+      return bFrom - aFrom;
+    })
     .find((measure) => measure.valueNumber !== null)?.valueNumber;
   return {
     id: service.id,
     from: service.fromPlaceId,
     to: service.toPlaceId,
-    leuge: leuge ?? undefined,
-    validFrom: service.validFrom ?? 1852,
-    validTo: service.validTo ?? undefined,
+    distance: distance ?? undefined,
+    validFrom: serviceYear,
+    validTo: undefined,
     notes: service.note ?? undefined,
     trips
   };
@@ -316,25 +370,24 @@ function resolveAnchorForPlace(
     .filter((anchor) => anchor.placeId === placeId)
     .filter((anchor) => isStoredActive(anchor.validFrom, anchor.validTo, year));
   if (matching.length) {
+    matching.sort((a, b) => {
+      const aExact = a.validFrom === year && a.validTo === year ? 1 : 0;
+      const bExact = b.validFrom === year && b.validTo === year ? 1 : 0;
+      if (aExact !== bExact) {
+        return bExact - aExact;
+      }
+      const aFrom = a.validFrom ?? Number.NEGATIVE_INFINITY;
+      const bFrom = b.validFrom ?? Number.NEGATIVE_INFINITY;
+      if (aFrom !== bFrom) {
+        return bFrom - aFrom;
+      }
+      const aTo = a.validTo ?? Number.POSITIVE_INFINITY;
+      const bTo = b.validTo ?? Number.POSITIVE_INFINITY;
+      return aTo - bTo;
+    });
     return matching[0];
   }
   return data.mapAnchors.find((anchor) => anchor.placeId === placeId) ?? null;
-}
-
-function pickValidFrom(...values: Array<NullableYear | undefined>): number {
-  const numeric = values.filter((value): value is number => value !== null && value !== undefined);
-  if (!numeric.length) {
-    return 1852;
-  }
-  return Math.max(...numeric);
-}
-
-function pickValidTo(...values: Array<NullableYear | undefined>): NullableYear {
-  const numeric = values.filter((value): value is number => value !== null && value !== undefined);
-  if (!numeric.length) {
-    return null;
-  }
-  return Math.min(...numeric);
 }
 
 function normalizeDayOffset(value: number | null | undefined): 0 | 1 | 2 {
@@ -395,24 +448,16 @@ function collectAvailableYears(places: StoredPlace[], services: StoredService[],
       years.add(edition.year);
     }
   }
-  for (const place of places) {
-    if (place.validFrom !== null && place.validFrom !== undefined) {
-      years.add(place.validFrom);
-    }
-    if (place.validTo !== null && place.validTo !== undefined) {
-      years.add(place.validTo);
-    }
-  }
-  for (const service of services) {
-    if (service.validFrom !== null && service.validFrom !== undefined) {
-      years.add(service.validFrom);
-    }
-    if (service.validTo !== null && service.validTo !== undefined) {
-      years.add(service.validTo);
-    }
-  }
   if (!years.size) {
     return [1852];
   }
   return [...years].sort((a, b) => a - b);
+}
+
+function coerceStoredServiceYear(service: StoredService): number {
+  return typeof service.year === 'number' && Number.isFinite(service.year) ? service.year : 1852;
+}
+
+function coerceStoredTripYear(trip: StoredServiceTrip, fallbackYear: number): number {
+  return typeof trip.year === 'number' && Number.isFinite(trip.year) ? trip.year : fallbackYear;
 }

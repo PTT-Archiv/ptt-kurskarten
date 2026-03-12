@@ -2,7 +2,9 @@ import { Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, eff
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type {
+  EditionEntry,
   EdgeTrip,
+  GraphAssertion,
   GraphEdge,
   GraphNode,
   GraphSnapshot,
@@ -22,14 +24,27 @@ import { TourOverlayComponent } from './tour-overlay.component';
 import { ADMIN_TUTORIAL_STEPS } from './admin-tutorial.steps';
 import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import {
+  buildArchiveIiifInfoUrl,
   ARCHIVE_DEFAULT_REGION,
+  ARCHIVE_IIIF_BASE,
   buildArchiveSnippetUrlForNode,
-  buildArchiveSnippetUrlFromRegion,
-  computeArchiveTransform
+  buildArchiveSnippetUrlFromRegionWithBase,
+  computeArchiveTransform,
+  normalizeIiifRoute
 } from '../../shared/archive/archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
 const UNDO_LIMIT = 20;
+const FACT_LINK_TEMPLATES: Record<string, string> = {
+  wikidata: 'https://www.wikidata.org/wiki/{value}',
+  mfk: 'https://mfk.rechercheonline.ch/{value}'
+};
+const FACT_SCHEMA_LINK_PROVIDER: Record<string, string> = {
+  'identifier.wikidata': 'wikidata',
+  'identifier.mfk': 'mfk',
+  'identifier.mfk_permalink': 'mfk',
+  'identifier.rechercheonline': 'mfk'
+};
 
 type MoveUndo = {
   type: 'MOVE_NODE';
@@ -60,7 +75,7 @@ type EdgeDraft = {
   id: string;
   from: string | null;
   to: string | null;
-  leuge?: number;
+  distance?: number;
   validFrom: number;
   validTo?: number;
   notes?: LocalizedText;
@@ -74,18 +89,37 @@ type GeoAdminResult = {
   y: number;
 };
 
-type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact' | 'anchor';
+type ExistingPlaceResult = {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  active: boolean;
+  hidden: boolean;
+};
+
+type QuickPlaceSuggestion =
+  | { id: string; kind: 'existing'; label: string; x: number; y: number; value: ExistingPlaceResult }
+  | { id: string; kind: 'geo'; label: string; x: number; y: number; value: GeoAdminResult };
+
+type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact';
 type InspectorTab = 'core' | 'facts' | 'anchors' | 'source';
 type DeleteConfirmAnchor = 'inline' | 'sticky';
-type PendingFact = {
+
+type InspectorFact = {
   id: string;
   targetType: 'place';
   targetId: string;
   schemaKey: string;
-  valueType: 'string' | 'number' | 'boolean';
+  valueType: 'string' | 'number' | 'boolean' | 'json';
   value: string;
-  status: string;
-  confidence: number;
+  editable: boolean;
+  removable: boolean;
+};
+
+type FactLink = {
+  label: string;
+  url: string | null;
 };
 
 @Component({
@@ -112,6 +146,9 @@ export class AdminComponent implements OnDestroy {
   year = signal<number>(DEFAULT_YEAR);
   graph = signal<GraphSnapshot | null>(null);
   availableYears = signal<number[]>([]);
+  editions = signal<EditionEntry[]>([]);
+  iiifRouteDraft = signal<string>(ARCHIVE_IIIF_BASE);
+  newEditionYearDraft = signal<string>('');
   selectedNodeId = this.selection.selectedNodeId;
   selectedEdgeId = this.selection.selectedEdgeId;
   selectedType = this.selection.selectedType;
@@ -138,14 +175,15 @@ export class AdminComponent implements OnDestroy {
   quickToOpen = signal<boolean>(false);
   quickFromActiveIndex = signal<number>(0);
   quickToActiveIndex = signal<number>(0);
-  quickLeuge = signal<string>('');
-  quickLeugeDirty = signal<boolean>(false);
+  quickDistance = signal<string>('');
   quickTrips = signal<EdgeTrip[]>([
     { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
   ]);
   quickEntityMode = signal<QuickEntityMode>('service');
   inspectorTab = signal<InspectorTab>('core');
   quickPlaceName = signal<string>('');
+  quickPlaceExistingResults = signal<ExistingPlaceResult[]>([]);
+  quickPlaceSelectedExistingId = signal<string | null>(null);
   quickPlaceGeoResults = signal<GeoAdminResult[]>([]);
   quickPlaceGeoOpen = signal<boolean>(false);
   quickPlaceGeoActiveIndex = signal<number>(0);
@@ -155,9 +193,8 @@ export class AdminComponent implements OnDestroy {
   quickFactSchemaKey = signal<string>('identifier.wikidata');
   quickFactValue = signal<string>('');
   quickFactValueType = signal<'string' | 'number' | 'boolean'>('string');
-  quickFactStatus = signal<string>('observed');
-  quickFactConfidence = signal<number>(1);
-  pendingFacts = signal<PendingFact[]>([]);
+  editingFactId = signal<string | null>(null);
+  persistedFacts = signal<GraphAssertion[]>([]);
   quickAnchorX = signal<string>('');
   quickAnchorY = signal<string>('');
   quickTripPasteText = signal<string>('');
@@ -166,9 +203,11 @@ export class AdminComponent implements OnDestroy {
   geoLoading = signal<boolean>(false);
   geoActiveIndex = signal<number>(0);
   private geoSearchHandle: ReturnType<typeof setTimeout> | null = null;
+  private quickPlaceExistingSearchHandle: ReturnType<typeof setTimeout> | null = null;
+  private quickPlaceExistingRequestSeq = 0;
   private quickPlaceGeoSearchHandle: ReturnType<typeof setTimeout> | null = null;
   private archiveSaveHandle: ReturnType<typeof setTimeout> | null = null;
-  private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number } | null = null;
+  private pendingIiifUpdate: { nodeId: string; iiifCenterX: number; iiifCenterY: number; anchorYear: number } | null = null;
   readonly transportOptions: TransportType[] = [
     'postkutsche',
     'dampfschiff',
@@ -183,8 +222,7 @@ export class AdminComponent implements OnDestroy {
     { id: 'link', label: 'Link', shortcut: 'L' },
     { id: 'service', label: 'Service', shortcut: 'S' },
     { id: 'trip', label: 'Trip', shortcut: 'T' },
-    { id: 'fact', label: 'Fact', shortcut: 'F' },
-    { id: 'anchor', label: 'Anchor', shortcut: 'A' }
+    { id: 'fact', label: 'Fact', shortcut: 'F' }
   ];
   readonly inspectorTabs: Array<{ id: InspectorTab; label: string }> = [
     { id: 'core', label: 'Core' },
@@ -194,6 +232,8 @@ export class AdminComponent implements OnDestroy {
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
+  private graphRequestSeq = 0;
+  private pendingNodeSelectionAfterGraphLoad: string | null = null;
   private dragState:
     | {
       id: string;
@@ -208,7 +248,6 @@ export class AdminComponent implements OnDestroy {
   @ViewChild('nodeNameInput') private nodeNameInput?: ElementRef<HTMLInputElement>;
   @ViewChild('quickFromInput') private quickFromInput?: ElementRef<HTMLInputElement>;
   @ViewChild('quickToInput') private quickToInput?: ElementRef<HTMLInputElement>;
-  @ViewChild('quickLeugeInput') private quickLeugeInput?: ElementRef<HTMLInputElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -232,24 +271,31 @@ export class AdminComponent implements OnDestroy {
       edges
     };
   });
+  archiveIiifRoute = computed(() => {
+    const year = this.year();
+    const edition = this.editions().find((item) => item.year === year);
+    return normalizeIiifRoute(edition?.iiifRoute);
+  });
+  archiveIiifInfoUrl = computed(() => buildArchiveIiifInfoUrl(this.archiveIiifRoute()));
 
   archiveSnippetUrl = computed(() => {
     const transform = computeArchiveTransform();
+    const iiifRoute = this.archiveIiifRoute();
     const draft = this.draftNode();
     if (draft) {
       if (transform) {
-        return buildArchiveSnippetUrlForNode(draft, transform);
+        return buildArchiveSnippetUrlForNode(draft, transform, iiifRoute);
       }
-      return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+      return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
     }
     const detail = this.nodeDetail();
     if (detail?.node) {
       if (transform) {
-        return buildArchiveSnippetUrlForNode(detail.node, transform);
+        return buildArchiveSnippetUrlForNode(detail.node, transform, iiifRoute);
       }
-      return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+      return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
     }
-    return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+    return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
   });
 
   outgoingEdges = computed(() => {
@@ -269,8 +315,7 @@ export class AdminComponent implements OnDestroy {
           toName: toNode?.name ?? '—',
           transports: this.sortTransportTypes(transports),
           tripsCount: edge.trips?.length ?? 0,
-          validFrom: edge.validFrom,
-          validTo: edge.validTo
+          validFrom: edge.validFrom
         };
       });
   });
@@ -299,6 +344,34 @@ export class AdminComponent implements OnDestroy {
     ensure(draft?.to);
 
     return [...options.values()].sort((a, b) => a.name.localeCompare(b.name));
+  });
+
+  quickPlaceSuggestions = computed<QuickPlaceSuggestion[]>(() => {
+    const existing = this.quickPlaceExistingResults().map((result) => ({
+      id: `existing-${result.id}`,
+      kind: 'existing' as const,
+      label: result.name,
+      x: result.x,
+      y: result.y,
+      value: result
+    }));
+    const geo = this.quickPlaceGeoResults().map((result) => ({
+      id: `geo-${result.id}`,
+      kind: 'geo' as const,
+      label: result.label,
+      x: result.x,
+      y: result.y,
+      value: result
+    }));
+    return [...existing, ...geo];
+  });
+
+  selectedQuickPlaceExisting = computed<ExistingPlaceResult | null>(() => {
+    const selectedId = this.quickPlaceSelectedExistingId();
+    if (!selectedId) {
+      return null;
+    }
+    return this.quickPlaceExistingResults().find((result) => result.id === selectedId) ?? null;
   });
 
   quickFromSuggestions = computed(() => {
@@ -333,22 +406,29 @@ export class AdminComponent implements OnDestroy {
       id: edge.id,
       from: edge.from,
       to: edge.to,
-      leuge: edge.leuge,
+      distance: edge.distance,
       validFrom: edge.validFrom,
-      validTo: edge.validTo,
+      validTo: undefined,
       notes: edge.notes,
       trips: this.normalizeTrips(edge.trips ?? [])
     };
   });
 
-  selectedNodeFacts = computed(() => {
+  selectedNodeFacts = computed<InspectorFact[]>(() => {
     const nodeId = this.selectedNodeId();
     if (!nodeId) {
       return [];
     }
-    const facts = this.pendingFacts().filter((fact) => fact.targetId === nodeId);
+    const persisted = this.persistedFacts()
+      .filter((fact) => fact.targetType === 'place' && fact.targetId === nodeId)
+      .map((fact) => this.toInspectorFact(fact))
+      .filter((fact): fact is InspectorFact => fact !== null);
+    const facts = [...persisted];
     const node = this.getNodeById(nodeId);
-    if (node?.foreign) {
+    const hasForeignFact = facts.some(
+      (fact) => fact.schemaKey === 'place.is_foreign' && fact.value.trim().toLowerCase() === 'true'
+    );
+    if (node?.foreign && !hasForeignFact) {
       facts.unshift({
         id: `derived-${node.id}-foreign`,
         targetType: 'place',
@@ -356,8 +436,8 @@ export class AdminComponent implements OnDestroy {
         schemaKey: 'place.is_foreign',
         valueType: 'boolean',
         value: 'true',
-        status: 'observed',
-        confidence: 1
+        editable: false,
+        removable: false
       });
     }
     return facts;
@@ -409,9 +489,9 @@ export class AdminComponent implements OnDestroy {
         id: draftEdge.id,
         from: draftEdge.from,
         to: draftEdge.to,
-        leuge: draftEdge.leuge,
+        distance: draftEdge.distance,
         validFrom: draftEdge.validFrom,
-        validTo: draftEdge.validTo,
+        validTo: undefined,
         trips: this.normalizeTrips(draftEdge.trips)
       };
       edges = [...edges, tempEdge];
@@ -429,12 +509,20 @@ export class AdminComponent implements OnDestroy {
     const years = this.availableYears();
     return years.length > 0 ? Math.max(...years) : DEFAULT_YEAR + 20;
   });
+  canAddNewEdition = computed(() => {
+    const value = Number(this.newEditionYearDraft().trim());
+    if (!Number.isInteger(value) || value < 0) {
+      return false;
+    }
+    return !this.availableYears().includes(value);
+  });
 
   constructor() {
     if (this.isBrowser) {
       const stored = window.localStorage.getItem('admin.shortcutsCollapsed');
       this.shortcutsCollapsed.set(stored === 'true');
       this.fetchYears();
+      this.fetchEditions();
       this.bindUndoShortcut();
       if (this.repo.isDemo && !this.tour.isCompleted()) {
         this.tour.start(ADMIN_TUTORIAL_STEPS);
@@ -454,6 +542,13 @@ export class AdminComponent implements OnDestroy {
       this.graphFetchHandle = setTimeout(() => {
         this.fetchGraph(targetYear);
       }, 200);
+    });
+
+    effect(() => {
+      const year = this.year();
+      const editions = this.editions();
+      const edition = editions.find((entry) => entry.year === year);
+      this.iiifRouteDraft.set(normalizeIiifRoute(edition?.iiifRoute));
     });
 
     effect(() => {
@@ -523,6 +618,10 @@ export class AdminComponent implements OnDestroy {
       clearTimeout(this.geoSearchHandle);
       this.geoSearchHandle = null;
     }
+    if (this.quickPlaceExistingSearchHandle) {
+      clearTimeout(this.quickPlaceExistingSearchHandle);
+      this.quickPlaceExistingSearchHandle = null;
+    }
     if (this.quickPlaceGeoSearchHandle) {
       clearTimeout(this.quickPlaceGeoSearchHandle);
       this.quickPlaceGeoSearchHandle = null;
@@ -536,42 +635,114 @@ export class AdminComponent implements OnDestroy {
     const input = event.target as HTMLInputElement;
     const nextYear = Number(input.value);
     if (!Number.isNaN(nextYear)) {
-      this.year.set(nextYear);
-      this.selection.clearSelection();
-      this.selection.clearPendingEdge();
-      this.draftNode.set(null);
-      this.draftEdge.set(null);
-      this.dragState = null;
+      this.applyYearSelection(nextYear);
     }
   }
 
   onEditionYearSelect(event: Event): void {
     const nextYear = Number((event.target as HTMLSelectElement).value);
     if (!Number.isNaN(nextYear)) {
-      this.year.set(nextYear);
-      this.selection.clearSelection();
-      this.selection.clearPendingEdge();
-      this.draftNode.set(null);
-      this.draftEdge.set(null);
-      this.dragState = null;
+      this.applyYearSelection(nextYear);
     }
+  }
+
+  onNewEditionYearInput(event: Event): void {
+    this.newEditionYearDraft.set((event.target as HTMLInputElement).value);
+  }
+
+  onNewEditionYearKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter') {
+      return;
+    }
+    event.preventDefault();
+    this.addNewEdition();
+  }
+
+  addNewEdition(): void {
+    const year = Number(this.newEditionYearDraft().trim());
+    if (!Number.isInteger(year) || year < 0) {
+      this.toastService.addToast({
+        type: 'error',
+        title: 'Ungültiges Jahr',
+        message: 'Bitte ein ganzzahliges Jahr >= 0 eingeben.',
+        key: 'edition-add-invalid'
+      });
+      return;
+    }
+    if (this.availableYears().includes(year)) {
+      this.applyYearSelection(year);
+      this.toastService.addToast({
+        type: 'info',
+        title: 'Edition existiert bereits',
+        key: 'edition-add-existing'
+      });
+      return;
+    }
+
+    this.repo
+      .updateEdition(year, {
+        title: `Kurskarte ${year}`
+      })
+      .subscribe({
+        next: (edition) => {
+          this.upsertEditionLocal(edition);
+          this.upsertAvailableYearLocal(year);
+          this.newEditionYearDraft.set(String(year + 1));
+          this.applyYearSelection(year);
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Edition erstellt',
+            key: `edition-add-${year}`
+          });
+        },
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'edition-add-error'
+          });
+        }
+      });
+  }
+
+  onIiifRouteInput(event: Event): void {
+    this.iiifRouteDraft.set((event.target as HTMLInputElement).value);
+  }
+
+  onIiifRouteBlur(): void {
+    this.saveIiifRouteForYear();
+  }
+
+  onIiifRouteKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Enter') {
+      return;
+    }
+    event.preventDefault();
+    this.saveIiifRouteForYear();
   }
 
   setQuickEntityMode(mode: QuickEntityMode): void {
     this.quickEntityMode.set(mode);
     if (mode !== 'place') {
+      this.quickPlaceExistingRequestSeq++;
+      this.quickPlaceExistingResults.set([]);
+      this.quickPlaceSelectedExistingId.set(null);
       this.quickPlaceGeoOpen.set(false);
       this.quickPlaceGeoResults.set([]);
       this.quickPlaceGeoActiveIndex.set(0);
       this.quickPlaceGeoPoint.set(null);
+      if (this.quickPlaceExistingSearchHandle) {
+        clearTimeout(this.quickPlaceExistingSearchHandle);
+        this.quickPlaceExistingSearchHandle = null;
+      }
       if (this.quickPlaceGeoSearchHandle) {
         clearTimeout(this.quickPlaceGeoSearchHandle);
         this.quickPlaceGeoSearchHandle = null;
       }
     }
-    if (mode === 'anchor') {
-      this.inspectorTab.set('anchors');
-      return;
+    if (mode !== 'fact' && this.editingFactId()) {
+      this.clearQuickFactEditor();
     }
     if (mode === 'fact') {
       this.inspectorTab.set('facts');
@@ -632,9 +803,11 @@ export class AdminComponent implements OnDestroy {
   onQuickPlaceInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.quickPlaceName.set(value);
+    this.quickPlaceSelectedExistingId.set(null);
     this.quickPlaceGeoPoint.set(null);
     this.quickPlaceGeoOpen.set(true);
     this.quickPlaceGeoActiveIndex.set(0);
+    this.queueQuickPlaceExistingSearch(value);
     this.queueQuickPlaceGeoSearch(value);
   }
 
@@ -643,33 +816,33 @@ export class AdminComponent implements OnDestroy {
     const isArrowUp = event.key === 'ArrowUp' || event.key === 'Up';
     const isEnter = event.key === 'Enter';
     const isEscape = event.key === 'Escape';
-    const results = this.quickPlaceGeoResults();
+    const suggestions = this.quickPlaceSuggestions();
     if (isArrowDown) {
-      if (!results.length) {
+      if (!suggestions.length) {
         return;
       }
       event.preventDefault();
       event.stopPropagation();
       this.quickPlaceGeoOpen.set(true);
-      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() + 1) % results.length);
+      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() + 1) % suggestions.length);
       return;
     }
     if (isArrowUp) {
-      if (!results.length) {
+      if (!suggestions.length) {
         return;
       }
       event.preventDefault();
       event.stopPropagation();
       this.quickPlaceGeoOpen.set(true);
-      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() - 1 + results.length) % results.length);
+      this.quickPlaceGeoActiveIndex.set((this.quickPlaceGeoActiveIndex() - 1 + suggestions.length) % suggestions.length);
       return;
     }
-    if (isEnter && results.length) {
+    if (isEnter && suggestions.length) {
       event.preventDefault();
       event.stopPropagation();
-      const picked = results[this.quickPlaceGeoActiveIndex()] ?? results[0];
+      const picked = suggestions[this.quickPlaceGeoActiveIndex()] ?? suggestions[0];
       if (picked) {
-        this.selectQuickPlaceGeoResult(picked);
+        this.selectQuickPlaceSuggestion(picked);
       }
       return;
     }
@@ -682,22 +855,68 @@ export class AdminComponent implements OnDestroy {
     if (isEscape) {
       event.stopPropagation();
       this.quickPlaceGeoOpen.set(false);
+      this.quickPlaceExistingResults.set([]);
+      this.quickPlaceSelectedExistingId.set(null);
       this.quickPlaceGeoResults.set([]);
       this.quickPlaceGeoActiveIndex.set(0);
     }
   }
 
   closeQuickPlaceList(): void {
-    setTimeout(() => this.quickPlaceGeoOpen.set(false), 80);
+    setTimeout(() => {
+      this.quickPlaceGeoOpen.set(false);
+      this.quickPlaceGeoActiveIndex.set(0);
+    }, 80);
+  }
+
+  selectQuickPlaceSuggestion(suggestion: QuickPlaceSuggestion): void {
+    if (suggestion.kind === 'existing') {
+      this.selectQuickPlaceExistingResult(suggestion.value);
+      return;
+    }
+    this.selectQuickPlaceGeoResult(suggestion.value);
+  }
+
+  selectQuickPlaceExistingResult(result: ExistingPlaceResult): void {
+    this.quickPlaceName.set(result.name);
+    this.quickPlaceSelectedExistingId.set(result.id);
+    this.quickPlaceGeoPoint.set({ x: result.x, y: result.y });
+    this.quickPlaceGeoOpen.set(false);
+    this.quickPlaceGeoActiveIndex.set(0);
+    this.quickPlaceGeoResults.set([]);
+    this.quickPlaceExistingResults.set([]);
   }
 
   selectQuickPlaceGeoResult(result: GeoAdminResult): void {
     const mapped = this.mapGeoAdminToLocal(result.x, result.y);
     this.quickPlaceName.set(result.label || this.quickPlaceName());
+    this.quickPlaceSelectedExistingId.set(null);
     this.quickPlaceGeoPoint.set(mapped);
     this.quickPlaceGeoOpen.set(false);
+    this.quickPlaceExistingResults.set([]);
     this.quickPlaceGeoResults.set([]);
     this.quickPlaceGeoActiveIndex.set(0);
+  }
+
+  activateSelectedQuickPlace(): void {
+    const selected = this.selectedQuickPlaceExisting();
+    if (!selected) {
+      return;
+    }
+    if (!selected.active) {
+      this.toastService.addToast({
+        type: 'info',
+        title: 'Place in diesem Jahr nicht aktiv',
+        message: 'Wähle ein passendes Jahr oder erstelle einen neuen Place.',
+        key: 'place-existing-inactive'
+      });
+      return;
+    }
+    if (selected.hidden) {
+      this.unhideExistingPlaceForYear(selected);
+      return;
+    }
+    this.activateExistingPlaceSuggestion(selected);
   }
 
   onQuickFromInput(event: Event): void {
@@ -713,7 +932,7 @@ export class AdminComponent implements OnDestroy {
     const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickToId());
     if (exact) {
       this.quickFromId.set(exact.id);
-      this.applyQuickLeugePrefill();
+      this.applyQuickDistancePrefill();
     }
   }
 
@@ -730,7 +949,7 @@ export class AdminComponent implements OnDestroy {
     const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickFromId());
     if (exact) {
       this.quickToId.set(exact.id);
-      this.applyQuickLeugePrefill();
+      this.applyQuickDistancePrefill();
     }
   }
 
@@ -819,7 +1038,6 @@ export class AdminComponent implements OnDestroy {
     if (isEnter && this.quickToId()) {
       event.preventDefault();
       event.stopPropagation();
-      this.focusQuickLeugeInput();
       return;
     }
     if (isEscape) {
@@ -849,7 +1067,7 @@ export class AdminComponent implements OnDestroy {
       this.quickToId.set(null);
       this.quickToQuery.set('');
     }
-    this.applyQuickLeugePrefill();
+    this.applyQuickDistancePrefill();
   }
 
   selectQuickTo(nodeId: string): void {
@@ -865,12 +1083,11 @@ export class AdminComponent implements OnDestroy {
       this.quickFromId.set(null);
       this.quickFromQuery.set('');
     }
-    this.applyQuickLeugePrefill();
+    this.applyQuickDistancePrefill();
   }
 
-  updateQuickLeuge(event: Event): void {
-    this.quickLeuge.set((event.target as HTMLInputElement).value);
-    this.quickLeugeDirty.set(true);
+  updateQuickDistance(event: Event): void {
+    this.quickDistance.set((event.target as HTMLInputElement).value);
   }
 
   addQuickTrip(copyLast = false): void {
@@ -935,9 +1152,9 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    const leugeRaw = this.quickLeuge().trim();
-    const leuge = leugeRaw === '' ? undefined : Number(leugeRaw);
-    if (leuge !== undefined && Number.isNaN(leuge)) {
+    const distanceRaw = this.quickDistance().trim();
+    const distance = distanceRaw === '' ? undefined : Number(distanceRaw);
+    if (distance !== undefined && Number.isNaN(distance)) {
       return;
     }
 
@@ -960,7 +1177,7 @@ export class AdminComponent implements OnDestroy {
       id: `edge-${Date.now()}`,
       from,
       to,
-      leuge,
+      distance,
       validFrom: this.year(),
       notes,
       trips
@@ -987,8 +1204,7 @@ export class AdminComponent implements OnDestroy {
         this.quickToOpen.set(false);
         this.quickToId.set(null);
         this.quickToQuery.set('');
-        this.quickLeuge.set('');
-        this.quickLeugeDirty.set(false);
+        this.quickDistance.set('');
         this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
         this.quickServiceNoteDe.set('');
         this.quickServiceNoteFr.set('');
@@ -1011,9 +1227,9 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    const leugeRaw = this.quickLeuge().trim();
-    const leuge = leugeRaw === '' ? undefined : Number(leugeRaw);
-    if (leuge !== undefined && Number.isNaN(leuge)) {
+    const distanceRaw = this.quickDistance().trim();
+    const distance = distanceRaw === '' ? undefined : Number(distanceRaw);
+    if (distance !== undefined && Number.isNaN(distance)) {
       return;
     }
 
@@ -1021,7 +1237,7 @@ export class AdminComponent implements OnDestroy {
       id: `edge-${Date.now()}`,
       from,
       to,
-      leuge,
+      distance,
       validFrom: this.year(),
       notes: undefined,
       trips: []
@@ -1041,6 +1257,47 @@ export class AdminComponent implements OnDestroy {
     if (!name) {
       return;
     }
+    const selected = this.selectedQuickPlaceExisting() ?? this.resolveExistingPlaceByName(name);
+    if (selected) {
+      this.quickPlaceSelectedExistingId.set(selected.id);
+      this.activateSelectedQuickPlace();
+      return;
+    }
+    const visibleMatch = this.findVisibleExistingPlaceByName(name);
+    if (visibleMatch) {
+      this.activateExistingPlaceSuggestion(visibleMatch);
+      return;
+    }
+    this.repo.searchPlaces(name, this.year()).subscribe({
+      next: (results) => {
+        const exact = this.pickExactExistingPlace(results, name);
+        if (exact) {
+          this.quickPlaceSelectedExistingId.set(exact.id);
+          if (!exact.active) {
+            this.toastService.addToast({
+              type: 'info',
+              title: 'Place in diesem Jahr nicht aktiv',
+              message: 'Wähle ein passendes Jahr oder erstelle bewusst einen neuen Place.',
+              key: 'place-existing-inactive'
+            });
+            return;
+          }
+          if (exact.hidden) {
+            this.unhideExistingPlaceForYear(exact);
+            return;
+          }
+          this.activateExistingPlaceSuggestion(exact);
+          return;
+        }
+        this.createQuickPlace(name);
+      },
+      error: () => {
+        this.createQuickPlace(name);
+      }
+    });
+  }
+
+  private createQuickPlace(name: string): void {
     const point = this.quickPlaceGeoPoint() ?? this.selection.lastMapPointerPosition() ?? { x: 0, y: 0 };
     const node: NodeDraft = {
       id: `node-${Date.now()}`,
@@ -1053,11 +1310,7 @@ export class AdminComponent implements OnDestroy {
       next: (created) => {
         this.addNode(created);
         this.selection.selectNode(created.id);
-        this.quickPlaceName.set('');
-        this.quickPlaceGeoPoint.set(null);
-        this.quickPlaceGeoOpen.set(false);
-        this.quickPlaceGeoResults.set([]);
-        this.quickPlaceGeoActiveIndex.set(0);
+        this.clearQuickPlaceInput();
         this.quickFromId.set(created.id);
         this.quickFromQuery.set(created.name);
         this.quickAnchorX.set(String(Math.round(created.x * 10) / 10));
@@ -1079,6 +1332,114 @@ export class AdminComponent implements OnDestroy {
     });
   }
 
+  private findVisibleExistingPlaceByName(name: string): ExistingPlaceResult | null {
+    const normalized = name.trim().toLowerCase();
+    if (!normalized) {
+      return null;
+    }
+    const snapshot = this.displayGraph() ?? this.graph();
+    const node = snapshot?.nodes.find((candidate) => candidate.name.trim().toLowerCase() === normalized);
+    if (!node) {
+      return null;
+    }
+    return {
+      id: node.id,
+      name: node.name,
+      x: node.x,
+      y: node.y,
+      active: true,
+      hidden: false
+    };
+  }
+
+  private pickExactExistingPlace(results: ExistingPlaceResult[], name: string): ExistingPlaceResult | null {
+    const normalized = name.trim().toLowerCase();
+    const matches = results.filter((result) => result.name.trim().toLowerCase() === normalized);
+    if (!matches.length) {
+      return null;
+    }
+    matches.sort((a, b) => {
+      if (a.hidden !== b.hidden) {
+        return Number(a.hidden) - Number(b.hidden);
+      }
+      if (a.active !== b.active) {
+        return Number(b.active) - Number(a.active);
+      }
+      return a.name.localeCompare(b.name);
+    });
+    return matches[0] ?? null;
+  }
+
+  private resolveExistingPlaceByName(name: string): ExistingPlaceResult | null {
+    const normalized = name.trim().toLowerCase();
+    if (!normalized) {
+      return null;
+    }
+    return this.quickPlaceExistingResults().find((result) => result.name.trim().toLowerCase() === normalized) ?? null;
+  }
+
+  private activateExistingPlaceSuggestion(result: ExistingPlaceResult): void {
+    if (result.hidden || !result.active) {
+      return;
+    }
+    this.selection.selectNode(result.id);
+    this.quickFromId.set(result.id);
+    this.quickFromQuery.set(result.name);
+    this.quickAnchorX.set(String(Math.round(result.x * 10) / 10));
+    this.quickAnchorY.set(String(Math.round(result.y * 10) / 10));
+    this.clearQuickPlaceInput();
+    this.toastService.addToast({
+      type: 'success',
+      title: 'Bestehender Place gewählt',
+      key: 'place-existing'
+    });
+  }
+
+  private unhideExistingPlaceForYear(result: ExistingPlaceResult): void {
+    const targetYear = this.year();
+    this.repo.setNodeVisibility(result.id, targetYear, false).subscribe({
+      next: (response) => {
+        if (!response.updated) {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Unhide fehlgeschlagen',
+            key: 'place-unhide'
+          });
+          return;
+        }
+        this.pendingNodeSelectionAfterGraphLoad = result.id;
+        this.fetchGraph(targetYear);
+        this.quickFromId.set(result.id);
+        this.quickFromQuery.set(result.name);
+        this.clearQuickPlaceInput();
+        this.toastService.addToast({
+          type: 'success',
+          title: `Place in ${targetYear} wieder sichtbar`,
+          key: 'place-unhide'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'place-unhide'
+        });
+      }
+    });
+  }
+
+  private clearQuickPlaceInput(): void {
+    this.quickPlaceExistingRequestSeq++;
+    this.quickPlaceName.set('');
+    this.quickPlaceSelectedExistingId.set(null);
+    this.quickPlaceGeoPoint.set(null);
+    this.quickPlaceGeoOpen.set(false);
+    this.quickPlaceExistingResults.set([]);
+    this.quickPlaceGeoResults.set([]);
+    this.quickPlaceGeoActiveIndex.set(0);
+  }
+
   useSelectedPlaceAsQuickTarget(): void {
     const nodeId = this.selectedNodeId();
     if (!nodeId) {
@@ -1093,35 +1454,130 @@ export class AdminComponent implements OnDestroy {
   }
 
   addQuickFact(): void {
-    const target = this.resolveQuickTargetPlaceId();
     const schemaKey = this.quickFactSchemaKey().trim();
-    const value = this.quickFactValue().trim();
-    if (!target || !schemaKey || !value) {
+    const valueRaw = this.quickFactValue().trim();
+    if (!schemaKey || !valueRaw) {
       return;
     }
-    const next: PendingFact = {
-      id: `fact-${Date.now()}`,
+    const valuePayload = this.buildQuickFactValuePayload(this.quickFactValueType(), valueRaw);
+    if (!valuePayload) {
+      return;
+    }
+
+    const editingId = this.editingFactId();
+    if (editingId) {
+      this.repo.updateAssertion(editingId, {
+        schemaKey,
+        ...valuePayload
+      }).subscribe({
+        next: (updated) => {
+          this.persistedFacts.set(this.persistedFacts().map((fact) => (fact.id === updated.id ? updated : fact)));
+          this.clearQuickFactEditor();
+          this.inspectorTab.set('facts');
+          this.toastService.addToast({
+            type: 'success',
+            title: 'Fact aktualisiert',
+            key: 'fact-update'
+          });
+        },
+        error: (error) => {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: 'fact-update'
+          });
+        }
+      });
+      return;
+    }
+
+    const target = this.resolveQuickTargetPlaceId();
+    if (!target) {
+      return;
+    }
+
+    const draft: GraphAssertion = {
+      id: '',
       targetType: 'place',
       targetId: target,
       schemaKey,
-      valueType: this.quickFactValueType(),
-      value,
-      status: this.quickFactStatus().trim() || 'observed',
-      confidence: Math.max(0, Math.min(1, this.quickFactConfidence()))
+      validFrom: this.year(),
+      validTo: null,
+      ...valuePayload
     };
-    this.pendingFacts.set([...this.pendingFacts(), next]);
-    this.quickFactValue.set('');
-    this.inspectorTab.set('facts');
-    this.toastService.addToast({
-      type: 'info',
-      title: 'Fact hinzugefügt',
-      message: 'Fact ist lokal im UI vorgemerkt.',
-      key: 'fact-add'
+    this.repo.createAssertion(draft).subscribe({
+      next: (created) => {
+        this.persistedFacts.set([...this.persistedFacts(), created]);
+        this.quickFactValue.set('');
+        this.inspectorTab.set('facts');
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Fact gespeichert',
+          key: 'fact-add'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'fact-add'
+        });
+      }
     });
   }
 
-  removePendingFact(factId: string): void {
-    this.pendingFacts.set(this.pendingFacts().filter((fact) => fact.id !== factId));
+  startEditFact(fact: InspectorFact): void {
+    if (!fact.editable) {
+      return;
+    }
+    this.editingFactId.set(fact.id);
+    this.quickFactSchemaKey.set(fact.schemaKey);
+    this.quickFactValueType.set(fact.valueType === 'number' || fact.valueType === 'boolean' ? fact.valueType : 'string');
+    this.quickFactValue.set(fact.value);
+    const node = this.getNodeById(fact.targetId);
+    if (node) {
+      this.quickFromId.set(node.id);
+      this.quickFromQuery.set(node.name);
+    }
+    this.setQuickEntityMode('fact');
+  }
+
+  cancelFactEdit(): void {
+    this.clearQuickFactEditor();
+  }
+
+  removeFact(factId: string): void {
+    this.repo.deleteAssertion(factId).subscribe({
+      next: (result) => {
+        if (!result.deleted) {
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fact konnte nicht gelöscht werden',
+            key: 'fact-remove'
+          });
+          return;
+        }
+        this.persistedFacts.set(this.persistedFacts().filter((fact) => fact.id !== factId));
+        if (this.editingFactId() === factId) {
+          this.clearQuickFactEditor();
+        }
+        this.toastService.addToast({
+          type: 'success',
+          title: 'Fact gelöscht',
+          key: 'fact-remove'
+        });
+      },
+      error: (error) => {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Fehler',
+          message: this.extractErrorMessage(error),
+          key: 'fact-remove'
+        });
+      }
+    });
   }
 
   setQuickAnchorFromPointer(): void {
@@ -1221,7 +1677,7 @@ export class AdminComponent implements OnDestroy {
     this.quickToId.set(fromId);
     this.quickFromQuery.set(toQuery);
     this.quickToQuery.set(fromQuery);
-    this.applyQuickLeugePrefill();
+    this.applyQuickDistancePrefill();
   }
 
   cancelPendingEdge(): void {
@@ -1247,6 +1703,7 @@ export class AdminComponent implements OnDestroy {
   deleteSelectedNode(): void {
     const nodeId = this.selectedNodeId();
     const snapshot = this.graph();
+    const deleteYear = this.year();
     if (!nodeId || !snapshot) {
       return;
     }
@@ -1254,20 +1711,22 @@ export class AdminComponent implements OnDestroy {
     if (!node) {
       return;
     }
-    const edges = snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId);
-    this.repo.deleteNode(nodeId).subscribe({
+    this.repo.deleteNode(nodeId, deleteYear).subscribe({
       next: (result) => {
         if (!result.deleted) {
           return;
         }
-        this.removeNodeCascadeLocal(nodeId);
-        this.pushUndo({ type: 'DELETE_NODE', node, edges });
+        if (this.year() === deleteYear) {
+          this.removeNodeCascadeLocal(nodeId);
+        } else {
+          this.fetchGraph(this.year());
+        }
         this.selection.clearSelection();
         this.closeDeleteConfirm();
         this.dirty.set(true);
         this.toastService.addToast({
           type: 'success',
-          title: 'Knoten gelöscht',
+          title: `Place im Jahr ${deleteYear} gelöscht`,
           key: 'node-delete'
         });
       },
@@ -1428,7 +1887,7 @@ export class AdminComponent implements OnDestroy {
       return;
     }
     this.updateNodeLocal(nodeId, { iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY });
-    this.pendingIiifUpdate = { nodeId, iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY };
+    this.pendingIiifUpdate = { nodeId, iiifCenterX: event.iiifCenterX, iiifCenterY: event.iiifCenterY, anchorYear: this.year() };
     if (this.archiveSaveHandle) {
       clearTimeout(this.archiveSaveHandle);
     }
@@ -1438,7 +1897,11 @@ export class AdminComponent implements OnDestroy {
         return;
       }
       this.repo
-        .updateNode(pending.nodeId, { iiifCenterX: pending.iiifCenterX, iiifCenterY: pending.iiifCenterY })
+        .updateNode(pending.nodeId, {
+          iiifCenterX: pending.iiifCenterX,
+          iiifCenterY: pending.iiifCenterY,
+          anchorYear: pending.anchorYear
+        })
         .subscribe({
           next: (updated) => {
             console.info('[archive-snippet] saved', updated.id, updated.iiifCenterX, updated.iiifCenterY);
@@ -1639,9 +2102,9 @@ export class AdminComponent implements OnDestroy {
       id: draft.id,
       from: draft.from,
       to: draft.to,
-      leuge: draft.leuge,
-      validFrom: draft.validFrom,
-      validTo: draft.validTo,
+      distance: draft.distance,
+      validFrom: this.year(),
+      validTo: undefined,
       notes: draft.notes,
       trips
     };
@@ -1683,7 +2146,7 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    const next = this.prefillDraftLeuge({ ...draft, from: value || null });
+    const next = this.prefillDraftDistance({ ...draft, from: value || null });
     this.draftEdge.set(next);
     this.dirty.set(true);
   }
@@ -1694,19 +2157,19 @@ export class AdminComponent implements OnDestroy {
     if (!draft) {
       return;
     }
-    const next = this.prefillDraftLeuge({ ...draft, to: value || null });
+    const next = this.prefillDraftDistance({ ...draft, to: value || null });
     this.draftEdge.set(next);
     this.dirty.set(true);
   }
 
-  updateDraftEdgeLeuge(event: Event): void {
+  updateDraftEdgeDistance(event: Event): void {
     const raw = (event.target as HTMLInputElement).value.trim();
     const value = raw === '' ? undefined : Number(raw);
     const draft = this.draftEdge();
     if (!draft || (value !== undefined && Number.isNaN(value))) {
       return;
     }
-    this.draftEdge.set({ ...draft, leuge: value });
+    this.draftEdge.set({ ...draft, distance: value });
     this.dirty.set(true);
   }
 
@@ -1758,8 +2221,8 @@ export class AdminComponent implements OnDestroy {
     if (!nextFrom) {
       return;
     }
-    const leuge = this.findExistingLeuge(nextFrom, draft.to, draft.id) ?? draft.leuge;
-    this.updateEdgeLocal(draft.id, { from: nextFrom, leuge });
+    const distance = this.findExistingDistance(nextFrom, draft.to, draft.id) ?? draft.distance;
+    this.updateEdgeLocal(draft.id, { from: nextFrom, distance });
     this.dirty.set(true);
   }
 
@@ -1773,19 +2236,19 @@ export class AdminComponent implements OnDestroy {
     if (!nextTo) {
       return;
     }
-    const leuge = this.findExistingLeuge(draft.from, nextTo, draft.id) ?? draft.leuge;
-    this.updateEdgeLocal(draft.id, { to: nextTo, leuge });
+    const distance = this.findExistingDistance(draft.from, nextTo, draft.id) ?? draft.distance;
+    this.updateEdgeLocal(draft.id, { to: nextTo, distance });
     this.dirty.set(true);
   }
 
-  updateSelectedEdgeLeuge(event: Event): void {
+  updateSelectedEdgeDistance(event: Event): void {
     const raw = (event.target as HTMLInputElement).value.trim();
     const value = raw === '' ? undefined : Number(raw);
     const draft = this.selectedEdgeDraft();
     if (!draft || (value !== undefined && Number.isNaN(value))) {
       return;
     }
-    this.updateEdgeLocal(draft.id, { leuge: value });
+    this.updateEdgeLocal(draft.id, { distance: value });
     this.dirty.set(true);
   }
 
@@ -1880,9 +2343,9 @@ export class AdminComponent implements OnDestroy {
       .updateEdge(draft.id, {
         from: draft.from,
         to: draft.to,
-        leuge: draft.leuge,
-        validFrom: draft.validFrom,
-        validTo: draft.validTo,
+        distance: draft.distance,
+        validFrom: this.year(),
+        validTo: undefined,
         notes: draft.notes,
         trips
       } as GraphEdge)
@@ -2297,6 +2760,24 @@ export class AdminComponent implements OnDestroy {
     this.quickPlaceGeoSearchHandle = setTimeout(() => this.fetchQuickPlaceGeoAdminResults(cleaned), 250);
   }
 
+  private queueQuickPlaceExistingSearch(query: string): void {
+    if (!this.isBrowser) {
+      this.quickPlaceExistingResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+      return;
+    }
+    const cleaned = query.trim();
+    if (cleaned.length < 2) {
+      this.quickPlaceExistingResults.set([]);
+      this.quickPlaceGeoActiveIndex.set(0);
+      return;
+    }
+    if (this.quickPlaceExistingSearchHandle) {
+      clearTimeout(this.quickPlaceExistingSearchHandle);
+    }
+    this.quickPlaceExistingSearchHandle = setTimeout(() => this.fetchQuickPlaceExistingResults(cleaned), 180);
+  }
+
   private fetchGeoAdminResults(query: string): void {
     if (!this.geoSearchEnabled() || !this.isBrowser) {
       return;
@@ -2314,6 +2795,26 @@ export class AdminComponent implements OnDestroy {
     this.fetchGeoAdminSearch(query, (results) => {
       this.quickPlaceGeoResults.set(results);
       this.quickPlaceGeoActiveIndex.set(0);
+    });
+  }
+
+  private fetchQuickPlaceExistingResults(query: string): void {
+    const year = this.year();
+    const requestSeq = ++this.quickPlaceExistingRequestSeq;
+    this.repo.searchPlaces(query, year).subscribe({
+      next: (results) => {
+        if (requestSeq !== this.quickPlaceExistingRequestSeq) {
+          return;
+        }
+        this.quickPlaceExistingResults.set(results);
+        this.quickPlaceGeoActiveIndex.set(0);
+      },
+      error: () => {
+        if (requestSeq !== this.quickPlaceExistingRequestSeq) {
+          return;
+        }
+        this.quickPlaceExistingResults.set([]);
+      }
     });
   }
 
@@ -2469,7 +2970,7 @@ export class AdminComponent implements OnDestroy {
       id: `edge-${Date.now()}`,
       from,
       to,
-      leuge: this.findExistingLeuge(from, to),
+      distance: this.findExistingDistance(from, to),
       validFrom: this.year(),
       notes: undefined,
       trips: []
@@ -2484,7 +2985,7 @@ export class AdminComponent implements OnDestroy {
       id: draftId,
       from,
       to,
-      leuge: this.findExistingLeuge(from, to),
+      distance: this.findExistingDistance(from, to),
       validFrom: this.year(),
       notes: undefined,
       trips: []
@@ -2499,18 +3000,15 @@ export class AdminComponent implements OnDestroy {
     this.deleteConfirmAnchor.set(null);
   }
 
-  private applyQuickLeugePrefill(): void {
-    if (this.quickLeugeDirty()) {
-      return;
-    }
+  private applyQuickDistancePrefill(): void {
     const from = this.quickFromId();
     const to = this.quickToId();
     if (!from || !to) {
-      this.quickLeuge.set('');
+      this.quickDistance.set('');
       return;
     }
-    const found = this.findExistingLeuge(from, to);
-    this.quickLeuge.set(found !== undefined ? String(found) : '');
+    const found = this.findExistingDistance(from, to);
+    this.quickDistance.set(found !== undefined ? String(found) : '');
   }
 
   private focusQuickTripField(index: number, field: 'departs' | 'arrives'): void {
@@ -2533,16 +3031,6 @@ export class AdminComponent implements OnDestroy {
     });
   }
 
-  private focusQuickLeugeInput(): void {
-    requestAnimationFrame(() => {
-      const input = this.quickLeugeInput?.nativeElement;
-      if (input) {
-        input.focus();
-        input.select();
-      }
-    });
-  }
-
   private pickEdgeNode(nodeId: string): void {
     const draft = this.draftEdge();
     if (!draft) {
@@ -2550,7 +3038,7 @@ export class AdminComponent implements OnDestroy {
         id: `edge-${Date.now()}`,
         from: nodeId,
         to: null,
-        leuge: undefined,
+        distance: undefined,
         validFrom: this.year(),
         trips: []
       });
@@ -2558,29 +3046,29 @@ export class AdminComponent implements OnDestroy {
     }
 
     if (!draft.from) {
-      const next = this.prefillDraftLeuge({ ...draft, from: nodeId });
+      const next = this.prefillDraftDistance({ ...draft, from: nodeId });
       this.draftEdge.set(next);
       return;
     }
 
     if (!draft.to && nodeId !== draft.from) {
-      const next = this.prefillDraftLeuge({ ...draft, to: nodeId });
+      const next = this.prefillDraftDistance({ ...draft, to: nodeId });
       this.draftEdge.set(next);
     }
   }
 
-  private prefillDraftLeuge(draft: EdgeDraft): EdgeDraft {
-    if (!draft.from || !draft.to || draft.leuge !== undefined) {
+  private prefillDraftDistance(draft: EdgeDraft): EdgeDraft {
+    if (!draft.from || !draft.to || draft.distance !== undefined) {
       return draft;
     }
-    const leuge = this.findExistingLeuge(draft.from, draft.to);
-    if (leuge === undefined) {
+    const distance = this.findExistingDistance(draft.from, draft.to);
+    if (distance === undefined) {
       return draft;
     }
-    return { ...draft, leuge };
+    return { ...draft, distance };
   }
 
-  private findExistingLeuge(from: string | null, to: string | null, excludeEdgeId?: string): number | undefined {
+  private findExistingDistance(from: string | null, to: string | null, excludeEdgeId?: string): number | undefined {
     if (!from || !to) {
       return undefined;
     }
@@ -2594,21 +3082,105 @@ export class AdminComponent implements OnDestroy {
         return false;
       }
       const [edgeA, edgeB] = edge.from <= edge.to ? [edge.from, edge.to] : [edge.to, edge.from];
-      return edgeA === a && edgeB === b && edge.leuge !== undefined;
+      return edgeA === a && edgeB === b && edge.distance !== undefined;
     });
-    return match?.leuge;
+    return match?.distance;
   }
 
   private fetchYears(): void {
     this.repo.loadYears().subscribe({
-      next: (years) => this.availableYears.set(years),
+      next: (years) => {
+        const sorted = [...years].sort((a, b) => a - b);
+        this.availableYears.set(sorted);
+        if (!this.newEditionYearDraft().trim()) {
+          const next = sorted.length ? sorted[sorted.length - 1] + 1 : DEFAULT_YEAR + 1;
+          this.newEditionYearDraft.set(String(next));
+        }
+      },
       error: () => this.availableYears.set([])
     });
   }
 
+  private fetchEditions(): void {
+    this.repo.loadEditions().subscribe({
+      next: (editions) => this.editions.set([...editions].sort((a, b) => a.year - b.year)),
+      error: () => this.editions.set([])
+    });
+  }
+
+  private saveIiifRouteForYear(): void {
+    const year = this.year();
+    const normalized = normalizeIiifRoute(this.iiifRouteDraft());
+    const current = normalizeIiifRoute(this.editions().find((entry) => entry.year === year)?.iiifRoute);
+    if (normalized === current) {
+      this.iiifRouteDraft.set(normalized);
+      return;
+    }
+    this.repo
+      .updateEdition(year, {
+        iiifRoute: normalized === ARCHIVE_IIIF_BASE ? undefined : normalized
+      })
+      .subscribe({
+        next: (edition) => {
+          this.upsertEditionLocal(edition);
+          this.iiifRouteDraft.set(normalizeIiifRoute(edition.iiifRoute));
+          this.toastService.addToast({
+            type: 'success',
+            title: 'IIIF-Route gespeichert',
+            key: `iiif-route-${year}`
+          });
+        },
+        error: (error) => {
+          this.iiifRouteDraft.set(current);
+          this.toastService.addToast({
+            type: 'error',
+            title: 'Fehler',
+            message: this.extractErrorMessage(error),
+            key: `iiif-route-${year}`
+          });
+        }
+      });
+  }
+
+  private upsertEditionLocal(edition: EditionEntry): void {
+    const current = this.editions();
+    const index = current.findIndex((item) => item.year === edition.year);
+    const next =
+      index === -1 ? [...current, edition] : [...current.slice(0, index), edition, ...current.slice(index + 1)];
+    this.editions.set(next.sort((a, b) => a.year - b.year));
+  }
+
+  private upsertAvailableYearLocal(year: number): void {
+    const years = this.availableYears();
+    if (years.includes(year)) {
+      return;
+    }
+    this.availableYears.set([...years, year].sort((a, b) => a - b));
+  }
+
+  private applyYearSelection(nextYear: number): void {
+    this.year.set(nextYear);
+    this.quickPlaceExistingRequestSeq++;
+    this.selection.clearSelection();
+    this.selection.clearPendingEdge();
+    this.draftNode.set(null);
+    this.draftEdge.set(null);
+    this.dragState = null;
+    this.quickPlaceExistingResults.set([]);
+    this.quickPlaceSelectedExistingId.set(null);
+    this.quickPlaceGeoResults.set([]);
+    this.quickPlaceGeoActiveIndex.set(0);
+    this.clearQuickFactEditor();
+  }
+
   private fetchGraph(year: number): void {
+    const requestSeq = ++this.graphRequestSeq;
+    this.fetchAssertions(year, requestSeq);
     this.repo.loadGraph(year).subscribe({
       next: (graph) => {
+        if (requestSeq !== this.graphRequestSeq || this.year() !== year) {
+          return;
+        }
         this.graph.set({
           ...graph,
           edges: graph.edges.map((edge) => this.normalizeEdge(edge))
@@ -2616,8 +3188,39 @@ export class AdminComponent implements OnDestroy {
         this.selection.clearSelection();
         this.draftNode.set(null);
         this.draftEdge.set(null);
+        if (this.pendingNodeSelectionAfterGraphLoad) {
+          const pendingId = this.pendingNodeSelectionAfterGraphLoad;
+          this.pendingNodeSelectionAfterGraphLoad = null;
+          if (graph.nodes.some((node) => node.id === pendingId)) {
+            this.selection.selectNode(pendingId);
+          }
+        }
       },
-      error: () => this.graph.set(null)
+      error: () => {
+        if (requestSeq !== this.graphRequestSeq || this.year() !== year) {
+          return;
+        }
+        this.graph.set(null);
+        this.persistedFacts.set([]);
+        this.pendingNodeSelectionAfterGraphLoad = null;
+      }
+    });
+  }
+
+  private fetchAssertions(year: number, requestSeq: number): void {
+    this.repo.loadAssertions({ year, targetType: 'place' }).subscribe({
+      next: (assertions) => {
+        if (requestSeq !== this.graphRequestSeq || this.year() !== year) {
+          return;
+        }
+        this.persistedFacts.set(assertions);
+      },
+      error: () => {
+        if (requestSeq !== this.graphRequestSeq || this.year() !== year) {
+          return;
+        }
+        this.persistedFacts.set([]);
+      }
     });
   }
 
@@ -2885,10 +3488,6 @@ export class AdminComponent implements OnDestroy {
       return;
     }
 
-    if (key === 'a') {
-      event.preventDefault();
-      this.setQuickEntityMode('anchor');
-    }
   };
 
   tripsValid(trips: EdgeTrip[]): boolean {
@@ -2916,6 +3515,211 @@ export class AdminComponent implements OnDestroy {
       return draft.id;
     }
     return null;
+  }
+
+  private clearQuickFactEditor(): void {
+    this.editingFactId.set(null);
+    this.quickFactSchemaKey.set('identifier.wikidata');
+    this.quickFactValueType.set('string');
+    this.quickFactValue.set('');
+  }
+
+  private buildQuickFactValuePayload(
+    valueType: 'string' | 'number' | 'boolean',
+    rawValue: string
+  ): Pick<GraphAssertion, 'valueType' | 'valueText' | 'valueNumber' | 'valueBoolean' | 'valueJson'> | null {
+    if (valueType === 'string') {
+      return {
+        valueType,
+        valueText: rawValue,
+        valueNumber: null,
+        valueBoolean: null,
+        valueJson: null
+      };
+    }
+
+    if (valueType === 'number') {
+      const parsed = Number(rawValue);
+      if (!Number.isFinite(parsed)) {
+        this.toastService.addToast({
+          type: 'error',
+          title: 'Ungültiger Zahlenwert',
+          key: 'fact-value'
+        });
+        return null;
+      }
+      return {
+        valueType,
+        valueText: null,
+        valueNumber: parsed,
+        valueBoolean: null,
+        valueJson: null
+      };
+    }
+
+    const normalized = rawValue.trim().toLowerCase();
+    let parsedBoolean: boolean | null = null;
+    if (normalized === 'true' || normalized === '1' || normalized === 'yes' || normalized === 'ja') {
+      parsedBoolean = true;
+    }
+    if (normalized === 'false' || normalized === '0' || normalized === 'no' || normalized === 'nein') {
+      parsedBoolean = false;
+    }
+    if (parsedBoolean === null) {
+      this.toastService.addToast({
+        type: 'error',
+        title: 'Ungültiger Boolean-Wert',
+        message: 'Erlaubt: true/false, 1/0, yes/no.',
+        key: 'fact-value'
+      });
+      return null;
+    }
+    return {
+      valueType: 'boolean',
+      valueText: null,
+      valueNumber: null,
+      valueBoolean: parsedBoolean,
+      valueJson: null
+    };
+  }
+
+  factLink(fact: InspectorFact): FactLink {
+    const raw = fact.value.trim();
+    if (!raw) {
+      return { label: '', url: null };
+    }
+
+    const [rawLabel, rawLinkToken] = raw.split(';', 2);
+    const label = rawLabel?.trim() || raw;
+    const linkToken = rawLinkToken?.trim() || null;
+    const providerFromSchema = this.resolveFactProviderFromSchemaKey(fact.schemaKey);
+
+    if (linkToken) {
+      return {
+        label,
+        url: this.resolveFactLinkFromToken(label, linkToken, providerFromSchema)
+      };
+    }
+
+    return {
+      label,
+      url: this.resolveFactLinkFromToken(label, providerFromSchema ?? label, providerFromSchema)
+    };
+  }
+
+  private resolveFactLinkFromToken(label: string, token: string, fallbackProvider?: string | null): string | null {
+    if (/^https?:\/\//i.test(token)) {
+      return token;
+    }
+    const provider = token.trim().toLowerCase() || (fallbackProvider?.trim().toLowerCase() ?? '');
+    const template = FACT_LINK_TEMPLATES[provider];
+    const normalizedValue = this.normalizeFactLinkValueForProvider(label, provider);
+    if (!template) {
+      if (/^https?:\/\//i.test(label)) {
+        return label;
+      }
+      return token.includes('{value}') ? token.replace('{value}', normalizedValue ?? label) : null;
+    }
+    if (!normalizedValue) {
+      return null;
+    }
+    return template.replace('{value}', normalizedValue);
+  }
+
+  private resolveFactProviderFromSchemaKey(schemaKey: string): string | null {
+    const normalized = schemaKey.trim().toLowerCase();
+    if (!normalized) {
+      return null;
+    }
+    return FACT_SCHEMA_LINK_PROVIDER[normalized] ?? null;
+  }
+
+  private normalizeFactLinkValueForProvider(value: string, provider: string): string | null {
+    const normalized = value.trim();
+    if (!normalized) {
+      return null;
+    }
+    if (provider === 'wikidata') {
+      const qid = normalized.match(/Q\d+/i)?.[0];
+      return qid ? qid.toUpperCase() : null;
+    }
+    if (provider === 'mfk') {
+      const objectId = normalized.match(/mfkobject:\d+/i)?.[0];
+      if (objectId) {
+        return objectId.toLowerCase();
+      }
+      if (/^\d+$/.test(normalized)) {
+        return `mfkobject:${normalized}`;
+      }
+      return normalized;
+    }
+    return normalized;
+  }
+
+  private toInspectorFact(assertion: GraphAssertion): InspectorFact | null {
+    const value = this.assertionValueToString(assertion);
+    if (value === null) {
+      return null;
+    }
+    const valueType = this.normalizeAssertionValueType(assertion);
+    return {
+      id: assertion.id,
+      targetType: 'place',
+      targetId: assertion.targetId,
+      schemaKey: assertion.schemaKey,
+      valueType,
+      value,
+      editable: valueType !== 'json',
+      removable: true
+    };
+  }
+
+  private normalizeAssertionValueType(assertion: GraphAssertion): InspectorFact['valueType'] {
+    if (
+      assertion.valueType === 'string' ||
+      assertion.valueType === 'number' ||
+      assertion.valueType === 'boolean' ||
+      assertion.valueType === 'json'
+    ) {
+      return assertion.valueType;
+    }
+    if (assertion.valueText !== null && assertion.valueText !== undefined) {
+      return 'string';
+    }
+    if (assertion.valueNumber !== null && assertion.valueNumber !== undefined) {
+      return 'number';
+    }
+    if (assertion.valueBoolean !== null && assertion.valueBoolean !== undefined) {
+      return 'boolean';
+    }
+    if (assertion.valueJson !== null && assertion.valueJson !== undefined) {
+      return 'json';
+    }
+    return 'string';
+  }
+
+  private assertionValueToString(assertion: GraphAssertion): string | null {
+    const valueType = this.normalizeAssertionValueType(assertion);
+    if (valueType === 'string') {
+      const value = assertion.valueText;
+      return value === null || value === undefined ? null : String(value);
+    }
+    if (valueType === 'number') {
+      const value = assertion.valueNumber;
+      return value === null || value === undefined ? null : String(value);
+    }
+    if (valueType === 'boolean') {
+      const value = assertion.valueBoolean;
+      return value === null || value === undefined ? null : String(value);
+    }
+    if (assertion.valueJson === null || assertion.valueJson === undefined) {
+      return null;
+    }
+    try {
+      return JSON.stringify(assertion.valueJson);
+    } catch {
+      return String(assertion.valueJson);
+    }
   }
 
   private parseTripLines(raw: string): EdgeTrip[] {

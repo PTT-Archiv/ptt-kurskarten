@@ -38,11 +38,38 @@ export type GraphNode = {
   iiifCenterY?: number;
 };
 
+export type GraphNodePatch = Partial<GraphNode> & {
+  anchorYear?: Year;
+};
+
+export type AssertionValueType = 'string' | 'number' | 'boolean' | 'json';
+
+export type GraphAssertion = {
+  id: string;
+  targetType: string;
+  targetId: string;
+  schemaKey: string;
+  valueType?: AssertionValueType;
+  valueText?: string | null;
+  valueNumber?: number | null;
+  valueBoolean?: boolean | null;
+  valueJson?: unknown | null;
+  validFrom?: Year | null;
+  validTo?: Year | null;
+};
+
+export type EditionEntry = {
+  id: string;
+  year: Year;
+  title?: string;
+  iiifRoute?: string;
+};
+
 export type GraphEdge = {
   id: string;
   from: string;
   to: string;
-  leuge?: number;
+  distance?: number;
   validFrom: Year;
   validTo?: Year;
   inDraft?: boolean;

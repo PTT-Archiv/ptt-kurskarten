@@ -14,9 +14,11 @@ import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
 import {
   ARCHIVE_DEFAULT_REGION,
+  buildArchiveIiifInfoUrl,
   buildArchiveSnippetUrlForNode,
-  buildArchiveSnippetUrlFromRegion,
+  buildArchiveSnippetUrlFromRegionWithBase,
   computeArchiveTransform,
+  normalizeIiifRoute,
   type ArchiveTransform
 } from '../../shared/archive/archive-snippet.util';
 
@@ -82,6 +84,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private pendingMapPickTarget: 'from' | 'to' | null = null;
   pickTarget = signal<'from' | 'to' | null>(null);
   private archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
+  private editionIiifRoutes = signal<Record<number, string>>({});
   hoveredNodeId = signal<string | null>(null);
   hoveredNodeScreen = signal<{ x: number; y: number } | null>(null);
   routePlannerOpen = signal(false);
@@ -117,14 +120,17 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     return [...snapshot.nodes].sort((a, b) => a.name.localeCompare(b.name));
   });
+  archiveIiifRoute = computed(() => normalizeIiifRoute(this.editionIiifRoutes()[this.year()]));
+  archiveIiifInfoUrl = computed(() => buildArchiveIiifInfoUrl(this.archiveIiifRoute()));
 
   archiveSnippetUrl = computed(() => {
     const node = this.getArchiveSnippetNode();
     const transform = this.archiveTransform();
+    const iiifRoute = this.archiveIiifRoute();
     if (node) {
-      return buildArchiveSnippetUrlForNode(node, transform);
+      return buildArchiveSnippetUrlForNode(node, transform, iiifRoute);
     }
-    return buildArchiveSnippetUrlFromRegion(ARCHIVE_DEFAULT_REGION);
+    return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
   });
 
   hoveredSnippetUrl = computed(() => {
@@ -137,7 +143,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (!node) {
       return null;
     }
-    return buildArchiveSnippetUrlForNode(node, this.archiveTransform());
+    return buildArchiveSnippetUrlForNode(node, this.archiveTransform(), this.archiveIiifRoute());
   });
 
   hoveredSnippetLoading = signal(false);
@@ -169,7 +175,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (!node) {
       return null;
     }
-    return buildArchiveSnippetUrlForNode(node, this.archiveTransform());
+    return buildArchiveSnippetUrlForNode(node, this.archiveTransform(), this.archiveIiifRoute());
   });
   showRouteNodePanel = computed(() => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId());
   placeSearchResults = computed(() => {
@@ -204,6 +210,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   constructor() {
     if (this.isBrowser) {
       this.fetchYears();
+      this.fetchEditions();
       this.fetchGraph(this.year());
     }
     this.langSub = this.transloco.langChanges$.subscribe((lang) => {
@@ -764,6 +771,21 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.viewerData.getYears().subscribe({
       next: (years) => this.availableYears.set(years),
       error: () => this.availableYears.set([])
+    });
+  }
+
+  private fetchEditions(): void {
+    this.viewerData.getEditions().subscribe({
+      next: (editions) => {
+        const byYear: Record<number, string> = {};
+        for (const edition of editions) {
+          if (typeof edition.iiifRoute === 'string' && edition.iiifRoute.trim().length) {
+            byYear[edition.year] = edition.iiifRoute.trim().replace(/\/+$/, '');
+          }
+        }
+        this.editionIiifRoutes.set(byYear);
+      },
+      error: () => this.editionIiifRoutes.set({})
     });
   }
 

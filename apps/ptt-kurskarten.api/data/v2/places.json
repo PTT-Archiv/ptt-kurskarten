@@ -5,9 +5,7 @@
     "status": "active",
     "defaultName": "Turin",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770808860448"
+    "validTo": null
   },
   {
     "id": "node-1770808908336",
@@ -15,9 +13,7 @@
     "status": "active",
     "defaultName": "Chambery",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770808908336"
+    "validTo": null
   },
   {
     "id": "node-1770809018783",
@@ -25,9 +21,7 @@
     "status": "active",
     "defaultName": "Sallenches Chamouny",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809018783"
+    "validTo": null
   },
   {
     "id": "node-1770809062251",
@@ -35,9 +29,7 @@
     "status": "active",
     "defaultName": "Genève",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809062251"
+    "validTo": null
   },
   {
     "id": "node-1770809102948",
@@ -45,9 +37,7 @@
     "status": "active",
     "defaultName": "Lyon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809102948"
+    "validTo": null
   },
   {
     "id": "node-1770809183587",
@@ -55,9 +45,7 @@
     "status": "active",
     "defaultName": "Paris",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809183587"
+    "validTo": null
   },
   {
     "id": "node-1770809209472",
@@ -65,19 +53,7 @@
     "status": "active",
     "defaultName": "Coppet",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809209472"
-  },
-  {
-    "id": "node-1770809870824",
-    "kind": "place",
-    "status": "active",
-    "defaultName": "Bern",
-    "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770809870824"
+    "validTo": null
   },
   {
     "id": "node-1770811420932",
@@ -85,9 +61,7 @@
     "status": "active",
     "defaultName": "Bellinzona",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770811420932"
+    "validTo": null
   },
   {
     "id": "node-1770811785314",
@@ -95,9 +69,7 @@
     "status": "active",
     "defaultName": "Chur",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770811785314"
+    "validTo": null
   },
   {
     "id": "node-1770812095922",
@@ -105,9 +77,7 @@
     "status": "active",
     "defaultName": "Basel",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770812095922"
+    "validTo": null
   },
   {
     "id": "node-1770812117179",
@@ -115,9 +85,7 @@
     "status": "active",
     "defaultName": "Nyon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770812117179"
+    "validTo": null
   },
   {
     "id": "node-1770818428222",
@@ -125,9 +93,7 @@
     "status": "active",
     "defaultName": "Lausanne",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818428222"
+    "validTo": null
   },
   {
     "id": "node-1770818436737",
@@ -135,9 +101,7 @@
     "status": "active",
     "defaultName": "Morges",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818436737"
+    "validTo": null
   },
   {
     "id": "node-1770818444657",
@@ -145,9 +109,7 @@
     "status": "active",
     "defaultName": "Oron",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818444657"
+    "validTo": null
   },
   {
     "id": "node-1770818451614",
@@ -155,9 +117,7 @@
     "status": "active",
     "defaultName": "Schönbühl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818451614"
+    "validTo": null
   },
   {
     "id": "node-1770818476302",
@@ -165,9 +125,7 @@
     "status": "active",
     "defaultName": "Brienz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818476302"
+    "validTo": null
   },
   {
     "id": "node-1770818481603",
@@ -175,9 +133,7 @@
     "status": "active",
     "defaultName": "Aarberg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818481603"
+    "validTo": null
   },
   {
     "id": "node-1770818483826",
@@ -185,9 +141,7 @@
     "status": "active",
     "defaultName": "Ins",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818483826"
+    "validTo": null
   },
   {
     "id": "node-1770818487149",
@@ -195,9 +149,7 @@
     "status": "active",
     "defaultName": "Walkringen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818487149"
+    "validTo": null
   },
   {
     "id": "node-1770818509015",
@@ -205,9 +157,7 @@
     "status": "active",
     "defaultName": "Münsingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770818509015"
+    "validTo": null
   },
   {
     "id": "node-1770823561872",
@@ -215,9 +165,7 @@
     "status": "active",
     "defaultName": "Martigny",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823561872"
+    "validTo": null
   },
   {
     "id": "node-1770823570686",
@@ -225,9 +173,7 @@
     "status": "active",
     "defaultName": "Sion",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823570686"
+    "validTo": null
   },
   {
     "id": "node-1770823595717",
@@ -235,9 +181,7 @@
     "status": "active",
     "defaultName": "Riddes",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823595717"
+    "validTo": null
   },
   {
     "id": "node-1770823607384",
@@ -245,9 +189,7 @@
     "status": "active",
     "defaultName": "Siders",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823607384"
+    "validTo": null
   },
   {
     "id": "node-1770823621828",
@@ -255,9 +197,7 @@
     "status": "active",
     "defaultName": "Turtmann",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823621828"
+    "validTo": null
   },
   {
     "id": "node-1770823657588",
@@ -265,9 +205,7 @@
     "status": "active",
     "defaultName": "Viesch",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770823657588"
+    "validTo": null
   },
   {
     "id": "node-1770890162679",
@@ -275,9 +213,7 @@
     "status": "active",
     "defaultName": "Saint-Cergue",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890162679"
+    "validTo": null
   },
   {
     "id": "node-1770890186709",
@@ -285,9 +221,7 @@
     "status": "active",
     "defaultName": "Les Rousses",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890186709"
+    "validTo": null
   },
   {
     "id": "node-1770890297820",
@@ -295,9 +229,7 @@
     "status": "active",
     "defaultName": "Rolle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890297820"
+    "validTo": null
   },
   {
     "id": "node-1770890321232",
@@ -305,9 +237,7 @@
     "status": "active",
     "defaultName": "Aubonne",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890321232"
+    "validTo": null
   },
   {
     "id": "node-1770890387454",
@@ -315,9 +245,7 @@
     "status": "active",
     "defaultName": "Douvaine",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890387454"
+    "validTo": null
   },
   {
     "id": "node-1770890410235",
@@ -325,9 +253,7 @@
     "status": "active",
     "defaultName": "Thonon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890410235"
+    "validTo": null
   },
   {
     "id": "node-1770890434712",
@@ -335,9 +261,7 @@
     "status": "active",
     "defaultName": "Saint-Gingolph",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890434712"
+    "validTo": null
   },
   {
     "id": "node-1770890490883",
@@ -345,9 +269,7 @@
     "status": "active",
     "defaultName": "Evian",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890490883"
+    "validTo": null
   },
   {
     "id": "node-1770890523913",
@@ -355,9 +277,7 @@
     "status": "active",
     "defaultName": "Vionnaz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890523913"
+    "validTo": null
   },
   {
     "id": "node-1770890541178",
@@ -365,9 +285,7 @@
     "status": "active",
     "defaultName": "Saint-Maurice",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890541178"
+    "validTo": null
   },
   {
     "id": "node-1770890556808",
@@ -375,9 +293,7 @@
     "status": "active",
     "defaultName": "Aigle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890556808"
+    "validTo": null
   },
   {
     "id": "node-1770890564956",
@@ -385,9 +301,7 @@
     "status": "active",
     "defaultName": "Vevey",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890564956"
+    "validTo": null
   },
   {
     "id": "node-1770890609929",
@@ -395,9 +309,7 @@
     "status": "active",
     "defaultName": "Montpreveyres",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890609929"
+    "validTo": null
   },
   {
     "id": "node-1770890628791",
@@ -405,9 +317,7 @@
     "status": "active",
     "defaultName": "Echallens",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890628791"
+    "validTo": null
   },
   {
     "id": "node-1770890638355",
@@ -415,9 +325,7 @@
     "status": "active",
     "defaultName": "Brieg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890638355"
+    "validTo": null
   },
   {
     "id": "node-1770890809431",
@@ -425,9 +333,7 @@
     "status": "active",
     "defaultName": "Berisal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890809431"
+    "validTo": null
   },
   {
     "id": "node-1770890904555",
@@ -435,9 +341,7 @@
     "status": "active",
     "defaultName": "Jsella",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890904555"
+    "validTo": null
   },
   {
     "id": "node-1770890971568",
@@ -445,9 +349,7 @@
     "status": "active",
     "defaultName": "Simplon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770890971568"
+    "validTo": null
   },
   {
     "id": "node-1770891003781",
@@ -455,9 +357,7 @@
     "status": "active",
     "defaultName": "Vogogna",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891003781"
+    "validTo": null
   },
   {
     "id": "node-1770891044281",
@@ -465,9 +365,7 @@
     "status": "active",
     "defaultName": "Baveno",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891044281"
+    "validTo": null
   },
   {
     "id": "node-1770891120113",
@@ -475,9 +373,7 @@
     "status": "active",
     "defaultName": "Domo d'Ossola",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891120113"
+    "validTo": null
   },
   {
     "id": "node-1770891148537",
@@ -485,9 +381,7 @@
     "status": "active",
     "defaultName": "Arona",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891148537"
+    "validTo": null
   },
   {
     "id": "node-1770891194672",
@@ -495,9 +389,7 @@
     "status": "active",
     "defaultName": "Mailand",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891194672"
+    "validTo": null
   },
   {
     "id": "node-1770891315316",
@@ -505,9 +397,7 @@
     "status": "active",
     "defaultName": "Camerlata",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891315316"
+    "validTo": null
   },
   {
     "id": "node-1770891342495",
@@ -515,9 +405,7 @@
     "status": "active",
     "defaultName": "Como",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891342495"
+    "validTo": null
   },
   {
     "id": "node-1770891376062",
@@ -525,9 +413,7 @@
     "status": "active",
     "defaultName": "Monza",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891376062"
+    "validTo": null
   },
   {
     "id": "node-1770891460324",
@@ -535,9 +421,7 @@
     "status": "active",
     "defaultName": "Carsaniga",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891460324"
+    "validTo": null
   },
   {
     "id": "node-1770891474595",
@@ -545,9 +429,7 @@
     "status": "active",
     "defaultName": "Lecco",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891474595"
+    "validTo": null
   },
   {
     "id": "node-1770891520064",
@@ -555,9 +437,7 @@
     "status": "active",
     "defaultName": "Varenna",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891520064"
+    "validTo": null
   },
   {
     "id": "node-1770891544616",
@@ -565,9 +445,7 @@
     "status": "active",
     "defaultName": "Colico",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891544616"
+    "validTo": null
   },
   {
     "id": "node-1770891568712",
@@ -575,9 +453,7 @@
     "status": "active",
     "defaultName": "Riva",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891568712"
+    "validTo": null
   },
   {
     "id": "node-1770891635575",
@@ -585,9 +461,7 @@
     "status": "active",
     "defaultName": "Chiavenna",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891635575"
+    "validTo": null
   },
   {
     "id": "node-1770891674893",
@@ -595,9 +469,7 @@
     "status": "active",
     "defaultName": "Campodolcino",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891674893"
+    "validTo": null
   },
   {
     "id": "node-1770891915773",
@@ -605,9 +477,7 @@
     "status": "active",
     "defaultName": "Mendrisio",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891915773"
+    "validTo": null
   },
   {
     "id": "node-1770891950032",
@@ -615,9 +485,7 @@
     "status": "active",
     "defaultName": "Lugano",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891950032"
+    "validTo": null
   },
   {
     "id": "node-1770891985133",
@@ -625,9 +493,7 @@
     "status": "active",
     "defaultName": "Bironico",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770891985133"
+    "validTo": null
   },
   {
     "id": "node-1770892074771",
@@ -635,9 +501,7 @@
     "status": "active",
     "defaultName": "Balzers",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892074771"
+    "validTo": null
   },
   {
     "id": "node-1770892131647",
@@ -645,9 +509,7 @@
     "status": "active",
     "defaultName": "Feldkirch",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892131647"
+    "validTo": null
   },
   {
     "id": "node-1770892169658",
@@ -655,9 +517,7 @@
     "status": "active",
     "defaultName": "Sennwald",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892169658"
+    "validTo": null
   },
   {
     "id": "node-1770892196035",
@@ -665,9 +525,7 @@
     "status": "active",
     "defaultName": "Sevelen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892196035"
+    "validTo": null
   },
   {
     "id": "node-1770892203535",
@@ -675,9 +533,7 @@
     "status": "active",
     "defaultName": "Sennwald",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892203535"
+    "validTo": null
   },
   {
     "id": "node-1770892276405",
@@ -685,9 +541,7 @@
     "status": "active",
     "defaultName": "Haag",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892276405"
+    "validTo": null
   },
   {
     "id": "node-1770892402501",
@@ -695,9 +549,7 @@
     "status": "active",
     "defaultName": "Bregenz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892402501"
+    "validTo": null
   },
   {
     "id": "node-1770892435872",
@@ -705,9 +557,7 @@
     "status": "active",
     "defaultName": "Lindau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892435872"
+    "validTo": null
   },
   {
     "id": "node-1770892475913",
@@ -715,9 +565,7 @@
     "status": "active",
     "defaultName": "Friedrichshafen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892475913"
+    "validTo": null
   },
   {
     "id": "node-1770892528135",
@@ -725,9 +573,7 @@
     "status": "active",
     "defaultName": "Ulm",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892528135"
+    "validTo": null
   },
   {
     "id": "node-1770892536449",
@@ -735,9 +581,7 @@
     "status": "active",
     "defaultName": "Heilbronn",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892536449"
+    "validTo": null
   },
   {
     "id": "node-1770892604502",
@@ -745,9 +589,7 @@
     "status": "active",
     "defaultName": "Konstanz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892604502"
+    "validTo": null
   },
   {
     "id": "node-1770892624111",
@@ -755,9 +597,7 @@
     "status": "active",
     "defaultName": "Stockach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892624111"
+    "validTo": null
   },
   {
     "id": "node-1770892703699",
@@ -765,9 +605,7 @@
     "status": "active",
     "defaultName": "Randegg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892703699"
+    "validTo": null
   },
   {
     "id": "node-1770892936569",
@@ -775,9 +613,7 @@
     "status": "active",
     "defaultName": "Blomberg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892936569"
+    "validTo": null
   },
   {
     "id": "node-1770892944989",
@@ -785,9 +621,7 @@
     "status": "active",
     "defaultName": "Stühlingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892944989"
+    "validTo": null
   },
   {
     "id": "node-1770892959172",
@@ -795,9 +629,7 @@
     "status": "active",
     "defaultName": "Unterhallau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770892959172"
+    "validTo": null
   },
   {
     "id": "node-1770893096455",
@@ -805,9 +637,7 @@
     "status": "active",
     "defaultName": "Lauchringen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893096455"
+    "validTo": null
   },
   {
     "id": "node-1770893139038",
@@ -815,9 +645,7 @@
     "status": "active",
     "defaultName": "Riedern",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893139038"
+    "validTo": null
   },
   {
     "id": "node-1770893174287",
@@ -825,9 +653,7 @@
     "status": "active",
     "defaultName": "Waldshut",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893174287"
+    "validTo": null
   },
   {
     "id": "node-1770893232957",
@@ -835,9 +661,7 @@
     "status": "active",
     "defaultName": "Säckingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893232957"
+    "validTo": null
   },
   {
     "id": "node-1770893253800",
@@ -845,9 +669,7 @@
     "status": "active",
     "defaultName": "Beuggen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893253800"
+    "validTo": null
   },
   {
     "id": "node-1770893270491",
@@ -855,9 +677,7 @@
     "status": "active",
     "defaultName": "Offenburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893270491"
+    "validTo": null
   },
   {
     "id": "node-1770893284200",
@@ -865,9 +685,7 @@
     "status": "active",
     "defaultName": "Karlsruhe",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893284200"
+    "validTo": null
   },
   {
     "id": "node-1770893304119",
@@ -875,9 +693,7 @@
     "status": "active",
     "defaultName": "Mannheim",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893304119"
+    "validTo": null
   },
   {
     "id": "node-1770893503712",
@@ -885,9 +701,7 @@
     "status": "active",
     "defaultName": "Frankfurt",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893503712"
+    "validTo": null
   },
   {
     "id": "node-1770893573469",
@@ -895,9 +709,7 @@
     "status": "active",
     "defaultName": "Colmar",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893573469"
+    "validTo": null
   },
   {
     "id": "node-1770893582974",
@@ -905,9 +717,7 @@
     "status": "active",
     "defaultName": "Strassburg-Sarreburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770893582974"
+    "validTo": null
   },
   {
     "id": "node-1770894673248",
@@ -915,9 +725,7 @@
     "status": "active",
     "defaultName": "Delle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894673248"
+    "validTo": null
   },
   {
     "id": "node-1770894704650",
@@ -925,9 +733,7 @@
     "status": "active",
     "defaultName": "Belfort",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894704650"
+    "validTo": null
   },
   {
     "id": "node-1770894747352",
@@ -935,9 +741,7 @@
     "status": "active",
     "defaultName": "Maiche",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894747352"
+    "validTo": null
   },
   {
     "id": "node-1770894787749",
@@ -945,9 +749,7 @@
     "status": "active",
     "defaultName": "Morteau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894787749"
+    "validTo": null
   },
   {
     "id": "node-1770894811224",
@@ -955,9 +757,7 @@
     "status": "active",
     "defaultName": "Besancon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894811224"
+    "validTo": null
   },
   {
     "id": "node-1770894828775",
@@ -965,9 +765,7 @@
     "status": "active",
     "defaultName": "Dijon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894828775"
+    "validTo": null
   },
   {
     "id": "node-1770894852240",
@@ -975,9 +773,7 @@
     "status": "active",
     "defaultName": "Salins",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894852240"
+    "validTo": null
   },
   {
     "id": "node-1770894880046",
@@ -985,9 +781,7 @@
     "status": "active",
     "defaultName": "Pontarlier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894880046"
+    "validTo": null
   },
   {
     "id": "node-1770894994828",
@@ -995,9 +789,7 @@
     "status": "active",
     "defaultName": "Jougne",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770894994828"
+    "validTo": null
   },
   {
     "id": "node-1770895016880",
@@ -1005,9 +797,7 @@
     "status": "active",
     "defaultName": "Lyon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770895016880"
+    "validTo": null
   },
   {
     "id": "node-1770895112907",
@@ -1015,9 +805,7 @@
     "status": "active",
     "defaultName": "Nauders",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770895112907"
+    "validTo": null
   },
   {
     "id": "node-1770897442282",
@@ -1025,9 +813,7 @@
     "status": "active",
     "defaultName": "Cossonay",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897442282"
+    "validTo": null
   },
   {
     "id": "node-1770897530894",
@@ -1035,9 +821,7 @@
     "status": "active",
     "defaultName": "Le Pont",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897530894"
+    "validTo": null
   },
   {
     "id": "node-1770897591288",
@@ -1045,9 +829,7 @@
     "status": "active",
     "defaultName": "Le Brassus",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897591288"
+    "validTo": null
   },
   {
     "id": "node-1770897613242",
@@ -1055,9 +837,7 @@
     "status": "active",
     "defaultName": "Orbe",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897613242"
+    "validTo": null
   },
   {
     "id": "node-1770897625083",
@@ -1065,9 +845,7 @@
     "status": "active",
     "defaultName": "Yverdon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897625083"
+    "validTo": null
   },
   {
     "id": "node-1770897668923",
@@ -1075,9 +853,7 @@
     "status": "active",
     "defaultName": "Moudon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897668923"
+    "validTo": null
   },
   {
     "id": "node-1770897698221",
@@ -1085,9 +861,7 @@
     "status": "active",
     "defaultName": "Châtel-Saint-Denis",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897698221"
+    "validTo": null
   },
   {
     "id": "node-1770897770477",
@@ -1095,9 +869,7 @@
     "status": "active",
     "defaultName": "Bulle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897770477"
+    "validTo": null
   },
   {
     "id": "node-1770897790722",
@@ -1105,9 +877,7 @@
     "status": "active",
     "defaultName": "Montbovon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897790722"
+    "validTo": null
   },
   {
     "id": "node-1770897856386",
@@ -1115,9 +885,7 @@
     "status": "active",
     "defaultName": "Saanen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897856386"
+    "validTo": null
   },
   {
     "id": "node-1770897860152",
@@ -1125,9 +893,7 @@
     "status": "active",
     "defaultName": "Zweisimmen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897860152"
+    "validTo": null
   },
   {
     "id": "node-1770897868165",
@@ -1135,9 +901,7 @@
     "status": "active",
     "defaultName": "Frutigen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897868165"
+    "validTo": null
   },
   {
     "id": "node-1770897884517",
@@ -1145,9 +909,7 @@
     "status": "active",
     "defaultName": "Hospitz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897884517"
+    "validTo": null
   },
   {
     "id": "node-1770897945287",
@@ -1155,9 +917,7 @@
     "status": "active",
     "defaultName": "Airolo",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897945287"
+    "validTo": null
   },
   {
     "id": "node-1770897948683",
@@ -1165,9 +925,7 @@
     "status": "active",
     "defaultName": "Bignasco",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897948683"
+    "validTo": null
   },
   {
     "id": "node-1770897993209",
@@ -1175,9 +933,7 @@
     "status": "active",
     "defaultName": "Locarno",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770897993209"
+    "validTo": null
   },
   {
     "id": "node-1770898030151",
@@ -1185,9 +941,7 @@
     "status": "active",
     "defaultName": "Magadino",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898030151"
+    "validTo": null
   },
   {
     "id": "node-1770898099050",
@@ -1195,9 +949,7 @@
     "status": "active",
     "defaultName": "Osogna",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898099050"
+    "validTo": null
   },
   {
     "id": "node-1770898134797",
@@ -1205,9 +957,7 @@
     "status": "active",
     "defaultName": "Biasca",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898134797"
+    "validTo": null
   },
   {
     "id": "node-1770898144757",
@@ -1215,9 +965,7 @@
     "status": "active",
     "defaultName": "Bodio",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898144757"
+    "validTo": null
   },
   {
     "id": "node-1770898184274",
@@ -1225,9 +973,7 @@
     "status": "active",
     "defaultName": "Olivone",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898184274"
+    "validTo": null
   },
   {
     "id": "node-1770898221637",
@@ -1235,9 +981,7 @@
     "status": "active",
     "defaultName": "Cama",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898221637"
+    "validTo": null
   },
   {
     "id": "node-1770898228869",
@@ -1245,9 +989,7 @@
     "status": "active",
     "defaultName": "Misocco",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898228869"
+    "validTo": null
   },
   {
     "id": "node-1770898312719",
@@ -1255,9 +997,7 @@
     "status": "active",
     "defaultName": "San Bernhardino",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898312719"
+    "validTo": null
   },
   {
     "id": "node-1770898350997",
@@ -1265,9 +1005,7 @@
     "status": "active",
     "defaultName": "Hinterhein",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898350997"
+    "validTo": null
   },
   {
     "id": "node-1770898396116",
@@ -1275,9 +1013,7 @@
     "status": "active",
     "defaultName": "Faido",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898396116"
+    "validTo": null
   },
   {
     "id": "node-1770898495591",
@@ -1285,9 +1021,7 @@
     "status": "active",
     "defaultName": "Splügen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898495591"
+    "validTo": null
   },
   {
     "id": "node-1770898535921",
@@ -1295,9 +1029,7 @@
     "status": "active",
     "defaultName": "Andeer",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898535921"
+    "validTo": null
   },
   {
     "id": "node-1770898587206",
@@ -1305,9 +1037,7 @@
     "status": "active",
     "defaultName": "Mühlen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898587206"
+    "validTo": null
   },
   {
     "id": "node-1770898624681",
@@ -1315,9 +1045,7 @@
     "status": "active",
     "defaultName": "Silvaplana",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898624681"
+    "validTo": null
   },
   {
     "id": "node-1770898631981",
@@ -1325,9 +1053,7 @@
     "status": "active",
     "defaultName": "Samedan",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898631981"
+    "validTo": null
   },
   {
     "id": "node-1770898668601",
@@ -1335,9 +1061,7 @@
     "status": "active",
     "defaultName": "Scanfs",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898668601"
+    "validTo": null
   },
   {
     "id": "node-1770898704049",
@@ -1345,9 +1069,7 @@
     "status": "active",
     "defaultName": "Zernetz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898704049"
+    "validTo": null
   },
   {
     "id": "node-1770898723871",
@@ -1355,9 +1077,7 @@
     "status": "active",
     "defaultName": "Schuls",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898723871"
+    "validTo": null
   },
   {
     "id": "node-1770898741949",
@@ -1365,9 +1085,7 @@
     "status": "active",
     "defaultName": "",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770898741949"
+    "validTo": null
   },
   {
     "id": "node-1770903887400",
@@ -1375,9 +1093,7 @@
     "status": "active",
     "defaultName": "Tiefenkasten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770903887400"
+    "validTo": null
   },
   {
     "id": "node-1770903938583",
@@ -1385,9 +1101,7 @@
     "status": "active",
     "defaultName": "Thusis",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770903938583"
+    "validTo": null
   },
   {
     "id": "node-1770903942187",
@@ -1395,9 +1109,7 @@
     "status": "active",
     "defaultName": "Churwalden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770903942187"
+    "validTo": null
   },
   {
     "id": "node-1770903965292",
@@ -1405,9 +1117,7 @@
     "status": "active",
     "defaultName": "Reichenau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770903965292"
+    "validTo": null
   },
   {
     "id": "node-1770904030276",
@@ -1415,9 +1125,7 @@
     "status": "active",
     "defaultName": "Küblis",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904030276"
+    "validTo": null
   },
   {
     "id": "node-1770904033887",
@@ -1425,9 +1133,7 @@
     "status": "active",
     "defaultName": "Ragaz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904033887"
+    "validTo": null
   },
   {
     "id": "node-1770904042006",
@@ -1435,9 +1141,7 @@
     "status": "active",
     "defaultName": "Balzers",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904042006"
+    "validTo": null
   },
   {
     "id": "node-1770904127514",
@@ -1445,9 +1149,7 @@
     "status": "active",
     "defaultName": "Rheineck",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904127514"
+    "validTo": null
   },
   {
     "id": "node-1770904139063",
@@ -1455,9 +1157,7 @@
     "status": "active",
     "defaultName": "Altstätten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904139063"
+    "validTo": null
   },
   {
     "id": "node-1770904186342",
@@ -1465,9 +1165,7 @@
     "status": "active",
     "defaultName": "Rorschach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904186342"
+    "validTo": null
   },
   {
     "id": "node-1770904191097",
@@ -1475,9 +1173,7 @@
     "status": "active",
     "defaultName": "Romanshorn",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904191097"
+    "validTo": null
   },
   {
     "id": "node-1770904214236",
@@ -1485,9 +1181,7 @@
     "status": "active",
     "defaultName": "Arbon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904214236"
+    "validTo": null
   },
   {
     "id": "node-1770904220319",
@@ -1495,9 +1189,7 @@
     "status": "active",
     "defaultName": "Heiden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904220319"
+    "validTo": null
   },
   {
     "id": "node-1770904231733",
@@ -1505,9 +1197,7 @@
     "status": "active",
     "defaultName": "Trogen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904231733"
+    "validTo": null
   },
   {
     "id": "node-1770904285550",
@@ -1515,9 +1205,7 @@
     "status": "active",
     "defaultName": "Appenzell",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904285550"
+    "validTo": null
   },
   {
     "id": "node-1770904291181",
@@ -1525,9 +1213,7 @@
     "status": "active",
     "defaultName": "St. Gallen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904291181"
+    "validTo": null
   },
   {
     "id": "node-1770904296483",
@@ -1535,9 +1221,7 @@
     "status": "active",
     "defaultName": "Herisau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904296483"
+    "validTo": null
   },
   {
     "id": "node-1770904323878",
@@ -1545,9 +1229,7 @@
     "status": "active",
     "defaultName": "Schönengrund",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904323878"
+    "validTo": null
   },
   {
     "id": "node-1770904329965",
@@ -1555,9 +1237,7 @@
     "status": "active",
     "defaultName": "Wattwyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904329965"
+    "validTo": null
   },
   {
     "id": "node-1770904350948",
@@ -1565,9 +1245,7 @@
     "status": "active",
     "defaultName": "Wald",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904350948"
+    "validTo": null
   },
   {
     "id": "node-1770904356934",
@@ -1575,9 +1253,7 @@
     "status": "active",
     "defaultName": "Uster",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904356934"
+    "validTo": null
   },
   {
     "id": "node-1770904366395",
@@ -1585,9 +1261,7 @@
     "status": "active",
     "defaultName": "Fehraltorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904366395"
+    "validTo": null
   },
   {
     "id": "node-1770904371435",
@@ -1595,9 +1269,7 @@
     "status": "active",
     "defaultName": "Bauma",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904371435"
+    "validTo": null
   },
   {
     "id": "node-1770904374540",
@@ -1605,9 +1277,7 @@
     "status": "active",
     "defaultName": "Fischenthal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904374540"
+    "validTo": null
   },
   {
     "id": "node-1770904442341",
@@ -1615,9 +1285,7 @@
     "status": "active",
     "defaultName": "Gossau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904442341"
+    "validTo": null
   },
   {
     "id": "node-1770904535478",
@@ -1625,9 +1293,7 @@
     "status": "active",
     "defaultName": "Flawil",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904535478"
+    "validTo": null
   },
   {
     "id": "node-1770904544888",
@@ -1635,9 +1301,7 @@
     "status": "active",
     "defaultName": "Flawyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904544888"
+    "validTo": null
   },
   {
     "id": "node-1770904555537",
@@ -1645,9 +1309,7 @@
     "status": "active",
     "defaultName": "Bischofszell",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904555537"
+    "validTo": null
   },
   {
     "id": "node-1770904561366",
@@ -1655,9 +1317,7 @@
     "status": "active",
     "defaultName": "Sulgen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904561366"
+    "validTo": null
   },
   {
     "id": "node-1770904580735",
@@ -1665,9 +1325,7 @@
     "status": "active",
     "defaultName": "Weinfelden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904580735"
+    "validTo": null
   },
   {
     "id": "node-1770904587781",
@@ -1675,9 +1333,7 @@
     "status": "active",
     "defaultName": "Frauenfeld",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904587781"
+    "validTo": null
   },
   {
     "id": "node-1770904633393",
@@ -1685,9 +1341,7 @@
     "status": "active",
     "defaultName": "Wyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904633393"
+    "validTo": null
   },
   {
     "id": "node-1770904637851",
@@ -1695,9 +1349,7 @@
     "status": "active",
     "defaultName": "Aadorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904637851"
+    "validTo": null
   },
   {
     "id": "node-1770904695836",
@@ -1705,9 +1357,7 @@
     "status": "active",
     "defaultName": "Pfyn",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904695836"
+    "validTo": null
   },
   {
     "id": "node-1770904703884",
@@ -1715,9 +1365,7 @@
     "status": "active",
     "defaultName": "Stammheim",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904703884"
+    "validTo": null
   },
   {
     "id": "node-1770904724487",
@@ -1725,9 +1373,7 @@
     "status": "active",
     "defaultName": "Stein",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904724487"
+    "validTo": null
   },
   {
     "id": "node-1770904765130",
@@ -1735,9 +1381,7 @@
     "status": "active",
     "defaultName": "Stein",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904765130"
+    "validTo": null
   },
   {
     "id": "node-1770904820100",
@@ -1745,9 +1389,7 @@
     "status": "active",
     "defaultName": "Steckborn",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904820100"
+    "validTo": null
   },
   {
     "id": "node-1770904839764",
@@ -1755,9 +1397,7 @@
     "status": "active",
     "defaultName": "Tägerwilen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904839764"
+    "validTo": null
   },
   {
     "id": "node-1770904950535",
@@ -1765,9 +1405,7 @@
     "status": "active",
     "defaultName": "Köpplishaus",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904950535"
+    "validTo": null
   },
   {
     "id": "node-1770904980483",
@@ -1775,9 +1413,7 @@
     "status": "active",
     "defaultName": "Wezikon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770904980483"
+    "validTo": null
   },
   {
     "id": "node-1770905078881",
@@ -1785,9 +1421,7 @@
     "status": "active",
     "defaultName": "Grüningen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905078881"
+    "validTo": null
   },
   {
     "id": "node-1770905083669",
@@ -1795,9 +1429,7 @@
     "status": "active",
     "defaultName": "Ob. Albis",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905083669"
+    "validTo": null
   },
   {
     "id": "node-1770905146525",
@@ -1805,9 +1437,7 @@
     "status": "active",
     "defaultName": "Muri",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905146525"
+    "validTo": null
   },
   {
     "id": "node-1770905217644",
@@ -1815,9 +1445,7 @@
     "status": "active",
     "defaultName": "Sarmenstorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905217644"
+    "validTo": null
   },
   {
     "id": "node-1770905227821",
@@ -1825,9 +1453,7 @@
     "status": "active",
     "defaultName": "Lenzburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905227821"
+    "validTo": null
   },
   {
     "id": "node-1770905233782",
@@ -1835,9 +1461,7 @@
     "status": "active",
     "defaultName": "Wohlen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905233782"
+    "validTo": null
   },
   {
     "id": "node-1770905238902",
@@ -1845,9 +1469,7 @@
     "status": "active",
     "defaultName": "Bremgarten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905238902"
+    "validTo": null
   },
   {
     "id": "node-1770905243649",
@@ -1855,9 +1477,7 @@
     "status": "active",
     "defaultName": "Othmarsingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905243649"
+    "validTo": null
   },
   {
     "id": "node-1770905249596",
@@ -1865,9 +1485,7 @@
     "status": "active",
     "defaultName": "Brugg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905249596"
+    "validTo": null
   },
   {
     "id": "node-1770905254016",
@@ -1875,9 +1493,7 @@
     "status": "active",
     "defaultName": "Baden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905254016"
+    "validTo": null
   },
   {
     "id": "node-1770905257484",
@@ -1885,9 +1501,7 @@
     "status": "active",
     "defaultName": "Zurzach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905257484"
+    "validTo": null
   },
   {
     "id": "node-1770905262003",
@@ -1895,9 +1509,7 @@
     "status": "active",
     "defaultName": "Wildhaus",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905262003"
+    "validTo": null
   },
   {
     "id": "node-1770905399229",
@@ -1905,9 +1517,7 @@
     "status": "active",
     "defaultName": "Kaiserstuhl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905399229"
+    "validTo": null
   },
   {
     "id": "node-1770905419544",
@@ -1915,9 +1525,7 @@
     "status": "active",
     "defaultName": "Eglisau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905419544"
+    "validTo": null
   },
   {
     "id": "node-1770905423781",
@@ -1925,9 +1533,7 @@
     "status": "active",
     "defaultName": "Niederweningen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905423781"
+    "validTo": null
   },
   {
     "id": "node-1770905432489",
@@ -1935,9 +1541,7 @@
     "status": "active",
     "defaultName": "Bülach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905432489"
+    "validTo": null
   },
   {
     "id": "node-1770905441164",
@@ -1945,9 +1549,7 @@
     "status": "active",
     "defaultName": "Baltenschweil",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905441164"
+    "validTo": null
   },
   {
     "id": "node-1770905554809",
@@ -1955,9 +1557,7 @@
     "status": "active",
     "defaultName": "Winterthur",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905554809"
+    "validTo": null
   },
   {
     "id": "node-1770905559674",
@@ -1965,9 +1565,7 @@
     "status": "active",
     "defaultName": "Andelfingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905559674"
+    "validTo": null
   },
   {
     "id": "node-1770905563396",
@@ -1975,9 +1573,7 @@
     "status": "active",
     "defaultName": "Rafz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905563396"
+    "validTo": null
   },
   {
     "id": "node-1770905568056",
@@ -1985,9 +1581,7 @@
     "status": "active",
     "defaultName": "Schaffhausen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905568056"
+    "validTo": null
   },
   {
     "id": "node-1770905648479",
@@ -1995,9 +1589,7 @@
     "status": "active",
     "defaultName": "Zürich",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905648479"
+    "validTo": null
   },
   {
     "id": "node-1770905682253",
@@ -2005,9 +1597,7 @@
     "status": "active",
     "defaultName": "Lauffenburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905682253"
+    "validTo": null
   },
   {
     "id": "node-1770905779983",
@@ -2015,9 +1605,7 @@
     "status": "active",
     "defaultName": "Rheinfelden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905779983"
+    "validTo": null
   },
   {
     "id": "node-1770905794500",
@@ -2025,9 +1613,7 @@
     "status": "active",
     "defaultName": "Frick",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905794500"
+    "validTo": null
   },
   {
     "id": "node-1770905800343",
@@ -2035,9 +1621,7 @@
     "status": "active",
     "defaultName": "Bötzen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905800343"
+    "validTo": null
   },
   {
     "id": "node-1770905848259",
@@ -2045,9 +1629,7 @@
     "status": "active",
     "defaultName": "Liestal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905848259"
+    "validTo": null
   },
   {
     "id": "node-1770905858716",
@@ -2055,9 +1637,7 @@
     "status": "active",
     "defaultName": "Bukten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905858716"
+    "validTo": null
   },
   {
     "id": "node-1770905871252",
@@ -2065,9 +1645,7 @@
     "status": "active",
     "defaultName": "Olten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905871252"
+    "validTo": null
   },
   {
     "id": "node-1770905878879",
@@ -2075,9 +1653,7 @@
     "status": "active",
     "defaultName": "Aarau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905878879"
+    "validTo": null
   },
   {
     "id": "node-1770905882167",
@@ -2085,9 +1661,7 @@
     "status": "active",
     "defaultName": "Leimbach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905882167"
+    "validTo": null
   },
   {
     "id": "node-1770905886053",
@@ -2095,9 +1669,7 @@
     "status": "active",
     "defaultName": "Zofingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905886053"
+    "validTo": null
   },
   {
     "id": "node-1770905890445",
@@ -2105,9 +1677,7 @@
     "status": "active",
     "defaultName": "Kreuzstrasse",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905890445"
+    "validTo": null
   },
   {
     "id": "node-1770905940014",
@@ -2115,9 +1685,7 @@
     "status": "active",
     "defaultName": "Murgenthal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905940014"
+    "validTo": null
   },
   {
     "id": "node-1770905944274",
@@ -2125,9 +1693,7 @@
     "status": "active",
     "defaultName": "Balsthal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905944274"
+    "validTo": null
   },
   {
     "id": "node-1770905962102",
@@ -2135,9 +1701,7 @@
     "status": "active",
     "defaultName": "Balstall",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905962102"
+    "validTo": null
   },
   {
     "id": "node-1770905973449",
@@ -2145,9 +1709,7 @@
     "status": "active",
     "defaultName": "Waldenburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905973449"
+    "validTo": null
   },
   {
     "id": "node-1770905979601",
@@ -2155,9 +1717,7 @@
     "status": "active",
     "defaultName": "Oensingen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770905979601"
+    "validTo": null
   },
   {
     "id": "node-1770906061553",
@@ -2165,9 +1725,7 @@
     "status": "active",
     "defaultName": "Dürrmühle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906061553"
+    "validTo": null
   },
   {
     "id": "node-1770906108849",
@@ -2175,9 +1733,7 @@
     "status": "active",
     "defaultName": "Aesch",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906108849"
+    "validTo": null
   },
   {
     "id": "node-1770906124944",
@@ -2185,9 +1741,7 @@
     "status": "active",
     "defaultName": "Laufen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906124944"
+    "validTo": null
   },
   {
     "id": "node-1770906150586",
@@ -2195,9 +1749,7 @@
     "status": "active",
     "defaultName": "Delémont",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906150586"
+    "validTo": null
   },
   {
     "id": "node-1770906161164",
@@ -2205,9 +1757,7 @@
     "status": "active",
     "defaultName": "Welschenrohr",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906161164"
+    "validTo": null
   },
   {
     "id": "node-1770906194376",
@@ -2215,9 +1765,7 @@
     "status": "active",
     "defaultName": "Moutier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906194376"
+    "validTo": null
   },
   {
     "id": "node-1770906199277",
@@ -2225,9 +1773,7 @@
     "status": "active",
     "defaultName": "Tavannes",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906199277"
+    "validTo": null
   },
   {
     "id": "node-1770906213725",
@@ -2235,9 +1781,7 @@
     "status": "active",
     "defaultName": "Saignelégier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906213725"
+    "validTo": null
   },
   {
     "id": "node-1770906278302",
@@ -2245,9 +1789,7 @@
     "status": "active",
     "defaultName": "La Roche",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906278302"
+    "validTo": null
   },
   {
     "id": "node-1770906293087",
@@ -2255,9 +1797,7 @@
     "status": "active",
     "defaultName": "Porrentruy",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906293087"
+    "validTo": null
   },
   {
     "id": "node-1770906301641",
@@ -2265,9 +1805,7 @@
     "status": "active",
     "defaultName": "Les Rangiers",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906301641"
+    "validTo": null
   },
   {
     "id": "node-1770906362386",
@@ -2275,9 +1813,7 @@
     "status": "active",
     "defaultName": "Les Malettes",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906362386"
+    "validTo": null
   },
   {
     "id": "node-1770906451065",
@@ -2285,9 +1821,7 @@
     "status": "active",
     "defaultName": "Undervelier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906451065"
+    "validTo": null
   },
   {
     "id": "node-1770906500293",
@@ -2295,9 +1829,7 @@
     "status": "active",
     "defaultName": "Malleray",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906500293"
+    "validTo": null
   },
   {
     "id": "node-1770906638289",
@@ -2305,9 +1837,7 @@
     "status": "active",
     "defaultName": "Les Bois",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906638289"
+    "validTo": null
   },
   {
     "id": "node-1770906644770",
@@ -2315,9 +1845,7 @@
     "status": "active",
     "defaultName": "Chaux-de-Fonds",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906644770"
+    "validTo": null
   },
   {
     "id": "node-1770906650706",
@@ -2325,9 +1853,7 @@
     "status": "active",
     "defaultName": "Hautes Geneveys",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906650706"
+    "validTo": null
   },
   {
     "id": "node-1770906712573",
@@ -2335,9 +1861,7 @@
     "status": "active",
     "defaultName": "Les Brenets",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906712573"
+    "validTo": null
   },
   {
     "id": "node-1770906731613",
@@ -2345,9 +1869,7 @@
     "status": "active",
     "defaultName": "Locle",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906731613"
+    "validTo": null
   },
   {
     "id": "node-1770906799317",
@@ -2355,9 +1877,7 @@
     "status": "active",
     "defaultName": "La Brévine",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906799317"
+    "validTo": null
   },
   {
     "id": "node-1770906804866",
@@ -2365,9 +1885,7 @@
     "status": "active",
     "defaultName": "Les Ponts",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906804866"
+    "validTo": null
   },
   {
     "id": "node-1770906927681",
@@ -2375,9 +1893,7 @@
     "status": "active",
     "defaultName": "Savagnier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906927681"
+    "validTo": null
   },
   {
     "id": "node-1770906973478",
@@ -2385,9 +1901,7 @@
     "status": "active",
     "defaultName": "Verrières",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906973478"
+    "validTo": null
   },
   {
     "id": "node-1770906982068",
@@ -2395,9 +1909,7 @@
     "status": "active",
     "defaultName": "Moutier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770906982068"
+    "validTo": null
   },
   {
     "id": "node-1770907045212",
@@ -2405,9 +1917,7 @@
     "status": "active",
     "defaultName": "Motiers",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907045212"
+    "validTo": null
   },
   {
     "id": "node-1770907088865",
@@ -2415,9 +1925,7 @@
     "status": "active",
     "defaultName": "Côte-aux-Fées",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907088865"
+    "validTo": null
   },
   {
     "id": "node-1770907094109",
@@ -2425,9 +1933,7 @@
     "status": "active",
     "defaultName": "Sainte-Croix",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907094109"
+    "validTo": null
   },
   {
     "id": "node-1770907100588",
@@ -2435,9 +1941,7 @@
     "status": "active",
     "defaultName": "Henniez",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907100588"
+    "validTo": null
   },
   {
     "id": "node-1770907142041",
@@ -2445,9 +1949,7 @@
     "status": "active",
     "defaultName": "Payerne",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907142041"
+    "validTo": null
   },
   {
     "id": "node-1770907145936",
@@ -2455,9 +1957,7 @@
     "status": "active",
     "defaultName": "Estavayer",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907145936"
+    "validTo": null
   },
   {
     "id": "node-1770907151001",
@@ -2465,9 +1965,7 @@
     "status": "active",
     "defaultName": "Saint-Aubin",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907151001"
+    "validTo": null
   },
   {
     "id": "node-1770907154674",
@@ -2475,9 +1973,7 @@
     "status": "active",
     "defaultName": "Rochefort",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907154674"
+    "validTo": null
   },
   {
     "id": "node-1770907161310",
@@ -2485,9 +1981,7 @@
     "status": "active",
     "defaultName": "Neuchâtel",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907161310"
+    "validTo": null
   },
   {
     "id": "node-1770907246859",
@@ -2495,9 +1989,7 @@
     "status": "active",
     "defaultName": "Belp",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770907246859"
+    "validTo": null
   },
   {
     "id": "node-1770911077601",
@@ -2505,9 +1997,7 @@
     "status": "active",
     "defaultName": "Posieux",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911077601"
+    "validTo": null
   },
   {
     "id": "node-1770911202396",
@@ -2515,9 +2005,7 @@
     "status": "active",
     "defaultName": "Romont",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911202396"
+    "validTo": null
   },
   {
     "id": "node-1770911208987",
@@ -2525,9 +2013,7 @@
     "status": "active",
     "defaultName": "Freiburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911208987"
+    "validTo": null
   },
   {
     "id": "node-1770911217459",
@@ -2535,9 +2021,7 @@
     "status": "active",
     "defaultName": "Murten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911217459"
+    "validTo": null
   },
   {
     "id": "node-1770911222493",
@@ -2545,9 +2029,7 @@
     "status": "active",
     "defaultName": "Gampelen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911222493"
+    "validTo": null
   },
   {
     "id": "node-1770911226606",
@@ -2555,9 +2037,7 @@
     "status": "active",
     "defaultName": "La Neuveville",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770911226606"
+    "validTo": null
   },
   {
     "id": "node-1770912043726",
@@ -2565,9 +2045,7 @@
     "status": "active",
     "defaultName": "Saint-Imier",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912043726"
+    "validTo": null
   },
   {
     "id": "node-1770912050316",
@@ -2575,9 +2053,7 @@
     "status": "active",
     "defaultName": "Sonceboz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912050316"
+    "validTo": null
   },
   {
     "id": "node-1770912067754",
@@ -2585,9 +2061,7 @@
     "status": "active",
     "defaultName": "Biel",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912067754"
+    "validTo": null
   },
   {
     "id": "node-1770912080230",
@@ -2595,9 +2069,7 @@
     "status": "active",
     "defaultName": "Grenchen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912080230"
+    "validTo": null
   },
   {
     "id": "node-1770912100324",
@@ -2605,9 +2077,7 @@
     "status": "active",
     "defaultName": "Solothurn",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912100324"
+    "validTo": null
   },
   {
     "id": "node-1770912118654",
@@ -2615,9 +2085,7 @@
     "status": "active",
     "defaultName": "Bätterkinden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912118654"
+    "validTo": null
   },
   {
     "id": "node-1770912128082",
@@ -2625,9 +2093,7 @@
     "status": "active",
     "defaultName": "Büren",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912128082"
+    "validTo": null
   },
   {
     "id": "node-1770912196738",
@@ -2635,9 +2101,7 @@
     "status": "active",
     "defaultName": "Kirchberg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912196738"
+    "validTo": null
   },
   {
     "id": "node-1770912202211",
@@ -2645,9 +2109,7 @@
     "status": "active",
     "defaultName": "Höchstetten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912202211"
+    "validTo": null
   },
   {
     "id": "node-1770912220114",
@@ -2655,9 +2117,7 @@
     "status": "active",
     "defaultName": "Schwarzenburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912220114"
+    "validTo": null
   },
   {
     "id": "node-1770912227271",
@@ -2665,9 +2125,7 @@
     "status": "active",
     "defaultName": "Neueneck",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912227271"
+    "validTo": null
   },
   {
     "id": "node-1770912277124",
@@ -2675,9 +2133,7 @@
     "status": "active",
     "defaultName": "Schwanden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912277124"
+    "validTo": null
   },
   {
     "id": "node-1770912305962",
@@ -2685,9 +2141,7 @@
     "status": "active",
     "defaultName": "Gümminen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912305962"
+    "validTo": null
   },
   {
     "id": "node-1770912364302",
@@ -2695,9 +2149,7 @@
     "status": "active",
     "defaultName": "Weissenburg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912364302"
+    "validTo": null
   },
   {
     "id": "node-1770912385928",
@@ -2705,9 +2157,7 @@
     "status": "active",
     "defaultName": "Thun",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912385928"
+    "validTo": null
   },
   {
     "id": "node-1770912401064",
@@ -2715,9 +2165,7 @@
     "status": "active",
     "defaultName": "Unterseen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912401064"
+    "validTo": null
   },
   {
     "id": "node-1770912408628",
@@ -2725,9 +2173,7 @@
     "status": "active",
     "defaultName": "Meiringen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912408628"
+    "validTo": null
   },
   {
     "id": "node-1770912412950",
@@ -2735,9 +2181,7 @@
     "status": "active",
     "defaultName": "Langnau im Emmental",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912412950"
+    "validTo": null
   },
   {
     "id": "node-1770912420029",
@@ -2745,9 +2189,7 @@
     "status": "active",
     "defaultName": "Escholzmatt",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912420029"
+    "validTo": null
   },
   {
     "id": "node-1770912450080",
@@ -2755,9 +2197,7 @@
     "status": "active",
     "defaultName": "Wohlhausen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912450080"
+    "validTo": null
   },
   {
     "id": "node-1770912454275",
@@ -2765,9 +2205,7 @@
     "status": "active",
     "defaultName": "Entlebuch",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912454275"
+    "validTo": null
   },
   {
     "id": "node-1770912479656",
@@ -2775,9 +2213,7 @@
     "status": "active",
     "defaultName": "Wohlhausen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912479656"
+    "validTo": null
   },
   {
     "id": "node-1770912516959",
@@ -2785,9 +2221,7 @@
     "status": "active",
     "defaultName": "Huttwyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912516959"
+    "validTo": null
   },
   {
     "id": "node-1770912543968",
@@ -2795,9 +2229,7 @@
     "status": "active",
     "defaultName": "Sumiswald",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912543968"
+    "validTo": null
   },
   {
     "id": "node-1770912548392",
@@ -2805,9 +2237,7 @@
     "status": "active",
     "defaultName": "Burgdorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912548392"
+    "validTo": null
   },
   {
     "id": "node-1770912553971",
@@ -2815,9 +2245,7 @@
     "status": "active",
     "defaultName": "Kirchberg",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912553971"
+    "validTo": null
   },
   {
     "id": "node-1770912564452",
@@ -2825,9 +2253,7 @@
     "status": "active",
     "defaultName": "Herzogenbuchsee",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912564452"
+    "validTo": null
   },
   {
     "id": "node-1770912569156",
@@ -2835,9 +2261,7 @@
     "status": "active",
     "defaultName": "Langenthal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912569156"
+    "validTo": null
   },
   {
     "id": "node-1770912572454",
@@ -2845,9 +2269,7 @@
     "status": "active",
     "defaultName": "Murgenthal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912572454"
+    "validTo": null
   },
   {
     "id": "node-1770912580537",
@@ -2855,9 +2277,7 @@
     "status": "active",
     "defaultName": "Kirchleerau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912580537"
+    "validTo": null
   },
   {
     "id": "node-1770912586038",
@@ -2865,9 +2285,7 @@
     "status": "active",
     "defaultName": "Reiden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912586038"
+    "validTo": null
   },
   {
     "id": "node-1770912594808",
@@ -2875,9 +2293,7 @@
     "status": "active",
     "defaultName": "Sursee",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912594808"
+    "validTo": null
   },
   {
     "id": "node-1770912606182",
@@ -2885,9 +2301,7 @@
     "status": "active",
     "defaultName": "Riedwyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912606182"
+    "validTo": null
   },
   {
     "id": "node-1770912625900",
@@ -2895,9 +2309,7 @@
     "status": "active",
     "defaultName": "Realp",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912625900"
+    "validTo": null
   },
   {
     "id": "node-1770912658453",
@@ -2905,9 +2317,7 @@
     "status": "active",
     "defaultName": "Urseren",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912658453"
+    "validTo": null
   },
   {
     "id": "node-1770912672117",
@@ -2915,9 +2325,7 @@
     "status": "active",
     "defaultName": "Inschi",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912672117"
+    "validTo": null
   },
   {
     "id": "node-1770912689899",
@@ -2925,9 +2333,7 @@
     "status": "active",
     "defaultName": "Altdorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912689899"
+    "validTo": null
   },
   {
     "id": "node-1770912696547",
@@ -2935,9 +2341,7 @@
     "status": "active",
     "defaultName": "Flüelen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912696547"
+    "validTo": null
   },
   {
     "id": "node-1770912699696",
@@ -2945,9 +2349,7 @@
     "status": "active",
     "defaultName": "Lungern",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912699696"
+    "validTo": null
   },
   {
     "id": "node-1770912704041",
@@ -2955,9 +2357,7 @@
     "status": "active",
     "defaultName": "Sarnen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912704041"
+    "validTo": null
   },
   {
     "id": "node-1770912707032",
@@ -2965,9 +2365,7 @@
     "status": "active",
     "defaultName": "Beckenried",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912707032"
+    "validTo": null
   },
   {
     "id": "node-1770912711681",
@@ -2975,9 +2373,7 @@
     "status": "active",
     "defaultName": "Brunnen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912711681"
+    "validTo": null
   },
   {
     "id": "node-1770912798782",
@@ -2985,9 +2381,7 @@
     "status": "active",
     "defaultName": "Brunnen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912798782"
+    "validTo": null
   },
   {
     "id": "node-1770912818126",
@@ -2995,9 +2389,7 @@
     "status": "active",
     "defaultName": "Schwyz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912818126"
+    "validTo": null
   },
   {
     "id": "node-1770912823042",
@@ -3005,9 +2397,7 @@
     "status": "active",
     "defaultName": "Arth",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912823042"
+    "validTo": null
   },
   {
     "id": "node-1770912826245",
@@ -3015,9 +2405,7 @@
     "status": "active",
     "defaultName": "Sattel",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912826245"
+    "validTo": null
   },
   {
     "id": "node-1770912829695",
@@ -3025,9 +2413,7 @@
     "status": "active",
     "defaultName": "Luzern",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912829695"
+    "validTo": null
   },
   {
     "id": "node-1770912845895",
@@ -3035,9 +2421,7 @@
     "status": "active",
     "defaultName": "Schachen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912845895"
+    "validTo": null
   },
   {
     "id": "node-1770912913255",
@@ -3045,9 +2429,7 @@
     "status": "active",
     "defaultName": "Hildisrieden",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912913255"
+    "validTo": null
   },
   {
     "id": "node-1770912961774",
@@ -3055,9 +2437,7 @@
     "status": "active",
     "defaultName": "Hochdorf",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912961774"
+    "validTo": null
   },
   {
     "id": "node-1770912969831",
@@ -3065,9 +2445,7 @@
     "status": "active",
     "defaultName": "Honau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770912969831"
+    "validTo": null
   },
   {
     "id": "node-1770913006672",
@@ -3075,9 +2453,7 @@
     "status": "active",
     "defaultName": "Zug",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913006672"
+    "validTo": null
   },
   {
     "id": "node-1770913010028",
@@ -3085,9 +2461,7 @@
     "status": "active",
     "defaultName": "Aegeri",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913010028"
+    "validTo": null
   },
   {
     "id": "node-1770913090657",
@@ -3095,9 +2469,7 @@
     "status": "active",
     "defaultName": "Einsiedeln",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913090657"
+    "validTo": null
   },
   {
     "id": "node-1770913131646",
@@ -3105,9 +2477,7 @@
     "status": "active",
     "defaultName": "Biberbruck",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913131646"
+    "validTo": null
   },
   {
     "id": "node-1770913159270",
@@ -3115,9 +2485,7 @@
     "status": "active",
     "defaultName": "Richterschwyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913159270"
+    "validTo": null
   },
   {
     "id": "node-1770913186861",
@@ -3125,9 +2493,7 @@
     "status": "active",
     "defaultName": "Horgen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913186861"
+    "validTo": null
   },
   {
     "id": "node-1770913221426",
@@ -3135,9 +2501,7 @@
     "status": "active",
     "defaultName": "Knonau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913221426"
+    "validTo": null
   },
   {
     "id": "node-1770913225645",
@@ -3145,9 +2509,7 @@
     "status": "active",
     "defaultName": "Sins",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913225645"
+    "validTo": null
   },
   {
     "id": "node-1770913233135",
@@ -3155,9 +2517,7 @@
     "status": "active",
     "defaultName": "Fahrwangen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913233135"
+    "validTo": null
   },
   {
     "id": "node-1770913265492",
@@ -3165,9 +2525,7 @@
     "status": "active",
     "defaultName": "Ilanz",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913265492"
+    "validTo": null
   },
   {
     "id": "node-1770913292189",
@@ -3175,9 +2533,7 @@
     "status": "active",
     "defaultName": "Truns",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913292189"
+    "validTo": null
   },
   {
     "id": "node-1770913331792",
@@ -3185,9 +2541,7 @@
     "status": "active",
     "defaultName": "Linththal",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913331792"
+    "validTo": null
   },
   {
     "id": "node-1770913368260",
@@ -3195,9 +2549,7 @@
     "status": "active",
     "defaultName": "Glarus",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913368260"
+    "validTo": null
   },
   {
     "id": "node-1770913438620",
@@ -3205,9 +2557,7 @@
     "status": "active",
     "defaultName": "Wallenstadt",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913438620"
+    "validTo": null
   },
   {
     "id": "node-1770913459973",
@@ -3215,9 +2565,7 @@
     "status": "active",
     "defaultName": "Weesen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913459973"
+    "validTo": null
   },
   {
     "id": "node-1770913468653",
@@ -3225,9 +2573,7 @@
     "status": "active",
     "defaultName": "Bilten",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913468653"
+    "validTo": null
   },
   {
     "id": "node-1770913525543",
@@ -3235,9 +2581,7 @@
     "status": "active",
     "defaultName": "Lachen",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913525543"
+    "validTo": null
   },
   {
     "id": "node-1770913567237",
@@ -3245,9 +2589,7 @@
     "status": "active",
     "defaultName": "Rapperschmyl",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913567237"
+    "validTo": null
   },
   {
     "id": "node-1770913587997",
@@ -3255,9 +2597,7 @@
     "status": "active",
     "defaultName": "Schirmensee",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913587997"
+    "validTo": null
   },
   {
     "id": "node-1770913659038",
@@ -3265,9 +2605,7 @@
     "status": "active",
     "defaultName": "Schmerikon",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913659038"
+    "validTo": null
   },
   {
     "id": "node-1770913663546",
@@ -3275,9 +2613,7 @@
     "status": "active",
     "defaultName": "Ebnat",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913663546"
+    "validTo": null
   },
   {
     "id": "node-1770913685913",
@@ -3285,9 +2621,7 @@
     "status": "active",
     "defaultName": "Nesslau",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913685913"
+    "validTo": null
   },
   {
     "id": "node-1770913715054",
@@ -3295,9 +2629,7 @@
     "status": "active",
     "defaultName": "Uznach",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770913715054"
+    "validTo": null
   },
   {
     "id": "node-1770991540696",
@@ -3305,9 +2637,7 @@
     "status": "active",
     "defaultName": "Urseren",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1770991540696"
+    "validTo": null
   },
   {
     "id": "node-1771596256944",
@@ -3315,14 +2645,30 @@
     "status": "active",
     "defaultName": "Boniswil",
     "validFrom": 1852,
-    "validTo": null,
-    "sourceId": "source-legacy-graph-json",
-    "legacyNodeId": "node-1771596256944"
+    "validTo": null
   },
   {
-    "id": "node-1773161385523",
-    "defaultName": "Kreuzlingen",
-    "validFrom": 1999,
+    "id": "node-1773305543455",
+    "defaultName": "Bern",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1773305687121",
+    "defaultName": "Bern",
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "node-1773320558440",
+    "defaultName": "Realp",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1773321719997",
+    "defaultName": "Crassier",
+    "validFrom": 1852,
     "validTo": null
   }
 ]

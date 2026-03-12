@@ -9,8 +9,7 @@
     "linkMeasures": 108,
     "services": 264,
     "serviceTrips": 384,
-    "assertions": 734,
-    "sources": 3
+    "assertions": 734
   },
   "warnings": {
     "duplicateWikidataNameKeys": [],
