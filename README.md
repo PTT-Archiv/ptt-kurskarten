@@ -19,13 +19,15 @@ npm install
 Start API (watch mode):
 
 ```bash
-npm run dev:api
+cd apps/ptt-kurskarten.api
+npm start
 ```
 
 Start UI (dev server with proxy to API):
 
 ```bash
-npm run dev:web
+cd apps/ptt-kurskarten-ui
+npm start
 ```
 
 Then open:
@@ -36,8 +38,6 @@ Then open:
 
 ## Root commands
 
-- `npm run dev:web` -> run Angular dev server
-- `npm run dev:api` -> run Nest API in watch mode
 - `npm run build` -> build shared package, API, and UI
 - `npm run build:static` -> build shared package + UI in static/read-only mode
 
@@ -282,7 +282,8 @@ For this domain (historical network + provenance + multi-year editions), relatio
 You can run with ephemeral in-memory data using:
 
 ```bash
-GRAPH_REPO=memory npm run dev:api
+cd apps/ptt-kurskarten.api
+GRAPH_REPO=memory npm start
 ```
 
 ## Static/read-only build

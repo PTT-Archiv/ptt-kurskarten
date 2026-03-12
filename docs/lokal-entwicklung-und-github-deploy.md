@@ -17,18 +17,20 @@ Im Repository-Root installieren:
 npm install
 ```
 
-## 2. Lokal starten
+## 2. Lokal starten (2 Terminals)
 
-API starten (Watch Mode):
+Terminal 1 (API, Watch Mode):
 
 ```bash
-npm run dev:api
+cd apps/ptt-kurskarten.api
+npm start
 ```
 
-UI starten (Angular Dev Server):
+Terminal 2 (UI, Angular Dev Server):
 
 ```bash
-npm run dev:web
+cd apps/ptt-kurskarten-ui
+npm start
 ```
 
 Dann:
@@ -57,7 +59,8 @@ Standard-Persistenz lokal:
 Optional kannst du mit In-Memory-Repo starten:
 
 ```bash
-GRAPH_REPO=memory npm run dev:api
+cd apps/ptt-kurskarten.api
+GRAPH_REPO=memory npm start
 ```
 
 Dann sind Änderungen nur im RAM.

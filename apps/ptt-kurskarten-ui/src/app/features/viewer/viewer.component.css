@@ -193,6 +193,12 @@
   color: #ffffff;
 }
 
+.fact-schema-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
 .fact-value {
   font-size: 14px;
   color: #ffffff;

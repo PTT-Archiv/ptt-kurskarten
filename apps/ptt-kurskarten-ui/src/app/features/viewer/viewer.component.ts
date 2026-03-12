@@ -55,6 +55,7 @@ type SidebarNodeTrip = {
 type SidebarFact = {
   id: string;
   schemaKey: string;
+  schemaLabel: string;
   label: string;
   url: string | null;
 };
@@ -183,6 +184,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
   sidebarFacts = computed<SidebarFact[]>(() => {
+    this.activeLang();
     const place = this.sidebarPlaceNode();
     if (!place) {
       return [];
@@ -199,6 +201,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
         return {
           id: assertion.id,
           schemaKey: assertion.schemaKey,
+          schemaLabel: this.schemaKeyDisplayLabel(assertion.schemaKey),
           label: link.label,
           url: link.url
         } satisfies SidebarFact;
@@ -1043,6 +1046,23 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return null;
     }
     return FACT_SCHEMA_LINK_PROVIDER[normalized] ?? null;
+  }
+
+  private schemaKeyDisplayLabel(schemaKey: string): string {
+    const normalized = schemaKey
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '_')
+      .replace(/^_+|_+$/g, '');
+    if (!normalized) {
+      return schemaKey;
+    }
+    const translationKey = `schemaKey.${normalized}`;
+    const translated = this.transloco.translate(translationKey);
+    if (!translated || translated === translationKey) {
+      return schemaKey;
+    }
+    return translated;
   }
 
   private normalizeFactLinkValueForProvider(value: string, provider: string): string | null {

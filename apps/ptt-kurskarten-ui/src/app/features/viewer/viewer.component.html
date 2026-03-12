@@ -223,7 +223,10 @@
       <div class="fact-list">
         @for (fact of sidebarFacts(); track fact.id) {
         <div class="fact-row">
-          <div class="fact-schema"><code>{{ fact.schemaKey }}</code></div>
+          <div class="fact-schema">
+            <div class="fact-schema-label">{{ fact.schemaLabel }}</div>
+            <code>{{ fact.schemaKey }}</code>
+          </div>
           <div class="fact-value">
             @if (fact.url) {
             <a class="fact-link" [href]="fact.url" target="_blank" rel="noopener noreferrer">
