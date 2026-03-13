@@ -106,55 +106,80 @@
         <div class="status-card">{{ getNoResultsMessage() }}</div>
       </div>
       }
-      }
+    }
     </div>
     @if (!archiveModeActive()) {
     <div class="simulation-overlay" [class.is-disabled]="routingActive()">
+      <div class="simulation-note" style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+        <span>{{ 'viewer.simTimeLabel' | transloco }}</span>
+        <span>{{ simulationStatusLabel() }}</span>
+      </div>
       <div class="simulation-clock">{{ simulationClockLabel() }}</div>
       <div class="simulation-mode-row">
-        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'off'"
-          (click)="setSimulationMode('off')" [disabled]="routingActive()" [attr.aria-label]="'viewer.simOff' | transloco"
-          [title]="'viewer.simOff' | transloco">
-          <fa-icon [icon]="simOffIcon"></fa-icon>
-        </button>
         <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'realtime'"
           (click)="setSimulationMode('realtime')" [disabled]="routingActive()"
-          [attr.aria-label]="'viewer.simRealtime' | transloco" [title]="'viewer.simRealtime' | transloco">
+          (mouseenter)="showSimulationHint('viewer.simRealtimeHelp')" (focus)="showSimulationHint('viewer.simRealtimeHelp')"
+          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
+          [attr.aria-label]="'viewer.simRealtimeHelp' | transloco" [title]="'viewer.simRealtimeHelp' | transloco">
           <fa-icon [icon]="simRealtimeIcon"></fa-icon>
         </button>
         <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'simulation'"
           (click)="setSimulationMode('simulation')" [disabled]="routingActive()"
-          [attr.aria-label]="'viewer.simPlayback' | transloco" [title]="'viewer.simPlayback' | transloco">
+          (mouseenter)="showSimulationHint('viewer.simPlaybackHelp')" (focus)="showSimulationHint('viewer.simPlaybackHelp')"
+          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
+          [attr.aria-label]="'viewer.simPlaybackHelp' | transloco" [title]="'viewer.simPlaybackHelp' | transloco">
           <fa-icon [icon]="simPlaybackIcon"></fa-icon>
+        </button>
+        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'off'"
+          (click)="setSimulationMode('off')" [disabled]="routingActive()"
+          (mouseenter)="showSimulationHint('viewer.simOffHelp')" (focus)="showSimulationHint('viewer.simOffHelp')"
+          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
+          [attr.aria-label]="'viewer.simOffHelp' | transloco"
+          [title]="'viewer.simOffHelp' | transloco">
+          <fa-icon [icon]="simOffIcon"></fa-icon>
         </button>
       </div>
       @if (simulationMode() === 'simulation') {
       <div class="simulation-controls">
         <div class="simulation-main-actions">
           <button type="button" class="sim-btn sim-icon-btn" (click)="toggleSimulationPlayback()" [disabled]="routingActive()"
-            [attr.aria-label]="(simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco"
-            [title]="(simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco">
-            <fa-icon [icon]="simulationPlaying() ? simStopIcon : simPlayIcon"></fa-icon>
+            (mouseenter)="showSimulationHint(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp')"
+            (focus)="showSimulationHint(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp')"
+            (mouseleave)="clearSimulationHint()"
+            (blur)="clearSimulationHint()"
+            [attr.aria-label]="(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp') | transloco"
+            [title]="(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp') | transloco">
+            <fa-icon [icon]="simulationPlaying() ? simPauseIcon : simPlayIcon"></fa-icon>
           </button>
-          <button type="button" class="sim-btn sim-icon-btn" (click)="resetSimulation()" [disabled]="routingActive()"
-            [attr.aria-label]="'viewer.simReset' | transloco" [title]="'viewer.simReset' | transloco">
+          <button type="button" class="sim-btn sim-icon-btn" (click)="resetSimulation()"
+            [disabled]="routingActive() || simulationMode() !== 'simulation'"
+            (mouseenter)="showSimulationHint('viewer.simResetHelp')" (focus)="showSimulationHint('viewer.simResetHelp')"
+            (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
+            [attr.aria-label]="'viewer.simResetHelp' | transloco" [title]="'viewer.simResetHelp' | transloco">
             <fa-icon [icon]="simResetIcon"></fa-icon>
           </button>
         </div>
         <div class="simulation-slider-row">
           <input type="range" min="0" max="1439" step="1" [value]="simulationSliderMinute()"
-            (input)="onSimulationSliderInput($any($event.target).value)" [disabled]="routingActive()" />
+            (input)="onSimulationSliderInput($any($event.target).value)"
+            [disabled]="routingActive() || simulationMode() !== 'simulation'" />
         </div>
         <div class="simulation-speed-row">
           @for (speed of simulationSpeedOptions; track speed) {
           <button type="button" class="sim-btn" [class.active]="simulationSpeed() === speed"
-            (click)="setSimulationSpeed(speed)" [disabled]="routingActive()">
+            (click)="setSimulationSpeed(speed)" [disabled]="routingActive() || simulationMode() !== 'simulation'"
+            (mouseenter)="showSimulationSpeedHint(speed)"
+            (focus)="showSimulationSpeedHint(speed)"
+            (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
+            [attr.aria-label]="'viewer.simSpeedHelp' | transloco : { speed: speed + 'x' }"
+            [title]="'viewer.simSpeedHelp' | transloco : { speed: speed + 'x' }">
             {{ speed }}x
           </button>
           }
         </div>
       </div>
       }
+      <div class="simulation-note">{{ simulationHintLabel() }}</div>
       @if (routingActive()) {
       <div class="simulation-note">{{ 'viewer.simDisabledRouting' | transloco }}</div>
       }
@@ -861,6 +886,7 @@
     <p>{{ 'viewer.helpText1' | transloco }}</p>
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
+    <p>{{ 'viewer.helpText4' | transloco }}</p>
   </section>
   @if (!smallScreenLayout()) {
   <button class="route-close-btn help-toggle-btn" style="left: 58px; z-index: 8;" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">

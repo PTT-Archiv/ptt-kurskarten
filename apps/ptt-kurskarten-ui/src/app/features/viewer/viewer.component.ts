@@ -23,11 +23,11 @@ import {
   faGear,
   faLocationDot,
   faMagnifyingGlass,
+  faPause,
   faPlay,
   faPowerOff,
   faRotateLeft,
   faRoute,
-  faStop,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
@@ -141,11 +141,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly archiveModeEnabled = environment.enableArchiveMode;
   resetViewportToken = signal(0);
   viewerSurfaceMode = signal<ViewerSurfaceMode>('map');
-  simulationMode = signal<SimulationMode>('off');
+  simulationMode = signal<SimulationMode>('realtime');
   simulationSpeed = signal<SimulationSpeed>(1);
   simulationPlaying = signal(false);
   simulationMinute = signal(0);
   realtimeMinute = signal(this.getCurrentMinuteOfDay());
+  simulationHint = signal<string | null>(null);
   readonly simulationSpeedOptions: readonly SimulationSpeed[] = [0.5, 1, 2];
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
@@ -314,7 +315,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly simRealtimeIcon = faClock;
   readonly simPlaybackIcon = faForward;
   readonly simPlayIcon = faPlay;
-  readonly simStopIcon = faStop;
+  readonly simPauseIcon = faPause;
   readonly simResetIcon = faRotateLeft;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
@@ -358,12 +359,20 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return this.simulationMinute();
   });
   simulationClockLabel = computed(() => {
-    const minute = this.simulationMinuteForMap();
-    if (minute === null) {
-      return '--:--';
-    }
+    const minute = this.simulationMinuteForMap() ?? this.realtimeMinute();
     return this.formatTimeMinutes(Math.floor(this.normalizeMinuteOfDay(minute)));
   });
+  simulationStatusLabel = computed(() => {
+    const mode = this.simulationMode();
+    if (mode === 'off') {
+      return this.transloco.translate('viewer.simOff');
+    }
+    if (mode === 'realtime') {
+      return this.transloco.translate('viewer.simRealtime');
+    }
+    return this.transloco.translate(this.simulationPlaying() ? 'viewer.simPlaying' : 'viewer.simPaused');
+  });
+  simulationHintLabel = computed(() => this.simulationHint() ?? this.transloco.translate('viewer.simTimeHelp'));
   simulationSliderMinute = computed(() => Math.floor(this.normalizeMinuteOfDay(this.simulationMinute())));
   routeSidebarTitle = computed(() => {
     const selected = this.selectedConnection();
@@ -471,7 +480,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       if (!this.isBrowser) {
         return;
       }
-      const realtimeActive = this.simulationMode() === 'realtime' && !this.routingActive();
+      const realtimeActive = this.simulationMode() !== 'simulation';
       if (realtimeActive) {
         this.startRealtimeTicker();
       } else {
@@ -1082,13 +1091,22 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.routingActive()) {
       return;
     }
+    const previousMode = this.simulationMode();
     this.simulationMode.set(mode);
     if (mode === 'realtime') {
       this.realtimeMinute.set(this.getCurrentMinuteOfDay());
-    }
-    if (mode !== 'simulation') {
       this.simulationPlaying.set(false);
+      return;
     }
+    if (mode === 'simulation') {
+      if (previousMode !== 'simulation') {
+        const startMinute = this.realtimeMinute();
+        this.simulationMinute.set(this.normalizeMinuteOfDay(startMinute));
+      }
+      this.simulationPlaying.set(true);
+      return;
+    }
+    this.simulationPlaying.set(false);
   }
 
   toggleSimulationPlayback(): void {
@@ -1096,9 +1114,22 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return;
     }
     if (this.simulationMode() !== 'simulation') {
-      this.simulationMode.set('simulation');
+      this.setSimulationMode('simulation');
+      return;
     }
     this.simulationPlaying.set(!this.simulationPlaying());
+  }
+
+  showSimulationHint(key: string, params?: Record<string, string>): void {
+    this.simulationHint.set(this.transloco.translate(key, params));
+  }
+
+  showSimulationSpeedHint(speed: SimulationSpeed): void {
+    this.showSimulationHint('viewer.simSpeedHelp', { speed: `${speed}x` });
+  }
+
+  clearSimulationHint(): void {
+    this.simulationHint.set(null);
   }
 
   onSimulationSliderInput(value: string): void {
