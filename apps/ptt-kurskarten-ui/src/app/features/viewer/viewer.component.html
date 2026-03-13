@@ -1,6 +1,7 @@
 <main class="viewer-shell planner-minimized" [class.sidebar-open]="sidebarOpen() && !archiveModeActive() && !smallScreenLayout()"
   [class.map-settled]="mapSettled()" [class.pick-mode]="pickTarget()" [class.archive-mode]="archiveModeActive()"
-  [class.small-screen-layout]="smallScreenLayout()" [class.mobile-layout]="mobileLayout()">
+  [class.small-screen-layout]="smallScreenLayout()" [class.mobile-layout]="mobileLayout()"
+  [class.mobile-sheet-open]="mobileSheetVisible()" [class.search-open]="placeSearchOpen()">
   <section class="map-stage">
     @if (archiveModeActive()) {
     <app-viewer-archive-stage
@@ -28,7 +29,8 @@
     }
     <div class="planner-overlay">
       @if (archiveModeActive() || !routePlannerOpen() || smallScreenLayout()) {
-      <div class="place-search-shell" [class.archive-only]="archiveModeActive()">
+      <div class="place-search-shell" [class.archive-only]="archiveModeActive()"
+        [class.has-utility-actions]="smallScreenLayout()">
         <fa-icon [icon]="searchIcon"></fa-icon>
         <input
           type="text"
@@ -39,7 +41,20 @@
           (input)="onPlaceSearchInput($any($event.target).value)"
           (keydown)="onPlaceSearchKeydown($event)"
         />
-        @if (!archiveModeActive()) {
+        @if (smallScreenLayout()) {
+        <div class="topbar-actions">
+          @if (!archiveModeActive()) {
+          <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
+            <fa-icon [icon]="routeIcon"></fa-icon>
+          </button>
+          }
+          <button class="route-toggle-btn search-utility-btn" type="button"
+            (click)="settingsOpen.set(!settingsOpen()); helpOpen.set(false)"
+            [attr.aria-label]="(settingsOpen() ? 'viewer.settingsClose' : 'viewer.settingsOpen') | transloco">
+            <fa-icon [icon]="settingsOpen() ? xmarkIcon : gearIcon"></fa-icon>
+          </button>
+        </div>
+        } @else if (!archiveModeActive()) {
         <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
           <fa-icon [icon]="routeIcon"></fa-icon>
         </button>
@@ -836,26 +851,38 @@
 
   @if (helpOpen()) {
   <section class="help-popup">
-      <div class="help-header">
-        <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
-      </div>
+    <div class="help-header">
+      <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+      <button class="ghost-btn help-header-close" type="button" (click)="helpOpen.set(false)"
+        [attr.aria-label]="'viewer.helpClose' | transloco">
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+      </button>
+    </div>
     <p>{{ 'viewer.helpText1' | transloco }}</p>
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
   </section>
+  @if (!smallScreenLayout()) {
   <button class="route-close-btn help-toggle-btn" style="left: 58px; z-index: 8;" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
     <fa-icon [icon]="xmarkIcon"></fa-icon>
   </button>
+  }
   } @else {
+  @if (!smallScreenLayout()) {
   <button class="help-fab help-toggle-btn" style="left: 58px;" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)" [attr.aria-label]="'viewer.helpOpen' | transloco">
     <span aria-hidden="true">?</span>
   </button>
+  }
   }
 
   @if (settingsOpen()) {
   <section class="help-popup" style="left: 16px; right: auto; width: min(320px, calc(100vw - 32px));">
     <div class="help-header">
       <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
+      <button class="ghost-btn help-header-close" type="button" (click)="settingsOpen.set(false)"
+        [attr.aria-label]="'viewer.settingsClose' | transloco">
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+      </button>
     </div>
     <label class="settings-field">
       <span>{{ 'viewer.editionTitle' | transloco }}</span>
@@ -873,6 +900,9 @@
     </label>
     <div>{{ 'nav.language' | transloco }}</div>
     <div class="quick-actions">
+      <button class="ghost-btn" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)">
+        {{ 'viewer.helpOpen' | transloco }}
+      </button>
       <button class="ghost-btn" type="button" [style.background]="activeLang() === 'de' ? '#ffffff' : '#141414'"
         [style.color]="activeLang() === 'de' ? '#141414' : '#ffffff'" (click)="setLang('de')">
         DE
@@ -907,14 +937,18 @@
     </div>
     }
   </section>
+  @if (!smallScreenLayout()) {
   <button class="route-close-btn help-toggle-btn" style="left: 16px; z-index: 8;" type="button"
     (click)="settingsOpen.set(false)" [attr.aria-label]="'viewer.settingsClose' | transloco">
     <fa-icon [icon]="xmarkIcon"></fa-icon>
   </button>
+  }
   } @else {
+  @if (!smallScreenLayout()) {
   <button class="route-close-btn help-toggle-btn" style="left: 16px;" type="button"
     (click)="settingsOpen.set(true); helpOpen.set(false)" [attr.aria-label]="'viewer.settingsOpen' | transloco">
     <fa-icon [icon]="gearIcon"></fa-icon>
   </button>
+  }
   }
 </main>

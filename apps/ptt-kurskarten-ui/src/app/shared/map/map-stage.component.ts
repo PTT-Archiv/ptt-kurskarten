@@ -29,7 +29,8 @@ const NODE_RADIUS_STEP = .3;
 const DEFAULT_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_OFFSET_Y = -100;
-const SELECTED_NODE_FOCUS_ZOOM = 10.2;
+const SELECTED_NODE_FOCUS_ZOOM_DESKTOP = 6.4;
+const SELECTED_NODE_FOCUS_ZOOM_COMPACT = 10.2;
 const MIN_VIEWPORT_ZOOM = 0.75;
 const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
@@ -239,6 +240,33 @@ export type MapSimulationTripHit = {
         opacity: 1;
         transform: translate(-50%, 0);
       }
+
+      @media (max-width: 1023px) {
+        .zoom-controls {
+          right: 12px;
+          bottom: 12px;
+          gap: 8px;
+        }
+
+        .zoom-hint {
+          left: auto;
+          right: 12px;
+          bottom: 100px;
+          max-width: min(220px, calc(100% - 24px));
+          transform: translateY(4px);
+        }
+
+        .zoom-hint.visible {
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .zoom-btn {
+          width: 36px;
+          height: 36px;
+        }
+      }
     `
   ]
 })
@@ -311,6 +339,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private stageHover = false;
   private pendingRouteFit = false;
   private pendingSelectedNodeFocusId: string | null = null;
+  private viewportMode: 'default' | 'selected-node' | 'connection' | 'manual' = 'default';
   private tripRunsByMinute: SimTripRun[][] = Array.from({ length: MINUTES_PER_DAY }, () => []);
   private screenSimulationDots: Array<{ x: number; y: number; r: number; run: SimTripRun; progress: number }> = [];
 
@@ -436,6 +465,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
           y: this.panStart.panY + dy
         };
         this.viewportTouched = true;
+        this.viewportMode = 'manual';
         this.scheduleRender();
       }
     }
@@ -599,6 +629,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.canvasSize = { width, height };
     if (this.interactiveViewport && this.selectedConnection) {
       this.pendingRouteFit = true;
+    }
+    if (
+      this.interactiveViewport &&
+      !this.selectedConnection &&
+      this.selectedNodeId &&
+      this.viewportMode === 'selected-node'
+    ) {
+      this.pendingSelectedNodeFocusId = this.selectedNodeId;
     }
     if (this.interactiveViewport && !this.selectedConnection && !this.viewportTouched) {
       this.resetViewport();
@@ -947,6 +985,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.viewportZoom = DEFAULT_INITIAL_VIEWPORT_ZOOM;
     this.viewportPan = this.getDefaultViewportPan(DEFAULT_INITIAL_VIEWPORT_ZOOM);
     this.viewportTouched = false;
+    this.viewportMode = 'default';
   }
 
   private zoomByFactor(factor: number): void {
@@ -975,6 +1014,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
     };
     this.viewportTouched = true;
+    this.viewportMode = 'manual';
     this.scheduleRender();
   }
 
@@ -1040,6 +1080,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: targetCenterY - centerY * nextZoom
     };
     this.viewportTouched = true;
+    this.viewportMode = 'connection';
     return true;
   }
 
@@ -1053,7 +1094,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return false;
     }
 
-    const nextZoom = Math.max(this.viewportZoom, Math.min(MAX_VIEWPORT_ZOOM, SELECTED_NODE_FOCUS_ZOOM));
+    const nextZoom = this.getSelectedNodeFocusZoom();
     const screenX = node.x * this.fitTransform.scale + this.fitTransform.offsetX;
     const screenY = node.y * this.fitTransform.scale + this.fitTransform.offsetY;
     const topInset = Math.max(0, Math.min(this.viewportFocusTopInset, this.canvasSize.height * 0.35));
@@ -1069,7 +1110,15 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: targetCenterY - screenY * nextZoom
     };
     this.viewportTouched = true;
+    this.viewportMode = 'selected-node';
     return true;
+  }
+
+  private getSelectedNodeFocusZoom(): number {
+    const compactFocus =
+      this.canvasSize.width < 1024 || this.viewportFocusTopInset > 0 || this.viewportFocusBottomInset > 0;
+    const targetZoom = compactFocus ? SELECTED_NODE_FOCUS_ZOOM_COMPACT : SELECTED_NODE_FOCUS_ZOOM_DESKTOP;
+    return Math.max(MIN_VIEWPORT_ZOOM, Math.min(MAX_VIEWPORT_ZOOM, targetZoom));
   }
 
   private getDefaultViewportPan(zoom: number): { x: number; y: number } {

@@ -469,6 +469,11 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           grid-template-columns: minmax(0, 1fr);
         }
 
+        .planner-row:last-child {
+          grid-template-columns: minmax(0, 1fr);
+          justify-content: stretch;
+        }
+
         .swap-btn {
           position: static;
           width: 100%;
@@ -477,6 +482,59 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
         .time-field {
           width: 100%;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .planner-card,
+        .planner-card.compact {
+          width: 100%;
+          padding: 10px 12px;
+          gap: 10px;
+        }
+
+        .planner-card.compact .route-core,
+        .planner-card.compact .planner-row {
+          gap: 10px;
+        }
+
+        .field.minimal span,
+        .time-label {
+          font-size: 11px;
+        }
+
+        .typeahead-input input,
+        .planner-card.compact .typeahead-input input {
+          font-size: 17px;
+          padding-right: 30px;
+        }
+
+        .swap-btn,
+        .planner-card.compact .swap-btn {
+          width: 100%;
+          height: 40px;
+        }
+
+        .planner-actions {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+          width: 100%;
+        }
+
+        .planner-actions .action-btn {
+          width: 100%;
+          justify-content: center;
+          min-width: 0;
+        }
+
+        .time-picker {
+          gap: 8px;
+        }
+
+        .time-input,
+        .planner-card.compact .time-input {
+          font-size: 14px;
+          padding: 8px 6px;
         }
       }
     `
