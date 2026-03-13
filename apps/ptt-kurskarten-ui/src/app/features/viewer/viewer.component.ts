@@ -50,6 +50,8 @@ import {
 const DEFAULT_YEAR = 1852;
 const MINUTES_PER_DAY = 1440;
 const SIMULATION_DAY_MS = 60_000;
+const TABLET_BREAKPOINT_PX = 1024;
+const MOBILE_BREAKPOINT_PX = 768;
 const FACT_LINK_TEMPLATES: Record<string, string> = {
   wikidata: 'https://www.wikidata.org/wiki/{value}',
   mfk: 'https://mfk.rechercheonline.ch/{value}'
@@ -81,6 +83,8 @@ type HoveredSimulationTrip = MapSimulationTripHit & { screenX: number; screenY: 
 type SimulationMode = 'off' | 'realtime' | 'simulation';
 type SimulationSpeed = 0.5 | 1 | 2;
 type ViewerSurfaceMode = 'map' | 'archive';
+type MobileSheetMode = 'closed' | 'planner' | 'results' | 'details';
+type MobileSheetSnap = 'peek' | 'half' | 'full';
 
 @Component({
   selector: 'app-viewer',
@@ -128,6 +132,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   mapSettled = signal(false);
   helpOpen = signal(false);
   settingsOpen = signal(false);
+  viewportWidth = signal<number>(this.getViewportWidth());
+  mobileSheetMode = signal<MobileSheetMode>('closed');
+  mobileSheetSnap = signal<MobileSheetSnap>('half');
   activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
   readonly readonlyViewer = environment.readonlyViewer;
   readonly archiveModeEnabled = environment.enableArchiveMode;
@@ -218,6 +225,25 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const anyEdition = this.editions().find((edition) => edition.year === currentYear);
     return anyEdition?.title || String(currentYear);
   });
+  smallScreenLayout = computed(() => this.viewportWidth() < TABLET_BREAKPOINT_PX);
+  mobileLayout = computed(() => this.viewportWidth() < MOBILE_BREAKPOINT_PX);
+  mobileSheetVisible = computed(
+    () => !this.archiveModeActive() && this.smallScreenLayout() && this.mobileSheetMode() !== 'closed'
+  );
+  mobileSheetTitle = computed(() => {
+    const mode = this.mobileSheetMode();
+    if (mode === 'details') {
+      return this.routeNodePanelNode()?.name ?? this.sidebarPlaceNode()?.name ?? this.transloco.translate('viewer.details');
+    }
+    if (mode === 'results') {
+      return this.transloco.translate('viewer.results');
+    }
+    if (mode === 'planner') {
+      return 'Routing';
+    }
+    return '';
+  });
+  mobileShowResultsBack = computed(() => this.mobileSheetMode() === 'details' && this.routeResultsVisible());
 
   archiveSnippetUrl = computed(() => {
     const node = this.getArchiveSnippetNode();
@@ -472,6 +498,39 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     });
 
     effect(() => {
+      const isSmall = this.smallScreenLayout();
+      const archiveMode = this.archiveModeActive();
+      if (!isSmall || archiveMode) {
+        this.mobileSheetMode.set('closed');
+        this.mobileSheetSnap.set('half');
+        return;
+      }
+      if (this.routePlannerOpen()) {
+        this.mobileSheetMode.set('planner');
+        if (this.mobileSheetSnap() === 'peek') {
+          this.mobileSheetSnap.set('half');
+        }
+        return;
+      }
+      if (this.selectedNodeId()) {
+        this.mobileSheetMode.set('details');
+        if (this.mobileSheetSnap() === 'peek') {
+          this.mobileSheetSnap.set('half');
+        }
+        return;
+      }
+      if (this.routeResultsVisible()) {
+        if (this.mobileSheetMode() === 'closed') {
+          this.mobileSheetMode.set('results');
+        }
+        return;
+      }
+      if (!this.helpOpen() && !this.settingsOpen()) {
+        this.mobileSheetMode.set('closed');
+      }
+    });
+
+    effect(() => {
       const editions = this.publicEditionOptions();
       if (!editions.length) {
         return;
@@ -561,6 +620,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       if (!routeResultsVisible) {
         this.sidebarOpen.set(false);
       }
+      if (this.smallScreenLayout()) {
+        this.mobileSheetMode.set(routeResultsVisible ? 'results' : 'closed');
+      }
       return;
     }
 
@@ -569,6 +631,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.uiState.set('details');
     }
     this.selectedNodeId.set(nodeId);
+    if (this.smallScreenLayout()) {
+      this.sidebarOpen.set(false);
+      this.mobileSheetMode.set('details');
+      this.mobileSheetSnap.set(routeResultsVisible ? 'full' : 'half');
+      return;
+    }
     this.sidebarOpen.set(true);
   }
 
@@ -606,7 +674,18 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
           this.routingState.set(hasResults ? 'results' : 'no_results');
           this.uiState.set(hasResults ? 'results' : 'landing');
           if (hasResults) {
-            this.sidebarOpen.set(true);
+            if (this.smallScreenLayout()) {
+              this.routePlannerOpen.set(false);
+              this.mobileSheetMode.set('results');
+              this.mobileSheetSnap.set('half');
+              this.sidebarOpen.set(false);
+            } else {
+              this.sidebarOpen.set(true);
+            }
+          } else if (this.smallScreenLayout()) {
+            this.routePlannerOpen.set(true);
+            this.mobileSheetMode.set('planner');
+            this.mobileSheetSnap.set('full');
           }
           if (normalized.length) {
             this.lastResultParams.set({ from, to, year });
@@ -617,6 +696,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
           this.selectedConnectionId.set(null);
           this.routingState.set('error');
           this.uiState.set('landing');
+          if (this.smallScreenLayout()) {
+            this.routePlannerOpen.set(true);
+            this.mobileSheetMode.set('planner');
+            this.mobileSheetSnap.set('full');
+          }
         }
       });
   }
@@ -644,6 +728,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   selectConnection(option: ConnectionOption): void {
     this.selectedConnectionId.set(option.id ?? null);
     this.uiState.set('details');
+    if (this.smallScreenLayout()) {
+      this.mobileSheetMode.set('results');
+      this.mobileSheetSnap.set('full');
+      this.sidebarOpen.set(false);
+      return;
+    }
     this.sidebarOpen.set(true);
   }
 
@@ -760,12 +850,28 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   openRoutePlanner(): void {
     this.routePlannerOpen.set(true);
     this.routePlannerFocusToken.set(this.routePlannerFocusToken() + 1);
+    if (this.smallScreenLayout()) {
+      this.mobileSheetMode.set('planner');
+      this.mobileSheetSnap.set('full');
+      this.sidebarOpen.set(false);
+    }
   }
 
   closeRoutePlanner(): void {
     this.routePlannerOpen.set(false);
     this.pendingMapPickTarget = null;
     this.pickTarget.set(null);
+    if (this.smallScreenLayout()) {
+      if (this.routeResultsVisible()) {
+        this.mobileSheetMode.set('results');
+        this.mobileSheetSnap.set('half');
+      } else if (this.selectedNodeId()) {
+        this.mobileSheetMode.set('details');
+        this.mobileSheetSnap.set('half');
+      } else {
+        this.mobileSheetMode.set('closed');
+      }
+    }
   }
 
   onRoutePlannerPickTargetChange(target: 'from' | 'to' | null): void {
@@ -830,6 +936,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    this.viewportWidth.set(this.getViewportWidth());
+  }
+
   onFromIdChange(id: string): void {
     this.fromId.set(id);
     this.triggerPulse(id);
@@ -843,13 +954,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   setNodeAsStart(nodeId: string): void {
     this.onFromIdChange(nodeId);
     this.pickTarget.set(null);
-    this.routePlannerOpen.set(true);
+    this.openRoutePlanner();
   }
 
   setNodeAsEnd(nodeId: string): void {
     this.onToIdChange(nodeId);
     this.pickTarget.set(null);
-    this.routePlannerOpen.set(true);
+    this.openRoutePlanner();
   }
 
   onDepartTimeDraftChange(time: TimeHHMM): void {
@@ -886,6 +997,58 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.hoveredSimulationTrip.set(null);
     this.tripFocusDomId.set(null);
     this.sidebarOpen.set(false);
+    if (this.smallScreenLayout()) {
+      this.mobileSheetMode.set(this.routePlannerOpen() ? 'planner' : 'closed');
+      this.mobileSheetSnap.set('half');
+    }
+  }
+
+  setMobileSheetSnap(snap: MobileSheetSnap): void {
+    this.mobileSheetSnap.set(snap);
+  }
+
+  cycleMobileSheetSnap(): void {
+    const nextBySnap: Record<MobileSheetSnap, MobileSheetSnap> = {
+      peek: 'half',
+      half: 'full',
+      full: 'peek'
+    };
+    this.mobileSheetSnap.set(nextBySnap[this.mobileSheetSnap()]);
+  }
+
+  openMobileResults(): void {
+    if (!this.smallScreenLayout() || !this.routeResultsVisible()) {
+      return;
+    }
+    this.selectedNodeId.set(null);
+    this.mobileSheetMode.set('results');
+    this.mobileSheetSnap.set('half');
+  }
+
+  closeMobileSheet(): void {
+    const mode = this.mobileSheetMode();
+    if (mode === 'planner') {
+      this.closeRoutePlanner();
+      return;
+    }
+    if (mode === 'details' && this.routeResultsVisible()) {
+      this.selectedNodeId.set(null);
+      this.mobileSheetMode.set('results');
+      this.mobileSheetSnap.set('half');
+      return;
+    }
+    if (mode === 'details') {
+      this.selectedNodeId.set(null);
+      this.sidebarOpen.set(false);
+      this.mobileSheetMode.set('closed');
+      this.mobileSheetSnap.set('half');
+      return;
+    }
+    if (mode === 'results') {
+      this.resetSearch();
+      this.mobileSheetMode.set('closed');
+      this.mobileSheetSnap.set('half');
+    }
   }
 
   onFromPreview(id: string): void {
@@ -964,7 +1127,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   }
 
   plannerAutoMinimize = computed(() => !this.sidebarOpen() && !this.plannerHovered() && !this.plannerFocused());
-  routeFitTopInset = computed(() => (this.routePlannerOpen() ? 260 : 90));
+  routeFitTopInset = computed(() => {
+    if (this.smallScreenLayout()) {
+      return this.routePlannerOpen() ? 116 : 78;
+    }
+    return this.routePlannerOpen() ? 260 : 90;
+  });
 
   selectedConnection = computed(() => {
     const id = this.selectedConnectionId();
@@ -1152,6 +1320,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.year.set(nextYear);
     this.yearDraft.set(nextYear);
     this.fetchGraph(nextYear);
+  }
+
+  private getViewportWidth(): number {
+    if (!this.isBrowser) {
+      return TABLET_BREAKPOINT_PX;
+    }
+    return window.innerWidth || TABLET_BREAKPOINT_PX;
   }
 
   private fetchNodeFacts(nodeId: string, year: number): void {

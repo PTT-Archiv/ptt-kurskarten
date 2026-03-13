@@ -1,12 +1,12 @@
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
 .viewer-shell {
   position: relative;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background: #000000;
   overflow-x: hidden;
@@ -20,7 +20,7 @@
   box-sizing: border-box;
   width: 100%;
   transition: width 220ms ease-out, height 260ms ease-out;
-  height: 100vh;
+  height: 100dvh;
 }
 
 
@@ -767,73 +767,131 @@
   color: inherit;
 }
 
-@media (max-width: 900px) {
-  .viewer-shell {
-    height: auto;
+.mobile-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: rgba(0, 0, 0, 0.96);
+  border-top: 2px solid #ffffff;
+  border-radius: 18px 18px 0 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow: hidden;
+}
+
+.mobile-sheet.snap-peek {
+  height: 78px;
+}
+
+.mobile-sheet.snap-half {
+  height: min(48vh, 420px);
+}
+
+.mobile-sheet.snap-full {
+  height: min(82vh, 760px);
+}
+
+@media (max-width: 1023px) {
+  .small-screen-layout .planner-overlay {
+    top: 12px;
+    width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
   }
 
-  .map-stage {
-    position: relative;
-    height: 360px;
-    border-bottom: var(--border);
-    padding-top: 0;
-    width: 100%;
+  .small-screen-layout.planner-minimized .planner-overlay {
+    transform: translateX(-50%);
   }
 
-  .map-stage > app-map-stage {
-    height: 100%;
+  .small-screen-layout .place-search-shell input {
+    font-size: 16px;
   }
 
-  .viewer-sidebar {
-    width: 100%;
-    height: auto;
-    border-left: none;
-    border-top: var(--border);
-    z-index: 2;
+  .small-screen-layout .simulation-overlay {
+    top: 82px;
+    left: 12px;
+    width: min(240px, calc(100vw - 24px));
+    padding: 7px;
+    gap: 5px;
   }
 
-  .viewer-shell.sidebar-open .viewer-sidebar {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: auto;
+  .small-screen-layout .simulation-clock {
+    font-size: 18px;
   }
 
-  .route-node-panel {
+  .small-screen-layout .reset-view-btn {
+    right: 12px;
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .small-screen-layout .help-popup {
+    position: fixed;
+    inset: 64px 12px 12px;
+    padding: 16px 16px 56px;
+    border-radius: 16px;
+  }
+
+  .small-screen-layout .help-toggle-btn {
+    top: 12px;
+    bottom: auto;
+    left: auto !important;
+    right: 12px !important;
+  }
+
+  .small-screen-layout .help-fab.help-toggle-btn {
+    right: 58px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-layout .planner-overlay {
+    top: 10px;
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+
+  .mobile-layout .place-search-shell {
+    gap: 8px;
+    padding: 9px 10px;
+  }
+
+  .mobile-layout .place-search-shell input {
+    font-size: 15px;
+  }
+
+  .mobile-layout .route-toggle-btn,
+  .mobile-layout .route-close-btn,
+  .mobile-layout .help-toggle-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-layout .simulation-overlay {
+    top: 74px;
+    width: min(196px, calc(100vw - 24px));
+  }
+
+  .mobile-layout .simulation-clock {
+    font-size: 16px;
+  }
+
+  .mobile-layout .simulation-trip-popup {
     display: none;
   }
 
-  .planner-overlay {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100vw - 24px);
+  .mobile-layout .reset-view-btn {
+    padding: 8px 10px;
+    font-size: 11px;
   }
 
-  .simulation-overlay {
-    top: 12px;
-    left: 12px;
-    width: min(280px, calc(100vw - 24px));
+  .mobile-layout .mobile-sheet.snap-half {
+    height: min(54vh, 460px);
   }
 
-  .reset-view-btn {
-    right: 12px;
-    bottom: 12px;
+  .mobile-layout .mobile-sheet.snap-full {
+    height: min(86dvh, 820px);
   }
 
-  .help-popup {
-    left: 12px;
-    right: auto;
-    bottom: 12px;
-    width: calc(100vw - 24px);
-    max-height: calc(100% - 24px);
-    padding: 16px 16px 56px;
-    border-radius: 12px;
-  }
-
-  .help-toggle-btn {
-    left: 12px;
-    right: auto;
-    bottom: 12px;
-  }
 }
