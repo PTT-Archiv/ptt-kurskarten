@@ -97,6 +97,7 @@ export type MapSimulationTripHit = {
           (pointerdown)="onPointerDown($event)"
           (pointermove)="onPointerMove($event)"
           (pointerup)="onPointerUp($event)"
+          (pointercancel)="onPointerUp($event)"
           (pointerleave)="onPointerLeave()"
           (wheel)="onWheel($event)"
         ></canvas>
@@ -177,6 +178,7 @@ export type MapSimulationTripHit = {
         width: 100%;
         height: 100%;
         display: block;
+        touch-action: none;
       }
 
       .zoom-controls {
@@ -332,8 +334,17 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private viewportTouched = false;
   private needsRender = false;
   private activePointerId: number | null = null;
+  private activePointers = new Map<number, { x: number; y: number }>();
   private panStart: { x: number; y: number; panX: number; panY: number } | null = null;
+  private pinchStart:
+    | {
+        distance: number;
+        zoom: number;
+        world: { x: number; y: number };
+      }
+    | null = null;
   private isPanning = false;
+  private suppressTapUntilPointersReleased = false;
   private langSub?: Subscription;
   private hoveredNodeId: string | null = null;
   private stageHover = false;
@@ -427,17 +438,26 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
+    const screen = this.getScreenPoint(event);
+    this.activePointers.set(event.pointerId, screen);
     this.activePointerId = event.pointerId;
     canvas.setPointerCapture(event.pointerId);
     if (this.interactiveViewport && this.pickMode === null) {
-      const screen = this.getScreenPoint(event);
-      this.panStart = {
-        x: screen.x,
-        y: screen.y,
-        panX: this.viewportPan.x,
-        panY: this.viewportPan.y
-      };
-      this.isPanning = false;
+      if (this.activePointers.size >= 2) {
+        this.activePointerId = null;
+        this.panStart = null;
+        this.isPanning = false;
+        this.pinchStart = this.createPinchStart();
+        this.suppressTapUntilPointersReleased = true;
+      } else {
+        this.panStart = {
+          x: screen.x,
+          y: screen.y,
+          panX: this.viewportPan.x,
+          panY: this.viewportPan.y
+        };
+        this.isPanning = false;
+      }
     } else {
       this.panStart = null;
       this.isPanning = false;
@@ -452,8 +472,16 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
+    const screen = this.getScreenPoint(event);
+    if (this.activePointers.has(event.pointerId)) {
+      this.activePointers.set(event.pointerId, screen);
+    }
+
+    if (this.interactiveViewport && this.pickMode === null && this.activePointers.size >= 2) {
+      this.updatePinchViewport();
+    }
+
     if (this.activePointerId === event.pointerId && this.panStart && this.interactiveViewport && this.pickMode === null) {
-      const screen = this.getScreenPoint(event);
       const dx = screen.x - this.panStart.x;
       const dy = screen.y - this.panStart.y;
       if (!this.isPanning && Math.hypot(dx, dy) > 3) {
@@ -478,23 +506,54 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   onPointerUp(event: PointerEvent): void {
-    if (!this.isBrowser || this.activePointerId !== event.pointerId) {
+    if (!this.isBrowser) {
       return;
     }
 
     const canvas = this.canvasRef?.nativeElement;
     if (canvas) {
-      canvas.releasePointerCapture(event.pointerId);
+      try {
+        canvas.releasePointerCapture(event.pointerId);
+      } catch {
+        // Pointer may already be released/cancelled.
+      }
     }
-    this.activePointerId = null;
+    const hadPinchGesture = this.suppressTapUntilPointersReleased;
+    const wasPrimaryPointer = this.activePointerId === event.pointerId;
+    if (wasPrimaryPointer) {
+      this.activePointerId = null;
+    }
     const wasPanning = this.isPanning;
     this.isPanning = false;
     this.panStart = null;
+    this.activePointers.delete(event.pointerId);
+
+    if (this.activePointers.size >= 2) {
+      this.pinchStart = this.createPinchStart();
+    } else {
+      this.pinchStart = null;
+    }
+
+    if (this.interactiveViewport && this.pickMode === null && this.activePointers.size === 1) {
+      const [remainingPointerId, remainingPoint] = this.activePointers.entries().next().value as [number, { x: number; y: number }];
+      this.activePointerId = remainingPointerId;
+      this.panStart = {
+        x: remainingPoint.x,
+        y: remainingPoint.y,
+        panX: this.viewportPan.x,
+        panY: this.viewportPan.y
+      };
+    }
+    if (this.activePointers.size === 0) {
+      this.suppressTapUntilPointersReleased = false;
+    }
 
     const payload = this.buildPointerPayload(event);
-    this.mapPointer.emit({ ...payload, type: 'up' });
+    if (wasPrimaryPointer || this.activePointers.size === 0) {
+      this.mapPointer.emit({ ...payload, type: 'up' });
+    }
 
-    if (!wasPanning) {
+    if (!wasPanning && !hadPinchGesture) {
       if (payload.hitNodeId) {
         this.nodeSelected.emit(payload.hitNodeId);
       } else if (!payload.hitSimulationTrip && this.pickMode === null && this.selectedNodeId !== null) {
@@ -1016,6 +1075,68 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.viewportTouched = true;
     this.viewportMode = 'manual';
     this.scheduleRender();
+  }
+
+  private createPinchStart():
+    | {
+        distance: number;
+        zoom: number;
+        world: { x: number; y: number };
+      }
+    | null {
+    const pair = this.getActivePointerPair();
+    if (!pair) {
+      return null;
+    }
+    const midpoint = {
+      x: (pair[0].x + pair[1].x) / 2,
+      y: (pair[0].y + pair[1].y) / 2
+    };
+    return {
+      distance: Math.max(1, Math.hypot(pair[0].x - pair[1].x, pair[0].y - pair[1].y)),
+      zoom: this.viewportZoom,
+      world: screenToWorld(midpoint, this.transform)
+    };
+  }
+
+  private updatePinchViewport(): void {
+    const pair = this.getActivePointerPair();
+    if (!pair) {
+      this.pinchStart = null;
+      return;
+    }
+    if (!this.pinchStart) {
+      this.pinchStart = this.createPinchStart();
+      if (!this.pinchStart) {
+        return;
+      }
+    }
+    const midpoint = {
+      x: (pair[0].x + pair[1].x) / 2,
+      y: (pair[0].y + pair[1].y) / 2
+    };
+    const distance = Math.max(1, Math.hypot(pair[0].x - pair[1].x, pair[0].y - pair[1].y));
+    const nextZoom = Math.max(
+      MIN_VIEWPORT_ZOOM,
+      Math.min(MAX_VIEWPORT_ZOOM, this.pinchStart.zoom * (distance / this.pinchStart.distance))
+    );
+
+    this.viewportZoom = nextZoom;
+    this.viewportPan = {
+      x: midpoint.x - (this.pinchStart.world.x * this.fitTransform.scale + this.fitTransform.offsetX) * nextZoom,
+      y: midpoint.y - (this.pinchStart.world.y * this.fitTransform.scale + this.fitTransform.offsetY) * nextZoom
+    };
+    this.viewportTouched = true;
+    this.viewportMode = 'manual';
+    this.scheduleRender();
+  }
+
+  private getActivePointerPair(): [{ x: number; y: number }, { x: number; y: number }] | null {
+    if (this.activePointers.size < 2) {
+      return null;
+    }
+    const values = [...this.activePointers.values()];
+    return [values[0], values[1]];
   }
 
   private fitViewportToConnection(connection: ConnectionOption, nodes: GraphNode[]): boolean {
