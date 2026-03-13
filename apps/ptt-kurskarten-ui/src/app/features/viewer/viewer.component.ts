@@ -133,6 +133,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   helpOpen = signal(false);
   settingsOpen = signal(false);
   viewportWidth = signal<number>(this.getViewportWidth());
+  viewportHeight = signal<number>(this.getViewportHeight());
   mobileSheetMode = signal<MobileSheetMode>('closed');
   mobileSheetSnap = signal<MobileSheetSnap>('half');
   activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
@@ -230,6 +231,23 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   mobileSheetVisible = computed(
     () => !this.archiveModeActive() && this.smallScreenLayout() && this.mobileSheetMode() !== 'closed'
   );
+  mobileSheetHeight = computed(() => {
+    if (!this.mobileSheetVisible()) {
+      return 0;
+    }
+    const height = this.viewportHeight();
+    if (height <= 0) {
+      return 0;
+    }
+    const snap = this.mobileSheetSnap();
+    if (snap === 'peek') {
+      return 78;
+    }
+    if (this.mobileLayout()) {
+      return snap === 'full' ? Math.min(height * 0.86, 820) : Math.min(height * 0.54, 460);
+    }
+    return snap === 'full' ? Math.min(height * 0.82, 760) : Math.min(height * 0.48, 420);
+  });
   mobileSheetTitle = computed(() => {
     const mode = this.mobileSheetMode();
     if (mode === 'details') {
@@ -939,6 +957,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   @HostListener('window:resize')
   onWindowResize(): void {
     this.viewportWidth.set(this.getViewportWidth());
+    this.viewportHeight.set(this.getViewportHeight());
   }
 
   onFromIdChange(id: string): void {
@@ -1133,6 +1152,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     return this.routePlannerOpen() ? 260 : 90;
   });
+  viewportFocusTopInset = computed(() => (this.smallScreenLayout() ? this.routeFitTopInset() : 0));
+  viewportFocusBottomInset = computed(() => (this.smallScreenLayout() ? this.mobileSheetHeight() : 0));
 
   selectedConnection = computed(() => {
     const id = this.selectedConnectionId();
@@ -1327,6 +1348,13 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return TABLET_BREAKPOINT_PX;
     }
     return window.innerWidth || TABLET_BREAKPOINT_PX;
+  }
+
+  private getViewportHeight(): number {
+    if (!this.isBrowser) {
+      return 900;
+    }
+    return window.innerHeight || 900;
   }
 
   private fetchNodeFacts(nodeId: string, year: number): void {

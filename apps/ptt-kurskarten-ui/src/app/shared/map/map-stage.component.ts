@@ -29,6 +29,7 @@ const NODE_RADIUS_STEP = .3;
 const DEFAULT_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_OFFSET_Y = -100;
+const SELECTED_NODE_FOCUS_ZOOM = 10.2;
 const MIN_VIEWPORT_ZOOM = 0.75;
 const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
@@ -262,6 +263,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() resetViewportToken = 0;
   @Input() glowingEdgeId: string | null = null;
   @Input() routeFitTopInset = 0;
+  @Input() viewportFocusTopInset = 0;
+  @Input() viewportFocusBottomInset = 0;
   @Output() nodeSelected = new EventEmitter<string | null>();
   @Output() mapPointer = new EventEmitter<{
     type: 'down' | 'move' | 'up';
@@ -307,6 +310,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private hoveredNodeId: string | null = null;
   private stageHover = false;
   private pendingRouteFit = false;
+  private pendingSelectedNodeFocusId: string | null = null;
   private tripRunsByMinute: SimTripRun[][] = Array.from({ length: MINUTES_PER_DAY }, () => []);
   private screenSimulationDots: Array<{ x: number; y: number; r: number; run: SimTripRun; progress: number }> = [];
 
@@ -338,6 +342,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['tripSimulationMinute'] ||
       changes['glowingEdgeId'] ||
       changes['routeFitTopInset'] ||
+      changes['viewportFocusTopInset'] ||
+      changes['viewportFocusBottomInset'] ||
       changes['resetViewportToken']
     ) {
       if (changes['graph']) {
@@ -355,6 +361,20 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
       if (this.interactiveViewport && changes['routeFitTopInset'] && this.selectedConnection) {
         this.pendingRouteFit = true;
+      }
+      if (
+        this.interactiveViewport &&
+        (changes['viewportFocusTopInset'] || changes['viewportFocusBottomInset']) &&
+        this.selectedNodeId &&
+        !this.selectedConnection
+      ) {
+        this.pendingSelectedNodeFocusId = this.selectedNodeId;
+      }
+      if (this.interactiveViewport && changes['selectedNodeId'] && this.selectedNodeId && !this.selectedConnection) {
+        this.pendingSelectedNodeFocusId = this.selectedNodeId;
+        if (this.focusViewportOnNode(this.selectedNodeId)) {
+          this.pendingSelectedNodeFocusId = null;
+        }
       }
       this.scheduleRender();
     }
@@ -632,6 +652,11 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.fitTransform = computeTransform(width, height, DEFAULT_VIEWBOX);
     if (this.pendingRouteFit && this.interactiveViewport && this.pickMode === null && this.selectedConnection) {
       this.pendingRouteFit = !this.fitViewportToConnection(this.selectedConnection, nodes);
+    }
+    if (this.pendingSelectedNodeFocusId && this.interactiveViewport && this.pickMode === null && !this.selectedConnection) {
+      if (this.focusViewportOnNode(this.pendingSelectedNodeFocusId)) {
+        this.pendingSelectedNodeFocusId = null;
+      }
     }
     this.transform = {
       scale: this.fitTransform.scale * this.viewportZoom,
@@ -1013,6 +1038,35 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.viewportPan = {
       x: targetCenterX - centerX * nextZoom,
       y: targetCenterY - centerY * nextZoom
+    };
+    this.viewportTouched = true;
+    return true;
+  }
+
+  private focusViewportOnNode(nodeId: string): boolean {
+    const nodes = this.graph?.nodes;
+    if (!nodes?.length || this.canvasSize.width <= 1 || this.canvasSize.height <= 1) {
+      return false;
+    }
+    const node = nodes.find((candidate) => candidate.id === nodeId);
+    if (!node) {
+      return false;
+    }
+
+    const nextZoom = Math.max(this.viewportZoom, Math.min(MAX_VIEWPORT_ZOOM, SELECTED_NODE_FOCUS_ZOOM));
+    const screenX = node.x * this.fitTransform.scale + this.fitTransform.offsetX;
+    const screenY = node.y * this.fitTransform.scale + this.fitTransform.offsetY;
+    const topInset = Math.max(0, Math.min(this.viewportFocusTopInset, this.canvasSize.height * 0.35));
+    const bottomInset = Math.max(0, Math.min(this.viewportFocusBottomInset, this.canvasSize.height * 0.75));
+    const visibleWidth = this.canvasSize.width;
+    const visibleHeight = Math.max(40, this.canvasSize.height - topInset - bottomInset);
+    const targetCenterX = visibleWidth / 2;
+    const targetCenterY = topInset + visibleHeight / 2;
+
+    this.viewportZoom = nextZoom;
+    this.viewportPan = {
+      x: targetCenterX - screenX * nextZoom,
+      y: targetCenterY - screenY * nextZoom
     };
     this.viewportTouched = true;
     return true;
