@@ -15,7 +15,20 @@ import { MapStageComponent, type MapSimulationTripHit } from '../../shared/map/m
 import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faFlag, faGear, faLocationDot, faMagnifyingGlass, faRoute, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faFlag,
+  faForward,
+  faGear,
+  faLocationDot,
+  faMagnifyingGlass,
+  faPlay,
+  faPowerOff,
+  faRotateLeft,
+  faRoute,
+  faStop,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
@@ -198,6 +211,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly endIcon = faLocationDot;
   readonly searchIcon = faMagnifyingGlass;
   readonly routeIcon = faRoute;
+  readonly simOffIcon = faPowerOff;
+  readonly simRealtimeIcon = faClock;
+  readonly simPlaybackIcon = faForward;
+  readonly simPlayIcon = faPlay;
+  readonly simStopIcon = faStop;
+  readonly simResetIcon = faRotateLeft;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
   sidebarFacts = computed<SidebarFact[]>(() => {

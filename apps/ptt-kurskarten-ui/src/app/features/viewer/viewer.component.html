@@ -82,27 +82,33 @@
     <div class="simulation-overlay" [class.is-disabled]="routingActive()">
       <div class="simulation-clock">{{ simulationClockLabel() }}</div>
       <div class="simulation-mode-row">
-        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'off'" (click)="setSimulationMode('off')"
-          [disabled]="routingActive()">
-          {{ 'viewer.simOff' | transloco }}
+        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'off'"
+          (click)="setSimulationMode('off')" [disabled]="routingActive()" [attr.aria-label]="'viewer.simOff' | transloco"
+          [title]="'viewer.simOff' | transloco">
+          <fa-icon [icon]="simOffIcon"></fa-icon>
         </button>
-        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'realtime'"
-          (click)="setSimulationMode('realtime')" [disabled]="routingActive()">
-          {{ 'viewer.simRealtime' | transloco }}
+        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'realtime'"
+          (click)="setSimulationMode('realtime')" [disabled]="routingActive()"
+          [attr.aria-label]="'viewer.simRealtime' | transloco" [title]="'viewer.simRealtime' | transloco">
+          <fa-icon [icon]="simRealtimeIcon"></fa-icon>
         </button>
-        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'simulation'"
-          (click)="setSimulationMode('simulation')" [disabled]="routingActive()">
-          {{ 'viewer.simPlayback' | transloco }}
+        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'simulation'"
+          (click)="setSimulationMode('simulation')" [disabled]="routingActive()"
+          [attr.aria-label]="'viewer.simPlayback' | transloco" [title]="'viewer.simPlayback' | transloco">
+          <fa-icon [icon]="simPlaybackIcon"></fa-icon>
         </button>
       </div>
       @if (simulationMode() === 'simulation') {
       <div class="simulation-controls">
         <div class="simulation-main-actions">
-          <button type="button" class="sim-btn wide" (click)="toggleSimulationPlayback()" [disabled]="routingActive()">
-            {{ (simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco }}
+          <button type="button" class="sim-btn sim-icon-btn" (click)="toggleSimulationPlayback()" [disabled]="routingActive()"
+            [attr.aria-label]="(simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco"
+            [title]="(simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco">
+            <fa-icon [icon]="simulationPlaying() ? simStopIcon : simPlayIcon"></fa-icon>
           </button>
-          <button type="button" class="sim-btn wide" (click)="resetSimulation()" [disabled]="routingActive()">
-            {{ 'viewer.simReset' | transloco }}
+          <button type="button" class="sim-btn sim-icon-btn" (click)="resetSimulation()" [disabled]="routingActive()"
+            [attr.aria-label]="'viewer.simReset' | transloco" [title]="'viewer.simReset' | transloco">
+            <fa-icon [icon]="simResetIcon"></fa-icon>
           </button>
         </div>
         <div class="simulation-slider-row">

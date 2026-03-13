@@ -341,13 +341,13 @@
   top: 16px;
   left: 16px;
   z-index: 7;
-  width: min(360px, calc(100% - 32px));
+  width: min(300px, calc(100% - 32px));
   background: #000000;
   border: 2px solid #ffffff;
-  border-radius: 14px;
-  padding: 10px;
+  border-radius: 12px;
+  padding: 8px;
   display: grid;
-  gap: 8px;
+  gap: 6px;
   pointer-events: auto;
 }
 
@@ -358,7 +358,7 @@
 .simulation-clock {
   font-family: "ABC Favorit Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1;
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -370,12 +370,12 @@
 .simulation-speed-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .simulation-controls {
   display: grid;
-  gap: 8px;
+  gap: 6px;
 }
 
 .simulation-slider-row input[type="range"] {
@@ -424,15 +424,25 @@
   background: #141414;
   color: #ffffff;
   border-radius: 999px;
-  padding: 5px 10px;
-  min-height: 30px;
+  padding: 4px 9px;
+  min-height: 26px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 }
 
-.sim-btn.wide {
-  min-width: 92px;
+.sim-icon-btn {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.sim-icon-btn fa-icon {
+  font-size: 12px;
 }
 
 .sim-btn.active {
@@ -765,7 +775,7 @@
   .simulation-overlay {
     top: 12px;
     left: 12px;
-    width: min(320px, calc(100vw - 24px));
+    width: min(280px, calc(100vw - 24px));
   }
 
   .reset-view-btn {
