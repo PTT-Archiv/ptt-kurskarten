@@ -4,7 +4,7 @@
 
 ## Links
 
-- Live-Viewer: https://blopditu.github.io/ptt-kurskarten/
+- Live-Viewer: https://ptt-archiv.github.io/ptt-kurskarten/
 - Lokale Entwicklung und GitHub Deploy: [docs/lokal-entwicklung-und-github-deploy.md](docs/lokal-entwicklung-und-github-deploy.md)
 - Admin-Benutzerhandbuch: [docs/admin-benutzerhandbuch.md](docs/admin-benutzerhandbuch.md)
 - Arc42-Dokumentation: [docs/arc42.md](docs/arc42.md)
