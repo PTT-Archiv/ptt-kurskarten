@@ -9,6 +9,13 @@
   background: #000000;
 }
 
+.snippet-frame.fill-frame {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
 .osd-container {
   position: absolute;
   inset: 0;

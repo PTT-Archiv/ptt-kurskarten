@@ -63,6 +63,7 @@ export type EditionEntry = {
   year: Year;
   title?: string;
   iiifRoute?: string;
+  public?: boolean;
 };
 
 export type GraphEdge = {

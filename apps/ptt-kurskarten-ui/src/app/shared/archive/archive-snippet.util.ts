@@ -34,6 +34,22 @@ export function buildArchiveRegion(x: number, y: number, transform: ArchiveTrans
   return `${iiifX},${iiifY},${ARCHIVE_REGION_SIZE},${ARCHIVE_REGION_SIZE}`;
 }
 
+export function getArchiveIiifCenter(
+  node: { x: number; y: number } & IiifOverride,
+  transform: ArchiveTransform
+): { x: number; y: number } {
+  if (node.iiifCenterX !== undefined && node.iiifCenterY !== undefined) {
+    return {
+      x: Math.round(node.iiifCenterX),
+      y: Math.round(node.iiifCenterY)
+    };
+  }
+  return {
+    x: Math.round(node.x * transform.scaleX + transform.offsetX + ARCHIVE_REGION_SIZE / 2),
+    y: Math.round(node.y * transform.scaleY + transform.offsetY + ARCHIVE_REGION_SIZE / 2)
+  };
+}
+
 export function buildArchiveSnippetUrlFromRegion(region: string): string {
   return buildArchiveSnippetUrlFromRegionWithBase(region, ARCHIVE_IIIF_BASE);
 }

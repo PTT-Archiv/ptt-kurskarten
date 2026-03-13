@@ -27,6 +27,8 @@ const NODE_RADIUS = 3;
 const NODE_RADIUS_MAX = 9;
 const NODE_RADIUS_STEP = .3;
 const DEFAULT_VIEWPORT_ZOOM = 1.0;
+const DEFAULT_INITIAL_VIEWPORT_ZOOM = 1.0;
+const DEFAULT_INITIAL_VIEWPORT_OFFSET_Y = -100;
 const MIN_VIEWPORT_ZOOM = 0.75;
 const MAX_VIEWPORT_ZOOM = 20;
 const EDGE_LINE_WIDTH = 1;
@@ -296,6 +298,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private fitTransform = computeTransform(1, 1, DEFAULT_VIEWBOX);
   private viewportZoom = DEFAULT_VIEWPORT_ZOOM;
   private viewportPan = { x: 0, y: 0 };
+  private viewportTouched = false;
   private needsRender = false;
   private activePointerId: number | null = null;
   private panStart: { x: number; y: number; panX: number; panY: number } | null = null;
@@ -339,6 +342,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     ) {
       if (changes['graph']) {
         this.rebuildTripSimulationCache();
+        if (this.interactiveViewport && !this.selectedConnection) {
+          this.resetViewport();
+        }
       }
       if (changes['resetViewportToken'] && this.interactiveViewport) {
         this.resetViewport();
@@ -409,6 +415,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
           x: this.panStart.panX + dx,
           y: this.panStart.panY + dy
         };
+        this.viewportTouched = true;
         this.scheduleRender();
       }
     }
@@ -572,6 +579,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.canvasSize = { width, height };
     if (this.interactiveViewport && this.selectedConnection) {
       this.pendingRouteFit = true;
+    }
+    if (this.interactiveViewport && !this.selectedConnection && !this.viewportTouched) {
+      this.resetViewport();
     }
     this.scheduleRender();
   }
@@ -909,8 +919,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private resetViewport(): void {
-    this.viewportZoom = DEFAULT_VIEWPORT_ZOOM;
-    this.viewportPan = { x: 0, y: 0 };
+    this.viewportZoom = DEFAULT_INITIAL_VIEWPORT_ZOOM;
+    this.viewportPan = this.getDefaultViewportPan(DEFAULT_INITIAL_VIEWPORT_ZOOM);
+    this.viewportTouched = false;
   }
 
   private zoomByFactor(factor: number): void {
@@ -938,6 +949,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       x: sx - (world.x * this.fitTransform.scale + this.fitTransform.offsetX) * this.viewportZoom,
       y: sy - (world.y * this.fitTransform.scale + this.fitTransform.offsetY) * this.viewportZoom
     };
+    this.viewportTouched = true;
     this.scheduleRender();
   }
 
@@ -1002,7 +1014,34 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       x: targetCenterX - centerX * nextZoom,
       y: targetCenterY - centerY * nextZoom
     };
+    this.viewportTouched = true;
     return true;
+  }
+
+  private getDefaultViewportPan(zoom: number): { x: number; y: number } {
+    const { width, height } = this.canvasSize;
+    if (width <= 1 || height <= 1) {
+      return { x: 0, y: 0 };
+    }
+    const defaultNode = this.getDefaultViewportNode();
+    if (!defaultNode) {
+      return { x: 0, y: 0 };
+    }
+    const fitTransform = computeTransform(width, height, DEFAULT_VIEWBOX);
+    const screenX = defaultNode.x * fitTransform.scale * zoom + fitTransform.offsetX * zoom;
+    const screenY = defaultNode.y * fitTransform.scale * zoom + fitTransform.offsetY * zoom;
+    return {
+      x: width / 2 - screenX,
+      y: height / 2 + DEFAULT_INITIAL_VIEWPORT_OFFSET_Y - screenY
+    };
+  }
+
+  private getDefaultViewportNode(): GraphNode | null {
+    const nodes = this.graph?.nodes;
+    if (!nodes?.length) {
+      return null;
+    }
+    return nodes.find((node) => node.name === 'Luzern') ?? nodes.find((node) => node.id === 'luzern') ?? null;
   }
 
   private getHighlightIds(): { nodeIds: Set<string>; edgeIds: Set<string> } {

@@ -28,10 +28,14 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   @Input({ required: true }) imageUrl = '';
   @Input() iiifInfoUrl = 'https://iiif.ptt-archiv.ch/iiif/3/P-38-2-1852-07.jp2/info.json';
+  @Input() initialCenterX: number | null = null;
+  @Input() initialCenterY: number | null = null;
+  @Input() initialZoomFactor = 1.5;
   @Input() autoFit = true;
   @Input() allowWrite = false;
   @Input() showCenterMarker = true;
   @Input() emitOnAutoFit = false;
+  @Input() fillFrame = false;
   @Output() regionChange = new EventEmitter<{ iiifCenterX: number; iiifCenterY: number }>();
   @ViewChild('osdContainer') private osdContainer?: ElementRef<HTMLDivElement>;
 
@@ -66,6 +70,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       this.applyRegionFromUrl(this.pendingRegionUrl ?? undefined);
     }
     if (changes['autoFit'] && this.autoFit) {
+      this.applyRegionFromUrl(this.pendingRegionUrl ?? this.imageUrl);
+    }
+    if ((changes['initialCenterX'] || changes['initialCenterY']) && this.autoFit && !(this.pendingRegionUrl ?? this.imageUrl)) {
       this.applyRegionFromUrl(this.pendingRegionUrl ?? this.imageUrl);
     }
   }
@@ -166,13 +173,9 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       return;
     }
     const url = urlOverride ?? this.imageUrl;
-    if (!url) {
-      return;
-    }
-    const region = this.parseRegion(url);
+    const region = url ? this.parseRegion(url) : null;
     if (!region) {
-      this.viewer.viewport.goHome(true);
-      this.viewer.viewport.applyConstraints();
+      this.applyDefaultViewport();
       return;
     }
     const item = this.viewer.world.getItemAt(0);
@@ -193,6 +196,28 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
     if (this.emitOnAutoFit && this.allowWrite) {
       setTimeout(() => this.emitCurrentCenter(), 0);
     }
+  }
+
+  private applyDefaultViewport(): void {
+    if (!this.viewer) {
+      return;
+    }
+    this.suppressNextViewportEvent = true;
+    this.viewer.viewport.goHome(true);
+    const item = this.viewer.world.getItemAt(0);
+    if (!item) {
+      this.viewer.viewport.applyConstraints();
+      return;
+    }
+    const center =
+      this.initialCenterX !== null && this.initialCenterY !== null
+        ? item.imageToViewportCoordinates(this.initialCenterX, this.initialCenterY, true)
+        : this.viewer.viewport.getCenter(true);
+    this.viewer.viewport.panTo(center, true);
+    if (this.initialZoomFactor > 0 && Math.abs(this.initialZoomFactor - 1) > 0.0001) {
+      this.viewer.viewport.zoomTo(this.viewer.viewport.getZoom(true) * this.initialZoomFactor, center, true);
+    }
+    this.viewer.viewport.applyConstraints();
   }
 
   private parseRegion(url: string): { x: number; y: number; w: number; h: number } | null {

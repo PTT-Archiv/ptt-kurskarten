@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import type {
   ConnectionLeg,
   ConnectionOption,
+  EditionEntry,
   GraphAssertion,
   GraphNode,
   GraphSnapshot,
@@ -30,6 +31,7 @@ import {
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
+import { ViewerArchiveStageComponent } from './viewer-archive-stage.component';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
 import { environment } from '../../../environments/environment';
@@ -37,6 +39,7 @@ import { Subscription } from 'rxjs';
 import {
   ARCHIVE_DEFAULT_REGION,
   buildArchiveIiifInfoUrl,
+  getArchiveIiifCenter,
   buildArchiveSnippetUrlForNode,
   buildArchiveSnippetUrlFromRegionWithBase,
   computeArchiveTransform,
@@ -77,11 +80,20 @@ type SidebarFact = {
 type HoveredSimulationTrip = MapSimulationTripHit & { screenX: number; screenY: number };
 type SimulationMode = 'off' | 'realtime' | 'simulation';
 type SimulationSpeed = 0.5 | 1 | 2;
+type ViewerSurfaceMode = 'map' | 'archive';
 
 @Component({
   selector: 'app-viewer',
   standalone: true,
-  imports: [MapStageComponent, TranslocoPipe, ViewerRoutePlannerOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent, RouterLink],
+  imports: [
+    MapStageComponent,
+    TranslocoPipe,
+    ViewerRoutePlannerOverlayComponent,
+    ViewerArchiveStageComponent,
+    ArchiveSnippetViewerComponent,
+    FaIconComponent,
+    RouterLink
+  ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css'
 })
@@ -96,6 +108,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   graph = signal<GraphSnapshot | null>(null);
   selectedNodeId = signal<string | null>(null);
   availableYears = signal<number[]>([]);
+  editions = signal<EditionEntry[]>([]);
   fromId = signal<string>('');
   toId = signal<string>('');
   departTime = signal<TimeHHMM>('08:00');
@@ -117,7 +130,9 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   settingsOpen = signal(false);
   activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
   readonly readonlyViewer = environment.readonlyViewer;
+  readonly archiveModeEnabled = environment.enableArchiveMode;
   resetViewportToken = signal(0);
+  viewerSurfaceMode = signal<ViewerSurfaceMode>('map');
   simulationMode = signal<SimulationMode>('off');
   simulationSpeed = signal<SimulationSpeed>(1);
   simulationPlaying = signal(false);
@@ -143,6 +158,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   placeSearchQuery = signal('');
   placeSearchOpen = signal(false);
   placeSearchActiveIndex = signal(0);
+  private archiveFocusNodeId = signal<string | null>(null);
   private placeSearchPreviewId = signal<string>('');
   private nodeAliases = signal<Record<string, string[]>>({});
   private nodeFacts = signal<GraphAssertion[]>([]);
@@ -180,6 +196,28 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   });
   archiveIiifRoute = computed(() => normalizeIiifRoute(this.editionIiifRoutes()[this.year()]));
   archiveIiifInfoUrl = computed(() => buildArchiveIiifInfoUrl(this.archiveIiifRoute()));
+  publicEditionOptions = computed(() => {
+    const editions = this.editions();
+    if (editions.length > 0) {
+      return editions.filter((edition) => edition.public !== false);
+    }
+    return this.availableYears().map((year) => ({
+      id: `year-${year}`,
+      year,
+      title: String(year),
+      public: true
+    }));
+  });
+  selectedEditionLabel = computed(() => {
+    const currentYear = this.year();
+    const editions = this.publicEditionOptions();
+    const selected = editions.find((edition) => edition.year === currentYear);
+    if (selected) {
+      return selected.title || String(selected.year);
+    }
+    const anyEdition = this.editions().find((edition) => edition.year === currentYear);
+    return anyEdition?.title || String(currentYear);
+  });
 
   archiveSnippetUrl = computed(() => {
     const node = this.getArchiveSnippetNode();
@@ -189,6 +227,23 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return buildArchiveSnippetUrlForNode(node, transform, iiifRoute);
     }
     return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
+  });
+  archiveModeActive = computed(() => this.archiveModeEnabled && this.viewerSurfaceMode() === 'archive');
+  archiveStageInitialCenter = computed(() => {
+    const node = this.getDefaultArchiveNode();
+    if (!node) {
+      return null;
+    }
+    return getArchiveIiifCenter(node, this.archiveTransform());
+  });
+  archiveStageImageUrl = computed(() => {
+    const node = this.getArchiveStageNode();
+    const transform = this.archiveTransform();
+    const iiifRoute = this.archiveIiifRoute();
+    if (node) {
+      return buildArchiveSnippetUrlForNode(node, transform, iiifRoute);
+    }
+    return '';
   });
 
   hoveredSnippetUrl = computed(() => {
@@ -404,6 +459,30 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       }
     });
 
+    effect(() => {
+      if (!this.archiveModeActive()) {
+        return;
+      }
+      this.routePlannerOpen.set(false);
+      this.sidebarOpen.set(false);
+      this.pickTarget.set(null);
+      this.pendingMapPickTarget = null;
+      this.hoveredSimulationTrip.set(null);
+      this.hoveredRouteEdgeId.set(null);
+    });
+
+    effect(() => {
+      const editions = this.publicEditionOptions();
+      if (!editions.length) {
+        return;
+      }
+      const currentYear = this.year();
+      if (editions.some((edition) => edition.year === currentYear)) {
+        return;
+      }
+      this.applyYearChange(editions[0].year);
+    });
+
     // Transform is derived from fixed anchors; no need to recompute on graph changes.
   }
 
@@ -451,9 +530,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     const input = event.target as HTMLInputElement;
     const nextYear = Number(input.value);
     if (!Number.isNaN(nextYear)) {
-      this.year.set(nextYear);
-      this.yearDraft.set(nextYear);
-      this.fetchGraph(nextYear);
+      this.applyYearChange(nextYear);
+    }
+  }
+
+  onEditionChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const nextYear = Number(select.value);
+    if (!Number.isNaN(nextYear)) {
+      this.applyYearChange(nextYear);
     }
   }
 
@@ -659,6 +744,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.placeSearchQuery.set(node.name);
     this.placeSearchOpen.set(false);
     this.placeSearchPreviewId.set('');
+    if (this.archiveModeActive()) {
+      this.archiveFocusNodeId.set(node.id);
+      return;
+    }
     this.onNodeSelected(node.id);
     this.triggerPulse(node.id);
   }
@@ -864,6 +953,16 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.resetViewportToken.set(this.resetViewportToken() + 1);
   }
 
+  setViewerSurfaceMode(mode: ViewerSurfaceMode): void {
+    if (mode === 'archive' && !this.archiveModeEnabled) {
+      return;
+    }
+    this.viewerSurfaceMode.set(mode);
+    if (mode === 'archive' && !this.archiveFocusNodeId()) {
+      this.archiveFocusNodeId.set(this.selectedNodeId() ?? this.fromId() ?? this.toId() ?? null);
+    }
+  }
+
   plannerAutoMinimize = computed(() => !this.sidebarOpen() && !this.plannerHovered() && !this.plannerFocused());
   routeFitTopInset = computed(() => (this.routePlannerOpen() ? 260 : 90));
 
@@ -1013,6 +1112,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private fetchEditions(): void {
     this.viewerData.getEditions().subscribe({
       next: (editions) => {
+        this.editions.set(editions ?? []);
         const byYear: Record<number, string> = {};
         for (const edition of editions) {
           if (typeof edition.iiifRoute === 'string' && edition.iiifRoute.trim().length) {
@@ -1021,7 +1121,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
         }
         this.editionIiifRoutes.set(byYear);
       },
-      error: () => this.editionIiifRoutes.set({})
+      error: () => {
+        this.editions.set([]);
+        this.editionIiifRoutes.set({});
+      }
     });
   }
 
@@ -1043,6 +1146,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       next: (aliases) => this.nodeAliases.set(aliases ?? {}),
       error: () => this.nodeAliases.set({})
     });
+  }
+
+  private applyYearChange(nextYear: number): void {
+    this.year.set(nextYear);
+    this.yearDraft.set(nextYear);
+    this.fetchGraph(nextYear);
   }
 
   private fetchNodeFacts(nodeId: string, year: number): void {
@@ -1123,13 +1232,38 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return snapshot.nodes.find((node) => node.id === id) ?? null;
   }
 
-  private getArchiveSnippetNode(): { id: string; name: string; x: number; y: number } | null {
+  private getArchiveSnippetNode(): GraphNode | null {
     const snapshot = this.graph();
     if (!snapshot) {
       return null;
     }
-    const preferredId = this.selectedNodeId() || this.fromId() || this.toId() || 'bern';
-    return snapshot.nodes.find((node) => node.id === preferredId) ?? snapshot.nodes[0] ?? null;
+    const preferredId = this.selectedNodeId() || this.fromId() || this.toId();
+    if (preferredId) {
+      return snapshot.nodes.find((node) => node.id === preferredId) ?? this.getDefaultArchiveNode();
+    }
+    return this.getDefaultArchiveNode();
+  }
+
+  private getArchiveStageNode(): GraphNode | null {
+    const archiveFocusNodeId = this.archiveFocusNodeId();
+    if (archiveFocusNodeId) {
+      return this.getNodeByIdFull(archiveFocusNodeId) ?? null;
+    }
+    const preferredId = this.selectedNodeId() || this.fromId() || this.toId();
+    return preferredId ? this.getNodeByIdFull(preferredId) : null;
+  }
+
+  private getDefaultArchiveNode(): GraphNode | null {
+    const snapshot = this.graph();
+    if (!snapshot) {
+      return null;
+    }
+    return (
+      snapshot.nodes.find((node) => node.name === 'Luzern') ??
+      snapshot.nodes.find((node) => node.id === 'luzern') ??
+      snapshot.nodes[0] ??
+      null
+    );
   }
 
   getLocalizedNote(note?: LocalizedText): string | null {

@@ -1,6 +1,14 @@
-<main class="viewer-shell planner-minimized" [class.sidebar-open]="sidebarOpen()" [class.map-settled]="mapSettled()"
-  [class.pick-mode]="pickTarget()">
+<main class="viewer-shell planner-minimized" [class.sidebar-open]="sidebarOpen() && !archiveModeActive()"
+  [class.map-settled]="mapSettled()" [class.pick-mode]="pickTarget()" [class.archive-mode]="archiveModeActive()">
   <section class="map-stage">
+    @if (archiveModeActive()) {
+    <app-viewer-archive-stage
+      [imageUrl]="archiveStageImageUrl()"
+      [iiifInfoUrl]="archiveIiifInfoUrl()"
+      [initialCenterX]="archiveStageInitialCenter()?.x ?? null"
+      [initialCenterY]="archiveStageInitialCenter()?.y ?? null"
+    ></app-viewer-archive-stage>
+    } @else {
     <app-map-stage [graph]="graph()" [nodeDetail]="null" [highlightedEdgeIds]="highlightedEdgeIds()"
       [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
       [endpointNodeIds]="endpointNodeIds()"
@@ -11,12 +19,13 @@
       [routeFitTopInset]="routeFitTopInset()"
       [glowingEdgeId]="activeHoveredRouteEdgeId()"
       (nodeSelected)="onNodeSelected($event)" (mapPointer)="onMapPointer($event)"></app-map-stage>
+    }
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
     <div class="planner-overlay">
-      @if (!routePlannerOpen()) {
-      <div class="place-search-shell">
+      @if (archiveModeActive() || !routePlannerOpen()) {
+      <div class="place-search-shell" [class.archive-only]="archiveModeActive()">
         <fa-icon [icon]="searchIcon"></fa-icon>
         <input
           type="text"
@@ -27,9 +36,11 @@
           (input)="onPlaceSearchInput($any($event.target).value)"
           (keydown)="onPlaceSearchKeydown($event)"
         />
+        @if (!archiveModeActive()) {
         <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
           <fa-icon [icon]="routeIcon"></fa-icon>
         </button>
+        }
         @if (placeSearchOpen() && placeSearchResults().length > 0) {
         <div class="place-search-list">
           @for (node of placeSearchResults(); track node.id; let i = $index) {
@@ -79,6 +90,7 @@
       }
       }
     </div>
+    @if (!archiveModeActive()) {
     <div class="simulation-overlay" [class.is-disabled]="routingActive()">
       <div class="simulation-clock">{{ simulationClockLabel() }}</div>
       <div class="simulation-mode-row">
@@ -129,7 +141,8 @@
       <div class="simulation-note">{{ 'viewer.simDisabledRouting' | transloco }}</div>
       }
     </div>
-    @if (hoveredSimulationTrip(); as hoverTrip) {
+    }
+    @if (!archiveModeActive() && hoveredSimulationTrip(); as hoverTrip) {
     <div class="simulation-trip-popup" [style.left.px]="hoverTrip.screenX + 14" [style.top.px]="hoverTrip.screenY + 14">
       <div class="simulation-trip-title">{{ 'viewer.simTripInfo' | transloco }}</div>
       <div class="simulation-trip-line">{{ getNodeLabel(hoverTrip.fromId) }} → {{ getNodeLabel(hoverTrip.toId) }}</div>
@@ -148,16 +161,19 @@
       <div class="simulation-trip-hint">{{ 'viewer.simTripClickHint' | transloco }}</div>
     </div>
     }
-    @if (pickTarget()) {
+    @if (!archiveModeActive() && pickTarget()) {
     <div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
       <div class="status-card" style="font-weight: 600;">{{ getPickModeLabel() }}</div>
     </div>
     }
+    @if (!archiveModeActive()) {
     <button class="reset-view-btn" type="button" (click)="resetMapView()">
       {{ 'viewer.resetView' | transloco }}
     </button>
+    }
   </section>
 
+  @if (!archiveModeActive()) {
   <aside class="viewer-sidebar" [class.is-open]="sidebarOpen()" [attr.aria-hidden]="!sidebarOpen()">
     <div class="sidebar-header">
       <div class="section-title">
@@ -448,7 +464,8 @@
       </label>
     </section>
   </aside>
-  @if (showRouteNodePanel()) {
+  }
+  @if (!archiveModeActive() && showRouteNodePanel()) {
     @if (routeNodePanelNode(); as panelNode) {
     <aside class="route-node-panel is-open">
       <div class="sidebar-header">
@@ -505,6 +522,20 @@
     <div class="help-header">
       <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
     </div>
+    <label class="settings-field">
+      <span>{{ 'viewer.editionTitle' | transloco }}</span>
+      @if (publicEditionOptions().length > 1) {
+      <select class="settings-select" [value]="year()" (change)="onEditionChange($event)">
+        @for (edition of publicEditionOptions(); track edition.id) {
+        <option [value]="edition.year">
+          {{ edition.title || edition.year }}
+        </option>
+        }
+      </select>
+      } @else {
+      <div class="settings-readonly">{{ selectedEditionLabel() }}</div>
+      }
+    </label>
     <div>{{ 'nav.language' | transloco }}</div>
     <div class="quick-actions">
       <button class="ghost-btn" type="button" [style.background]="activeLang() === 'de' ? '#ffffff' : '#141414'"
@@ -516,6 +547,20 @@
         FR
       </button>
     </div>
+    @if (archiveModeEnabled) {
+    <div>{{ 'viewer.surfaceModeTitle' | transloco }}</div>
+    <div class="quick-actions">
+      <button class="ghost-btn" type="button" [style.background]="viewerSurfaceMode() === 'map' ? '#ffffff' : '#141414'"
+        [style.color]="viewerSurfaceMode() === 'map' ? '#141414' : '#ffffff'" (click)="setViewerSurfaceMode('map')">
+        {{ 'viewer.surfaceModeMap' | transloco }}
+      </button>
+      <button class="ghost-btn" type="button"
+        [style.background]="viewerSurfaceMode() === 'archive' ? '#ffffff' : '#141414'"
+        [style.color]="viewerSurfaceMode() === 'archive' ? '#141414' : '#ffffff'" (click)="setViewerSurfaceMode('archive')">
+        {{ 'viewer.surfaceModeArchive' | transloco }}
+      </button>
+    </div>
+    }
     @if (!readonlyViewer) {
     <div class="quick-actions">
       <button class="ghost-btn" type="button" routerLink="/admin" (click)="settingsOpen.set(false)">

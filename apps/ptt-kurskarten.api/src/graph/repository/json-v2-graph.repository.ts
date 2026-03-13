@@ -53,6 +53,7 @@ type StoredEdition = {
   year: number;
   title?: string;
   iiifRoute?: string;
+  public?: boolean;
 };
 
 type StoredLink = {
@@ -332,11 +333,15 @@ export class JsonV2GraphRepository implements GraphRepository {
         id: existing?.id ?? patch.id ?? `edition-${targetYear}`,
         year: targetYear,
         title: patch.title ?? existing?.title,
-        iiifRoute: this.normalizeIiifRoute(patch.iiifRoute) ?? existing?.iiifRoute
+        iiifRoute: this.normalizeIiifRoute(patch.iiifRoute) ?? existing?.iiifRoute,
+        public: patch.public ?? existing?.public ?? true
       };
 
       if (patch.iiifRoute !== undefined) {
         next.iiifRoute = this.normalizeIiifRoute(patch.iiifRoute);
+      }
+      if (patch.public !== undefined) {
+        next.public = patch.public;
       }
 
       if (index === -1) {
@@ -816,7 +821,8 @@ export class JsonV2GraphRepository implements GraphRepository {
       id: edition.id,
       year: this.coerceYear(edition.year),
       title: edition.title,
-      iiifRoute: this.normalizeIiifRoute(edition.iiifRoute)
+      iiifRoute: this.normalizeIiifRoute(edition.iiifRoute),
+      public: edition.public !== false
     };
   }
 

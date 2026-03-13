@@ -130,7 +130,7 @@ export class JsonGraphRepository implements GraphRepository {
 
   async getEditions(): Promise<EditionEntry[]> {
     const years = await this.getAvailableYears();
-    return years.map((year) => ({ id: `edition-${year}`, year }));
+    return years.map((year) => ({ id: `edition-${year}`, year, public: true }));
   }
 
   async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
@@ -139,7 +139,8 @@ export class JsonGraphRepository implements GraphRepository {
       id: patch.id ?? `edition-${y}`,
       year: y,
       title: patch.title,
-      iiifRoute: typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined
+      iiifRoute: typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined,
+      public: patch.public ?? true
     };
   }
 

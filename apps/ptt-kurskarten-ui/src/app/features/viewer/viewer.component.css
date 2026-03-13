@@ -27,7 +27,8 @@
 .viewer-shell.sidebar-open .map-stage {
   width: calc(100% - 360px);
 }
-.map-stage > app-map-stage {
+.map-stage > app-map-stage,
+.map-stage > app-viewer-archive-stage {
   display: block;
   height: 100%;
 }
@@ -469,6 +470,10 @@
   gap: 10px;
 }
 
+.place-search-shell.archive-only {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
 .place-search-shell input {
   border: none;
   outline: none;
@@ -642,6 +647,39 @@
   font-size: 16px;
   line-height: 1.35;
   color: #f5f5f5;
+}
+
+.settings-field {
+  display: grid;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.settings-select {
+  appearance: none;
+  width: 100%;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  background: #141414;
+  color: #ffffff;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.settings-readonly {
+  width: 100%;
+  border: 2px solid #5a5a5a;
+  border-radius: 10px;
+  background: #0d0d0d;
+  color: #f5f5f5;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.settings-select:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
 }
 
 .help-fab {

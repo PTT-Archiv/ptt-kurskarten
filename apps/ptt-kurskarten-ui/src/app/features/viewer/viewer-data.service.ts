@@ -50,6 +50,7 @@ type StoredEdition = {
   year: number;
   title?: string;
   iiifRoute?: string;
+  public?: boolean;
 };
 
 type StoredService = {
@@ -163,7 +164,8 @@ export class ViewerDataService {
             id: edition.id,
             year: coerceYear(edition.year),
             title: edition.title,
-            iiifRoute: typeof edition.iiifRoute === 'string' ? edition.iiifRoute.trim().replace(/\/+$/, '') : undefined
+            iiifRoute: typeof edition.iiifRoute === 'string' ? edition.iiifRoute.trim().replace(/\/+$/, '') : undefined,
+            public: edition.public !== false
           }))
           .sort((a, b) => a.year - b.year)
       )

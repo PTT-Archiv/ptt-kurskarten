@@ -13,7 +13,8 @@ import type { GraphRepository } from './graph.repository';
 const YEARS: number[] = [1840, 1855, 1852, 1888, 1900];
 let EDITIONS: EditionEntry[] = YEARS.map((year) => ({
   id: `edition-${year}`,
-  year
+  year,
+  public: true
 }));
 
 let NODES: GraphNode[] = [
