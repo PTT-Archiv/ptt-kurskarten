@@ -11,7 +11,7 @@ import type {
   TimeHHMM,
   TransportType
 } from '@ptt-kurskarten/shared';
-import { MapStageComponent } from '../../shared/map/map-stage.component';
+import { MapStageComponent, type MapSimulationTripHit } from '../../shared/map/map-stage.component';
 import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -32,6 +32,8 @@ import {
 } from '../../shared/archive/archive-snippet.util';
 
 const DEFAULT_YEAR = 1852;
+const MINUTES_PER_DAY = 1440;
+const SIMULATION_DAY_MS = 60_000;
 const FACT_LINK_TEMPLATES: Record<string, string> = {
   wikidata: 'https://www.wikidata.org/wiki/{value}',
   mfk: 'https://mfk.rechercheonline.ch/{value}'
@@ -59,6 +61,9 @@ type SidebarFact = {
   label: string;
   url: string | null;
 };
+type HoveredSimulationTrip = MapSimulationTripHit & { screenX: number; screenY: number };
+type SimulationMode = 'off' | 'realtime' | 'simulation';
+type SimulationSpeed = 0.5 | 1 | 2;
 
 @Component({
   selector: 'app-viewer',
@@ -100,6 +105,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
   readonly readonlyViewer = environment.readonlyViewer;
   resetViewportToken = signal(0);
+  simulationMode = signal<SimulationMode>('off');
+  simulationSpeed = signal<SimulationSpeed>(1);
+  simulationPlaying = signal(false);
+  simulationMinute = signal(0);
+  realtimeMinute = signal(this.getCurrentMinuteOfDay());
+  readonly simulationSpeedOptions: readonly SimulationSpeed[] = [0.5, 1, 2];
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
   private toPreviewId = signal<string>('');
@@ -123,6 +134,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private nodeAliases = signal<Record<string, string[]>>({});
   private nodeFacts = signal<GraphAssertion[]>([]);
   hoveredRouteEdgeId = signal<string | null>(null);
+  private realtimeTickHandle: ReturnType<typeof setInterval> | null = null;
+  private simulationRafId: number | null = null;
+  private simulationLastTs: number | null = null;
+  hoveredSimulationTrip = signal<HoveredSimulationTrip | null>(null);
+  tripFocusDomId = signal<string | null>(null);
+  private tripFocusClearHandle: ReturnType<typeof setTimeout> | null = null;
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -209,6 +226,27 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       .filter((fact): fact is SidebarFact => fact !== null);
   });
   routeResultsVisible = computed(() => this.routingState() === 'results' && this.connectionResults().length > 0);
+  simulationMinuteForMap = computed<number | null>(() => {
+    if (this.routingActive()) {
+      return null;
+    }
+    const mode = this.simulationMode();
+    if (mode === 'off') {
+      return null;
+    }
+    if (mode === 'realtime') {
+      return this.realtimeMinute();
+    }
+    return this.simulationMinute();
+  });
+  simulationClockLabel = computed(() => {
+    const minute = this.simulationMinuteForMap();
+    if (minute === null) {
+      return '--:--';
+    }
+    return this.formatTimeMinutes(Math.floor(this.normalizeMinuteOfDay(minute)));
+  });
+  simulationSliderMinute = computed(() => Math.floor(this.normalizeMinuteOfDay(this.simulationMinute())));
   routeSidebarTitle = computed(() => {
     const selected = this.selectedConnection();
     const from = selected?.from ?? this.fromId();
@@ -311,6 +349,42 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.fetchNodeFacts(nodeId, year);
     });
 
+    effect(() => {
+      if (!this.isBrowser) {
+        return;
+      }
+      const realtimeActive = this.simulationMode() === 'realtime' && !this.routingActive();
+      if (realtimeActive) {
+        this.startRealtimeTicker();
+      } else {
+        this.stopRealtimeTicker();
+      }
+    });
+
+    effect(() => {
+      if (!this.isBrowser) {
+        return;
+      }
+      const shouldPlay = this.simulationMode() === 'simulation' && this.simulationPlaying() && !this.routingActive();
+      if (shouldPlay) {
+        this.startSimulationPlayback();
+      } else {
+        this.stopSimulationPlayback();
+      }
+    });
+
+    effect(() => {
+      if (this.routingActive() && this.simulationPlaying()) {
+        this.simulationPlaying.set(false);
+      }
+    });
+
+    effect(() => {
+      if (this.routingActive() || this.simulationMode() === 'off') {
+        this.hoveredSimulationTrip.set(null);
+      }
+    });
+
     // Transform is derived from fixed anchors; no need to recompute on graph changes.
   }
 
@@ -333,6 +407,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.placeSearchBlurHandle) {
       clearTimeout(this.placeSearchBlurHandle);
     }
+    if (this.tripFocusClearHandle) {
+      clearTimeout(this.tripFocusClearHandle);
+    }
+    this.stopRealtimeTicker();
+    this.stopSimulationPlayback();
     this.langSub?.unsubscribe();
   }
 
@@ -591,11 +670,24 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     world: { x: number; y: number };
     hitNodeId: string | null;
     hitEdgeId: string | null;
+    hitSimulationTrip: MapSimulationTripHit | null;
   }): void {
     if (payload.type === 'down') {
       this.pendingMapPickTarget = this.pickTarget();
     }
     if (payload.type === 'move') {
+      if (payload.hitSimulationTrip && !this.routingActive() && this.simulationMode() !== 'off') {
+        this.hoveredSimulationTrip.set({
+          ...payload.hitSimulationTrip,
+          screenX: payload.screen.x,
+          screenY: payload.screen.y
+        });
+        if (this.simulationMode() === 'simulation' && this.simulationPlaying()) {
+          this.simulationPlaying.set(false);
+        }
+      } else {
+        this.hoveredSimulationTrip.set(null);
+      }
       this.hoveredNodeId.set(payload.hitNodeId);
       this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
       const hitEdgeId = payload.hitEdgeId;
@@ -604,6 +696,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       } else {
         this.hoveredRouteEdgeId.set(null);
       }
+    }
+    if (payload.type === 'up' && payload.hitSimulationTrip) {
+      this.openSimulationTripDetail(payload.hitSimulationTrip);
+      return;
     }
     if (payload.type === 'up' && !payload.hitNodeId) {
       this.pendingMapPickTarget = null;
@@ -679,6 +775,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.lastResultParams.set(null);
     this.selectedNodeId.set(null);
     this.hoveredRouteEdgeId.set(null);
+    this.hoveredSimulationTrip.set(null);
+    this.tripFocusDomId.set(null);
     this.sidebarOpen.set(false);
   }
 
@@ -688,6 +786,59 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   onToPreview(id: string): void {
     this.toPreviewId.set(id);
+  }
+
+  setSimulationMode(mode: SimulationMode): void {
+    if (this.routingActive()) {
+      return;
+    }
+    this.simulationMode.set(mode);
+    if (mode === 'realtime') {
+      this.realtimeMinute.set(this.getCurrentMinuteOfDay());
+    }
+    if (mode !== 'simulation') {
+      this.simulationPlaying.set(false);
+    }
+  }
+
+  toggleSimulationPlayback(): void {
+    if (this.routingActive()) {
+      return;
+    }
+    if (this.simulationMode() !== 'simulation') {
+      this.simulationMode.set('simulation');
+    }
+    this.simulationPlaying.set(!this.simulationPlaying());
+  }
+
+  onSimulationSliderInput(value: string): void {
+    if (this.routingActive()) {
+      return;
+    }
+    const next = Number(value);
+    if (!Number.isFinite(next)) {
+      return;
+    }
+    this.simulationMinute.set(this.normalizeMinuteOfDay(next));
+  }
+
+  setSimulationSpeed(speed: SimulationSpeed): void {
+    if (this.routingActive()) {
+      return;
+    }
+    this.simulationSpeed.set(speed);
+  }
+
+  resetSimulation(): void {
+    if (this.routingActive()) {
+      return;
+    }
+    this.simulationPlaying.set(false);
+    this.simulationMinute.set(0);
+  }
+
+  tripRowDomId(edgeId: string, tripId: string): string {
+    return `trip-row-${this.toDomToken(edgeId)}-${this.toDomToken(tripId)}`;
   }
 
   resetMapView(): void {
@@ -1176,6 +1327,110 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       .toString()
       .padStart(2, '0');
     return `${hours}:${minutes}` as TimeHHMM;
+  }
+
+  private openSimulationTripDetail(trip: MapSimulationTripHit): void {
+    this.hoveredSimulationTrip.set(null);
+    this.onNodeSelected(trip.fromId);
+    this.triggerPulse(trip.fromId);
+    this.focusTripRow(trip.edgeId, trip.tripId);
+  }
+
+  private focusTripRow(edgeId: string, tripId: string): void {
+    const domId = this.tripRowDomId(edgeId, tripId);
+    this.tripFocusDomId.set(domId);
+    if (this.tripFocusClearHandle) {
+      clearTimeout(this.tripFocusClearHandle);
+    }
+    this.tripFocusClearHandle = setTimeout(() => {
+      if (this.tripFocusDomId() === domId) {
+        this.tripFocusDomId.set(null);
+      }
+    }, 2200);
+    if (!this.isBrowser) {
+      return;
+    }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const element = document.getElementById(domId);
+        element?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+      });
+    });
+  }
+
+  private startRealtimeTicker(): void {
+    if (this.realtimeTickHandle) {
+      return;
+    }
+    this.realtimeMinute.set(this.getCurrentMinuteOfDay());
+    this.realtimeTickHandle = setInterval(() => {
+      this.realtimeMinute.set(this.getCurrentMinuteOfDay());
+    }, 1_000);
+  }
+
+  private stopRealtimeTicker(): void {
+    if (!this.realtimeTickHandle) {
+      return;
+    }
+    clearInterval(this.realtimeTickHandle);
+    this.realtimeTickHandle = null;
+  }
+
+  private startSimulationPlayback(): void {
+    if (!this.isBrowser || this.simulationRafId !== null) {
+      return;
+    }
+    this.simulationLastTs = null;
+    this.simulationRafId = requestAnimationFrame(this.onSimulationFrame);
+  }
+
+  private stopSimulationPlayback(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+    if (this.simulationRafId !== null) {
+      cancelAnimationFrame(this.simulationRafId);
+    }
+    this.simulationRafId = null;
+    this.simulationLastTs = null;
+  }
+
+  private readonly onSimulationFrame = (ts: number): void => {
+    if (!this.isBrowser) {
+      return;
+    }
+    if (this.simulationMode() !== 'simulation' || !this.simulationPlaying() || this.routingActive()) {
+      this.simulationRafId = null;
+      this.simulationLastTs = null;
+      return;
+    }
+    if (this.simulationLastTs === null) {
+      this.simulationLastTs = ts;
+    }
+    const deltaMs = Math.max(0, ts - this.simulationLastTs);
+    this.simulationLastTs = ts;
+    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * this.simulationSpeed();
+    if (minuteAdvance > 0) {
+      this.simulationMinute.set(this.normalizeMinuteOfDay(this.simulationMinute() + minuteAdvance));
+    }
+    this.simulationRafId = requestAnimationFrame(this.onSimulationFrame);
+  };
+
+  private getCurrentMinuteOfDay(): number {
+    const now = new Date();
+    return now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60 + now.getMilliseconds() / 60000;
+  }
+
+  private normalizeMinuteOfDay(value: number): number {
+    return ((value % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+  }
+
+  private toDomToken(value: string): string {
+    const normalized = value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    return normalized.length ? normalized : 'item';
   }
 
   private triggerPulse(nodeId: string): void {

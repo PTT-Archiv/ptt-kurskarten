@@ -6,6 +6,7 @@
       [endpointNodeIds]="endpointNodeIds()"
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
+      [tripSimulationMinute]="simulationMinuteForMap()"
       [interactiveViewport]="true" [resetViewportToken]="resetViewportToken()"
       [routeFitTopInset]="routeFitTopInset()"
       [glowingEdgeId]="activeHoveredRouteEdgeId()"
@@ -78,6 +79,69 @@
       }
       }
     </div>
+    <div class="simulation-overlay" [class.is-disabled]="routingActive()">
+      <div class="simulation-clock">{{ simulationClockLabel() }}</div>
+      <div class="simulation-mode-row">
+        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'off'" (click)="setSimulationMode('off')"
+          [disabled]="routingActive()">
+          {{ 'viewer.simOff' | transloco }}
+        </button>
+        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'realtime'"
+          (click)="setSimulationMode('realtime')" [disabled]="routingActive()">
+          {{ 'viewer.simRealtime' | transloco }}
+        </button>
+        <button type="button" class="sim-btn" [class.active]="simulationMode() === 'simulation'"
+          (click)="setSimulationMode('simulation')" [disabled]="routingActive()">
+          {{ 'viewer.simPlayback' | transloco }}
+        </button>
+      </div>
+      @if (simulationMode() === 'simulation') {
+      <div class="simulation-controls">
+        <div class="simulation-main-actions">
+          <button type="button" class="sim-btn wide" (click)="toggleSimulationPlayback()" [disabled]="routingActive()">
+            {{ (simulationPlaying() ? 'viewer.simStop' : 'viewer.simPlay') | transloco }}
+          </button>
+          <button type="button" class="sim-btn wide" (click)="resetSimulation()" [disabled]="routingActive()">
+            {{ 'viewer.simReset' | transloco }}
+          </button>
+        </div>
+        <div class="simulation-slider-row">
+          <input type="range" min="0" max="1439" step="1" [value]="simulationSliderMinute()"
+            (input)="onSimulationSliderInput($any($event.target).value)" [disabled]="routingActive()" />
+        </div>
+        <div class="simulation-speed-row">
+          @for (speed of simulationSpeedOptions; track speed) {
+          <button type="button" class="sim-btn" [class.active]="simulationSpeed() === speed"
+            (click)="setSimulationSpeed(speed)" [disabled]="routingActive()">
+            {{ speed }}x
+          </button>
+          }
+        </div>
+      </div>
+      }
+      @if (routingActive()) {
+      <div class="simulation-note">{{ 'viewer.simDisabledRouting' | transloco }}</div>
+      }
+    </div>
+    @if (hoveredSimulationTrip(); as hoverTrip) {
+    <div class="simulation-trip-popup" [style.left.px]="hoverTrip.screenX + 14" [style.top.px]="hoverTrip.screenY + 14">
+      <div class="simulation-trip-title">{{ 'viewer.simTripInfo' | transloco }}</div>
+      <div class="simulation-trip-line">{{ getNodeLabel(hoverTrip.fromId) }} → {{ getNodeLabel(hoverTrip.toId) }}</div>
+      <div class="simulation-trip-line">{{ ('transport.' + hoverTrip.transport) | transloco }}</div>
+      <div class="simulation-trip-line">
+        @if (hoverTrip.departs) {
+        {{ hoverTrip.departs }} →
+        }
+        {{ hoverTrip.arrives }}
+        @if (hoverTrip.arrivalDayOffset && hoverTrip.arrivalDayOffset > 0) {
+        <span>(+{{ hoverTrip.arrivalDayOffset }})</span>
+        }
+      </div>
+      <div class="simulation-trip-line">{{ 'viewer.simTripId' | transloco }}: {{ hoverTrip.tripId }}</div>
+      <div class="simulation-trip-line">{{ 'viewer.simEdgeId' | transloco }}: {{ hoverTrip.edgeId }}</div>
+      <div class="simulation-trip-hint">{{ 'viewer.simTripClickHint' | transloco }}</div>
+    </div>
+    }
     @if (pickTarget()) {
     <div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
       <div class="status-card" style="font-weight: 600;">{{ getPickModeLabel() }}</div>
@@ -225,7 +289,6 @@
         <div class="fact-row">
           <div class="fact-schema">
             <div class="fact-schema-label">{{ fact.schemaLabel }}</div>
-            <code>{{ fact.schemaKey }}</code>
           </div>
           <div class="fact-value">
             @if (fact.url) {
@@ -249,7 +312,8 @@
       @if (outgoingNodeTrips().length > 0) {
       <div class="node-trip-list">
         @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-        <div class="node-trip-row">
+        <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
+          [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
           <div class="node-trip-head">{{ trip.nodeName }}</div>
           <div class="node-trip-time">
             @if (trip.departs) {
@@ -274,7 +338,8 @@
       @if (incomingNodeTrips().length > 0) {
       <div class="node-trip-list">
         @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-        <div class="node-trip-row">
+        <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
+          [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
           <div class="node-trip-head">{{ trip.nodeName }}</div>
           <div class="node-trip-time">
             @if (trip.departs) {

@@ -14,7 +14,7 @@ import {
   inject
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import type { ConnectionOption, GraphNode, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
+import type { ConnectionOption, GraphNode, GraphSnapshot, NodeDetail, TimeHHMM, TransportType } from '@ptt-kurskarten/shared';
 import { computeTransform, DEFAULT_VIEWBOX, screenToWorld, worldToScreen } from './map-coordinates';
 import { buildWaitSegments, getLegAbsTime } from '../routing/connection-details.util';
 import { TranslocoService } from '@jsverse/transloco';
@@ -38,6 +38,36 @@ const ROUTE_FIT_PADDING_MAX = 84;
 const NODE_COLOR_DEFAULT = '#ffffff';
 const NODE_COLOR_FOREIGN = '#ffffff';
 const NODE_COLOR_MUTED = '#9a9a9a';
+const MINUTES_PER_DAY = 1440;
+const MAX_SIMULATION_DOTS = 700;
+
+type SimTripRun = {
+  edgeId: string;
+  tripId: string;
+  fromId: string;
+  toId: string;
+  transport: TransportType;
+  departs?: TimeHHMM;
+  arrives: TimeHHMM;
+  arrivalDayOffset?: number;
+  departMinute: number;
+  arriveMinute: number;
+  durationMinutes: number;
+};
+
+export type MapSimulationTripHit = {
+  edgeId: string;
+  tripId: string;
+  fromId: string;
+  toId: string;
+  transport: TransportType;
+  departs?: TimeHHMM;
+  arrives: TimeHHMM;
+  arrivalDayOffset?: number;
+  progress: number;
+  dotX: number;
+  dotY: number;
+};
 
 @Component({
   selector: 'app-map-stage',
@@ -224,6 +254,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() showConnectionDetailsOnMap = true;
   @Input() selectedNodeId: string | null = null;
   @Input() routingActive = false;
+  @Input() tripSimulationMinute: number | null = null;
   @Input() showBorder = true;
   @Input() interactiveViewport = false;
   @Input() resetViewportToken = 0;
@@ -236,6 +267,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     world: { x: number; y: number };
     hitNodeId: string | null;
     hitEdgeId: string | null;
+    hitSimulationTrip: MapSimulationTripHit | null;
   }>();
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -272,6 +304,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private hoveredNodeId: string | null = null;
   private stageHover = false;
   private pendingRouteFit = false;
+  private tripRunsByMinute: SimTripRun[][] = Array.from({ length: MINUTES_PER_DAY }, () => []);
+  private screenSimulationDots: Array<{ x: number; y: number; r: number; run: SimTripRun; progress: number }> = [];
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) {
@@ -298,10 +332,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['showConnectionDetailsOnMap'] ||
       changes['selectedNodeId'] ||
       changes['routingActive'] ||
+      changes['tripSimulationMinute'] ||
       changes['glowingEdgeId'] ||
       changes['routeFitTopInset'] ||
       changes['resetViewportToken']
     ) {
+      if (changes['graph']) {
+        this.rebuildTripSimulationCache();
+      }
       if (changes['resetViewportToken'] && this.interactiveViewport) {
         this.resetViewport();
         this.pendingRouteFit = false;
@@ -402,7 +440,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     if (!wasPanning) {
       if (payload.hitNodeId) {
         this.nodeSelected.emit(payload.hitNodeId);
-      } else if (this.pickMode === null && this.selectedNodeId !== null) {
+      } else if (!payload.hitSimulationTrip && this.pickMode === null && this.selectedNodeId !== null) {
         this.nodeSelected.emit(null);
       }
     }
@@ -413,6 +451,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
     this.updateHoverState(null);
+    this.mapPointer.emit({
+      type: 'move',
+      screen: { x: -1, y: -1 },
+      world: { x: 0, y: 0 },
+      hitNodeId: null,
+      hitEdgeId: null,
+      hitSimulationTrip: null
+    });
   }
 
   onWheel(event: WheelEvent): void {
@@ -595,6 +641,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.screenNodes.clear();
     this.screenNodeLabels.clear();
     this.screenEdges.clear();
+    this.screenSimulationDots = [];
 
     const edgeCounts = new Map<string, number>();
     edges.forEach((edge) => {
@@ -740,6 +787,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
 
+    const simulationDotCount = this.drawTripSimulationDots(ctx, pulseTime, sizeScale);
+
     if (!(this.showConnectionDetailsOnMap && this.selectedConnection)) {
       const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
       const labelNodes =
@@ -832,7 +881,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.restore();
     });
 
-    if (pulseIds.size > 0) {
+    if (pulseIds.size > 0 || simulationDotCount > 0) {
       this.scheduleRender();
     }
   }
@@ -1105,6 +1154,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     world: { x: number; y: number };
     hitNodeId: string | null;
     hitEdgeId: string | null;
+    hitSimulationTrip: MapSimulationTripHit | null;
   } {
     const canvas = this.canvasRef?.nativeElement;
     if (!canvas) {
@@ -1112,7 +1162,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         screen: { x: 0, y: 0 },
         world: { x: 0, y: 0 },
         hitNodeId: null,
-        hitEdgeId: null
+        hitEdgeId: null,
+        hitSimulationTrip: null
       };
     }
 
@@ -1123,9 +1174,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       y: (screen.y - this.transform.offsetY) / this.transform.scale
     };
     const hitNodeId = this.hitTestNode(event);
-    const hitEdgeId = hitNodeId ? null : this.hitTestEdge(screen.x, screen.y);
+    const hitSimulationTrip = hitNodeId ? null : this.hitTestSimulationDot(screen.x, screen.y);
+    const hitEdgeId = hitNodeId || hitSimulationTrip ? null : this.hitTestEdge(screen.x, screen.y);
 
-    return { screen, world, hitNodeId, hitEdgeId };
+    return { screen, world, hitNodeId, hitEdgeId, hitSimulationTrip };
   }
 
   private updateHoverState(hitNodeId: string | null): void {
@@ -1150,6 +1202,44 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     return bestId;
+  }
+
+  private hitTestSimulationDot(x: number, y: number): MapSimulationTripHit | null {
+    let best:
+      | {
+          dot: { x: number; y: number; r: number; run: SimTripRun; progress: number };
+          dist: number;
+        }
+      | null = null;
+    const threshold = 9;
+    for (const dot of this.screenSimulationDots) {
+      const dx = x - dot.x;
+      const dy = y - dot.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist > Math.max(threshold, dot.r + 4)) {
+        continue;
+      }
+      if (!best || dist < best.dist) {
+        best = { dot, dist };
+      }
+    }
+    if (!best) {
+      return null;
+    }
+    const run = best.dot.run;
+    return {
+      edgeId: run.edgeId,
+      tripId: run.tripId,
+      fromId: run.fromId,
+      toId: run.toId,
+      transport: run.transport,
+      departs: run.departs,
+      arrives: run.arrives,
+      arrivalDayOffset: run.arrivalDayOffset,
+      progress: best.dot.progress,
+      dotX: best.dot.x,
+      dotY: best.dot.y
+    };
   }
 
   private drawConnectionDetails(ctx: CanvasRenderingContext2D, connection: ConnectionOption): void {
@@ -1280,10 +1370,159 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     return Math.max(0.36, Math.min(1.4, scale * viewportScale));
   }
 
+  private rebuildTripSimulationCache(): void {
+    this.tripRunsByMinute = Array.from({ length: MINUTES_PER_DAY }, () => []);
+    const graph = this.graph;
+    if (!graph) {
+      return;
+    }
+    for (const edge of graph.edges) {
+      for (const trip of edge.trips ?? []) {
+        if (!trip.departs || !trip.arrives) {
+          continue;
+        }
+        const departMinute = parseHHMM(trip.departs);
+        const arriveMinuteRaw = parseHHMM(trip.arrives);
+        if (departMinute === null || arriveMinuteRaw === null) {
+          continue;
+        }
+        const providedOffset = typeof trip.arrivalDayOffset === 'number' ? trip.arrivalDayOffset : 0;
+        let arriveMinute = arriveMinuteRaw + providedOffset * MINUTES_PER_DAY;
+        if (arriveMinute <= departMinute) {
+          arriveMinute += MINUTES_PER_DAY;
+        }
+        const durationMinutes = arriveMinute - departMinute;
+        if (!(durationMinutes > 0)) {
+          continue;
+        }
+        const run: SimTripRun = {
+          edgeId: edge.id,
+          tripId: trip.id,
+          fromId: edge.from,
+          toId: edge.to,
+          transport: trip.transport,
+          departs: trip.departs,
+          arrives: trip.arrives,
+          arrivalDayOffset: trip.arrivalDayOffset,
+          departMinute,
+          arriveMinute,
+          durationMinutes
+        };
+        this.addTripRunToBuckets(run);
+      }
+    }
+  }
+
+  private addTripRunToBuckets(run: SimTripRun): void {
+    if (run.durationMinutes >= MINUTES_PER_DAY) {
+      for (let minute = 0; minute < MINUTES_PER_DAY; minute += 1) {
+        this.tripRunsByMinute[minute].push(run);
+      }
+      return;
+    }
+    const start = Math.floor(run.departMinute);
+    const end = Math.floor(run.arriveMinute);
+    if (end < MINUTES_PER_DAY) {
+      for (let minute = start; minute <= end; minute += 1) {
+        this.tripRunsByMinute[minute].push(run);
+      }
+      return;
+    }
+    for (let minute = start; minute < MINUTES_PER_DAY; minute += 1) {
+      this.tripRunsByMinute[minute].push(run);
+    }
+    const wrappedEnd = end % MINUTES_PER_DAY;
+    for (let minute = 0; minute <= wrappedEnd; minute += 1) {
+      this.tripRunsByMinute[minute].push(run);
+    }
+  }
+
+  private drawTripSimulationDots(ctx: CanvasRenderingContext2D, pulseTime: number, sizeScale: number): number {
+    if (this.routingActive || this.tripSimulationMinute === null) {
+      return 0;
+    }
+    const minute = normalizeMinute(this.tripSimulationMinute);
+    const minuteBucket = this.tripRunsByMinute[Math.floor(minute)];
+    if (!minuteBucket?.length) {
+      return 0;
+    }
+
+    const dotRadius = Math.max(1.2, 1.9 * sizeScale);
+    let drawn = 0;
+    ctx.save();
+    for (const run of minuteBucket) {
+      const edge = this.screenEdges.get(run.edgeId);
+      if (!edge) {
+        continue;
+      }
+      const progress = this.getTripRunProgress(run, minute);
+      if (progress === null) {
+        continue;
+      }
+      const x = edge.x1 + (edge.x2 - edge.x1) * progress;
+      const y = edge.y1 + (edge.y2 - edge.y1) * progress;
+      const phase = pulseTime / 160 + ((x + y) % 17);
+      const pulse = 0.5 + 0.5 * Math.sin(phase);
+      const outerRadius = dotRadius + 1.4 * sizeScale + pulse * 1.2 * sizeScale;
+      ctx.globalAlpha = 0.95;
+      ctx.beginPath();
+      ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.globalAlpha = 0.55;
+      ctx.beginPath();
+      ctx.arc(x, y, outerRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      this.screenSimulationDots.push({
+        x,
+        y,
+        r: outerRadius,
+        run,
+        progress
+      });
+      drawn += 1;
+      if (drawn >= MAX_SIMULATION_DOTS) {
+        break;
+      }
+    }
+    ctx.restore();
+    return drawn;
+  }
+
+  private getTripRunProgress(run: SimTripRun, minute: number): number | null {
+    let absoluteMinute = minute;
+    while (absoluteMinute < run.departMinute) {
+      absoluteMinute += MINUTES_PER_DAY;
+    }
+    if (absoluteMinute < run.departMinute || absoluteMinute > run.arriveMinute) {
+      return null;
+    }
+    return Math.max(0, Math.min(1, (absoluteMinute - run.departMinute) / run.durationMinutes));
+  }
+
   private getNodeLabel(id: string): string {
     const nodes = this.graph?.nodes ?? [];
     return nodes.find((node) => node.id === id)?.name ?? id;
   }
+}
+
+function normalizeMinute(value: number): number {
+  return ((value % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+}
+
+function parseHHMM(value: string): number | null {
+  const match = value.trim().match(/^(\d{2}):(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+  const hours = Number(match[1]);
+  const minutes = Number(match[2]);
+  if (!Number.isInteger(hours) || !Number.isInteger(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+    return null;
+  }
+  return hours * 60 + minutes;
 }
 
 function measureLabel(ctx: CanvasRenderingContext2D, text: string): { w: number; h: number } {
