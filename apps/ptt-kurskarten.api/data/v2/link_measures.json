@@ -961,5 +961,189 @@
     "unit": "leuge",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "link-measure-node-1770906199277__node-1770906451065-distance-1852",
+    "linkId": "node-1770906199277__node-1770906451065",
+    "measureKey": "distance",
+    "valueNumber": 3.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912050316__node-1770912067754-distance-1852",
+    "linkId": "node-1770912050316__node-1770912067754",
+    "measureKey": "distance",
+    "valueNumber": 3.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770911226606__node-1770912067754-distance-1852",
+    "linkId": "node-1770911226606__node-1770912067754",
+    "measureKey": "distance",
+    "valueNumber": 3.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912067754__node-1770912080230-distance-1852",
+    "linkId": "node-1770912067754__node-1770912080230",
+    "measureKey": "distance",
+    "valueNumber": 2.75,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818481603__node-1770912067754-distance-1852",
+    "linkId": "node-1770818481603__node-1770912067754",
+    "measureKey": "distance",
+    "valueNumber": 2.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818481603__node-1770818483826-distance-1852",
+    "linkId": "node-1770818481603__node-1770818483826",
+    "measureKey": "distance",
+    "valueNumber": 3.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912080230__node-1770912100324-distance-1852",
+    "linkId": "node-1770912080230__node-1770912100324",
+    "measureKey": "distance",
+    "valueNumber": 2.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818481603__node-1770912128082-distance-1852",
+    "linkId": "node-1770818481603__node-1770912128082",
+    "measureKey": "distance",
+    "valueNumber": 3.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818481603__node-1770911217459-distance-1852",
+    "linkId": "node-1770818481603__node-1770911217459",
+    "measureKey": "distance",
+    "valueNumber": 4,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912277124__node-1773305543455-distance-1852",
+    "linkId": "node-1770912277124__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 2.625,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818481603__node-1773305543455-distance-1852",
+    "linkId": "node-1770818481603__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 4.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770911217459__node-1770912305962-distance-1852",
+    "linkId": "node-1770911217459__node-1770912305962",
+    "measureKey": "distance",
+    "valueNumber": 2.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912305962__node-1773305543455-distance-1852",
+    "linkId": "node-1770912305962__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 3.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912227271__node-1773305543455-distance-1852",
+    "linkId": "node-1770912227271__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 2.75,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770911208987__node-1770912227271-distance-1852",
+    "linkId": "node-1770911208987__node-1770912227271",
+    "measureKey": "distance",
+    "valueNumber": 3.75,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770907142041__node-1770911208987-distance-1852",
+    "linkId": "node-1770907142041__node-1770911208987",
+    "measureKey": "distance",
+    "valueNumber": 4.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770907246859__node-1773305543455-distance-1852",
+    "linkId": "node-1770907246859__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 2,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818451614__node-1773305543455-distance-1852",
+    "linkId": "node-1770818451614__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 2.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912548392__node-1773305543455-distance-1852",
+    "linkId": "node-1770912548392__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 5.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818487149__node-1773305543455-distance-1852",
+    "linkId": "node-1770818487149__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 3.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912202211__node-1773305543455-distance-1852",
+    "linkId": "node-1770912202211__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 3.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818509015__node-1773305543455-distance-1852",
+    "linkId": "node-1770818509015__node-1773305543455",
+    "measureKey": "distance",
+    "valueNumber": 2.625,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818509015__node-1770912385928-distance-1852",
+    "linkId": "node-1770818509015__node-1770912385928",
+    "measureKey": "distance",
+    "valueNumber": 2.875,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]
