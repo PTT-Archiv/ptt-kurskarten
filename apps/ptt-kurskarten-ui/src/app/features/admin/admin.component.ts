@@ -105,6 +105,8 @@ type QuickPlaceSuggestion =
 type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact';
 type InspectorTab = 'core' | 'facts' | 'anchors' | 'source';
 type DeleteConfirmAnchor = 'inline' | 'sticky';
+type ServiceNodeFilter = 'all' | 'onlyOutgoing' | 'onlyIncoming' | 'both' | 'none';
+type ServiceNodeState = Exclude<ServiceNodeFilter, 'all'>;
 
 type InspectorFact = {
   id: string;
@@ -180,6 +182,8 @@ export class AdminComponent implements OnDestroy {
     { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
   ]);
   quickEntityMode = signal<QuickEntityMode>('service');
+  quickFromNodeFilter = signal<ServiceNodeFilter>('all');
+  quickToNodeFilter = signal<ServiceNodeFilter>('all');
   inspectorTab = signal<InspectorTab>('core');
   quickPlaceName = signal<string>('');
   quickPlaceExistingResults = signal<ExistingPlaceResult[]>([]);
@@ -229,6 +233,13 @@ export class AdminComponent implements OnDestroy {
     { id: 'facts', label: 'Facts' },
     { id: 'anchors', label: 'Anchors' },
     { id: 'source', label: 'Source' }
+  ];
+  readonly serviceNodeFilterOptions: Array<{ id: ServiceNodeFilter; label: string }> = [
+    { id: 'all', label: 'All' },
+    { id: 'onlyOutgoing', label: 'Only outgoing' },
+    { id: 'onlyIncoming', label: 'Only incoming' },
+    { id: 'both', label: 'Both' },
+    { id: 'none', label: 'None' }
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
@@ -374,20 +385,60 @@ export class AdminComponent implements OnDestroy {
     return this.quickPlaceExistingResults().find((result) => result.id === selectedId) ?? null;
   });
 
+  nodeServiceStates = computed(() => {
+    const snapshot = this.displayGraph() ?? this.graph();
+    const states = new Map<string, ServiceNodeState>();
+    if (!snapshot) {
+      return states;
+    }
+
+    const counts = new Map<string, { outgoing: number; incoming: number }>();
+    snapshot.nodes.forEach((node) => counts.set(node.id, { outgoing: 0, incoming: 0 }));
+
+    snapshot.edges.forEach((edge) => {
+      const tripCount = edge.trips?.length ?? 0;
+      if (tripCount <= 0) {
+        return;
+      }
+      const fromCounts = counts.get(edge.from);
+      if (fromCounts) {
+        fromCounts.outgoing += tripCount;
+      }
+      const toCounts = counts.get(edge.to);
+      if (toCounts) {
+        toCounts.incoming += tripCount;
+      }
+    });
+
+    snapshot.nodes.forEach((node) => {
+      const stats = counts.get(node.id) ?? { outgoing: 0, incoming: 0 };
+      let state: ServiceNodeState = 'none';
+      if (stats.outgoing > 0 && stats.incoming > 0) {
+        state = 'both';
+      } else if (stats.outgoing > 0) {
+        state = 'onlyOutgoing';
+      } else if (stats.incoming > 0) {
+        state = 'onlyIncoming';
+      }
+      states.set(node.id, state);
+    });
+
+    return states;
+  });
+
+  quickFromNodes = computed(() => this.getQuickNodesForTarget('from'));
+  quickToNodes = computed(() => this.getQuickNodesForTarget('to'));
+
   quickFromSuggestions = computed(() => {
     const query = this.quickFromQuery().trim().toLowerCase();
-    const selectedToId = this.quickToId();
-    return this.nodeOptions()
-      .filter((node) => node.id !== selectedToId)
+    return this.quickFromNodes()
       .filter((node) => !query || node.name.toLowerCase().includes(query))
       .slice(0, 12);
   });
 
   quickToSuggestions = computed(() => {
     const query = this.quickToQuery().trim().toLowerCase();
-    const selectedFromId = this.quickFromId();
-    return this.nodeOptions()
-      .filter((node) => node.id !== selectedFromId)
+    return this.quickToNodes()
       .filter((node) => !query || node.name.toLowerCase().includes(query))
       .slice(0, 12);
   });
@@ -498,6 +549,42 @@ export class AdminComponent implements OnDestroy {
     }
 
     return { ...snapshot, nodes, edges };
+  });
+
+  mapGraph = computed<GraphSnapshot | null>(() => {
+    const snapshot = this.displayGraph();
+    if (!snapshot || this.quickEntityMode() !== 'service') {
+      return snapshot;
+    }
+
+    const visibleNodeIds = new Set<string>();
+    const fromFilter = this.quickFromNodeFilter();
+    const toFilter = this.quickToNodeFilter();
+
+    snapshot.nodes.forEach((node) => {
+      if (this.matchesServiceNodeFilter(node.id, fromFilter) || this.matchesServiceNodeFilter(node.id, toFilter)) {
+        visibleNodeIds.add(node.id);
+      }
+    });
+
+    const fromId = this.quickFromId();
+    const toId = this.quickToId();
+    if (fromId) {
+      visibleNodeIds.add(fromId);
+    }
+    if (toId) {
+      visibleNodeIds.add(toId);
+    }
+
+    if (visibleNodeIds.size >= snapshot.nodes.length) {
+      return snapshot;
+    }
+
+    return {
+      ...snapshot,
+      nodes: snapshot.nodes.filter((node) => visibleNodeIds.has(node.id)),
+      edges: snapshot.edges.filter((edge) => visibleNodeIds.has(edge.from) && visibleNodeIds.has(edge.to))
+    };
   });
 
   minYear = computed(() => {
@@ -929,7 +1016,7 @@ export class AdminComponent implements OnDestroy {
     if (!normalized) {
       return;
     }
-    const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickToId());
+    const exact = this.quickFromNodes().find((node) => node.name.toLowerCase() === normalized);
     if (exact) {
       this.quickFromId.set(exact.id);
       this.applyQuickDistancePrefill();
@@ -946,7 +1033,7 @@ export class AdminComponent implements OnDestroy {
     if (!normalized) {
       return;
     }
-    const exact = this.nodeOptions().find((node) => node.name.toLowerCase() === normalized && node.id !== this.quickFromId());
+    const exact = this.quickToNodes().find((node) => node.name.toLowerCase() === normalized);
     if (exact) {
       this.quickToId.set(exact.id);
       this.applyQuickDistancePrefill();
@@ -1088,6 +1175,19 @@ export class AdminComponent implements OnDestroy {
 
   updateQuickDistance(event: Event): void {
     this.quickDistance.set((event.target as HTMLInputElement).value);
+  }
+
+  setQuickNodeFilter(target: 'from' | 'to', value: string): void {
+    if (!this.isServiceNodeFilter(value)) {
+      return;
+    }
+    if (target === 'from') {
+      this.quickFromNodeFilter.set(value);
+      this.quickFromActiveIndex.set(0);
+      return;
+    }
+    this.quickToNodeFilter.set(value);
+    this.quickToActiveIndex.set(0);
   }
 
   addQuickTrip(copyLast = false): void {
@@ -3160,6 +3260,8 @@ export class AdminComponent implements OnDestroy {
 
   private applyYearSelection(nextYear: number): void {
     this.year.set(nextYear);
+    this.quickFromNodeFilter.set('all');
+    this.quickToNodeFilter.set('all');
     this.quickPlaceExistingRequestSeq++;
     this.selection.clearSelection();
     this.selection.clearPendingEdge();
@@ -3171,6 +3273,27 @@ export class AdminComponent implements OnDestroy {
     this.quickPlaceGeoResults.set([]);
     this.quickPlaceGeoActiveIndex.set(0);
     this.clearQuickFactEditor();
+  }
+
+  private getQuickNodesForTarget(target: 'from' | 'to'): Array<{ id: string; name: string }> {
+    const selectedOtherId = target === 'from' ? this.quickToId() : this.quickFromId();
+    const selectedCurrentId = target === 'from' ? this.quickFromId() : this.quickToId();
+    const filter = target === 'from' ? this.quickFromNodeFilter() : this.quickToNodeFilter();
+
+    return this.nodeOptions()
+      .filter((node) => node.id !== selectedOtherId)
+      .filter((node) => node.id === selectedCurrentId || this.matchesServiceNodeFilter(node.id, filter));
+  }
+
+  private matchesServiceNodeFilter(nodeId: string, filter: ServiceNodeFilter): boolean {
+    if (filter === 'all') {
+      return true;
+    }
+    return this.nodeServiceStates().get(nodeId) === filter;
+  }
+
+  private isServiceNodeFilter(value: string): value is ServiceNodeFilter {
+    return value === 'all' || value === 'onlyOutgoing' || value === 'onlyIncoming' || value === 'both' || value === 'none';
   }
 
   private fetchGraph(year: number): void {

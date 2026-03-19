@@ -180,6 +180,13 @@
   font-size: 11px;
 }
 
+.quick-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .quick-edge-field input {
   border: 2px solid #141414;
   border-radius: 10px;
@@ -197,6 +204,15 @@
   background: #ffffff;
   width: 100%;
   box-sizing: border-box;
+}
+
+.quick-node-filter {
+  width: auto;
+  max-width: 132px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .quick-edge-typeahead {

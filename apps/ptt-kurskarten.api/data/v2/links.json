@@ -1111,5 +1111,12 @@
     "placeBId": "node-1770912385928",
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "node-1770912202211__node-1770912385928",
+    "placeAId": "node-1770912202211",
+    "placeBId": "node-1770912385928",
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]

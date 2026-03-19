@@ -50,11 +50,13 @@
 <main class="layout">
   <section class="canvas-area">
     <app-map-stage
-      [graph]="displayGraph()"
+      [graph]="mapGraph()"
       [nodeDetail]="nodeDetail()"
       [selectedNodeId]="selectedNodeId()"
       [highlightedEdgeIds]="highlightedEdgeIds()"
       [showBorder]="false"
+      [interactiveViewport]="true"
+      viewportPanMode="empty-space-only"
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
 
@@ -147,7 +149,21 @@
       @if (quickEntityMode() === 'link' || quickEntityMode() === 'service') {
         <div class="quick-edge-row">
           <label class="quick-edge-field">
-            <span>{{ 'label.from' | transloco }}</span>
+            <div class="quick-field-header">
+              <span>{{ 'label.from' | transloco }}</span>
+              @if (quickEntityMode() === 'service') {
+                <select
+                  class="quick-node-filter"
+                  [value]="quickFromNodeFilter()"
+                  (change)="setQuickNodeFilter('from', $any($event.target).value)"
+                  aria-label="Filter source places by trip direction"
+                >
+                  @for (filter of serviceNodeFilterOptions; track filter.id) {
+                    <option [value]="filter.id" [selected]="filter.id === quickFromNodeFilter()">{{ filter.label }}</option>
+                  }
+                </select>
+              }
+            </div>
             <div class="quick-edge-typeahead">
               <input
                 #quickFromInput
@@ -180,7 +196,21 @@
           </button>
 
           <label class="quick-edge-field">
-            <span>{{ 'label.to' | transloco }}</span>
+            <div class="quick-field-header">
+              <span>{{ 'label.to' | transloco }}</span>
+              @if (quickEntityMode() === 'service') {
+                <select
+                  class="quick-node-filter"
+                  [value]="quickToNodeFilter()"
+                  (change)="setQuickNodeFilter('to', $any($event.target).value)"
+                  aria-label="Filter destination places by trip direction"
+                >
+                  @for (filter of serviceNodeFilterOptions; track filter.id) {
+                    <option [value]="filter.id" [selected]="filter.id === quickToNodeFilter()">{{ filter.label }}</option>
+                  }
+                </select>
+              }
+            </div>
             <div class="quick-edge-typeahead">
               <input
                 #quickToInput

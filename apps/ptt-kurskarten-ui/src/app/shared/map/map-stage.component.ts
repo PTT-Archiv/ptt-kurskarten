@@ -139,6 +139,7 @@ export type MapSimulationTripHit = {
         height: 100%;
         background: #000000;
         border: 1px solid var(--ptt-black);
+        overflow: hidden;
       }
 
       .stage.no-border {
@@ -290,6 +291,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() tripSimulationMinute: number | null = null;
   @Input() showBorder = true;
   @Input() interactiveViewport = false;
+  @Input() viewportPanMode: 'anywhere' | 'empty-space-only' = 'anywhere';
   @Input() resetViewportToken = 0;
   @Input() glowingEdgeId: string | null = null;
   @Input() routeFitTopInset = 0;
@@ -442,6 +444,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.activePointers.set(event.pointerId, screen);
     this.activePointerId = event.pointerId;
     canvas.setPointerCapture(event.pointerId);
+    const payload = this.buildPointerPayload(event);
     if (this.interactiveViewport && this.pickMode === null) {
       if (this.activePointers.size >= 2) {
         this.activePointerId = null;
@@ -450,20 +453,23 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.pinchStart = this.createPinchStart();
         this.suppressTapUntilPointersReleased = true;
       } else {
-        this.panStart = {
-          x: screen.x,
-          y: screen.y,
-          panX: this.viewportPan.x,
-          panY: this.viewportPan.y
-        };
+        const canPanFromPointer =
+          this.viewportPanMode !== 'empty-space-only' ||
+          (!payload.hitNodeId && !payload.hitEdgeId && !payload.hitSimulationTrip);
+        this.panStart = canPanFromPointer
+          ? {
+              x: screen.x,
+              y: screen.y,
+              panX: this.viewportPan.x,
+              panY: this.viewportPan.y
+            }
+          : null;
         this.isPanning = false;
       }
     } else {
       this.panStart = null;
       this.isPanning = false;
     }
-
-    const payload = this.buildPointerPayload(event);
     this.mapPointer.emit({ ...payload, type: 'down' });
   }
 
