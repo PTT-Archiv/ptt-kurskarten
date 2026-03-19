@@ -4228,5 +4228,23 @@
     "arrives": "15:20",
     "arrivalDayOffset": 0,
     "year": 1852
+  },
+  {
+    "id": "quick-trip-1773930258080",
+    "serviceId": "edge-1773932158841",
+    "transport": "postkutsche",
+    "departs": "13:55",
+    "arrives": "15:40",
+    "arrivalDayOffset": 0,
+    "year": 1852
+  },
+  {
+    "id": "quick-trip-1773932158944",
+    "serviceId": "edge-1773932236396",
+    "transport": "postkutsche",
+    "departs": "11:20",
+    "arrives": "12:50",
+    "arrivalDayOffset": 0,
+    "year": 1852
   }
 ]

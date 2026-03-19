@@ -154,7 +154,7 @@
               @if (quickEntityMode() === 'service') {
                 <select
                   class="quick-node-filter"
-                  [tabIndex]="1"
+                  tabindex="-1"
                   [value]="quickFromNodeFilter()"
                   (change)="setQuickNodeFilter('from', $any($event.target).value)"
                   aria-label="Filter source places by trip direction"
@@ -169,6 +169,7 @@
               <input
                 #quickFromInput
                 type="text"
+                tabindex="1"
                 [value]="quickFromQuery()"
                 placeholder="Type station..."
                 (focus)="quickFromOpen.set(true)"
@@ -192,7 +193,7 @@
             </div>
           </label>
 
-          <button type="button" class="quick-edge-swap" (click)="swapQuickDirection()" title="Swap direction">
+          <button type="button" class="quick-edge-swap" tabindex="-1" (click)="swapQuickDirection()" title="Swap direction">
             <fa-icon [icon]="swapIcon"></fa-icon>
           </button>
 
@@ -202,6 +203,7 @@
               @if (quickEntityMode() === 'service') {
                 <select
                   class="quick-node-filter"
+                  tabindex="-1"
                   [value]="quickToNodeFilter()"
                   (change)="setQuickNodeFilter('to', $any($event.target).value)"
                   aria-label="Filter destination places by trip direction"
@@ -216,7 +218,7 @@
               <input
                 #quickToInput
                 type="text"
-                [tabIndex]="2"
+                tabindex="2"
                 [value]="quickToQuery()"
                 placeholder="Type station..."
                 (focus)="quickToOpen.set(true)"
@@ -244,9 +246,13 @@
         <div class="quick-edge-row quick-edge-meta">
           <label class="quick-edge-field">
             <span>{{ 'label.distance' | transloco }}</span>
-            <input type="number" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
+            <input type="number" tabindex="3" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
           </label>
         </div>
+
+        @if (quickEntityMode() === 'service' && quickServicePairHint(); as pairHint) {
+          <div class="quick-mode-note pair-direction-note">{{ pairHint }}</div>
+        }
 
         @if (quickEntityMode() === 'service') {
           <div class="quick-service-notes">
@@ -254,6 +260,7 @@
               <span>Note DE</span>
               <input
                 type="text"
+                tabindex="-1"
                 [value]="quickServiceNoteDe()"
                 placeholder="Service note (DE)"
                 (input)="quickServiceNoteDe.set($any($event.target).value)"
@@ -263,6 +270,7 @@
               <span>Note FR</span>
               <input
                 type="text"
+                tabindex="-1"
                 [value]="quickServiceNoteFr()"
                 placeholder="Service note (FR)"
                 (input)="quickServiceNoteFr.set($any($event.target).value)"
@@ -273,7 +281,7 @@
           <div class="quick-trip-header">
             <span class="quick-trip-title">Trips</span>
             <button type="button" class="ghost-btn" (click)="addQuickTrip()"
-              [tabIndex]="3"
+              tabindex="4"
             >
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
               {{ 'btn.addTrip' | transloco }}
@@ -289,6 +297,7 @@
             @for (trip of quickTrips(); track trip.id; let idx = $index) {
               <div class="quick-trip-row">
                 <select
+                  tabindex="-1"
                   [value]="trip.transport"
                   (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
                 >
@@ -302,7 +311,7 @@
                   type="text"
                   [value]="trip.departs"
                   placeholder="HH:MM"
-                  [tabIndex]="4"
+                  [tabIndex]="5 + idx * 2"
                   (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
                   (keydown)="onQuickTripKeydown($event, idx, 'departs')"
                   [attr.data-quick-trip-index]="idx"
@@ -312,13 +321,13 @@
                   type="text"
                   [value]="trip.arrives"
                   placeholder="HH:MM"
-                  [tabIndex]="5"
+                  [tabIndex]="6 + idx * 2"
                   (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
                   (keydown)="onQuickTripKeydown($event, idx, 'arrives')"
                   [attr.data-quick-trip-index]="idx"
                   data-quick-trip-field="arrives"
                 />
-                <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+                <button type="button" class="remove-btn" tabindex="-1" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               </div>
@@ -343,7 +352,7 @@
             class="quick-edge-create"
             [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
             (click)="saveQuickEdge()"
-            [tabIndex]="7"
+            [tabIndex]="5 + quickTrips().length * 2"
           >
             Create Service
           </button>

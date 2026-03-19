@@ -105,8 +105,23 @@ type QuickPlaceSuggestion =
 type QuickEntityMode = 'place' | 'link' | 'service' | 'trip' | 'fact';
 type InspectorTab = 'core' | 'facts' | 'anchors' | 'source';
 type DeleteConfirmAnchor = 'inline' | 'sticky';
-type ServiceNodeFilter = 'all' | 'onlyOutgoing' | 'onlyIncoming' | 'both' | 'none';
+type ServiceNodeFilter =
+  | 'all'
+  | 'onlyOutgoing'
+  | 'onlyIncoming'
+  | 'both'
+  | 'none'
+  | 'needsOutgoingPair'
+  | 'needsIncomingPair'
+  | 'fullyPaired';
 type ServiceNodeState = Exclude<ServiceNodeFilter, 'all'>;
+type ServiceNodeMetrics = {
+  state: 'onlyOutgoing' | 'onlyIncoming' | 'both' | 'none';
+  hasTrips: boolean;
+  needsOutgoingPair: boolean;
+  needsIncomingPair: boolean;
+  fullyPaired: boolean;
+};
 
 type InspectorFact = {
   id: string;
@@ -239,7 +254,10 @@ export class AdminComponent implements OnDestroy {
     { id: 'onlyOutgoing', label: 'Only outgoing' },
     { id: 'onlyIncoming', label: 'Only incoming' },
     { id: 'both', label: 'Both' },
-    { id: 'none', label: 'None' }
+    { id: 'none', label: 'None' },
+    { id: 'needsOutgoingPair', label: 'Needs outgoing pair' },
+    { id: 'needsIncomingPair', label: 'Needs incoming pair' },
+    { id: 'fullyPaired', label: 'Fully paired' }
   ];
 
   private graphFetchHandle: ReturnType<typeof setTimeout> | null = null;
@@ -385,21 +403,33 @@ export class AdminComponent implements OnDestroy {
     return this.quickPlaceExistingResults().find((result) => result.id === selectedId) ?? null;
   });
 
-  nodeServiceStates = computed(() => {
+  nodeServiceMetrics = computed(() => {
     const snapshot = this.displayGraph() ?? this.graph();
-    const states = new Map<string, ServiceNodeState>();
+    const metrics = new Map<string, ServiceNodeMetrics>();
     if (!snapshot) {
-      return states;
+      return metrics;
     }
 
     const counts = new Map<string, { outgoing: number; incoming: number }>();
-    snapshot.nodes.forEach((node) => counts.set(node.id, { outgoing: 0, incoming: 0 }));
+    snapshot.nodes.forEach((node) => {
+      counts.set(node.id, { outgoing: 0, incoming: 0 });
+      metrics.set(node.id, {
+        state: 'none',
+        hasTrips: false,
+        needsOutgoingPair: false,
+        needsIncomingPair: false,
+        fullyPaired: false
+      });
+    });
+
+    const directedPairKeys = new Set<string>();
 
     snapshot.edges.forEach((edge) => {
       const tripCount = edge.trips?.length ?? 0;
       if (tripCount <= 0) {
         return;
       }
+      directedPairKeys.add(`${edge.from}→${edge.to}`);
       const fromCounts = counts.get(edge.from);
       if (fromCounts) {
         fromCounts.outgoing += tripCount;
@@ -412,7 +442,7 @@ export class AdminComponent implements OnDestroy {
 
     snapshot.nodes.forEach((node) => {
       const stats = counts.get(node.id) ?? { outgoing: 0, incoming: 0 };
-      let state: ServiceNodeState = 'none';
+      let state: ServiceNodeMetrics['state'] = 'none';
       if (stats.outgoing > 0 && stats.incoming > 0) {
         state = 'both';
       } else if (stats.outgoing > 0) {
@@ -420,10 +450,43 @@ export class AdminComponent implements OnDestroy {
       } else if (stats.incoming > 0) {
         state = 'onlyIncoming';
       }
-      states.set(node.id, state);
+      metrics.set(node.id, {
+        ...(metrics.get(node.id) ?? {
+          state: 'none',
+          hasTrips: false,
+          needsOutgoingPair: false,
+          needsIncomingPair: false,
+          fullyPaired: false
+        }),
+        state,
+        hasTrips: stats.outgoing > 0 || stats.incoming > 0
+      });
     });
 
-    return states;
+    snapshot.edges.forEach((edge) => {
+      const tripCount = edge.trips?.length ?? 0;
+      if (tripCount <= 0) {
+        return;
+      }
+      if (directedPairKeys.has(`${edge.to}→${edge.from}`)) {
+        return;
+      }
+
+      const fromMetric = metrics.get(edge.from);
+      if (fromMetric) {
+        fromMetric.needsIncomingPair = true;
+      }
+      const toMetric = metrics.get(edge.to);
+      if (toMetric) {
+        toMetric.needsOutgoingPair = true;
+      }
+    });
+
+    metrics.forEach((metric) => {
+      metric.fullyPaired = metric.hasTrips && !metric.needsOutgoingPair && !metric.needsIncomingPair;
+    });
+
+    return metrics;
   });
 
   quickFromNodes = computed(() => this.getQuickNodesForTarget('from'));
@@ -441,6 +504,15 @@ export class AdminComponent implements OnDestroy {
     return this.quickToNodes()
       .filter((node) => !query || node.name.toLowerCase().includes(query))
       .slice(0, 12);
+  });
+
+  quickServicePairHint = computed(() => {
+    const from = this.quickFromId();
+    const to = this.quickToId();
+    if (!from || !to || this.quickEntityMode() !== 'service') {
+      return null;
+    }
+    return this.buildDirectionalPairHint(from, to, this.quickTrips().length > 0);
   });
 
   selectedEdgeDraft = computed<EdgeDraft | null>(() => {
@@ -3289,11 +3361,56 @@ export class AdminComponent implements OnDestroy {
     if (filter === 'all') {
       return true;
     }
-    return this.nodeServiceStates().get(nodeId) === filter;
+    const metric = this.nodeServiceMetrics().get(nodeId);
+    if (!metric) {
+      return false;
+    }
+    if (filter === 'needsOutgoingPair') {
+      return metric.needsOutgoingPair;
+    }
+    if (filter === 'needsIncomingPair') {
+      return metric.needsIncomingPair;
+    }
+    if (filter === 'fullyPaired') {
+      return metric.fullyPaired;
+    }
+    return metric.state === filter;
   }
 
   private isServiceNodeFilter(value: string): value is ServiceNodeFilter {
-    return value === 'all' || value === 'onlyOutgoing' || value === 'onlyIncoming' || value === 'both' || value === 'none';
+    return (
+      value === 'all' ||
+      value === 'onlyOutgoing' ||
+      value === 'onlyIncoming' ||
+      value === 'both' ||
+      value === 'none' ||
+      value === 'needsOutgoingPair' ||
+      value === 'needsIncomingPair' ||
+      value === 'fullyPaired'
+    );
+  }
+
+  private buildDirectionalPairHint(fromId: string, toId: string, assumeForwardExists = false): string | null {
+    const snapshot = this.displayGraph() ?? this.graph();
+    const fromName = this.getNodeName(fromId);
+    const toName = this.getNodeName(toId);
+    const forwardExists = assumeForwardExists || this.hasTripEdge(snapshot, fromId, toId);
+    const reverseExists = this.hasTripEdge(snapshot, toId, fromId);
+
+    if (forwardExists && !reverseExists) {
+      return `Missing reverse pair: ${toName} -> ${fromName}.`;
+    }
+    if (!forwardExists && reverseExists) {
+      return `Only the reverse pair exists so far: ${toName} -> ${fromName}.`;
+    }
+    return null;
+  }
+
+  private hasTripEdge(snapshot: GraphSnapshot | null, fromId: string, toId: string): boolean {
+    if (!snapshot) {
+      return false;
+    }
+    return snapshot.edges.some((edge) => edge.from === fromId && edge.to === toId && (edge.trips?.length ?? 0) > 0);
   }
 
   private fetchGraph(year: number): void {

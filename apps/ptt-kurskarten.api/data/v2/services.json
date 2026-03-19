@@ -2551,5 +2551,21 @@
     "toPlaceId": "node-1770912412950",
     "year": 1852,
     "note": null
+  },
+  {
+    "id": "edge-1773932158841",
+    "linkId": "node-1770912420029__node-1770912454275",
+    "fromPlaceId": "node-1770912420029",
+    "toPlaceId": "node-1770912454275",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1773932236396",
+    "linkId": "node-1770912420029__node-1770912454275",
+    "fromPlaceId": "node-1770912454275",
+    "toPlaceId": "node-1770912420029",
+    "year": 1852,
+    "note": null
   }
 ]
