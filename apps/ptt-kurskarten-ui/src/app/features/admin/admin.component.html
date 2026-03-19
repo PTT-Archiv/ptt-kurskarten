@@ -154,6 +154,7 @@
               @if (quickEntityMode() === 'service') {
                 <select
                   class="quick-node-filter"
+                  [tabIndex]="1"
                   [value]="quickFromNodeFilter()"
                   (change)="setQuickNodeFilter('from', $any($event.target).value)"
                   aria-label="Filter source places by trip direction"
@@ -215,6 +216,7 @@
               <input
                 #quickToInput
                 type="text"
+                [tabIndex]="2"
                 [value]="quickToQuery()"
                 placeholder="Type station..."
                 (focus)="quickToOpen.set(true)"
@@ -270,7 +272,9 @@
 
           <div class="quick-trip-header">
             <span class="quick-trip-title">Trips</span>
-            <button type="button" class="ghost-btn" (click)="addQuickTrip()">
+            <button type="button" class="ghost-btn" (click)="addQuickTrip()"
+              [tabIndex]="3"
+            >
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
               {{ 'btn.addTrip' | transloco }}
             </button>
@@ -298,6 +302,7 @@
                   type="text"
                   [value]="trip.departs"
                   placeholder="HH:MM"
+                  [tabIndex]="4"
                   (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
                   (keydown)="onQuickTripKeydown($event, idx, 'departs')"
                   [attr.data-quick-trip-index]="idx"
@@ -307,6 +312,7 @@
                   type="text"
                   [value]="trip.arrives"
                   placeholder="HH:MM"
+                  [tabIndex]="5"
                   (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
                   (keydown)="onQuickTripKeydown($event, idx, 'arrives')"
                   [attr.data-quick-trip-index]="idx"
@@ -337,6 +343,7 @@
             class="quick-edge-create"
             [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
             (click)="saveQuickEdge()"
+            [tabIndex]="7"
           >
             Create Service
           </button>

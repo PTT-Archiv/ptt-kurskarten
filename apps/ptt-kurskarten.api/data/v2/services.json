@@ -2519,5 +2519,37 @@
     "toPlaceId": "node-1770912202211",
     "year": 1852,
     "note": null
+  },
+  {
+    "id": "edge-1773929069185",
+    "linkId": "node-1770912202211__node-1770912412950",
+    "fromPlaceId": "node-1770912202211",
+    "toPlaceId": "node-1770912412950",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1773929090666",
+    "linkId": "node-1770912202211__node-1770912412950",
+    "fromPlaceId": "node-1770912412950",
+    "toPlaceId": "node-1770912202211",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1773929110540",
+    "linkId": "node-1770912412950__node-1770912420029",
+    "fromPlaceId": "node-1770912412950",
+    "toPlaceId": "node-1770912420029",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1773929129046",
+    "linkId": "node-1770912412950__node-1770912420029",
+    "fromPlaceId": "node-1770912420029",
+    "toPlaceId": "node-1770912412950",
+    "year": 1852,
+    "note": null
   }
 ]

@@ -1153,5 +1153,21 @@
     "valueNumber": 4.25,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912202211__node-1770912412950-distance-1852",
+    "linkId": "node-1770912202211__node-1770912412950",
+    "measureKey": "distance",
+    "valueNumber": 3.375,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912412950__node-1770912420029-distance-1852",
+    "linkId": "node-1770912412950__node-1770912420029",
+    "measureKey": "distance",
+    "valueNumber": 3.375,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]
