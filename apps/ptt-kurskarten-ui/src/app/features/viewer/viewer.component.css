@@ -337,123 +337,188 @@
   pointer-events: none;
 }
 
-.simulation-overlay {
+.viewer-top-controls {
   position: absolute;
   top: 16px;
   left: 16px;
   z-index: 7;
-  width: min(300px, calc(100% - 32px));
-  background: #000;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: calc(100% - 32px);
+}
+
+.viewer-year-card,
+.viewer-orbit-card {
+  background: rgba(0, 0, 0, 0.92);
   border: 2px solid #fff;
-  border-radius: 12px;
-  padding: 8px;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.viewer-year-card {
+  min-width: 150px;
+  max-width: min(220px, calc(100vw - 156px));
+  padding: 10px 12px;
   display: grid;
   gap: 6px;
   pointer-events: auto;
 }
 
-.simulation-overlay.is-disabled {
-  opacity: 0.75;
-}
-
-.simulation-clock {
-  font-family: "ABC Favorit Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  font-size: 20px;
+.viewer-year-label {
+  font-size: 11px;
   line-height: 1;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   font-weight: 600;
-  color: #fff;
-}
-
-.simulation-mode-row,
-.simulation-main-actions,
-.simulation-speed-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.simulation-controls {
-  display: grid;
-  gap: 6px;
-}
-
-.simulation-slider-row input[type="range"] {
-  width: 100%;
-  accent-color: #fff;
-}
-
-.simulation-note {
-  font-size: 12px;
   color: #cfcfcf;
 }
 
-.simulation-trip-popup {
-  position: absolute;
-  z-index: 8;
-  max-width: 300px;
+.viewer-year-select,
+.viewer-year-readonly {
+  width: 100%;
+  min-height: 42px;
   border: 2px solid #fff;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.96);
-  color: #fff;
-  padding: 8px 10px;
-  display: grid;
-  gap: 4px;
-  pointer-events: none;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.28);
-}
-
-.simulation-trip-title {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.simulation-trip-line {
-  font-size: 12px;
-  overflow-wrap: anywhere;
-}
-
-.simulation-trip-hint {
-  margin-top: 2px;
-  font-size: 11px;
-  color: #cfcfcf;
-}
-
-.sim-btn {
-  border: 1px solid #fff;
   background: #141414;
   color: #fff;
-  border-radius: 999px;
-  padding: 4px 9px;
-  min-height: 26px;
-  cursor: pointer;
-  font-size: 11px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 18px;
   font-weight: 600;
 }
 
-.sim-icon-btn {
-  width: 28px;
-  min-width: 28px;
-  height: 28px;
-  min-height: 28px;
-  padding: 0;
+.viewer-year-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.viewer-year-select:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.viewer-orbit-card {
+  width: 90px;
+  height: 90px;
+  padding: 4px;
   display: grid;
   place-items: center;
 }
 
-.sim-icon-btn fa-icon {
+.viewer-orbit-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.viewer-orbit-path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-dasharray: 106 16;
+  transform: rotate(-22deg);
+  transform-origin: center;
+}
+
+.viewer-orbit-sun-core {
+  fill: #fff;
+}
+
+.viewer-orbit-ray {
+  stroke: #fff;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.viewer-orbit-moon-core {
+  fill: #fff;
+}
+
+.viewer-orbit-moon-cut {
+  fill: rgba(0, 0, 0, 0.92);
+}
+
+.viewer-action-stack {
+  position: absolute;
+  left: 16px;
+  z-index: 7;
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+
+.viewer-action-btn {
+  position: static;
+  width: 42px;
+  height: 42px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.help-toggle-btn.viewer-action-btn {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.layer-switcher-card {
+  width: 124px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.layer-switcher-preview {
+  position: relative;
+  width: 124px;
+  height: 88px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 18px;
+  background-color: #141414;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 180ms ease-out, filter 180ms ease-out;
+}
+
+.layer-switcher-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+.layer-switcher-preview.is-map-preview::after {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.56) 100%),
+    radial-gradient(circle at 72% 24%, rgba(255, 255, 255, 0.2), transparent 42%);
+}
+
+.layer-switcher-chip {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: inline-flex;
+  width: fit-content;
+  max-width: calc(100% - 20px);
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
   font-size: 12px;
+  font-weight: 600;
+  transition: background-color 180ms ease-out, color 180ms ease-out;
 }
 
-.sim-btn.active {
-  background: #fff;
-  color: #141414;
-}
-
-.sim-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
+.viewer-floating-panel {
+  z-index: 8;
+  bottom: 16px;
+  left: 16px;
 }
 
 .place-search-shell {
@@ -603,15 +668,6 @@
   }
 }
 
-@keyframes trip-row-focus-pulse {
-  0% {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-}
-
 .sidebar-header {
   display: flex;
   align-items: center;
@@ -624,9 +680,9 @@
 
 .help-popup {
   position: absolute;
-  left: 30px;
+  left: 16px;
   right: auto;
-  bottom: 30px;
+  bottom: 16px;
   width: min(760px, calc(100vw - 32px));
   max-height: calc(100% - 32px);
   overflow: auto;
@@ -655,50 +711,12 @@
   color: #f5f5f5;
 }
 
-.settings-field {
-  display: grid;
-  gap: 8px;
-  color: #fff;
-  font-size: 14px;
-}
-
-.settings-select {
-  appearance: none;
-  width: 100%;
-  border: 2px solid #fff;
-  border-radius: 10px;
-  background: #141414;
-  color: #fff;
-  padding: 10px 12px;
-  font: inherit;
-}
-
-.settings-readonly {
-  width: 100%;
-  border: 2px solid #5a5a5a;
-  border-radius: 10px;
-  background: #0d0d0d;
-  color: #f5f5f5;
-  padding: 10px 12px;
-  font: inherit;
-}
-
-.settings-select:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-.help-fab {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1;
+.settings-popup {
+  width: min(320px, calc(100vw - 32px));
 }
 
 .help-toggle-btn {
-  position: absolute;
-  left: 16px;
-  right: auto;
-  bottom: 16px;
+  position: static;
   width: 34px;
   height: 34px;
   border: 2px solid #fff;
@@ -722,21 +740,37 @@
 .route-toggle-btn:focus-visible,
 .route-close-btn:hover,
 .route-close-btn:focus-visible,
-.sim-btn:hover,
-.sim-btn:focus-visible,
 .reset-view-btn:hover,
 .reset-view-btn:focus-visible,
-.help-fab:hover,
-.help-fab:focus-visible {
+.viewer-action-btn:hover,
+.viewer-action-btn:focus-visible {
   background: #fff;
   color: #141414;
 }
 
+.viewer-action-btn:hover,
+.viewer-action-btn:focus-visible,
 .help-toggle-btn:hover,
 .help-toggle-btn:focus-visible {
-  background: #fff;
-  color: #141414;
   border-color: #141414;
+}
+
+.layer-switcher-card:hover .layer-switcher-preview,
+.layer-switcher-card:focus-visible .layer-switcher-preview {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.layer-switcher-card:hover .layer-switcher-chip,
+.layer-switcher-card:focus-visible .layer-switcher-chip {
+  background: rgba(255, 255, 255, 0.92);
+  color: #141414;
+}
+
+.layer-switcher-card:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+  border-radius: 20px;
 }
 
 .result-card:hover .result-meta,
@@ -802,7 +836,7 @@
 
 @media (max-width: 1023px) {
   .small-screen-layout .planner-overlay {
-    top: 12px;
+    top: 94px;
     width: calc(100% - 24px);
     max-width: calc(100% - 24px);
   }
@@ -811,27 +845,47 @@
     transform: translateX(-50%);
   }
 
+  .small-screen-layout .viewer-top-controls {
+    top: 12px;
+    left: 12px;
+    gap: 10px;
+    max-width: calc(100% - 24px);
+  }
+
+  .small-screen-layout .viewer-year-card {
+    min-width: 140px;
+    max-width: min(210px, calc(100vw - 122px));
+  }
+
+  .small-screen-layout .viewer-year-select,
+  .small-screen-layout .viewer-year-readonly {
+    min-height: 38px;
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+
+  .small-screen-layout .viewer-orbit-card {
+    width: 78px;
+    height: 78px;
+  }
+
+  .small-screen-layout .viewer-action-stack {
+    left: 12px;
+    gap: 8px;
+  }
+
   .small-screen-layout .place-search-shell input {
     font-size: 16px;
   }
 
-  .small-screen-layout .simulation-overlay {
-    top: 82px;
-    left: 12px;
-    width: min(220px, calc(100vw - 24px));
-    padding: 7px;
-    gap: 5px;
-  }
-
   .small-screen-layout .reset-view-btn {
     right: 12px;
-    bottom: calc(116px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     padding: 7px 10px;
     font-size: 11px;
     box-shadow: none;
   }
 
-  .small-screen-layout:is(.search-open, .mobile-sheet-open) .simulation-overlay,
   .small-screen-layout.mobile-sheet-open .reset-view-btn {
     opacity: 0;
     pointer-events: none;
@@ -849,9 +903,34 @@
 
 @media (max-width: 767px) {
   .mobile-layout .planner-overlay {
-    top: 10px;
+    top: 86px;
     width: calc(100% - 20px);
     max-width: calc(100% - 20px);
+  }
+
+  .mobile-layout .viewer-top-controls {
+    gap: 8px;
+  }
+
+  .mobile-layout .viewer-year-card {
+    min-width: 128px;
+    max-width: min(180px, calc(100vw - 108px));
+    padding: 8px 10px;
+  }
+
+  .mobile-layout .viewer-year-label {
+    font-size: 10px;
+  }
+
+  .mobile-layout .viewer-year-select,
+  .mobile-layout .viewer-year-readonly {
+    min-height: 36px;
+    font-size: 15px;
+  }
+
+  .mobile-layout .viewer-orbit-card {
+    width: 70px;
+    height: 70px;
   }
 
   .mobile-layout .place-search-shell {
@@ -869,9 +948,18 @@
     height: 32px;
   }
 
-  .mobile-layout .simulation-overlay {
-    top: 74px;
-    width: min(188px, calc(100vw - 24px));
+  .mobile-layout .viewer-action-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-layout .layer-switcher-card,
+  .mobile-layout .layer-switcher-preview {
+    width: 110px;
+  }
+
+  .mobile-layout .layer-switcher-preview {
+    height: 76px;
   }
 
   .mobile-layout .mobile-sheet.snap-half {

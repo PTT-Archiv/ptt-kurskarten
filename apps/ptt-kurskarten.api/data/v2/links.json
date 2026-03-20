@@ -1139,5 +1139,54 @@
     "placeBId": "node-1770912454275",
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "node-1770912100324__node-1770912128082",
+    "placeAId": "node-1770912100324",
+    "placeBId": "node-1770912128082",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912100324__node-1770912118654",
+    "placeAId": "node-1770912100324",
+    "placeBId": "node-1770912118654",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770818451614__node-1770912118654",
+    "placeAId": "node-1770818451614",
+    "placeBId": "node-1770912118654",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770818451614__node-1770912553971",
+    "placeAId": "node-1770818451614",
+    "placeBId": "node-1770912553971",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912548392__node-1770912553971",
+    "placeAId": "node-1770912548392",
+    "placeBId": "node-1770912553971",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770906061553__node-1770912100324",
+    "placeAId": "node-1770906061553",
+    "placeBId": "node-1770912100324",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770905962102__node-1770906061553",
+    "placeAId": "node-1770905962102",
+    "placeBId": "node-1770906061553",
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]

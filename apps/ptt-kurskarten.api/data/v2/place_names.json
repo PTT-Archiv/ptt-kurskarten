@@ -6092,5 +6092,16 @@
     "nameType": "primary",
     "validFrom": 1892,
     "validTo": null
+  },
+  {
+    "id": "e532748b-9ba9-422b-ac52-8358769a3ddf",
+    "placeId": "node-1774010705101",
+    "lang": "und",
+    "name": "Weisslingen",
+    "normalized": "weisslingen",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1900,
+    "validTo": null
   }
 ]

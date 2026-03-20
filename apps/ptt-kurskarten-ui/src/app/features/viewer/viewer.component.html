@@ -27,6 +27,44 @@
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
+    <div class="viewer-top-controls">
+      <label class="viewer-year-card">
+        <span class="viewer-year-label">{{ 'viewer.editionTitle' | transloco }}</span>
+        @if (publicEditionOptions().length > 1) {
+        <select class="viewer-year-select" [value]="year()" (change)="onEditionChange($event)">
+          @for (edition of publicEditionOptions(); track edition.id) {
+          <option [value]="edition.year">
+            {{ edition.title || edition.year }}
+          </option>
+          }
+        </select>
+        } @else {
+        <div class="viewer-year-readonly">{{ selectedEditionLabel() }}</div>
+        }
+      </label>
+      @if (orbitVisible()) {
+      <div class="viewer-orbit-card" aria-hidden="true">
+        <svg viewBox="0 0 88 88" class="viewer-orbit-svg">
+          <circle class="viewer-orbit-path" cx="44" cy="44" r="26"></circle>
+          <g [attr.transform]="'translate(' + dayNightOrbit().sunX + ' ' + dayNightOrbit().sunY + ') scale(' + dayNightOrbit().sunScale + ')'">
+            <circle class="viewer-orbit-sun-core" r="6"></circle>
+            <line class="viewer-orbit-ray" x1="0" y1="-11" x2="0" y2="-16"></line>
+            <line class="viewer-orbit-ray" x1="0" y1="11" x2="0" y2="16"></line>
+            <line class="viewer-orbit-ray" x1="-11" y1="0" x2="-16" y2="0"></line>
+            <line class="viewer-orbit-ray" x1="11" y1="0" x2="16" y2="0"></line>
+            <line class="viewer-orbit-ray" x1="-8" y1="-8" x2="-12" y2="-12"></line>
+            <line class="viewer-orbit-ray" x1="8" y1="-8" x2="12" y2="-12"></line>
+            <line class="viewer-orbit-ray" x1="-8" y1="8" x2="-12" y2="12"></line>
+            <line class="viewer-orbit-ray" x1="8" y1="8" x2="12" y2="12"></line>
+          </g>
+          <g [attr.transform]="'translate(' + dayNightOrbit().moonX + ' ' + dayNightOrbit().moonY + ') scale(' + dayNightOrbit().moonScale + ')'">
+            <circle class="viewer-orbit-moon-core" r="6"></circle>
+            <circle class="viewer-orbit-moon-cut" cx="3.5" cy="-1.5" r="6"></circle>
+          </g>
+        </svg>
+      </div>
+      }
+    </div>
     <div class="planner-overlay">
       @if (archiveModeActive() || !routePlannerOpen() || smallScreenLayout()) {
       <div class="place-search-shell" [class.archive-only]="archiveModeActive()"
@@ -48,11 +86,6 @@
             <fa-icon [icon]="routeIcon"></fa-icon>
           </button>
           }
-          <button class="route-toggle-btn search-utility-btn" type="button"
-            (click)="settingsOpen.set(!settingsOpen()); helpOpen.set(false)"
-            [attr.aria-label]="(settingsOpen() ? 'viewer.settingsClose' : 'viewer.settingsOpen') | transloco">
-            <fa-icon [icon]="settingsOpen() ? xmarkIcon : gearIcon"></fa-icon>
-          </button>
         </div>
         } @else if (!archiveModeActive()) {
         <button class="route-toggle-btn" type="button" (click)="openRoutePlanner()" aria-label="Routenplaner öffnen">
@@ -108,102 +141,33 @@
       }
     }
     </div>
-    @if (!archiveModeActive()) {
-    <div class="simulation-overlay" [class.is-disabled]="routingActive()">
-      <div class="simulation-note" style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-        <span>{{ 'viewer.simTimeLabel' | transloco }}</span>
-        <span>{{ simulationStatusLabel() }}</span>
-      </div>
-      <div class="simulation-clock">{{ simulationClockLabel() }}</div>
-      <div class="simulation-mode-row">
-        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'realtime'"
-          (click)="setSimulationMode('realtime')" [disabled]="routingActive()"
-          (mouseenter)="showSimulationHint('viewer.simRealtimeHelp')" (focus)="showSimulationHint('viewer.simRealtimeHelp')"
-          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
-          [attr.aria-label]="'viewer.simRealtimeHelp' | transloco" [title]="'viewer.simRealtimeHelp' | transloco">
-          <fa-icon [icon]="simRealtimeIcon"></fa-icon>
-        </button>
-        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'simulation'"
-          (click)="setSimulationMode('simulation')" [disabled]="routingActive()"
-          (mouseenter)="showSimulationHint('viewer.simPlaybackHelp')" (focus)="showSimulationHint('viewer.simPlaybackHelp')"
-          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
-          [attr.aria-label]="'viewer.simPlaybackHelp' | transloco" [title]="'viewer.simPlaybackHelp' | transloco">
-          <fa-icon [icon]="simPlaybackIcon"></fa-icon>
-        </button>
-        <button type="button" class="sim-btn sim-icon-btn" [class.active]="simulationMode() === 'off'"
-          (click)="setSimulationMode('off')" [disabled]="routingActive()"
-          (mouseenter)="showSimulationHint('viewer.simOffHelp')" (focus)="showSimulationHint('viewer.simOffHelp')"
-          (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
-          [attr.aria-label]="'viewer.simOffHelp' | transloco"
-          [title]="'viewer.simOffHelp' | transloco">
-          <fa-icon [icon]="simOffIcon"></fa-icon>
-        </button>
-      </div>
-      @if (simulationMode() === 'simulation') {
-      <div class="simulation-controls">
-        <div class="simulation-main-actions">
-          <button type="button" class="sim-btn sim-icon-btn" (click)="toggleSimulationPlayback()" [disabled]="routingActive()"
-            (mouseenter)="showSimulationHint(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp')"
-            (focus)="showSimulationHint(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp')"
-            (mouseleave)="clearSimulationHint()"
-            (blur)="clearSimulationHint()"
-            [attr.aria-label]="(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp') | transloco"
-            [title]="(simulationPlaying() ? 'viewer.simPauseHelp' : 'viewer.simPlayHelp') | transloco">
-            <fa-icon [icon]="simulationPlaying() ? simPauseIcon : simPlayIcon"></fa-icon>
-          </button>
-          <button type="button" class="sim-btn sim-icon-btn" (click)="resetSimulation()"
-            [disabled]="routingActive() || simulationMode() !== 'simulation'"
-            (mouseenter)="showSimulationHint('viewer.simResetHelp')" (focus)="showSimulationHint('viewer.simResetHelp')"
-            (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
-            [attr.aria-label]="'viewer.simResetHelp' | transloco" [title]="'viewer.simResetHelp' | transloco">
-            <fa-icon [icon]="simResetIcon"></fa-icon>
-          </button>
+    <div class="viewer-action-stack" [style.bottom.px]="actionStackBottomOffset()">
+      <button class="help-toggle-btn viewer-action-btn" type="button"
+        (click)="helpOpen.set(!helpOpen()); settingsOpen.set(false)"
+        [attr.aria-label]="(helpOpen() ? 'viewer.helpClose' : 'viewer.helpOpen') | transloco">
+        @if (helpOpen()) {
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+        } @else {
+        <span aria-hidden="true">?</span>
+        }
+      </button>
+      <button class="route-close-btn viewer-action-btn" type="button"
+        (click)="settingsOpen.set(!settingsOpen()); helpOpen.set(false)"
+        [attr.aria-label]="(settingsOpen() ? 'viewer.settingsClose' : 'viewer.settingsOpen') | transloco">
+        <fa-icon [icon]="settingsOpen() ? xmarkIcon : gearIcon"></fa-icon>
+      </button>
+      @if (archiveModeEnabled) {
+      <button class="layer-switcher-card" type="button" (click)="toggleViewerSurfaceMode()"
+        [attr.aria-label]="(inactiveSurfaceMode() === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco">
+        <div class="layer-switcher-preview" [class.is-map-preview]="inactiveSurfaceMode() === 'map'"
+          [style.background-image]="inactiveSurfacePreviewImageUrl() ? 'url(' + inactiveSurfacePreviewImageUrl() + ')' : null">
+          <span class="layer-switcher-chip">
+            {{ (inactiveSurfaceMode() === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco }}
+          </span>
         </div>
-        <div class="simulation-slider-row">
-          <input type="range" min="0" max="1439" step="1" [value]="simulationSliderMinute()"
-            (input)="onSimulationSliderInput($any($event.target).value)"
-            [disabled]="routingActive() || simulationMode() !== 'simulation'" />
-        </div>
-        <div class="simulation-speed-row">
-          @for (speed of simulationSpeedOptions; track speed) {
-          <button type="button" class="sim-btn" [class.active]="simulationSpeed() === speed"
-            (click)="setSimulationSpeed(speed)" [disabled]="routingActive() || simulationMode() !== 'simulation'"
-            (mouseenter)="showSimulationSpeedHint(speed)"
-            (focus)="showSimulationSpeedHint(speed)"
-            (mouseleave)="clearSimulationHint()" (blur)="clearSimulationHint()"
-            [attr.aria-label]="'viewer.simSpeedHelp' | transloco : { speed: speed + 'x' }"
-            [title]="'viewer.simSpeedHelp' | transloco : { speed: speed + 'x' }">
-            {{ speed }}x
-          </button>
-          }
-        </div>
-      </div>
-      }
-      <div class="simulation-note">{{ simulationHintLabel() }}</div>
-      @if (routingActive()) {
-      <div class="simulation-note">{{ 'viewer.simDisabledRouting' | transloco }}</div>
+      </button>
       }
     </div>
-    }
-    @if (!archiveModeActive() && hoveredSimulationTrip(); as hoverTrip) {
-    <div class="simulation-trip-popup" [style.left.px]="hoverTrip.screenX + 14" [style.top.px]="hoverTrip.screenY + 14">
-      <div class="simulation-trip-title">{{ 'viewer.simTripInfo' | transloco }}</div>
-      <div class="simulation-trip-line">{{ getNodeLabel(hoverTrip.fromId) }} → {{ getNodeLabel(hoverTrip.toId) }}</div>
-      <div class="simulation-trip-line">{{ ('transport.' + hoverTrip.transport) | transloco }}</div>
-      <div class="simulation-trip-line">
-        @if (hoverTrip.departs) {
-        {{ hoverTrip.departs }} →
-        }
-        {{ hoverTrip.arrives }}
-        @if (hoverTrip.arrivalDayOffset && hoverTrip.arrivalDayOffset > 0) {
-        <span>(+{{ hoverTrip.arrivalDayOffset }})</span>
-        }
-      </div>
-      <div class="simulation-trip-line">{{ 'viewer.simTripId' | transloco }}: {{ hoverTrip.tripId }}</div>
-      <div class="simulation-trip-line">{{ 'viewer.simEdgeId' | transloco }}: {{ hoverTrip.edgeId }}</div>
-      <div class="simulation-trip-hint">{{ 'viewer.simTripClickHint' | transloco }}</div>
-    </div>
-    }
     @if (!archiveModeActive() && pickTarget()) {
     <div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
       <div class="status-card" style="font-weight: 600;">{{ getPickModeLabel() }}</div>
@@ -374,11 +338,10 @@
 
     <section class="panel-section">
       <div class="section-title">Ausgehende Verbindungen</div>
-      @if (outgoingNodeTrips().length > 0) {
-      <div class="node-trip-list">
-        @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-        <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
-          [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
+        @if (outgoingNodeTrips().length > 0) {
+        <div class="node-trip-list">
+          @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
           <div class="node-trip-head">{{ trip.nodeName }}</div>
           <div class="node-trip-time">
             @if (trip.departs) {
@@ -400,11 +363,10 @@
 
     <section class="panel-section">
       <div class="section-title">Eingehende Verbindungen</div>
-      @if (incomingNodeTrips().length > 0) {
-      <div class="node-trip-list">
-        @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-        <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
-          [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
+        @if (incomingNodeTrips().length > 0) {
+        <div class="node-trip-list">
+          @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
+        <div class="node-trip-row">
           <div class="node-trip-head">{{ trip.nodeName }}</div>
           <div class="node-trip-time">
             @if (trip.departs) {
@@ -817,8 +779,7 @@
         @if (outgoingNodeTrips().length > 0) {
         <div class="node-trip-list">
           @for (trip of outgoingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-          <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
-            [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
+          <div class="node-trip-row">
             <div class="node-trip-head">{{ trip.nodeName }}</div>
             <div class="node-trip-time">
               @if (trip.departs) {
@@ -843,8 +804,7 @@
         @if (incomingNodeTrips().length > 0) {
         <div class="node-trip-list">
           @for (trip of incomingNodeTrips(); track trip.edgeId + '-' + trip.tripId) {
-          <div class="node-trip-row" [id]="tripRowDomId(trip.edgeId, trip.tripId)"
-            [class.trip-row-focus]="tripFocusDomId() === tripRowDomId(trip.edgeId, trip.tripId)">
+          <div class="node-trip-row">
             <div class="node-trip-head">{{ trip.nodeName }}</div>
             <div class="node-trip-time">
               @if (trip.departs) {
@@ -875,7 +835,7 @@
   }
 
   @if (helpOpen()) {
-  <section class="help-popup">
+  <section class="help-popup viewer-floating-panel">
     <div class="help-header">
       <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
       <button class="ghost-btn help-header-close" type="button" (click)="helpOpen.set(false)"
@@ -888,21 +848,10 @@
     <p>{{ 'viewer.helpText3' | transloco }}</p>
     <p>{{ 'viewer.helpText4' | transloco }}</p>
   </section>
-  @if (!smallScreenLayout()) {
-  <button class="route-close-btn help-toggle-btn" style="left: 58px; z-index: 8;" type="button" (click)="helpOpen.set(false)" [attr.aria-label]="'viewer.helpClose' | transloco">
-    <fa-icon [icon]="xmarkIcon"></fa-icon>
-  </button>
-  }
-  } @else {
-  @if (!smallScreenLayout()) {
-  <button class="help-fab help-toggle-btn" style="left: 58px;" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)" [attr.aria-label]="'viewer.helpOpen' | transloco">
-    <span aria-hidden="true">?</span>
-  </button>
-  }
   }
 
   @if (settingsOpen()) {
-  <section class="help-popup" style="left: 16px; right: auto; width: min(320px, calc(100vw - 32px));">
+  <section class="help-popup settings-popup viewer-floating-panel">
     <div class="help-header">
       <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
       <button class="ghost-btn help-header-close" type="button" (click)="settingsOpen.set(false)"
@@ -910,25 +859,8 @@
         <fa-icon [icon]="xmarkIcon"></fa-icon>
       </button>
     </div>
-    <label class="settings-field">
-      <span>{{ 'viewer.editionTitle' | transloco }}</span>
-      @if (publicEditionOptions().length > 1) {
-      <select class="settings-select" [value]="year()" (change)="onEditionChange($event)">
-        @for (edition of publicEditionOptions(); track edition.id) {
-        <option [value]="edition.year">
-          {{ edition.title || edition.year }}
-        </option>
-        }
-      </select>
-      } @else {
-      <div class="settings-readonly">{{ selectedEditionLabel() }}</div>
-      }
-    </label>
     <div>{{ 'nav.language' | transloco }}</div>
     <div class="quick-actions">
-      <button class="ghost-btn" type="button" (click)="helpOpen.set(true); settingsOpen.set(false)">
-        {{ 'viewer.helpOpen' | transloco }}
-      </button>
       <button class="ghost-btn" type="button" [style.background]="activeLang() === 'de' ? '#ffffff' : '#141414'"
         [style.color]="activeLang() === 'de' ? '#141414' : '#ffffff'" (click)="setLang('de')">
         DE
@@ -938,20 +870,6 @@
         FR
       </button>
     </div>
-    @if (archiveModeEnabled) {
-    <div>{{ 'viewer.surfaceModeTitle' | transloco }}</div>
-    <div class="quick-actions">
-      <button class="ghost-btn" type="button" [style.background]="viewerSurfaceMode() === 'map' ? '#ffffff' : '#141414'"
-        [style.color]="viewerSurfaceMode() === 'map' ? '#141414' : '#ffffff'" (click)="setViewerSurfaceMode('map')">
-        {{ 'viewer.surfaceModeMap' | transloco }}
-      </button>
-      <button class="ghost-btn" type="button"
-        [style.background]="viewerSurfaceMode() === 'archive' ? '#ffffff' : '#141414'"
-        [style.color]="viewerSurfaceMode() === 'archive' ? '#141414' : '#ffffff'" (click)="setViewerSurfaceMode('archive')">
-        {{ 'viewer.surfaceModeArchive' | transloco }}
-      </button>
-    </div>
-    }
     @if (!readonlyViewer) {
     <div class="quick-actions">
       <button class="ghost-btn" type="button" routerLink="/admin" (click)="settingsOpen.set(false)">
@@ -963,18 +881,5 @@
     </div>
     }
   </section>
-  @if (!smallScreenLayout()) {
-  <button class="route-close-btn help-toggle-btn" style="left: 16px; z-index: 8;" type="button"
-    (click)="settingsOpen.set(false)" [attr.aria-label]="'viewer.settingsClose' | transloco">
-    <fa-icon [icon]="xmarkIcon"></fa-icon>
-  </button>
-  }
-  } @else {
-  @if (!smallScreenLayout()) {
-  <button class="route-close-btn help-toggle-btn" style="left: 16px;" type="button"
-    (click)="settingsOpen.set(true); helpOpen.set(false)" [attr.aria-label]="'viewer.settingsOpen' | transloco">
-    <fa-icon [icon]="gearIcon"></fa-icon>
-  </button>
-  }
   }
 </main>

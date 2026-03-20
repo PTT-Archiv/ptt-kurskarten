@@ -4999,5 +4999,44 @@
     "valueNumber": null,
     "valueBoolean": null,
     "valueJson": null
+  },
+  {
+    "id": "34ac5ffd-7184-4e3c-b871-40fa23e5569c",
+    "targetType": "place",
+    "targetId": "node-1774010705101",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "125c9000-de44-47fd-90fa-451628ef2400",
+    "targetType": "place",
+    "targetId": "node-1774010705101",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1900,
+    "validTo": 1900
+  },
+  {
+    "id": "7da50b2f-b376-4d1d-ab27-05c1c2410c2d",
+    "targetType": "place",
+    "targetId": "node-1773305687121",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1900,
+    "validTo": 1900
   }
 ]

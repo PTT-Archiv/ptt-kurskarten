@@ -2670,5 +2670,11 @@
     "defaultName": "Crassier",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "node-1774010705101",
+    "defaultName": "Weisslingen",
+    "validFrom": 1900,
+    "validTo": null
   }
 ]

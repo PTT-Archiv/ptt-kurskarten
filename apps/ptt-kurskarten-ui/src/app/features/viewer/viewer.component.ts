@@ -12,21 +12,15 @@ import type {
   TimeHHMM,
   TransportType
 } from '@ptt-kurskarten/shared';
-import { MapStageComponent, type MapSimulationTripHit } from '../../shared/map/map-stage.component';
+import { MapStageComponent } from '../../shared/map/map-stage.component';
 import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import {
-  faClock,
   faFlag,
-  faForward,
   faGear,
   faLocationDot,
   faMagnifyingGlass,
-  faPause,
-  faPlay,
-  faPowerOff,
-  faRotateLeft,
   faRoute,
   faXmark
 } from '@fortawesome/free-solid-svg-icons';
@@ -79,9 +73,6 @@ type SidebarFact = {
   label: string;
   url: string | null;
 };
-type HoveredSimulationTrip = MapSimulationTripHit & { screenX: number; screenY: number };
-type SimulationMode = 'off' | 'realtime' | 'simulation';
-type SimulationSpeed = 0.5 | 1 | 2;
 type ViewerSurfaceMode = 'map' | 'archive';
 type MobileSheetMode = 'closed' | 'planner' | 'results' | 'details';
 type MobileSheetSnap = 'peek' | 'half' | 'full';
@@ -108,7 +99,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private readonly transloco = inject(TranslocoService);
 
   year = signal<number>(DEFAULT_YEAR);
-  yearDraft = signal<number>(DEFAULT_YEAR);
   graph = signal<GraphSnapshot | null>(null);
   selectedNodeId = signal<string | null>(null);
   availableYears = signal<number[]>([]);
@@ -139,15 +129,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
   readonly readonlyViewer = environment.readonlyViewer;
   readonly archiveModeEnabled = environment.enableArchiveMode;
+  readonly mapLayerPreviewUrl = 'assets/maps/switzerland.svg';
   resetViewportToken = signal(0);
   viewerSurfaceMode = signal<ViewerSurfaceMode>('map');
-  simulationMode = signal<SimulationMode>('realtime');
-  simulationSpeed = signal<SimulationSpeed>(1);
   simulationPlaying = signal(false);
   simulationMinute = signal(0);
-  realtimeMinute = signal(this.getCurrentMinuteOfDay());
-  simulationHint = signal<string | null>(null);
-  readonly simulationSpeedOptions: readonly SimulationSpeed[] = [0.5, 1, 2];
   private transientPulseIds = signal<Set<string>>(new Set());
   private fromPreviewId = signal<string>('');
   private toPreviewId = signal<string>('');
@@ -172,12 +158,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private nodeAliases = signal<Record<string, string[]>>({});
   private nodeFacts = signal<GraphAssertion[]>([]);
   hoveredRouteEdgeId = signal<string | null>(null);
-  private realtimeTickHandle: ReturnType<typeof setInterval> | null = null;
   private simulationRafId: number | null = null;
   private simulationLastTs: number | null = null;
-  hoveredSimulationTrip = signal<HoveredSimulationTrip | null>(null);
-  tripFocusDomId = signal<string | null>(null);
-  private tripFocusClearHandle: ReturnType<typeof setTimeout> | null = null;
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -274,6 +256,56 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
   });
   archiveModeActive = computed(() => this.archiveModeEnabled && this.viewerSurfaceMode() === 'archive');
+  sidePanelVisible = computed(() => {
+    if (this.archiveModeActive()) {
+      return false;
+    }
+    if (this.smallScreenLayout()) {
+      const mode = this.mobileSheetMode();
+      return mode === 'results' || mode === 'details';
+    }
+    return this.sidebarOpen();
+  });
+  animationAllowed = computed(() => !this.archiveModeActive() && !this.sidePanelVisible());
+  orbitVisible = computed(() => this.animationAllowed());
+  actionStackBottomOffset = computed(() => {
+    const baseOffset = this.mobileLayout() ? 12 : 16;
+    return this.mobileSheetVisible() ? this.mobileSheetHeight() + baseOffset : baseOffset;
+  });
+  inactiveSurfaceMode = computed<ViewerSurfaceMode>(() => (this.viewerSurfaceMode() === 'map' ? 'archive' : 'map'));
+  inactiveSurfacePreviewImageUrl = computed(() => {
+    if (this.inactiveSurfaceMode() === 'map') {
+      return this.mapLayerPreviewUrl;
+    }
+    return this.archiveStageImageUrl() || this.archiveSnippetUrl() || '';
+  });
+  dayNightOrbit = computed(() => {
+    const minute = this.normalizeMinuteOfDay(this.simulationMinute());
+    const center = 44;
+    const radius = 26;
+    const sunAngle = ((minute - 720) / MINUTES_PER_DAY) * Math.PI * 2 - Math.PI / 2;
+    const moonAngle = sunAngle + Math.PI;
+    const sun = {
+      x: center + radius * Math.cos(sunAngle),
+      y: center + radius * Math.sin(sunAngle)
+    };
+    const moon = {
+      x: center + radius * Math.cos(moonAngle),
+      y: center + radius * Math.sin(moonAngle)
+    };
+    const scaleForY = (y: number) => {
+      const topFactor = ((center - y) / radius + 1) / 2;
+      return 0.72 + topFactor * 0.6;
+    };
+    return {
+      sunX: sun.x,
+      sunY: sun.y,
+      sunScale: scaleForY(sun.y),
+      moonX: moon.x,
+      moonY: moon.y,
+      moonScale: scaleForY(moon.y)
+    };
+  });
   archiveStageInitialCenter = computed(() => {
     const node = this.getDefaultArchiveNode();
     if (!node) {
@@ -311,12 +343,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly endIcon = faLocationDot;
   readonly searchIcon = faMagnifyingGlass;
   readonly routeIcon = faRoute;
-  readonly simOffIcon = faPowerOff;
-  readonly simRealtimeIcon = faClock;
-  readonly simPlaybackIcon = faForward;
-  readonly simPlayIcon = faPlay;
-  readonly simPauseIcon = faPause;
-  readonly simResetIcon = faRotateLeft;
 
   sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
   sidebarFacts = computed<SidebarFact[]>(() => {
@@ -345,35 +371,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       .filter((fact): fact is SidebarFact => fact !== null);
   });
   routeResultsVisible = computed(() => this.routingState() === 'results' && this.connectionResults().length > 0);
-  simulationMinuteForMap = computed<number | null>(() => {
-    if (this.routingActive()) {
-      return null;
-    }
-    const mode = this.simulationMode();
-    if (mode === 'off') {
-      return null;
-    }
-    if (mode === 'realtime') {
-      return this.realtimeMinute();
-    }
-    return this.simulationMinute();
-  });
-  simulationClockLabel = computed(() => {
-    const minute = this.simulationMinuteForMap() ?? this.realtimeMinute();
-    return this.formatTimeMinutes(Math.floor(this.normalizeMinuteOfDay(minute)));
-  });
-  simulationStatusLabel = computed(() => {
-    const mode = this.simulationMode();
-    if (mode === 'off') {
-      return this.transloco.translate('viewer.simOff');
-    }
-    if (mode === 'realtime') {
-      return this.transloco.translate('viewer.simRealtime');
-    }
-    return this.transloco.translate(this.simulationPlaying() ? 'viewer.simPlaying' : 'viewer.simPaused');
-  });
-  simulationHintLabel = computed(() => this.simulationHint() ?? this.transloco.translate('viewer.simTimeHelp'));
-  simulationSliderMinute = computed(() => Math.floor(this.normalizeMinuteOfDay(this.simulationMinute())));
+  simulationMinuteForMap = computed<number | null>(() => (this.animationAllowed() ? this.simulationMinute() : null));
   routeSidebarTitle = computed(() => {
     const selected = this.selectedConnection();
     const from = selected?.from ?? this.fromId();
@@ -480,11 +478,15 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       if (!this.isBrowser) {
         return;
       }
-      const realtimeActive = this.simulationMode() !== 'simulation';
-      if (realtimeActive) {
-        this.startRealtimeTicker();
-      } else {
-        this.stopRealtimeTicker();
+      const allowed = this.animationAllowed();
+      if (!allowed) {
+        this.simulationPlaying.set(false);
+        this.stopSimulationPlayback();
+        return;
+      }
+      if (!this.simulationPlaying()) {
+        this.simulationMinute.set(this.getCurrentMinuteOfDay());
+        this.simulationPlaying.set(true);
       }
     });
 
@@ -492,23 +494,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       if (!this.isBrowser) {
         return;
       }
-      const shouldPlay = this.simulationMode() === 'simulation' && this.simulationPlaying() && !this.routingActive();
+      const shouldPlay = this.animationAllowed() && this.simulationPlaying();
       if (shouldPlay) {
         this.startSimulationPlayback();
       } else {
         this.stopSimulationPlayback();
-      }
-    });
-
-    effect(() => {
-      if (this.routingActive() && this.simulationPlaying()) {
-        this.simulationPlaying.set(false);
-      }
-    });
-
-    effect(() => {
-      if (this.routingActive() || this.simulationMode() === 'off') {
-        this.hoveredSimulationTrip.set(null);
       }
     });
 
@@ -520,7 +510,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       this.sidebarOpen.set(false);
       this.pickTarget.set(null);
       this.pendingMapPickTarget = null;
-      this.hoveredSimulationTrip.set(null);
       this.hoveredRouteEdgeId.set(null);
     });
 
@@ -591,10 +580,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (this.placeSearchBlurHandle) {
       clearTimeout(this.placeSearchBlurHandle);
     }
-    if (this.tripFocusClearHandle) {
-      clearTimeout(this.tripFocusClearHandle);
-    }
-    this.stopRealtimeTicker();
     this.stopSimulationPlayback();
     this.langSub?.unsubscribe();
   }
@@ -602,22 +587,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   setLang(lang: 'de' | 'fr'): void {
     this.activeLang.set(lang);
     this.transloco.setActiveLang(lang);
-  }
-
-  onYearInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const nextYear = Number(input.value);
-    if (!Number.isNaN(nextYear)) {
-      this.yearDraft.set(nextYear);
-    }
-  }
-
-  onYearCommit(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const nextYear = Number(input.value);
-    if (!Number.isNaN(nextYear)) {
-      this.applyYearChange(nextYear);
-    }
   }
 
   onEditionChange(event: Event): void {
@@ -911,24 +880,12 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     world: { x: number; y: number };
     hitNodeId: string | null;
     hitEdgeId: string | null;
-    hitSimulationTrip: MapSimulationTripHit | null;
+    hitSimulationTrip: unknown;
   }): void {
     if (payload.type === 'down') {
       this.pendingMapPickTarget = this.pickTarget();
     }
     if (payload.type === 'move') {
-      if (payload.hitSimulationTrip && !this.routingActive() && this.simulationMode() !== 'off') {
-        this.hoveredSimulationTrip.set({
-          ...payload.hitSimulationTrip,
-          screenX: payload.screen.x,
-          screenY: payload.screen.y
-        });
-        if (this.simulationMode() === 'simulation' && this.simulationPlaying()) {
-          this.simulationPlaying.set(false);
-        }
-      } else {
-        this.hoveredSimulationTrip.set(null);
-      }
       this.hoveredNodeId.set(payload.hitNodeId);
       this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
       const hitEdgeId = payload.hitEdgeId;
@@ -937,10 +894,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       } else {
         this.hoveredRouteEdgeId.set(null);
       }
-    }
-    if (payload.type === 'up' && payload.hitSimulationTrip) {
-      this.openSimulationTripDetail(payload.hitSimulationTrip);
-      return;
     }
     if (payload.type === 'up' && !payload.hitNodeId) {
       this.pendingMapPickTarget = null;
@@ -1022,8 +975,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.lastResultParams.set(null);
     this.selectedNodeId.set(null);
     this.hoveredRouteEdgeId.set(null);
-    this.hoveredSimulationTrip.set(null);
-    this.tripFocusDomId.set(null);
     this.sidebarOpen.set(false);
     if (this.smallScreenLayout()) {
       this.mobileSheetMode.set(this.routePlannerOpen() ? 'planner' : 'closed');
@@ -1087,81 +1038,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.toPreviewId.set(id);
   }
 
-  setSimulationMode(mode: SimulationMode): void {
-    if (this.routingActive()) {
-      return;
-    }
-    const previousMode = this.simulationMode();
-    this.simulationMode.set(mode);
-    if (mode === 'realtime') {
-      this.realtimeMinute.set(this.getCurrentMinuteOfDay());
-      this.simulationPlaying.set(false);
-      return;
-    }
-    if (mode === 'simulation') {
-      if (previousMode !== 'simulation') {
-        const startMinute = this.realtimeMinute();
-        this.simulationMinute.set(this.normalizeMinuteOfDay(startMinute));
-      }
-      this.simulationPlaying.set(true);
-      return;
-    }
-    this.simulationPlaying.set(false);
-  }
-
-  toggleSimulationPlayback(): void {
-    if (this.routingActive()) {
-      return;
-    }
-    if (this.simulationMode() !== 'simulation') {
-      this.setSimulationMode('simulation');
-      return;
-    }
-    this.simulationPlaying.set(!this.simulationPlaying());
-  }
-
-  showSimulationHint(key: string, params?: Record<string, string>): void {
-    this.simulationHint.set(this.transloco.translate(key, params));
-  }
-
-  showSimulationSpeedHint(speed: SimulationSpeed): void {
-    this.showSimulationHint('viewer.simSpeedHelp', { speed: `${speed}x` });
-  }
-
-  clearSimulationHint(): void {
-    this.simulationHint.set(null);
-  }
-
-  onSimulationSliderInput(value: string): void {
-    if (this.routingActive()) {
-      return;
-    }
-    const next = Number(value);
-    if (!Number.isFinite(next)) {
-      return;
-    }
-    this.simulationMinute.set(this.normalizeMinuteOfDay(next));
-  }
-
-  setSimulationSpeed(speed: SimulationSpeed): void {
-    if (this.routingActive()) {
-      return;
-    }
-    this.simulationSpeed.set(speed);
-  }
-
-  resetSimulation(): void {
-    if (this.routingActive()) {
-      return;
-    }
-    this.simulationPlaying.set(false);
-    this.simulationMinute.set(0);
-  }
-
-  tripRowDomId(edgeId: string, tripId: string): string {
-    return `trip-row-${this.toDomToken(edgeId)}-${this.toDomToken(tripId)}`;
-  }
-
   resetMapView(): void {
     this.resetViewportToken.set(this.resetViewportToken() + 1);
   }
@@ -1176,12 +1052,16 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  toggleViewerSurfaceMode(): void {
+    this.setViewerSurfaceMode(this.inactiveSurfaceMode());
+  }
+
   plannerAutoMinimize = computed(() => !this.sidebarOpen() && !this.plannerHovered() && !this.plannerFocused());
   routeFitTopInset = computed(() => {
     if (this.smallScreenLayout()) {
-      return this.routePlannerOpen() ? 116 : 78;
+      return this.routePlannerOpen() ? 184 : 126;
     }
-    return this.routePlannerOpen() ? 260 : 90;
+    return this.routePlannerOpen() ? 260 : 132;
   });
   viewportFocusTopInset = computed(() => (this.smallScreenLayout() ? this.routeFitTopInset() : 0));
   viewportFocusBottomInset = computed(() => (this.smallScreenLayout() ? this.mobileSheetHeight() : 0));
@@ -1370,7 +1250,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
 
   private applyYearChange(nextYear: number): void {
     this.year.set(nextYear);
-    this.yearDraft.set(nextYear);
     this.fetchGraph(nextYear);
   }
 
@@ -1716,53 +1595,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     return `${hours}:${minutes}` as TimeHHMM;
   }
 
-  private openSimulationTripDetail(trip: MapSimulationTripHit): void {
-    this.hoveredSimulationTrip.set(null);
-    this.onNodeSelected(trip.fromId);
-    this.triggerPulse(trip.fromId);
-    this.focusTripRow(trip.edgeId, trip.tripId);
-  }
-
-  private focusTripRow(edgeId: string, tripId: string): void {
-    const domId = this.tripRowDomId(edgeId, tripId);
-    this.tripFocusDomId.set(domId);
-    if (this.tripFocusClearHandle) {
-      clearTimeout(this.tripFocusClearHandle);
-    }
-    this.tripFocusClearHandle = setTimeout(() => {
-      if (this.tripFocusDomId() === domId) {
-        this.tripFocusDomId.set(null);
-      }
-    }, 2200);
-    if (!this.isBrowser) {
-      return;
-    }
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const element = document.getElementById(domId);
-        element?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
-      });
-    });
-  }
-
-  private startRealtimeTicker(): void {
-    if (this.realtimeTickHandle) {
-      return;
-    }
-    this.realtimeMinute.set(this.getCurrentMinuteOfDay());
-    this.realtimeTickHandle = setInterval(() => {
-      this.realtimeMinute.set(this.getCurrentMinuteOfDay());
-    }, 1_000);
-  }
-
-  private stopRealtimeTicker(): void {
-    if (!this.realtimeTickHandle) {
-      return;
-    }
-    clearInterval(this.realtimeTickHandle);
-    this.realtimeTickHandle = null;
-  }
-
   private startSimulationPlayback(): void {
     if (!this.isBrowser || this.simulationRafId !== null) {
       return;
@@ -1786,7 +1618,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     if (!this.isBrowser) {
       return;
     }
-    if (this.simulationMode() !== 'simulation' || !this.simulationPlaying() || this.routingActive()) {
+    if (!this.animationAllowed() || !this.simulationPlaying()) {
       this.simulationRafId = null;
       this.simulationLastTs = null;
       return;
@@ -1796,7 +1628,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     const deltaMs = Math.max(0, ts - this.simulationLastTs);
     this.simulationLastTs = ts;
-    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * this.simulationSpeed();
+    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * 2;
     if (minuteAdvance > 0) {
       this.simulationMinute.set(this.normalizeMinuteOfDay(this.simulationMinute() + minuteAdvance));
     }
@@ -1811,15 +1643,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   private normalizeMinuteOfDay(value: number): number {
     return ((value % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
   }
-
-  private toDomToken(value: string): string {
-    const normalized = value
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-    return normalized.length ? normalized : 'item';
-  }
-
   private triggerPulse(nodeId: string): void {
     if (!nodeId) {
       return;
