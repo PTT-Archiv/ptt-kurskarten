@@ -1188,5 +1188,19 @@
     "placeBId": "node-1770906061553",
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "node-1770905962102__node-1770906161164",
+    "placeAId": "node-1770905962102",
+    "placeBId": "node-1770906161164",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770906161164__node-1770906982068",
+    "placeAId": "node-1770906161164",
+    "placeBId": "node-1770906982068",
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]
