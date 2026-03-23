@@ -1073,14 +1073,6 @@
     "year": 1852
   },
   {
-    "id": "edge-1771930346696",
-    "linkId": "node-1770891315316__node-1770891915773",
-    "fromPlaceId": "node-1770891315316",
-    "toPlaceId": "node-1770891915773",
-    "note": null,
-    "year": 1852
-  },
-  {
     "id": "edge-1771930407983",
     "linkId": "node-1770891194672__node-1770891315316",
     "fromPlaceId": "node-1770891315316",
@@ -3391,6 +3383,504 @@
     "linkId": "node-1770904724487__node-1770905682253",
     "fromPlaceId": "node-1770905682253",
     "toPlaceId": "node-1770904724487",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279627180",
+    "linkId": "node-1770905890445__node-1770912572454",
+    "fromPlaceId": "node-1770912572454",
+    "toPlaceId": "node-1770905890445",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279660498",
+    "linkId": "node-1770912569156__node-1770912572454",
+    "fromPlaceId": "node-1770912572454",
+    "toPlaceId": "node-1770912569156",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279694555",
+    "linkId": "node-1770905886053__node-1770905890445",
+    "fromPlaceId": "node-1770905890445",
+    "toPlaceId": "node-1770905886053",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279708764",
+    "linkId": "node-1770905886053__node-1770905890445",
+    "fromPlaceId": "node-1770905886053",
+    "toPlaceId": "node-1770905890445",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279730275",
+    "linkId": "node-1770905886053__node-1770912586038",
+    "fromPlaceId": "node-1770905886053",
+    "toPlaceId": "node-1770912586038",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279798377",
+    "linkId": "node-1770905886053__node-1770912586038",
+    "fromPlaceId": "node-1770912586038",
+    "toPlaceId": "node-1770905886053",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279901227",
+    "linkId": "node-1770905871252__node-1770905890445",
+    "fromPlaceId": "node-1770905871252",
+    "toPlaceId": "node-1770905890445",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279920246",
+    "linkId": "node-1770905871252__node-1770905890445",
+    "fromPlaceId": "node-1770905890445",
+    "toPlaceId": "node-1770905871252",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279962790",
+    "linkId": "node-1770912586038__node-1770912594808",
+    "fromPlaceId": "node-1770912586038",
+    "toPlaceId": "node-1770912594808",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774279985208",
+    "linkId": "node-1770912586038__node-1770912594808",
+    "fromPlaceId": "node-1770912594808",
+    "toPlaceId": "node-1770912586038",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280006698",
+    "linkId": "node-1770912594808__node-1770912829695",
+    "fromPlaceId": "node-1770912594808",
+    "toPlaceId": "node-1770912829695",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280035147",
+    "linkId": "node-1770912594808__node-1770912829695",
+    "fromPlaceId": "node-1770912829695",
+    "toPlaceId": "node-1770912594808",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280058391",
+    "linkId": "node-1770912580537__node-1770912594808",
+    "fromPlaceId": "node-1770912594808",
+    "toPlaceId": "node-1770912580537",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280071251",
+    "linkId": "node-1770912580537__node-1770912594808",
+    "fromPlaceId": "node-1770912580537",
+    "toPlaceId": "node-1770912594808",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280495277",
+    "linkId": "node-1770912707032__node-1770912829695",
+    "fromPlaceId": "node-1770912829695",
+    "toPlaceId": "node-1770912707032",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280521092",
+    "linkId": "node-1770912707032__node-1770912829695",
+    "fromPlaceId": "node-1770912707032",
+    "toPlaceId": "node-1770912829695",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280547084",
+    "linkId": "node-1770912707032__node-1770912798782",
+    "fromPlaceId": "node-1770912707032",
+    "toPlaceId": "node-1770912798782",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280568070",
+    "linkId": "node-1770912707032__node-1770912798782",
+    "fromPlaceId": "node-1770912798782",
+    "toPlaceId": "node-1770912707032",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280587548",
+    "linkId": "node-1770912704041__node-1770912707032",
+    "fromPlaceId": "node-1770912707032",
+    "toPlaceId": "node-1770912704041",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280600378",
+    "linkId": "node-1770912704041__node-1770912707032",
+    "fromPlaceId": "node-1770912704041",
+    "toPlaceId": "node-1770912707032",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774280628764",
+    "linkId": "node-1770912699696__node-1770912704041",
+    "fromPlaceId": "node-1770912704041",
+    "toPlaceId": "node-1770912699696",
+    "year": 1852,
+    "note": {
+      "de": "nur im Sommer"
+    }
+  },
+  {
+    "id": "edge-1774280639345",
+    "linkId": "node-1770912699696__node-1770912704041",
+    "fromPlaceId": "node-1770912699696",
+    "toPlaceId": "node-1770912704041",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281006172",
+    "linkId": "node-1770912696547__node-1770912798782",
+    "fromPlaceId": "node-1770912798782",
+    "toPlaceId": "node-1770912696547",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281032250",
+    "linkId": "node-1770912696547__node-1770912798782",
+    "fromPlaceId": "node-1770912696547",
+    "toPlaceId": "node-1770912798782",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281056081",
+    "linkId": "node-1770912689899__node-1770912696547",
+    "fromPlaceId": "node-1770912696547",
+    "toPlaceId": "node-1770912689899",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281085850",
+    "linkId": "node-1770912689899__node-1770912696547",
+    "fromPlaceId": "node-1770912689899",
+    "toPlaceId": "node-1770912696547",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281111885",
+    "linkId": "node-1770912672117__node-1770912689899",
+    "fromPlaceId": "node-1770912689899",
+    "toPlaceId": "node-1770912672117",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281141623",
+    "linkId": "node-1770912672117__node-1770912689899",
+    "fromPlaceId": "node-1770912672117",
+    "toPlaceId": "node-1770912689899",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281165475",
+    "linkId": "node-1770912672117__node-1770991540696",
+    "fromPlaceId": "node-1770912672117",
+    "toPlaceId": "node-1770991540696",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281229476",
+    "linkId": "node-1770912672117__node-1770991540696",
+    "fromPlaceId": "node-1770991540696",
+    "toPlaceId": "node-1770912672117",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281254713",
+    "linkId": "node-1770897884517__node-1770991540696",
+    "fromPlaceId": "node-1770991540696",
+    "toPlaceId": "node-1770897884517",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281269043",
+    "linkId": "node-1770897884517__node-1770991540696",
+    "fromPlaceId": "node-1770897884517",
+    "toPlaceId": "node-1770991540696",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281295600",
+    "linkId": "node-1770897884517__node-1770897945287",
+    "fromPlaceId": "node-1770897884517",
+    "toPlaceId": "node-1770897945287",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281316707",
+    "linkId": "node-1770897884517__node-1770897945287",
+    "fromPlaceId": "node-1770897945287",
+    "toPlaceId": "node-1770897884517",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281331585",
+    "linkId": "node-1770897945287__node-1770898396116",
+    "fromPlaceId": "node-1770897945287",
+    "toPlaceId": "node-1770898396116",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281357397",
+    "linkId": "node-1770897945287__node-1770898396116",
+    "fromPlaceId": "node-1770898396116",
+    "toPlaceId": "node-1770897945287",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281376509",
+    "linkId": "node-1770898144757__node-1770898396116",
+    "fromPlaceId": "node-1770898396116",
+    "toPlaceId": "node-1770898144757",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281595611",
+    "linkId": "node-1770898134797__node-1770898144757",
+    "fromPlaceId": "node-1770898144757",
+    "toPlaceId": "node-1770898134797",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774281631811",
+    "linkId": "node-1770898134797__node-1770898144757",
+    "fromPlaceId": "node-1770898134797",
+    "toPlaceId": "node-1770898144757",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282085527",
+    "linkId": "node-1770898134797__node-1770898184274",
+    "fromPlaceId": "node-1770898134797",
+    "toPlaceId": "node-1770898184274",
+    "year": 1852,
+    "note": {
+      "de": "Di. Do. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774282116565",
+    "linkId": "node-1770898134797__node-1770898184274",
+    "fromPlaceId": "node-1770898184274",
+    "toPlaceId": "node-1770898134797",
+    "year": 1852,
+    "note": {
+      "de": "Di. Do. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774282173436",
+    "linkId": "node-1770898099050__node-1770898134797",
+    "fromPlaceId": "node-1770898134797",
+    "toPlaceId": "node-1770898099050",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282198973",
+    "linkId": "node-1770898099050__node-1770898134797",
+    "fromPlaceId": "node-1770898099050",
+    "toPlaceId": "node-1770898134797",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282228883",
+    "linkId": "node-1770811420932__node-1770898099050",
+    "fromPlaceId": "node-1770898099050",
+    "toPlaceId": "node-1770811420932",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282261566",
+    "linkId": "node-1770811420932__node-1770898099050",
+    "fromPlaceId": "node-1770811420932",
+    "toPlaceId": "node-1770898099050",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282274901",
+    "linkId": "node-1770811420932__node-1770897993209",
+    "fromPlaceId": "node-1770811420932",
+    "toPlaceId": "node-1770897993209",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282288829",
+    "linkId": "node-1770811420932__node-1770897993209",
+    "fromPlaceId": "node-1770897993209",
+    "toPlaceId": "node-1770811420932",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282339319",
+    "linkId": "node-1770897948683__node-1770897993209",
+    "fromPlaceId": "node-1770897993209",
+    "toPlaceId": "node-1770897948683",
+    "year": 1852,
+    "note": {
+      "de": "Di. So. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774282364495",
+    "linkId": "node-1770897948683__node-1770897993209",
+    "fromPlaceId": "node-1770897948683",
+    "toPlaceId": "node-1770897993209",
+    "year": 1852,
+    "note": {
+      "de": "Mo. Mi. u. Fr."
+    }
+  },
+  {
+    "id": "edge-1774282386255",
+    "linkId": "node-1770811420932__node-1770898030151",
+    "fromPlaceId": "node-1770811420932",
+    "toPlaceId": "node-1770898030151",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282451206",
+    "linkId": "node-1770811420932__node-1770898030151",
+    "fromPlaceId": "node-1770898030151",
+    "toPlaceId": "node-1770811420932",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282492000",
+    "linkId": "node-1770891148537__node-1770898030151",
+    "fromPlaceId": "node-1770898030151",
+    "toPlaceId": "node-1770891148537",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282513936",
+    "linkId": "node-1770891148537__node-1770898030151",
+    "fromPlaceId": "node-1770891148537",
+    "toPlaceId": "node-1770898030151",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282543581",
+    "linkId": "node-1770811420932__node-1770891985133",
+    "fromPlaceId": "node-1770811420932",
+    "toPlaceId": "node-1770891985133",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282567645",
+    "linkId": "node-1770811420932__node-1770891985133",
+    "fromPlaceId": "node-1770891985133",
+    "toPlaceId": "node-1770811420932",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282670171",
+    "linkId": "node-1770891950032__node-1770891985133",
+    "fromPlaceId": "node-1770891985133",
+    "toPlaceId": "node-1770891950032",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282695021",
+    "linkId": "node-1770891950032__node-1770891985133",
+    "fromPlaceId": "node-1770891950032",
+    "toPlaceId": "node-1770891985133",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282720936",
+    "linkId": "node-1770891915773__node-1770891950032",
+    "fromPlaceId": "node-1770891950032",
+    "toPlaceId": "node-1770891915773",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282749345",
+    "linkId": "node-1770891915773__node-1770891950032",
+    "fromPlaceId": "node-1770891915773",
+    "toPlaceId": "node-1770891950032",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282778055",
+    "linkId": "node-1770891315316__node-1770891915773",
+    "fromPlaceId": "node-1770891915773",
+    "toPlaceId": "node-1770891315316",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774282810287",
+    "linkId": "node-1770891315316__node-1770891915773",
+    "fromPlaceId": "node-1770891315316",
+    "toPlaceId": "node-1770891915773",
     "year": 1852,
     "note": null
   }

@@ -5051,5 +5051,18 @@
     "valueJson": null,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "43d12dde-15e5-4de0-ae25-20cbe10c4084",
+    "targetType": "place",
+    "targetId": "node-1771596256944",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]

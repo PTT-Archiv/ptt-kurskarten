@@ -396,7 +396,7 @@
     "placeAId": "node-1770891315316",
     "placeBId": "node-1770891915773",
     "validFrom": 1852,
-    "validTo": null
+    "validTo": 1852
   },
   {
     "id": "node-1770891342495__node-1770891544616",
@@ -1522,6 +1522,223 @@
     "id": "node-1770904724487__node-1770905682253",
     "placeAId": "node-1770904724487",
     "placeBId": "node-1770905682253",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770905890445__node-1770912572454",
+    "placeAId": "node-1770905890445",
+    "placeBId": "node-1770912572454",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912569156__node-1770912572454",
+    "placeAId": "node-1770912569156",
+    "placeBId": "node-1770912572454",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770905886053__node-1770905890445",
+    "placeAId": "node-1770905886053",
+    "placeBId": "node-1770905890445",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770905886053__node-1770912586038",
+    "placeAId": "node-1770905886053",
+    "placeBId": "node-1770912586038",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770905871252__node-1770905890445",
+    "placeAId": "node-1770905871252",
+    "placeBId": "node-1770905890445",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912586038__node-1770912594808",
+    "placeAId": "node-1770912586038",
+    "placeBId": "node-1770912594808",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912594808__node-1770912829695",
+    "placeAId": "node-1770912594808",
+    "placeBId": "node-1770912829695",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912580537__node-1770912594808",
+    "placeAId": "node-1770912580537",
+    "placeBId": "node-1770912594808",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912707032__node-1770912829695",
+    "placeAId": "node-1770912707032",
+    "placeBId": "node-1770912829695",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912707032__node-1770912798782",
+    "placeAId": "node-1770912707032",
+    "placeBId": "node-1770912798782",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912704041__node-1770912707032",
+    "placeAId": "node-1770912704041",
+    "placeBId": "node-1770912707032",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912699696__node-1770912704041",
+    "placeAId": "node-1770912699696",
+    "placeBId": "node-1770912704041",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912696547__node-1770912798782",
+    "placeAId": "node-1770912696547",
+    "placeBId": "node-1770912798782",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912689899__node-1770912696547",
+    "placeAId": "node-1770912689899",
+    "placeBId": "node-1770912696547",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912672117__node-1770912689899",
+    "placeAId": "node-1770912672117",
+    "placeBId": "node-1770912689899",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770912672117__node-1770991540696",
+    "placeAId": "node-1770912672117",
+    "placeBId": "node-1770991540696",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770897884517__node-1770991540696",
+    "placeAId": "node-1770897884517",
+    "placeBId": "node-1770991540696",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770897884517__node-1770897945287",
+    "placeAId": "node-1770897884517",
+    "placeBId": "node-1770897945287",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770897945287__node-1770898396116",
+    "placeAId": "node-1770897945287",
+    "placeBId": "node-1770898396116",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770898144757__node-1770898396116",
+    "placeAId": "node-1770898144757",
+    "placeBId": "node-1770898396116",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770898134797__node-1770898144757",
+    "placeAId": "node-1770898134797",
+    "placeBId": "node-1770898144757",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770898134797__node-1770898184274",
+    "placeAId": "node-1770898134797",
+    "placeBId": "node-1770898184274",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770898099050__node-1770898134797",
+    "placeAId": "node-1770898099050",
+    "placeBId": "node-1770898134797",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770811420932__node-1770898099050",
+    "placeAId": "node-1770811420932",
+    "placeBId": "node-1770898099050",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770811420932__node-1770897993209",
+    "placeAId": "node-1770811420932",
+    "placeBId": "node-1770897993209",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770897948683__node-1770897993209",
+    "placeAId": "node-1770897948683",
+    "placeBId": "node-1770897993209",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770811420932__node-1770898030151",
+    "placeAId": "node-1770811420932",
+    "placeBId": "node-1770898030151",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770891148537__node-1770898030151",
+    "placeAId": "node-1770891148537",
+    "placeBId": "node-1770898030151",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770811420932__node-1770891985133",
+    "placeAId": "node-1770811420932",
+    "placeBId": "node-1770891985133",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770891950032__node-1770891985133",
+    "placeAId": "node-1770891950032",
+    "placeBId": "node-1770891985133",
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "node-1770891915773__node-1770891950032",
+    "placeAId": "node-1770891915773",
+    "placeBId": "node-1770891950032",
     "validFrom": 1852,
     "validTo": 1852
   }
