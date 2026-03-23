@@ -981,10 +981,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         if (!node || !screenNode) {
           return;
         }
-        const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
+        const rippleProgress = 1 - intensity;
         const organicRadius = screenNode.r + 1.5 * sizeScale;
         ctx.save();
-        ctx.globalAlpha = intensity;
+        ctx.globalAlpha = Math.max(0.12, intensity);
         ctx.beginPath();
         ctx.arc(screenNode.x, screenNode.y, organicRadius, 0, Math.PI * 2);
         ctx.fillStyle = node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
@@ -992,16 +992,16 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.beginPath();
         ctx.arc(screenNode.x, screenNode.y, organicRadius, 0, Math.PI * 2);
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1.7;
         ctx.stroke();
         ctx.restore();
 
         ctx.save();
-        ctx.globalAlpha = Math.max(0.15, intensity * 0.65);
+        ctx.globalAlpha = Math.max(0, intensity * 0.55);
         ctx.beginPath();
-        ctx.arc(screenNode.x, screenNode.y, organicRadius + 7 * sizeScale + pulse * 3 * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
-        ctx.lineWidth = 1.8;
+        ctx.arc(screenNode.x, screenNode.y, organicRadius + (2.5 + rippleProgress * 5) * sizeScale, 0, Math.PI * 2);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.3;
         ctx.stroke();
         ctx.restore();
       });
