@@ -31,6 +31,12 @@ import { ViewerDataService } from './viewer-data.service';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
 import {
+  isTripFlowEdgeMode,
+  isTripFlowNodeMode,
+  type TripFlowEdgeMode,
+  type TripFlowNodeMode
+} from '../../shared/map/map-stage-simulation.util';
+import {
   ARCHIVE_DEFAULT_REGION,
   buildArchiveIiifInfoUrl,
   getArchiveIiifCenter,
@@ -76,6 +82,7 @@ type SidebarFact = {
 type ViewerSurfaceMode = 'map' | 'archive';
 type MobileSheetMode = 'closed' | 'planner' | 'results' | 'details';
 type MobileSheetSnap = 'peek' | 'half' | 'full';
+type TripFlowModeOption<T extends string> = { value: T; labelKey: string };
 
 @Component({
   selector: 'app-viewer',
@@ -132,6 +139,8 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly mapLayerPreviewUrl = 'assets/maps/switzerland.svg';
   resetViewportToken = signal(0);
   viewerSurfaceMode = signal<ViewerSurfaceMode>('map');
+  tripFlowNodeMode = signal<TripFlowNodeMode>('always-active');
+  tripFlowEdgeMode = signal<TripFlowEdgeMode>('always-active');
   simulationPlaying = signal(false);
   simulationMinute = signal(0);
   private transientPulseIds = signal<Set<string>>(new Set());
@@ -160,6 +169,21 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   hoveredRouteEdgeId = signal<string | null>(null);
   private simulationRafId: number | null = null;
   private simulationLastTs: number | null = null;
+  readonly tripFlowNodeModeOptions: TripFlowModeOption<TripFlowNodeMode>[] = [
+    { value: 'always-active', labelKey: 'viewer.tripFlowModeAlwaysActive' },
+    { value: 'unhighlighted', labelKey: 'viewer.tripFlowModeUnhighlighted' },
+    { value: 'not-visible', labelKey: 'viewer.tripFlowModeNotVisible' },
+    { value: 'active-when-relevant-muted', labelKey: 'viewer.tripFlowModeRelevantMuted' },
+    { value: 'active-when-relevant-hidden', labelKey: 'viewer.tripFlowModeRelevantHidden' },
+    { value: 'organic', labelKey: 'viewer.tripFlowModeOrganic' }
+  ];
+  readonly tripFlowEdgeModeOptions: TripFlowModeOption<TripFlowEdgeMode>[] = [
+    { value: 'always-active', labelKey: 'viewer.tripFlowModeAlwaysActive' },
+    { value: 'unhighlighted', labelKey: 'viewer.tripFlowModeUnhighlighted' },
+    { value: 'not-visible', labelKey: 'viewer.tripFlowModeNotVisible' },
+    { value: 'active-when-relevant-muted', labelKey: 'viewer.tripFlowModeRelevantMuted' },
+    { value: 'active-when-relevant-hidden', labelKey: 'viewer.tripFlowModeRelevantHidden' }
+  ];
 
   pulseNodeIds = computed(() => {
     const ids = new Set(this.transientPulseIds());
@@ -587,6 +611,18 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
   setLang(lang: 'de' | 'fr'): void {
     this.activeLang.set(lang);
     this.transloco.setActiveLang(lang);
+  }
+
+  onTripFlowNodeModeChange(value: string): void {
+    if (isTripFlowNodeMode(value)) {
+      this.tripFlowNodeMode.set(value);
+    }
+  }
+
+  onTripFlowEdgeModeChange(value: string): void {
+    if (isTripFlowEdgeMode(value)) {
+      this.tripFlowEdgeMode.set(value);
+    }
   }
 
   onEditionChange(event: Event): void {

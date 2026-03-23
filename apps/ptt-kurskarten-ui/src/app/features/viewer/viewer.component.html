@@ -13,6 +13,7 @@
     } @else {
     <app-map-stage [graph]="graph()" [nodeDetail]="null" [highlightedEdgeIds]="highlightedEdgeIds()"
       [highlightedNodeIds]="highlightedNodeIds()" [selectedNodeId]="selectedNodeId()" [pulseNodeIds]="pulseNodeIds()"
+      [tripFlowNodeMode]="tripFlowNodeMode()" [tripFlowEdgeMode]="tripFlowEdgeMode()"
       [endpointNodeIds]="endpointNodeIds()"
       [pickMode]="pickTarget()" [selectedConnection]="selectedConnection()"
       [showConnectionDetailsOnMap]="showConnectionDetailsOnMap()" [routingActive]="routingActive()" [showBorder]="false"
@@ -869,6 +870,27 @@
         [style.color]="activeLang() === 'fr' ? '#141414' : '#ffffff'" (click)="setLang('fr')">
         FR
       </button>
+    </div>
+    <div class="settings-section">
+      <div class="settings-section-title">{{ 'viewer.animationConfigTitle' | transloco }}</div>
+      <label class="settings-field">
+        <span>{{ 'viewer.animationNodes' | transloco }}</span>
+        <select class="settings-select" [value]="tripFlowNodeMode()"
+          (change)="onTripFlowNodeModeChange($any($event.target).value)">
+          @for (option of tripFlowNodeModeOptions; track option.value) {
+          <option [value]="option.value">{{ option.labelKey | transloco }}</option>
+          }
+        </select>
+      </label>
+      <label class="settings-field">
+        <span>{{ 'viewer.animationEdges' | transloco }}</span>
+        <select class="settings-select" [value]="tripFlowEdgeMode()"
+          (change)="onTripFlowEdgeModeChange($any($event.target).value)">
+          @for (option of tripFlowEdgeModeOptions; track option.value) {
+          <option [value]="option.value">{{ option.labelKey | transloco }}</option>
+          }
+        </select>
+      </label>
     </div>
     @if (!readonlyViewer) {
     <div class="quick-actions">

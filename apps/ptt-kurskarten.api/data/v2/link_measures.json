@@ -1313,5 +1313,69 @@
     "valueNumber": 2.625,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912454275__node-1770912845895-distance-1852",
+    "linkId": "node-1770912454275__node-1770912845895",
+    "measureKey": "distance",
+    "valueNumber": 3.325,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912829695__node-1770912845895-distance-1852",
+    "linkId": "node-1770912829695__node-1770912845895",
+    "measureKey": "distance",
+    "valueNumber": 2.625,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912450080__node-1770912829695-distance-1852",
+    "linkId": "node-1770912450080__node-1770912829695",
+    "measureKey": "distance",
+    "valueNumber": 4.125,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912450080__node-1770912516959-distance-1852",
+    "linkId": "node-1770912450080__node-1770912516959",
+    "measureKey": "distance",
+    "valueNumber": 5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912516959__node-1770912543968-distance-1852",
+    "linkId": "node-1770912516959__node-1770912543968",
+    "measureKey": "distance",
+    "valueNumber": 3.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818487149__node-1770912543968-distance-1852",
+    "linkId": "node-1770818487149__node-1770912543968",
+    "measureKey": "distance",
+    "valueNumber": 3.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770912412950__node-1770912548392-distance-1852",
+    "linkId": "node-1770912412950__node-1770912548392",
+    "measureKey": "distance",
+    "valueNumber": 4.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770818451614__node-1770912548392-distance-1852",
+    "linkId": "node-1770818451614__node-1770912548392",
+    "measureKey": "distance",
+    "valueNumber": 2.625,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]

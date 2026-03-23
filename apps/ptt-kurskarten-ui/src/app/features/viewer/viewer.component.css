@@ -712,7 +712,36 @@
 }
 
 .settings-popup {
-  width: min(320px, calc(100vw - 32px));
+  width: min(380px, calc(100vw - 32px));
+}
+
+.settings-section {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.settings-field {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: #f5f5f5;
+}
+
+.settings-select {
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  background: #141414;
+  color: #fff;
+  padding: 8px 10px;
+  font: inherit;
 }
 
 .help-toggle-btn {

@@ -22,6 +22,21 @@ import { Subscription } from 'rxjs';
 import { BorderUncertaintyLayerComponent } from './border-uncertainty-layer.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  MINUTES_PER_DAY,
+  collectOrganicNodeEventIntensities,
+  getActiveSimulationRunsAtMinute,
+  getRelevantSimulationEdgeIds,
+  getRelevantSimulationNodeIds,
+  getTripRunProgressAtMinute,
+  normalizeMinute,
+  resolveSimulationEdgeDisplayState,
+  resolveSimulationNodeDisplayState,
+  type TripFlowDisplayState,
+  type TripFlowEdgeMode,
+  type TripFlowNodeMode,
+  type TripFlowSimulationRun
+} from './map-stage-simulation.util';
 
 const NODE_RADIUS = 3;
 const NODE_RADIUS_MAX = 9;
@@ -42,22 +57,8 @@ const ROUTE_FIT_PADDING_MAX = 84;
 const NODE_COLOR_DEFAULT = '#ffffff';
 const NODE_COLOR_FOREIGN = '#ffffff';
 const NODE_COLOR_MUTED = '#9a9a9a';
-const MINUTES_PER_DAY = 1440;
 const MAX_SIMULATION_DOTS = 700;
-
-type SimTripRun = {
-  edgeId: string;
-  tripId: string;
-  fromId: string;
-  toId: string;
-  transport: TransportType;
-  departs?: TimeHHMM;
-  arrives: TimeHHMM;
-  arrivalDayOffset?: number;
-  departMinute: number;
-  arriveMinute: number;
-  durationMinutes: number;
-};
+type SimTripRun = TripFlowSimulationRun;
 
 export type MapSimulationTripHit = {
   edgeId: string;
@@ -289,6 +290,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() selectedNodeId: string | null = null;
   @Input() routingActive = false;
   @Input() tripSimulationMinute: number | null = null;
+  @Input() tripFlowNodeMode: TripFlowNodeMode = 'always-active';
+  @Input() tripFlowEdgeMode: TripFlowEdgeMode = 'always-active';
   @Input() showBorder = true;
   @Input() interactiveViewport = false;
   @Input() viewportPanMode: 'anywhere' | 'empty-space-only' = 'anywhere';
@@ -382,6 +385,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       changes['selectedNodeId'] ||
       changes['routingActive'] ||
       changes['tripSimulationMinute'] ||
+      changes['tripFlowNodeMode'] ||
+      changes['tripFlowEdgeMode'] ||
       changes['glowingEdgeId'] ||
       changes['routeFitTopInset'] ||
       changes['viewportFocusTopInset'] ||
@@ -773,6 +778,18 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const nodeHighlights = this.highlightedNodeIds ?? highlightIds.nodeIds;
     const uncertainRouteEdgeIds = this.getUncertainRouteEdgeIds();
     const routingActive = this.routingActive;
+    const simulationDisplayActive = !routingActive && this.tripSimulationMinute !== null;
+    const simulationMinute = simulationDisplayActive ? normalizeMinute(this.tripSimulationMinute ?? 0) : null;
+    const simulationRuns =
+      simulationMinute === null
+        ? []
+        : getActiveSimulationRunsAtMinute(simulationMinute, this.tripRunsByMinute[Math.floor(simulationMinute)] ?? []);
+    const simulationRelevantEdgeIds = getRelevantSimulationEdgeIds(simulationRuns);
+    const simulationRelevantNodeIds = getRelevantSimulationNodeIds(simulationRuns);
+    const organicNodeIntensities =
+      simulationDisplayActive && this.tripFlowNodeMode === 'organic' && simulationMinute !== null
+        ? collectOrganicNodeEventIntensities(simulationMinute, simulationRuns)
+        : new Map<string, number>();
     const selectedFocusActive = !routingActive && this.selectedNodeId !== null;
     const selectedFocusEdgeIds = this.getSelectedNodeEdgeIds(edges);
 
@@ -780,6 +797,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.screenNodeLabels.clear();
     this.screenEdges.clear();
     this.screenSimulationDots = [];
+    const visibleNodeIds = new Set<string>();
 
     const edgeCounts = new Map<string, number>();
     edges.forEach((edge) => {
@@ -815,12 +833,27 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         }
         const laneIndex = index - (count - 1) / 2;
         const laneOffsetPx = laneIndex * EDGE_LANE_SPACING;
-        const isHighlighted = edgeHighlights.has(edge.id);
+        const simulationEdgeDisplay = simulationDisplayActive
+          ? resolveSimulationEdgeDisplayState(this.tripFlowEdgeMode, simulationRelevantEdgeIds.has(edge.id))
+          : null;
+        const isHighlighted = simulationEdgeDisplay === 'emphasis' || edgeHighlights.has(edge.id);
         const isGlowing = this.glowingEdgeId === edge.id;
         const isDashed = isHighlighted && uncertainRouteEdgeIds.has(edge.id);
         const isDimmed = routingActive && !isHighlighted;
         const isSelectionMuted = selectedFocusActive && !selectedFocusEdgeIds.has(edge.id);
-        this.drawEdgeLane(ctx, edge.id, from, to, laneOffsetPx, isHighlighted, isGlowing, isDashed, isDimmed, isSelectionMuted);
+        this.drawEdgeLane(
+          ctx,
+          edge.id,
+          from,
+          to,
+          laneOffsetPx,
+          isHighlighted,
+          isGlowing,
+          isDashed,
+          isDimmed,
+          isSelectionMuted,
+          simulationEdgeDisplay
+        );
       });
     });
 
@@ -840,16 +873,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.selectedConnection !== null &&
         (node.id === this.selectedConnection.from || node.id === this.selectedConnection.to);
       const isEndpoint = isEndpointPinned || isRouteEndpoint;
-      const isHighlighted = selectedFocusActive
+      const simulationNodeDisplay = simulationDisplayActive
+        ? resolveSimulationNodeDisplayState(this.tripFlowNodeMode, simulationRelevantNodeIds.has(node.id))
+        : null;
+      const isHighlighted = simulationNodeDisplay === 'emphasis' || (selectedFocusActive
         ? isSelected || isEndpoint
-        : nodeHighlights.has(node.id) || isSelected || isEndpoint;
+        : nodeHighlights.has(node.id) || isSelected || isEndpoint);
       const isHovered = this.hoveredNodeId === node.id;
       const isPulsing = pulseIds.has(node.id);
       const isDimmed = routingActive && !isHighlighted && !isHovered && !isPulsing;
       const shouldEmphasize = isHighlighted || (!selectedFocusActive && isHovered);
       const radius = baseRadius + (shouldEmphasize ? 2 * sizeScale : 0);
       const showShadow = this.pickMode !== null;
-      const isSelectionMuted = selectedFocusActive && !isSelected && !isPulsing && !isEndpoint;
+      const isSelectionMuted =
+        simulationNodeDisplay === 'muted' || (selectedFocusActive && !isSelected && !isPulsing && !isEndpoint);
+      const shouldHideStaticNode =
+        simulationNodeDisplay === 'hidden' || simulationNodeDisplay === 'organic';
       const fillColor = isPulsing
         ? NODE_COLOR_DEFAULT
         : isSelectionMuted
@@ -859,35 +898,39 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
             : NODE_COLOR_DEFAULT;
       const strokeColor = isPulsing ? '#ffffff' : isSelectionMuted ? NODE_COLOR_MUTED : '#ffffff';
       const nodeAlpha = isPulsing ? 1 : isDimmed || isSelectionMuted ? DIM_ALPHA : 1;
-      if (showShadow) {
+      const drawsStaticNode = !shouldHideStaticNode;
+      if (drawsStaticNode) {
+        if (showShadow) {
+          ctx.save();
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetX = 5 * sizeScale;
+          ctx.shadowOffsetY = 5 * sizeScale;
+          ctx.globalAlpha = nodeAlpha;
+          ctx.beginPath();
+          ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = fillColor;
+          ctx.fill();
+          ctx.restore();
+        } else {
+          ctx.save();
+          ctx.globalAlpha = nodeAlpha;
+          ctx.beginPath();
+          ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = fillColor;
+          ctx.fill();
+          ctx.restore();
+        }
         ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetX = 5 * sizeScale;
-        ctx.shadowOffsetY = 5 * sizeScale;
         ctx.globalAlpha = nodeAlpha;
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = fillColor;
-        ctx.fill();
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = 2;
+        ctx.stroke();
         ctx.restore();
-      } else {
-        ctx.save();
-        ctx.globalAlpha = nodeAlpha;
-        ctx.beginPath();
-        ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = fillColor;
-        ctx.fill();
-        ctx.restore();
+        visibleNodeIds.add(node.id);
       }
-      ctx.save();
-      ctx.globalAlpha = nodeAlpha;
-      ctx.beginPath();
-      ctx.arc(position.x, position.y, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.restore();
 
       if (isEndpoint) {
         const ringRadius = radius + 6 * sizeScale;
@@ -903,6 +946,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.lineWidth = 2.25;
         ctx.stroke();
         ctx.restore();
+        visibleNodeIds.add(node.id);
       }
 
       if (isSelected || isHovered) {
@@ -911,6 +955,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
         ctx.stroke();
+        visibleNodeIds.add(node.id);
       }
 
       if (isPulsing) {
@@ -920,10 +965,47 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
         ctx.lineWidth = 2;
         ctx.stroke();
+        visibleNodeIds.add(node.id);
       }
 
       this.screenNodes.set(node.id, { x: position.x, y: position.y, r: radius });
     });
+
+    if (organicNodeIntensities.size > 0) {
+      organicNodeIntensities.forEach((intensity, nodeId) => {
+        if (intensity <= 0) {
+          return;
+        }
+        const node = nodeMap.get(nodeId);
+        const screenNode = this.screenNodes.get(nodeId);
+        if (!node || !screenNode) {
+          return;
+        }
+        const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
+        const organicRadius = screenNode.r + 1.5 * sizeScale;
+        ctx.save();
+        ctx.globalAlpha = intensity;
+        ctx.beginPath();
+        ctx.arc(screenNode.x, screenNode.y, organicRadius, 0, Math.PI * 2);
+        ctx.fillStyle = node.foreign ? NODE_COLOR_FOREIGN : NODE_COLOR_DEFAULT;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(screenNode.x, screenNode.y, organicRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.15, intensity * 0.65);
+        ctx.beginPath();
+        ctx.arc(screenNode.x, screenNode.y, organicRadius + 7 * sizeScale + pulse * 3 * sizeScale, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+        ctx.restore();
+      });
+    }
 
     const simulationDotCount = this.drawTripSimulationDots(ctx, pulseTime, sizeScale);
 
@@ -934,6 +1016,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
           ? nodes
           : nodes.filter((node) => labeledNames.has(node.name));
       labelNodes.forEach((node) => {
+        if (!visibleNodeIds.has(node.id)) {
+          return;
+        }
         const screen = this.screenNodes.get(node.id);
         if (!screen) {
           return;
@@ -1357,7 +1442,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     isGlowing: boolean,
     isDashed: boolean,
     isDimmed: boolean,
-    isSelectionMuted: boolean
+    isSelectionMuted: boolean,
+    simulationDisplayState: TripFlowDisplayState | null
   ): void {
     const fromPos = this.project(from);
     const toPos = this.project(to);
@@ -1372,12 +1458,24 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const pickDim = this.pickMode !== null;
     const baseStroke = pickDim ? 'rgba(255, 255, 255, 0.24)' : 'rgba(255, 255, 255, 0.48)';
     const dimStroke = pickDim ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.14)';
-    const strokeStyle = isHighlighted ? '#ffffff' : isSelectionMuted ? NODE_COLOR_MUTED : isDimmed ? dimStroke : baseStroke;
     const x1 = fromPos.x + px * laneOffsetPx;
     const y1 = fromPos.y + py * laneOffsetPx;
     const x2 = toPos.x + px * laneOffsetPx;
     const y2 = toPos.y + py * laneOffsetPx;
     this.screenEdges.set(edgeId, { x1, y1, x2, y2 });
+    if (simulationDisplayState === 'hidden') {
+      return;
+    }
+    const displayState = simulationDisplayState ?? (isHighlighted ? 'emphasis' : isSelectionMuted ? 'muted' : 'base');
+    const strokeStyle =
+      displayState === 'emphasis'
+        ? '#ffffff'
+        : displayState === 'muted'
+          ? NODE_COLOR_MUTED
+          : isDimmed
+            ? dimStroke
+            : baseStroke;
+    const strokeAlpha = displayState === 'muted' ? DIM_ALPHA : isSelectionMuted ? DIM_ALPHA : 1;
     const dashPattern = isDashed ? [10, 7] : [];
     if (isGlowing) {
       ctx.save();
@@ -1393,9 +1491,14 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.restore();
     }
     ctx.save();
-    ctx.globalAlpha = isSelectionMuted ? DIM_ALPHA : 1;
+    ctx.globalAlpha = strokeAlpha;
     ctx.strokeStyle = isGlowing ? '#ffffff' : strokeStyle;
-    ctx.lineWidth = isGlowing ? EDGE_LINE_WIDTH_HIGHLIGHT + 1 : isHighlighted ? EDGE_LINE_WIDTH_HIGHLIGHT : EDGE_LINE_WIDTH;
+    ctx.lineWidth =
+      isGlowing
+        ? EDGE_LINE_WIDTH_HIGHLIGHT + 1
+        : displayState === 'emphasis'
+          ? EDGE_LINE_WIDTH_HIGHLIGHT
+          : EDGE_LINE_WIDTH;
     ctx.setLineDash(dashPattern);
     ctx.beginPath();
     ctx.moveTo(x1, y1);
@@ -1724,7 +1827,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (!edge) {
         continue;
       }
-      const progress = this.getTripRunProgress(run, minute);
+      const progress = getTripRunProgressAtMinute(run, minute);
       if (progress === null) {
         continue;
       }
@@ -1760,25 +1863,10 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     return drawn;
   }
 
-  private getTripRunProgress(run: SimTripRun, minute: number): number | null {
-    let absoluteMinute = minute;
-    while (absoluteMinute < run.departMinute) {
-      absoluteMinute += MINUTES_PER_DAY;
-    }
-    if (absoluteMinute < run.departMinute || absoluteMinute > run.arriveMinute) {
-      return null;
-    }
-    return Math.max(0, Math.min(1, (absoluteMinute - run.departMinute) / run.durationMinutes));
-  }
-
   private getNodeLabel(id: string): string {
     const nodes = this.graph?.nodes ?? [];
     return nodes.find((node) => node.id === id)?.name ?? id;
   }
-}
-
-function normalizeMinute(value: number): number {
-  return ((value % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
 }
 
 function parseHHMM(value: string): number | null {
