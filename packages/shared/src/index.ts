@@ -22,7 +22,7 @@ export type EdgeTrip = {
   id: string;
   transport: TransportType;
   departs?: TimeHHMM;
-  arrives: TimeHHMM;
+  arrives?: TimeHHMM;
   arrivalDayOffset?: DayOffset;
 };
 

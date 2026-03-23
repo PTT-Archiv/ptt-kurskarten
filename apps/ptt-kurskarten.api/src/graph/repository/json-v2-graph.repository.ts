@@ -704,12 +704,12 @@ export class JsonV2GraphRepository implements GraphRepository {
 
   private materializeTrip(trip: StoredServiceTrip): EdgeTrip {
     const departs = trip.departs ?? undefined;
-    const arrives = trip.arrives ?? '';
+    const arrives = trip.arrives ?? undefined;
     return {
       id: trip.id,
       transport: trip.transport ?? 'postkutsche',
-      departs: departs as EdgeTrip['departs'],
-      arrives: arrives as EdgeTrip['arrives'],
+      departs,
+      arrives,
       arrivalDayOffset: this.normalizeDayOffset(trip.arrivalDayOffset)
     };
   }

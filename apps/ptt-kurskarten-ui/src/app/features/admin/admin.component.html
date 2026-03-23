@@ -350,7 +350,7 @@
           <button
             type="button"
             class="quick-edge-create"
-            [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
+            [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId() || !tripsValid(quickTrips())"
             (click)="saveQuickEdge()"
             [tabIndex]="5 + quickTrips().length * 2"
           >
@@ -1012,7 +1012,7 @@
             Save Service Draft
           </button>
         } @else if (selectedEdgeDraft()) {
-          <button class="action-btn" (click)="saveSelectedEdge()">Update Service</button>
+          <button class="action-btn" [disabled]="!tripsValid(selectedEdgeDraft()?.trips ?? [])" (click)="saveSelectedEdge()">Update Service</button>
         } @else if (draftNode()) {
           <button class="action-btn" (click)="saveDraftNode()">Create Place</button>
         } @else if (selectedNodeId()) {

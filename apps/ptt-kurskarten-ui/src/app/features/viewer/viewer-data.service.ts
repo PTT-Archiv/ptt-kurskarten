@@ -323,7 +323,7 @@ function materializeEdgeForYear(service: StoredService, data: StaticGraphData, y
       id: trip.id,
       transport: trip.transport ?? 'postkutsche',
       departs: normalizeTimeHHMM(trip.departs),
-      arrives: (trip.arrives ?? '') as EdgeTrip['arrives'],
+      arrives: normalizeTimeHHMM(trip.arrives),
       arrivalDayOffset: normalizeDayOffset(trip.arrivalDayOffset)
     }));
   const distance = data.linkMeasures

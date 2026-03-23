@@ -1806,7 +1806,7 @@ export class AdminComponent implements OnDestroy {
   }
 
   appendQuickTripsToCurrentService(): void {
-    const trips = this.normalizeTrips(this.quickTrips()).filter((trip) => this.isTimeValid(trip.departs ?? '') && this.isTimeValid(trip.arrives ?? ''));
+    const trips = this.normalizeTrips(this.quickTrips()).filter((trip) => this.isTripValid(trip));
     if (!trips.length) {
       return;
     }
@@ -3565,6 +3565,8 @@ export class AdminComponent implements OnDestroy {
   private normalizeTrip(trip: EdgeTrip): EdgeTrip {
     return {
       ...trip,
+      departs: (trip.departs?.trim() || undefined) as EdgeTrip['departs'],
+      arrives: (trip.arrives?.trim() || undefined) as EdgeTrip['arrives'],
       transport: this.toTransportType(trip.transport)
     };
   }
@@ -3734,13 +3736,26 @@ export class AdminComponent implements OnDestroy {
     if (!trips.length) {
       return true;
     }
-    return trips.every(
-      (trip) => this.isTimeValid(trip.departs ?? '') && this.isTimeValid(trip.arrives ?? '')
-    );
+    return trips.every((trip) => this.isTripValid(trip));
   }
 
   private isTimeValid(value: string): boolean {
     return /^\d{2}:\d{2}$/.test(value?.trim());
+  }
+
+  private isTripTimeFieldValid(value: string | undefined): boolean {
+    const trimmed = value?.trim() ?? '';
+    return trimmed === '' || this.isTimeValid(trimmed);
+  }
+
+  private hasKnownTripTime(trip: EdgeTrip): boolean {
+    return Boolean(trip.departs?.trim() || trip.arrives?.trim());
+  }
+
+  private isTripValid(trip: EdgeTrip): boolean {
+    return this.hasKnownTripTime(trip)
+      && this.isTripTimeFieldValid(trip.departs)
+      && this.isTripTimeFieldValid(trip.arrives);
   }
 
   private resolveQuickTargetPlaceId(): string | null {
@@ -3969,41 +3984,53 @@ export class AdminComponent implements OnDestroy {
       .filter((line) => line.length > 0);
     const rows: EdgeTrip[] = [];
     for (const line of lines) {
-      const parts = line.split(/[;\t,]/).map((part) => part.trim()).filter((part) => part.length > 0);
+      const parts = line.split(/[;\t,]/).map((part) => part.trim());
+      if (!parts.some((part) => part.length > 0)) {
+        continue;
+      }
       let transport: TransportType = 'postkutsche';
       let departs = '';
       let arrives = '';
 
       if (parts.length >= 3) {
-        const maybeTransport = this.toTransportType(parts[0]);
-        const maybeTimeStart = this.isTimeValid(parts[0]);
-        if (!maybeTimeStart) {
-          transport = maybeTransport;
-          departs = parts[1] ?? '';
-          arrives = parts[2] ?? '';
+        const first = parts[0] ?? '';
+        const second = parts[1] ?? '';
+        const third = parts[2] ?? '';
+        const transportFirst = first.length > 0 && !this.isTimeValid(first);
+        const transportLast = third.length > 0 && !this.isTimeValid(third);
+
+        if (transportFirst) {
+          transport = this.toTransportType(first);
+          departs = second;
+          arrives = third;
+        } else if (transportLast) {
+          departs = first;
+          arrives = second;
+          transport = this.toTransportType(third);
         } else {
-          departs = parts[0] ?? '';
-          arrives = parts[1] ?? '';
-          transport = this.toTransportType(parts[2]);
+          departs = first;
+          arrives = second;
         }
       } else if (parts.length === 2) {
-        departs = parts[0];
-        arrives = parts[1];
+        departs = parts[0] ?? '';
+        arrives = parts[1] ?? '';
       } else {
         continue;
       }
 
-      if (!this.isTimeValid(departs) || !this.isTimeValid(arrives)) {
+      const trip: EdgeTrip = {
+        id: `trip-${Date.now()}-${rows.length}`,
+        transport,
+        departs: (departs || undefined) as EdgeTrip['departs'],
+        arrives: (arrives || undefined) as EdgeTrip['arrives'],
+        arrivalDayOffset: 0
+      };
+
+      if (!this.isTripValid(trip)) {
         continue;
       }
 
-      rows.push({
-        id: `trip-${Date.now()}-${rows.length}`,
-        transport,
-        departs: departs as EdgeTrip['departs'],
-        arrives: arrives as EdgeTrip['arrives'],
-        arrivalDayOffset: 0
-      });
+      rows.push(trip);
     }
     return rows;
   }

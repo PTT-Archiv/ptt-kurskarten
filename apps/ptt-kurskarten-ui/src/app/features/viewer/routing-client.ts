@@ -109,8 +109,9 @@ export function computeTripChoice(
       continue;
     }
     const dep = parseTime(trip.departs);
-    const hasArrive = Boolean(trip.arrives);
-    const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
+    const arrives = trip.arrives;
+    const hasArrive = Boolean(arrives);
+    const arrRaw = arrives ? parseTime(arrives) : dep;
     const offset = hasArrive ? trip.arrivalDayOffset : undefined;
     const arr = resolveArrivalMinutes(dep, arrRaw, offset);
 
@@ -129,8 +130,9 @@ export function computeTripChoice(
         continue;
       }
       const dep = parseTime(trip.departs);
-      const hasArrive = Boolean(trip.arrives);
-      const arrRaw = hasArrive ? parseTime(trip.arrives) : dep;
+      const arrives = trip.arrives;
+      const hasArrive = Boolean(arrives);
+      const arrRaw = arrives ? parseTime(arrives) : dep;
       const offset = hasArrive ? trip.arrivalDayOffset : undefined;
       const arr = resolveArrivalMinutes(dep, arrRaw, offset);
 
