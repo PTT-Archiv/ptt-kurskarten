@@ -6125,5 +6125,16 @@
     "nameType": "primary",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "c257fcbd-3c2b-4792-90d5-12242fcf2d70",
+    "placeId": "node-1774351366192",
+    "lang": "und",
+    "name": "Zizers",
+    "normalized": "zizers",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
