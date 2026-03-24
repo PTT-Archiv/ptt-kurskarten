@@ -115,6 +115,7 @@ type ServiceNodeFilter =
   | 'needsIncomingPair'
   | 'fullyPaired';
 type ServiceNodeState = Exclude<ServiceNodeFilter, 'all'>;
+type DirectionalPairState = 'missingReverse' | 'reverseOnly';
 type ServiceNodeMetrics = {
   state: 'onlyOutgoing' | 'onlyIncoming' | 'both' | 'none';
   hasTrips: boolean;
@@ -193,9 +194,7 @@ export class AdminComponent implements OnDestroy {
   quickFromActiveIndex = signal<number>(0);
   quickToActiveIndex = signal<number>(0);
   quickDistance = signal<string>('');
-  quickTrips = signal<EdgeTrip[]>([
-    { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }
-  ]);
+  quickTrips = signal<EdgeTrip[]>([this.createDefaultQuickTrip()]);
   quickEntityMode = signal<QuickEntityMode>('service');
   quickFromNodeFilter = signal<ServiceNodeFilter>('all');
   quickToNodeFilter = signal<ServiceNodeFilter>('all');
@@ -277,6 +276,7 @@ export class AdminComponent implements OnDestroy {
   @ViewChild('nodeNameInput') private nodeNameInput?: ElementRef<HTMLInputElement>;
   @ViewChild('quickFromInput') private quickFromInput?: ElementRef<HTMLInputElement>;
   @ViewChild('quickToInput') private quickToInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('addQuickTripButton') private addQuickTripButton?: ElementRef<HTMLButtonElement>;
 
   nodeDetail = computed<NodeDetail | null>(() => {
     const snapshot = this.graph();
@@ -1266,7 +1266,7 @@ export class AdminComponent implements OnDestroy {
     const trips = this.quickTrips();
     const next: EdgeTrip = copyLast && trips.length > 0
       ? { ...trips[trips.length - 1], id: `quick-trip-${Date.now()}` }
-      : { id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 };
+      : this.createDefaultQuickTrip();
     this.quickTrips.set([...trips, next]);
   }
 
@@ -1344,6 +1344,7 @@ export class AdminComponent implements OnDestroy {
     const notes: LocalizedText | undefined = noteDe || noteFr
       ? { de: noteDe || undefined, fr: noteFr || undefined }
       : undefined;
+    const shouldPrefillReverse = this.resolveDirectionalPairState(from, to, trips.length > 0) === 'missingReverse';
 
     const edge: GraphEdge = {
       id: `edge-${Date.now()}`,
@@ -1374,10 +1375,15 @@ export class AdminComponent implements OnDestroy {
         }
         this.quickFromOpen.set(false);
         this.quickToOpen.set(false);
+        if (shouldPrefillReverse) {
+          this.prepareReverseQuickServiceDraft(created.from, created.to);
+          this.focusAddQuickTripButton();
+          return;
+        }
         this.quickToId.set(null);
         this.quickToQuery.set('');
         this.quickDistance.set('');
-        this.quickTrips.set([{ id: `quick-trip-${Date.now()}`, transport: 'postkutsche', departs: '08:00', arrives: '09:00', arrivalDayOffset: 0 }]);
+        this.quickTrips.set([this.createDefaultQuickTrip()]);
         this.quickServiceNoteDe.set('');
         this.quickServiceNoteFr.set('');
       },
@@ -3183,6 +3189,45 @@ export class AdminComponent implements OnDestroy {
     this.quickDistance.set(found !== undefined ? String(found) : '');
   }
 
+  private resolveDirectionalPairState(
+    fromId: string,
+    toId: string,
+    assumeForwardExists = false
+  ): DirectionalPairState | null {
+    const snapshot = this.displayGraph() ?? this.graph();
+    const forwardExists = assumeForwardExists || this.hasTripEdge(snapshot, fromId, toId);
+    const reverseExists = this.hasTripEdge(snapshot, toId, fromId);
+
+    if (forwardExists && !reverseExists) {
+      return 'missingReverse';
+    }
+    if (!forwardExists && reverseExists) {
+      return 'reverseOnly';
+    }
+    return null;
+  }
+
+  private createDefaultQuickTrip(): EdgeTrip {
+    return {
+      id: `quick-trip-${Date.now()}`,
+      transport: 'postkutsche',
+      departs: '08:00',
+      arrives: '09:00',
+      arrivalDayOffset: 0
+    };
+  }
+
+  private prepareReverseQuickServiceDraft(fromId: string, toId: string): void {
+    this.quickFromId.set(toId);
+    this.quickFromQuery.set(this.getNodeById(toId)?.name ?? '');
+    this.quickToId.set(fromId);
+    this.quickToQuery.set(this.getNodeById(fromId)?.name ?? '');
+    this.quickTrips.set([this.createDefaultQuickTrip()]);
+    this.quickServiceNoteDe.set('');
+    this.quickServiceNoteFr.set('');
+    this.applyQuickDistancePrefill();
+  }
+
   private focusQuickTripField(index: number, field: 'departs' | 'arrives'): void {
     const root = this.hostRef.nativeElement;
     const selector = `[data-quick-trip-index=\"${index}\"][data-quick-trip-field=\"${field}\"]`;
@@ -3200,6 +3245,12 @@ export class AdminComponent implements OnDestroy {
         input.focus();
         input.select();
       }
+    });
+  }
+
+  private focusAddQuickTripButton(): void {
+    requestAnimationFrame(() => {
+      this.addQuickTripButton?.nativeElement?.focus();
     });
   }
 
@@ -3391,16 +3442,14 @@ export class AdminComponent implements OnDestroy {
   }
 
   private buildDirectionalPairHint(fromId: string, toId: string, assumeForwardExists = false): string | null {
-    const snapshot = this.displayGraph() ?? this.graph();
     const fromName = this.getNodeName(fromId);
     const toName = this.getNodeName(toId);
-    const forwardExists = assumeForwardExists || this.hasTripEdge(snapshot, fromId, toId);
-    const reverseExists = this.hasTripEdge(snapshot, toId, fromId);
+    const pairState = this.resolveDirectionalPairState(fromId, toId, assumeForwardExists);
 
-    if (forwardExists && !reverseExists) {
+    if (pairState === 'missingReverse') {
       return `Missing reverse pair: ${toName} -> ${fromName}.`;
     }
-    if (!forwardExists && reverseExists) {
+    if (pairState === 'reverseOnly') {
       return `Only the reverse pair exists so far: ${toName} -> ${fromName}.`;
     }
     return null;
