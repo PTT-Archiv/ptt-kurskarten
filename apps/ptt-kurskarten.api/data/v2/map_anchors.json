@@ -2052,8 +2052,8 @@
   {
     "id": "anchor-node-1770905871252",
     "placeId": "node-1770905871252",
-    "x": 346.33333976120684,
-    "y": 114.44720327821472,
+    "x": 347.60300650339366,
+    "y": 106.45909609669768,
     "iiifCenterX": null,
     "iiifCenterY": null,
     "validFrom": 1852,
@@ -2082,8 +2082,8 @@
   {
     "id": "anchor-node-1770905886053",
     "placeId": "node-1770905886053",
-    "x": 357.8026685358752,
-    "y": 127.90122694050251,
+    "x": 365.7322254040687,
+    "y": 128.8313236762541,
     "iiifCenterX": 6329,
     "iiifCenterY": 2751,
     "validFrom": 1852,
@@ -3996,6 +3996,36 @@
     "y": 77.80938080313285,
     "iiifCenterX": 7064,
     "iiifCenterY": 1815,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770905890445-1852",
+    "placeId": "node-1770905890445",
+    "x": 339.4422310756972,
+    "y": 126.90836653386454,
+    "iiifCenterX": 6310,
+    "iiifCenterY": 2690,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770905871252-1852",
+    "placeId": "node-1770905871252",
+    "x": 346.33333976120684,
+    "y": 114.44720327821472,
+    "iiifCenterX": 6189,
+    "iiifCenterY": 2496,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770905886053-1852",
+    "placeId": "node-1770905886053",
+    "x": 357.8026685358752,
+    "y": 127.90122694050251,
+    "iiifCenterX": 6473,
+    "iiifCenterY": 2837,
     "validFrom": 1852,
     "validTo": 1852
   }
