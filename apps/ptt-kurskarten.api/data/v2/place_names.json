@@ -6213,5 +6213,16 @@
     "nameType": "primary",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "9c403b55-34e3-40e2-b8d4-5e5a88ea0882",
+    "placeId": "node-1774363977918",
+    "lang": "und",
+    "name": "Gonzenbach",
+    "normalized": "gonzenbach",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]

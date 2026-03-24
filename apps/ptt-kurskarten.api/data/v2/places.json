@@ -2736,5 +2736,11 @@
     "defaultName": "Diefsenhofen",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "node-1774363977918",
+    "defaultName": "Gonzenbach",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
