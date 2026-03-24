@@ -4028,5 +4028,15 @@
     "iiifCenterY": 2837,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "anchor-node-1770913438620-1852",
+    "placeId": "node-1770913438620",
+    "x": 604.8836236682924,
+    "y": 184.37616456342863,
+    "iiifCenterX": 10165,
+    "iiifCenterY": 3350,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]
