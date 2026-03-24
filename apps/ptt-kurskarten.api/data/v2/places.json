@@ -2694,5 +2694,47 @@
     "defaultName": "Zizers",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "node-1774357222614",
+    "defaultName": "Augsburg",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774357233358",
+    "defaultName": "Leipzig",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774357248626",
+    "defaultName": "München",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774358553903",
+    "defaultName": "Donauschingen, Offenburg",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774358633200",
+    "defaultName": "Freiburg",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774359370690",
+    "defaultName": "Unterneuhaus",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774359516377",
+    "defaultName": "Diefsenhofen",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]

@@ -6136,5 +6136,82 @@
     "nameType": "primary",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "dd3917e6-2838-449d-807c-8ae0b65c8311",
+    "placeId": "node-1774357222614",
+    "lang": "und",
+    "name": "Augsburg",
+    "normalized": "augsburg",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "cf3b29c5-69bf-4260-adb7-1abc0d1b7247",
+    "placeId": "node-1774357233358",
+    "lang": "und",
+    "name": "Leipzig",
+    "normalized": "leipzig",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "01dc08c3-a508-43a2-8ace-c4399503add5",
+    "placeId": "node-1774357248626",
+    "lang": "und",
+    "name": "München",
+    "normalized": "munchen",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "198af8ce-e4b0-4300-a23c-631b96b21bfc",
+    "placeId": "node-1774358553903",
+    "lang": "und",
+    "name": "Donauschingen, Offenburg",
+    "normalized": "donauschingen, offenburg",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "76660834-51ae-422f-8c83-c48b0f530bb8",
+    "placeId": "node-1774358633200",
+    "lang": "und",
+    "name": "Freiburg",
+    "normalized": "freiburg",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "d576c970-f120-4795-bb1c-b3a7f802d43d",
+    "placeId": "node-1774359370690",
+    "lang": "und",
+    "name": "Unterneuhaus",
+    "normalized": "unterneuhaus",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "456e2141-7b7d-497c-a52e-7f29aacd86fa",
+    "placeId": "node-1774359516377",
+    "lang": "und",
+    "name": "Diefsenhofen",
+    "normalized": "diefsenhofen",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
