@@ -1664,7 +1664,7 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
     const deltaMs = Math.max(0, ts - this.simulationLastTs);
     this.simulationLastTs = ts;
-    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * 2;
+    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * 3;
     if (minuteAdvance > 0) {
       this.simulationMinute.set(this.normalizeMinuteOfDay(this.simulationMinute() + minuteAdvance));
     }

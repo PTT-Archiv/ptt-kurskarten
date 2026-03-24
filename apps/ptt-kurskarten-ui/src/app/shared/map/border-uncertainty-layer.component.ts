@@ -81,7 +81,7 @@ export const DEFAULT_BORDER_UNCERTAINTY_CONFIG: BorderUncertaintyConfig = {
             [attr.y]="dot.y - dot.r"
             [attr.width]="dot.r * 2"
             [attr.height]="dot.r * 2"
-            fill="#a7aeb6"
+            fill="#b3b3b397"
             [attr.opacity]="dot.o"
           ></rect>
         }
@@ -93,7 +93,7 @@ export const DEFAULT_BORDER_UNCERTAINTY_CONFIG: BorderUncertaintyConfig = {
             [attr.y]="dot.y - dot.r"
             [attr.width]="dot.r * 2"
             [attr.height]="dot.r * 2"
-            fill="#a7aeb6"
+            fill="#b3b3b46e"
             [attr.opacity]="dot.o"
           ></rect>
         }

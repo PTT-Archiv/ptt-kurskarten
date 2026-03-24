@@ -38,8 +38,8 @@ import {
   type TripFlowSimulationRun
 } from './map-stage-simulation.util';
 
-const NODE_RADIUS = 3;
-const NODE_RADIUS_MAX = 9;
+const NODE_RADIUS = 1;
+const NODE_RADIUS_MAX = 1;
 const NODE_RADIUS_STEP = .3;
 const DEFAULT_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_ZOOM = 0.85;
