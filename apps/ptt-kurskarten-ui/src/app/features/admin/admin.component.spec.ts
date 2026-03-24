@@ -178,4 +178,15 @@ describe('AdminComponent quick service reverse pair flow', () => {
     expect(component.quickToQuery()).toBe('');
     expect(component.quickDistance()).toBe('');
   });
+
+  it('treats trips with both departure and arrival empty as valid', () => {
+    const fixture = TestBed.createComponent(AdminComponent);
+    const component = fixture.componentInstance;
+
+    expect(
+      component.tripsValid([
+        { id: 'trip-empty', transport: 'postkutsche', departs: undefined, arrives: undefined, arrivalDayOffset: 0 }
+      ])
+    ).toBe(true);
+  });
 });

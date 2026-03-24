@@ -3797,13 +3797,8 @@ export class AdminComponent implements OnDestroy {
     return trimmed === '' || this.isTimeValid(trimmed);
   }
 
-  private hasKnownTripTime(trip: EdgeTrip): boolean {
-    return Boolean(trip.departs?.trim() || trip.arrives?.trim());
-  }
-
   private isTripValid(trip: EdgeTrip): boolean {
-    return this.hasKnownTripTime(trip)
-      && this.isTripTimeFieldValid(trip.departs)
+    return this.isTripTimeFieldValid(trip.departs)
       && this.isTripTimeFieldValid(trip.arrives);
   }
 

@@ -7045,5 +7045,14 @@
     "arrives": "17:30",
     "arrivalDayOffset": 0,
     "year": 1852
+  },
+  {
+    "id": "trip-1774349992320",
+    "serviceId": "edge-1774349650789",
+    "transport": "postkutsche",
+    "departs": null,
+    "arrives": null,
+    "arrivalDayOffset": 0,
+    "year": 1852
   }
 ]
