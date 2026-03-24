@@ -5064,5 +5064,31 @@
     "valueJson": null,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "da20e996-abfc-4409-a6bf-d875a9313bd0",
+    "targetType": "place",
+    "targetId": "node-1774348272800",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "728fe552-4bbb-4ea4-b388-a44a5c028bdb",
+    "targetType": "place",
+    "targetId": "node-1774348285328",
+    "schemaKey": "identifier.wikidata",
+    "validFrom": 1852,
+    "validTo": null,
+    "valueType": "string",
+    "valueText": "Q660433",
+    "valueNumber": null,
+    "valueBoolean": null,
+    "valueJson": null
   }
 ]

@@ -4027,5 +4027,135 @@
     "toPlaceId": "node-1770891568712",
     "year": 1852,
     "note": null
+  },
+  {
+    "id": "edge-1774348410761",
+    "linkId": "node-1770891635575__node-1774348285328",
+    "fromPlaceId": "node-1770891635575",
+    "toPlaceId": "node-1774348285328",
+    "year": 1852,
+    "note": {
+      "de": "Mi. Fr. u. So."
+    }
+  },
+  {
+    "id": "edge-1774348437492",
+    "linkId": "node-1770891635575__node-1774348285328",
+    "fromPlaceId": "node-1774348285328",
+    "toPlaceId": "node-1770891635575",
+    "year": 1852,
+    "note": {
+      "de": "Mi. Fr. u. So."
+    }
+  },
+  {
+    "id": "edge-1774348477946",
+    "linkId": "node-1770898624681__node-1774348285328",
+    "fromPlaceId": "node-1774348285328",
+    "toPlaceId": "node-1770898624681",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774348485209",
+    "linkId": "node-1770898624681__node-1774348285328",
+    "fromPlaceId": "node-1770898624681",
+    "toPlaceId": "node-1774348285328",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774348526355",
+    "linkId": "node-1770898624681__node-1770898631981",
+    "fromPlaceId": "node-1770898624681",
+    "toPlaceId": "node-1770898631981",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774348542809",
+    "linkId": "node-1770898624681__node-1770898631981",
+    "fromPlaceId": "node-1770898631981",
+    "toPlaceId": "node-1770898624681",
+    "year": 1852,
+    "note": {
+      "de": "Di. Do. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774348619437",
+    "linkId": "node-1770898631981__node-1770898668601",
+    "fromPlaceId": "node-1770898631981",
+    "toPlaceId": "node-1770898668601",
+    "year": 1852,
+    "note": {
+      "de": "vom 15. Juni bis 15. Sept täglich.\nSamedan - Zernetz via Scanfs: Di. Do. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774348747855",
+    "linkId": "node-1770898631981__node-1770898668601",
+    "fromPlaceId": "node-1770898668601",
+    "toPlaceId": "node-1770898631981",
+    "year": 1852,
+    "note": {
+      "de": "vom 15. Juni bis 15. Sept täglich. Zernetz - Samedan via Scanfs: Mo. Fr. u. So."
+    }
+  },
+  {
+    "id": "edge-1774348774748",
+    "linkId": "node-1770898668601__node-1770898704049",
+    "fromPlaceId": "node-1770898668601",
+    "toPlaceId": "node-1770898704049",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774348886322",
+    "linkId": "node-1770898704049__node-1770898723871",
+    "fromPlaceId": "node-1770898704049",
+    "toPlaceId": "node-1770898723871",
+    "year": 1852,
+    "note": {
+      "de": "im Sommer Di. Do. Sa."
+    }
+  },
+  {
+    "id": "edge-1774348909006",
+    "linkId": "node-1770898704049__node-1770898723871",
+    "fromPlaceId": "node-1770898723871",
+    "toPlaceId": "node-1770898704049",
+    "year": 1852,
+    "note": {
+      "de": "Mi. Fr. u. So."
+    }
+  },
+  {
+    "id": "edge-1774348996088",
+    "linkId": "node-1770895112907__node-1770898723871",
+    "fromPlaceId": "node-1770898723871",
+    "toPlaceId": "node-1770895112907",
+    "year": 1852,
+    "note": {
+      "de": "Mi. u. So."
+    }
+  },
+  {
+    "id": "edge-1774349004952",
+    "linkId": "node-1770895112907__node-1770898723871",
+    "fromPlaceId": "node-1770895112907",
+    "toPlaceId": "node-1770898723871",
+    "year": 1852,
+    "note": {
+      "de": "Di. u. Sa."
+    }
+  },
+  {
+    "id": "edge-1774349650789",
+    "linkId": "node-1770898668601__node-1770898704049",
+    "fromPlaceId": "node-1770898704049",
+    "toPlaceId": "node-1770898668601",
+    "year": 1852,
+    "note": null
   }
 ]

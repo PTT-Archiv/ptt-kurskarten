@@ -6103,5 +6103,27 @@
     "nameType": "primary",
     "validFrom": 1900,
     "validTo": null
+  },
+  {
+    "id": "11350311-eb50-4873-8bf1-f9868d7c1757",
+    "placeId": "node-1774348272800",
+    "lang": "und",
+    "name": "Vex",
+    "normalized": "vex",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "881814ee-a132-4ea4-abe9-41dc0a4271ea",
+    "placeId": "node-1774348285328",
+    "lang": "und",
+    "name": "Vicosoprano",
+    "normalized": "vicosoprano",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
   }
 ]
