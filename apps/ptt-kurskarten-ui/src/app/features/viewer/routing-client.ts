@@ -29,6 +29,13 @@ type TripChoice = {
   legs: ConnectionLeg[];
 };
 
+type ContinuationCandidate = {
+  edge: GraphEdge;
+  leg: ConnectionLeg;
+  departAbs?: number;
+  arriveAbs?: number;
+};
+
 type QueueItem = { nodeId: string; time: number };
 
 type PrevInfo = {
@@ -134,6 +141,38 @@ function buildAdjacency(snapshot: GraphSnapshot): Map<string, GraphEdge[]> {
   return adjacency;
 }
 
+function buildReachableToTarget(adjacency: Map<string, GraphEdge[]>, targetNode: string): Set<string> {
+  const reverse = new Map<string, string[]>();
+
+  adjacency.forEach((edges) => {
+    edges.forEach((edge) => {
+      const incoming = reverse.get(edge.to) ?? [];
+      incoming.push(edge.from);
+      reverse.set(edge.to, incoming);
+    });
+  });
+
+  const reachable = new Set<string>([targetNode]);
+  const queue = [targetNode];
+
+  while (queue.length) {
+    const nodeId = queue.shift();
+    if (!nodeId) {
+      continue;
+    }
+
+    for (const prevNode of reverse.get(nodeId) ?? []) {
+      if (reachable.has(prevNode)) {
+        continue;
+      }
+      reachable.add(prevNode);
+      queue.push(prevNode);
+    }
+  }
+
+  return reachable;
+}
+
 export function computeTripChoice(
   edge: GraphEdge,
   currentTime: number,
@@ -179,29 +218,44 @@ function computePartialChainChoices(
   adjacency: Map<string, GraphEdge[]>,
   edge: GraphEdge,
   currentTime: number,
-  minTransferMinutes: number
+  minTransferMinutes: number,
+  targetReachable: Set<string>,
+  targetNode: string
 ): TripChoice[] {
   const choices: TripChoice[] = [];
   const trips = edge.trips ?? [];
 
   for (const trip of trips) {
-    if (!trip.departs || trip.arrives) {
+    if (!trip.departs) {
       continue;
     }
 
     const departAbs = resolveTimeAtOrAfter(currentTime + minTransferMinutes, trip.departs);
-    const baseLeg = buildRouteLeg(edge, trip, departAbs, undefined);
+    const arriveAbs = trip.arrives
+      ? resolveTimeAtOrAfter(departAbs, trip.arrives, trip.arrivalDayOffset)
+      : undefined;
+    const baseLeg = buildRouteLeg(edge, trip, departAbs, arriveAbs);
     const visitedNodes = new Set([edge.from, edge.to]);
-    const continuation = extendPartialChain(adjacency, edge.to, resolveTripTransport(trip), departAbs, visitedNodes);
-    if (!continuation) {
+    const continuations = extendPartialChain(
+      adjacency,
+      edge.to,
+      resolveTripTransport(trip),
+      arriveAbs ?? departAbs,
+      visitedNodes,
+      targetReachable,
+      targetNode
+    );
+    if (!continuations.length) {
       continue;
     }
 
-    choices.push({
-      toNode: continuation.toNode,
-      departAbs,
-      arriveAbs: continuation.arriveAbs,
-      legs: [baseLeg, ...continuation.legs]
+    continuations.forEach((continuation) => {
+      choices.push({
+        toNode: continuation.toNode,
+        departAbs,
+        arriveAbs: continuation.arriveAbs,
+        legs: [baseLeg, ...continuation.legs]
+      });
     });
   }
 
@@ -213,41 +267,64 @@ function extendPartialChain(
   startNode: string,
   transport: TransportType,
   referenceAbs: number,
-  visitedNodes: Set<string>
-): TripChoice | null {
-  const legs: ConnectionLeg[] = [];
-  let currentNode = startNode;
-  let currentReferenceAbs = referenceAbs;
-
-  while (legs.length <= adjacency.size) {
-    const continuations = collectContinuationCandidates(adjacency, currentNode, transport, currentReferenceAbs, visitedNodes);
-    if (continuations.length !== 1) {
-      return null;
-    }
-
-    const next = continuations[0];
-    legs.push(next.leg);
-    currentNode = next.edge.to;
-    if (visitedNodes.has(currentNode)) {
-      return null;
-    }
-    visitedNodes.add(currentNode);
-
-    if (next.arriveAbs !== undefined) {
-      return {
-        toNode: currentNode,
-        departAbs: referenceAbs,
-        arriveAbs: next.arriveAbs,
-        legs
-      };
-    }
-
-    if (next.departAbs !== undefined) {
-      currentReferenceAbs = next.departAbs;
-    }
+  visitedNodes: Set<string>,
+  targetReachable: Set<string>,
+  targetNode: string
+): TripChoice[] {
+  if (visitedNodes.size > adjacency.size + 1) {
+    return [];
   }
 
-  return null;
+  const continuations = selectContinuationCandidates(
+    collectContinuationCandidates(adjacency, startNode, transport, referenceAbs, visitedNodes),
+    targetReachable,
+    targetNode
+  );
+  if (!continuations.length) {
+    return [];
+  }
+
+  const chains: TripChoice[] = [];
+
+  for (const next of continuations) {
+    const nextNode = next.edge.to;
+    if (visitedNodes.has(nextNode)) {
+      continue;
+    }
+
+    if (next.arriveAbs !== undefined) {
+      chains.push({
+        toNode: nextNode,
+        departAbs: referenceAbs,
+        arriveAbs: next.arriveAbs,
+        legs: [next.leg]
+      });
+      continue;
+    }
+
+    const nextVisitedNodes = new Set(visitedNodes);
+    nextVisitedNodes.add(nextNode);
+    const downstreamChains = extendPartialChain(
+      adjacency,
+      nextNode,
+      transport,
+      next.departAbs ?? referenceAbs,
+      nextVisitedNodes,
+      targetReachable,
+      targetNode
+    );
+
+    downstreamChains.forEach((chain) => {
+      chains.push({
+        toNode: chain.toNode,
+        departAbs: referenceAbs,
+        arriveAbs: chain.arriveAbs,
+        legs: [next.leg, ...chain.legs]
+      });
+    });
+  }
+
+  return chains;
 }
 
 function collectContinuationCandidates(
@@ -256,9 +333,9 @@ function collectContinuationCandidates(
   transport: TransportType,
   referenceAbs: number,
   visitedNodes: Set<string>
-): Array<{ edge: GraphEdge; leg: ConnectionLeg; departAbs?: number; arriveAbs?: number }> {
+): ContinuationCandidate[] {
   const edges = adjacency.get(nodeId) ?? [];
-  const candidates: Array<{ edge: GraphEdge; leg: ConnectionLeg; departAbs?: number; arriveAbs?: number }> = [];
+  const candidates: ContinuationCandidate[] = [];
 
   for (const edge of edges) {
     if (visitedNodes.has(edge.to)) {
@@ -287,11 +364,52 @@ function collectContinuationCandidates(
   return candidates;
 }
 
+function selectContinuationCandidates(
+  candidates: ContinuationCandidate[],
+  targetReachable: Set<string>,
+  targetNode: string
+): ContinuationCandidate[] {
+  if (!candidates.length) {
+    return [];
+  }
+
+  const byEdge = new Map<string, ContinuationCandidate[]>();
+  candidates.forEach((candidate) => {
+    const edgeCandidates = byEdge.get(candidate.edge.id) ?? [];
+    edgeCandidates.push(candidate);
+    byEdge.set(candidate.edge.id, edgeCandidates);
+  });
+
+  const directTargetEdgeGroups = [...byEdge.values()].filter((group) => group[0]?.edge.to === targetNode);
+  if (directTargetEdgeGroups.length === 1) {
+    return directTargetEdgeGroups[0];
+  }
+  if (directTargetEdgeGroups.length > 1) {
+    return [];
+  }
+
+  const targetEdgeGroups = [...byEdge.values()].filter((group) => targetReachable.has(group[0]?.edge.to ?? ''));
+  if (targetEdgeGroups.length === 1) {
+    return targetEdgeGroups[0];
+  }
+  if (targetEdgeGroups.length > 1) {
+    return [];
+  }
+
+  if (byEdge.size !== 1) {
+    return [];
+  }
+
+  return [...byEdge.values()][0] ?? [];
+}
+
 function computeOutgoingChoices(
   adjacency: Map<string, GraphEdge[]>,
   currentNode: string,
   currentTime: number,
-  minTransferMinutes: number
+  minTransferMinutes: number,
+  targetReachable: Set<string>,
+  targetNode: string
 ): TripChoice[] {
   const edges = adjacency.get(currentNode) ?? [];
   const signatures = new Set<string>();
@@ -307,7 +425,14 @@ function computeOutgoingChoices(
       }
     }
 
-    for (const chain of computePartialChainChoices(adjacency, edge, currentTime, minTransferMinutes)) {
+    for (const chain of computePartialChainChoices(
+      adjacency,
+      edge,
+      currentTime,
+      minTransferMinutes,
+      targetReachable,
+      targetNode
+    )) {
       const signature = chain.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
       if (!signatures.has(signature)) {
         signatures.add(signature);
@@ -325,6 +450,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
   const startTime = parseTime(params.depart);
 
   const adjacency = buildAdjacency(snapshot);
+  const targetReachable = buildReachableToTarget(adjacency, params.to);
 
   const dist = new Map<string, number>();
   const prev = new Map<string, PrevInfo>();
@@ -364,7 +490,9 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       adjacency,
       current.nodeId,
       current.time,
-      current.nodeId === params.from ? 0 : minTransferMinutes
+      current.nodeId === params.from ? 0 : minTransferMinutes,
+      targetReachable,
+      params.to
     );
     for (const choice of choices) {
       if (visited.has(choice.toNode)) {

@@ -52,6 +52,39 @@ describe('routing-client', () => {
     expect(result?.legs.map((leg) => leg.edgeId)).toEqual(['samedan-scanfs', 'scanfs-zernetz']);
   });
 
+  it('also chains from a fully timed first leg into an arrival-only continuation', () => {
+    const snapshot = buildSnapshot([
+      {
+        id: 'solothurn-duerrmuehle',
+        from: 'a',
+        to: 'b',
+        validFrom: 1800,
+        trips: [{ id: 'a-b-1', transport: 'postkutsche', departs: '20:00', arrives: '20:40' }]
+      },
+      {
+        id: 'duerrmuehle-oensingen',
+        from: 'b',
+        to: 'c',
+        validFrom: 1800,
+        trips: [{ id: 'b-c-1', transport: 'postkutsche', arrives: '21:45' }]
+      }
+    ]);
+
+    const result = computeEarliestArrival(snapshot, {
+      year: 1852,
+      from: 'a',
+      to: 'c',
+      depart: '19:30',
+      minTransferMinutes: 0
+    });
+
+    expect(result).not.toBeNull();
+    expect(result?.departs).toBe('20:00');
+    expect(result?.arrives).toBe('21:45');
+    expect(result?.legs.map((leg) => leg.edgeId)).toEqual(['solothurn-duerrmuehle', 'duerrmuehle-oensingen']);
+    expect(result?.legs[0]?.arrives).toBe('20:40');
+  });
+
   it('allows both-unknown trips only as internal bridge segments', () => {
     const chained = computeEarliestArrival(
       buildSnapshot([
@@ -134,7 +167,94 @@ describe('routing-client', () => {
     expect(result).toBeNull();
   });
 
-  it('aborts heuristic chaining when an intermediate continuation is ambiguous', () => {
+  it('uses the requested destination to disambiguate a plausible partial continuation', () => {
+    const snapshot = buildSnapshot([
+      {
+        id: 'a-b',
+        from: 'a',
+        to: 'b',
+        validFrom: 1800,
+        trips: [{ id: 'a-b-1', transport: 'postkutsche', departs: '20:00' }]
+      },
+      {
+        id: 'b-c',
+        from: 'b',
+        to: 'c',
+        validFrom: 1800,
+        trips: [
+          { id: 'b-c-1', transport: 'postkutsche', arrives: '09:55' },
+          { id: 'b-c-2', transport: 'postkutsche', arrives: '21:45' }
+        ]
+      },
+      {
+        id: 'b-d',
+        from: 'b',
+        to: 'd',
+        validFrom: 1800,
+        trips: [{ id: 'b-d-1', transport: 'postkutsche', arrives: '20:30' }]
+      }
+    ]);
+
+    const result = computeEarliestArrival(snapshot, {
+      year: 1852,
+      from: 'a',
+      to: 'c',
+      depart: '19:30',
+      minTransferMinutes: 0
+    });
+
+    expect(result).not.toBeNull();
+    expect(result?.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`)).toEqual(['a-b:a-b-1', 'b-c:b-c-2']);
+    expect(result?.departs).toBe('20:00');
+    expect(result?.arrives).toBe('21:45');
+  });
+
+  it('prefers a direct continuation to the requested destination over indirect target-reachable detours', () => {
+    const snapshot = buildSnapshot([
+      {
+        id: 'solothurn-duerrmuehle',
+        from: 'a',
+        to: 'b',
+        validFrom: 1800,
+        trips: [{ id: 'a-b-1', transport: 'postkutsche', departs: '20:00' }]
+      },
+      {
+        id: 'duerrmuehle-oensingen',
+        from: 'b',
+        to: 'c',
+        validFrom: 1800,
+        trips: [{ id: 'b-c-1', transport: 'postkutsche', arrives: '21:45' }]
+      },
+      {
+        id: 'duerrmuehle-balstall',
+        from: 'b',
+        to: 'd',
+        validFrom: 1800,
+        trips: [{ id: 'b-d-1', transport: 'postkutsche', departs: '20:10', arrives: '20:15' }]
+      },
+      {
+        id: 'balstall-oensingen',
+        from: 'd',
+        to: 'c',
+        validFrom: 1800,
+        trips: [{ id: 'd-c-1', transport: 'postkutsche', departs: '20:20', arrives: '22:10' }]
+      }
+    ]);
+
+    const result = computeEarliestArrival(snapshot, {
+      year: 1852,
+      from: 'a',
+      to: 'c',
+      depart: '19:30',
+      minTransferMinutes: 0
+    });
+
+    expect(result).not.toBeNull();
+    expect(result?.legs.map((leg) => leg.edgeId)).toEqual(['solothurn-duerrmuehle', 'duerrmuehle-oensingen']);
+    expect(result?.arrives).toBe('21:45');
+  });
+
+  it('still aborts heuristic chaining when multiple continuations remain target-reachable', () => {
     const snapshot = buildSnapshot([
       {
         id: 'a-b',
@@ -156,13 +276,33 @@ describe('routing-client', () => {
         to: 'd',
         validFrom: 1800,
         trips: [{ id: 'b-d-1', transport: 'postkutsche', arrives: '07:30' }]
+      },
+      {
+        id: 'c-e',
+        from: 'c',
+        to: 'e',
+        validFrom: 1800,
+        trips: [{ id: 'c-e-1', transport: 'postkutsche', departs: '08:10', arrives: '09:00' }]
+      },
+      {
+        id: 'd-e',
+        from: 'd',
+        to: 'e',
+        validFrom: 1800,
+        trips: [{ id: 'd-e-1', transport: 'postkutsche', departs: '08:15', arrives: '08:50' }]
       }
+    ], [
+      buildNode('a', 'A'),
+      buildNode('b', 'B'),
+      buildNode('c', 'C'),
+      buildNode('d', 'D'),
+      buildNode('e', 'E')
     ]);
 
     const result = computeEarliestArrival(snapshot, {
       year: 1852,
       from: 'a',
-      to: 'c',
+      to: 'e',
       depart: '04:30',
       minTransferMinutes: 0
     });
