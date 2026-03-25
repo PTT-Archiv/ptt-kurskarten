@@ -1010,7 +1010,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const simulationDotCount = this.drawTripSimulationDots(ctx, pulseTime, sizeScale);
 
     if (!(this.showConnectionDetailsOnMap && this.selectedConnection)) {
-      const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève']);
+      const labeledNames = new Set(['Bern', 'Zürich', 'Bellinzona', 'Chur', 'Genève', 'Basel', 'Luzern']);
       const labelNodes =
         this.interactiveViewport && this.viewportZoom >= 1.8
           ? nodes
