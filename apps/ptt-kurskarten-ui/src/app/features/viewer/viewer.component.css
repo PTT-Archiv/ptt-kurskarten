@@ -350,13 +350,13 @@
 
 .viewer-year-card,
 .viewer-orbit-card {
-  background: rgba(0, 0, 0, 0.92);
-  border: 2px solid #fff;
-  border-radius: 16px;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .viewer-year-card {
+  background: rgba(0, 0, 0, 0.92);
+  border: 2px solid #fff;
+  border-radius: 16px;
   min-width: 150px;
   max-width: min(220px, calc(100vw - 156px));
   padding: 10px 12px;
@@ -401,42 +401,8 @@
 .viewer-orbit-card {
   width: 90px;
   height: 90px;
-  padding: 4px;
-  display: grid;
-  place-items: center;
-}
-
-.viewer-orbit-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.viewer-orbit-path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.88);
-  stroke-width: 2.1;
-  stroke-linecap: round;
-  stroke-dasharray: 106 16;
-  transform: rotate(-22deg);
-  transform-origin: center;
-}
-
-.viewer-orbit-sun-core {
-  fill: #fff;
-}
-
-.viewer-orbit-ray {
-  stroke: #fff;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-}
-
-.viewer-orbit-moon-core {
-  fill: #fff;
-}
-
-.viewer-orbit-moon-cut {
-  fill: rgba(0, 0, 0, 0.92);
+  display: block;
+  pointer-events: none;
 }
 
 .viewer-action-stack {

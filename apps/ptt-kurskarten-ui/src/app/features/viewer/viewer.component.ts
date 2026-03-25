@@ -26,6 +26,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
 import { ViewerArchiveStageComponent } from './viewer-archive-stage.component';
+import { ViewerDayNightIndicatorComponent } from './viewer-day-night-indicator.component';
 import { ViewerRoutePlannerOverlayComponent } from './viewer-route-planner-overlay.component';
 import { ViewerDataService } from './viewer-data.service';
 import { environment } from '../../../environments/environment';
@@ -92,6 +93,7 @@ type TripFlowModeOption<T extends string> = { value: T; labelKey: string };
     TranslocoPipe,
     ViewerRoutePlannerOverlayComponent,
     ViewerArchiveStageComponent,
+    ViewerDayNightIndicatorComponent,
     ArchiveSnippetViewerComponent,
     FaIconComponent,
     RouterLink
@@ -302,33 +304,6 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
       return this.mapLayerPreviewUrl;
     }
     return this.archiveStageImageUrl() || this.archiveSnippetUrl() || '';
-  });
-  dayNightOrbit = computed(() => {
-    const minute = this.normalizeMinuteOfDay(this.simulationMinute());
-    const center = 44;
-    const radius = 26;
-    const sunAngle = ((minute - 720) / MINUTES_PER_DAY) * Math.PI * 2 - Math.PI / 2;
-    const moonAngle = sunAngle + Math.PI;
-    const sun = {
-      x: center + radius * Math.cos(sunAngle),
-      y: center + radius * Math.sin(sunAngle)
-    };
-    const moon = {
-      x: center + radius * Math.cos(moonAngle),
-      y: center + radius * Math.sin(moonAngle)
-    };
-    const scaleForY = (y: number) => {
-      const topFactor = ((center - y) / radius + 1) / 2;
-      return 0.72 + topFactor * 0.6;
-    };
-    return {
-      sunX: sun.x,
-      sunY: sun.y,
-      sunScale: scaleForY(sun.y),
-      moonX: moon.x,
-      moonY: moon.y,
-      moonScale: scaleForY(moon.y)
-    };
   });
   archiveStageInitialCenter = computed(() => {
     const node = this.getDefaultArchiveNode();
