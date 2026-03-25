@@ -6593,5 +6593,161 @@
     "toPlaceId": "node-1770904950535",
     "year": 1852,
     "note": null
+  },
+  {
+    "id": "edge-1774431687515",
+    "linkId": "node-1770904544888__node-1774363977918",
+    "fromPlaceId": "node-1774363977918",
+    "toPlaceId": "node-1770904544888",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431693996",
+    "linkId": "node-1770904544888__node-1774363977918",
+    "fromPlaceId": "node-1770904544888",
+    "toPlaceId": "node-1774363977918",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431718942",
+    "linkId": "node-1770904633393__node-1774363977918",
+    "fromPlaceId": "node-1774363977918",
+    "toPlaceId": "node-1770904633393",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431724114",
+    "linkId": "node-1770904633393__node-1774363977918",
+    "fromPlaceId": "node-1770904633393",
+    "toPlaceId": "node-1774363977918",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431764862",
+    "linkId": "node-1770904329965__node-1770913567237",
+    "fromPlaceId": "node-1770904329965",
+    "toPlaceId": "node-1770913567237",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431771562",
+    "linkId": "node-1770904329965__node-1770913567237",
+    "fromPlaceId": "node-1770913567237",
+    "toPlaceId": "node-1770904329965",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774431800542",
+    "linkId": "node-1770913567237__node-1770913715054",
+    "fromPlaceId": "node-1770913567237",
+    "toPlaceId": "node-1770913715054",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432005268",
+    "linkId": "node-1770913525543__node-1770913715054",
+    "fromPlaceId": "node-1770913715054",
+    "toPlaceId": "node-1770913525543",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432015337",
+    "linkId": "node-1770913525543__node-1770913715054",
+    "fromPlaceId": "node-1770913525543",
+    "toPlaceId": "node-1770913715054",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432039384",
+    "linkId": "node-1770913159270__node-1770913525543",
+    "fromPlaceId": "node-1770913525543",
+    "toPlaceId": "node-1770913159270",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432046600",
+    "linkId": "node-1770913159270__node-1770913525543",
+    "fromPlaceId": "node-1770913159270",
+    "toPlaceId": "node-1770913525543",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432065397",
+    "linkId": "node-1770913131646__node-1770913159270",
+    "fromPlaceId": "node-1770913159270",
+    "toPlaceId": "node-1770913131646",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432069365",
+    "linkId": "node-1770913131646__node-1770913159270",
+    "fromPlaceId": "node-1770913131646",
+    "toPlaceId": "node-1770913159270",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432236848",
+    "linkId": "node-1770905648479__node-1770913159270",
+    "fromPlaceId": "node-1770905648479",
+    "toPlaceId": "node-1770913159270",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432251164",
+    "linkId": "node-1770905648479__node-1770913159270",
+    "fromPlaceId": "node-1770913159270",
+    "toPlaceId": "node-1770905648479",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432273799",
+    "linkId": "node-1770913159270__node-1770913567237",
+    "fromPlaceId": "node-1770913159270",
+    "toPlaceId": "node-1770913567237",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432285497",
+    "linkId": "node-1770913159270__node-1770913567237",
+    "fromPlaceId": "node-1770913567237",
+    "toPlaceId": "node-1770913159270",
+    "year": 1852,
+    "note": null
+  },
+  {
+    "id": "edge-1774432345973",
+    "linkId": "node-1770905648479__node-1770913659038",
+    "fromPlaceId": "node-1770905648479",
+    "toPlaceId": "node-1770913659038",
+    "year": 1852,
+    "note": {
+      "de": "im Sommer."
+    }
+  },
+  {
+    "id": "edge-1774432384915",
+    "linkId": "node-1770905648479__node-1770913659038",
+    "fromPlaceId": "node-1770913659038",
+    "toPlaceId": "node-1770905648479",
+    "year": 1852,
+    "note": {
+      "de": "im Sommer"
+    }
   }
 ]

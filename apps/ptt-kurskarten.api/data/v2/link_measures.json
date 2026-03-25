@@ -3001,5 +3001,77 @@
     "valueNumber": 4,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770904544888__node-1774363977918-distance-1852",
+    "linkId": "node-1770904544888__node-1774363977918",
+    "measureKey": "distance",
+    "valueNumber": 2.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770904633393__node-1774363977918-distance-1852",
+    "linkId": "node-1770904633393__node-1774363977918",
+    "measureKey": "distance",
+    "valueNumber": 2,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770904329965__node-1770913567237-distance-1852",
+    "linkId": "node-1770904329965__node-1770913567237",
+    "measureKey": "distance",
+    "valueNumber": 5.375,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770913567237__node-1770913715054-distance-1852",
+    "linkId": "node-1770913567237__node-1770913715054",
+    "measureKey": "distance",
+    "valueNumber": 2.875,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770913525543__node-1770913715054-distance-1852",
+    "linkId": "node-1770913525543__node-1770913715054",
+    "measureKey": "distance",
+    "valueNumber": 2.5,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770913159270__node-1770913525543-distance-1852",
+    "linkId": "node-1770913159270__node-1770913525543",
+    "measureKey": "distance",
+    "valueNumber": 2.625,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770913131646__node-1770913159270-distance-1852",
+    "linkId": "node-1770913131646__node-1770913159270",
+    "measureKey": "distance",
+    "valueNumber": 1.75,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770905648479__node-1770913159270-distance-1852",
+    "linkId": "node-1770905648479__node-1770913159270",
+    "measureKey": "distance",
+    "valueNumber": 6.25,
+    "validFrom": 1852,
+    "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770905648479__node-1770913659038-distance-1852",
+    "linkId": "node-1770905648479__node-1770913659038",
+    "measureKey": "distance",
+    "valueNumber": 6.25,
+    "validFrom": 1852,
+    "validTo": 1852
   }
 ]
