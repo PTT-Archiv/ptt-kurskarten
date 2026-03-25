@@ -1418,7 +1418,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     for (const [id, node] of this.screenNodes) {
       const dx = x - node.x;
       const dy = y - node.y;
-      if (dx * dx + dy * dy <= node.r * node.r) {
+      if (dx * dx + dy * dy <= node.r + 20 * node.r + 20) {
         return id;
       }
     }
