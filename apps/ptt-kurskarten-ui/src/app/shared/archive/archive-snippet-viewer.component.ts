@@ -15,6 +15,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlassMinus, faMagnifyingGlassPlus, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { TileSourceSpecifier } from 'openseadragon';
 
 @Component({
   selector: 'app-archive-snippet-viewer',
@@ -60,7 +61,8 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       this.pendingRegionUrl = this.imageUrl;
     }
     if (changes['iiifInfoUrl'] && this.viewer) {
-      this.viewer.open(this.iiifInfoUrl);
+      const tileSource = { tileSource: this.iiifInfoUrl } as TileSourceSpecifier;
+      this.viewer.open(tileSource)
       return;
     }
     if (!this.isBrowser || !this.viewer) {
@@ -164,7 +166,8 @@ export class ArchiveSnippetViewerComponent implements AfterViewInit, OnChanges, 
       this.viewer.addHandler('viewport-change', () => this.onViewportChange());
       this.viewer.addHandler('canvas-drag-end', () => this.onViewportChange(true));
       this.viewer.addHandler('animation-finish', () => this.onViewportChange(true));
-      this.viewer.open(this.iiifInfoUrl);
+      const tileSource = {tileSource: this.iiifInfoUrl} as TileSourceSpecifier;
+      this.viewer.open(tileSource);
     });
   }
 

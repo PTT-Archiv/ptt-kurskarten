@@ -164,7 +164,7 @@ export class ViewerDayNightIndicatorComponent {
   }
 
   rayOpacity(): number {
-    return 1 - smoothstep(34, 42, this.symbolY());
+    return 1 - smoothstep(39, 46, this.symbolY());
   }
 
   formatOpacity(value: number): string {
