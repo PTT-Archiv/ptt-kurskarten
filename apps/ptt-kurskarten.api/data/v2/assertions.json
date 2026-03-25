@@ -5090,5 +5090,31 @@
     "valueNumber": null,
     "valueBoolean": null,
     "valueJson": null
+  },
+  {
+    "id": "0bcf9153-7b90-43ab-bd40-696c3021872b",
+    "targetType": "place",
+    "targetId": "node-1770905648479",
+    "schemaKey": "identifier.wikidata",
+    "validFrom": 1852,
+    "validTo": null,
+    "valueType": "string",
+    "valueText": "Spanisch-Brötli-Bahn;https://www.wikidata.org/wiki/Q366163",
+    "valueNumber": null,
+    "valueBoolean": null,
+    "valueJson": null
+  },
+  {
+    "id": "8aff98ba-47b8-413a-87b7-dada97770032",
+    "targetType": "place",
+    "targetId": "node-1770905254016",
+    "schemaKey": "identifier.wikidata",
+    "validFrom": 1852,
+    "validTo": null,
+    "valueType": "string",
+    "valueText": "Spanisch-Brötli-Bahn;https://www.wikidata.org/wiki/Q366163",
+    "valueNumber": null,
+    "valueBoolean": null,
+    "valueJson": null
   }
 ]

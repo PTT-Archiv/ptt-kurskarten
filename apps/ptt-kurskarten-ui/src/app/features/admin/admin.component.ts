@@ -233,7 +233,8 @@ export class AdminComponent implements OnDestroy {
     'courier',
     'messagerie',
     'mallepost',
-    'diligence'
+    'diligence',
+    'eisenbahn'
   ];
   readonly quickEntityModes: Array<{ id: QuickEntityMode; label: string; shortcut: string }> = [
     { id: 'place', label: 'Place', shortcut: 'P' },

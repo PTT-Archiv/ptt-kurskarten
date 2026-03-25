@@ -7,7 +7,9 @@ export type TransportType =
   | 'courier'
   | 'messagerie'
   | 'mallepost'
-  | 'diligence';
+  | 'diligence'
+  | 'eisenbahn'
+  ;
 
 export type LocalizedText = {
   de?: string;
