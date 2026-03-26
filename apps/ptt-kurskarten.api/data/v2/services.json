@@ -6949,5 +6949,29 @@
     "toPlaceId": "node-1770905648479",
     "year": 1892,
     "note": null
+  },
+  {
+    "id": "edge-1774535845008",
+    "linkId": "node-1770809062251__node-1770818428222",
+    "fromPlaceId": "node-1770809062251",
+    "toPlaceId": "node-1770818428222",
+    "year": 1892,
+    "note": null
+  },
+  {
+    "id": "edge-1774535882264",
+    "linkId": "node-1770818428222__node-1773305687121",
+    "fromPlaceId": "node-1770818428222",
+    "toPlaceId": "node-1773305687121",
+    "year": 1892,
+    "note": null
+  },
+  {
+    "id": "edge-1774535906447",
+    "linkId": "node-1770811420932__node-1770905648479",
+    "fromPlaceId": "node-1770905648479",
+    "toPlaceId": "node-1770811420932",
+    "year": 1892,
+    "note": null
   }
 ]

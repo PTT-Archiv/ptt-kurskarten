@@ -53,7 +53,7 @@
     "placeAId": "node-1770809062251",
     "placeBId": "node-1770818428222",
     "validFrom": 1852,
-    "validTo": null
+    "validTo": 1892
   },
   {
     "id": "node-1770809062251__node-1770890387454",
@@ -3055,6 +3055,20 @@
     "id": "node-1770905648479__node-1773305687121",
     "placeAId": "node-1770905648479",
     "placeBId": "node-1773305687121",
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "node-1770818428222__node-1773305687121",
+    "placeAId": "node-1770818428222",
+    "placeBId": "node-1773305687121",
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "node-1770811420932__node-1770905648479",
+    "placeAId": "node-1770811420932",
+    "placeBId": "node-1770905648479",
     "validFrom": 1892,
     "validTo": 1892
   }
