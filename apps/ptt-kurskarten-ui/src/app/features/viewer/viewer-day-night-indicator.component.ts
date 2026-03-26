@@ -9,6 +9,14 @@ const SYMBOL_X = VIEWBOX_SIZE / 2;
 const SYMBOL_SWING = 14;
 const WAVE_REPEAT_WIDTH = 64;
 const WAVE_SCROLL_CYCLES = 8;
+const DAY_NIGHT_INDICATOR_COLORS = {
+  cardFill: '#000',
+  cardStroke: 'transparent',
+  waveStroke: 'rgba(255, 255, 255, 0.24)',
+  horizonStroke: 'rgba(255, 255, 255, 0.94)',
+  symbolFill: '#fff',
+  moonCutFill: '#000'
+} as const;
 
 let nextClipPathId = 0;
 
@@ -16,6 +24,14 @@ let nextClipPathId = 0;
   selector: 'app-viewer-day-night-indicator',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.--day-night-card-fill]': 'colors.cardFill',
+    '[style.--day-night-card-stroke]': 'colors.cardStroke',
+    '[style.--day-night-wave-stroke]': 'colors.waveStroke',
+    '[style.--day-night-horizon-stroke]': 'colors.horizonStroke',
+    '[style.--day-night-symbol-fill]': 'colors.symbolFill',
+    '[style.--day-night-moon-cut-fill]': 'colors.moonCutFill'
+  },
   template: `
     <svg class="day-night-svg" viewBox="0 0 88 88" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <defs>
@@ -92,37 +108,37 @@ let nextClipPathId = 0;
       }
 
       .day-night-card {
-        fill: #000;
-        stroke: #fff;
+        fill: var(--day-night-card-fill);
+        stroke: var(--day-night-card-stroke);
         stroke-width: 2;
       }
 
       .day-night-wave {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.24);
+        stroke: var(--day-night-wave-stroke);
         stroke-width: 1.1;
         stroke-linecap: round;
       }
 
       .day-night-horizon {
-        stroke: rgba(255, 255, 255, 0.94);
+        stroke: var(--day-night-horizon-stroke);
         stroke-width: 1.6;
         stroke-linecap: round;
       }
 
       .day-night-sun-core,
       .day-night-moon-core {
-        fill: #fff;
+        fill: var(--day-night-symbol-fill);
       }
 
       .day-night-rays line {
-        stroke: #fff;
+        stroke: var(--day-night-symbol-fill);
         stroke-width: 1.4;
         stroke-linecap: round;
       }
 
       .day-night-moon-cut {
-        fill: #000;
+        fill: var(--day-night-moon-cut-fill);
       }
     `
   ]
@@ -132,6 +148,7 @@ export class ViewerDayNightIndicatorComponent {
 
   @Input({ required: true }) minuteOfDay = 0;
 
+  readonly colors = DAY_NIGHT_INDICATOR_COLORS;
   readonly VIEWBOX_SIZE = VIEWBOX_SIZE;
   readonly CARD_INSET = CARD_INSET;
   readonly CARD_RADIUS = CARD_RADIUS;

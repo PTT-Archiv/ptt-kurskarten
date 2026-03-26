@@ -600,12 +600,11 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  onEditionChange(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const nextYear = Number(select.value);
-    if (!Number.isNaN(nextYear)) {
-      this.applyYearChange(nextYear);
+  selectEdition(year: number): void {
+    if (!Number.isFinite(year) || year === this.year()) {
+      return;
     }
+    this.applyYearChange(year);
   }
 
   onNodeSelected(nodeId: string | null): void {

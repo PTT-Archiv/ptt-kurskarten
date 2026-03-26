@@ -322,9 +322,45 @@
   color: #cfcfcf;
 }
 
+.viewer-brand-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 7;
+  min-height: 28px;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  color: #fff;
+  pointer-events: none;
+}
+
+.viewer-brand-title,
+.viewer-brand-note {
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.viewer-brand-title {
+  font-weight: 700;
+}
+
+.viewer-brand-note {
+  color: #d8d8d8;
+  text-align: right;
+}
+
 .planner-overlay {
   position: absolute;
-  top: 36px;
+  top: 75px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
@@ -339,13 +375,14 @@
 
 .viewer-top-controls {
   position: absolute;
-  top: 16px;
+  top: 44px;
   left: 16px;
+  right: 16px;
   z-index: 7;
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  max-width: calc(100% - 32px);
 }
 
 .viewer-year-card,
@@ -355,14 +392,20 @@
 
 .viewer-year-card {
   background: rgba(0, 0, 0, 0.92);
-  border: 2px solid #fff;
+  border: none;
   border-radius: 16px;
   min-width: 150px;
   max-width: min(220px, calc(100vw - 156px));
-  padding: 10px 12px;
+
   display: grid;
   gap: 6px;
   pointer-events: auto;
+}
+
+.viewer-year-card.viewer-year-card-multi {
+  min-width: 360px;
+  max-width: min(560px, calc(100vw - 156px));
+  gap: 14px;
 }
 
 .viewer-year-label {
@@ -371,18 +414,18 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
-  color: #cfcfcf;
+  color: #ffffff;
 }
 
 .viewer-year-select,
 .viewer-year-readonly {
   width: 100%;
   min-height: 42px;
-  border: 2px solid #fff;
+  border: none;
   border-radius: 12px;
   background: #141414;
   color: #fff;
-  padding: 10px 12px;
+
   font: inherit;
   font-size: 18px;
   font-weight: 600;
@@ -398,10 +441,70 @@
   outline-offset: 2px;
 }
 
+.viewer-edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+}
+
+.viewer-edition-option {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: #d0d0d07c;
+  padding: 2px 0 18px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 180ms ease-out;
+}
+
+.viewer-edition-option::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 40px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateX(-50%) translateY(3px);
+  transition: opacity 180ms ease-out, transform 180ms ease-out, background-color 180ms ease-out;
+}
+
+.viewer-edition-option:hover,
+.viewer-edition-option:focus-visible,
+.viewer-edition-option.active {
+  color: #fff;
+}
+
+.viewer-edition-option.active::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+.viewer-edition-option:focus-visible {
+  outline: none;
+}
+
+.viewer-edition-option:focus-visible::after,
+.viewer-edition-option:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .viewer-orbit-card {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   display: block;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -591,7 +694,7 @@
 
 .viewer-shell.sidebar-open .planner-overlay {
   width: clamp(420px, 52vw, 560px);
-  top: 28px;
+  top: 56px;
 }
 
 .viewer-shell.planner-minimized .planner-overlay {
@@ -830,8 +933,18 @@
 }
 
 @media (max-width: 1023px) {
+  .small-screen-layout .viewer-brand-bar {
+    min-height: 26px;
+    padding: 6px 12px;
+  }
+
+  .small-screen-layout .viewer-brand-title,
+  .small-screen-layout .viewer-brand-note {
+    font-size: 10px;
+  }
+
   .small-screen-layout .planner-overlay {
-    top: 94px;
+    top: 108px;
     width: calc(100% - 24px);
     max-width: calc(100% - 24px);
   }
@@ -841,10 +954,10 @@
   }
 
   .small-screen-layout .viewer-top-controls {
-    top: 12px;
+    top: 40px;
     left: 12px;
+    right: 12px;
     gap: 10px;
-    max-width: calc(100% - 24px);
   }
 
   .small-screen-layout .viewer-year-card {
@@ -852,11 +965,31 @@
     max-width: min(210px, calc(100vw - 122px));
   }
 
+  .small-screen-layout .viewer-year-card.viewer-year-card-multi {
+    min-width: min(320px, calc(100vw - 126px));
+    max-width: min(440px, calc(100vw - 126px));
+    padding: 12px 14px 10px;
+  }
+
   .small-screen-layout .viewer-year-select,
   .small-screen-layout .viewer-year-readonly {
     min-height: 38px;
     font-size: 16px;
     padding: 8px 10px;
+  }
+
+  .small-screen-layout .viewer-edition-switcher {
+    gap: 10px 20px;
+  }
+
+  .small-screen-layout .viewer-edition-option {
+    font-size: 18px;
+    padding-bottom: 16px;
+  }
+
+  .small-screen-layout .viewer-edition-option::after {
+    width: 38px;
+    height: 9px;
   }
 
   .small-screen-layout .viewer-orbit-card {
@@ -897,13 +1030,26 @@
 }
 
 @media (max-width: 767px) {
+  .mobile-layout .viewer-brand-bar {
+    min-height: 24px;
+    padding: 5px 10px;
+    gap: 8px;
+  }
+
+  .mobile-layout .viewer-brand-title,
+  .mobile-layout .viewer-brand-note {
+    font-size: 9px;
+    letter-spacing: 0.06em;
+  }
+
   .mobile-layout .planner-overlay {
-    top: 86px;
+    top: 98px;
     width: calc(100% - 20px);
     max-width: calc(100% - 20px);
   }
 
   .mobile-layout .viewer-top-controls {
+    top: 38px;
     gap: 8px;
   }
 
@@ -911,6 +1057,12 @@
     min-width: 128px;
     max-width: min(180px, calc(100vw - 108px));
     padding: 8px 10px;
+  }
+
+  .mobile-layout .viewer-year-card.viewer-year-card-multi {
+    min-width: min(250px, calc(100vw - 102px));
+    max-width: min(320px, calc(100vw - 102px));
+    padding: 10px 12px 9px;
   }
 
   .mobile-layout .viewer-year-label {
@@ -921,6 +1073,20 @@
   .mobile-layout .viewer-year-readonly {
     min-height: 36px;
     font-size: 15px;
+  }
+
+  .mobile-layout .viewer-edition-switcher {
+    gap: 8px 16px;
+  }
+
+  .mobile-layout .viewer-edition-option {
+    font-size: 15px;
+    padding-bottom: 13px;
+  }
+
+  .mobile-layout .viewer-edition-option::after {
+    width: 34px;
+    height: 8px;
   }
 
   .mobile-layout .viewer-orbit-card {

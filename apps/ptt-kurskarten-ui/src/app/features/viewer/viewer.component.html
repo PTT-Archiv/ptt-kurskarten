@@ -28,21 +28,34 @@
     @if (!graph()) {
     <div class="canvas-overlay">{{ 'viewer.loading' | transloco }}</div>
     }
+    <div class="viewer-brand-bar" aria-label="Viewer information">
+      <span class="viewer-brand-title">PTT-Kurskarten</span>
+      <span class="viewer-brand-note">Änderungen vorbehalten</span>
+    </div>
     <div class="viewer-top-controls">
-      <label class="viewer-year-card">
+      <div class="viewer-year-card" [class.viewer-year-card-multi]="publicEditionOptions().length > 1">
         <span class="viewer-year-label">{{ 'viewer.editionTitle' | transloco }}</span>
         @if (publicEditionOptions().length > 1) {
-        <select class="viewer-year-select" [value]="year()" (change)="onEditionChange($event)">
+        <div class="viewer-edition-switcher" role="tablist" [attr.aria-label]="'viewer.editionTitle' | transloco">
           @for (edition of publicEditionOptions(); track edition.id) {
-          <option [value]="edition.year">
-            {{ edition.title || edition.year }}
-          </option>
+          <button
+            class="viewer-edition-option"
+            type="button"
+            role="tab"
+            [class.active]="edition.year === year()"
+            [attr.aria-selected]="edition.year === year()"
+            [attr.aria-label]="edition.title || edition.year"
+            [title]="edition.title || edition.year"
+            (click)="selectEdition(edition.year)"
+          >
+            {{ edition.year }}
+          </button>
           }
-        </select>
+        </div>
         } @else {
         <div class="viewer-year-readonly">{{ selectedEditionLabel() }}</div>
         }
-      </label>
+      </div>
       @if (orbitVisible()) {
       <div class="viewer-orbit-card" aria-hidden="true">
         <app-viewer-day-night-indicator [minuteOfDay]="simulationMinute()"></app-viewer-day-night-indicator>
