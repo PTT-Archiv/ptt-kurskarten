@@ -2754,5 +2754,17 @@
     "defaultName": "Oberglatt",
     "validFrom": 1892,
     "validTo": null
+  },
+  {
+    "id": "node-1774529644891",
+    "defaultName": "Belprahon",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "node-1774529779613",
+    "defaultName": "Zollikofen",
+    "validFrom": 1892,
+    "validTo": null
   }
 ]

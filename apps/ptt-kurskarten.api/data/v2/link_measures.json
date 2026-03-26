@@ -3161,5 +3161,13 @@
     "valueNumber": 4.375,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "link-measure-node-1770905648479__node-1773305687121-distance-1892",
+    "linkId": "node-1770905648479__node-1773305687121",
+    "measureKey": "distance",
+    "valueNumber": 2.5,
+    "validFrom": 1892,
+    "validTo": 1892
   }
 ]

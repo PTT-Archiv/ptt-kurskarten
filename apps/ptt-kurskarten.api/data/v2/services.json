@@ -6941,5 +6941,13 @@
     "note": {
       "de": "So. Di. Mi. u. Fr."
     }
+  },
+  {
+    "id": "edge-1774533599484",
+    "linkId": "node-1770905648479__node-1773305687121",
+    "fromPlaceId": "node-1773305687121",
+    "toPlaceId": "node-1770905648479",
+    "year": 1892,
+    "note": null
   }
 ]

@@ -6246,5 +6246,27 @@
     "nameType": "primary",
     "validFrom": 1892,
     "validTo": null
+  },
+  {
+    "id": "6ba27ffd-f4dd-4114-976e-8e8bf2ea2a59",
+    "placeId": "node-1774529644891",
+    "lang": "und",
+    "name": "Belprahon",
+    "normalized": "belprahon",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1852,
+    "validTo": null
+  },
+  {
+    "id": "b516f97a-3ee2-4470-b4f3-f0abd39fb7b8",
+    "placeId": "node-1774529779613",
+    "lang": "und",
+    "name": "Zollikofen",
+    "normalized": "zollikofen",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1892,
+    "validTo": null
   }
 ]
