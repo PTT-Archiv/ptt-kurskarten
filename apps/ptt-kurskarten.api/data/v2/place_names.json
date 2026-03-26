@@ -6224,5 +6224,27 @@
     "nameType": "primary",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "1cf8c6a6-e0a6-4bfa-9e86-ea5857121f41",
+    "placeId": "node-1774528227648",
+    "lang": "und",
+    "name": "Chevrilles",
+    "normalized": "chevrilles",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "a64eae8d-82e8-4572-8d9a-697f4a472f9b",
+    "placeId": "node-1774528309990",
+    "lang": "und",
+    "name": "Oberglatt",
+    "normalized": "oberglatt",
+    "preferred": true,
+    "nameType": "primary",
+    "validFrom": 1892,
+    "validTo": null
   }
 ]

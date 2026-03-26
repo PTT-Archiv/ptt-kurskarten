@@ -1,0 +1,85 @@
+<div class="viewer-brand-bar" aria-label="Viewer information">
+  <span class="viewer-brand-title">PTT-Kurskarten</span>
+  <span class="viewer-brand-note">Änderungen vorbehalten</span>
+</div>
+<div class="viewer-header">
+  <div class="viewer-header-slot viewer-header-slot-start">
+    <div class="viewer-year-card" [class.viewer-year-card-multi]="vm.publicEditionOptions.length > 1">
+      <span class="viewer-year-label">{{ 'viewer.editionTitle' | transloco }}</span>
+      @if (vm.publicEditionOptions.length > 1) {
+      <div class="viewer-edition-switcher" role="tablist" [attr.aria-label]="vm.editionTitle">
+        @for (edition of vm.publicEditionOptions; track edition.id) {
+        <button
+          class="viewer-edition-option"
+          type="button"
+          role="tab"
+          [class.active]="edition.year === vm.year"
+          [attr.aria-selected]="edition.year === vm.year"
+          [attr.aria-label]="edition.title || edition.year"
+          [title]="edition.title || edition.year"
+          (click)="selectEdition.emit(edition.year)"
+        >
+          {{ edition.year }}
+        </button>
+        }
+      </div>
+      } @else {
+      <div class="viewer-year-readonly">{{ vm.selectedEditionLabel }}</div>
+      }
+    </div>
+  </div>
+  <div class="viewer-header-slot viewer-header-slot-center">
+    @if (vm.archiveModeActive || !vm.routePlannerOpen || vm.smallScreenLayout) {
+    <div class="viewer-header-search">
+      <div class="place-search-shell" [class.archive-only]="vm.archiveModeActive"
+        [class.has-utility-actions]="vm.smallScreenLayout">
+        <fa-icon [icon]="searchIcon"></fa-icon>
+        <input
+          type="text"
+          [value]="vm.placeSearchQuery"
+          [placeholder]="'viewer.searchPlacePlaceholder' | transloco"
+          (focus)="placeSearchFocus.emit()"
+          (blur)="placeSearchBlur.emit()"
+          (input)="placeSearchInput.emit($any($event.target).value)"
+          (keydown)="placeSearchKeydown.emit($event)"
+        />
+        @if (vm.smallScreenLayout) {
+        <div class="topbar-actions">
+          @if (!vm.archiveModeActive) {
+          <button class="route-toggle-btn" type="button" (click)="openRoutePlanner.emit()" aria-label="Routenplaner öffnen">
+            <fa-icon [icon]="routeIcon"></fa-icon>
+          </button>
+          }
+        </div>
+        } @else if (!vm.archiveModeActive) {
+        <button class="route-toggle-btn" type="button" (click)="openRoutePlanner.emit()" aria-label="Routenplaner öffnen">
+          <fa-icon [icon]="routeIcon"></fa-icon>
+        </button>
+        }
+        @if (vm.placeSearchOpen && vm.placeSearchResults.length > 0) {
+        <div class="place-search-list">
+          @for (node of vm.placeSearchResults; track node.id; let i = $index) {
+          <button
+            type="button"
+            [class.active]="i === vm.placeSearchActiveIndex"
+            (mouseenter)="previewPlaceResult.emit({ nodeId: node.id, index: i })"
+            (focus)="previewPlaceResult.emit({ nodeId: node.id, index: i })"
+            (mousedown)="selectPlaceResult.emit(node.id)"
+          >
+            {{ node.name }}
+          </button>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  <div class="viewer-header-slot viewer-header-slot-end">
+    @if (vm.orbitVisible) {
+    <div class="viewer-orbit-card" aria-hidden="true">
+      <app-viewer-day-night-indicator [minuteOfDay]="vm.simulationMinute"></app-viewer-day-night-indicator>
+    </div>
+    }
+  </div>
+</div>

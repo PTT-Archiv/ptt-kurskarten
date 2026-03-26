@@ -5129,5 +5129,31 @@
     "valueJson": null,
     "validFrom": 1852,
     "validTo": 1852
+  },
+  {
+    "id": "06b55119-6cd1-4c7e-9867-96d2619cf219",
+    "targetType": "place",
+    "targetId": "node-1774528227648",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1892,
+    "validTo": 1892
+  },
+  {
+    "id": "b564c6b2-4b72-49a6-b1ac-ee23776586d5",
+    "targetType": "place",
+    "targetId": "node-1774528309990",
+    "schemaKey": "place.hidden",
+    "valueType": "boolean",
+    "valueText": null,
+    "valueNumber": null,
+    "valueBoolean": true,
+    "valueJson": null,
+    "validFrom": 1892,
+    "validTo": 1892
   }
 ]

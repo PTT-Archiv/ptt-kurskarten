@@ -1,0 +1,91 @@
+<section class="panel-section results-panel">
+  <div class="section-title">{{ 'viewer.results' | transloco }}</div>
+  @if (vm.routingState === 'searching') {
+  <div class="muted">{{ 'viewer.searching' | transloco }}</div>
+  } @else if (vm.routingState === 'error') {
+  <div class="muted">{{ 'viewer.error' | transloco }}</div>
+  } @else if (vm.connectionResults.length > 0) {
+  <div class="result-list">
+    @for (option of vm.connectionResults; track option.id) {
+    <button class="result-card" [class.active]="vm.selectedConnectionId === option.id"
+      (click)="selectConnection.emit(option)">
+      @if (option.kind === 'COMPLETE_PREFIX') {
+      <div class="result-time">
+        Reise bis {{ vm.getNodeLabel(option.resolvedTo ?? option.to) }} (Datensatz-Ende)
+      </div>
+      <div class="result-meta badge">
+        Weiterreise ins Ausland: Zeiten unvollständig
+      </div>
+      <div class="result-meta">
+        @if (option.departs) {
+        {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+        @if (option.departDayOffset && option.departDayOffset > 0) {
+        <span>(+{{ option.departDayOffset }})</span>
+        }
+        }
+        @if (option.arrives) {
+        · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+        @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+        <span>(+{{ option.arriveDayOffset }})</span>
+        }
+        }
+        @if (option.durationMinutes !== undefined) {
+        · {{ 'viewer.duration' | transloco: { duration: vm.formatDuration(option.durationMinutes) } }}
+        }
+      </div>
+      } @else if (option.kind === 'FOREIGN_START_FALLBACK') {
+      <div class="result-time">
+        {{ vm.getNodeLabel(option.requestedFrom ?? option.from) }} → {{ vm.getNodeLabel(option.to) }}
+      </div>
+      <div class="result-meta badge">
+        @if (option.foreignStartNote) {
+        {{ 'viewer.knownFrom' | transloco }} {{ vm.getNodeLabel(option.effectiveFrom ?? '') }}
+        {{ option.effectiveStartTime }}
+        } @else {
+        {{ 'viewer.startInDataset' | transloco }}: {{ vm.getNodeLabel(option.effectiveFrom ?? '') }}
+        {{ option.effectiveStartTime }}
+        }
+      </div>
+      <div class="result-meta">
+        @if (option.foreignStartNote) {
+        ({{ 'viewer.unknownStartTime' | transloco }})
+        } @else {
+        {{ 'viewer.departFrom' | transloco: { node: vm.getNodeLabel(option.requestedFrom ?? option.from), time: option.departs } }}
+        }
+      </div>
+      } @else {
+      <div class="result-time">
+        {{ 'viewer.departShort' | transloco }} {{ option.departs }}
+        @if (option.departDayOffset && option.departDayOffset > 0) {
+        <span>(+{{ option.departDayOffset }})</span>
+        }
+        · {{ 'viewer.arriveShort' | transloco }} {{ option.arrives }}
+        @if (option.arriveDayOffset && option.arriveDayOffset > 0) {
+        <span>(+{{ option.arriveDayOffset }})</span>
+        }
+      </div>
+      <div class="result-meta">
+        {{ 'viewer.duration' | transloco: { duration: vm.formatDuration(option.durationMinutes) } }}
+        ·
+        @if ((option.transfers ?? option.legs.length - 1) === 0) {
+        {{ 'viewer.direct' | transloco }}
+        } @else if ((option.transfers ?? option.legs.length - 1) === 1) {
+        {{ 'viewer.oneTransfer' | transloco }}
+        } @else {
+        {{ 'viewer.manyTransfers' | transloco: { count: option.transfers ?? option.legs.length - 1 } }}
+        }
+      </div>
+      }
+    </button>
+    }
+  </div>
+  } @else {
+  <div class="muted">{{ vm.noResultsMessage }}</div>
+  @if (vm.routingState === 'no_results') {
+  <div class="quick-actions">
+    <button type="button" class="ghost-btn" (click)="shiftTime.emit(-30)">-30 min</button>
+    <button type="button" class="ghost-btn" (click)="shiftTime.emit(30)">+30 min</button>
+  </div>
+  }
+  }
+</section>

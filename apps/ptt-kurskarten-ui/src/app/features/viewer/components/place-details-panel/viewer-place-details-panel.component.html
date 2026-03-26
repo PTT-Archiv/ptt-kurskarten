@@ -1,0 +1,100 @@
+@if (vm.place; as place) {
+<section class="panel-section location-section">
+  @if (showArchivePreview) {
+  <app-archive-snippet-viewer [imageUrl]="vm.archiveSnippetUrl" [iiifInfoUrl]="vm.archiveIiifInfoUrl"
+    [showCenterMarker]="false"></app-archive-snippet-viewer>
+  }
+  <div class="location-actions">
+    <button class="icon-action-btn" type="button" (click)="setNodeAsStart.emit(place.id)"
+      [attr.aria-label]="'viewer.setAsStart' | transloco">
+      <fa-icon [icon]="startIcon"></fa-icon>
+      <span>{{ 'viewer.setAsStart' | transloco }}</span>
+    </button>
+    <button class="icon-action-btn" type="button" (click)="setNodeAsEnd.emit(place.id)"
+      [attr.aria-label]="'viewer.setAsEnd' | transloco">
+      <fa-icon [icon]="endIcon"></fa-icon>
+      <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+    </button>
+  </div>
+</section>
+
+<section class="panel-section">
+  <div class="section-title">{{ 'viewer.facts' | transloco }}</div>
+  @if (vm.sidebarFacts.length > 0) {
+  <div class="fact-list">
+    @for (fact of vm.sidebarFacts; track fact.id) {
+    <div class="fact-row">
+      <div class="fact-schema">
+        <div class="fact-schema-label">{{ fact.schemaLabel }}</div>
+      </div>
+      <div class="fact-value">
+        @if (fact.url) {
+        <a class="fact-link" [href]="fact.url" target="_blank" rel="noopener noreferrer">
+          {{ fact.label }}
+        </a>
+        } @else {
+        {{ fact.label }}
+        }
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="muted">{{ 'viewer.noFacts' | transloco }}</div>
+  }
+</section>
+
+<section class="panel-section">
+  <div class="section-title">Ausgehende Verbindungen</div>
+  @if (vm.outgoingNodeTrips.length > 0) {
+  <div class="node-trip-list">
+    @for (trip of vm.outgoingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
+    <div class="node-trip-row">
+      <div class="node-trip-head">{{ trip.nodeName }}</div>
+      <div class="node-trip-time">
+        @if (trip.departs) {
+        {{ trip.departs }} →
+        }
+        {{ trip.arrives }}
+        @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+        <span>(+{{ trip.arrivalDayOffset }})</span>
+        }
+      </div>
+      <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="muted">Keine ausgehenden Verbindungen</div>
+  }
+</section>
+
+<section class="panel-section">
+  <div class="section-title">Eingehende Verbindungen</div>
+  @if (vm.incomingNodeTrips.length > 0) {
+  <div class="node-trip-list">
+    @for (trip of vm.incomingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
+    <div class="node-trip-row">
+      <div class="node-trip-head">{{ trip.nodeName }}</div>
+      <div class="node-trip-time">
+        @if (trip.departs) {
+        {{ trip.departs }} →
+        }
+        {{ trip.arrives }}
+        @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+        <span>(+{{ trip.arrivalDayOffset }})</span>
+        }
+      </div>
+      <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="muted">Keine eingehenden Verbindungen</div>
+  }
+</section>
+} @else {
+<section class="panel-section">
+  <div class="muted">{{ 'viewer.details' | transloco }}</div>
+</section>
+}

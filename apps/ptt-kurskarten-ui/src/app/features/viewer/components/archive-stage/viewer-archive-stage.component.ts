@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ArchiveSnippetViewerComponent } from '../../shared/archive/archive-snippet-viewer.component';
+import { ArchiveSnippetViewerComponent } from '../../../../shared/archive/archive-snippet-viewer.component';
 
 @Component({
   selector: 'app-viewer-archive-stage',

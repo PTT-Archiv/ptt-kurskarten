@@ -1,0 +1,109 @@
+<div class="viewer-action-stack" [style.bottom.px]="vm.actionStackBottomOffset">
+  <button class="help-toggle-btn viewer-action-btn" type="button"
+    (click)="toggleHelp.emit()"
+    [attr.aria-label]="(vm.helpOpen ? 'viewer.helpClose' : 'viewer.helpOpen') | transloco">
+    @if (vm.helpOpen) {
+    <fa-icon [icon]="xmarkIcon"></fa-icon>
+    } @else {
+    <span aria-hidden="true">?</span>
+    }
+  </button>
+  <button class="route-close-btn viewer-action-btn" type="button"
+    (click)="toggleSettings.emit()"
+    [attr.aria-label]="(vm.settingsOpen ? 'viewer.settingsClose' : 'viewer.settingsOpen') | transloco">
+    <fa-icon [icon]="vm.settingsOpen ? xmarkIcon : gearIcon"></fa-icon>
+  </button>
+  @if (vm.archiveModeEnabled) {
+  <button class="layer-switcher-card" type="button" (click)="toggleSurfaceMode.emit()"
+    [attr.aria-label]="(vm.inactiveSurfaceMode === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco">
+    <div class="layer-switcher-preview" [class.is-map-preview]="vm.inactiveSurfaceMode === 'map'"
+      [style.background-image]="vm.inactiveSurfacePreviewImageUrl ? 'url(' + vm.inactiveSurfacePreviewImageUrl + ')' : null">
+      <span class="layer-switcher-chip">
+        {{ (vm.inactiveSurfaceMode === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco }}
+      </span>
+    </div>
+  </button>
+  }
+</div>
+
+@if (vm.pickModeVisible) {
+<div style="position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 7; pointer-events: none;">
+  <div class="status-card" style="font-weight: 600;">{{ vm.pickModeLabel }}</div>
+</div>
+}
+
+@if (vm.resetViewVisible) {
+<button class="reset-view-btn" type="button" (click)="resetMapView.emit()">
+  {{ 'viewer.resetView' | transloco }}
+</button>
+}
+
+@if (vm.helpOpen) {
+<section class="help-popup viewer-floating-panel">
+  <div class="help-header">
+    <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+    <button class="ghost-btn help-header-close" type="button" (click)="closeHelp.emit()"
+      [attr.aria-label]="'viewer.helpClose' | transloco">
+      <fa-icon [icon]="xmarkIcon"></fa-icon>
+    </button>
+  </div>
+  <p>{{ 'viewer.helpText1' | transloco }}</p>
+  <p>{{ 'viewer.helpText2' | transloco }}</p>
+  <p>{{ 'viewer.helpText3' | transloco }}</p>
+  <p>{{ 'viewer.helpText4' | transloco }}</p>
+</section>
+}
+
+@if (vm.settingsOpen) {
+<section class="help-popup settings-popup viewer-floating-panel">
+  <div class="help-header">
+    <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
+    <button class="ghost-btn help-header-close" type="button" (click)="closeSettings.emit()"
+      [attr.aria-label]="'viewer.settingsClose' | transloco">
+      <fa-icon [icon]="xmarkIcon"></fa-icon>
+    </button>
+  </div>
+  <div>{{ 'nav.language' | transloco }}</div>
+  <div class="quick-actions">
+    <button class="ghost-btn" type="button" [style.background]="vm.activeLang === 'de' ? '#ffffff' : '#141414'"
+      [style.color]="vm.activeLang === 'de' ? '#141414' : '#ffffff'" (click)="setLang.emit('de')">
+      DE
+    </button>
+    <button class="ghost-btn" type="button" [style.background]="vm.activeLang === 'fr' ? '#ffffff' : '#141414'"
+      [style.color]="vm.activeLang === 'fr' ? '#141414' : '#ffffff'" (click)="setLang.emit('fr')">
+      FR
+    </button>
+  </div>
+  <div class="settings-section">
+    <div class="settings-section-title">{{ 'viewer.animationConfigTitle' | transloco }}</div>
+    <label class="settings-field">
+      <span>{{ 'viewer.animationNodes' | transloco }}</span>
+      <select class="settings-select" [value]="vm.tripFlowNodeMode"
+        (change)="tripFlowNodeModeChange.emit($any($event.target).value)">
+        @for (option of vm.tripFlowNodeModeOptions; track option.value) {
+        <option [value]="option.value">{{ option.labelKey | transloco }}</option>
+        }
+      </select>
+    </label>
+    <label class="settings-field">
+      <span>{{ 'viewer.animationEdges' | transloco }}</span>
+      <select class="settings-select" [value]="vm.tripFlowEdgeMode"
+        (change)="tripFlowEdgeModeChange.emit($any($event.target).value)">
+        @for (option of vm.tripFlowEdgeModeOptions; track option.value) {
+        <option [value]="option.value">{{ option.labelKey | transloco }}</option>
+        }
+      </select>
+    </label>
+  </div>
+  @if (!vm.readonlyViewer) {
+  <div class="quick-actions">
+    <button class="ghost-btn" type="button" routerLink="/admin" (click)="closeSettings.emit()">
+      {{ 'nav.admin' | transloco }}
+    </button>
+    <button class="ghost-btn" type="button" routerLink="/reports" (click)="closeSettings.emit()">
+      {{ 'nav.reports' | transloco }}
+    </button>
+  </div>
+  }
+</section>
+}

@@ -1,0 +1,18 @@
+<aside class="viewer-sidebar" [class.is-open]="vm.isOpen" [attr.aria-hidden]="!vm.isOpen">
+  <div class="sidebar-header">
+    <div class="section-title">{{ vm.title }}</div>
+    <button class="ghost-btn" type="button" (click)="close.emit()" [attr.aria-label]="'btn.cancel' | transloco">
+      <fa-icon [icon]="xmarkIcon"></fa-icon>
+    </button>
+  </div>
+
+  @if (vm.routeResultsVisible) {
+  <app-viewer-results-panel [vm]="vm.resultsVm" (selectConnection)="selectConnection.emit($event)"
+    (shiftTime)="shiftTime.emit($event)"></app-viewer-results-panel>
+  <app-viewer-route-details-panel [vm]="vm.routeDetailsVm" (hoverRouteLeg)="hoverRouteLeg.emit($event)"
+    (toggleDetailsOnMap)="toggleDetailsOnMap.emit($event)"></app-viewer-route-details-panel>
+  } @else {
+  <app-viewer-place-details-panel [vm]="vm.placeDetailsVm" (setNodeAsStart)="setNodeAsStart.emit($event)"
+    (setNodeAsEnd)="setNodeAsEnd.emit($event)"></app-viewer-place-details-panel>
+  }
+</aside>

@@ -1,0 +1,74 @@
+@if (vm.selectedConnection; as selected) {
+<section class="panel-section detail-panel">
+  <div class="section-title">{{ 'viewer.routeDetails' | transloco }}</div>
+  @if (selected.kind === 'COMPLETE_PREFIX') {
+  <div class="detail-subtitle">
+    Reise bis {{ vm.getNodeLabel(selected.resolvedTo ?? selected.to) }} (Datensatz-Ende)
+  </div>
+  <div class="detail-badge">Weiterreise ins Ausland: Zeiten unvollständig</div>
+  } @else if (selected.kind === 'FOREIGN_START_FALLBACK') {
+  <div class="detail-subtitle">
+    {{ vm.getNodeLabel(selected.requestedFrom ?? selected.from) }} → {{ vm.getNodeLabel(selected.to) }}
+  </div>
+  <div class="detail-badge">
+    @if (selected.foreignStartNote) {
+    {{ 'viewer.knownFrom' | transloco }} {{ vm.getNodeLabel(selected.effectiveFrom ?? '') }}
+    {{ selected.effectiveStartTime }}
+    } @else {
+    {{ 'viewer.startInDataset' | transloco }}: {{ vm.getNodeLabel(selected.effectiveFrom ?? '') }}
+    {{ selected.effectiveStartTime }}
+    }
+  </div>
+  <div class="detail-line">
+    @if (!selected.foreignStartNote) {
+    {{ 'viewer.departFrom' | transloco: { node: vm.getNodeLabel(selected.requestedFrom ?? selected.from), time: selected.departs } }}
+    }
+  </div>
+  } @else {
+  <div class="detail-subtitle">{{ vm.getNodeName(selected.from) }} → {{ vm.getNodeName(selected.to) }}</div>
+  }
+  @for (leg of selected.legs; track leg.edgeId + leg.tripId; let idx = $index) {
+  <div class="detail-row" [class.is-hovered]="vm.activeHoveredRouteEdgeId === leg.edgeId"
+    (mouseenter)="hoverRouteLeg.emit(leg.edgeId)" (mouseleave)="hoverRouteLeg.emit(null)">
+    @if (!leg.continuationOutsideDataset) {
+    <div class="detail-time">
+      {{ leg.departs }} → {{ leg.arrives }}
+      @if (leg.arrivalDayOffset && leg.arrivalDayOffset > 0) {
+      <span>(+{{ leg.arrivalDayOffset }})</span>
+      }
+    </div>
+    <div class="detail-line">
+      {{ vm.getNodeName(leg.from) }} → {{ vm.getNodeName(leg.to) }} ({{ ('transport.' + leg.transport) | transloco }})
+    </div>
+    @if (leg.notes) {
+    <div class="detail-note">{{ vm.getLocalizedNote(leg.notes) }}</div>
+    }
+    <div class="detail-duration">{{ vm.formatDuration(leg.durationMinutes) }}</div>
+    }
+  </div>
+  @if (vm.selectedWaitSegments[idx]; as wait) {
+  <div class="wait-row">
+    <div class="wait-title">
+      {{ 'label.wait' | transloco }} {{ vm.formatDuration(wait.durationMinutes) }}
+    </div>
+    @if (wait.overnight) {
+    <div class="wait-meta">
+      {{ 'label.overnight' | transloco }}
+      @if (wait.endDayOffset - wait.startDayOffset > 0) {
+      <span>(+{{ wait.endDayOffset - wait.startDayOffset }})</span>
+      }
+    </div>
+    }
+  </div>
+  }
+  }
+</section>
+}
+
+<section class="panel-section">
+  <label class="toggle-row">
+    <input type="checkbox" [checked]="vm.showConnectionDetailsOnMap"
+      (change)="toggleDetailsOnMap.emit($any($event.target).checked)" />
+    <span>{{ 'viewer.detailsOnMap' | transloco }}</span>
+  </label>
+</section>

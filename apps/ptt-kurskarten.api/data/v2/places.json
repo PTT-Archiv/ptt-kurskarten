@@ -2742,5 +2742,17 @@
     "defaultName": "Gonzenbach",
     "validFrom": 1852,
     "validTo": null
+  },
+  {
+    "id": "node-1774528227648",
+    "defaultName": "Chevrilles",
+    "validFrom": 1892,
+    "validTo": null
+  },
+  {
+    "id": "node-1774528309990",
+    "defaultName": "Oberglatt",
+    "validFrom": 1892,
+    "validTo": null
   }
 ]
