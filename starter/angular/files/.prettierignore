@@ -1,0 +1,7 @@
+.angular
+.codex
+.husky
+dist
+node_modules
+out-tsc
+coverage

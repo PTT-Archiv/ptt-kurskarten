@@ -6973,5 +6973,13 @@
     "toPlaceId": "node-1770811420932",
     "year": 1892,
     "note": null
+  },
+  {
+    "id": "edge-1774538092909",
+    "linkId": "node-1770809062251__node-1770811420932",
+    "fromPlaceId": "node-1770811420932",
+    "toPlaceId": "node-1770809062251",
+    "year": 1892,
+    "note": null
   }
 ]
