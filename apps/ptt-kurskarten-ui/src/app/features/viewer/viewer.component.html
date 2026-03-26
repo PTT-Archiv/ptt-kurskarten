@@ -32,38 +32,35 @@
       <span class="viewer-brand-title">PTT-Kurskarten</span>
       <span class="viewer-brand-note">Änderungen vorbehalten</span>
     </div>
-    <div class="viewer-top-controls">
-      <div class="viewer-year-card" [class.viewer-year-card-multi]="publicEditionOptions().length > 1">
-        <span class="viewer-year-label">{{ 'viewer.editionTitle' | transloco }}</span>
-        @if (publicEditionOptions().length > 1) {
-        <div class="viewer-edition-switcher" role="tablist" [attr.aria-label]="'viewer.editionTitle' | transloco">
-          @for (edition of publicEditionOptions(); track edition.id) {
-          <button
-            class="viewer-edition-option"
-            type="button"
-            role="tab"
-            [class.active]="edition.year === year()"
-            [attr.aria-selected]="edition.year === year()"
-            [attr.aria-label]="edition.title || edition.year"
-            [title]="edition.title || edition.year"
-            (click)="selectEdition(edition.year)"
-          >
-            {{ edition.year }}
-          </button>
+    <div class="viewer-header">
+      <div class="viewer-header-slot viewer-header-slot-start">
+        <div class="viewer-year-card" [class.viewer-year-card-multi]="publicEditionOptions().length > 1">
+          <span class="viewer-year-label">{{ 'viewer.editionTitle' | transloco }}</span>
+          @if (publicEditionOptions().length > 1) {
+          <div class="viewer-edition-switcher" role="tablist" [attr.aria-label]="'viewer.editionTitle' | transloco">
+            @for (edition of publicEditionOptions(); track edition.id) {
+            <button
+              class="viewer-edition-option"
+              type="button"
+              role="tab"
+              [class.active]="edition.year === year()"
+              [attr.aria-selected]="edition.year === year()"
+              [attr.aria-label]="edition.title || edition.year"
+              [title]="edition.title || edition.year"
+              (click)="selectEdition(edition.year)"
+            >
+              {{ edition.year }}
+            </button>
+            }
+          </div>
+          } @else {
+          <div class="viewer-year-readonly">{{ selectedEditionLabel() }}</div>
           }
         </div>
-        } @else {
-        <div class="viewer-year-readonly">{{ selectedEditionLabel() }}</div>
-        }
       </div>
-      @if (orbitVisible()) {
-      <div class="viewer-orbit-card" aria-hidden="true">
-        <app-viewer-day-night-indicator [minuteOfDay]="simulationMinute()"></app-viewer-day-night-indicator>
-      </div>
-      }
-    </div>
-    <div class="planner-overlay">
-      @if (archiveModeActive() || !routePlannerOpen() || smallScreenLayout()) {
+      <div class="viewer-header-slot viewer-header-slot-center">
+        @if (archiveModeActive() || !routePlannerOpen() || smallScreenLayout()) {
+        <div class="viewer-header-search">
       <div class="place-search-shell" [class.archive-only]="archiveModeActive()"
         [class.has-utility-actions]="smallScreenLayout()">
         <fa-icon [icon]="searchIcon"></fa-icon>
@@ -105,7 +102,19 @@
         </div>
         }
       </div>
-      } @else {
+        </div>
+        }
+      </div>
+      <div class="viewer-header-slot viewer-header-slot-end">
+        @if (orbitVisible()) {
+        <div class="viewer-orbit-card" aria-hidden="true">
+          <app-viewer-day-night-indicator [minuteOfDay]="simulationMinute()"></app-viewer-day-night-indicator>
+        </div>
+        }
+      </div>
+    </div>
+    @if (!archiveModeActive() && routePlannerOpen() && !smallScreenLayout()) {
+    <div class="planner-overlay">
       <div class="route-planner-shell">
       <app-viewer-route-planner-overlay [nodes]="nodes()" [fromId]="fromId()" [toId]="toId()"
         [nodeAliases]="nodeAliasesById()"
@@ -136,8 +145,8 @@
         <div class="status-card">{{ getNoResultsMessage() }}</div>
       </div>
       }
-    }
     </div>
+    }
     <div class="viewer-action-stack" [style.bottom.px]="actionStackBottomOffset()">
       <button class="help-toggle-btn viewer-action-btn" type="button"
         (click)="helpOpen.set(!helpOpen()); settingsOpen.set(false)"

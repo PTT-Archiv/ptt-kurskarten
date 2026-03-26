@@ -54,9 +54,47 @@ const EDGE_LANE_SPACING = 6;
 const DIM_ALPHA = 0.3;
 const ROUTE_FIT_PADDING_MIN = 28;
 const ROUTE_FIT_PADDING_MAX = 84;
-const NODE_COLOR_DEFAULT = '#ffffff';
-const NODE_COLOR_FOREIGN = '#ffffff';
-const NODE_COLOR_MUTED = '#9a9a9a';
+const MAP_STAGE_PALETTE = {
+  stageBackground: '#000000',
+  controlBorder: '#ffffff',
+  controlSurface: '#141414',
+  controlText: '#ffffff',
+  controlShadow: 'rgba(0, 0, 0, 0.2)',
+  controlSurfaceActive: '#ffffff',
+  controlTextActive: '#141414',
+  hintText: '#000000',
+  hintSurface: 'rgba(255, 255, 255, 0.85)',
+  nodeDefault: '#ffffff',
+  nodeForeign: '#ffffff',
+  nodeMuted: '#9a9a9a',
+  nodeStroke: '#ffffff',
+  nodeShadow: 'rgba(0, 0, 0, 0.35)',
+  endpointRingOuter: '#000000',
+  endpointRingInner: '#ffffff',
+  hoverRing: '#ffffff',
+  pulseRing: 'rgba(255, 255, 255, 0.6)',
+  organicNodeStroke: '#ffffff',
+  organicRippleStroke: '#ffffff',
+  edgeBaseStroke: 'rgba(255, 255, 255, 0.48)',
+  edgeDimStroke: 'rgba(255, 255, 255, 0.14)',
+  edgePickBaseStroke: 'rgba(255, 255, 255, 0.24)',
+  edgePickDimStroke: 'rgba(255, 255, 255, 0.08)',
+  edgeEmphasisStroke: '#ffffff',
+  edgeGlowShadow: 'rgba(255, 255, 255, 0.9)',
+  labelText: '#ffffff',
+  labelBoxFill: '#ffffff',
+  labelBoxText: '#000000',
+  labelBoxStroke: '#141414',
+  simulationDotFill: '#ffffff',
+  simulationDotHalo: 'rgba(255, 255, 255, 0.65)',
+  waitLabelFill: 'rgba(0, 0, 0, 0.9)',
+  waitLabelStroke: '#ffffff',
+  waitLabelText: '#ffffff',
+  waitLabelIcon: '#ffffff'
+} as const;
+const NODE_COLOR_DEFAULT = MAP_STAGE_PALETTE.nodeDefault;
+const NODE_COLOR_FOREIGN = MAP_STAGE_PALETTE.nodeForeign;
+const NODE_COLOR_MUTED = MAP_STAGE_PALETTE.nodeMuted;
 const MAX_SIMULATION_DOTS = 700;
 type SimTripRun = TripFlowSimulationRun;
 
@@ -138,7 +176,7 @@ export type MapSimulationTripHit = {
         position: relative;
         width: 100%;
         height: 100%;
-        background: #000000;
+        background: ${MAP_STAGE_PALETTE.stageBackground};
         border: 1px solid var(--ptt-black);
         overflow: hidden;
       }
@@ -194,9 +232,9 @@ export type MapSimulationTripHit = {
       .zoom-btn {
         width: 34px;
         height: 34px;
-        border: 2px solid #ffffff;
-        background: #141414;
-        color: #ffffff;
+        border: 2px solid ${MAP_STAGE_PALETTE.controlBorder};
+        background: ${MAP_STAGE_PALETTE.controlSurface};
+        color: ${MAP_STAGE_PALETTE.controlText};
         border-radius: 999px;
         font-size: 22px;
         line-height: 1;
@@ -205,14 +243,14 @@ export type MapSimulationTripHit = {
         display: grid;
         place-items: center;
         padding: 0;
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 4px 4px 0 ${MAP_STAGE_PALETTE.controlShadow};
         transition: background 140ms ease-out, color 140ms ease-out, transform 80ms ease-out;
       }
 
       .zoom-btn:hover,
       .zoom-btn:focus-visible {
-        background: #ffffff;
-        color: #141414;
+        background: ${MAP_STAGE_PALETTE.controlSurfaceActive};
+        color: ${MAP_STAGE_PALETTE.controlTextActive};
         outline: none;
       }
 
@@ -232,8 +270,8 @@ export type MapSimulationTripHit = {
         border-radius: 999px;
         font-size: 12px;
         line-height: 1.2;
-        color: #000;
-        background: rgba(255, 255, 255, 0.85);
+        color: ${MAP_STAGE_PALETTE.hintText};
+        background: ${MAP_STAGE_PALETTE.hintSurface};
         opacity: 0;
         transform: translate(-50%, 4px);
         transition: opacity 140ms ease-out, transform 140ms ease-out;
@@ -896,13 +934,13 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
           : node.foreign
             ? NODE_COLOR_FOREIGN
             : NODE_COLOR_DEFAULT;
-      const strokeColor = isPulsing ? '#ffffff' : isSelectionMuted ? NODE_COLOR_MUTED : '#ffffff';
+      const strokeColor = isPulsing ? MAP_STAGE_PALETTE.nodeStroke : isSelectionMuted ? NODE_COLOR_MUTED : MAP_STAGE_PALETTE.nodeStroke;
       const nodeAlpha = isPulsing ? 1 : isDimmed || isSelectionMuted ? DIM_ALPHA : 1;
       const drawsStaticNode = !shouldHideStaticNode;
       if (drawsStaticNode) {
         if (showShadow) {
           ctx.save();
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+          ctx.shadowColor = MAP_STAGE_PALETTE.nodeShadow;
           ctx.shadowBlur = 0;
           ctx.shadowOffsetX = 5 * sizeScale;
           ctx.shadowOffsetY = 5 * sizeScale;
@@ -937,12 +975,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.save();
         ctx.beginPath();
         ctx.arc(position.x, position.y, ringRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.endpointRingOuter;
         ctx.lineWidth = 4;
         ctx.stroke();
         ctx.beginPath();
         ctx.arc(position.x, position.y, ringRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.endpointRingInner;
         ctx.lineWidth = 2.25;
         ctx.stroke();
         ctx.restore();
@@ -952,7 +990,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (isSelected || isHovered) {
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 4 * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.hoverRing;
         ctx.lineWidth = 2;
         ctx.stroke();
         visibleNodeIds.add(node.id);
@@ -962,7 +1000,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const pulse = 0.5 + 0.5 * Math.sin(pulseTime / 140);
         ctx.beginPath();
         ctx.arc(position.x, position.y, radius + 8 * sizeScale + pulse * 4 * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.pulseRing;
         ctx.lineWidth = 2;
         ctx.stroke();
         visibleNodeIds.add(node.id);
@@ -991,7 +1029,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.fill();
         ctx.beginPath();
         ctx.arc(screenNode.x, screenNode.y, organicRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.organicNodeStroke;
         ctx.lineWidth = 1.7;
         ctx.stroke();
         ctx.restore();
@@ -1000,7 +1038,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         ctx.globalAlpha = Math.max(0, intensity * 0.55);
         ctx.beginPath();
         ctx.arc(screenNode.x, screenNode.y, organicRadius + (2.5 + rippleProgress * 5) * sizeScale, 0, Math.PI * 2);
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = MAP_STAGE_PALETTE.organicRippleStroke;
         ctx.lineWidth = 1.3;
         ctx.stroke();
         ctx.restore();
@@ -1033,9 +1071,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const y = screen.y - size.h - 8;
         const isActive = this.hoveredNodeId === node.id || this.selectedNodeId === node.id;
         if (isActive) {
-          drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+          drawLabelBox(ctx, text, x, y, size.w, size.h, MAP_STAGE_PALETTE.labelBoxFill, MAP_STAGE_PALETTE.labelBoxText);
         } else {
-          drawLabel(ctx, text, x, y, size.w, size.h, '#ffffff');
+          drawLabel(ctx, text, x, y, size.w, size.h, MAP_STAGE_PALETTE.labelText);
         }
         this.screenNodeLabels.set(node.id, { x, y, w: size.w, h: size.h });
         ctx.restore();
@@ -1058,7 +1096,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = node.x + 10;
         const y = node.y - size.h - 8;
-        drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+        drawLabelBox(ctx, text, x, y, size.w, size.h, MAP_STAGE_PALETTE.labelBoxFill, MAP_STAGE_PALETTE.labelBoxText);
         this.screenNodeLabels.set(this.hoveredNodeId, { x, y, w: size.w, h: size.h });
         ctx.restore();
       }
@@ -1076,7 +1114,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
         const size = measureLabel(ctx, text);
         const x = node.x + 10;
         const y = node.y - size.h - 8;
-        drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+        drawLabelBox(ctx, text, x, y, size.w, size.h, MAP_STAGE_PALETTE.labelBoxFill, MAP_STAGE_PALETTE.labelBoxText);
         this.screenNodeLabels.set(this.selectedNodeId, { x, y, w: size.w, h: size.h });
         ctx.restore();
       }
@@ -1099,7 +1137,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       const size = measureLabel(ctx, text);
       const x = node.x + 10;
       const y = node.y - size.h - 8;
-      drawLabelBox(ctx, text, x, y, size.w, size.h, '#ffffff', '#000000');
+      drawLabelBox(ctx, text, x, y, size.w, size.h, MAP_STAGE_PALETTE.labelBoxFill, MAP_STAGE_PALETTE.labelBoxText);
       this.screenNodeLabels.set(nodeId, { x, y, w: size.w, h: size.h });
       ctx.restore();
     });
@@ -1456,8 +1494,8 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const px = -dy / len;
     const py = dx / len;
     const pickDim = this.pickMode !== null;
-    const baseStroke = pickDim ? 'rgba(255, 255, 255, 0.24)' : 'rgba(255, 255, 255, 0.48)';
-    const dimStroke = pickDim ? 'rgba(255, 255, 255, 0.08)' : 'rgba(255, 255, 255, 0.14)';
+    const baseStroke = pickDim ? MAP_STAGE_PALETTE.edgePickBaseStroke : MAP_STAGE_PALETTE.edgeBaseStroke;
+    const dimStroke = pickDim ? MAP_STAGE_PALETTE.edgePickDimStroke : MAP_STAGE_PALETTE.edgeDimStroke;
     const x1 = fromPos.x + px * laneOffsetPx;
     const y1 = fromPos.y + py * laneOffsetPx;
     const x2 = toPos.x + px * laneOffsetPx;
@@ -1469,7 +1507,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const displayState = simulationDisplayState ?? (isHighlighted ? 'emphasis' : isSelectionMuted ? 'muted' : 'base');
     const strokeStyle =
       displayState === 'emphasis'
-        ? '#ffffff'
+        ? MAP_STAGE_PALETTE.edgeEmphasisStroke
         : displayState === 'muted'
           ? NODE_COLOR_MUTED
           : isDimmed
@@ -1479,9 +1517,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     const dashPattern = isDashed ? [10, 7] : [];
     if (isGlowing) {
       ctx.save();
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = MAP_STAGE_PALETTE.edgeEmphasisStroke;
       ctx.lineWidth = EDGE_LINE_WIDTH_HIGHLIGHT + 5;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
+      ctx.shadowColor = MAP_STAGE_PALETTE.edgeGlowShadow;
       ctx.shadowBlur = 14;
       ctx.setLineDash(dashPattern);
       ctx.beginPath();
@@ -1492,7 +1530,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
     ctx.save();
     ctx.globalAlpha = strokeAlpha;
-    ctx.strokeStyle = isGlowing ? '#ffffff' : strokeStyle;
+    ctx.strokeStyle = isGlowing ? MAP_STAGE_PALETTE.edgeEmphasisStroke : strokeStyle;
     ctx.lineWidth =
       isGlowing
         ? EDGE_LINE_WIDTH_HIGHLIGHT + 1
@@ -1721,7 +1759,7 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       if (label.kind === 'wait') {
         drawWaitLabel(ctx, label.text, position.x, position.y, size.w, size.h, label.overnightDelta);
       } else if (label.kind === 'endpoint') {
-        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h, '#ffffff');
+        drawLabel(ctx, label.text, position.x, position.y, size.w, size.h, MAP_STAGE_PALETTE.labelText);
       } else {
         drawLabel(ctx, label.text, position.x, position.y, size.w, size.h);
       }
@@ -1839,12 +1877,12 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       ctx.globalAlpha = 0.95;
       ctx.beginPath();
       ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = MAP_STAGE_PALETTE.simulationDotFill;
       ctx.fill();
       ctx.globalAlpha = 0.55;
       ctx.beginPath();
       ctx.arc(x, y, outerRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.strokeStyle = MAP_STAGE_PALETTE.simulationDotHalo;
       ctx.lineWidth = 1.2;
       ctx.stroke();
       this.screenSimulationDots.push({
@@ -1914,7 +1952,7 @@ function drawLabel(
   y: number,
   w: number,
   h: number,
-  textColor = '#ffffff'
+  textColor = MAP_STAGE_PALETTE.labelText
 ): void {
   ctx.save();
   ctx.fillStyle = textColor;
@@ -1929,12 +1967,12 @@ function drawLabelBox(
   y: number,
   w: number,
   h: number,
-  fillColor = '#ffffff',
-  textColor = '#141414'
+  fillColor = MAP_STAGE_PALETTE.labelBoxFill,
+  textColor = MAP_STAGE_PALETTE.labelBoxText
 ): void {
   ctx.save();
   ctx.fillStyle = fillColor;
-  ctx.strokeStyle = '#141414';
+  ctx.strokeStyle = MAP_STAGE_PALETTE.labelBoxStroke;
   ctx.lineWidth = 1.5;
   drawRoundedRect(ctx, x, y, w, h, 6);
   ctx.fill();
@@ -1964,8 +2002,8 @@ function drawWaitLabel(
   const iconSize = 12;
   const gap = 6;
   ctx.save();
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-  ctx.strokeStyle = '#ffffff';
+  ctx.fillStyle = MAP_STAGE_PALETTE.waitLabelFill;
+  ctx.strokeStyle = MAP_STAGE_PALETTE.waitLabelStroke;
   ctx.lineWidth = 1.2;
   drawRoundedRect(ctx, x, y, w, h, 7);
   ctx.fill();
@@ -1981,13 +2019,13 @@ function drawWaitLabel(
     ctx.save();
     ctx.translate(iconX, iconY);
     ctx.scale(scale, scale);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = MAP_STAGE_PALETTE.waitLabelIcon;
     ctx.fill(waitIconPath);
     ctx.restore();
   } else {
     // SSR-safe fallback: draw a simple clock
     ctx.save();
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = MAP_STAGE_PALETTE.waitLabelIcon;
     ctx.lineWidth = 1.2;
     ctx.beginPath();
     ctx.arc(iconX + iconSize / 2, iconY + iconSize / 2, iconSize / 2, 0, Math.PI * 2);
@@ -2001,7 +2039,7 @@ function drawWaitLabel(
     ctx.restore();
   }
 
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = MAP_STAGE_PALETTE.waitLabelText;
   let textX = x + 8 + iconSize + gap;
   ctx.fillText(text, textX, y + h / 2);
 
@@ -2017,7 +2055,7 @@ function drawWaitLabel(
       ctx.save();
       ctx.translate(overnightX, iconY);
       ctx.scale(scale, scale);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = MAP_STAGE_PALETTE.waitLabelIcon;
       ctx.fill(overnightIconPath);
       ctx.restore();
       ctx.fillText(suffix, overnightX + iconSize + gap, y + h / 2);

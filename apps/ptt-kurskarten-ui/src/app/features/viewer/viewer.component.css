@@ -5,6 +5,11 @@
 }
 
 .viewer-shell {
+  --viewer-brand-bar-height: 40px;
+  --viewer-header-top-gap: 12px;
+  --viewer-header-side-width: clamp(180px, 18vw, 300px);
+  --viewer-header-center-width: clamp(360px, 50vw, 720px);
+  --viewer-expanded-planner-top: calc(var(--viewer-brand-bar-height) + var(--viewer-header-top-gap) + 132px);
   position: relative;
   height: 100dvh;
   width: 100%;
@@ -360,11 +365,11 @@
 
 .planner-overlay {
   position: absolute;
-  top: 75px;
+  top: var(--viewer-expanded-planner-top);
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-  width: clamp(520px, 60vw, 720px);
+  width: min(var(--viewer-header-center-width), calc(100% - 24px));
   max-width: calc(100% - 24px);
   transition: transform 180ms ease-out, opacity 180ms ease-out, box-shadow 180ms ease-out;
   display: grid;
@@ -373,38 +378,65 @@
   pointer-events: none;
 }
 
-.viewer-top-controls {
+.viewer-header {
   position: absolute;
-  top: 44px;
+  top: var(--viewer-brand-bar-height);
   left: 16px;
   right: 16px;
   z-index: 7;
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns:
+    minmax(0, var(--viewer-header-side-width))
+    minmax(0, var(--viewer-header-center-width))
+    minmax(0, var(--viewer-header-side-width));
   justify-content: space-between;
-  gap: 12px;
+  align-items: center;
+  column-gap: 16px;
 }
 
-.viewer-year-card,
-.viewer-orbit-card {
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+.viewer-header-slot {
+  min-width: 0;
+  display: flex;
+  align-items: center;
 }
+
+.viewer-header-slot-start {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.viewer-header-slot-center {
+  width: min(100%, var(--viewer-header-center-width));
+  justify-self: center;
+}
+
+.viewer-header-slot-end {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.viewer-header-search {
+  width: 100%;
+}
+
+
 
 .viewer-year-card {
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(0, 0, 0, 0);
   border: none;
   border-radius: 16px;
   min-width: 150px;
-  max-width: min(220px, calc(100vw - 156px));
-
+  max-width: 100%;
+  width: fit-content;
   display: grid;
+  justify-items: start;
   gap: 6px;
   pointer-events: auto;
 }
 
 .viewer-year-card.viewer-year-card-multi {
-  min-width: 360px;
-  max-width: min(560px, calc(100vw - 156px));
+  min-width: 0;
+  width: min(100%, 360px);
   gap: 14px;
 }
 
@@ -425,7 +457,7 @@
   border-radius: 12px;
   background: #141414;
   color: #fff;
-
+  padding: 10px 12px;
   font: inherit;
   font-size: 18px;
   font-weight: 600;
@@ -445,6 +477,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  max-width: 100%;
   gap: 12px 28px;
 }
 
@@ -500,12 +533,42 @@
   transform: translateX(-50%) translateY(0);
 }
 
+.viewer-shell.archive-mode .viewer-year-card {
+  mix-blend-mode: difference;
+}
+
+.viewer-shell.archive-mode .viewer-year-label,
+.viewer-shell.archive-mode .viewer-year-readonly,
+.viewer-shell.archive-mode .viewer-edition-option {
+  color: #fff;
+}
+
+.viewer-shell.archive-mode .viewer-year-readonly {
+  background: #000;
+}
+
+.viewer-shell.archive-mode .viewer-edition-option::after {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.viewer-shell.archive-mode .viewer-edition-option.active::after,
+.viewer-shell.archive-mode .viewer-edition-option:focus-visible::after,
+.viewer-shell.archive-mode .viewer-edition-option:hover::after {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
 .viewer-orbit-card {
   width: 120px;
   height: 120px;
   display: block;
   z-index: -1;
   pointer-events: none;
+}
+
+.viewer-header-search .place-search-shell {
+  width: 100%;
 }
 
 .viewer-action-stack {
@@ -694,7 +757,6 @@
 
 .viewer-shell.sidebar-open .planner-overlay {
   width: clamp(420px, 52vw, 560px);
-  top: 56px;
 }
 
 .viewer-shell.planner-minimized .planner-overlay {
@@ -933,6 +995,13 @@
 }
 
 @media (max-width: 1023px) {
+  .viewer-shell.small-screen-layout {
+    --viewer-brand-bar-height: 38px;
+    --viewer-header-top-gap: 10px;
+    --viewer-header-side-width: clamp(150px, 20vw, 220px);
+    --viewer-header-center-width: clamp(320px, 44vw, 520px);
+  }
+
   .small-screen-layout .viewer-brand-bar {
     min-height: 26px;
     padding: 6px 12px;
@@ -943,31 +1012,18 @@
     font-size: 10px;
   }
 
-  .small-screen-layout .planner-overlay {
-    top: 108px;
-    width: calc(100% - 24px);
-    max-width: calc(100% - 24px);
-  }
-
-  .small-screen-layout.planner-minimized .planner-overlay {
-    transform: translateX(-50%);
-  }
-
-  .small-screen-layout .viewer-top-controls {
-    top: 40px;
+  .small-screen-layout .viewer-header {
     left: 12px;
     right: 12px;
-    gap: 10px;
+    column-gap: 12px;
   }
 
   .small-screen-layout .viewer-year-card {
     min-width: 140px;
-    max-width: min(210px, calc(100vw - 122px));
   }
 
   .small-screen-layout .viewer-year-card.viewer-year-card-multi {
-    min-width: min(320px, calc(100vw - 126px));
-    max-width: min(440px, calc(100vw - 126px));
+    width: min(100%, 320px);
     padding: 12px 14px 10px;
   }
 
@@ -1030,6 +1086,11 @@
 }
 
 @media (max-width: 767px) {
+  .viewer-shell.mobile-layout {
+    --viewer-brand-bar-height: 34px;
+    --viewer-header-top-gap: 8px;
+  }
+
   .mobile-layout .viewer-brand-bar {
     min-height: 24px;
     padding: 5px 10px;
@@ -1042,26 +1103,40 @@
     letter-spacing: 0.06em;
   }
 
-  .mobile-layout .planner-overlay {
-    top: 98px;
-    width: calc(100% - 20px);
-    max-width: calc(100% - 20px);
+  .mobile-layout .viewer-header {
+    left: 10px;
+    right: 10px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'start end'
+      'center center';
+    justify-content: stretch;
+    align-items: start;
+    row-gap: 10px;
+    column-gap: 10px;
   }
 
-  .mobile-layout .viewer-top-controls {
-    top: 38px;
-    gap: 8px;
+  .mobile-layout .viewer-header-slot-start {
+    grid-area: start;
+  }
+
+  .mobile-layout .viewer-header-slot-center {
+    grid-area: center;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .mobile-layout .viewer-header-slot-end {
+    grid-area: end;
   }
 
   .mobile-layout .viewer-year-card {
     min-width: 128px;
-    max-width: min(180px, calc(100vw - 108px));
     padding: 8px 10px;
   }
 
   .mobile-layout .viewer-year-card.viewer-year-card-multi {
-    min-width: min(250px, calc(100vw - 102px));
-    max-width: min(320px, calc(100vw - 102px));
+    width: min(100%, 320px);
     padding: 10px 12px 9px;
   }
 
@@ -1092,6 +1167,10 @@
   .mobile-layout .viewer-orbit-card {
     width: 70px;
     height: 70px;
+  }
+
+  .mobile-layout .viewer-header-search .place-search-shell {
+    width: 100%;
   }
 
   .mobile-layout .place-search-shell {

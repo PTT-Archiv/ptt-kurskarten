@@ -72,6 +72,10 @@
   z-index: 3;
 }
 
+.snippet-frame.fill-frame .snippet-controls {
+  top: calc(var(--viewer-brand-bar-height, 40px) + 8px);
+}
+
 .ghost-btn {
   width: 32px;
   height: 32px;
