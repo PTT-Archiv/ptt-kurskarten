@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass, faRoute } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -7,23 +7,27 @@ import type { ViewerHeaderVm } from '../../viewer.models';
 
 @Component({
   selector: 'app-viewer-header',
-  standalone: true,
   imports: [TranslocoPipe, FaIconComponent, ViewerDayNightIndicatorComponent],
   templateUrl: './viewer-header.component.html',
-  styleUrl: './viewer-header.component.css'
+  styleUrl: './viewer-header.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewerHeaderComponent {
-  @Input({ required: true }) vm!: ViewerHeaderVm;
+  readonly vmInput = input.required<ViewerHeaderVm>({ alias: 'vm' });
 
-  @Output() selectEdition = new EventEmitter<number>();
-  @Output() placeSearchFocus = new EventEmitter<void>();
-  @Output() placeSearchBlur = new EventEmitter<void>();
-  @Output() placeSearchInput = new EventEmitter<string>();
-  @Output() placeSearchKeydown = new EventEmitter<KeyboardEvent>();
-  @Output() previewPlaceResult = new EventEmitter<{ nodeId: string; index: number }>();
-  @Output() selectPlaceResult = new EventEmitter<string>();
-  @Output() openRoutePlanner = new EventEmitter<void>();
+  readonly selectEdition = output<number>();
+  readonly placeSearchFocus = output<void>();
+  readonly placeSearchBlur = output<void>();
+  readonly placeSearchInput = output<string>();
+  readonly placeSearchKeydown = output<KeyboardEvent>();
+  readonly previewPlaceResult = output<{ nodeId: string; index: number }>();
+  readonly selectPlaceResult = output<string>();
+  readonly openRoutePlanner = output<void>();
 
   readonly searchIcon = faMagnifyingGlass;
   readonly routeIcon = faRoute;
+
+  get vm(): ViewerHeaderVm {
+    return this.vmInput();
+  }
 }

@@ -1,17 +1,32 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnChanges,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren,
+  inject,
+  input,
+  output
+} from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faArrowsLeftRight, faXmark } from '@fortawesome/free-solid-svg-icons';
 import type { TimeHHMM } from '@ptt-kurskarten/shared';
+import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-time-controls.component';
 
 @Component({
   selector: 'app-viewer-route-planner-overlay',
-  standalone: true,
-  imports: [TranslocoPipe, FaIconComponent],
+  imports: [TranslocoPipe, FaIconComponent, ViewerRoutePlannerTimeControlsComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
       class="planner-card"
-      [class.compact]="variant === 'compact'"
+      [class.compact]="variant() === 'compact'"
       (focusin)="plannerFocus.emit(true)"
       (focusout)="plannerFocus.emit(false)"
       (mouseenter)="plannerHover.emit(true)"
@@ -96,65 +111,17 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           }
         </label>
       </div>
-      <div class="planner-row">
-        @if (showTime) {
-        <label class="field time-field">
-          <span>{{ 'label.departure' | transloco }}</span>
-          <div class="time-picker">
-            <div class="time-segment">
-              <span class="time-label">hr</span>
-              <input
-                class="time-input"
-                type="text"
-                inputmode="numeric"
-                list="hour-options"
-                maxlength="2"
-                [value]="hourDisplayValue"
-                (focus)="onHourFocus()"
-                (input)="onHourInput($any($event.target).value)"
-                (blur)="onHourBlur()"
-                (keydown.enter)="onHourEnter($event)"
-              />
-              <datalist id="hour-options">
-                @for (h of hours; track h) {
-                  <option [value]="h"></option>
-                }
-              </datalist>
-            </div>
-            <div class="time-segment">
-              <span class="time-label">min</span>
-              <input
-                class="time-input"
-                type="text"
-                inputmode="numeric"
-                list="minute-options"
-                maxlength="2"
-                [value]="minuteDisplayValue"
-                (focus)="onMinuteFocus()"
-                (input)="onMinuteInput($any($event.target).value)"
-                (blur)="onMinuteBlur()"
-                (keydown.enter)="onMinuteEnter($event)"
-              />
-              <datalist id="minute-options">
-                @for (m of minutes; track m) {
-                  <option [value]="m"></option>
-                }
-              </datalist>
-            </div>
-          </div>
-        </label>
-        <div class="planner-actions">
-          @if (canApplyTime) {
-            <button type="button" class="action-btn" (click)="applyTime.emit()">
-              {{ 'btn.apply' | transloco }}
-            </button>
-          }
-          <button type="button" class="action-btn secondary" (click)="resetSearch.emit()">
-            {{ 'viewer.resetSearch' | transloco }}
-          </button>
-        </div>
-        }
-      </div>
+
+      @if (showTime()) {
+        <app-viewer-route-planner-time-controls
+          [departTime]="departTime()"
+          [canApplyTime]="canApplyTime()"
+          [compact]="variant() === 'compact'"
+          (departTimeChange)="departTimeChange.emit($event)"
+          (applyTime)="applyTime.emit()"
+          (resetSearch)="resetSearch.emit()"
+        ></app-viewer-route-planner-time-controls>
+      }
     </div>
   `,
   styles: [
@@ -185,26 +152,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         align-items: end;
       }
 
-      .planner-row {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
-        align-items: end;
-      }
-
-      .planner-row:last-child {
-        grid-template-columns: 240px auto;
-        justify-content: center;
-      }
-
-      .planner-actions {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-        row-gap: 8px;
-      }
-
       .field {
         display: grid;
         gap: 6px;
@@ -226,7 +173,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
 
       .field input:focus,
       .field select:focus,
-      .time-input:focus,
       .typeahead-input input:focus,
       .swap-btn:focus,
       .swap-btn:focus-visible,
@@ -243,40 +189,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
       .field.minimal span {
         font-size: 12px;
         color: #cfcfcf;
-      }
-
-      .time-field {
-        justify-self: stretch;
-        width: 240px;
-        text-align: center;
-      }
-
-      .time-picker {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .time-segment {
-        display: grid;
-        gap: 6px;
-      }
-
-      .time-label {
-        font-size: 11px;
-        color: #cfcfcf;
-      }
-
-      .time-input {
-        border: 2px solid #ffffff;
-        border-radius: 14px;
-        padding: 10px 8px;
-        background: #000000;
-        color: #ffffff;
-        box-shadow: none;
-        font-size: 16px;
-        font-weight: 600;
-        text-align: center;
       }
 
       .swap-btn {
@@ -309,45 +221,11 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         transform: translateY(-1px);
       }
 
-      .action-btn {
-        background: #141414;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        padding: 8px 14px;
-        border-radius: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        height: 40px;
-        box-shadow: none;
-      }
-
-      .action-btn:hover,
-      .action-btn:focus-visible {
-        background: #ffffff;
-        color: #141414;
-      }
-
-      .action-btn[disabled] {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-
-      .action-btn.secondary {
-        background: #141414;
-      }
-
-      .action-btn.secondary:hover,
-      .action-btn.secondary:focus-visible {
-        background: #ffffff;
-        color: #141414;
-      }
-
       .planner-card.compact {
         padding: 10px 12px;
       }
 
-      .planner-card.compact .route-core,
-      .planner-card.compact .planner-row {
+      .planner-card.compact .route-core {
         gap: 8px;
       }
 
@@ -360,12 +238,6 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
         font-size: 16px;
       }
 
-      .planner-card.compact .time-input {
-        padding: 8px 6px;
-        font-size: 15px;
-      }
-
-      .planner-card.compact .action-btn,
       .planner-card.compact .swap-btn {
         height: 36px;
       }
@@ -465,23 +337,10 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           grid-template-columns: minmax(0, 1fr);
         }
 
-        .planner-row {
-          grid-template-columns: minmax(0, 1fr);
-        }
-
-        .planner-row:last-child {
-          grid-template-columns: minmax(0, 1fr);
-          justify-content: stretch;
-        }
-
         .swap-btn {
           position: static;
           width: 100%;
           height: 44px;
-        }
-
-        .time-field {
-          width: 100%;
         }
       }
 
@@ -493,13 +352,11 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           gap: 10px;
         }
 
-        .planner-card.compact .route-core,
-        .planner-card.compact .planner-row {
+        .planner-card.compact .route-core {
           gap: 10px;
         }
 
-        .field.minimal span,
-        .time-label {
+        .field.minimal span {
           font-size: 11px;
         }
 
@@ -514,57 +371,38 @@ import type { TimeHHMM } from '@ptt-kurskarten/shared';
           width: 100%;
           height: 40px;
         }
-
-        .planner-actions {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr);
-          width: 100%;
-        }
-
-        .planner-actions .action-btn {
-          width: 100%;
-          justify-content: center;
-          min-width: 0;
-        }
-
-        .time-picker {
-          gap: 8px;
-        }
-
-        .time-input,
-        .planner-card.compact .time-input {
-          font-size: 14px;
-          padding: 8px 6px;
-        }
       }
     `
   ]
 })
 export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChanges {
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
   readonly xmarkIcon = faXmark;
   readonly swapIcon = faArrowsLeftRight;
 
-  @Input() variant: 'full' | 'compact' = 'full';
-  @Input({ required: true }) nodes: Array<{ id: string; name: string }> = [];
-  @Input() nodeAliases: Record<string, string[]> = {};
-  @Input() fromId = '';
-  @Input() toId = '';
-  @Input() departTime: TimeHHMM = '08:00';
-  @Input() showTime = false;
-  @Input() canApplyTime = false;
-  @Input() searching = false;
-  @Input() autoFocusFromToken = 0;
-  @Output() fromIdChange = new EventEmitter<string>();
-  @Output() toIdChange = new EventEmitter<string>();
-  @Output() departTimeChange = new EventEmitter<TimeHHMM>();
-  @Output() applyTime = new EventEmitter<void>();
-  @Output() swap = new EventEmitter<void>();
-  @Output() plannerFocus = new EventEmitter<boolean>();
-  @Output() plannerHover = new EventEmitter<boolean>();
-  @Output() fromPreviewChange = new EventEmitter<string>();
-  @Output() toPreviewChange = new EventEmitter<string>();
-  @Output() pickTargetChange = new EventEmitter<'from' | 'to' | null>();
-  @Output() resetSearch = new EventEmitter<void>();
+  readonly variant = input<'full' | 'compact'>('full');
+  readonly nodes = input.required<Array<{ id: string; name: string }>>();
+  readonly nodeAliases = input<Record<string, string[]>>({});
+  readonly fromId = input('');
+  readonly toId = input('');
+  readonly departTime = input<TimeHHMM>('08:00');
+  readonly showTime = input(false);
+  readonly canApplyTime = input(false);
+  readonly searching = input(false);
+  readonly autoFocusFromToken = input(0);
+
+  readonly fromIdChange = output<string>();
+  readonly toIdChange = output<string>();
+  readonly departTimeChange = output<TimeHHMM>();
+  readonly applyTime = output<void>();
+  readonly swap = output<void>();
+  readonly plannerFocus = output<boolean>();
+  readonly plannerHover = output<boolean>();
+  readonly fromPreviewChange = output<string>();
+  readonly toPreviewChange = output<string>();
+  readonly pickTargetChange = output<'from' | 'to' | null>();
+  readonly resetSearch = output<void>();
 
   @ViewChildren('fromOption', { read: ElementRef }) fromOptions!: QueryList<ElementRef<HTMLElement>>;
   @ViewChildren('toOption', { read: ElementRef }) toOptions!: QueryList<ElementRef<HTMLElement>>;
@@ -578,116 +416,24 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
   fromActiveIndex = 0;
   toActiveIndex = 0;
   private activePickTarget: 'from' | 'to' | null = null;
-  private hourDraft = '';
-  private minuteDraft = '';
-  private editingHour = false;
-  private editingMinute = false;
-
-  hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'));
-  minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
-
-  get hourValue(): string {
-    return this.departTime?.split(':')[0] ?? '00';
-  }
-
-  get minuteValue(): string {
-    return this.departTime?.split(':')[1] ?? '00';
-  }
-
-  get hourDisplayValue(): string {
-    return this.editingHour ? this.hourDraft : this.hourValue;
-  }
-
-  get minuteDisplayValue(): string {
-    return this.editingMinute ? this.minuteDraft : this.minuteValue;
-  }
 
   ngAfterViewInit(): void {
-    if (this.autoFocusFromToken > 0) {
+    if (this.autoFocusFromToken() > 0) {
       this.focusFromInput();
     }
-  }
-
-  onHourFocus(): void {
-    this.editingHour = true;
-    this.hourDraft = this.hourValue;
-  }
-
-  onHourInput(value: string): void {
-    this.hourDraft = this.normalizeDraft(value);
-    if (this.hourDraft.length === 2) {
-      this.commitHour();
-    }
-  }
-
-  onHourBlur(): void {
-    this.commitHour();
-    this.editingHour = false;
-  }
-
-  onHourEnter(event: Event): void {
-    event.preventDefault();
-    this.commitHour();
-    this.editingHour = false;
-    if (this.canApplyTime) {
-      this.applyTime.emit();
-    }
-  }
-
-  onMinuteFocus(): void {
-    this.editingMinute = true;
-    this.minuteDraft = this.minuteValue;
-  }
-
-  onMinuteInput(value: string): void {
-    this.minuteDraft = this.normalizeDraft(value);
-    if (this.minuteDraft.length === 2) {
-      this.commitMinute();
-    }
-  }
-
-  onMinuteBlur(): void {
-    this.commitMinute();
-    this.editingMinute = false;
-  }
-
-  onMinuteEnter(event: Event): void {
-    event.preventDefault();
-    this.commitMinute();
-    this.editingMinute = false;
-    if (this.canApplyTime) {
-      this.applyTime.emit();
-    }
-  }
-
-  private normalizeNumber(value: string, max: number): string {
-    const parsed = Number(value);
-    if (!Number.isFinite(parsed)) {
-      return '00';
-    }
-    const clamped = Math.max(0, Math.min(max, Math.floor(parsed)));
-    return clamped.toString().padStart(2, '0');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     const fromIdChanged = !!changes['fromId'];
     const toIdChanged = !!changes['toId'];
-    const fromMapPickActive = fromIdChanged && !!this.fromId && this.activePickTarget === 'from';
-    const toMapPickActive = toIdChanged && !!this.toId && this.activePickTarget === 'to';
+    const fromMapPickActive = fromIdChanged && !!this.fromId() && this.activePickTarget === 'from';
+    const toMapPickActive = toIdChanged && !!this.toId() && this.activePickTarget === 'to';
 
     if ((fromIdChanged || changes['nodes']) && (!this.fromOpen || fromMapPickActive)) {
-      this.fromQuery = this.nameForId(this.fromId);
+      this.fromQuery = this.nameForId(this.fromId());
     }
     if ((toIdChanged || changes['nodes']) && (!this.toOpen || toMapPickActive)) {
-      this.toQuery = this.nameForId(this.toId);
-    }
-    if (changes['departTime']) {
-      if (!this.editingHour) {
-        this.hourDraft = this.hourValue;
-      }
-      if (!this.editingMinute) {
-        this.minuteDraft = this.minuteValue;
-      }
+      this.toQuery = this.nameForId(this.toId());
     }
     if (changes['autoFocusFromToken'] && !changes['autoFocusFromToken'].firstChange) {
       this.focusFromInput();
@@ -700,11 +446,7 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
     this.fromActiveIndex = 0;
     this.emitFromPreview();
     const match = this.matchByName(value);
-    if (match) {
-      this.fromIdChange.emit(match.id);
-    } else {
-      this.fromIdChange.emit('');
-    }
+    this.fromIdChange.emit(match?.id ?? '');
   }
 
   onToInput(value: string): void {
@@ -713,11 +455,7 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
     this.toActiveIndex = 0;
     this.emitToPreview();
     const match = this.matchByName(value);
-    if (match) {
-      this.toIdChange.emit(match.id);
-    } else {
-      this.toIdChange.emit('');
-    }
+    this.toIdChange.emit(match?.id ?? '');
   }
 
   selectFrom(node: { id: string; name: string }): void {
@@ -777,7 +515,7 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
   onFromBlur(): void {
     setTimeout(() => {
       const resolved = this.resolveNodeFromQuery(this.fromQuery);
-      if (resolved && this.fromId !== resolved.id) {
+      if (resolved && this.fromId() !== resolved.id) {
         this.fromQuery = resolved.name;
         this.fromIdChange.emit(resolved.id);
       }
@@ -787,13 +525,14 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
         this.activePickTarget = null;
         this.pickTargetChange.emit(null);
       }
+      this.changeDetectorRef.markForCheck();
     }, 120);
   }
 
   onToBlur(): void {
     setTimeout(() => {
       const resolved = this.resolveNodeFromQuery(this.toQuery);
-      if (resolved && this.toId !== resolved.id) {
+      if (resolved && this.toId() !== resolved.id) {
         this.toQuery = resolved.name;
         this.toIdChange.emit(resolved.id);
       }
@@ -803,6 +542,7 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
         this.activePickTarget = null;
         this.pickTargetChange.emit(null);
       }
+      this.changeDetectorRef.markForCheck();
     }, 120);
   }
 
@@ -890,23 +630,32 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
     return this.filterNodes(this.toQuery);
   }
 
+  clearButtonLeft(value: string): number {
+    const text = value ?? '';
+    const fontSize = this.variant() === 'compact' ? 16 : 22;
+    const textWidth = this.measureTextWidth(text, fontSize);
+    const basePadding = 6;
+    const left = basePadding + textWidth + 2;
+    return Math.max(8, Math.min(left, 260));
+  }
+
   private filterNodes(query: string): Array<{ id: string; name: string }> {
-    const q = this.normalizeSearch(query);
-    const list = this.nodes ?? [];
-    if (!q) {
+    const normalizedQuery = this.normalizeSearch(query);
+    const list = this.nodes();
+    if (!normalizedQuery) {
       return list.slice(0, 8);
     }
     return list
-      .filter((node) => this.getSearchTerms(node).some((term) => term.includes(q)))
+      .filter((node) => this.getSearchTerms(node).some((term) => term.includes(normalizedQuery)))
       .slice(0, 8);
   }
 
   private matchByName(value: string): { id: string; name: string } | null {
-    const v = this.normalizeSearch(value);
-    if (!v) {
+    const normalizedValue = this.normalizeSearch(value);
+    if (!normalizedValue) {
       return null;
     }
-    return this.nodes.find((node) => this.getSearchTerms(node).some((term) => term === v)) ?? null;
+    return this.nodes().find((node) => this.getSearchTerms(node).some((term) => term === normalizedValue)) ?? null;
   }
 
   private resolveNodeFromQuery(query: string): { id: string; name: string } | null {
@@ -914,20 +663,17 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
     if (exact) {
       return exact;
     }
-    const q = this.normalizeSearch(query);
-    if (!q) {
+    const normalizedQuery = this.normalizeSearch(query);
+    if (!normalizedQuery) {
       return null;
     }
     const candidates = this.filterNodes(query);
-    if (candidates.length === 1) {
-      return candidates[0];
-    }
-    return null;
+    return candidates.length === 1 ? candidates[0] : null;
   }
 
   private getSearchTerms(node: { id: string; name: string }): string[] {
     const canonical = this.normalizeSearch(node.name);
-    const aliases = (this.nodeAliases?.[node.id] ?? []).map((alias) => this.normalizeSearch(alias)).filter(Boolean);
+    const aliases = (this.nodeAliases()[node.id] ?? []).map((alias) => this.normalizeSearch(alias)).filter(Boolean);
     return [canonical, ...aliases];
   }
 
@@ -940,65 +686,38 @@ export class ViewerRoutePlannerOverlayComponent implements AfterViewInit, OnChan
       .trim();
   }
 
-  private normalizeDraft(value: string): string {
-    return value.replace(/\D/g, '').slice(0, 2);
-  }
-
-  clearButtonLeft(value: string): number {
-    const text = value ?? '';
-    const fontSize = this.variant === 'compact' ? 16 : 22;
-    const textWidth = this.measureTextWidth(text, fontSize);
-    const basePadding = 6;
-    const left = basePadding + textWidth + 2;
-    return Math.max(8, Math.min(left, 260));
-  }
-
   private measureTextWidth(text: string, fontSize: number): number {
     const sample = text.length ? text : ' ';
     if (typeof document === 'undefined') {
       return sample.length * fontSize * 0.56;
     }
     const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
+    const context = canvas.getContext('2d');
+    if (!context) {
       return sample.length * fontSize * 0.56;
     }
-    ctx.font = `600 ${fontSize}px system-ui`;
-    return ctx.measureText(sample).width;
-  }
-
-  private commitHour(): void {
-    const hour = this.normalizeNumber(this.hourDraft || this.hourValue, 23);
-    this.hourDraft = hour;
-    const next = `${hour}:${this.minuteValue}` as TimeHHMM;
-    this.departTimeChange.emit(next);
-  }
-
-  private commitMinute(): void {
-    const minute = this.normalizeNumber(this.minuteDraft || this.minuteValue, 59);
-    this.minuteDraft = minute;
-    const next = `${this.hourValue}:${minute}` as TimeHHMM;
-    this.departTimeChange.emit(next);
+    context.font = `600 ${fontSize}px system-ui`;
+    return context.measureText(sample).width;
   }
 
   private nameForId(id: string): string {
     if (!id) {
       return '';
     }
-    return this.nodes.find((node) => node.id === id)?.name ?? '';
+    return this.nodes().find((node) => node.id === id)?.name ?? '';
   }
 
   private scrollFromActive(): void {
     setTimeout(() => {
-      const el = this.fromOptions?.get(this.fromActiveIndex)?.nativeElement;
-      el?.scrollIntoView({ block: 'nearest' });
+      const element = this.fromOptions?.get(this.fromActiveIndex)?.nativeElement;
+      element?.scrollIntoView({ block: 'nearest' });
     }, 0);
   }
 
   private scrollToActive(): void {
     setTimeout(() => {
-      const el = this.toOptions?.get(this.toActiveIndex)?.nativeElement;
-      el?.scrollIntoView({ block: 'nearest' });
+      const element = this.toOptions?.get(this.toActiveIndex)?.nativeElement;
+      element?.scrollIntoView({ block: 'nearest' });
     }, 0);
   }
 

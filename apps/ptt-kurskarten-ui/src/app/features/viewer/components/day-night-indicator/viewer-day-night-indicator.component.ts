@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 const MINUTES_PER_DAY = 1440;
 const VIEWBOX_SIZE = 88;
@@ -22,7 +22,6 @@ let nextClipPathId = 0;
 
 @Component({
   selector: 'app-viewer-day-night-indicator',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[style.--day-night-card-fill]': 'colors.cardFill',
@@ -146,7 +145,7 @@ let nextClipPathId = 0;
 export class ViewerDayNightIndicatorComponent {
   private readonly rawMinuteFallback = 0;
 
-  @Input({ required: true }) minuteOfDay = 0;
+  readonly minuteOfDayInput = input.required<number>({ alias: 'minuteOfDay' });
 
   readonly colors = DAY_NIGHT_INDICATOR_COLORS;
   readonly VIEWBOX_SIZE = VIEWBOX_SIZE;
@@ -193,7 +192,8 @@ export class ViewerDayNightIndicatorComponent {
   }
 
   private normalizedCycle(): number {
-    const minute = Number.isFinite(this.minuteOfDay) ? this.minuteOfDay : this.rawMinuteFallback;
+    const minuteOfDay = this.minuteOfDayInput();
+    const minute = Number.isFinite(minuteOfDay) ? minuteOfDay : this.rawMinuteFallback;
     return (((minute % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY) / MINUTES_PER_DAY;
   }
 

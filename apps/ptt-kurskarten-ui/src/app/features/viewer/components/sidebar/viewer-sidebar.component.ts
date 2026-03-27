@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -10,7 +10,6 @@ import { ViewerPlaceDetailsPanelComponent } from '../place-details-panel/viewer-
 
 @Component({
   selector: 'app-viewer-sidebar',
-  standalone: true,
   imports: [
     TranslocoPipe,
     FaIconComponent,
@@ -19,18 +18,23 @@ import { ViewerPlaceDetailsPanelComponent } from '../place-details-panel/viewer-
     ViewerPlaceDetailsPanelComponent
   ],
   templateUrl: './viewer-sidebar.component.html',
-  styleUrl: './viewer-sidebar.component.css'
+  styleUrl: './viewer-sidebar.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewerSidebarComponent {
-  @Input({ required: true }) vm!: ViewerSidebarVm;
+  readonly vmInput = input.required<ViewerSidebarVm>({ alias: 'vm' });
 
-  @Output() close = new EventEmitter<void>();
-  @Output() selectConnection = new EventEmitter<ConnectionOption>();
-  @Output() shiftTime = new EventEmitter<number>();
-  @Output() setNodeAsStart = new EventEmitter<string>();
-  @Output() setNodeAsEnd = new EventEmitter<string>();
-  @Output() hoverRouteLeg = new EventEmitter<string | null>();
-  @Output() toggleDetailsOnMap = new EventEmitter<boolean>();
+  readonly close = output<void>();
+  readonly selectConnection = output<ConnectionOption>();
+  readonly shiftTime = output<number>();
+  readonly setNodeAsStart = output<string>();
+  readonly setNodeAsEnd = output<string>();
+  readonly hoverRouteLeg = output<string | null>();
+  readonly toggleDetailsOnMap = output<boolean>();
 
   readonly xmarkIcon = faXmark;
+
+  get vm(): ViewerSidebarVm {
+    return this.vmInput();
+  }
 }

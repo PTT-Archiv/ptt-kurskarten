@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFlag, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -7,19 +7,23 @@ import { ArchiveSnippetViewerComponent } from '../../../../shared/archive/archiv
 
 @Component({
   selector: 'app-viewer-route-node-panel',
-  standalone: true,
   imports: [TranslocoPipe, FaIconComponent, ArchiveSnippetViewerComponent],
   templateUrl: './viewer-route-node-panel.component.html',
-  styleUrl: './viewer-route-node-panel.component.css'
+  styleUrl: './viewer-route-node-panel.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewerRouteNodePanelComponent {
-  @Input({ required: true }) vm!: ViewerRouteNodePanelVm;
+  readonly vmInput = input.required<ViewerRouteNodePanelVm>({ alias: 'vm' });
 
-  @Output() close = new EventEmitter<void>();
-  @Output() setNodeAsStart = new EventEmitter<string>();
-  @Output() setNodeAsEnd = new EventEmitter<string>();
+  readonly close = output<void>();
+  readonly setNodeAsStart = output<string>();
+  readonly setNodeAsEnd = output<string>();
 
   readonly xmarkIcon = faXmark;
   readonly startIcon = faFlag;
   readonly endIcon = faLocationDot;
+
+  get vm(): ViewerRouteNodePanelVm {
+    return this.vmInput();
+  }
 }

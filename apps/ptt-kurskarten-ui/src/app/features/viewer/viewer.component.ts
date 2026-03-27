@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -11,10 +11,15 @@ import { ViewerFloatingActionsComponent } from './components/floating-actions/vi
 import { ViewerSidebarComponent } from './components/sidebar/viewer-sidebar.component';
 import { ViewerRouteNodePanelComponent } from './components/route-node-panel/viewer-route-node-panel.component';
 import { ViewerMobileSheetComponent } from './components/mobile-sheet/viewer-mobile-sheet.component';
+import { ViewerCoreStore } from './viewer-core.store';
+import { ViewerRoutingStore } from './viewer-routing.store';
+import { ViewerSearchStore } from './viewer-search.store';
+import { ViewerLayoutStore } from './viewer-layout.store';
+import { ViewerArchiveStore } from './viewer-archive.store';
+import { ViewerSimulationStore } from './viewer-simulation.store';
 
 @Component({
   selector: 'app-viewer',
-  standalone: true,
   imports: [
     TranslocoPipe,
     FaIconComponent,
@@ -27,10 +32,23 @@ import { ViewerMobileSheetComponent } from './components/mobile-sheet/viewer-mob
     ViewerRouteNodePanelComponent,
     ViewerMobileSheetComponent
   ],
-  providers: [ViewerFacade],
+  providers: [
+    ViewerCoreStore,
+    ViewerRoutingStore,
+    ViewerSearchStore,
+    ViewerArchiveStore,
+    ViewerLayoutStore,
+    ViewerSimulationStore,
+    ViewerFacade
+  ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:keydown)': 'onWindowKeydown($event)',
+    '(window:resize)': 'onWindowResize()'
+  }
 })
 export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly facade = inject(ViewerFacade);
@@ -44,12 +62,10 @@ export class ViewerComponent implements AfterViewInit, OnDestroy {
     this.facade.destroy();
   }
 
-  @HostListener('window:keydown', ['$event'])
   onWindowKeydown(event: KeyboardEvent): void {
     this.facade.onKeydown(event);
   }
 
-  @HostListener('window:resize')
   onWindowResize(): void {
     this.facade.onWindowResize();
   }

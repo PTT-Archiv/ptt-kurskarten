@@ -1,55 +1,24 @@
-import { PLATFORM_ID, computed, effect, inject, Injectable, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { computed, effect, inject, Injectable } from '@angular/core';
 import type {
   ConnectionOption,
-  EditionEntry,
   GraphAssertion,
-  GraphNode,
-  GraphSnapshot,
   LocalizedText,
   TimeHHMM
 } from '@ptt-kurskarten/shared';
 import { TranslocoService } from '@jsverse/transloco';
-import { Subscription } from 'rxjs';
-import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
-import { ViewerDataService } from './viewer-data.service';
-import { environment } from '../../../environments/environment';
-import {
-  isTripFlowEdgeMode,
-  isTripFlowNodeMode,
-  type TripFlowEdgeMode,
-  type TripFlowNodeMode
-} from '../../shared/map/map-stage-simulation.util';
-import {
-  ARCHIVE_DEFAULT_REGION,
-  buildArchiveIiifInfoUrl,
-  getArchiveIiifCenter,
-  buildArchiveSnippetUrlForNode,
-  buildArchiveSnippetUrlFromRegionWithBase,
-  computeArchiveTransform,
-  normalizeIiifRoute,
-  type ArchiveTransform
-} from '../../shared/archive/archive-snippet.util';
 import {
   assertionValueToString,
-  normalizeFactLinkValueForProvider,
-  resolveFactLink,
-  resolveFactProviderFromSchemaKey
+  resolveFactLink
 } from './viewer-facts.util';
 import {
-  computeLegDurationMinutes,
-  ensureConnectionId,
-  formatDuration,
-  formatTimeMinutes,
-  parseTimeMinutes
+  buildArchiveSnippetUrlForNode
+} from '../../shared/archive/archive-snippet.util';
+import {
+  formatDuration
 } from './viewer-routing.util';
-import { nodeSearchTerms, normalizeSearch } from './viewer-search.util';
 import type {
-  MobileSheetMode,
-  MobileSheetSnap,
   SidebarFact,
   SidebarNodeTrip,
-  TripFlowModeOption,
   ViewerFloatingActionsVm,
   ViewerHeaderVm,
   ViewerMobileSheetVm,
@@ -60,239 +29,131 @@ import type {
   ViewerSidebarVm,
   ViewerSurfaceMode
 } from './viewer.models';
-
-const DEFAULT_YEAR = 1852;
-const MINUTES_PER_DAY = 1440;
-const SIMULATION_DAY_MS = 60_000;
-const TABLET_BREAKPOINT_PX = 1024;
-const MOBILE_BREAKPOINT_PX = 768;
+import { tripSortValue } from './viewer-node-selectors.util';
+import { ViewerArchiveStore } from './viewer-archive.store';
+import { ViewerCoreStore } from './viewer-core.store';
+import { ViewerLayoutStore } from './viewer-layout.store';
+import { ViewerRoutingStore } from './viewer-routing.store';
+import { ViewerSearchStore } from './viewer-search.store';
+import { ViewerSimulationStore } from './viewer-simulation.store';
 
 @Injectable()
 export class ViewerFacade {
-  private readonly viewerData = inject(ViewerDataService);
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly transloco = inject(TranslocoService);
+  private readonly core = inject(ViewerCoreStore);
+  private readonly routing = inject(ViewerRoutingStore);
+  private readonly search = inject(ViewerSearchStore);
+  private readonly layout = inject(ViewerLayoutStore);
+  private readonly archive = inject(ViewerArchiveStore);
+  private readonly simulation = inject(ViewerSimulationStore);
 
-  readonly readonlyViewer = environment.readonlyViewer;
-  readonly archiveModeEnabled = environment.enableArchiveMode;
-  readonly mapLayerPreviewUrl = 'assets/maps/switzerland.svg';
-
-  readonly year = signal<number>(DEFAULT_YEAR);
-  readonly graph = signal<GraphSnapshot | null>(null);
-  readonly selectedNodeId = signal<string | null>(null);
-  readonly availableYears = signal<number[]>([]);
-  readonly editions = signal<EditionEntry[]>([]);
-  readonly fromId = signal<string>('');
-  readonly toId = signal<string>('');
-  readonly departTime = signal<TimeHHMM>('08:00');
-  readonly draftDepartTime = signal<TimeHHMM>('08:00');
-  readonly hasSearched = signal(false);
-  readonly connectionResults = signal<ConnectionOption[]>([]);
-  readonly selectedConnectionId = signal<string | null>(null);
-  readonly showConnectionDetailsOnMap = signal(true);
-  readonly routingState = signal<'idle' | 'searching' | 'results' | 'no_results' | 'error'>('idle');
-  readonly sidebarOpen = signal(false);
-  readonly plannerHovered = signal(false);
-  readonly plannerFocused = signal(false);
-  readonly lastSearchParams = signal<{ from: string; to: string; time: TimeHHMM; year: number } | null>(null);
-  readonly lastResultParams = signal<{ from: string; to: string; year: number } | null>(null);
-  readonly mapSettled = signal(false);
-  readonly helpOpen = signal(false);
-  readonly settingsOpen = signal(false);
-  readonly viewportWidth = signal<number>(this.getViewportWidth());
-  readonly viewportHeight = signal<number>(this.getViewportHeight());
-  readonly mobileSheetMode = signal<MobileSheetMode>('closed');
-  readonly mobileSheetSnap = signal<MobileSheetSnap>('half');
-  readonly activeLang = signal<'de' | 'fr'>(this.transloco.getActiveLang() === 'fr' ? 'fr' : 'de');
-  readonly resetViewportToken = signal(0);
-  readonly viewerSurfaceMode = signal<ViewerSurfaceMode>('map');
-  readonly tripFlowNodeMode = signal<TripFlowNodeMode>('always-active');
-  readonly tripFlowEdgeMode = signal<TripFlowEdgeMode>('always-active');
-  readonly simulationPlaying = signal(false);
-  readonly simulationMinute = signal(0);
-  readonly pickTarget = signal<'from' | 'to' | null>(null);
-  readonly hoveredNodeId = signal<string | null>(null);
-  readonly hoveredNodeScreen = signal<{ x: number; y: number } | null>(null);
-  readonly routePlannerOpen = signal(false);
-  readonly routePlannerFocusToken = signal(0);
-  readonly placeSearchQuery = signal('');
-  readonly placeSearchOpen = signal(false);
-  readonly placeSearchActiveIndex = signal(0);
-  readonly hoveredRouteEdgeId = signal<string | null>(null);
-
-  private readonly transientPulseIds = signal<Set<string>>(new Set());
-  private readonly fromPreviewId = signal<string>('');
-  private readonly toPreviewId = signal<string>('');
-  private readonly archiveTransform = signal<ArchiveTransform>(computeArchiveTransform());
-  private readonly editionIiifRoutes = signal<Record<number, string>>({});
-  private readonly archiveFocusNodeId = signal<string | null>(null);
-  private readonly placeSearchPreviewId = signal<string>('');
-  private readonly nodeAliases = signal<Record<string, string[]>>({});
-  private readonly nodeFacts = signal<GraphAssertion[]>([]);
-  private plannerBlurHandle: ReturnType<typeof setTimeout> | null = null;
-  private placeSearchBlurHandle: ReturnType<typeof setTimeout> | null = null;
-  private readonly pulseTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
-  private nodeFactsRequestSeq = 0;
-  private langSub?: Subscription;
-  private pendingMapPickTarget: 'from' | 'to' | null = null;
-  private simulationRafId: number | null = null;
-  private simulationLastTs: number | null = null;
   private searchHandle: ReturnType<typeof setTimeout> | null = null;
 
-  readonly tripFlowNodeModeOptions: TripFlowModeOption<TripFlowNodeMode>[] = [
-    { value: 'always-active', labelKey: 'viewer.tripFlowModeAlwaysActive' },
-    { value: 'unhighlighted', labelKey: 'viewer.tripFlowModeUnhighlighted' },
-    { value: 'not-visible', labelKey: 'viewer.tripFlowModeNotVisible' },
-    { value: 'active-when-relevant-muted', labelKey: 'viewer.tripFlowModeRelevantMuted' },
-    { value: 'active-when-relevant-hidden', labelKey: 'viewer.tripFlowModeRelevantHidden' },
-    { value: 'organic', labelKey: 'viewer.tripFlowModeOrganic' }
-  ];
+  readonly readonlyViewer = this.core.readonlyViewer;
+  readonly archiveModeEnabled = this.core.archiveModeEnabled;
+  readonly mapLayerPreviewUrl = this.core.mapLayerPreviewUrl;
 
-  readonly tripFlowEdgeModeOptions: TripFlowModeOption<TripFlowEdgeMode>[] = [
-    { value: 'always-active', labelKey: 'viewer.tripFlowModeAlwaysActive' },
-    { value: 'unhighlighted', labelKey: 'viewer.tripFlowModeUnhighlighted' },
-    { value: 'not-visible', labelKey: 'viewer.tripFlowModeNotVisible' },
-    { value: 'active-when-relevant-muted', labelKey: 'viewer.tripFlowModeRelevantMuted' },
-    { value: 'active-when-relevant-hidden', labelKey: 'viewer.tripFlowModeRelevantHidden' }
-  ];
+  readonly year = this.core.year;
+  readonly graph = this.core.graph;
+  readonly selectedNodeId = this.core.selectedNodeId;
+  readonly availableYears = this.core.availableYears;
+  readonly editions = this.core.editions;
+  readonly nodeFacts = this.core.nodeFacts;
+  readonly nodeAliasesById = this.core.nodeAliasesById;
+  readonly mapSettled = this.core.mapSettled;
+  readonly activeLang = this.core.activeLang;
+  readonly viewportWidth = this.core.viewportWidth;
+  readonly viewportHeight = this.core.viewportHeight;
+  readonly resetViewportToken = this.core.resetViewportToken;
+  readonly hoveredNodeId = this.core.hoveredNodeId;
+  readonly hoveredNodeScreen = this.core.hoveredNodeScreen;
+  readonly publicEditionOptions = this.core.publicEditionOptions;
+  readonly selectedEditionLabel = this.core.selectedEditionLabel;
+  readonly nodes = this.core.nodes;
+
+  readonly fromId = this.routing.fromId;
+  readonly toId = this.routing.toId;
+  readonly departTime = this.routing.departTime;
+  readonly draftDepartTime = this.routing.draftDepartTime;
+  readonly hasSearched = this.routing.hasSearched;
+  readonly connectionResults = this.routing.connectionResults;
+  readonly selectedConnectionId = this.routing.selectedConnectionId;
+  readonly showConnectionDetailsOnMap = this.routing.showConnectionDetailsOnMap;
+  readonly routingState = this.routing.routingState;
+  readonly selectedConnection = this.routing.selectedConnection;
+  readonly routeResultsVisible = this.routing.routeResultsVisible;
+  readonly routingActive = this.routing.routingActive;
+  readonly endpointNodeIds = this.routing.endpointNodeIds;
+  readonly selectedWaitSegments = this.routing.selectedWaitSegments;
+  readonly selectedRouteEdgeIds = this.routing.selectedRouteEdgeIds;
+  readonly activeHoveredRouteEdgeId = this.routing.activeHoveredRouteEdgeId;
+  readonly highlightedEdgeIds = this.routing.highlightedEdgeIds;
+  readonly highlightedNodeIds = this.routing.highlightedNodeIds;
+  readonly hoveredRouteEdgeId = this.routing.hoveredRouteEdgeId;
+
+  readonly placeSearchQuery = this.search.placeSearchQuery;
+  readonly placeSearchOpen = this.search.placeSearchOpen;
+  readonly placeSearchActiveIndex = this.search.placeSearchActiveIndex;
+  readonly placeSearchResults = this.search.placeSearchResults;
+
+  readonly sidebarOpen = this.layout.sidebarOpen;
+  readonly helpOpen = this.layout.helpOpen;
+  readonly settingsOpen = this.layout.settingsOpen;
+  readonly mobileSheetMode = this.layout.mobileSheetMode;
+  readonly mobileSheetSnap = this.layout.mobileSheetSnap;
+  readonly routePlannerOpen = this.layout.routePlannerOpen;
+  readonly routePlannerFocusToken = this.layout.routePlannerFocusToken;
+  readonly pickTarget = this.layout.pickTarget;
+  readonly smallScreenLayout = this.layout.smallScreenLayout;
+  readonly mobileLayout = this.layout.mobileLayout;
+  readonly mobileSheetVisible = this.layout.mobileSheetVisible;
+  readonly mobileSheetHeight = this.layout.mobileSheetHeight;
+  readonly sidePanelVisible = this.layout.sidePanelVisible;
+  readonly actionStackBottomOffset = this.layout.actionStackBottomOffset;
+  readonly routeFitTopInset = this.layout.routeFitTopInset;
+  readonly viewportFocusTopInset = this.layout.viewportFocusTopInset;
+  readonly viewportFocusBottomInset = this.layout.viewportFocusBottomInset;
+
+  readonly viewerSurfaceMode = this.archive.viewerSurfaceMode;
+  readonly archiveIiifRoute = this.archive.archiveIiifRoute;
+  readonly archiveIiifInfoUrl = this.archive.archiveIiifInfoUrl;
+  readonly archiveTransform = this.archive.archiveTransform;
+  readonly archiveSnippetUrl = this.archive.archiveSnippetUrl;
+  readonly archiveModeActive = this.archive.archiveModeActive;
+  readonly inactiveSurfaceMode = this.archive.inactiveSurfaceMode;
+  readonly inactiveSurfacePreviewImageUrl = this.archive.inactiveSurfacePreviewImageUrl;
+  readonly archiveStageInitialCenter = this.archive.archiveStageInitialCenter;
+  readonly archiveStageImageUrl = this.archive.archiveStageImageUrl;
+
+  readonly tripFlowNodeMode = this.simulation.tripFlowNodeMode;
+  readonly tripFlowEdgeMode = this.simulation.tripFlowEdgeMode;
+  readonly simulationPlaying = this.simulation.simulationPlaying;
+  readonly simulationMinute = this.simulation.simulationMinute;
+  readonly animationAllowed = this.simulation.animationAllowed;
+  readonly orbitVisible = this.simulation.orbitVisible;
+  readonly simulationMinuteForMap = this.simulation.simulationMinuteForMap;
 
   readonly pulseNodeIds = computed(() => {
-    const ids = new Set(this.transientPulseIds());
-    const from = this.fromPreviewId();
-    const to = this.toPreviewId();
+    const ids = new Set(this.core.transientPulseIds());
+    const from = this.routing.fromPreviewId();
+    const to = this.routing.toPreviewId();
     if (from) {
       ids.add(from);
     }
     if (to) {
       ids.add(to);
     }
-    const placePreview = this.placeSearchPreviewId();
+    const placePreview = this.search.placeSearchPreviewId();
     if (placePreview) {
       ids.add(placePreview);
     }
     return ids;
   });
 
-  readonly nodes = computed(() => {
-    const snapshot = this.graph();
-    if (!snapshot) {
-      return [];
-    }
-    return [...snapshot.nodes].sort((a, b) => a.name.localeCompare(b.name));
-  });
+  readonly sidebarPlaceNode = this.archive.archiveSnippetNode;
 
-  readonly nodeNameById = computed<Record<string, string>>(() => {
-    const byId: Record<string, string> = {};
-    for (const node of this.nodes()) {
-      byId[node.id] = node.name;
-    }
-    return byId;
-  });
-
-  readonly archiveIiifRoute = computed(() => normalizeIiifRoute(this.editionIiifRoutes()[this.year()]));
-  readonly archiveIiifInfoUrl = computed(() => buildArchiveIiifInfoUrl(this.archiveIiifRoute()));
-  readonly publicEditionOptions = computed(() => {
-    const editions = this.editions();
-    if (editions.length > 0) {
-      return editions.filter((edition) => edition.public !== false);
-    }
-    return this.availableYears().map((year) => ({
-      id: `year-${year}`,
-      year,
-      title: String(year),
-      public: true
-    }));
-  });
-
-  readonly selectedEditionLabel = computed(() => {
-    const currentYear = this.year();
-    const editions = this.publicEditionOptions();
-    const selected = editions.find((edition) => edition.year === currentYear);
-    if (selected) {
-      return selected.title || String(selected.year);
-    }
-    const anyEdition = this.editions().find((edition) => edition.year === currentYear);
-    return anyEdition?.title || String(currentYear);
-  });
-
-  readonly smallScreenLayout = computed(() => this.viewportWidth() < TABLET_BREAKPOINT_PX);
-  readonly mobileLayout = computed(() => this.viewportWidth() < MOBILE_BREAKPOINT_PX);
-  readonly mobileSheetVisible = computed(
-    () => !this.archiveModeActive() && this.smallScreenLayout() && this.mobileSheetMode() !== 'closed'
-  );
-  readonly mobileSheetHeight = computed(() => {
-    if (!this.mobileSheetVisible()) {
-      return 0;
-    }
-    const height = this.viewportHeight();
-    if (height <= 0) {
-      return 0;
-    }
-    const snap = this.mobileSheetSnap();
-    if (snap === 'peek') {
-      return 78;
-    }
-    if (this.mobileLayout()) {
-      return snap === 'full' ? Math.min(height * 0.86, 820) : Math.min(height * 0.54, 460);
-    }
-    return snap === 'full' ? Math.min(height * 0.82, 760) : Math.min(height * 0.48, 420);
-  });
-
-  readonly archiveSnippetUrl = computed(() => {
-    const node = this.getArchiveSnippetNode();
-    const transform = this.archiveTransform();
-    const iiifRoute = this.archiveIiifRoute();
-    if (node) {
-      return buildArchiveSnippetUrlForNode(node, transform, iiifRoute);
-    }
-    return buildArchiveSnippetUrlFromRegionWithBase(ARCHIVE_DEFAULT_REGION, iiifRoute);
-  });
-
-  readonly archiveModeActive = computed(() => this.archiveModeEnabled && this.viewerSurfaceMode() === 'archive');
-  readonly sidePanelVisible = computed(() => {
-    if (this.archiveModeActive()) {
-      return false;
-    }
-    if (this.smallScreenLayout()) {
-      const mode = this.mobileSheetMode();
-      return mode === 'results' || mode === 'details';
-    }
-    return this.sidebarOpen();
-  });
-  readonly animationAllowed = computed(() => !this.archiveModeActive() && !this.sidePanelVisible());
-  readonly orbitVisible = computed(() => this.animationAllowed());
-  readonly actionStackBottomOffset = computed(() => {
-    const baseOffset = this.mobileLayout() ? 12 : 16;
-    return this.mobileSheetVisible() ? this.mobileSheetHeight() + baseOffset : baseOffset;
-  });
-  readonly inactiveSurfaceMode = computed<ViewerSurfaceMode>(() => (this.viewerSurfaceMode() === 'map' ? 'archive' : 'map'));
-  readonly inactiveSurfacePreviewImageUrl = computed(() => {
-    if (this.inactiveSurfaceMode() === 'map') {
-      return this.mapLayerPreviewUrl;
-    }
-    return this.archiveStageImageUrl() || this.archiveSnippetUrl() || '';
-  });
-  readonly archiveStageInitialCenter = computed(() => {
-    const node = this.getDefaultArchiveNode();
-    if (!node) {
-      return null;
-    }
-    return getArchiveIiifCenter(node, this.archiveTransform());
-  });
-  readonly archiveStageImageUrl = computed(() => {
-    const node = this.getArchiveStageNode();
-    const transform = this.archiveTransform();
-    const iiifRoute = this.archiveIiifRoute();
-    if (node) {
-      return buildArchiveSnippetUrlForNode(node, transform, iiifRoute);
-    }
-    return '';
-  });
-
-  readonly sidebarPlaceNode = computed(() => this.getArchiveSnippetNode());
   readonly sidebarFacts = computed<SidebarFact[]>(() => {
-    this.activeLang();
+    this.core.activeLang();
     const place = this.sidebarPlaceNode();
     if (!place) {
       return [];
@@ -300,25 +161,10 @@ export class ViewerFacade {
     return this.nodeFacts()
       .filter((assertion) => assertion.targetType === 'place' && assertion.targetId === place.id)
       .filter((assertion) => assertion.schemaKey !== 'place.hidden' && assertion.schemaKey !== 'place.is_foreign')
-      .map((assertion) => {
-        const rawValue = assertionValueToString(assertion);
-        if (!rawValue) {
-          return null;
-        }
-        const link = resolveFactLink(assertion.schemaKey, rawValue);
-        return {
-          id: assertion.id,
-          schemaKey: assertion.schemaKey,
-          schemaLabel: this.schemaKeyDisplayLabel(assertion.schemaKey),
-          label: link.label,
-          url: link.url
-        } satisfies SidebarFact;
-      })
+      .map((assertion) => this.mapSidebarFact(assertion))
       .filter((fact): fact is SidebarFact => fact !== null);
   });
 
-  readonly routeResultsVisible = computed(() => this.routingState() === 'results' && this.connectionResults().length > 0);
-  readonly simulationMinuteForMap = computed<number | null>(() => (this.animationAllowed() ? this.simulationMinute() : null));
   readonly routeSidebarTitle = computed(() => {
     const selected = this.selectedConnection();
     const from = selected?.from ?? this.fromId();
@@ -328,38 +174,24 @@ export class ViewerFacade {
     }
     return `${this.getNodeLabel(from)} → ${this.getNodeLabel(to)}`;
   });
-  readonly routeNodePanelNode = computed(() => this.getNodeById(this.selectedNodeId()));
+
+  readonly routeNodePanelNode = computed(() => this.core.getNodeById(this.selectedNodeId()));
+
   readonly routeNodePanelSnippetUrl = computed(() => {
     const nodeId = this.selectedNodeId();
     if (!nodeId) {
       return null;
     }
-    const node = this.getNodeByIdFull(nodeId);
+    const node = this.core.getNodeByIdFull(nodeId);
     if (!node) {
       return null;
     }
     return buildArchiveSnippetUrlForNode(node, this.archiveTransform(), this.archiveIiifRoute());
   });
-  readonly showRouteNodePanel = computed(() => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId());
-  readonly placeSearchResults = computed(() => {
-    const q = normalizeSearch(this.placeSearchQuery());
-    if (!q) {
-      return this.nodes().slice(0, 12);
-    }
-    const aliasesById = this.nodeAliases();
-    return this.nodes()
-      .filter((node) => nodeSearchTerms(node, aliasesById).some((term) => term.includes(q)))
-      .slice(0, 12);
-  });
 
-  readonly nodeAliasesById = computed<Record<string, string[]>>(() => {
-    const aliasesById = this.nodeAliases();
-    const aliases: Record<string, string[]> = {};
-    for (const node of this.nodes()) {
-      aliases[node.id] = aliasesById[node.id] ?? [];
-    }
-    return aliases;
-  });
+  readonly showRouteNodePanel = computed(
+    () => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId()
+  );
 
   readonly mobileSheetTitle = computed(() => {
     const mode = this.mobileSheetMode();
@@ -375,38 +207,10 @@ export class ViewerFacade {
     return '';
   });
 
-  readonly mobileShowResultsBack = computed(() => this.mobileSheetMode() === 'details' && this.routeResultsVisible());
-  readonly selectedConnection = computed(() => {
-    const id = this.selectedConnectionId();
-    if (!id) {
-      return null;
-    }
-    return this.connectionResults().find((option) => option.id === id) ?? null;
-  });
-  readonly routingActive = computed(() => this.routingState() === 'results' && this.selectedConnectionId() !== null);
-  readonly endpointNodeIds = computed(() => {
-    const ids = new Set<string>();
-    const from = this.fromId();
-    const to = this.toId();
-    if (from) ids.add(from);
-    if (to) ids.add(to);
-    return ids.size > 0 ? ids : null;
-  });
-  readonly selectedWaitSegments = computed<WaitSegment[]>(() => {
-    const selected = this.selectedConnection();
-    return selected ? buildWaitSegments(selected) : [];
-  });
-  readonly selectedRouteEdgeIds = computed(() => {
-    const selected = this.selectedConnection();
-    if (!selected) {
-      return new Set<string>();
-    }
-    return new Set(selected.legs.map((leg) => leg.edgeId));
-  });
-  readonly activeHoveredRouteEdgeId = computed(() => {
-    const edgeId = this.hoveredRouteEdgeId();
-    return edgeId && this.selectedRouteEdgeIds().has(edgeId) ? edgeId : null;
-  });
+  readonly mobileShowResultsBack = computed(
+    () => this.mobileSheetMode() === 'details' && this.routeResultsVisible()
+  );
+
   readonly outgoingNodeTrips = computed<SidebarNodeTrip[]>(() => {
     const snapshot = this.graph();
     const place = this.sidebarPlaceNode();
@@ -431,8 +235,9 @@ export class ViewerFacade {
           });
         });
       });
-    return rows.sort((a, b) => this.tripSortValue(a) - this.tripSortValue(b));
+    return rows.sort((a, b) => tripSortValue(a) - tripSortValue(b));
   });
+
   readonly incomingNodeTrips = computed<SidebarNodeTrip[]>(() => {
     const snapshot = this.graph();
     const place = this.sidebarPlaceNode();
@@ -457,46 +262,8 @@ export class ViewerFacade {
           });
         });
       });
-    return rows.sort((a, b) => this.tripSortValue(a) - this.tripSortValue(b));
+    return rows.sort((a, b) => tripSortValue(a) - tripSortValue(b));
   });
-  readonly highlightedEdgeIds = computed(() => {
-    const selected = this.selectedConnection();
-    if (selected) {
-      const ids = new Set(selected.legs.map((leg) => leg.edgeId));
-      const hovered = this.hoveredRouteEdgeId();
-      if (hovered) {
-        ids.add(hovered);
-      }
-      return ids;
-    }
-    const nodeId = this.selectedNodeId();
-    const snapshot = this.graph();
-    if (!nodeId || !snapshot) {
-      return null;
-    }
-    return new Set(snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId).map((edge) => edge.id));
-  });
-  readonly highlightedNodeIds = computed(() => {
-    const selected = this.selectedConnection();
-    if (selected) {
-      const ids = new Set<string>();
-      selected.legs.forEach((leg) => {
-        ids.add(leg.from);
-        ids.add(leg.to);
-      });
-      return ids;
-    }
-    const nodeId = this.selectedNodeId();
-    return nodeId ? new Set([nodeId]) : null;
-  });
-  readonly routeFitTopInset = computed(() => {
-    if (this.smallScreenLayout()) {
-      return this.routePlannerOpen() ? 184 : 126;
-    }
-    return this.routePlannerOpen() ? 260 : 132;
-  });
-  readonly viewportFocusTopInset = computed(() => (this.smallScreenLayout() ? this.routeFitTopInset() : 0));
-  readonly viewportFocusBottomInset = computed(() => (this.smallScreenLayout() ? this.mobileSheetHeight() : 0));
 
   readonly headerVm = computed<ViewerHeaderVm>(() => ({
     archiveModeActive: this.archiveModeActive(),
@@ -587,205 +354,82 @@ export class ViewerFacade {
     readonlyViewer: this.readonlyViewer,
     tripFlowNodeMode: this.tripFlowNodeMode(),
     tripFlowEdgeMode: this.tripFlowEdgeMode(),
-    tripFlowNodeModeOptions: this.tripFlowNodeModeOptions,
-    tripFlowEdgeModeOptions: this.tripFlowEdgeModeOptions
+    tripFlowNodeModeOptions: this.simulation.tripFlowNodeModeOptions,
+    tripFlowEdgeModeOptions: this.simulation.tripFlowEdgeModeOptions
   }));
 
   constructor() {
-    if (this.isBrowser) {
-      this.fetchYears();
-      this.fetchEditions();
-      this.fetchGraph(this.year());
-    }
-    this.langSub = this.transloco.langChanges$.subscribe((lang) => {
-      this.activeLang.set(lang === 'fr' ? 'fr' : 'de');
-    });
-
-    effect(() => {
-      if (!this.isBrowser) {
-        return;
-      }
-      if (this.searchHandle) {
-        clearTimeout(this.searchHandle);
-      }
-      const from = this.fromId();
-      const to = this.toId();
-      if (!from || !to || from === to) {
-        this.routingState.set('idle');
-        this.connectionResults.set([]);
-        this.selectedConnectionId.set(null);
-        return;
-      }
-      this.searchHandle = setTimeout(() => this.onSearchConnections(), 300);
-    });
-
-    effect(() => {
-      if (!this.isBrowser) {
-        return;
-      }
-      const nodeId = this.selectedNodeId();
-      const year = this.year();
-      if (!nodeId) {
-        this.nodeFacts.set([]);
-        return;
-      }
-      this.fetchNodeFacts(nodeId, year);
-    });
-
-    effect(() => {
-      if (!this.isBrowser) {
-        return;
-      }
-      const allowed = this.animationAllowed();
-      if (!allowed) {
-        this.simulationPlaying.set(false);
-        this.stopSimulationPlayback();
-        return;
-      }
-      if (!this.simulationPlaying()) {
-        this.simulationMinute.set(this.getCurrentMinuteOfDay());
-        this.simulationPlaying.set(true);
-      }
-    });
-
-    effect(() => {
-      if (!this.isBrowser) {
-        return;
-      }
-      const shouldPlay = this.animationAllowed() && this.simulationPlaying();
-      if (shouldPlay) {
-        this.startSimulationPlayback();
-      } else {
-        this.stopSimulationPlayback();
-      }
-    });
-
-    effect(() => {
-      if (!this.archiveModeActive()) {
-        return;
-      }
-      this.routePlannerOpen.set(false);
-      this.sidebarOpen.set(false);
-      this.pickTarget.set(null);
-      this.pendingMapPickTarget = null;
-      this.hoveredRouteEdgeId.set(null);
-    });
-
-    effect(() => {
-      const isSmall = this.smallScreenLayout();
-      const archiveMode = this.archiveModeActive();
-      if (!isSmall || archiveMode) {
-        this.mobileSheetMode.set('closed');
-        this.mobileSheetSnap.set('half');
-        return;
-      }
-      if (this.routePlannerOpen()) {
-        this.mobileSheetMode.set('planner');
-        if (this.mobileSheetSnap() === 'peek') {
-          this.mobileSheetSnap.set('half');
-        }
-        return;
-      }
-      if (this.selectedNodeId()) {
-        this.mobileSheetMode.set('details');
-        if (this.mobileSheetSnap() === 'peek') {
-          this.mobileSheetSnap.set('half');
-        }
-        return;
-      }
-      if (this.routeResultsVisible()) {
-        if (this.mobileSheetMode() === 'closed') {
-          this.mobileSheetMode.set('results');
-        }
-        return;
-      }
-      if (!this.helpOpen() && !this.settingsOpen()) {
-        this.mobileSheetMode.set('closed');
-      }
-    });
-
-    effect(() => {
-      const editions = this.publicEditionOptions();
-      if (!editions.length) {
-        return;
-      }
-      const currentYear = this.year();
-      if (!editions.some((edition) => edition.year === currentYear)) {
-        this.applyYearChange(editions[0].year);
-      }
-    });
+    this.core.init();
+    this.setupRoutingSearchEffect();
+    this.setupNodeFactsEffect();
+    this.setupSimulationEffects();
+    this.setupArchiveModeEffect();
+    this.setupMobileSheetModeEffect();
+    this.setupEditionFallbackEffect();
   }
 
   afterViewInit(): void {
-    if (!this.isBrowser) {
-      return;
-    }
-    requestAnimationFrame(() => this.mapSettled.set(true));
+    this.core.afterViewInit();
   }
 
   destroy(): void {
-    if (this.searchHandle) clearTimeout(this.searchHandle);
-    if (this.plannerBlurHandle) clearTimeout(this.plannerBlurHandle);
-    if (this.placeSearchBlurHandle) clearTimeout(this.placeSearchBlurHandle);
-    this.stopSimulationPlayback();
-    this.langSub?.unsubscribe();
+    if (this.searchHandle) {
+      clearTimeout(this.searchHandle);
+    }
+    this.core.destroy();
+    this.search.destroy();
+    this.layout.destroy();
+    this.simulation.destroy();
   }
 
   toggleHelp(): void {
-    this.helpOpen.set(!this.helpOpen());
-    this.settingsOpen.set(false);
+    this.layout.toggleHelp();
   }
 
   toggleSettings(): void {
-    this.settingsOpen.set(!this.settingsOpen());
-    this.helpOpen.set(false);
+    this.layout.toggleSettings();
   }
 
   closeHelp(): void {
-    this.helpOpen.set(false);
+    this.layout.closeHelp();
   }
 
   closeSettings(): void {
-    this.settingsOpen.set(false);
+    this.layout.closeSettings();
   }
 
   setLang(lang: 'de' | 'fr'): void {
-    this.activeLang.set(lang);
-    this.transloco.setActiveLang(lang);
+    this.core.setLang(lang);
   }
 
   onTripFlowNodeModeChange(value: string): void {
-    if (isTripFlowNodeMode(value)) {
-      this.tripFlowNodeMode.set(value);
-    }
+    this.simulation.onTripFlowNodeModeChange(value);
   }
 
   onTripFlowEdgeModeChange(value: string): void {
-    if (isTripFlowEdgeMode(value)) {
-      this.tripFlowEdgeMode.set(value);
-    }
+    this.simulation.onTripFlowEdgeModeChange(value);
   }
 
   selectEdition(year: number): void {
     if (Number.isFinite(year) && year !== this.year()) {
-      this.applyYearChange(year);
+      this.core.applyYearChange(year);
     }
   }
 
   onNodeSelected(nodeId: string | null): void {
     const routeResultsVisible = this.routeResultsVisible();
-    const pick = this.pickTarget() ?? this.pendingMapPickTarget;
+    const pick = this.layout.effectivePickTarget();
     if (pick && nodeId) {
       if (pick === 'from') {
         this.onFromIdChange(nodeId);
       } else {
         this.onToIdChange(nodeId);
       }
-      this.pendingMapPickTarget = null;
-      this.pickTarget.set(null);
+      this.layout.clearPendingMapPick();
+      this.layout.pickTarget.set(null);
       return;
     }
-    this.pendingMapPickTarget = null;
+    this.layout.clearPendingMapPick();
     if (!nodeId) {
       this.selectedNodeId.set(null);
       if (!routeResultsVisible) {
@@ -810,33 +454,9 @@ export class ViewerFacade {
   }
 
   onSearchConnections(): void {
-    const from = this.fromId();
-    const to = this.toId();
-    if (!from || !to || from === to) {
-      this.connectionResults.set([]);
-      this.selectedConnectionId.set(null);
-      this.routingState.set('idle');
-      return;
-    }
-    const year = this.year();
-    const depart = this.departTime();
-    this.hasSearched.set(true);
-    this.routingState.set('searching');
-    this.lastSearchParams.set({ from, to, time: depart, year });
-    this.viewerData.getConnections({
-      year,
-      from,
-      to,
-      depart,
-      k: 10,
-      allowForeignStartFallback: true
-    }).subscribe({
-      next: (options) => {
-        const normalized = (options ?? []).map((option, index) => ensureConnectionId(option, index));
-        this.connectionResults.set(normalized);
-        this.selectedConnectionId.set(normalized[0]?.id ?? null);
-        const hasResults = normalized.length > 0;
-        this.routingState.set(hasResults ? 'results' : 'no_results');
+    this.routing.searchConnections({
+      onSuccess: (options) => {
+        const hasResults = options.length > 0;
         if (hasResults) {
           if (this.smallScreenLayout()) {
             this.routePlannerOpen.set(false);
@@ -851,14 +471,8 @@ export class ViewerFacade {
           this.mobileSheetMode.set('planner');
           this.mobileSheetSnap.set('full');
         }
-        if (normalized.length) {
-          this.lastResultParams.set({ from, to, year });
-        }
       },
-      error: () => {
-        this.connectionResults.set([]);
-        this.selectedConnectionId.set(null);
-        this.routingState.set('error');
+      onError: () => {
         if (this.smallScreenLayout()) {
           this.routePlannerOpen.set(true);
           this.mobileSheetMode.set('planner');
@@ -869,26 +483,18 @@ export class ViewerFacade {
   }
 
   swapConnections(): void {
-    const from = this.fromId();
-    const to = this.toId();
-    this.fromId.set(to);
-    this.toId.set(from);
-    this.triggerPulse(to);
-    this.triggerPulse(from);
+    const { from, to } = this.routing.swapConnections();
+    this.core.triggerPulse(to);
+    this.core.triggerPulse(from);
   }
 
   shiftTime(minutes: number): void {
-    const current = this.draftDepartTime();
-    const total = parseTimeMinutes(current) + minutes;
-    const normalized = ((total % 1440) + 1440) % 1440;
-    const next = formatTimeMinutes(normalized);
-    this.draftDepartTime.set(next);
-    this.departTime.set(next);
+    this.routing.shiftTime(minutes);
     this.onSearchConnections();
   }
 
   selectConnection(option: ConnectionOption): void {
-    this.selectedConnectionId.set(option.id ?? null);
+    this.routing.selectConnection(option);
     if (this.smallScreenLayout()) {
       this.mobileSheetMode.set('results');
       this.mobileSheetSnap.set('full');
@@ -912,42 +518,23 @@ export class ViewerFacade {
   }
 
   onPlannerFocus(active: boolean): void {
-    if (this.plannerBlurHandle) {
-      clearTimeout(this.plannerBlurHandle);
-      this.plannerBlurHandle = null;
-    }
-    if (active) {
-      this.plannerFocused.set(true);
-      return;
-    }
-    this.plannerBlurHandle = setTimeout(() => this.plannerFocused.set(false), 120);
+    this.layout.onPlannerFocus(active);
   }
 
   onPlannerHover(active: boolean): void {
-    this.plannerHovered.set(active);
+    this.layout.onPlannerHover(active);
   }
 
   onPlaceSearchFocus(): void {
-    if (this.placeSearchBlurHandle) {
-      clearTimeout(this.placeSearchBlurHandle);
-      this.placeSearchBlurHandle = null;
-    }
-    this.placeSearchOpen.set(true);
-    this.syncPlaceSearchPreview();
+    this.search.focus();
   }
 
   onPlaceSearchBlur(): void {
-    this.placeSearchBlurHandle = setTimeout(() => {
-      this.placeSearchOpen.set(false);
-      this.placeSearchPreviewId.set('');
-    }, 120);
+    this.search.blur();
   }
 
   onPlaceSearchInput(value: string): void {
-    this.placeSearchQuery.set(value);
-    this.placeSearchOpen.set(true);
-    this.placeSearchActiveIndex.set(0);
-    this.syncPlaceSearchPreview();
+    this.search.input(value);
   }
 
   onPlaceSearchKeydown(event: KeyboardEvent): void {
@@ -957,82 +544,55 @@ export class ViewerFacade {
     }
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      this.placeSearchOpen.set(true);
-      this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() + 1) % results.length);
-      this.syncPlaceSearchPreview();
+      this.search.moveActive(1);
       return;
     }
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      this.placeSearchOpen.set(true);
-      this.placeSearchActiveIndex.set((this.placeSearchActiveIndex() - 1 + results.length) % results.length);
-      this.syncPlaceSearchPreview();
+      this.search.moveActive(-1);
       return;
     }
     if (event.key === 'Enter') {
       event.preventDefault();
-      const pick = results[this.placeSearchActiveIndex()] ?? results[0];
+      const pick = this.search.activeResult();
       if (pick) {
         this.selectPlaceResult(pick.id);
       }
       return;
     }
     if (event.key === 'Escape') {
-      this.placeSearchOpen.set(false);
-      this.placeSearchPreviewId.set('');
+      this.search.close();
     }
   }
 
   selectPlaceResult(nodeId: string): void {
-    const node = this.getNodeById(nodeId);
+    const node = this.core.getNodeById(nodeId);
     if (!node) {
       return;
     }
-    this.placeSearchQuery.set(node.name);
-    this.placeSearchOpen.set(false);
-    this.placeSearchPreviewId.set('');
+    this.search.completeSelection(node.name);
     if (this.archiveModeActive()) {
-      this.archiveFocusNodeId.set(node.id);
+      this.archive.setArchiveFocusNode(node.id);
       return;
     }
     this.onNodeSelected(node.id);
-    this.triggerPulse(node.id);
+    this.core.triggerPulse(node.id);
   }
 
   previewPlaceSearchResult(nodeId: string, index: number): void {
-    this.placeSearchActiveIndex.set(index);
-    this.placeSearchPreviewId.set(nodeId);
+    this.search.previewResult(nodeId, index);
   }
 
   openRoutePlanner(): void {
-    this.routePlannerOpen.set(true);
-    this.routePlannerFocusToken.set(this.routePlannerFocusToken() + 1);
-    if (this.smallScreenLayout()) {
-      this.mobileSheetMode.set('planner');
-      this.mobileSheetSnap.set('full');
-      this.sidebarOpen.set(false);
-    }
+    this.layout.openRoutePlanner();
   }
 
   closeRoutePlanner(): void {
-    this.routePlannerOpen.set(false);
-    this.pendingMapPickTarget = null;
-    this.pickTarget.set(null);
-    if (this.smallScreenLayout()) {
-      if (this.routeResultsVisible()) {
-        this.mobileSheetMode.set('results');
-        this.mobileSheetSnap.set('half');
-      } else if (this.selectedNodeId()) {
-        this.mobileSheetMode.set('details');
-        this.mobileSheetSnap.set('half');
-      } else {
-        this.mobileSheetMode.set('closed');
-      }
-    }
+    this.layout.closeRoutePlanner();
   }
 
   onRoutePlannerPickTargetChange(target: 'from' | 'to' | null): void {
-    this.pickTarget.set(target);
+    this.layout.setPickTarget(target);
   }
 
   onMapPointer(payload: {
@@ -1044,51 +604,38 @@ export class ViewerFacade {
     hitSimulationTrip: unknown;
   }): void {
     if (payload.type === 'down') {
-      this.pendingMapPickTarget = this.pickTarget();
+      this.layout.rememberPendingMapPick();
     }
     if (payload.type === 'move') {
       this.hoveredNodeId.set(payload.hitNodeId);
       this.hoveredNodeScreen.set(payload.hitNodeId ? payload.screen : null);
-      const hitEdgeId = payload.hitEdgeId;
-      if (hitEdgeId && this.selectedRouteEdgeIds().has(hitEdgeId)) {
-        this.hoveredRouteEdgeId.set(hitEdgeId);
-      } else {
-        this.hoveredRouteEdgeId.set(null);
-      }
+      this.routing.onMapHoveredEdge(payload.hitEdgeId);
     }
     if (payload.type === 'up' && !payload.hitNodeId) {
-      this.pendingMapPickTarget = null;
+      this.layout.clearPendingMapPick();
     }
   }
 
   onRouteLegHover(edgeId: string | null): void {
-    if (edgeId && this.selectedRouteEdgeIds().has(edgeId)) {
-      this.hoveredRouteEdgeId.set(edgeId);
-      return;
-    }
-    this.hoveredRouteEdgeId.set(null);
+    this.routing.onRouteLegHover(edgeId);
   }
 
   onKeydown(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && this.pickTarget()) {
-      this.pendingMapPickTarget = null;
-      this.pickTarget.set(null);
-    }
+    this.layout.onKeydown(event);
   }
 
   onWindowResize(): void {
-    this.viewportWidth.set(this.getViewportWidth());
-    this.viewportHeight.set(this.getViewportHeight());
+    this.core.onWindowResize();
   }
 
   onFromIdChange(id: string): void {
-    this.fromId.set(id);
-    this.triggerPulse(id);
+    this.routing.setFromId(id);
+    this.core.triggerPulse(id);
   }
 
   onToIdChange(id: string): void {
-    this.toId.set(id);
-    this.triggerPulse(id);
+    this.routing.setToId(id);
+    this.core.triggerPulse(id);
   }
 
   setNodeAsStart(nodeId: string): void {
@@ -1104,34 +651,20 @@ export class ViewerFacade {
   }
 
   onDepartTimeDraftChange(time: TimeHHMM): void {
-    this.draftDepartTime.set(time);
+    this.routing.setDraftDepartTime(time);
   }
 
   applyDepartTime(): void {
-    const next = this.draftDepartTime();
-    if (next !== this.departTime()) {
-      this.departTime.set(next);
+    if (this.routing.applyDepartTime()) {
       this.onSearchConnections();
     }
   }
 
   resetSearch(): void {
     this.pickTarget.set(null);
-    this.pendingMapPickTarget = null;
-    this.fromPreviewId.set('');
-    this.toPreviewId.set('');
-    this.fromId.set('');
-    this.toId.set('');
-    this.departTime.set('08:00');
-    this.draftDepartTime.set('08:00');
-    this.hasSearched.set(false);
-    this.connectionResults.set([]);
-    this.selectedConnectionId.set(null);
-    this.routingState.set('idle');
-    this.lastSearchParams.set(null);
-    this.lastResultParams.set(null);
+    this.layout.clearPendingMapPick();
+    this.routing.resetSearch();
     this.selectedNodeId.set(null);
-    this.hoveredRouteEdgeId.set(null);
     this.sidebarOpen.set(false);
     if (this.smallScreenLayout()) {
       this.mobileSheetMode.set(this.routePlannerOpen() ? 'planner' : 'closed');
@@ -1139,88 +672,52 @@ export class ViewerFacade {
     }
   }
 
-  setMobileSheetSnap(snap: MobileSheetSnap): void {
-    this.mobileSheetSnap.set(snap);
+  setMobileSheetSnap(snap: 'peek' | 'half' | 'full'): void {
+    this.layout.setMobileSheetSnap(snap);
   }
 
   cycleMobileSheetSnap(): void {
-    const nextBySnap: Record<MobileSheetSnap, MobileSheetSnap> = { peek: 'half', half: 'full', full: 'peek' };
-    this.mobileSheetSnap.set(nextBySnap[this.mobileSheetSnap()]);
+    this.layout.cycleMobileSheetSnap();
   }
 
   openMobileResults(): void {
-    if (!this.smallScreenLayout() || !this.routeResultsVisible()) {
-      return;
-    }
-    this.selectedNodeId.set(null);
-    this.mobileSheetMode.set('results');
-    this.mobileSheetSnap.set('half');
+    this.layout.openMobileResults();
   }
 
   closeMobileSheet(): void {
-    const mode = this.mobileSheetMode();
-    if (mode === 'planner') {
-      this.closeRoutePlanner();
-      return;
-    }
-    if (mode === 'details' && this.routeResultsVisible()) {
-      this.selectedNodeId.set(null);
-      this.mobileSheetMode.set('results');
-      this.mobileSheetSnap.set('half');
-      return;
-    }
-    if (mode === 'details') {
-      this.selectedNodeId.set(null);
-      this.sidebarOpen.set(false);
-      this.mobileSheetMode.set('closed');
-      this.mobileSheetSnap.set('half');
-      return;
-    }
-    if (mode === 'results') {
-      this.resetSearch();
-      this.mobileSheetMode.set('closed');
-      this.mobileSheetSnap.set('half');
-    }
+    this.layout.closeMobileSheet(() => this.resetSearch());
   }
 
   onFromPreview(id: string): void {
-    this.fromPreviewId.set(id);
+    this.routing.setFromPreview(id);
   }
 
   onToPreview(id: string): void {
-    this.toPreviewId.set(id);
+    this.routing.setToPreview(id);
   }
 
   resetMapView(): void {
-    this.resetViewportToken.set(this.resetViewportToken() + 1);
+    this.core.resetMapView();
   }
 
   setViewerSurfaceMode(mode: ViewerSurfaceMode): void {
-    if (mode === 'archive' && !this.archiveModeEnabled) {
-      return;
-    }
-    this.viewerSurfaceMode.set(mode);
-    if (mode === 'archive' && !this.archiveFocusNodeId()) {
-      this.archiveFocusNodeId.set(this.selectedNodeId() ?? this.fromId() ?? this.toId() ?? null);
-    }
+    this.archive.setViewerSurfaceMode(mode);
   }
 
   toggleViewerSurfaceMode(): void {
-    this.setViewerSurfaceMode(this.inactiveSurfaceMode());
+    this.archive.toggleViewerSurfaceMode();
   }
 
   getNodeName(id: string): string {
-    return this.nodeNameById()[id] ?? '—';
+    return this.core.getNodeName(id);
   }
 
   getNodeLabel(id: string): string {
-    return this.nodeNameById()[id] ?? id;
+    return this.core.getNodeLabel(id);
   }
 
   getNodeById(id: string | null): { id: string; name: string } | null {
-    if (!id) return null;
-    const name = this.nodeNameById()[id];
-    return name ? { id, name } : null;
+    return this.core.getNodeById(id);
   }
 
   getLocalizedNote(note?: LocalizedText): string | null {
@@ -1244,7 +741,7 @@ export class ViewerFacade {
     if (!fromExists || !toExists) {
       return this.transloco.translate('viewer.noRouteYear');
     }
-    const lastResult = this.lastResultParams();
+    const lastResult = this.routing.lastResultParams();
     if (lastResult && lastResult.from === from && lastResult.to === to && lastResult.year !== this.year()) {
       return this.transloco.translate('viewer.noRouteNotYet', { year: this.year() });
     }
@@ -1262,127 +759,91 @@ export class ViewerFacade {
     return '';
   }
 
-  private fetchYears(): void {
-    this.viewerData.getYears().subscribe({
-      next: (years) => this.availableYears.set(years),
-      error: () => this.availableYears.set([])
+  private setupRoutingSearchEffect(): void {
+    effect(() => {
+      if (!this.core.isBrowser) {
+        return;
+      }
+      if (this.searchHandle) {
+        clearTimeout(this.searchHandle);
+      }
+      const from = this.fromId();
+      const to = this.toId();
+      if (!from || !to || from === to) {
+        this.routing.clearToIdle();
+        return;
+      }
+      this.searchHandle = setTimeout(() => this.onSearchConnections(), 300);
     });
   }
 
-  private fetchEditions(): void {
-    this.viewerData.getEditions().subscribe({
-      next: (editions) => {
-        this.editions.set(editions ?? []);
-        const byYear: Record<number, string> = {};
-        for (const edition of editions) {
-          if (typeof edition.iiifRoute === 'string' && edition.iiifRoute.trim().length) {
-            byYear[edition.year] = edition.iiifRoute.trim().replace(/\/+$/, '');
-          }
-        }
-        this.editionIiifRoutes.set(byYear);
-      },
-      error: () => {
-        this.editions.set([]);
-        this.editionIiifRoutes.set({});
+  private setupNodeFactsEffect(): void {
+    effect(() => {
+      if (!this.core.isBrowser) {
+        return;
+      }
+      const nodeId = this.selectedNodeId();
+      const year = this.year();
+      if (!nodeId) {
+        this.core.clearNodeFacts();
+        return;
+      }
+      this.core.fetchNodeFacts(nodeId, year);
+    });
+  }
+
+  private setupSimulationEffects(): void {
+    effect(() => {
+      this.simulation.syncAnimationAllowance();
+    });
+
+    effect(() => {
+      this.simulation.syncPlayback();
+    });
+  }
+
+  private setupArchiveModeEffect(): void {
+    effect(() => {
+      if (!this.archiveModeActive()) {
+        return;
+      }
+      this.layout.handleArchiveModeActivated();
+      this.hoveredRouteEdgeId.set(null);
+    });
+  }
+
+  private setupMobileSheetModeEffect(): void {
+    effect(() => {
+      this.layout.syncMobileSheetMode();
+    });
+  }
+
+  private setupEditionFallbackEffect(): void {
+    effect(() => {
+      const editions = this.publicEditionOptions();
+      if (!editions.length) {
+        return;
+      }
+      const currentYear = this.year();
+      if (!editions.some((edition) => edition.year === currentYear)) {
+        this.core.applyYearChange(editions[0].year);
       }
     });
   }
 
-  private fetchGraph(year: number): void {
-    this.fetchNodeAliases(year);
-    this.viewerData.getGraph(year).subscribe({
-      next: (graph) => {
-        this.graph.set(graph);
-        this.selectedNodeId.set(null);
-      },
-      error: () => this.graph.set(null)
-    });
-  }
-
-  private fetchNodeAliases(year: number): void {
-    this.viewerData.getNodeAliases(year).subscribe({
-      next: (aliases) => this.nodeAliases.set(aliases ?? {}),
-      error: () => this.nodeAliases.set({})
-    });
-  }
-
-  private applyYearChange(nextYear: number): void {
-    this.year.set(nextYear);
-    this.fetchGraph(nextYear);
-  }
-
-  private getViewportWidth(): number {
-    return this.isBrowser ? window.innerWidth || TABLET_BREAKPOINT_PX : TABLET_BREAKPOINT_PX;
-  }
-
-  private getViewportHeight(): number {
-    return this.isBrowser ? window.innerHeight || 900 : 900;
-  }
-
-  private fetchNodeFacts(nodeId: string, year: number): void {
-    const requestSeq = ++this.nodeFactsRequestSeq;
-    this.viewerData.getAssertions({ year, targetType: 'place', targetId: nodeId }).subscribe({
-      next: (facts) => {
-        if (requestSeq === this.nodeFactsRequestSeq) {
-          this.nodeFacts.set(facts ?? []);
-        }
-      },
-      error: () => {
-        if (requestSeq === this.nodeFactsRequestSeq) {
-          this.nodeFacts.set([]);
-        }
-      }
-    });
-  }
-
-  private syncPlaceSearchPreview(): void {
-    const results = this.placeSearchResults();
-    if (!results.length) {
-      this.placeSearchPreviewId.set('');
-      return;
-    }
-    const index = Math.max(0, Math.min(this.placeSearchActiveIndex(), results.length - 1));
-    this.placeSearchActiveIndex.set(index);
-    this.placeSearchPreviewId.set(results[index]?.id ?? '');
-  }
-
-  private getNodeByIdFull(id: string): GraphNode | null {
-    const snapshot = this.graph();
-    return snapshot?.nodes.find((node) => node.id === id) ?? null;
-  }
-
-  private getArchiveSnippetNode(): GraphNode | null {
-    const snapshot = this.graph();
-    if (!snapshot) {
+  private mapSidebarFact(assertion: GraphAssertion): SidebarFact | null {
+    const rawValue = assertionValueToString(assertion);
+    if (!rawValue) {
       return null;
     }
-    const preferredId = this.selectedNodeId() || this.fromId() || this.toId();
-    if (preferredId) {
-      return snapshot.nodes.find((node) => node.id === preferredId) ?? this.getDefaultArchiveNode();
-    }
-    return this.getDefaultArchiveNode();
-  }
-
-  private getArchiveStageNode(): GraphNode | null {
-    const archiveFocusNodeId = this.archiveFocusNodeId();
-    if (archiveFocusNodeId) {
-      return this.getNodeByIdFull(archiveFocusNodeId) ?? null;
-    }
-    const preferredId = this.selectedNodeId() || this.fromId() || this.toId();
-    return preferredId ? this.getNodeByIdFull(preferredId) : null;
-  }
-
-  private getDefaultArchiveNode(): GraphNode | null {
-    const snapshot = this.graph();
-    if (!snapshot) {
-      return null;
-    }
-    return (
-      snapshot.nodes.find((node) => node.name === 'Luzern') ??
-      snapshot.nodes.find((node) => node.id === 'luzern') ??
-      snapshot.nodes[0] ??
-      null
-    );
+    const link = resolveFactLink(assertion.schemaKey, rawValue);
+    return {
+      id: assertion.id,
+      schemaKey: assertion.schemaKey,
+      schemaLabel: this.schemaKeyDisplayLabel(assertion.schemaKey),
+      label: link.label,
+      url: link.url
+    };
   }
 
   private schemaKeyDisplayLabel(schemaKey: string): string {
@@ -1397,84 +858,5 @@ export class ViewerFacade {
     const translationKey = `schemaKey.${normalized}`;
     const translated = this.transloco.translate(translationKey);
     return !translated || translated === translationKey ? schemaKey : translated;
-  }
-
-  private startSimulationPlayback(): void {
-    if (!this.isBrowser || this.simulationRafId !== null) {
-      return;
-    }
-    this.simulationLastTs = null;
-    this.simulationRafId = requestAnimationFrame(this.onSimulationFrame);
-  }
-
-  private stopSimulationPlayback(): void {
-    if (!this.isBrowser) {
-      return;
-    }
-    if (this.simulationRafId !== null) {
-      cancelAnimationFrame(this.simulationRafId);
-    }
-    this.simulationRafId = null;
-    this.simulationLastTs = null;
-  }
-
-  private readonly onSimulationFrame = (ts: number): void => {
-    if (!this.isBrowser) {
-      return;
-    }
-    if (!this.animationAllowed() || !this.simulationPlaying()) {
-      this.simulationRafId = null;
-      this.simulationLastTs = null;
-      return;
-    }
-    if (this.simulationLastTs === null) {
-      this.simulationLastTs = ts;
-    }
-    const deltaMs = Math.max(0, ts - this.simulationLastTs);
-    this.simulationLastTs = ts;
-    const minuteAdvance = (deltaMs / SIMULATION_DAY_MS) * MINUTES_PER_DAY * 3;
-    if (minuteAdvance > 0) {
-      this.simulationMinute.set(this.normalizeMinuteOfDay(this.simulationMinute() + minuteAdvance));
-    }
-    this.simulationRafId = requestAnimationFrame(this.onSimulationFrame);
-  };
-
-  private getCurrentMinuteOfDay(): number {
-    const now = new Date();
-    return now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60 + now.getMilliseconds() / 60000;
-  }
-
-  private normalizeMinuteOfDay(value: number): number {
-    return ((value % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
-  }
-
-  private triggerPulse(nodeId: string): void {
-    if (!nodeId) {
-      return;
-    }
-    const next = new Set(this.transientPulseIds());
-    next.add(nodeId);
-    this.transientPulseIds.set(next);
-    const existing = this.pulseTimeouts.get(nodeId);
-    if (existing) {
-      clearTimeout(existing);
-    }
-    const handle = setTimeout(() => {
-      const updated = new Set(this.transientPulseIds());
-      updated.delete(nodeId);
-      this.transientPulseIds.set(updated);
-      this.pulseTimeouts.delete(nodeId);
-    }, 1400);
-    this.pulseTimeouts.set(nodeId, handle);
-  }
-
-  private tripSortValue(trip: SidebarNodeTrip): number {
-    if (trip.departs) {
-      return parseTimeMinutes(trip.departs);
-    }
-    if (trip.arrives) {
-      return parseTimeMinutes(trip.arrives) + 720;
-    }
-    return Number.MAX_SAFE_INTEGER;
   }
 }
