@@ -8,11 +8,11 @@ import {
   getArchiveIiifCenter,
   normalizeIiifRoute,
   type ArchiveTransform
-} from '../../shared/archive/archive-snippet.util';
-import { getDefaultArchiveNode } from './viewer-node-selectors.util';
+} from '../../../shared/archive/archive-snippet.util';
+import { getDefaultArchiveNode } from '../utils/viewer-node-selectors.util';
 import { ViewerCoreStore } from './viewer-core.store';
 import { ViewerRoutingStore } from './viewer-routing.store';
-import type { ViewerSurfaceMode } from './viewer.models';
+import type { ViewerSurfaceMode } from '../viewer.models';
 
 @Injectable()
 export class ViewerArchiveStore {

@@ -1,5 +1,5 @@
 import type { GraphNode, GraphSnapshot } from '@ptt-kurskarten/shared';
-import type { SidebarNodeTrip } from './viewer.models';
+import type { SidebarNodeTrip } from '../viewer.models';
 import { parseTimeMinutes } from './viewer-routing.util';
 
 export function buildNodeNameById(nodes: GraphNode[]): Record<string, string> {

@@ -3,9 +3,9 @@ import { isPlatformBrowser } from '@angular/common';
 import type { EditionEntry, GraphAssertion, GraphNode, GraphSnapshot } from '@ptt-kurskarten/shared';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { ViewerDataService } from './viewer-data.service';
-import { buildNodeNameById, getNodeById } from './viewer-node-selectors.util';
+import { environment } from '../../../../environments/environment';
+import { ViewerDataService } from '../viewer-data.service';
+import { buildNodeNameById, getNodeById } from '../utils/viewer-node-selectors.util';
 
 const DEFAULT_YEAR = 1852;
 const TABLET_BREAKPOINT_PX = 1024;

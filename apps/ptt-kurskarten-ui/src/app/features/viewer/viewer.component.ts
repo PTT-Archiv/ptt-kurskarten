@@ -11,12 +11,12 @@ import { ViewerFloatingActionsComponent } from './components/floating-actions/vi
 import { ViewerSidebarComponent } from './components/sidebar/viewer-sidebar.component';
 import { ViewerRouteNodePanelComponent } from './components/route-node-panel/viewer-route-node-panel.component';
 import { ViewerMobileSheetComponent } from './components/mobile-sheet/viewer-mobile-sheet.component';
-import { ViewerCoreStore } from './viewer-core.store';
-import { ViewerRoutingStore } from './viewer-routing.store';
-import { ViewerSearchStore } from './viewer-search.store';
-import { ViewerLayoutStore } from './viewer-layout.store';
-import { ViewerArchiveStore } from './viewer-archive.store';
-import { ViewerSimulationStore } from './viewer-simulation.store';
+import { ViewerCoreStore } from './stores/viewer-core.store';
+import { ViewerRoutingStore } from './stores/viewer-routing.store';
+import { ViewerSearchStore } from './stores/viewer-search.store';
+import { ViewerLayoutStore } from './stores/viewer-layout.store';
+import { ViewerArchiveStore } from './stores/viewer-archive.store';
+import { ViewerSimulationStore } from './stores/viewer-simulation.store';
 
 @Component({
   selector: 'app-viewer',

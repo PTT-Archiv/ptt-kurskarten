@@ -5,8 +5,8 @@ import {
   isTripFlowNodeMode,
   type TripFlowEdgeMode,
   type TripFlowNodeMode
-} from '../../shared/map/map-stage-simulation.util';
-import type { TripFlowModeOption } from './viewer.models';
+} from '../../../shared/map/map-stage-simulation.util';
+import type { TripFlowModeOption } from '../viewer.models';
 import { ViewerArchiveStore } from './viewer-archive.store';
 import { ViewerLayoutStore } from './viewer-layout.store';
 

@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import type { MobileSheetMode, MobileSheetSnap } from './viewer.models';
+import type { MobileSheetMode, MobileSheetSnap } from '../viewer.models';
 import { ViewerArchiveStore } from './viewer-archive.store';
 import { ViewerCoreStore } from './viewer-core.store';
 import { ViewerRoutingStore } from './viewer-routing.store';

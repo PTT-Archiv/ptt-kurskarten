@@ -9,13 +9,13 @@ import { TranslocoService } from '@jsverse/transloco';
 import {
   assertionValueToString,
   resolveFactLink
-} from './viewer-facts.util';
+} from './utils/viewer-facts.util';
 import {
   buildArchiveSnippetUrlForNode
 } from '../../shared/archive/archive-snippet.util';
 import {
   formatDuration
-} from './viewer-routing.util';
+} from './utils/viewer-routing.util';
 import type {
   SidebarFact,
   SidebarNodeTrip,
@@ -29,13 +29,35 @@ import type {
   ViewerSidebarVm,
   ViewerSurfaceMode
 } from './viewer.models';
-import { tripSortValue } from './viewer-node-selectors.util';
-import { ViewerArchiveStore } from './viewer-archive.store';
-import { ViewerCoreStore } from './viewer-core.store';
-import { ViewerLayoutStore } from './viewer-layout.store';
-import { ViewerRoutingStore } from './viewer-routing.store';
-import { ViewerSearchStore } from './viewer-search.store';
-import { ViewerSimulationStore } from './viewer-simulation.store';
+import { tripSortValue } from './utils/viewer-node-selectors.util';
+import { ViewerArchiveStore } from './stores/viewer-archive.store';
+import { ViewerCoreStore } from './stores/viewer-core.store';
+import { ViewerLayoutStore } from './stores/viewer-layout.store';
+import { ViewerRoutingStore } from './stores/viewer-routing.store';
+import { ViewerSearchStore } from './stores/viewer-search.store';
+import { ViewerSimulationStore } from './stores/viewer-simulation.store';
+
+const PLACE_HIDDEN_SCHEMA_KEY = 'place.hidden';
+const PLACE_FOREIGN_SCHEMA_KEY = 'place.is_foreign';
+const PICK_TARGET_FROM = 'from';
+const PICK_TARGET_TO = 'to';
+const MOBILE_SHEET_MODE_CLOSED = 'closed';
+const MOBILE_SHEET_MODE_PLANNER = 'planner';
+const MOBILE_SHEET_MODE_RESULTS = 'results';
+const MOBILE_SHEET_MODE_DETAILS = 'details';
+const MOBILE_SHEET_SNAP_HALF = 'half';
+const MOBILE_SHEET_SNAP_FULL = 'full';
+const PLACE_SEARCH_NEXT_STEP = 1;
+const PLACE_SEARCH_PREVIOUS_STEP = -1;
+const PLACE_SEARCH_DEBOUNCE_MS = 300;
+const KEY_ARROW_DOWN = 'ArrowDown';
+const KEY_ARROW_UP = 'ArrowUp';
+const KEY_ENTER = 'Enter';
+const KEY_ESCAPE = 'Escape';
+const ROUTE_PLANNER_TITLE = 'Routing';
+const EMPTY_TEXT = '';
+const SCHEMA_KEY_NORMALIZE_PATTERN = /[^a-z0-9]+/g;
+const SCHEMA_KEY_TRIM_PATTERN = /^_+|_+$/g;
 
 @Injectable()
 export class ViewerFacade {
@@ -160,7 +182,10 @@ export class ViewerFacade {
     }
     return this.nodeFacts()
       .filter((assertion) => assertion.targetType === 'place' && assertion.targetId === place.id)
-      .filter((assertion) => assertion.schemaKey !== 'place.hidden' && assertion.schemaKey !== 'place.is_foreign')
+      .filter(
+        (assertion) =>
+          assertion.schemaKey !== PLACE_HIDDEN_SCHEMA_KEY && assertion.schemaKey !== PLACE_FOREIGN_SCHEMA_KEY
+      )
       .map((assertion) => this.mapSidebarFact(assertion))
       .filter((fact): fact is SidebarFact => fact !== null);
   });
@@ -195,20 +220,20 @@ export class ViewerFacade {
 
   readonly mobileSheetTitle = computed(() => {
     const mode = this.mobileSheetMode();
-    if (mode === 'details') {
+    if (mode === MOBILE_SHEET_MODE_DETAILS) {
       return this.routeNodePanelNode()?.name ?? this.sidebarPlaceNode()?.name ?? this.transloco.translate('viewer.details');
     }
-    if (mode === 'results') {
+    if (mode === MOBILE_SHEET_MODE_RESULTS) {
       return this.transloco.translate('viewer.results');
     }
-    if (mode === 'planner') {
-      return 'Routing';
+    if (mode === MOBILE_SHEET_MODE_PLANNER) {
+      return ROUTE_PLANNER_TITLE;
     }
-    return '';
+    return EMPTY_TEXT;
   });
 
   readonly mobileShowResultsBack = computed(
-    () => this.mobileSheetMode() === 'details' && this.routeResultsVisible()
+    () => this.mobileSheetMode() === MOBILE_SHEET_MODE_DETAILS && this.routeResultsVisible()
   );
 
   readonly outgoingNodeTrips = computed<SidebarNodeTrip[]>(() => {
@@ -420,7 +445,7 @@ export class ViewerFacade {
     const routeResultsVisible = this.routeResultsVisible();
     const pick = this.layout.effectivePickTarget();
     if (pick && nodeId) {
-      if (pick === 'from') {
+      if (pick === PICK_TARGET_FROM) {
         this.onFromIdChange(nodeId);
       } else {
         this.onToIdChange(nodeId);
@@ -436,7 +461,7 @@ export class ViewerFacade {
         this.sidebarOpen.set(false);
       }
       if (this.smallScreenLayout()) {
-        this.mobileSheetMode.set(routeResultsVisible ? 'results' : 'closed');
+        this.mobileSheetMode.set(routeResultsVisible ? MOBILE_SHEET_MODE_RESULTS : MOBILE_SHEET_MODE_CLOSED);
       }
       return;
     }
@@ -446,8 +471,8 @@ export class ViewerFacade {
     this.selectedNodeId.set(nodeId);
     if (this.smallScreenLayout()) {
       this.sidebarOpen.set(false);
-      this.mobileSheetMode.set('details');
-      this.mobileSheetSnap.set(routeResultsVisible ? 'full' : 'half');
+      this.mobileSheetMode.set(MOBILE_SHEET_MODE_DETAILS);
+      this.mobileSheetSnap.set(routeResultsVisible ? MOBILE_SHEET_SNAP_FULL : MOBILE_SHEET_SNAP_HALF);
       return;
     }
     this.sidebarOpen.set(true);
@@ -460,23 +485,23 @@ export class ViewerFacade {
         if (hasResults) {
           if (this.smallScreenLayout()) {
             this.routePlannerOpen.set(false);
-            this.mobileSheetMode.set('results');
-            this.mobileSheetSnap.set('half');
+            this.mobileSheetMode.set(MOBILE_SHEET_MODE_RESULTS);
+            this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_HALF);
             this.sidebarOpen.set(false);
           } else {
             this.sidebarOpen.set(true);
           }
         } else if (this.smallScreenLayout()) {
           this.routePlannerOpen.set(true);
-          this.mobileSheetMode.set('planner');
-          this.mobileSheetSnap.set('full');
+          this.mobileSheetMode.set(MOBILE_SHEET_MODE_PLANNER);
+          this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_FULL);
         }
       },
       onError: () => {
         if (this.smallScreenLayout()) {
           this.routePlannerOpen.set(true);
-          this.mobileSheetMode.set('planner');
-          this.mobileSheetSnap.set('full');
+          this.mobileSheetMode.set(MOBILE_SHEET_MODE_PLANNER);
+          this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_FULL);
         }
       }
     });
@@ -496,8 +521,8 @@ export class ViewerFacade {
   selectConnection(option: ConnectionOption): void {
     this.routing.selectConnection(option);
     if (this.smallScreenLayout()) {
-      this.mobileSheetMode.set('results');
-      this.mobileSheetSnap.set('full');
+      this.mobileSheetMode.set(MOBILE_SHEET_MODE_RESULTS);
+      this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_FULL);
       this.sidebarOpen.set(false);
       return;
     }
@@ -542,17 +567,17 @@ export class ViewerFacade {
     if (!results.length) {
       return;
     }
-    if (event.key === 'ArrowDown') {
+    if (event.key === KEY_ARROW_DOWN) {
       event.preventDefault();
-      this.search.moveActive(1);
+      this.search.moveActive(PLACE_SEARCH_NEXT_STEP);
       return;
     }
-    if (event.key === 'ArrowUp') {
+    if (event.key === KEY_ARROW_UP) {
       event.preventDefault();
-      this.search.moveActive(-1);
+      this.search.moveActive(PLACE_SEARCH_PREVIOUS_STEP);
       return;
     }
-    if (event.key === 'Enter') {
+    if (event.key === KEY_ENTER) {
       event.preventDefault();
       const pick = this.search.activeResult();
       if (pick) {
@@ -560,7 +585,7 @@ export class ViewerFacade {
       }
       return;
     }
-    if (event.key === 'Escape') {
+    if (event.key === KEY_ESCAPE) {
       this.search.close();
     }
   }
@@ -667,8 +692,8 @@ export class ViewerFacade {
     this.selectedNodeId.set(null);
     this.sidebarOpen.set(false);
     if (this.smallScreenLayout()) {
-      this.mobileSheetMode.set(this.routePlannerOpen() ? 'planner' : 'closed');
-      this.mobileSheetSnap.set('half');
+      this.mobileSheetMode.set(this.routePlannerOpen() ? MOBILE_SHEET_MODE_PLANNER : MOBILE_SHEET_MODE_CLOSED);
+      this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_HALF);
     }
   }
 
@@ -750,13 +775,13 @@ export class ViewerFacade {
 
   getPickModeLabel(): string {
     const target = this.pickTarget();
-    if (target === 'from') {
+    if (target === PICK_TARGET_FROM) {
       return this.transloco.translate('viewer.pickModeFrom');
     }
-    if (target === 'to') {
+    if (target === PICK_TARGET_TO) {
       return this.transloco.translate('viewer.pickModeTo');
     }
-    return '';
+    return EMPTY_TEXT;
   }
 
   private setupRoutingSearchEffect(): void {
@@ -773,7 +798,7 @@ export class ViewerFacade {
         this.routing.clearToIdle();
         return;
       }
-      this.searchHandle = setTimeout(() => this.onSearchConnections(), 300);
+      this.searchHandle = setTimeout(() => this.onSearchConnections(), PLACE_SEARCH_DEBOUNCE_MS);
     });
   }
 
@@ -850,8 +875,8 @@ export class ViewerFacade {
     const normalized = schemaKey
       .trim()
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '_')
-      .replace(/^_+|_+$/g, '');
+      .replace(SCHEMA_KEY_NORMALIZE_PATTERN, '_')
+      .replace(SCHEMA_KEY_TRIM_PATTERN, '');
     if (!normalized) {
       return schemaKey;
     }

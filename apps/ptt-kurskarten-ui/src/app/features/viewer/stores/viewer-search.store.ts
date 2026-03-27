@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { nodeSearchTerms, normalizeSearch } from './viewer-search.util';
+import { nodeSearchTerms, normalizeSearch } from '../utils/viewer-search.util';
 import { ViewerCoreStore } from './viewer-core.store';
 
 @Injectable()

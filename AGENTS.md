@@ -3,6 +3,7 @@ You are an expert in TypeScript, Angular, and NestJs web apps.
 ## Core Rules
 
 - Use strict TypeScript. Prefer inference when obvious and avoid `any`.
+- Avoid scattering semantic literals through the code. When a string or number represents a mode, status, key, event name, route segment, threshold, timeout, spacing value, breakpoint, or other reusable meaning, define a readable named constant and use that instead.
 - Use standalone Angular components. Do not add `standalone: true`; Angular v21 already defaults to it.
 - Use signals for local state and `computed()` for derived state.
 - Use `input()` and `output()` instead of decorator-based inputs and outputs.

@@ -1,8 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import type { ConnectionOption, TimeHHMM } from '@ptt-kurskarten/shared';
-import { buildWaitSegments, type WaitSegment } from '../../shared/routing/connection-details.util';
-import { ViewerDataService } from './viewer-data.service';
-import { ensureConnectionId, formatTimeMinutes, parseTimeMinutes } from './viewer-routing.util';
+import { buildWaitSegments, type WaitSegment } from '../../../shared/routing/connection-details.util';
+import { ViewerDataService } from '../viewer-data.service';
+import { ensureConnectionId, formatTimeMinutes, parseTimeMinutes } from '../utils/viewer-routing.util';
 import { ViewerCoreStore } from './viewer-core.store';
 
 export type RoutingState = 'idle' | 'searching' | 'results' | 'no_results' | 'error';
