@@ -10,7 +10,9 @@ app-viewer,
   --viewer-header-top-gap: 12px;
   --viewer-header-side-width: clamp(180px, 18vw, 300px);
   --viewer-header-center-width: clamp(360px, 50vw, 720px);
-  --viewer-expanded-planner-top: calc(var(--viewer-brand-bar-height) + var(--viewer-header-top-gap) + 132px);
+  --viewer-expanded-planner-top: calc(
+    var(--viewer-brand-bar-height) + var(--viewer-header-top-gap) + 132px
+  );
   position: relative;
   height: 100dvh;
   width: 100%;
@@ -25,10 +27,11 @@ app-viewer,
   padding-top: 0;
   box-sizing: border-box;
   width: 100%;
-  transition: width 220ms ease-out, height 260ms ease-out;
+  transition:
+    width 220ms ease-out,
+    height 260ms ease-out;
   height: 100dvh;
 }
-
 
 .viewer-shell.sidebar-open .map-stage {
   width: calc(100% - 360px);
@@ -38,7 +41,6 @@ app-viewer,
   display: block;
   height: 100%;
 }
-
 
 .canvas-overlay {
   position: absolute;
@@ -69,7 +71,9 @@ app-viewer,
   transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
-  transition: transform 200ms ease-out, opacity 200ms ease-out;
+  transition:
+    transform 200ms ease-out,
+    opacity 200ms ease-out;
 }
 
 .viewer-sidebar.is-open {
@@ -98,7 +102,9 @@ app-viewer,
   transform: translateX(16px);
   opacity: 0;
   pointer-events: none;
-  transition: transform 180ms ease-out, opacity 180ms ease-out;
+  transition:
+    transform 180ms ease-out,
+    opacity 180ms ease-out;
 }
 
 .route-node-panel.is-open {
@@ -274,11 +280,11 @@ app-viewer,
   color: #cfcfcf;
 }
 
-.detail-row:is(:hover,.is-hovered) {
+.detail-row:is(:hover, .is-hovered) {
   background: #fff;
 }
 
-.detail-row:is(:hover,.is-hovered) * {
+.detail-row:is(:hover, .is-hovered) * {
   color: #141414;
 }
 
@@ -372,7 +378,10 @@ app-viewer,
   z-index: 5;
   width: min(var(--viewer-header-center-width), calc(100% - 24px));
   max-width: calc(100% - 24px);
-  transition: transform 180ms ease-out, opacity 180ms ease-out, box-shadow 180ms ease-out;
+  transition:
+    transform 180ms ease-out,
+    opacity 180ms ease-out,
+    box-shadow 180ms ease-out;
   display: grid;
   justify-items: center;
   gap: 10px;
@@ -419,8 +428,6 @@ app-viewer,
 .viewer-header-search {
   width: 100%;
 }
-
-
 
 .viewer-year-card {
   background: rgba(0, 0, 0, 0);
@@ -508,7 +515,10 @@ app-viewer,
   border: 1px solid rgba(255, 255, 255, 0.2);
   opacity: 0;
   transform: translateX(-50%) translateY(3px);
-  transition: opacity 180ms ease-out, transform 180ms ease-out, background-color 180ms ease-out;
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out,
+    background-color 180ms ease-out;
 }
 
 .viewer-edition-option:hover,
@@ -613,7 +623,9 @@ app-viewer,
   background-position: center;
   background-size: cover;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-  transition: transform 180ms ease-out, filter 180ms ease-out;
+  transition:
+    transform 180ms ease-out,
+    filter 180ms ease-out;
 }
 
 .layer-switcher-preview::after {
@@ -645,7 +657,9 @@ app-viewer,
   color: #fff;
   font-size: 12px;
   font-weight: 600;
-  transition: background-color 180ms ease-out, color 180ms ease-out;
+  transition:
+    background-color 180ms ease-out,
+    color 180ms ease-out;
 }
 
 .viewer-floating-panel {
@@ -672,7 +686,9 @@ app-viewer,
   grid-template-columns: auto minmax(0, 1fr);
 }
 
-.place-search-shell.has-utility-actions { grid-template-columns: auto minmax(0, 1fr) auto; }
+.place-search-shell.has-utility-actions {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
 
 .place-search-shell input {
   border: none;
@@ -682,7 +698,11 @@ app-viewer,
   color: #fff;
 }
 
-.topbar-actions { display: inline-flex; align-items: center; gap: 8px; }
+.topbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .place-search-shell input::placeholder {
   color: #cfcfcf;
@@ -834,7 +854,11 @@ app-viewer,
   color: #fff;
 }
 
-.help-header { display: flex; align-items: center; justify-content: space-between; }
+.help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .help-popup p {
   margin: 0;
@@ -978,6 +1002,7 @@ app-viewer,
   grid-template-rows: auto minmax(0, 1fr);
   background: #000;
   border-top: 2px solid #fff;
+  color: #fff;
   border-radius: 18px 18px 0 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   overflow: hidden;
@@ -1083,7 +1108,6 @@ app-viewer,
     padding: 16px 16px 56px;
     border-radius: 16px;
   }
-
 }
 
 @media (max-width: 767px) {
@@ -1210,5 +1234,4 @@ app-viewer,
   .mobile-layout .mobile-sheet.snap-full {
     height: min(88dvh, 860px);
   }
-
 }

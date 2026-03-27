@@ -23,8 +23,8 @@ export class ViewerSimulationStore {
   private simulationRafId: number | null = null;
   private simulationLastTs: number | null = null;
 
-  readonly tripFlowNodeMode = signal<TripFlowNodeMode>('always-active');
-  readonly tripFlowEdgeMode = signal<TripFlowEdgeMode>('always-active');
+  readonly tripFlowNodeMode = signal<TripFlowNodeMode>('unhighlighted');
+  readonly tripFlowEdgeMode = signal<TripFlowEdgeMode>('unhighlighted');
   readonly simulationPlaying = signal(false);
   readonly simulationMinute = signal(0);
 
