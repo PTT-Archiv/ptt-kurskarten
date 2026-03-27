@@ -21,7 +21,6 @@ You are an expert in TypeScript, Angular, and NestJs web apps.
 - Use transactions for multi-write flows and keep database access predictable and explicit.
 - Prefer structured logging with request context over ad hoc `console.log`.
 
-
 ## Architecture Thresholds
 
 - Keep components small and single-purpose.

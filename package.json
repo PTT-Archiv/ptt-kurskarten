@@ -8,15 +8,50 @@
   "scripts": {
     "build": "npm run build --workspace @ptt-kurskarten/shared && npm run build --workspace ptt-kurskarten.api && npm run build --workspace ptt-kurskarten-ui",
     "build:static": "npm run build --workspace @ptt-kurskarten/shared && npm run build:static --workspace ptt-kurskarten-ui",
-    "migrate:data:v2": "node scripts/migrate_data_v2.js"
+    "migrate:data:v2": "node scripts/migrate_data_v2.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "prepare": "husky",
+    "ci:quality": "npm run lint && npm run format:check && npm run build"
   },
   "dependencies": {
     "openseadragon": "^6.0.2"
   },
   "devDependencies": {
-    "@types/openseadragon": "^5.0.2"
+    "@types/openseadragon": "^5.0.2",
+    "eslint": "^9.18.0",
+    "angular-eslint": "^21.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
   },
   "overrides": {
     "ajv@^8.0.0": "8.18.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,html}": [
+      "eslint --fix"
+    ],
+    "*.{scss,css,md,json}": [
+      "prettier --write"
+    ]
   }
 }

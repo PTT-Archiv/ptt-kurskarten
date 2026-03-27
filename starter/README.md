@@ -19,6 +19,12 @@ This starter captures the repo defaults that reduce drift and token-heavy setup 
 2. From this repo, run:
 
 ```bash
+npm run starter:bootstrap
+```
+
+Or target another project directory explicitly:
+
+```bash
 npm run starter:bootstrap -- ../my-angular-app
 ```
 
@@ -36,3 +42,4 @@ npm run build
 - The bootstrap script patches `src/styles.scss` when it exists and appends the semantic token mixins.
 - It does not install packages for you.
 - It assumes a standard Angular workspace layout with `package.json` at the project root.
+- If no target directory is passed, it bootstraps the current working directory.
