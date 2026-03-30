@@ -1,10 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { MapStageComponent } from '@shared-ui/map/map-stage.component';
 import { ViewerArchiveStageComponent } from '@viewer/components/archive-stage/viewer-archive-stage.component';
-import { ViewerRoutePlannerOverlayComponent } from '@viewer/components/route-planner-overlay/viewer-route-planner-overlay.component';
+import { ViewerDesktopPlannerComponent } from '@viewer/components/desktop-planner/viewer-desktop-planner.component';
 import { ViewerFacade } from '@viewer/viewer.facade';
 import { ViewerHeaderComponent } from '@viewer/components/header/viewer-header.component';
 import { ViewerFloatingActionsComponent } from '@viewer/components/floating-actions/viewer-floating-actions.component';
@@ -22,10 +20,9 @@ import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
   selector: 'app-viewer',
   imports: [
     TranslocoPipe,
-    FaIconComponent,
     MapStageComponent,
     ViewerArchiveStageComponent,
-    ViewerRoutePlannerOverlayComponent,
+    ViewerDesktopPlannerComponent,
     ViewerHeaderComponent,
     ViewerFloatingActionsComponent,
     ViewerSidebarComponent,
@@ -51,7 +48,6 @@ import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
 })
 export class ViewerComponent implements AfterViewInit, OnDestroy {
   readonly facade = inject(ViewerFacade);
-  readonly xmarkIcon = faXmark;
 
   ngAfterViewInit(): void {
     this.facade.afterViewInit();

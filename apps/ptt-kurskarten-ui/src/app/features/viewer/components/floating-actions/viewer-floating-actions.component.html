@@ -16,7 +16,7 @@
   @if (vm.archiveModeEnabled) {
   <button class="layer-switcher-card" type="button" (click)="toggleSurfaceMode.emit()"
     [attr.aria-label]="(vm.inactiveSurfaceMode === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco">
-    <div class="layer-switcher-preview" [class.is-map-preview]="vm.inactiveSurfaceMode === 'map'"
+    <div class="surface-card surface-card--inverse layer-switcher-preview" [class.is-map-preview]="vm.inactiveSurfaceMode === 'map'"
       [style.background-image]="vm.inactiveSurfacePreviewImageUrl ? 'url(' + vm.inactiveSurfacePreviewImageUrl + ')' : null">
       <span class="layer-switcher-chip">
         {{ (vm.inactiveSurfaceMode === 'map' ? 'viewer.surfaceModeMap' : 'viewer.surfaceModeArchive') | transloco }}
@@ -39,32 +39,34 @@
 }
 
 @if (vm.helpOpen) {
-<section class="help-popup viewer-floating-panel">
-  <div class="help-header">
-    <div class="help-title">{{ 'viewer.helpTitle' | transloco }}</div>
+<section class="help-popup viewer-floating-panel surface-card surface-card--inverse surface-card--panel surface-card--overlay">
+  <div class="overlay-panel__header">
+    <div class="overlay-panel__title">{{ 'viewer.helpTitle' | transloco }}</div>
     <button class="button button--ghost button--pill viewer-floating-actions__panel-close-button" type="button" (click)="closeHelp.emit()"
       [attr.aria-label]="'viewer.helpClose' | transloco">
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>
   </div>
-  <p>{{ 'viewer.helpText1' | transloco }}</p>
-  <p>{{ 'viewer.helpText2' | transloco }}</p>
-  <p>{{ 'viewer.helpText3' | transloco }}</p>
-  <p>{{ 'viewer.helpText4' | transloco }}</p>
+  <div class="overlay-panel__body help-popup__body">
+    <p>{{ 'viewer.helpText1' | transloco }}</p>
+    <p>{{ 'viewer.helpText2' | transloco }}</p>
+    <p>{{ 'viewer.helpText3' | transloco }}</p>
+    <p>{{ 'viewer.helpText4' | transloco }}</p>
+  </div>
 </section>
 }
 
 @if (vm.settingsOpen) {
-<section class="help-popup settings-popup viewer-floating-panel">
-  <div class="help-header">
-    <div class="help-title">{{ 'viewer.settingsTitle' | transloco }}</div>
+<section class="help-popup settings-popup viewer-floating-panel surface-card surface-card--inverse surface-card--panel surface-card--overlay">
+  <div class="overlay-panel__header">
+    <div class="overlay-panel__title">{{ 'viewer.settingsTitle' | transloco }}</div>
     <button class="button button--ghost button--pill viewer-floating-actions__panel-close-button" type="button" (click)="closeSettings.emit()"
       [attr.aria-label]="'viewer.settingsClose' | transloco">
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>
   </div>
-  <div>{{ 'nav.language' | transloco }}</div>
-  <div class="quick-actions">
+  <div class="text-muted viewer-floating-actions__settings-label">{{ 'nav.language' | transloco }}</div>
+  <div class="overlay-panel__actions quick-actions">
     <button
       class="button button--ghost button--pill viewer-floating-actions__lang-button"
       type="button"
@@ -83,7 +85,7 @@
     </button>
   </div>
   <div class="settings-section">
-    <div class="settings-section-title">{{ 'viewer.animationConfigTitle' | transloco }}</div>
+    <div class="ui-section-title settings-section-title">{{ 'viewer.animationConfigTitle' | transloco }}</div>
     <label class="settings-field">
       <span>{{ 'viewer.animationNodes' | transloco }}</span>
       <select class="form-control form-control--inverse settings-select" [value]="vm.tripFlowNodeMode"
@@ -104,7 +106,7 @@
     </label>
   </div>
   @if (!vm.readonlyViewer) {
-  <div class="quick-actions">
+  <div class="overlay-panel__actions quick-actions">
     <button class="button button--ghost button--pill" type="button" routerLink="/admin" (click)="closeSettings.emit()">
       {{ 'nav.admin' | transloco }}
     </button>

@@ -47,26 +47,26 @@ Pflegeregel:
 ### Shell und Layout
 
 - [x] Viewer-Shell und Child-Ownership stilistisch getrennt.
-- [ ] Shell-Koordination auf wirklich featureuebergreifende Layout-Regeln begrenzen und Rest-Duplikate weiter abbauen.
-- [ ] Pruefen, ob `viewer.component.css` noch weitere Child-nahe Selektoren enthaelt, die nach unten verschoben werden koennen.
+- [x] Shell-Koordination auf wirklich featureuebergreifende Layout-Regeln begrenzen und Rest-Duplikate weiter abbauen.
+- [x] Pruefen, ob `viewer.component.css` noch weitere Child-nahe Selektoren enthaelt, die nach unten verschoben werden koennen.
 
 ### Header
 
 - [x] Header nutzt komponentenlokale Styles.
-- [ ] Header-Typografie und Search-/Edition-Spacing auf verbleibende Sonderfaelle pruefen.
-- [ ] Archiv-Mode- und Small-Screen-Regeln im Header nach moeglichen Vereinfachungen durchsuchen.
+- [x] Header-Typografie und Search-/Edition-Spacing auf verbleibende Sonderfaelle pruefen.
+- [x] Archiv-Mode- und Small-Screen-Regeln im Header nach moeglichen Vereinfachungen durchsuchen.
 
 ### Mobile Sheet
 
 - [x] Mobile-Sheet-Styles in eigene Component-CSS verschoben.
 - [ ] `peek` / `half` / `full` visuell auf Mobile gegenpruefen.
-- [ ] Mobile-Sheet-Hoehen und Insets auf moegliche weitere Tokenisierung pruefen, ohne Geometrie kuenstlich zu abstrahieren.
+- [x] Mobile-Sheet-Hoehen und Insets auf moegliche weitere Tokenisierung pruefen, ohne Geometrie kuenstlich zu abstrahieren.
 
 ### Floating Actions
 
 - [x] Floating-Actions-Styles in eigene Component-CSS verschoben.
-- [ ] Help-/Settings-Popup-Stile auf gemeinsame Overlay-Primitives pruefen.
-- [ ] Sprach- und Layer-Switcher visuell gegen Admin-/Shared-Controls abgleichen.
+- [x] Help-/Settings-Popup-Stile auf gemeinsame Overlay-Primitives pruefen.
+- [x] Sprach- und Layer-Switcher visuell gegen Admin-/Shared-Controls abgleichen.
 
 ### Sidebar und Route Node Panel
 

@@ -1,5 +1,33 @@
 :host {
   display: contents;
+  --viewer-brand-bar-min-height: 28px;
+  --viewer-brand-bar-padding: var(--space-2) var(--inset-md);
+  --viewer-brand-bar-gap: var(--space-5);
+  --viewer-brand-bar-font-size: var(--font-size-2xs);
+  --viewer-brand-bar-letter-spacing: 0.08em;
+  --viewer-header-inline-inset: var(--inset-md);
+  --viewer-header-column-gap: var(--inset-md);
+  --viewer-year-card-min-width: 150px;
+  --viewer-year-card-padding: 0;
+  --viewer-year-card-multi-width: min(100%, 360px);
+  --viewer-year-card-multi-padding: 0;
+  --viewer-year-label-font-size: var(--font-size-2xs);
+  --viewer-year-readonly-min-height: 42px;
+  --viewer-year-readonly-font-size: var(--font-size-xl);
+  --viewer-year-readonly-padding: var(--surface-padding-default);
+  --viewer-edition-switcher-gap: var(--space-5) 28px;
+  --viewer-edition-option-color: rgba(208, 208, 208, 0.49);
+  --viewer-edition-option-font-size: var(--font-size-2xl);
+  --viewer-edition-option-padding-bottom: 18px;
+  --viewer-edition-indicator-width: 40px;
+  --viewer-edition-indicator-height: 10px;
+  --viewer-orbit-size: 120px;
+  --viewer-search-shell-gap: var(--space-4);
+  --viewer-search-shell-padding: var(--surface-padding-default);
+  --viewer-search-input-font-size: var(--font-size-xl);
+  --viewer-planner-toggle-size: 34px;
+  --viewer-year-card-blend-mode: normal;
+  --viewer-year-readonly-background: #141414;
 }
 
 .viewer-brand-bar {
@@ -8,12 +36,12 @@
   left: 0;
   right: 0;
   z-index: 7;
-  min-height: 28px;
-  padding: var(--space-2) var(--inset-md);
+  min-height: var(--viewer-brand-bar-min-height);
+  padding: var(--viewer-brand-bar-padding);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-5);
+  gap: var(--viewer-brand-bar-gap);
   background: rgba(0, 0, 0, 0.9);
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
   color: #fff;
@@ -22,9 +50,9 @@
 
 .viewer-brand-title,
 .viewer-brand-note {
-  font-size: var(--font-size-2xs);
+  font-size: var(--viewer-brand-bar-font-size);
   line-height: var(--line-height-ui);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--viewer-brand-bar-letter-spacing);
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -41,8 +69,8 @@
 .viewer-header {
   position: absolute;
   top: var(--viewer-brand-bar-height);
-  left: var(--inset-md);
-  right: var(--inset-md);
+  left: var(--viewer-header-inline-inset);
+  right: var(--viewer-header-inline-inset);
   z-index: 7;
   display: grid;
   grid-template-columns:
@@ -51,7 +79,7 @@
     minmax(0, var(--viewer-header-side-width));
   justify-content: space-between;
   align-items: center;
-  column-gap: var(--inset-md);
+  column-gap: var(--viewer-header-column-gap);
 }
 
 .viewer-header-slot {
@@ -80,26 +108,29 @@
 }
 
 .viewer-year-card {
-  background: rgba(0, 0, 0, 0);
+  background: transparent;
   border: none;
   border-radius: var(--radius-xl);
-  min-width: 150px;
+  min-width: var(--viewer-year-card-min-width);
   max-width: 100%;
   width: fit-content;
+  padding: var(--viewer-year-card-padding);
   display: grid;
   justify-items: start;
   gap: var(--space-2);
   pointer-events: auto;
+  mix-blend-mode: var(--viewer-year-card-blend-mode);
 }
 
 .viewer-year-card.viewer-year-card-multi {
   min-width: 0;
-  width: min(100%, 360px);
+  width: var(--viewer-year-card-multi-width);
+  padding: var(--viewer-year-card-multi-padding);
   gap: var(--space-6);
 }
 
 .viewer-year-label {
-  font-size: var(--font-size-2xs);
+  font-size: var(--viewer-year-label-font-size);
   line-height: var(--line-height-tight);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -109,14 +140,14 @@
 
 .viewer-year-readonly {
   width: 100%;
-  min-height: 42px;
+  min-height: var(--viewer-year-readonly-min-height);
   border: none;
   border-radius: var(--radius-control);
-  background: #141414;
+  background: var(--viewer-year-readonly-background);
   color: #fff;
-  padding: var(--surface-padding-default);
+  padding: var(--viewer-year-readonly-padding);
   font: inherit;
-  font-size: var(--font-size-xl);
+  font-size: var(--viewer-year-readonly-font-size);
   font-weight: 600;
 }
 
@@ -125,17 +156,17 @@
   flex-wrap: wrap;
   align-items: center;
   max-width: 100%;
-  gap: var(--space-5) 28px;
+  gap: var(--viewer-edition-switcher-gap);
 }
 
 .viewer-edition-option {
   position: relative;
   border: none;
   background: transparent;
-  color: #d0d0d07c;
-  padding: 2px 0 18px;
+  color: var(--viewer-edition-option-color);
+  padding: 2px 0 var(--viewer-edition-option-padding-bottom);
   font: inherit;
-  font-size: var(--font-size-2xl);
+  font-size: var(--viewer-edition-option-font-size);
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: var(--line-height-tight);
@@ -148,8 +179,8 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  width: 40px;
-  height: 10px;
+  width: var(--viewer-edition-indicator-width);
+  height: var(--viewer-edition-indicator-height);
   background: rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.2);
   opacity: 0;
@@ -184,8 +215,8 @@
 }
 
 .viewer-orbit-card {
-  width: 120px;
-  height: 120px;
+  width: var(--viewer-orbit-size);
+  height: var(--viewer-orbit-size);
   display: block;
   z-index: -1;
   pointer-events: none;
@@ -202,11 +233,11 @@
   background: #000;
   border: 2px solid #fff;
   border-radius: var(--radius-pill);
-  padding: var(--surface-padding-default);
+  padding: var(--viewer-search-shell-padding);
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--viewer-search-shell-gap);
 }
 
 .place-search-shell.archive-only {
@@ -220,7 +251,7 @@
 .place-search-shell input {
   border: none;
   outline: none;
-  font-size: var(--font-size-xl);
+  font-size: var(--viewer-search-input-font-size);
   background: transparent;
   color: #fff;
 }
@@ -266,111 +297,71 @@
 }
 
 .viewer-header__planner-toggle-button {
-  width: 34px;
-  height: 34px;
-  min-height: 34px;
-  min-width: 34px;
+  width: var(--viewer-planner-toggle-size);
+  height: var(--viewer-planner-toggle-size);
+  min-height: var(--viewer-planner-toggle-size);
+  min-width: var(--viewer-planner-toggle-size);
   padding: 0;
   display: grid;
   place-items: center;
   box-shadow: none;
 }
 
-:host-context(.archive-mode) .viewer-year-card {
-  mix-blend-mode: difference;
+:host-context(.archive-mode) {
+  --viewer-year-card-blend-mode: difference;
+  --viewer-edition-option-color: #fff;
+  --viewer-year-readonly-background: #000;
 }
 
-:host-context(.archive-mode) .viewer-year-label,
-:host-context(.archive-mode) .viewer-year-readonly,
-:host-context(.archive-mode) .viewer-edition-option {
-  color: #fff;
+:host-context(.small-screen-layout) {
+  --viewer-brand-bar-min-height: 26px;
+  --viewer-brand-bar-padding: var(--space-2) var(--inset-sm);
+  --viewer-brand-bar-font-size: var(--font-size-3xs);
+  --viewer-header-inline-inset: var(--inset-sm);
+  --viewer-header-column-gap: var(--inset-sm);
+  --viewer-year-card-min-width: 140px;
+  --viewer-year-card-multi-width: min(100%, 320px);
+  --viewer-year-card-multi-padding: var(--space-5) var(--space-6) var(--space-4);
+  --viewer-year-readonly-min-height: 38px;
+  --viewer-year-readonly-font-size: var(--font-size-lg);
+  --viewer-year-readonly-padding: var(--surface-padding-compact);
+  --viewer-edition-switcher-gap: var(--space-4) var(--space-9);
+  --viewer-edition-option-font-size: var(--font-size-xl);
+  --viewer-edition-option-padding-bottom: var(--inset-md);
+  --viewer-edition-indicator-width: 38px;
+  --viewer-edition-indicator-height: 9px;
+  --viewer-orbit-size: 78px;
+  --viewer-search-input-font-size: var(--font-size-lg);
 }
 
-:host-context(.archive-mode) .viewer-year-readonly {
-  background: #000;
-}
-
-:host-context(.archive-mode) .viewer-edition-option::after {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-:host-context(.archive-mode) .viewer-edition-option.active::after,
-:host-context(.archive-mode) .viewer-edition-option:focus-visible::after,
-:host-context(.archive-mode) .viewer-edition-option:hover::after {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 255, 255, 0.92);
-}
-
-:host-context(.small-screen-layout) .viewer-brand-bar {
-  min-height: 26px;
-  padding: var(--space-2) var(--inset-sm);
-}
-
-:host-context(.small-screen-layout) .viewer-brand-title,
-:host-context(.small-screen-layout) .viewer-brand-note {
-  font-size: var(--font-size-3xs);
-}
-
-:host-context(.small-screen-layout) .viewer-header {
-  left: var(--inset-sm);
-  right: var(--inset-sm);
-  column-gap: var(--inset-sm);
-}
-
-:host-context(.small-screen-layout) .viewer-year-card {
-  min-width: 140px;
-}
-
-:host-context(.small-screen-layout) .viewer-year-card.viewer-year-card-multi {
-  width: min(100%, 320px);
-  padding: var(--space-5) var(--space-6) var(--space-4);
-}
-
-:host-context(.small-screen-layout) .viewer-year-readonly {
-  min-height: 38px;
-  font-size: var(--font-size-lg);
-  padding: var(--surface-padding-compact);
-}
-
-:host-context(.small-screen-layout) .viewer-edition-switcher {
-  gap: var(--space-4) var(--space-9);
-}
-
-:host-context(.small-screen-layout) .viewer-edition-option {
-  font-size: var(--font-size-xl);
-  padding-bottom: var(--inset-md);
-}
-
-:host-context(.small-screen-layout) .viewer-edition-option::after {
-  width: 38px;
-  height: 9px;
-}
-
-:host-context(.small-screen-layout) .viewer-orbit-card {
-  width: 78px;
-  height: 78px;
-}
-
-:host-context(.small-screen-layout) .place-search-shell input {
-  font-size: var(--font-size-lg);
-}
-
-:host-context(.mobile-layout) .viewer-brand-bar {
-  min-height: 24px;
-  padding: 5px var(--inset-xs);
-  gap: var(--space-3);
-}
-
-:host-context(.mobile-layout) .viewer-brand-title,
-:host-context(.mobile-layout) .viewer-brand-note {
-  font-size: var(--font-size-4xs);
-  letter-spacing: 0.06em;
+:host-context(.mobile-layout) {
+  --viewer-brand-bar-min-height: 24px;
+  --viewer-brand-bar-padding: 5px var(--inset-xs);
+  --viewer-brand-bar-gap: var(--space-3);
+  --viewer-brand-bar-font-size: var(--font-size-4xs);
+  --viewer-brand-bar-letter-spacing: 0.06em;
+  --viewer-header-inline-inset: var(--inset-xs);
+  --viewer-header-column-gap: var(--space-4);
+  --viewer-year-card-min-width: 128px;
+  --viewer-year-card-padding: var(--surface-padding-compact);
+  --viewer-year-card-multi-width: min(100%, 320px);
+  --viewer-year-card-multi-padding: var(--space-4) var(--space-5) 9px;
+  --viewer-year-label-font-size: var(--font-size-3xs);
+  --viewer-year-readonly-min-height: 36px;
+  --viewer-year-readonly-font-size: 15px;
+  --viewer-edition-switcher-gap: var(--space-3) var(--inset-md);
+  --viewer-edition-option-font-size: 15px;
+  --viewer-edition-option-padding-bottom: 13px;
+  --viewer-edition-indicator-width: 34px;
+  --viewer-edition-indicator-height: 8px;
+  --viewer-orbit-size: 70px;
+  --viewer-search-shell-gap: var(--space-3);
+  --viewer-search-shell-padding: 9px var(--inset-xs);
+  --viewer-search-input-font-size: 15px;
+  --viewer-planner-toggle-size: 32px;
 }
 
 :host-context(.mobile-layout) .viewer-header {
-  left: var(--inset-xs);
-  right: var(--inset-xs);
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
     'start end'
@@ -378,7 +369,7 @@
   justify-content: stretch;
   align-items: start;
   row-gap: var(--space-4);
-  column-gap: var(--space-4);
+  column-gap: var(--viewer-header-column-gap);
 }
 
 :host-context(.mobile-layout) .viewer-header-slot-start {
@@ -395,60 +386,6 @@
   grid-area: end;
 }
 
-:host-context(.mobile-layout) .viewer-year-card {
-  min-width: 128px;
-  padding: var(--surface-padding-compact);
-}
-
-:host-context(.mobile-layout) .viewer-year-card.viewer-year-card-multi {
-  width: min(100%, 320px);
-  padding: var(--space-4) var(--space-5) 9px;
-}
-
-:host-context(.mobile-layout) .viewer-year-label {
-  font-size: var(--font-size-3xs);
-}
-
-:host-context(.mobile-layout) .viewer-year-readonly {
-  min-height: 36px;
-  font-size: 15px;
-}
-
-:host-context(.mobile-layout) .viewer-edition-switcher {
-  gap: var(--space-3) var(--inset-md);
-}
-
-:host-context(.mobile-layout) .viewer-edition-option {
-  font-size: 15px;
-  padding-bottom: 13px;
-}
-
-:host-context(.mobile-layout) .viewer-edition-option::after {
-  width: 34px;
-  height: 8px;
-}
-
-:host-context(.mobile-layout) .viewer-orbit-card {
-  width: 70px;
-  height: 70px;
-}
-
 :host-context(.mobile-layout) .viewer-header-search .place-search-shell {
   width: 100%;
-}
-
-:host-context(.mobile-layout) .place-search-shell {
-  gap: var(--space-3);
-  padding: 9px var(--inset-xs);
-}
-
-:host-context(.mobile-layout) .place-search-shell input {
-  font-size: 15px;
-}
-
-:host-context(.mobile-layout) .viewer-header__planner-toggle-button {
-  width: 32px;
-  height: 32px;
-  min-height: 32px;
-  min-width: 32px;
 }

@@ -62,55 +62,30 @@
     ></app-viewer-header>
 
     @if (!facade.archiveModeActive() && facade.routePlannerOpen() && !facade.smallScreenLayout()) {
-    <div class="planner-overlay">
-      <div class="route-planner-shell">
-        <app-viewer-route-planner-overlay
-          [nodes]="facade.nodes()"
-          [fromId]="facade.fromId()"
-          [toId]="facade.toId()"
-          [nodeAliases]="facade.nodeAliasesById()"
-          [departTime]="facade.draftDepartTime()"
-          [showTime]="facade.hasSearched()"
-          [canApplyTime]="facade.hasSearched() && facade.draftDepartTime() !== facade.departTime()"
-          [searching]="facade.routingState() === 'searching'"
-          [variant]="'compact'"
-          [autoFocusFromToken]="facade.routePlannerFocusToken()"
-          (fromIdChange)="facade.onFromIdChange($event)"
-          (toIdChange)="facade.onToIdChange($event)"
-          (fromPreviewChange)="facade.onFromPreview($event)"
-          (toPreviewChange)="facade.onToPreview($event)"
-          (pickTargetChange)="facade.onRoutePlannerPickTargetChange($event)"
-          (departTimeChange)="facade.onDepartTimeDraftChange($event)"
-          (applyTime)="facade.applyDepartTime()"
-          (resetSearch)="facade.resetSearch()"
-          (swap)="facade.swapConnections()"
-          (plannerFocus)="facade.onPlannerFocus($event)"
-          (plannerHover)="facade.onPlannerHover($event)"
-        ></app-viewer-route-planner-overlay>
-        <button
-          class="button button--ghost button--pill viewer-route-planner__close-button"
-          type="button"
-          (click)="facade.closeRoutePlanner()"
-          aria-label="Routenplaner schliessen"
-        >
-          <fa-icon [icon]="xmarkIcon"></fa-icon>
-        </button>
-      </div>
-      @if (facade.routingState() === 'searching') {
-      <div class="planner-status">
-        <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
-          <span class="spinner" aria-hidden="true"></span>
-          <span>{{ 'viewer.searching' | transloco }}</span>
-        </div>
-      </div>
-      } @else if (facade.routingState() === 'no_results') {
-      <div class="planner-status">
-        <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
-          {{ facade.resultsVm().noResultsMessage }}
-        </div>
-      </div>
-      }
-    </div>
+    <app-viewer-desktop-planner
+      [nodes]="facade.nodes()"
+      [fromId]="facade.fromId()"
+      [toId]="facade.toId()"
+      [nodeAliases]="facade.nodeAliasesById()"
+      [departTime]="facade.draftDepartTime()"
+      [showTime]="facade.hasSearched()"
+      [canApplyTime]="facade.hasSearched() && facade.draftDepartTime() !== facade.departTime()"
+      [searching]="facade.routingState() === 'searching'"
+      [noResultsMessage]="facade.routingState() === 'no_results' ? facade.resultsVm().noResultsMessage : ''"
+      [autoFocusFromToken]="facade.routePlannerFocusToken()"
+      (close)="facade.closeRoutePlanner()"
+      (fromIdChange)="facade.onFromIdChange($event)"
+      (toIdChange)="facade.onToIdChange($event)"
+      (fromPreviewChange)="facade.onFromPreview($event)"
+      (toPreviewChange)="facade.onToPreview($event)"
+      (pickTargetChange)="facade.onRoutePlannerPickTargetChange($event)"
+      (departTimeChange)="facade.onDepartTimeDraftChange($event)"
+      (applyTime)="facade.applyDepartTime()"
+      (resetSearch)="facade.resetSearch()"
+      (swap)="facade.swapConnections()"
+      (plannerFocus)="facade.onPlannerFocus($event)"
+      (plannerHover)="facade.onPlannerHover($event)"
+    ></app-viewer-desktop-planner>
     }
 
     <app-viewer-floating-actions

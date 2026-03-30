@@ -6,6 +6,17 @@ import { ViewerRoutingStore } from '@viewer/stores/viewer-routing.store';
 
 const TABLET_BREAKPOINT_PX = 1024;
 const MOBILE_BREAKPOINT_PX = 768;
+const MOBILE_SHEET_PEEK_HEIGHT_PX = 78;
+const MOBILE_SHEET_HALF_VIEWPORT_RATIO_DESKTOP = 0.48;
+const MOBILE_SHEET_HALF_MAX_HEIGHT_DESKTOP_PX = 420;
+const MOBILE_SHEET_FULL_VIEWPORT_RATIO_DESKTOP = 0.82;
+const MOBILE_SHEET_FULL_MAX_HEIGHT_DESKTOP_PX = 760;
+const MOBILE_SHEET_HALF_VIEWPORT_RATIO_MOBILE = 0.58;
+const MOBILE_SHEET_HALF_MAX_HEIGHT_MOBILE_PX = 520;
+const MOBILE_SHEET_FULL_VIEWPORT_RATIO_MOBILE = 0.88;
+const MOBILE_SHEET_FULL_MAX_HEIGHT_MOBILE_PX = 860;
+const ACTION_STACK_BASE_OFFSET_DESKTOP_PX = 16;
+const ACTION_STACK_BASE_OFFSET_MOBILE_PX = 12;
 
 @Injectable()
 export class ViewerLayoutStore {
@@ -43,12 +54,16 @@ export class ViewerLayoutStore {
     }
     const snap = this.mobileSheetSnap();
     if (snap === 'peek') {
-      return 78;
+      return MOBILE_SHEET_PEEK_HEIGHT_PX;
     }
     if (this.mobileLayout()) {
-      return snap === 'full' ? Math.min(height * 0.86, 820) : Math.min(height * 0.54, 460);
+      return snap === 'full'
+        ? Math.min(height * MOBILE_SHEET_FULL_VIEWPORT_RATIO_MOBILE, MOBILE_SHEET_FULL_MAX_HEIGHT_MOBILE_PX)
+        : Math.min(height * MOBILE_SHEET_HALF_VIEWPORT_RATIO_MOBILE, MOBILE_SHEET_HALF_MAX_HEIGHT_MOBILE_PX);
     }
-    return snap === 'full' ? Math.min(height * 0.82, 760) : Math.min(height * 0.48, 420);
+    return snap === 'full'
+      ? Math.min(height * MOBILE_SHEET_FULL_VIEWPORT_RATIO_DESKTOP, MOBILE_SHEET_FULL_MAX_HEIGHT_DESKTOP_PX)
+      : Math.min(height * MOBILE_SHEET_HALF_VIEWPORT_RATIO_DESKTOP, MOBILE_SHEET_HALF_MAX_HEIGHT_DESKTOP_PX);
   });
 
   readonly sidePanelVisible = computed(() => {
@@ -63,7 +78,7 @@ export class ViewerLayoutStore {
   });
 
   readonly actionStackBottomOffset = computed(() => {
-    const baseOffset = this.mobileLayout() ? 12 : 16;
+    const baseOffset = this.mobileLayout() ? ACTION_STACK_BASE_OFFSET_MOBILE_PX : ACTION_STACK_BASE_OFFSET_DESKTOP_PX;
     return this.mobileSheetVisible() ? this.mobileSheetHeight() + baseOffset : baseOffset;
   });
 

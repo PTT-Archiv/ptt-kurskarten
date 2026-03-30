@@ -1,0 +1,50 @@
+<div class="planner-overlay">
+  <div class="route-planner-shell">
+    <app-viewer-route-planner-overlay
+      [nodes]="nodes"
+      [fromId]="fromId"
+      [toId]="toId"
+      [nodeAliases]="nodeAliases"
+      [departTime]="departTime"
+      [showTime]="showTime"
+      [canApplyTime]="canApplyTime"
+      [searching]="searching"
+      [variant]="'compact'"
+      [autoFocusFromToken]="autoFocusFromToken"
+      (fromIdChange)="fromIdChange.emit($event)"
+      (toIdChange)="toIdChange.emit($event)"
+      (fromPreviewChange)="fromPreviewChange.emit($event)"
+      (toPreviewChange)="toPreviewChange.emit($event)"
+      (pickTargetChange)="pickTargetChange.emit($event)"
+      (departTimeChange)="departTimeChange.emit($event)"
+      (applyTime)="applyTime.emit()"
+      (resetSearch)="resetSearch.emit()"
+      (swap)="swap.emit()"
+      (plannerFocus)="plannerFocus.emit($event)"
+      (plannerHover)="plannerHover.emit($event)"
+    ></app-viewer-route-planner-overlay>
+    <button
+      class="button button--ghost button--pill viewer-route-planner__close-button"
+      type="button"
+      (click)="close.emit()"
+      aria-label="Routenplaner schliessen"
+    >
+      <fa-icon [icon]="xmarkIcon"></fa-icon>
+    </button>
+  </div>
+
+  @if (searching) {
+    <div class="planner-status">
+      <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
+        <span class="spinner" aria-hidden="true"></span>
+        <span>{{ 'viewer.searching' | transloco }}</span>
+      </div>
+    </div>
+  } @else if (noResultsMessage) {
+    <div class="planner-status">
+      <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
+        {{ noResultsMessage }}
+      </div>
+    </div>
+  }
+</div>

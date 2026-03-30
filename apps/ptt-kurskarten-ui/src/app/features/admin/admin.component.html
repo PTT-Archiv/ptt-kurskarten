@@ -579,9 +579,9 @@
               </button>
               <div class="danger-action-wrap">
                 @if (confirmDeleteNode() && deleteConfirmAnchor() === 'inline') {
-                  <div class="delete-popover">
+                  <div class="delete-popover surface-card surface-card--panel surface-card--overlay">
                     <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
-                    <div class="delete-popover-actions">
+                    <div class="overlay-panel__actions delete-popover-actions">
                       <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
                         Delete Place
                       </button>
@@ -1057,9 +1057,9 @@
         @if (selectedType() === 'node') {
           <div class="danger-action-wrap sticky-danger">
             @if (confirmDeleteNode() && deleteConfirmAnchor() === 'sticky') {
-              <div class="delete-popover">
+              <div class="delete-popover surface-card surface-card--panel surface-card--overlay">
                 <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
-                <div class="delete-popover-actions">
+                <div class="overlay-panel__actions delete-popover-actions">
                   <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
                     Delete Place
                   </button>
