@@ -98,14 +98,7 @@
   top: 12px;
   left: 12px;
   width: min(560px, calc(100% - 24px));
-  background: #ffffff;
-  border: 2px solid #141414;
-  border-radius: 14px;
-  padding: 10px;
-  display: grid;
-  gap: 8px;
   z-index: 6;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
 }
 
 .quick-entity-header {
@@ -156,32 +149,9 @@
   gap: 8px;
 }
 
-.quick-edge-field input {
-  border: var(--form-control-border-width) solid var(--color-border-default);
-  border-radius: var(--form-control-radius);
-  padding: var(--form-control-padding-y) var(--form-control-padding-x);
-  background: var(--color-surface-default);
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: var(--shadow-strong);
-}
-
-.quick-edge-field select,
-.quick-edge-field textarea {
-  border: var(--form-control-border-width) solid var(--color-border-default);
-  border-radius: var(--form-control-radius);
-  padding: var(--form-control-padding-y) var(--form-control-padding-x);
-  background: var(--color-surface-default);
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: var(--shadow-strong);
-}
-
 .quick-node-filter {
   width: auto;
   max-width: 132px;
-  padding: 4px 8px;
-  border-radius: 999px;
   font-size: 10px;
   font-weight: 600;
 }
@@ -197,37 +167,7 @@
   right: 0;
   max-height: 220px;
   overflow: auto;
-  background: #ffffff;
-  border: 2px solid #141414;
-  border-radius: 10px;
-  padding: 4px;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
-  display: grid;
-  gap: 4px;
   z-index: 10;
-}
-
-.quick-edge-list button {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  width: 100%;
-  text-align: left;
-  border: 1px solid #141414;
-  border-radius: 8px;
-  background: #f8f8f8;
-  padding: 6px 8px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.quick-edge-list button:hover {
-  background: #ffffff;
-}
-
-.quick-edge-list button.active {
-  background: #ffffff;
-  border: 2px solid #141414;
 }
 
 .admin-quick-entity-panel__swap-button {
@@ -296,18 +236,6 @@
   color: #3a3a3a;
 }
 
-.quick-trip-row input,
-.quick-trip-row select {
-  border: var(--form-control-border-width) solid var(--color-border-default);
-  border-radius: var(--form-control-radius);
-  padding: 5px 6px;
-  background: var(--color-surface-default);
-  font-size: 12px;
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: var(--shadow-strong);
-}
-
 .quick-fact-grid {
   display: grid;
   gap: 8px;
@@ -335,12 +263,8 @@
   position: absolute;
   left: 12px;
   bottom: 12px;
-  background: var(--ptt-white);
-  border: 1px solid var(--ptt-black);
-  border-radius: 8px;
   padding: 8px 10px;
   font-size: 12px;
-  display: grid;
   gap: 6px;
   min-width: 200px;
   z-index: 5;
@@ -490,25 +414,13 @@
 }
 
 .panel-section {
-  border: 2px solid #141414;
-  border-radius: 18px;
-  padding: 14px;
-  display: grid;
-  gap: 12px;
   max-width: 100%;
-  background: #ffffff;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
   width: 100%;
   box-sizing: border-box;
 }
 
 .panel-section.compact.collapsed {
   display: none;
-}
-
-.section-title {
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .field {
@@ -532,53 +444,9 @@
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #ffffff;
-  border: 2px solid #141414;
-  border-radius: 12px;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
-  padding: 4px;
-  display: grid;
-  gap: 4px;
   z-index: 5;
   max-height: 180px;
   overflow: auto;
-}
-
-.typeahead-list button {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  width: 100%;
-  border: 2px solid transparent;
-  background: #f8f8f8;
-  padding: 6px 8px;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: left;
-  font-size: 12px;
-}
-
-.typeahead-list button.active {
-  border-color: #141414;
-  background: #ffffff;
-}
-
-.typeahead-list button:hover {
-  border-color: #141414;
-  background: #ffffff;
-}
-
-.field input,
-.field select,
-.field textarea {
-  border: var(--form-control-border-width) solid var(--color-border-default);
-  border-radius: var(--form-control-radius);
-  padding: var(--form-control-padding-y) var(--form-control-padding-x);
-  background: var(--color-surface-default);
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  box-shadow: var(--shadow-strong);
 }
 
 .field-grid {
@@ -699,19 +567,6 @@
   color: #3a3a3a;
 }
 
-.trip-row input,
-.trip-row select {
-  border: var(--form-control-border-width) solid var(--color-border-default);
-  border-radius: var(--form-control-radius);
-  padding: 5px 6px;
-  background: var(--color-surface-default);
-  font-size: 12px;
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  box-shadow: var(--shadow-strong);
-}
-
 .admin-trip-table__remove-button {
   min-width: 38px;
   padding: 6px 10px;
@@ -733,11 +588,6 @@
 
 .hint {
   font-size: 11px;
-  color: #3a3a3a;
-}
-
-.muted {
-  font-size: 12px;
   color: #3a3a3a;
 }
 

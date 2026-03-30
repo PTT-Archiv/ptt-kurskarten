@@ -76,22 +76,12 @@
   top: calc(var(--viewer-brand-bar-height, 40px) + 8px);
 }
 
-.ghost-btn {
+.archive-snippet-viewer__control {
   width: 32px;
   height: 32px;
-  display: grid;
-  place-items: center;
-  background: #141414;
-  border: 2px solid #ffffff;
-  color: #ffffff;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-  font-weight: 600;
-}
-
-.ghost-btn:hover,
-.ghost-btn:focus-visible {
-  background: #ffffff;
-  color: #141414;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-soft);
 }

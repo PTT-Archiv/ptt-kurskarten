@@ -67,7 +67,7 @@
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
 
-    <section class="quick-edge-panel quick-entity-panel">
+    <section class="quick-edge-panel quick-entity-panel surface-card surface-card--panel">
       <div class="quick-entity-header">
         <div class="quick-edge-title">Quick Entity</div>
         <div class="quick-entity-active">Mode: {{ quickEntityMode() }}</div>
@@ -94,6 +94,7 @@
           <span>Name</span>
           <div class="quick-edge-typeahead">
             <input
+              class="form-control form-control--elevated"
               type="text"
               [value]="quickPlaceName()"
               placeholder="Place name"
@@ -103,24 +104,25 @@
               (blur)="closeQuickPlaceList()"
             />
             @if (quickPlaceGeoOpen() && quickPlaceSuggestions().length > 0) {
-              <div class="quick-edge-list">
+              <div class="quick-edge-list interactive-list">
                 @for (suggestion of quickPlaceSuggestions(); track suggestion.id; let idx = $index) {
                   <button
                     type="button"
-                    [class.active]="idx === quickPlaceGeoActiveIndex()"
+                    class="interactive-list__item"
+                    [class.is-active]="idx === quickPlaceGeoActiveIndex()"
                     (mousedown)="selectQuickPlaceSuggestion(suggestion)"
                   >
                     <span>{{ suggestion.label }}</span>
                     @if (suggestion.kind === 'existing') {
                       @if (suggestion.value.hidden) {
-                        <span class="muted">Existing · hidden in {{ year() }}</span>
+                        <span class="text-muted interactive-list__meta">Existing · hidden in {{ year() }}</span>
                       } @else if (!suggestion.value.active) {
-                        <span class="muted">Existing · not active in {{ year() }}</span>
+                        <span class="text-muted interactive-list__meta">Existing · not active in {{ year() }}</span>
                       } @else {
-                        <span class="muted">Existing · visible</span>
+                        <span class="text-muted interactive-list__meta">Existing · visible</span>
                       }
                     } @else {
-                      <span class="muted">GeoAdmin · {{ suggestion.x.toFixed(0) }}, {{ suggestion.y.toFixed(0) }}</span>
+                      <span class="text-muted interactive-list__meta">GeoAdmin · {{ suggestion.x.toFixed(0) }}, {{ suggestion.y.toFixed(0) }}</span>
                     }
                   </button>
                 }
@@ -160,7 +162,7 @@
               <span>{{ 'label.from' | transloco }}</span>
               @if (quickEntityMode() === 'service') {
                 <select
-                  class="quick-node-filter"
+                  class="form-control form-control--compact form-control--elevated quick-node-filter"
                   tabindex="-1"
                   [value]="quickFromNodeFilter()"
                   (change)="setQuickNodeFilter('from', $any($event.target).value)"
@@ -174,6 +176,7 @@
             </div>
             <div class="quick-edge-typeahead">
               <input
+                class="form-control form-control--elevated"
                 #quickFromInput
                 type="text"
                 tabindex="1"
@@ -185,11 +188,12 @@
                 (blur)="closeQuickFromList()"
               />
               @if (quickFromOpen() && quickFromSuggestions().length > 0) {
-                <div class="quick-edge-list">
+                <div class="quick-edge-list interactive-list">
                   @for (node of quickFromSuggestions(); track node.id; let idx = $index) {
                     <button
                       type="button"
-                      [class.active]="idx === quickFromActiveIndex()"
+                      class="interactive-list__item"
+                      [class.is-active]="idx === quickFromActiveIndex()"
                       (mousedown)="selectQuickFrom(node.id)"
                     >
                       {{ node.name }}
@@ -209,7 +213,7 @@
               <span>{{ 'label.to' | transloco }}</span>
               @if (quickEntityMode() === 'service') {
                 <select
-                  class="quick-node-filter"
+                  class="form-control form-control--compact form-control--elevated quick-node-filter"
                   tabindex="-1"
                   [value]="quickToNodeFilter()"
                   (change)="setQuickNodeFilter('to', $any($event.target).value)"
@@ -223,6 +227,7 @@
             </div>
             <div class="quick-edge-typeahead">
               <input
+                class="form-control form-control--elevated"
                 #quickToInput
                 type="text"
                 tabindex="2"
@@ -234,11 +239,12 @@
                 (blur)="closeQuickToList()"
               />
               @if (quickToOpen() && quickToSuggestions().length > 0) {
-                <div class="quick-edge-list">
+                <div class="quick-edge-list interactive-list">
                   @for (node of quickToSuggestions(); track node.id; let idx = $index) {
                     <button
                       type="button"
-                      [class.active]="idx === quickToActiveIndex()"
+                      class="interactive-list__item"
+                      [class.is-active]="idx === quickToActiveIndex()"
                       (mousedown)="selectQuickTo(node.id)"
                     >
                       {{ node.name }}
@@ -253,7 +259,7 @@
         <div class="quick-edge-row quick-edge-meta">
           <label class="quick-edge-field">
             <span>{{ 'label.distance' | transloco }}</span>
-            <input type="number" tabindex="3" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
+            <input class="form-control form-control--elevated" type="number" tabindex="3" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
           </label>
         </div>
 
@@ -266,6 +272,7 @@
             <label class="quick-edge-field">
               <span>Note DE</span>
               <input
+                class="form-control form-control--elevated"
                 type="text"
                 tabindex="-1"
                 [value]="quickServiceNoteDe()"
@@ -276,6 +283,7 @@
             <label class="quick-edge-field">
               <span>Note FR</span>
               <input
+                class="form-control form-control--elevated"
                 type="text"
                 tabindex="-1"
                 [value]="quickServiceNoteFr()"
@@ -304,6 +312,7 @@
             @for (trip of quickTrips(); track trip.id; let idx = $index) {
               <div class="quick-trip-row">
                 <select
+                  class="form-control form-control--compact form-control--elevated"
                   tabindex="-1"
                   [value]="trip.transport"
                   (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
@@ -315,6 +324,7 @@
                   }
                 </select>
                 <input
+                  class="form-control form-control--compact form-control--elevated"
                   type="text"
                   [value]="trip.departs"
                   placeholder="HH:MM"
@@ -325,6 +335,7 @@
                   data-quick-trip-field="departs"
                 />
                 <input
+                  class="form-control form-control--compact form-control--elevated"
                   type="text"
                   [value]="trip.arrives"
                   placeholder="HH:MM"
@@ -386,13 +397,13 @@
           </div>
           @for (trip of quickTrips(); track trip.id; let idx = $index) {
             <div class="quick-trip-row">
-              <select [value]="trip.transport" (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)">
+              <select class="form-control form-control--compact form-control--elevated" [value]="trip.transport" (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)">
                 @for (transport of transportOptions; track transport) {
                   <option [value]="transport" [selected]="transport === trip.transport">{{ ('transport.' + transport) | transloco }}</option>
                 }
               </select>
-              <input type="text" [value]="trip.departs" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)" />
-              <input type="text" [value]="trip.arrives" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)" />
+              <input class="form-control form-control--compact form-control--elevated" type="text" [value]="trip.departs" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)" />
+              <input class="form-control form-control--compact form-control--elevated" type="text" [value]="trip.arrives" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)" />
               <button type="button" class="button button--secondary button--compact admin-trip-table__remove-button" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
                 <fa-icon [icon]="xmarkIcon"></fa-icon>
               </button>
@@ -406,6 +417,7 @@
           <span>Target place</span>
           <div class="quick-edge-typeahead">
             <input
+              class="form-control form-control--elevated"
               #quickFromInput
               type="text"
               [value]="quickFromQuery()"
@@ -416,11 +428,12 @@
               (blur)="closeQuickFromList()"
             />
             @if (quickFromOpen() && quickFromSuggestions().length > 0) {
-              <div class="quick-edge-list">
+              <div class="quick-edge-list interactive-list">
                 @for (node of quickFromSuggestions(); track node.id; let idx = $index) {
                   <button
                     type="button"
-                    [class.active]="idx === quickFromActiveIndex()"
+                    class="interactive-list__item"
+                    [class.is-active]="idx === quickFromActiveIndex()"
                     (mousedown)="selectQuickFrom(node.id)"
                   >
                     {{ node.name }}
@@ -439,11 +452,11 @@
         <div class="quick-fact-grid">
           <label class="quick-edge-field">
             <span>Schema key</span>
-            <input type="text" [value]="quickFactSchemaKey()" (input)="quickFactSchemaKey.set($any($event.target).value)" />
+            <input class="form-control form-control--elevated" type="text" [value]="quickFactSchemaKey()" (input)="quickFactSchemaKey.set($any($event.target).value)" />
           </label>
           <label class="quick-edge-field">
             <span>Value type</span>
-            <select [value]="quickFactValueType()" (change)="quickFactValueType.set($any($event.target).value)">
+            <select class="form-control form-control--elevated" [value]="quickFactValueType()" (change)="quickFactValueType.set($any($event.target).value)">
               <option value="string">string</option>
               <option value="number">number</option>
               <option value="boolean">boolean</option>
@@ -452,7 +465,7 @@
         </div>
         <label class="quick-edge-field">
           <span>Value</span>
-          <input type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
+          <input class="form-control form-control--elevated" type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
         </label>
         <button type="button" class="button button--primary button--compact admin-quick-entity-panel__create-button" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
           {{ editingFactId() ? 'Save Fact' : 'Add Fact' }}
@@ -464,7 +477,7 @@
 
     </section>
 
-    <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
+    <div class="shortcuts-panel surface-card surface-card--panel" [class.collapsed]="shortcutsCollapsed()">
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
         <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="toggleShortcuts()">
@@ -546,15 +559,15 @@
     <div class="sidebar-body">
       @if (inspectorTab() === 'core') {
         @if (!selectedNodeId() && !selectedEdgeId() && !draftNode() && !draftEdge()) {
-          <section class="panel-section empty-state">
-            <div class="section-title">Core Inspector</div>
-            <div class="muted">Select a place or service on the map to edit core fields.</div>
+          <section class="panel-section surface-card surface-card--panel empty-state">
+            <div class="ui-section-title">Core Inspector</div>
+            <div class="text-muted">Select a place or service on the map to edit core fields.</div>
             <div class="hint">Use quick modes (P/L/S/T/F/A) for fast creation.</div>
           </section>
         }
 
-        <section class="panel-section compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
-          <div class="section-title">Place (Core)</div>
+        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
+          <div class="ui-section-title">Place (Core)</div>
           @if (selectedNodeId() && !draftNode()) {
             <div class="node-actions">
               <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEdgeFromSelected()">
@@ -589,6 +602,7 @@
               <span>{{ 'label.name' | transloco }}</span>
               <div class="typeahead">
                 <input
+                  class="form-control form-control--elevated"
                   #nodeNameInput
                   type="text"
                   [value]="draft.name"
@@ -596,15 +610,16 @@
                   (keydown)="onNodeNameKeydown($event, 'draft')"
                 />
                 @if (geoSearchEnabled() && geoResults().length > 0) {
-                  <div class="typeahead-list">
+                  <div class="typeahead-list interactive-list">
                     @for (result of geoResults(); track result.id; let idx = $index) {
                       <button
                         type="button"
-                        [class.active]="idx === geoActiveIndex()"
+                        class="interactive-list__item"
+                        [class.is-active]="idx === geoActiveIndex()"
                         (click)="applyGeoResult(result)"
                       >
                         <span>{{ result.label }}</span>
-                        <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                        <span class="text-muted interactive-list__meta">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
                       </button>
                     }
                   </div>
@@ -625,11 +640,11 @@
             </label>
             <label class="field">
               <span>{{ 'label.validFrom' | transloco }}</span>
-              <input type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
+              <input class="form-control form-control--elevated" type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
             </label>
             <label class="field">
               <span>{{ 'label.validTo' | transloco }}</span>
-              <input type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
+              <input class="form-control form-control--elevated" type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
             </label>
             <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
           } @else if (nodeDetail(); as detail) {
@@ -637,6 +652,7 @@
               <span>{{ 'label.name' | transloco }}</span>
               <div class="typeahead">
                 <input
+                  class="form-control form-control--elevated"
                   #nodeNameInput
                   type="text"
                   [value]="detail.node?.name"
@@ -644,15 +660,16 @@
                   (keydown)="onNodeNameKeydown($event, 'selected')"
                 />
                 @if (geoSearchEnabled() && geoResults().length > 0) {
-                  <div class="typeahead-list">
+                  <div class="typeahead-list interactive-list">
                     @for (result of geoResults(); track result.id; let idx = $index) {
                       <button
                         type="button"
-                        [class.active]="idx === geoActiveIndex()"
+                        class="interactive-list__item"
+                        [class.is-active]="idx === geoActiveIndex()"
                         (click)="applyGeoResult(result)"
                       >
                         <span>{{ result.label }}</span>
-                        <span class="muted">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                        <span class="text-muted interactive-list__meta">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
                       </button>
                     }
                   </div>
@@ -673,11 +690,11 @@
             </label>
             <label class="field">
               <span>{{ 'label.validFrom' | transloco }}</span>
-              <input type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
+              <input class="form-control form-control--elevated" type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
             </label>
             <label class="field">
               <span>{{ 'label.validTo' | transloco }}</span>
-              <input type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
+              <input class="form-control form-control--elevated" type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
             </label>
             <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
             @if (outgoingEdges().length > 0) {
@@ -700,17 +717,17 @@
               </div>
             }
           } @else {
-            <div class="muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
+            <div class="text-muted">{{ 'admin.clickNodeToEdit' | transloco }}</div>
           }
         </section>
 
-        <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
-          <div class="section-title">Service (Core)</div>
+        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
+          <div class="ui-section-title">Service (Core)</div>
           @if (selectedEdgeDraft(); as edgeDraft) {
             <div class="coord">{{ getNodeName(edgeDraft.from) }} -> {{ getNodeName(edgeDraft.to) }}</div>
             <label class="field">
               <span>{{ 'label.from' | transloco }}</span>
-              <select [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
+              <select class="form-control form-control--elevated" [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
                 @for (node of nodeOptions(); track node.id) {
                   <option [value]="node.id" [selected]="node.id === edgeDraft.from">{{ node.name }}</option>
                 }
@@ -718,7 +735,7 @@
             </label>
             <label class="field">
               <span>{{ 'label.to' | transloco }}</span>
-              <select [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
+              <select class="form-control form-control--elevated" [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
                 @for (node of nodeOptions(); track node.id) {
                   <option [value]="node.id" [selected]="node.id === edgeDraft.to">{{ node.name }}</option>
                 }
@@ -727,11 +744,11 @@
             <div class="field-grid">
               <label class="field">
                 <span>Year</span>
-                <input type="number" [value]="edgeDraft.validFrom" readonly />
+                <input class="form-control form-control--elevated" type="number" [value]="edgeDraft.validFrom" readonly />
               </label>
               <label class="field">
                 <span>{{ 'label.distance' | transloco }}</span>
-                <input type="number" [value]="edgeDraft.distance ?? ''" (input)="updateSelectedEdgeDistance($event)" />
+                <input class="form-control form-control--elevated" type="number" [value]="edgeDraft.distance ?? ''" (input)="updateSelectedEdgeDistance($event)" />
               </label>
             </div>
             <div class="field">
@@ -740,6 +757,7 @@
                 <label class="notes-field">
                   <span>DE</span>
                   <textarea
+                    class="form-control form-control--elevated"
                     rows="3"
                     [value]="edgeDraft.notes?.de ?? ''"
                     (input)="updateSelectedEdgeNotes('de', $event)"
@@ -748,6 +766,7 @@
                 <label class="notes-field">
                   <span>FR</span>
                   <textarea
+                    class="form-control form-control--elevated"
                     rows="3"
                     [value]="edgeDraft.notes?.fr ?? ''"
                     (input)="updateSelectedEdgeNotes('fr', $event)"
@@ -761,7 +780,7 @@
             </div>
             <label class="field">
               <span>{{ 'label.from' | transloco }}</span>
-              <select [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
+              <select class="form-control form-control--elevated" [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
                 <option value="">-</option>
                 @for (node of nodeOptions(); track node.id) {
                   <option [value]="node.id" [selected]="node.id === draft.from">{{ node.name }}</option>
@@ -770,7 +789,7 @@
             </label>
             <label class="field">
               <span>{{ 'label.to' | transloco }}</span>
-              <select [value]="draft.to" (change)="updateDraftEdgeTo($event)">
+              <select class="form-control form-control--elevated" [value]="draft.to" (change)="updateDraftEdgeTo($event)">
                 <option value="">-</option>
                 @for (node of nodeOptions(); track node.id) {
                   <option [value]="node.id" [selected]="node.id === draft.to">{{ node.name }}</option>
@@ -780,11 +799,11 @@
             <div class="field-grid">
               <label class="field">
                 <span>Year</span>
-                <input type="number" [value]="draft.validFrom" readonly />
+                <input class="form-control form-control--elevated" type="number" [value]="draft.validFrom" readonly />
               </label>
               <label class="field">
                 <span>{{ 'label.distance' | transloco }}</span>
-                <input type="number" [value]="draft.distance ?? ''" (input)="updateDraftEdgeDistance($event)" />
+                <input class="form-control form-control--elevated" type="number" [value]="draft.distance ?? ''" (input)="updateDraftEdgeDistance($event)" />
               </label>
             </div>
             <div class="field">
@@ -793,6 +812,7 @@
                 <label class="notes-field">
                   <span>DE</span>
                   <textarea
+                    class="form-control form-control--elevated"
                     rows="3"
                     [value]="draft.notes?.de ?? ''"
                     (input)="updateDraftEdgeNotes('de', $event)"
@@ -801,6 +821,7 @@
                 <label class="notes-field">
                   <span>FR</span>
                   <textarea
+                    class="form-control form-control--elevated"
                     rows="3"
                     [value]="draft.notes?.fr ?? ''"
                     (input)="updateDraftEdgeNotes('fr', $event)"
@@ -809,12 +830,12 @@
               </div>
             </div>
           } @else {
-            <div class="muted">Pick two places or use quick Link mode.</div>
+            <div class="text-muted">Pick two places or use quick Link mode.</div>
           }
         </section>
 
-        <section class="panel-section compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
-          <div class="section-title">Trip Table</div>
+        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
+          <div class="ui-section-title">Trip Table</div>
           @if (selectedEdgeDraft(); as edgeDraft) {
             <div class="trip-header">
               <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addSelectedTrip()">
@@ -834,6 +855,7 @@
                 @for (trip of edgeDraft.trips; track trip.id; let idx = $index) {
                   <div class="trip-row">
                     <select
+                      class="form-control form-control--compact form-control--elevated"
                       [value]="trip.transport"
                       (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)"
                     >
@@ -844,6 +866,7 @@
                       }
                     </select>
                     <input
+                      class="form-control form-control--compact form-control--elevated"
                       type="text"
                       [value]="trip.departs"
                       placeholder="HH:MM"
@@ -853,6 +876,7 @@
                       data-trip-field="departs"
                     />
                     <input
+                      class="form-control form-control--compact form-control--elevated"
                       type="text"
                       [value]="trip.arrives"
                       placeholder="HH:MM"
@@ -869,7 +893,7 @@
               </div>
               <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
             } @else {
-              <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+              <div class="text-muted">{{ 'admin.noTrips' | transloco }}</div>
             }
           } @else if (draftEdge(); as draft) {
             <div class="trip-header">
@@ -890,6 +914,7 @@
                 @for (trip of draft.trips; track trip.id; let idx = $index) {
                   <div class="trip-row">
                     <select
+                      class="form-control form-control--compact form-control--elevated"
                       [value]="trip.transport"
                       (change)="updateTripField(trip.id, 'transport', $any($event.target).value)"
                     >
@@ -900,6 +925,7 @@
                       }
                     </select>
                     <input
+                      class="form-control form-control--compact form-control--elevated"
                       type="text"
                       [value]="trip.departs"
                       placeholder="HH:MM"
@@ -909,6 +935,7 @@
                       data-trip-field="departs"
                     />
                     <input
+                      class="form-control form-control--compact form-control--elevated"
                       type="text"
                       [value]="trip.arrives"
                       placeholder="HH:MM"
@@ -925,7 +952,7 @@
               </div>
               <div class="hint">{{ 'admin.timeHint' | transloco }}</div>
             } @else {
-              <div class="muted">{{ 'admin.noTrips' | transloco }}</div>
+              <div class="text-muted">{{ 'admin.noTrips' | transloco }}</div>
             }
           }
 
@@ -936,8 +963,8 @@
       }
 
       @if (inspectorTab() === 'facts') {
-        <section class="panel-section">
-          <div class="section-title">Facts</div>
+        <section class="panel-section surface-card surface-card--panel">
+          <div class="ui-section-title">Facts</div>
           @if (selectedNodeId(); as nodeId) {
             <div class="coord">Target place: {{ getNodeName(nodeId) }}</div>
             @if (selectedNodeFacts().length > 0) {
@@ -967,17 +994,17 @@
                 }
               </div>
             } @else {
-              <div class="muted">No facts for this place yet.</div>
+              <div class="text-muted">No facts for this place yet.</div>
             }
           } @else {
-            <div class="muted">Select a place and add facts via Quick Mode F.</div>
+            <div class="text-muted">Select a place and add facts via Quick Mode F.</div>
           }
         </section>
       }
 
       @if (inspectorTab() === 'anchors') {
-        <section class="panel-section" #archivePanel>
-          <div class="section-title">Anchors</div>
+        <section class="panel-section surface-card surface-card--panel" #archivePanel>
+          <div class="ui-section-title">Anchors</div>
           @if (selectedNodeId(); as nodeId) {
             @if (getNodeById(nodeId); as node) {
               <div class="archive-debug">
@@ -999,9 +1026,9 @@
       }
 
       @if (inspectorTab() === 'source') {
-        <section class="panel-section">
-          <div class="section-title">Source</div>
-          <div class="muted">Current entity payload preview (for migration/debugging).</div>
+        <section class="panel-section surface-card surface-card--panel">
+          <div class="ui-section-title">Source</div>
+          <div class="text-muted">Current entity payload preview (for migration/debugging).</div>
           <pre class="source-preview">{{ selectedEntitySourceJson() }}</pre>
         </section>
       }

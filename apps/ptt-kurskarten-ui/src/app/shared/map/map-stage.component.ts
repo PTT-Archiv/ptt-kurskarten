@@ -142,10 +142,10 @@ export type MapSimulationTripHit = {
         ></canvas>
         @if (showZoomControls()) {
           <div class="zoom-controls" aria-label="Zoom controls">
-            <button type="button" class="zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">
+            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">
               <fa-icon [icon]="plusIcon"></fa-icon>
             </button>
-            <button type="button" class="zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">
+            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">
               <fa-icon [icon]="minusIcon"></fa-icon>
             </button>
           </div>
@@ -232,26 +232,12 @@ export type MapSimulationTripHit = {
       .zoom-btn {
         width: 34px;
         height: 34px;
-        border: 2px solid ${MAP_STAGE_PALETTE.controlBorder};
-        background: ${MAP_STAGE_PALETTE.controlSurface};
-        color: ${MAP_STAGE_PALETTE.controlText};
-        border-radius: 999px;
+        min-width: 34px;
+        min-height: 34px;
+        padding: 0;
         font-size: 22px;
         line-height: 1;
-        font-weight: 600;
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-        padding: 0;
         box-shadow: 4px 4px 0 ${MAP_STAGE_PALETTE.controlShadow};
-        transition: background 140ms ease-out, color 140ms ease-out, transform 80ms ease-out;
-      }
-
-      .zoom-btn:hover,
-      .zoom-btn:focus-visible {
-        background: ${MAP_STAGE_PALETTE.controlSurfaceActive};
-        color: ${MAP_STAGE_PALETTE.controlTextActive};
-        outline: none;
       }
 
       .zoom-btn:active {
@@ -268,9 +254,9 @@ export type MapSimulationTripHit = {
         bottom: 12px;
         padding: 6px 10px;
         border-radius: 999px;
-        font-size: 12px;
-        line-height: 1.2;
-        color: ${MAP_STAGE_PALETTE.hintText};
+        font-size: var(--font-size-xs);
+        line-height: var(--line-height-ui);
+        color: var(--color-text-default);
         background: ${MAP_STAGE_PALETTE.hintSurface};
         opacity: 0;
         transform: translate(-50%, 4px);
