@@ -127,26 +127,26 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
   styles: [
     `
       .planner-card {
-        padding: 12px 14px;
+        padding: var(--space-5) var(--space-6);
         display: grid;
-        gap: 10px;
+        gap: var(--space-4);
       }
 
       .route-core {
         position: relative;
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-        gap: 16px;
+        gap: var(--inset-md);
         align-items: end;
       }
 
       .field select,
       .field input {
-        padding: 8px 10px;
+        padding: var(--surface-padding-compact);
         border-color: var(--color-border-inverse);
         background: var(--color-surface-inverse);
         color: var(--color-text-inverse);
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: var(--shadow-soft);
       }
 
       .field input:focus,
@@ -165,7 +165,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
       }
 
       .field.minimal span {
-        font-size: 12px;
+        font-size: var(--font-size-xs);
         color: #cfcfcf;
       }
 
@@ -175,7 +175,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         width: 56px;
         padding: 0;
         font-size: 22px;
-        line-height: 1;
+        line-height: var(--line-height-tight);
         display: grid;
         place-items: center;
         box-shadow: none;
@@ -188,20 +188,20 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
       }
 
       .planner-card.compact {
-        padding: 10px 12px;
+        padding: var(--surface-padding-default);
       }
 
       .planner-card.compact .route-core {
-        gap: 8px;
+        gap: var(--space-3);
       }
 
       .planner-card.compact .field select,
       .planner-card.compact .field input {
-        padding: 6px 8px;
+        padding: var(--space-2) var(--space-3);
       }
 
       .planner-card.compact .field.minimal select {
-        font-size: 16px;
+        font-size: var(--font-size-lg);
       }
 
       .planner-card.compact .swap-btn {
@@ -216,7 +216,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         display: grid;
         grid-template-columns: minmax(0, 1fr);
         align-items: center;
-        gap: 6px;
+        gap: var(--space-2);
       }
 
       .input-shell {
@@ -248,8 +248,8 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         border: none;
         background: transparent;
         color: #d0d0d0;
-        font-size: 18px;
-        line-height: 1;
+        font-size: var(--font-size-xl);
+        line-height: var(--line-height-tight);
         height: 20px;
         width: 20px;
         display: grid;
@@ -267,9 +267,9 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         background: #000000;
         border: 2px solid #ffffff;
         color: #ffffff;
-        border-radius: 14px;
-        box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
-        padding: 6px 0;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-strong);
+        padding: var(--space-2) 0;
         display: grid;
         gap: 2px;
         max-height: 240px;
@@ -282,8 +282,8 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         border: none;
         background: transparent;
         text-align: left;
-        padding: 8px 12px;
-        font-size: 16px;
+        padding: var(--surface-padding-roomy);
+        font-size: var(--font-size-lg);
         color: #ffffff;
         cursor: pointer;
       }
@@ -296,7 +296,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
       }
 
       .planner-card.compact .typeahead-input input {
-        font-size: 16px;
+        font-size: var(--font-size-lg);
       }
 
       @media (max-width: 900px) {
@@ -315,16 +315,16 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         .planner-card,
         .planner-card.compact {
           width: 100%;
-          padding: 10px 12px;
-          gap: 10px;
+          padding: var(--surface-padding-default);
+          gap: var(--space-4);
         }
 
         .planner-card.compact .route-core {
-          gap: 10px;
+          gap: var(--space-4);
         }
 
         .field.minimal span {
-          font-size: 11px;
+          font-size: var(--font-size-2xs);
         }
 
         .typeahead-input input,

@@ -9,11 +9,11 @@
   right: 0;
   z-index: 7;
   min-height: 28px;
-  padding: 6px 16px;
+  padding: var(--space-2) var(--inset-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-5);
   background: rgba(0, 0, 0, 0.9);
   border-bottom: 1px solid rgba(0, 0, 0, 0.9);
   color: #fff;
@@ -22,8 +22,8 @@
 
 .viewer-brand-title,
 .viewer-brand-note {
-  font-size: 11px;
-  line-height: 1.2;
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-ui);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -41,8 +41,8 @@
 .viewer-header {
   position: absolute;
   top: var(--viewer-brand-bar-height);
-  left: 16px;
-  right: 16px;
+  left: var(--inset-md);
+  right: var(--inset-md);
   z-index: 7;
   display: grid;
   grid-template-columns:
@@ -51,7 +51,7 @@
     minmax(0, var(--viewer-header-side-width));
   justify-content: space-between;
   align-items: center;
-  column-gap: 16px;
+  column-gap: var(--inset-md);
 }
 
 .viewer-header-slot {
@@ -82,25 +82,25 @@
 .viewer-year-card {
   background: rgba(0, 0, 0, 0);
   border: none;
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   min-width: 150px;
   max-width: 100%;
   width: fit-content;
   display: grid;
   justify-items: start;
-  gap: 6px;
+  gap: var(--space-2);
   pointer-events: auto;
 }
 
 .viewer-year-card.viewer-year-card-multi {
   min-width: 0;
   width: min(100%, 360px);
-  gap: 14px;
+  gap: var(--space-6);
 }
 
 .viewer-year-label {
-  font-size: 11px;
-  line-height: 1;
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-tight);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 600;
@@ -111,12 +111,12 @@
   width: 100%;
   min-height: 42px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-control);
   background: #141414;
   color: #fff;
-  padding: 10px 12px;
+  padding: var(--surface-padding-default);
   font: inherit;
-  font-size: 18px;
+  font-size: var(--font-size-xl);
   font-weight: 600;
 }
 
@@ -125,7 +125,7 @@
   flex-wrap: wrap;
   align-items: center;
   max-width: 100%;
-  gap: 12px 28px;
+  gap: var(--space-5) 28px;
 }
 
 .viewer-edition-option {
@@ -135,10 +135,10 @@
   color: #d0d0d07c;
   padding: 2px 0 18px;
   font: inherit;
-  font-size: 20px;
+  font-size: var(--font-size-2xl);
   font-weight: 500;
   letter-spacing: 0.04em;
-  line-height: 1;
+  line-height: var(--line-height-tight);
   cursor: pointer;
   transition: color 180ms ease-out;
 }
@@ -201,12 +201,12 @@
   width: min(720px, 100%);
   background: #000;
   border: 2px solid #fff;
-  border-radius: 999px;
-  padding: 10px 12px;
+  border-radius: var(--radius-pill);
+  padding: var(--surface-padding-default);
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-4);
 }
 
 .place-search-shell.archive-only {
@@ -220,7 +220,7 @@
 .place-search-shell input {
   border: none;
   outline: none;
-  font-size: 18px;
+  font-size: var(--font-size-xl);
   background: transparent;
   color: #fff;
 }
@@ -232,20 +232,20 @@
 .topbar-actions {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-3);
 }
 
 .place-search-list {
   position: absolute;
   top: calc(100% + 6px);
-  left: 12px;
-  right: 12px;
+  left: var(--inset-sm);
+  right: var(--inset-sm);
   background: #000;
   border: 2px solid #fff;
-  border-radius: 12px;
+  border-radius: var(--radius-control);
   display: grid;
   gap: 2px;
-  padding: 4px;
+  padding: var(--space-1);
   z-index: 8;
 }
 
@@ -253,8 +253,8 @@
   border: none;
   background: transparent;
   text-align: left;
-  padding: 8px 10px;
-  border-radius: 8px;
+  padding: var(--surface-padding-compact);
+  border-radius: var(--radius-xs);
   cursor: pointer;
   color: #fff;
 }
@@ -304,18 +304,18 @@
 
 :host-context(.small-screen-layout) .viewer-brand-bar {
   min-height: 26px;
-  padding: 6px 12px;
+  padding: var(--space-2) var(--inset-sm);
 }
 
 :host-context(.small-screen-layout) .viewer-brand-title,
 :host-context(.small-screen-layout) .viewer-brand-note {
-  font-size: 10px;
+  font-size: var(--font-size-3xs);
 }
 
 :host-context(.small-screen-layout) .viewer-header {
-  left: 12px;
-  right: 12px;
-  column-gap: 12px;
+  left: var(--inset-sm);
+  right: var(--inset-sm);
+  column-gap: var(--inset-sm);
 }
 
 :host-context(.small-screen-layout) .viewer-year-card {
@@ -324,22 +324,22 @@
 
 :host-context(.small-screen-layout) .viewer-year-card.viewer-year-card-multi {
   width: min(100%, 320px);
-  padding: 12px 14px 10px;
+  padding: var(--space-5) var(--space-6) var(--space-4);
 }
 
 :host-context(.small-screen-layout) .viewer-year-readonly {
   min-height: 38px;
-  font-size: 16px;
-  padding: 8px 10px;
+  font-size: var(--font-size-lg);
+  padding: var(--surface-padding-compact);
 }
 
 :host-context(.small-screen-layout) .viewer-edition-switcher {
-  gap: 10px 20px;
+  gap: var(--space-4) var(--space-9);
 }
 
 :host-context(.small-screen-layout) .viewer-edition-option {
-  font-size: 18px;
-  padding-bottom: 16px;
+  font-size: var(--font-size-xl);
+  padding-bottom: var(--inset-md);
 }
 
 :host-context(.small-screen-layout) .viewer-edition-option::after {
@@ -353,32 +353,32 @@
 }
 
 :host-context(.small-screen-layout) .place-search-shell input {
-  font-size: 16px;
+  font-size: var(--font-size-lg);
 }
 
 :host-context(.mobile-layout) .viewer-brand-bar {
   min-height: 24px;
-  padding: 5px 10px;
-  gap: 8px;
+  padding: 5px var(--inset-xs);
+  gap: var(--space-3);
 }
 
 :host-context(.mobile-layout) .viewer-brand-title,
 :host-context(.mobile-layout) .viewer-brand-note {
-  font-size: 9px;
+  font-size: var(--font-size-4xs);
   letter-spacing: 0.06em;
 }
 
 :host-context(.mobile-layout) .viewer-header {
-  left: 10px;
-  right: 10px;
+  left: var(--inset-xs);
+  right: var(--inset-xs);
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
     'start end'
     'center center';
   justify-content: stretch;
   align-items: start;
-  row-gap: 10px;
-  column-gap: 10px;
+  row-gap: var(--space-4);
+  column-gap: var(--space-4);
 }
 
 :host-context(.mobile-layout) .viewer-header-slot-start {
@@ -397,16 +397,16 @@
 
 :host-context(.mobile-layout) .viewer-year-card {
   min-width: 128px;
-  padding: 8px 10px;
+  padding: var(--surface-padding-compact);
 }
 
 :host-context(.mobile-layout) .viewer-year-card.viewer-year-card-multi {
   width: min(100%, 320px);
-  padding: 10px 12px 9px;
+  padding: var(--space-4) var(--space-5) 9px;
 }
 
 :host-context(.mobile-layout) .viewer-year-label {
-  font-size: 10px;
+  font-size: var(--font-size-3xs);
 }
 
 :host-context(.mobile-layout) .viewer-year-readonly {
@@ -415,7 +415,7 @@
 }
 
 :host-context(.mobile-layout) .viewer-edition-switcher {
-  gap: 8px 16px;
+  gap: var(--space-3) var(--inset-md);
 }
 
 :host-context(.mobile-layout) .viewer-edition-option {
@@ -438,8 +438,8 @@
 }
 
 :host-context(.mobile-layout) .place-search-shell {
-  gap: 8px;
-  padding: 9px 10px;
+  gap: var(--space-3);
+  padding: 9px var(--inset-xs);
 }
 
 :host-context(.mobile-layout) .place-search-shell input {

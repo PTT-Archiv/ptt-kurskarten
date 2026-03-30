@@ -76,17 +76,17 @@ let nextTimePickerId = 0;
       .time-controls {
         display: grid;
         grid-template-columns: 240px auto;
-        gap: 10px;
+        gap: var(--space-4);
         align-items: end;
         justify-content: center;
       }
 
       .planner-actions {
         display: flex;
-        gap: 8px;
+        gap: var(--space-3);
         align-items: center;
         flex-wrap: wrap;
-        row-gap: 8px;
+        row-gap: var(--space-3);
       }
 
       .time-field {
@@ -98,22 +98,22 @@ let nextTimePickerId = 0;
       .time-picker {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        gap: var(--space-4);
       }
 
       .time-segment {
         display: grid;
-        gap: 6px;
+        gap: var(--space-2);
       }
 
       .time-label {
-        font-size: 11px;
+        font-size: var(--font-size-2xs);
         color: #cfcfcf;
       }
 
       .time-input {
-        padding: 10px 8px;
-        font-size: 16px;
+        padding: var(--space-4) var(--space-3);
+        font-size: var(--font-size-lg);
         font-weight: 600;
         text-align: center;
       }
@@ -128,7 +128,7 @@ let nextTimePickerId = 0;
       }
 
       .compact .time-input {
-        padding: 8px 6px;
+        padding: var(--space-3) var(--space-2);
         font-size: 15px;
       }
 
@@ -157,16 +157,16 @@ let nextTimePickerId = 0;
         }
 
         .time-picker {
-          gap: 8px;
+          gap: var(--space-3);
         }
 
         .time-label {
-          font-size: 11px;
+          font-size: var(--font-size-2xs);
         }
 
         .time-input,
         .compact .time-input {
-          font-size: 14px;
+          font-size: var(--font-size-md);
           padding: 8px 6px;
         }
       }

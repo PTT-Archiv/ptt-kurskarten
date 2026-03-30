@@ -21,7 +21,9 @@
 
   --radius-xs: 6px;
   --radius-sm: 10px;
+  --radius-control: 12px;
   --radius-md: 14px;
+  --radius-xl: 16px;
   --radius-lg: 18px;
   --radius-pill: 999px;
 
@@ -33,6 +35,32 @@
   --space-6: 14px;
   --space-7: 16px;
   --space-8: 18px;
+  --space-9: 20px;
+
+  --inset-xs: 10px;
+  --inset-sm: 12px;
+  --inset-md: 16px;
+  --inset-lg: 18px;
+
+  --font-size-4xs: 9px;
+  --font-size-3xs: 10px;
+  --font-size-2xs: 11px;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+
+  --line-height-tight: 1;
+  --line-height-ui: 1.2;
+  --line-height-body: 1.35;
+
+  --panel-padding-section: var(--space-6) 2px;
+  --surface-padding-compact: var(--space-3) var(--space-4);
+  --surface-padding-default: var(--space-4) var(--space-5);
+  --surface-padding-roomy: var(--space-5) var(--inset-md);
 
   --border-width-1: 1px;
   --border-width-2: 2px;

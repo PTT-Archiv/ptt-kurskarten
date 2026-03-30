@@ -66,7 +66,7 @@ app-viewer,
     box-shadow 180ms ease-out;
   display: grid;
   justify-items: center;
-  gap: 10px;
+  gap: var(--space-4);
   pointer-events: none;
 }
 
@@ -87,7 +87,7 @@ app-viewer,
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
-  gap: 8px;
+  gap: var(--space-3);
 }
 
 .viewer-shell.sidebar-open .planner-overlay {
@@ -106,7 +106,7 @@ app-viewer,
 }
 
 .viewer-status-card {
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .spinner {

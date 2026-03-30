@@ -4,10 +4,10 @@
 
 .viewer-action-stack {
   position: absolute;
-  left: 16px;
+  left: var(--inset-md);
   z-index: 7;
   display: grid;
-  gap: 10px;
+  gap: var(--space-4);
   align-items: start;
 }
 
@@ -16,13 +16,13 @@
   width: 42px;
   height: 42px;
   padding: 0;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .viewer-floating-actions__toggle-button:first-child {
-  font-size: 24px;
+  font-size: var(--font-size-3xl);
   font-weight: 500;
-  line-height: 1;
+  line-height: var(--line-height-tight);
 }
 
 .layer-switcher-card {
@@ -39,11 +39,11 @@
   height: 88px;
   overflow: hidden;
   border: 2px solid #fff;
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background-color: #141414;
   background-position: center;
   background-size: cover;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
   transition:
     transform 180ms ease-out,
     filter 180ms ease-out;
@@ -64,19 +64,19 @@
 
 .layer-switcher-chip {
   position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  left: var(--inset-xs);
+  right: var(--inset-xs);
+  bottom: var(--inset-xs);
   z-index: 1;
   display: inline-flex;
   width: fit-content;
   max-width: calc(100% - 20px);
   align-items: center;
-  padding: 6px 10px;
-  border-radius: 999px;
+  padding: var(--space-2) var(--inset-xs);
+  border-radius: var(--radius-pill);
   background: rgba(0, 0, 0, 0.78);
   color: #fff;
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
   transition:
     background-color 180ms ease-out,
@@ -86,14 +86,14 @@
 .viewer-floating-panel {
   position: absolute;
   z-index: 8;
-  bottom: 16px;
-  left: 16px;
+  bottom: var(--inset-md);
+  left: var(--inset-md);
 }
 
 .viewer-floating-actions__status-wrap {
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  bottom: var(--inset-md);
   transform: translateX(-50%);
   z-index: 7;
   pointer-events: none;
@@ -105,10 +105,10 @@
 
 .viewer-floating-actions__reset-button {
   position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: var(--inset-md);
+  bottom: var(--inset-md);
   z-index: 7;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .viewer-floating-actions__panel-close-button {
@@ -132,17 +132,17 @@
   overflow: auto;
   background: #000;
   border: 2px solid #fff;
-  border-radius: 14px;
-  padding: 18px 18px 60px;
+  border-radius: var(--radius-md);
+  padding: var(--inset-lg) var(--inset-lg) 60px;
   z-index: 7;
   display: grid;
-  gap: 12px;
+  gap: var(--space-5);
 }
 
 .help-title {
-  font-size: 18px;
+  font-size: var(--font-size-xl);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--line-height-ui);
   color: #fff;
 }
 
@@ -154,8 +154,8 @@
 
 .help-popup p {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.35;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-body);
   color: #f5f5f5;
 }
 
@@ -165,20 +165,20 @@
 
 .settings-section {
   display: grid;
-  gap: 10px;
-  padding-top: 4px;
+  gap: var(--space-4);
+  padding-top: var(--space-1);
 }
 
 .settings-section-title {
-  font-size: 14px;
+  font-size: var(--font-size-md);
   font-weight: 700;
   color: #fff;
 }
 
 .settings-field {
   display: grid;
-  gap: 6px;
-  font-size: 14px;
+  gap: var(--space-2);
+  font-size: var(--font-size-md);
   color: #f5f5f5;
 }
 
@@ -188,8 +188,8 @@
 
 .quick-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
 }
 
 .viewer-floating-actions__lang-button.is-active {
@@ -212,19 +212,19 @@
 
 .layer-switcher-card:focus-visible {
   outline: 2px solid #fff;
-  outline-offset: 4px;
-  border-radius: 20px;
+  outline-offset: var(--space-1);
+  border-radius: var(--space-9);
 }
 
 :host-context(.small-screen-layout) .viewer-action-stack {
-  left: 12px;
-  gap: 8px;
+  left: var(--inset-sm);
+  gap: var(--space-3);
 }
 
 :host-context(.small-screen-layout) .viewer-floating-actions__reset-button {
-  right: 12px;
-  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  font-size: 11px;
+  right: var(--inset-sm);
+  bottom: calc(var(--inset-sm) + env(safe-area-inset-bottom, 0px));
+  font-size: var(--font-size-2xs);
   box-shadow: none;
 }
 
@@ -236,9 +236,9 @@
 
 :host-context(.small-screen-layout) .help-popup {
   position: fixed;
-  inset: 64px 12px 12px;
-  padding: 16px 16px 56px;
-  border-radius: 16px;
+  inset: 64px var(--inset-sm) var(--inset-sm);
+  padding: var(--inset-md) var(--inset-md) 56px;
+  border-radius: var(--radius-xl);
 }
 
 :host-context(.mobile-layout) .viewer-floating-actions__toggle-button {
