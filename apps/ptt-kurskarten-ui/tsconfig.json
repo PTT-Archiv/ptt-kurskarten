@@ -19,7 +19,10 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
+      "@admin/*": ["app/features/admin/*"],
+      "@connections/*": ["app/features/connections/*"],
       "@env/*": ["environments/*"],
+      "@reports/*": ["app/features/reports/*"],
       "@shared-ui/*": ["app/shared/*"],
       "@viewer/*": ["app/features/viewer/*"]
     }
