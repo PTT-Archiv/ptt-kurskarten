@@ -78,8 +78,8 @@ Pflegeregel:
 ### Results, Place Details und Route Details
 
 - [x] Results-, Place-Details- und Route-Details-Stile lokalisiert.
-- [ ] Gemeinsame Card-/Meta-/Section-Patterns zwischen den Panels weiter vereinheitlichen.
-- [ ] `muted`-/Meta-Textregeln auf gemeinsame Primitive oder klare lokale Ownership pruefen.
+- [x] Gemeinsame Card-/Meta-/Section-Patterns zwischen den Panels weiter vereinheitlichen.
+- [x] `muted`-/Meta-Textregeln auf gemeinsame Primitive oder klare lokale Ownership pruefen.
 
 ### Planner Overlay und Time Controls
 

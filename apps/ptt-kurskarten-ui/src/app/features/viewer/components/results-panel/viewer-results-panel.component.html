@@ -1,9 +1,9 @@
-<section class="panel-section results-panel">
-  <div class="section-title">{{ 'viewer.results' | transloco }}</div>
+<section class="content-section results-panel">
+  <div class="content-section__title">{{ 'viewer.results' | transloco }}</div>
   @if (vm.routingState === 'searching') {
-  <div class="muted">{{ 'viewer.searching' | transloco }}</div>
+  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.searching' | transloco }}</div>
   } @else if (vm.routingState === 'error') {
-  <div class="muted">{{ 'viewer.error' | transloco }}</div>
+  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.error' | transloco }}</div>
   } @else if (vm.connectionResults.length > 0) {
   <div class="result-list">
     @for (option of vm.connectionResults; track option.id) {
@@ -13,10 +13,10 @@
       <div class="result-time">
         Reise bis {{ vm.getNodeLabel(option.resolvedTo ?? option.to) }} (Datensatz-Ende)
       </div>
-      <div class="result-meta badge">
+      <div class="result-meta meta-text meta-text--sm meta-text--inverse badge">
         Weiterreise ins Ausland: Zeiten unvollständig
       </div>
-      <div class="result-meta">
+      <div class="result-meta meta-text meta-text--sm meta-text--inverse">
         @if (option.departs) {
         {{ 'viewer.departShort' | transloco }} {{ option.departs }}
         @if (option.departDayOffset && option.departDayOffset > 0) {
@@ -37,7 +37,7 @@
       <div class="result-time">
         {{ vm.getNodeLabel(option.requestedFrom ?? option.from) }} → {{ vm.getNodeLabel(option.to) }}
       </div>
-      <div class="result-meta badge">
+      <div class="result-meta meta-text meta-text--sm meta-text--inverse badge">
         @if (option.foreignStartNote) {
         {{ 'viewer.knownFrom' | transloco }} {{ vm.getNodeLabel(option.effectiveFrom ?? '') }}
         {{ option.effectiveStartTime }}
@@ -46,7 +46,7 @@
         {{ option.effectiveStartTime }}
         }
       </div>
-      <div class="result-meta">
+      <div class="result-meta meta-text meta-text--sm meta-text--inverse">
         @if (option.foreignStartNote) {
         ({{ 'viewer.unknownStartTime' | transloco }})
         } @else {
@@ -64,7 +64,7 @@
         <span>(+{{ option.arriveDayOffset }})</span>
         }
       </div>
-      <div class="result-meta">
+      <div class="result-meta meta-text meta-text--sm meta-text--inverse">
         {{ 'viewer.duration' | transloco: { duration: vm.formatDuration(option.durationMinutes) } }}
         ·
         @if ((option.transfers ?? option.legs.length - 1) === 0) {
@@ -80,7 +80,7 @@
     }
   </div>
   } @else {
-  <div class="muted">{{ vm.noResultsMessage }}</div>
+  <div class="meta-text meta-text--md text-muted--inverse">{{ vm.noResultsMessage }}</div>
   @if (vm.routingState === 'no_results') {
   <div class="quick-actions">
     <button type="button" class="button button--ghost button--pill button--compact viewer-results-panel__shift-button" (click)="shiftTime.emit(-30)">-30 min</button>

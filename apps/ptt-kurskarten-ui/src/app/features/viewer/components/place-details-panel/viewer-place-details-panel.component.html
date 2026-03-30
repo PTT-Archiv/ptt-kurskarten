@@ -1,5 +1,5 @@
 @if (vm.place; as place) {
-<section class="panel-section location-section">
+<section class="content-section location-section">
   @if (showArchivePreview) {
   <app-archive-snippet-viewer [imageUrl]="vm.archiveSnippetUrl" [iiifInfoUrl]="vm.archiveIiifInfoUrl"
     [showCenterMarker]="false"></app-archive-snippet-viewer>
@@ -18,14 +18,14 @@
   </div>
 </section>
 
-<section class="panel-section">
-  <div class="section-title">{{ 'viewer.facts' | transloco }}</div>
+<section class="content-section">
+  <div class="content-section__title">{{ 'viewer.facts' | transloco }}</div>
   @if (vm.sidebarFacts.length > 0) {
-  <div class="fact-list">
+  <div class="fact-list content-list">
     @for (fact of vm.sidebarFacts; track fact.id) {
-    <div class="fact-row">
+    <div class="fact-row content-list__row">
       <div class="fact-schema">
-        <div class="fact-schema-label">{{ fact.schemaLabel }}</div>
+        <div class="fact-schema-label content-list__label">{{ fact.schemaLabel }}</div>
       </div>
       <div class="fact-value">
         @if (fact.url) {
@@ -40,17 +40,17 @@
     }
   </div>
   } @else {
-  <div class="muted">{{ 'viewer.noFacts' | transloco }}</div>
+  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.noFacts' | transloco }}</div>
   }
 </section>
 
-<section class="panel-section">
-  <div class="section-title">Ausgehende Verbindungen</div>
+<section class="content-section">
+  <div class="content-section__title">Ausgehende Verbindungen</div>
   @if (vm.outgoingNodeTrips.length > 0) {
-  <div class="node-trip-list">
+  <div class="node-trip-list content-list">
     @for (trip of vm.outgoingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
-    <div class="node-trip-row">
-      <div class="node-trip-head">{{ trip.nodeName }}</div>
+    <div class="node-trip-row content-list__row">
+      <div class="node-trip-head content-list__label">{{ trip.nodeName }}</div>
       <div class="node-trip-time">
         @if (trip.departs) {
         {{ trip.departs }} →
@@ -60,22 +60,22 @@
         <span>(+{{ trip.arrivalDayOffset }})</span>
         }
       </div>
-      <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+      <div class="node-trip-meta meta-text meta-text--xs text-muted--inverse">{{ ('transport.' + trip.transport) | transloco }}</div>
     </div>
     }
   </div>
   } @else {
-  <div class="muted">Keine ausgehenden Verbindungen</div>
+  <div class="meta-text meta-text--md text-muted--inverse">Keine ausgehenden Verbindungen</div>
   }
 </section>
 
-<section class="panel-section">
-  <div class="section-title">Eingehende Verbindungen</div>
+<section class="content-section">
+  <div class="content-section__title">Eingehende Verbindungen</div>
   @if (vm.incomingNodeTrips.length > 0) {
-  <div class="node-trip-list">
+  <div class="node-trip-list content-list">
     @for (trip of vm.incomingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
-    <div class="node-trip-row">
-      <div class="node-trip-head">{{ trip.nodeName }}</div>
+    <div class="node-trip-row content-list__row">
+      <div class="node-trip-head content-list__label">{{ trip.nodeName }}</div>
       <div class="node-trip-time">
         @if (trip.departs) {
         {{ trip.departs }} →
@@ -85,16 +85,16 @@
         <span>(+{{ trip.arrivalDayOffset }})</span>
         }
       </div>
-      <div class="node-trip-meta">{{ ('transport.' + trip.transport) | transloco }}</div>
+      <div class="node-trip-meta meta-text meta-text--xs text-muted--inverse">{{ ('transport.' + trip.transport) | transloco }}</div>
     </div>
     }
   </div>
   } @else {
-  <div class="muted">Keine eingehenden Verbindungen</div>
+  <div class="meta-text meta-text--md text-muted--inverse">Keine eingehenden Verbindungen</div>
   }
 </section>
 } @else {
-<section class="panel-section">
-  <div class="muted">{{ 'viewer.details' | transloco }}</div>
+<section class="content-section">
+  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.details' | transloco }}</div>
 </section>
 }

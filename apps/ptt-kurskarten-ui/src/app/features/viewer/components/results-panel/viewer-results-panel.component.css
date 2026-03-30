@@ -2,26 +2,6 @@
   display: contents;
 }
 
-.panel-section {
-  border: none;
-  border-bottom: 1px solid #5a5a5a;
-  border-radius: 0;
-  padding: var(--panel-padding-section);
-  display: grid;
-  gap: var(--space-5);
-  background: transparent;
-}
-
-.section-title {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-}
-
-.muted {
-  font-size: var(--font-size-md);
-  color: #cfcfcf;
-}
-
 .quick-actions {
   display: flex;
   gap: var(--space-3);
@@ -59,11 +39,6 @@
 
 .result-time {
   font-weight: 600;
-}
-
-.result-meta {
-  font-size: var(--font-size-sm);
-  color: #d0d0d0;
 }
 
 .result-meta.badge {
