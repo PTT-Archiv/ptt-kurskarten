@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faGear, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
-import type { ViewerFloatingActionsVm } from '../../viewer.models';
+import type { ViewerFloatingActionsVm } from '@viewer/viewer.models';
 
 @Component({
   selector: 'app-viewer-floating-actions',

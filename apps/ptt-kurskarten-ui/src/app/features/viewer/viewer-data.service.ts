@@ -12,8 +12,8 @@ import type {
   TimeHHMM
 } from '@ptt-kurskarten/shared';
 import { Observable, forkJoin, map, shareReplay } from 'rxjs';
-import { computeConnections } from './routing-client';
-import { environment } from '../../../environments/environment';
+import { computeConnections } from '@viewer/routing-client';
+import { environment } from '@env/environment';
 
 type NullableYear = number | null;
 

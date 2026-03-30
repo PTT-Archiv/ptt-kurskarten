@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFlag, faLocationDot, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
-import type { ViewerRouteNodePanelVm } from '../../viewer.models';
-import { ArchiveSnippetViewerComponent } from '../../../../shared/archive/archive-snippet-viewer.component';
+import type { ViewerRouteNodePanelVm } from '@viewer/viewer.models';
+import { ArchiveSnippetViewerComponent } from '@shared-ui/archive/archive-snippet-viewer.component';
 
 @Component({
   selector: 'app-viewer-route-node-panel',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import type { ConnectionOption } from '@ptt-kurskarten/shared';
-import type { ViewerResultsVm } from '../../viewer.models';
+import type { ViewerResultsVm } from '@viewer/viewer.models';
 
 @Component({
   selector: 'app-viewer-results-panel',

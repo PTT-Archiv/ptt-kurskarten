@@ -5,10 +5,10 @@ import {
   isTripFlowNodeMode,
   type TripFlowEdgeMode,
   type TripFlowNodeMode
-} from '../../../shared/map/map-stage-simulation.util';
-import type { TripFlowModeOption } from '../viewer.models';
-import { ViewerArchiveStore } from './viewer-archive.store';
-import { ViewerLayoutStore } from './viewer-layout.store';
+} from '@shared-ui/map/map-stage-simulation.util';
+import type { TripFlowModeOption } from '@viewer/viewer.models';
+import { ViewerArchiveStore } from '@viewer/stores/viewer-archive.store';
+import { ViewerLayoutStore } from '@viewer/stores/viewer-layout.store';
 
 const MINUTES_PER_DAY = 1440;
 const SIMULATION_DAY_MS = 60_000;

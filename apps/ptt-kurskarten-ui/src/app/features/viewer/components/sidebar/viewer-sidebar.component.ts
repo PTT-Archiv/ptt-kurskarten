@@ -3,7 +3,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
 import type { ConnectionOption } from '@ptt-kurskarten/shared';
-import type { ViewerSidebarVm } from '../../viewer.models';
+import type { ViewerSidebarVm } from '@viewer/viewer.models';
 import { ViewerResultsPanelComponent } from '../results-panel/viewer-results-panel.component';
 import { ViewerRouteDetailsPanelComponent } from '../route-details-panel/viewer-route-details-panel.component';
 import { ViewerPlaceDetailsPanelComponent } from '../place-details-panel/viewer-place-details-panel.component';

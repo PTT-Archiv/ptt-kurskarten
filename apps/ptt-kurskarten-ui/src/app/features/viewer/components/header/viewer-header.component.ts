@@ -3,7 +3,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass, faRoute } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { ViewerDayNightIndicatorComponent } from '../day-night-indicator/viewer-day-night-indicator.component';
-import type { ViewerHeaderVm } from '../../viewer.models';
+import type { ViewerHeaderVm } from '@viewer/viewer.models';
 
 @Component({
   selector: 'app-viewer-header',

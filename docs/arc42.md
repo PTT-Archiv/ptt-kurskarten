@@ -42,38 +42,38 @@ Wesentliche Use Cases, die aus Code und vorhandener Dokumentation ableitbar sind
 
 ### 1.2 Qualitätsziele
 
-| Priorität | Qualitätsziel | Erläuterung |
-| --- | --- | --- |
-| 1 | Nachvollziehbarkeit historischer Daten | Jahresabhängige Sicht, Editionslogik, valide Trennung von Place, Anchor, Link, Service, Trip und Assertion müssen fachlich erklärbar bleiben. |
-| 2 | Änderbarkeit des Daten- und Feature-Modells | Das System soll neue Jahre, zusätzliche Fakten, weitere Anchors und alternative Persistenzpfade ohne grundlegende UI/API-Neuschreibung aufnehmen können. |
-| 3 | Nutzbarkeit für Fachanwender | Viewer und Admin sollen für Archiv- und Redaktionsarbeit verständlich sein; Such-, Auswahl- und Bearbeitungsabläufe müssen klar bleiben. |
-| 4 | Betriebsfähigkeit in zwei Modi | Das System muss sowohl als Full-Stack-Anwendung mit API als auch als öffentlicher Static Viewer auf GitHub Pages funktionieren. |
-| 5 | Technische Konsistenz zwischen UI und API | Gemeinsame Typen und klare Schnittstellen sollen Inkonsistenzen zwischen Angular, NestJS und den JSON-Daten reduzieren. |
+| Priorität | Qualitätsziel                               | Erläuterung                                                                                                                                              |
+| --------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1         | Nachvollziehbarkeit historischer Daten      | Jahresabhängige Sicht, Editionslogik, valide Trennung von Place, Anchor, Link, Service, Trip und Assertion müssen fachlich erklärbar bleiben.            |
+| 2         | Änderbarkeit des Daten- und Feature-Modells | Das System soll neue Jahre, zusätzliche Fakten, weitere Anchors und alternative Persistenzpfade ohne grundlegende UI/API-Neuschreibung aufnehmen können. |
+| 3         | Nutzbarkeit für Fachanwender                | Viewer und Admin sollen für Archiv- und Redaktionsarbeit verständlich sein; Such-, Auswahl- und Bearbeitungsabläufe müssen klar bleiben.                 |
+| 4         | Betriebsfähigkeit in zwei Modi              | Das System muss sowohl als Full-Stack-Anwendung mit API als auch als öffentlicher Static Viewer auf GitHub Pages funktionieren.                          |
+| 5         | Technische Konsistenz zwischen UI und API   | Gemeinsame Typen und klare Schnittstellen sollen Inkonsistenzen zwischen Angular, NestJS und den JSON-Daten reduzieren.                                  |
 
 ### 1.3 Stakeholder
 
-| Rolle | Kontakt | Erwartungshaltung |
-| --- | --- | --- |
-| Viewer-Nutzer | rollenbasiert | historische Karten erkunden, Orte suchen, Routen nachvollziehen, Originalkarte einsehen |
-| Admin-Bearbeiter / Fachredaktion | rollenbasiert | neue Editionen, Orte, Verbindungen, Fahrten und Fakten effizient pflegen |
-| Projektteam / Entwickler | rollenbasiert | verständliche Trennung von UI, API, Datenmodell und Static-Build |
-| Projektverantwortliche | rollenbasiert | nachvollziehbare Architektur, überschaubare technische Schulden, öffentlich betreibbarer Viewer |
-| Externe Daten-/Archivquellen | systemisch | stabile IIIF-Einbindung und konsistente Verwendung externer Identifikatoren |
+| Rolle                            | Kontakt       | Erwartungshaltung                                                                               |
+| -------------------------------- | ------------- | ----------------------------------------------------------------------------------------------- |
+| Viewer-Nutzer                    | rollenbasiert | historische Karten erkunden, Orte suchen, Routen nachvollziehen, Originalkarte einsehen         |
+| Admin-Bearbeiter / Fachredaktion | rollenbasiert | neue Editionen, Orte, Verbindungen, Fahrten und Fakten effizient pflegen                        |
+| Projektteam / Entwickler         | rollenbasiert | verständliche Trennung von UI, API, Datenmodell und Static-Build                                |
+| Projektverantwortliche           | rollenbasiert | nachvollziehbare Architektur, überschaubare technische Schulden, öffentlich betreibbarer Viewer |
+| Externe Daten-/Archivquellen     | systemisch    | stabile IIIF-Einbindung und konsistente Verwendung externer Identifikatoren                     |
 
 ## 2. Randbedingungen
 
-| Kategorie | Randbedingung | Bedeutung |
-| --- | --- | --- |
-| Technisch | Monorepo mit `apps/ptt-kurskarten-ui`, `apps/ptt-kurskarten.api`, `packages/shared` | Architektur und Doku müssen UI, API und gemeinsame Typen zusammen betrachten. |
-| Technisch | Angular 21 im UI-Teil | Client-seitige und statische Nutzung stehen im Vordergrund. |
-| Technisch | NestJS 11 im API-Teil | REST-Schnittstellen und modulare Repository-Anbindung prägen die Serverarchitektur. |
-| Technisch | Kanonisches JSON-Modell `data/v2` | JSON-Dateien sind heute Source of Truth der fachlichen Daten. |
-| Technisch | IIIF/OpenSeadragon | Originalkartenansicht hängt von externen IIIF-Ressourcen und Bildmetadaten ab. |
-| Technisch | DE/FR-Mehrsprachigkeit via Transloco | UI-Texte und Benutzbarkeit müssen zweisprachig gedacht werden. |
-| Betrieb | Static Viewer auf GitHub Pages | Öffentliche Sicht ist bewusst eingeschränkt und arbeitet ohne Admin/API. |
-| Betrieb | Node.js 22 in Workflows | Build- und Deploy-Pfade orientieren sich an Node 22. |
-| Dokumentation | Markdown mit Mermaid | Diagramme werden inline und textuell versioniert gepflegt. |
-| Organisatorisch | Rollen statt realer Namen in dieser Doku | Nicht im Repo belegbare Personen- und Organisationsdetails werden nicht erfunden. |
+| Kategorie       | Randbedingung                                                                       | Bedeutung                                                                           |
+| --------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Technisch       | Monorepo mit `apps/ptt-kurskarten-ui`, `apps/ptt-kurskarten.api`, `packages/shared` | Architektur und Doku müssen UI, API und gemeinsame Typen zusammen betrachten.       |
+| Technisch       | Angular 21 im UI-Teil                                                               | Client-seitige und statische Nutzung stehen im Vordergrund.                         |
+| Technisch       | NestJS 11 im API-Teil                                                               | REST-Schnittstellen und modulare Repository-Anbindung prägen die Serverarchitektur. |
+| Technisch       | Kanonisches JSON-Modell `data/v2`                                                   | JSON-Dateien sind heute Source of Truth der fachlichen Daten.                       |
+| Technisch       | IIIF/OpenSeadragon                                                                  | Originalkartenansicht hängt von externen IIIF-Ressourcen und Bildmetadaten ab.      |
+| Technisch       | DE/FR-Mehrsprachigkeit via Transloco                                                | UI-Texte und Benutzbarkeit müssen zweisprachig gedacht werden.                      |
+| Betrieb         | Static Viewer auf GitHub Pages                                                      | Öffentliche Sicht ist bewusst eingeschränkt und arbeitet ohne Admin/API.            |
+| Betrieb         | Node.js 22 in Workflows                                                             | Build- und Deploy-Pfade orientieren sich an Node 22.                                |
+| Dokumentation   | Markdown mit Mermaid                                                                | Diagramme werden inline und textuell versioniert gepflegt.                          |
+| Organisatorisch | Rollen statt realer Namen in dieser Doku                                            | Nicht im Repo belegbare Personen- und Organisationsdetails werden nicht erfunden.   |
 
 ## 3. Kontextabgrenzung
 
@@ -118,7 +118,7 @@ flowchart TD
     browser[Browser]
     ui[Angular UI]
     api[NestJS API]
-    shared[@ptt-kurskarten/shared]
+    shared["@ptt-kurskarten/shared"]
     json[data/v2 JSON-Dateien]
     iiif[IIIF info.json + Bildausschnitte]
     gh[GitHub Pages Static Output]
@@ -171,7 +171,7 @@ flowchart LR
     subgraph repo[Monorepo ptt-kurskarten]
         ui[ptt-kurskarten-ui\nAngular Anwendung]
         api[ptt-kurskarten.api\nNestJS REST API]
-        shared[@ptt-kurskarten/shared\ngemeinsame Typen]
+        shared["@ptt-kurskarten/shared\ngemeinsame Typen"]
         data[data/v2\nkanonische JSON-Daten]
     end
     iiif[IIIF-Server]
@@ -218,7 +218,7 @@ flowchart TD
     reports --> i18n
 ```
 
-Wesentliche UI-Bausteine:
+Wesentliche UI- und UI-nahe Unterstützungsbausteine:
 
 - **Viewer:** zentrale öffentliche Oberfläche mit Karte, Route Planner, Archivmodus, Editionen und Simulation
 - **Admin:** Bearbeitungsoberfläche für Editionen, Anchors, Places, Links, Services, Trips und Facts
@@ -226,7 +226,11 @@ Wesentliche UI-Bausteine:
 - **Reports:** Stations- und Kantenberichte mit CSV-Export
 - **Connections:** alternative, direkte Routing-Oberfläche
 - **ViewerDataService:** Kapselung zwischen API-Modus und statischem JSON-Modus
+- **Routing-Client:** UI-seitige Kapselung der Routing-Aufrufe und der dazugehörigen Request-/Response-Verwendung
 - **Shared Map/Archive Components:** Karten-Rendering, Zoom/Pan, IIIF-Viewer
+- **Transloco:** Querschnittsbaustein für Sprachumschaltung, Übersetzungsschlüssel und DE/FR-Textausgabe in der UI
+
+Der Abschnitt enthält damit bewusst nicht nur sichtbare Screens, sondern auch zentrale technische UI-Bausteine, ohne die Viewer, Admin, Reports und Connections nicht funktionsfähig wären.
 
 ### 5.4 Ebene 3: Wichtige API- und Datenzugriffsbausteine
 
@@ -498,14 +502,14 @@ erDiagram
 
 ## 9. Architekturentscheidungen
 
-| Entscheidung | Begründung |
-| --- | --- |
-| JSON `v2` ist heute kanonisches Modell | erleichtert Nachvollziehbarkeit, manuelle Review und schrittweise Modellreifung |
-| `links` sind ungerichtet, `services` gerichtet | trennt strukturelle Verbindung von jahres- und richtungsabhängigem Fahrplan |
-| Gemeinsame TS-Typen in `@ptt-kurskarten/shared` | reduziert Inkonsistenzen zwischen UI und API |
-| Static Viewer als separater Betriebsmodus | erlaubt sichere öffentliche Veröffentlichung ohne schreibende API |
-| Mermaid für Architekturdiagramme | textbasiert, versionierbar, ohne zusätzliche Diagrammtoolchain |
-| IIIF als externe Originalkartenquelle | vermeidet lokale Bildduplikation und unterstützt große Originalkarten |
+| Entscheidung                                    | Begründung                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| JSON `v2` ist heute kanonisches Modell          | erleichtert Nachvollziehbarkeit, manuelle Review und schrittweise Modellreifung |
+| `links` sind ungerichtet, `services` gerichtet  | trennt strukturelle Verbindung von jahres- und richtungsabhängigem Fahrplan     |
+| Gemeinsame TS-Typen in `@ptt-kurskarten/shared` | reduziert Inkonsistenzen zwischen UI und API                                    |
+| Static Viewer als separater Betriebsmodus       | erlaubt sichere öffentliche Veröffentlichung ohne schreibende API               |
+| Mermaid für Architekturdiagramme                | textbasiert, versionierbar, ohne zusätzliche Diagrammtoolchain                  |
+| IIIF als externe Originalkartenquelle           | vermeidet lokale Bildduplikation und unterstützt große Originalkarten           |
 
 ## 10. Qualitätsszenarien
 
@@ -536,21 +540,21 @@ Wenn Anchors, Facts oder Places zeitlich variieren, dann soll die Datenstruktur 
 
 ## 12. Glossar
 
-| Begriff | Bedeutung |
-| --- | --- |
-| Place | stabiler Ort bzw. fachliche Ortsidentität |
-| Anchor | Kartenposition eines Place auf der vereinfachten Karte, ggf. mit IIIF-Zentrum |
-| Edition | jahresbezogener Kontext einer Kurskarte, inklusive Titel und IIIF-Route |
-| Link | ungerichtete strukturelle Verbindung zwischen zwei Places |
-| LinkMeasure | Messwert zu einem Link, z. B. Distanz |
-| Service | gerichtete, jahresgebundene Verbindung von `fromPlaceId` nach `toPlaceId` |
-| Trip / ServiceTrip | einzelne Fahrzeitzeile eines Service |
-| Fact / Assertion | generische Metadaten- oder Identifier-Aussage zu einer Entität |
-| GraphSnapshot | materialisierte Sicht des Netzes für genau ein Jahr |
-| IIIF Route | Basisroute zur IIIF-Ressource einer Edition |
-| IIIF Info URL | `info.json`-Metadaten einer IIIF-Bildquelle |
-| Archive Snippet | fokussierter Bildausschnitt der Originalkarte |
-| Static Viewer | öffentlicher, schreibgeschützter Viewer ohne Backend |
+| Begriff            | Bedeutung                                                                     |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Place              | stabiler Ort bzw. fachliche Ortsidentität                                     |
+| Anchor             | Kartenposition eines Place auf der vereinfachten Karte, ggf. mit IIIF-Zentrum |
+| Edition            | jahresbezogener Kontext einer Kurskarte, inklusive Titel und IIIF-Route       |
+| Link               | ungerichtete strukturelle Verbindung zwischen zwei Places                     |
+| LinkMeasure        | Messwert zu einem Link, z. B. Distanz                                         |
+| Service            | gerichtete, jahresgebundene Verbindung von `fromPlaceId` nach `toPlaceId`     |
+| Trip / ServiceTrip | einzelne Fahrzeitzeile eines Service                                          |
+| Fact / Assertion   | generische Metadaten- oder Identifier-Aussage zu einer Entität                |
+| GraphSnapshot      | materialisierte Sicht des Netzes für genau ein Jahr                           |
+| IIIF Route         | Basisroute zur IIIF-Ressource einer Edition                                   |
+| IIIF Info URL      | `info.json`-Metadaten einer IIIF-Bildquelle                                   |
+| Archive Snippet    | fokussierter Bildausschnitt der Originalkarte                                 |
+| Static Viewer      | öffentlicher, schreibgeschützter Viewer ohne Backend                          |
 
 ## Quellenbasis dieser Dokumentation
 

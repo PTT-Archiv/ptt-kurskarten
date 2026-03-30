@@ -2,21 +2,21 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewEncap
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { MapStageComponent } from '../../shared/map/map-stage.component';
-import { ViewerArchiveStageComponent } from './components/archive-stage/viewer-archive-stage.component';
-import { ViewerRoutePlannerOverlayComponent } from './components/route-planner-overlay/viewer-route-planner-overlay.component';
-import { ViewerFacade } from './viewer.facade';
-import { ViewerHeaderComponent } from './components/header/viewer-header.component';
-import { ViewerFloatingActionsComponent } from './components/floating-actions/viewer-floating-actions.component';
-import { ViewerSidebarComponent } from './components/sidebar/viewer-sidebar.component';
-import { ViewerRouteNodePanelComponent } from './components/route-node-panel/viewer-route-node-panel.component';
-import { ViewerMobileSheetComponent } from './components/mobile-sheet/viewer-mobile-sheet.component';
-import { ViewerCoreStore } from './stores/viewer-core.store';
-import { ViewerRoutingStore } from './stores/viewer-routing.store';
-import { ViewerSearchStore } from './stores/viewer-search.store';
-import { ViewerLayoutStore } from './stores/viewer-layout.store';
-import { ViewerArchiveStore } from './stores/viewer-archive.store';
-import { ViewerSimulationStore } from './stores/viewer-simulation.store';
+import { MapStageComponent } from '@shared-ui/map/map-stage.component';
+import { ViewerArchiveStageComponent } from '@viewer/components/archive-stage/viewer-archive-stage.component';
+import { ViewerRoutePlannerOverlayComponent } from '@viewer/components/route-planner-overlay/viewer-route-planner-overlay.component';
+import { ViewerFacade } from '@viewer/viewer.facade';
+import { ViewerHeaderComponent } from '@viewer/components/header/viewer-header.component';
+import { ViewerFloatingActionsComponent } from '@viewer/components/floating-actions/viewer-floating-actions.component';
+import { ViewerSidebarComponent } from '@viewer/components/sidebar/viewer-sidebar.component';
+import { ViewerRouteNodePanelComponent } from '@viewer/components/route-node-panel/viewer-route-node-panel.component';
+import { ViewerMobileSheetComponent } from '@viewer/components/mobile-sheet/viewer-mobile-sheet.component';
+import { ViewerCoreStore } from '@viewer/stores/viewer-core.store';
+import { ViewerRoutingStore } from '@viewer/stores/viewer-routing.store';
+import { ViewerSearchStore } from '@viewer/stores/viewer-search.store';
+import { ViewerLayoutStore } from '@viewer/stores/viewer-layout.store';
+import { ViewerArchiveStore } from '@viewer/stores/viewer-archive.store';
+import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
 
 @Component({
   selector: 'app-viewer',

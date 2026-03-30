@@ -9,13 +9,13 @@ import { TranslocoService } from '@jsverse/transloco';
 import {
   assertionValueToString,
   resolveFactLink
-} from './utils/viewer-facts.util';
+} from '@viewer/utils/viewer-facts.util';
 import {
   buildArchiveSnippetUrlForNode
-} from '../../shared/archive/archive-snippet.util';
+} from '@shared-ui/archive/archive-snippet.util';
 import {
   formatDuration
-} from './utils/viewer-routing.util';
+} from '@viewer/utils/viewer-routing.util';
 import type {
   SidebarFact,
   SidebarNodeTrip,
@@ -28,14 +28,14 @@ import type {
   ViewerRouteNodePanelVm,
   ViewerSidebarVm,
   ViewerSurfaceMode
-} from './viewer.models';
-import { tripSortValue } from './utils/viewer-node-selectors.util';
-import { ViewerArchiveStore } from './stores/viewer-archive.store';
-import { ViewerCoreStore } from './stores/viewer-core.store';
-import { ViewerLayoutStore } from './stores/viewer-layout.store';
-import { ViewerRoutingStore } from './stores/viewer-routing.store';
-import { ViewerSearchStore } from './stores/viewer-search.store';
-import { ViewerSimulationStore } from './stores/viewer-simulation.store';
+} from '@viewer/viewer.models';
+import { tripSortValue } from '@viewer/utils/viewer-node-selectors.util';
+import { ViewerArchiveStore } from '@viewer/stores/viewer-archive.store';
+import { ViewerCoreStore } from '@viewer/stores/viewer-core.store';
+import { ViewerLayoutStore } from '@viewer/stores/viewer-layout.store';
+import { ViewerRoutingStore } from '@viewer/stores/viewer-routing.store';
+import { ViewerSearchStore } from '@viewer/stores/viewer-search.store';
+import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
 
 const PLACE_HIDDEN_SCHEMA_KEY = 'place.hidden';
 const PLACE_FOREIGN_SCHEMA_KEY = 'place.is_foreign';

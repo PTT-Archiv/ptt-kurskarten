@@ -6,8 +6,8 @@ import type {
   TimeHHMM,
   TransportType
 } from '@ptt-kurskarten/shared';
-import type { WaitSegment } from '../../shared/routing/connection-details.util';
-import type { TripFlowEdgeMode, TripFlowNodeMode } from '../../shared/map/map-stage-simulation.util';
+import type { WaitSegment } from '@shared-ui/routing/connection-details.util';
+import type { TripFlowEdgeMode, TripFlowNodeMode } from '@shared-ui/map/map-stage-simulation.util';
 
 export type SidebarNodeTrip = {
   edgeId: string;

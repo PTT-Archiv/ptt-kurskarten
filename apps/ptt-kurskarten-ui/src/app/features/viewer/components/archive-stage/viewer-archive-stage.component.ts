@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ArchiveSnippetViewerComponent } from '../../../../shared/archive/archive-snippet-viewer.component';
+import { ArchiveSnippetViewerComponent } from '@shared-ui/archive/archive-snippet-viewer.component';
 
 @Component({
   selector: 'app-viewer-archive-stage',

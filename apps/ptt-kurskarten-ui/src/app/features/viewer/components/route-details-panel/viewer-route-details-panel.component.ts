@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
-import type { ViewerRouteDetailsVm } from '../../viewer.models';
+import type { ViewerRouteDetailsVm } from '@viewer/viewer.models';
 
 @Component({
   selector: 'app-viewer-route-details-panel',

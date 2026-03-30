@@ -1,8 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import type { MobileSheetMode, MobileSheetSnap } from '../viewer.models';
-import { ViewerArchiveStore } from './viewer-archive.store';
-import { ViewerCoreStore } from './viewer-core.store';
-import { ViewerRoutingStore } from './viewer-routing.store';
+import type { MobileSheetMode, MobileSheetSnap } from '@viewer/viewer.models';
+import { ViewerArchiveStore } from '@viewer/stores/viewer-archive.store';
+import { ViewerCoreStore } from '@viewer/stores/viewer-core.store';
+import { ViewerRoutingStore } from '@viewer/stores/viewer-routing.store';
 
 const TABLET_BREAKPOINT_PX = 1024;
 const MOBILE_BREAKPOINT_PX = 768;

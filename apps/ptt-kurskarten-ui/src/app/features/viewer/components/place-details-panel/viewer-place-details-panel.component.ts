@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 import { TranslocoPipe } from '@jsverse/transloco';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFlag, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { ArchiveSnippetViewerComponent } from '../../../../shared/archive/archive-snippet-viewer.component';
-import type { ViewerPlaceDetailsVm } from '../../viewer.models';
+import { ArchiveSnippetViewerComponent } from '@shared-ui/archive/archive-snippet-viewer.component';
+import type { ViewerPlaceDetailsVm } from '@viewer/viewer.models';
 
 @Component({
   selector: 'app-viewer-place-details-panel',
