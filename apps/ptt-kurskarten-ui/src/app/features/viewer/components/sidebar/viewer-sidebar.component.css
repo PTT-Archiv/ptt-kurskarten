@@ -1,3 +1,59 @@
 :host {
   display: contents;
 }
+
+.viewer-sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100%;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #000;
+  color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 2;
+  border: 2px solid #fff;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 200ms ease-out,
+    opacity 200ms ease-out;
+}
+
+.viewer-sidebar.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid #5a5a5a;
+  padding: 6px 2px 12px;
+  background: transparent;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.viewer-sidebar__close-button {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  min-width: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  box-shadow: none;
+}

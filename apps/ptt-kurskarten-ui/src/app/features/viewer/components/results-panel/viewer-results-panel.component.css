@@ -1,3 +1,77 @@
 :host {
   display: contents;
 }
+
+.panel-section {
+  border: none;
+  border-bottom: 1px solid #5a5a5a;
+  border-radius: 0;
+  padding: 14px 2px;
+  display: grid;
+  gap: 12px;
+  background: transparent;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.muted {
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.result-list {
+  display: grid;
+  gap: 8px;
+}
+
+.result-card {
+  border: 2px solid #fff;
+  background: #000;
+  color: #fff;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+  border-radius: 10px;
+}
+
+.result-card.active {
+  background: #fff;
+  color: #141414;
+  border-width: 2px;
+}
+
+.result-card:hover,
+.result-card:focus-visible {
+  background: #fff;
+  color: #141414;
+}
+
+.result-time {
+  font-weight: 600;
+}
+
+.result-meta {
+  font-size: 13px;
+  color: #d0d0d0;
+}
+
+.result-meta.badge {
+  font-weight: 600;
+}
+
+.result-card:hover .result-meta,
+.result-card:focus-visible .result-meta,
+.result-card.active .result-meta {
+  color: #3a3a3a;
+}

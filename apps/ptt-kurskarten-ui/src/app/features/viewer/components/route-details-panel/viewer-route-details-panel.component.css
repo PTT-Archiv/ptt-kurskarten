@@ -1,3 +1,93 @@
 :host {
   display: contents;
 }
+
+.panel-section {
+  border: none;
+  border-bottom: 1px solid #5a5a5a;
+  border-radius: 0;
+  padding: 14px 2px;
+  display: grid;
+  gap: 12px;
+  background: transparent;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.toggle-row input {
+  width: 16px;
+  height: 16px;
+  accent-color: #141414;
+}
+
+.detail-row {
+  display: grid;
+  gap: 2px;
+  font-size: 13px;
+  padding: 6px 0;
+  border-bottom: 1px dashed #5f5f5f;
+}
+
+.detail-time {
+  font-weight: 600;
+}
+
+.detail-line {
+  font-size: 13px;
+}
+
+.detail-duration {
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.detail-note {
+  font-size: 12px;
+  color: #cfcfcf;
+}
+
+.detail-row:is(:hover, .is-hovered) {
+  background: #fff;
+}
+
+.detail-row:is(:hover, .is-hovered) * {
+  color: #141414;
+}
+
+.detail-subtitle {
+  font-size: 14px;
+  color: #cfcfcf;
+  overflow-wrap: anywhere;
+}
+
+.detail-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.wait-row {
+  display: grid;
+  gap: 2px;
+  font-size: 12px;
+  color: #cfcfcf;
+  margin-bottom: 6px;
+}
+
+.wait-title {
+  font-weight: 600;
+}
+
+.wait-meta {
+  font-size: 12px;
+}

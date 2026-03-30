@@ -1,3 +1,454 @@
 :host {
   display: contents;
 }
+
+.viewer-brand-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 7;
+  min-height: 28px;
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  color: #fff;
+  pointer-events: none;
+}
+
+.viewer-brand-title,
+.viewer-brand-note {
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.viewer-brand-title {
+  font-weight: 700;
+}
+
+.viewer-brand-note {
+  color: #d8d8d8;
+  text-align: right;
+}
+
+.viewer-header {
+  position: absolute;
+  top: var(--viewer-brand-bar-height);
+  left: 16px;
+  right: 16px;
+  z-index: 7;
+  display: grid;
+  grid-template-columns:
+    minmax(0, var(--viewer-header-side-width))
+    minmax(0, var(--viewer-header-center-width))
+    minmax(0, var(--viewer-header-side-width));
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.viewer-header-slot {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.viewer-header-slot-start {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.viewer-header-slot-center {
+  width: min(100%, var(--viewer-header-center-width));
+  justify-self: center;
+}
+
+.viewer-header-slot-end {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.viewer-header-search {
+  width: 100%;
+}
+
+.viewer-year-card {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: 16px;
+  min-width: 150px;
+  max-width: 100%;
+  width: fit-content;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.viewer-year-card.viewer-year-card-multi {
+  min-width: 0;
+  width: min(100%, 360px);
+  gap: 14px;
+}
+
+.viewer-year-label {
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.viewer-year-readonly {
+  width: 100%;
+  min-height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: #141414;
+  color: #fff;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.viewer-edition-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
+  gap: 12px 28px;
+}
+
+.viewer-edition-option {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: #d0d0d07c;
+  padding: 2px 0 18px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 180ms ease-out;
+}
+
+.viewer-edition-option::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 40px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateX(-50%) translateY(3px);
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out,
+    background-color 180ms ease-out;
+}
+
+.viewer-edition-option:hover,
+.viewer-edition-option:focus-visible,
+.viewer-edition-option.active {
+  color: #fff;
+}
+
+.viewer-edition-option.active::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+.viewer-edition-option:focus-visible {
+  outline: none;
+}
+
+.viewer-edition-option:focus-visible::after,
+.viewer-edition-option:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.viewer-orbit-card {
+  width: 120px;
+  height: 120px;
+  display: block;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.viewer-header-search .place-search-shell {
+  width: 100%;
+}
+
+.place-search-shell {
+  pointer-events: auto;
+  position: relative;
+  width: min(720px, 100%);
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.place-search-shell.archive-only {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.place-search-shell.has-utility-actions {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.place-search-shell input {
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background: transparent;
+  color: #fff;
+}
+
+.place-search-shell input::placeholder {
+  color: #cfcfcf;
+}
+
+.topbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.place-search-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 12px;
+  right: 12px;
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  display: grid;
+  gap: 2px;
+  padding: 4px;
+  z-index: 8;
+}
+
+.place-search-list button {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.place-search-list button.active,
+.place-search-list button:hover {
+  background: #fff;
+  color: #141414;
+}
+
+.viewer-header__planner-toggle-button {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  min-width: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  box-shadow: none;
+}
+
+:host-context(.archive-mode) .viewer-year-card {
+  mix-blend-mode: difference;
+}
+
+:host-context(.archive-mode) .viewer-year-label,
+:host-context(.archive-mode) .viewer-year-readonly,
+:host-context(.archive-mode) .viewer-edition-option {
+  color: #fff;
+}
+
+:host-context(.archive-mode) .viewer-year-readonly {
+  background: #000;
+}
+
+:host-context(.archive-mode) .viewer-edition-option::after {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:host-context(.archive-mode) .viewer-edition-option.active::after,
+:host-context(.archive-mode) .viewer-edition-option:focus-visible::after,
+:host-context(.archive-mode) .viewer-edition-option:hover::after {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+:host-context(.small-screen-layout) .viewer-brand-bar {
+  min-height: 26px;
+  padding: 6px 12px;
+}
+
+:host-context(.small-screen-layout) .viewer-brand-title,
+:host-context(.small-screen-layout) .viewer-brand-note {
+  font-size: 10px;
+}
+
+:host-context(.small-screen-layout) .viewer-header {
+  left: 12px;
+  right: 12px;
+  column-gap: 12px;
+}
+
+:host-context(.small-screen-layout) .viewer-year-card {
+  min-width: 140px;
+}
+
+:host-context(.small-screen-layout) .viewer-year-card.viewer-year-card-multi {
+  width: min(100%, 320px);
+  padding: 12px 14px 10px;
+}
+
+:host-context(.small-screen-layout) .viewer-year-readonly {
+  min-height: 38px;
+  font-size: 16px;
+  padding: 8px 10px;
+}
+
+:host-context(.small-screen-layout) .viewer-edition-switcher {
+  gap: 10px 20px;
+}
+
+:host-context(.small-screen-layout) .viewer-edition-option {
+  font-size: 18px;
+  padding-bottom: 16px;
+}
+
+:host-context(.small-screen-layout) .viewer-edition-option::after {
+  width: 38px;
+  height: 9px;
+}
+
+:host-context(.small-screen-layout) .viewer-orbit-card {
+  width: 78px;
+  height: 78px;
+}
+
+:host-context(.small-screen-layout) .place-search-shell input {
+  font-size: 16px;
+}
+
+:host-context(.mobile-layout) .viewer-brand-bar {
+  min-height: 24px;
+  padding: 5px 10px;
+  gap: 8px;
+}
+
+:host-context(.mobile-layout) .viewer-brand-title,
+:host-context(.mobile-layout) .viewer-brand-note {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+:host-context(.mobile-layout) .viewer-header {
+  left: 10px;
+  right: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'start end'
+    'center center';
+  justify-content: stretch;
+  align-items: start;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+:host-context(.mobile-layout) .viewer-header-slot-start {
+  grid-area: start;
+}
+
+:host-context(.mobile-layout) .viewer-header-slot-center {
+  grid-area: center;
+  width: 100%;
+  justify-self: stretch;
+}
+
+:host-context(.mobile-layout) .viewer-header-slot-end {
+  grid-area: end;
+}
+
+:host-context(.mobile-layout) .viewer-year-card {
+  min-width: 128px;
+  padding: 8px 10px;
+}
+
+:host-context(.mobile-layout) .viewer-year-card.viewer-year-card-multi {
+  width: min(100%, 320px);
+  padding: 10px 12px 9px;
+}
+
+:host-context(.mobile-layout) .viewer-year-label {
+  font-size: 10px;
+}
+
+:host-context(.mobile-layout) .viewer-year-readonly {
+  min-height: 36px;
+  font-size: 15px;
+}
+
+:host-context(.mobile-layout) .viewer-edition-switcher {
+  gap: 8px 16px;
+}
+
+:host-context(.mobile-layout) .viewer-edition-option {
+  font-size: 15px;
+  padding-bottom: 13px;
+}
+
+:host-context(.mobile-layout) .viewer-edition-option::after {
+  width: 34px;
+  height: 8px;
+}
+
+:host-context(.mobile-layout) .viewer-orbit-card {
+  width: 70px;
+  height: 70px;
+}
+
+:host-context(.mobile-layout) .viewer-header-search .place-search-shell {
+  width: 100%;
+}
+
+:host-context(.mobile-layout) .place-search-shell {
+  gap: 8px;
+  padding: 9px 10px;
+}
+
+:host-context(.mobile-layout) .place-search-shell input {
+  font-size: 15px;
+}
+
+:host-context(.mobile-layout) .viewer-header__planner-toggle-button {
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  min-width: 32px;
+}

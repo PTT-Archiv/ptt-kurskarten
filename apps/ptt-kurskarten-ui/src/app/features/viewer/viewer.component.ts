@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
@@ -43,7 +43,6 @@ import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
   ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.css',
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(window:keydown)': 'onWindowKeydown($event)',
