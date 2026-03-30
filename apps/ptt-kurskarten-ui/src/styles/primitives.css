@@ -1,0 +1,180 @@
+.button {
+  --button-bg: var(--color-surface-default);
+  --button-border: var(--color-border-default);
+  --button-text: var(--color-text-default);
+  --button-shadow: none;
+  --button-hover-bg: var(--color-text-default);
+  --button-hover-border: var(--color-text-default);
+  --button-hover-text: var(--color-text-inverse);
+  --button-radius: var(--radius-md);
+  --button-height: var(--button-height-default);
+  --button-padding-y: var(--button-padding-y-default);
+  --button-padding-x: var(--button-padding-x-default);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--button-height);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border: var(--border-width-2) solid var(--button-border);
+  border-radius: var(--button-radius);
+  background: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: var(--button-shadow);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-text);
+  border-color: var(--button-hover-border);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button--compact {
+  --button-height: var(--button-height-compact);
+  --button-padding-y: var(--button-padding-y-compact);
+  --button-padding-x: var(--button-padding-x-compact);
+}
+
+.button--pill {
+  --button-radius: var(--radius-pill);
+}
+
+.button--ghost {
+  --button-bg: var(--color-surface-inverse);
+  --button-border: var(--color-border-inverse);
+  --button-text: var(--color-text-inverse);
+  --button-hover-bg: var(--color-surface-default);
+  --button-hover-border: var(--color-text-default);
+  --button-hover-text: var(--color-text-default);
+}
+
+.button--secondary {
+  --button-bg: var(--color-surface-default);
+  --button-border: var(--color-border-default);
+  --button-text: var(--color-text-default);
+  --button-shadow: var(--shadow-strong);
+  --button-hover-bg: var(--color-surface-inverse);
+  --button-hover-border: var(--color-border-default);
+  --button-hover-text: var(--color-text-inverse);
+}
+
+.button--primary {
+  --button-bg: var(--ptt-yellow);
+  --button-border: var(--color-border-default);
+  --button-text: var(--color-text-default);
+  --button-hover-bg: var(--color-surface-inverse);
+  --button-hover-border: var(--color-border-default);
+  --button-hover-text: var(--ptt-yellow);
+}
+
+.button--danger {
+  --button-border: var(--color-danger);
+  --button-text: var(--color-danger);
+  --button-hover-bg: var(--color-danger);
+  --button-hover-border: var(--color-danger);
+  --button-hover-text: var(--color-text-inverse);
+}
+
+.button--icon {
+  gap: var(--space-2);
+}
+
+.button.is-active,
+.button--secondary.is-active {
+  background: var(--ptt-yellow);
+  color: var(--color-text-default);
+  border-color: var(--color-border-default);
+}
+
+.surface-card {
+  --surface-card-bg: var(--color-surface-default);
+  --surface-card-border: var(--color-border-default);
+  --surface-card-text: var(--color-text-default);
+  --surface-card-shadow: var(--shadow-strong);
+
+  background: var(--surface-card-bg);
+  color: var(--surface-card-text);
+  border: var(--border-width-2) solid var(--surface-card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--surface-card-shadow);
+}
+
+.surface-card--inverse {
+  --surface-card-bg: var(--color-surface-inverse);
+  --surface-card-border: var(--color-border-inverse);
+  --surface-card-text: var(--color-text-inverse);
+  --surface-card-shadow: var(--shadow-soft);
+}
+
+.surface-card--status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  font-size: 13px;
+}
+
+.surface-card--interactive {
+  transition:
+    transform var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.surface-card--interactive:hover,
+.surface-card--interactive:focus-within {
+  transform: translateY(-2px);
+}
+
+.form-field {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 12px;
+}
+
+.form-field--compact {
+  gap: var(--space-1);
+  font-size: 11px;
+}
+
+.form-control {
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
+  padding: var(--form-control-padding-y) var(--form-control-padding-x);
+  background: var(--color-surface-default);
+  color: var(--color-text-default);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.form-control--inverse {
+  border-color: var(--color-border-inverse);
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
+  box-shadow: none;
+}
+
+.form-control::placeholder,
+.form-control--inverse::placeholder {
+  color: inherit;
+  opacity: 0.75;
+}

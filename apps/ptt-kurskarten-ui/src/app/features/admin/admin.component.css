@@ -50,16 +50,9 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
-.context-bar select,
-.context-bar input {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  padding: 6px 10px;
-  background: #ffffff;
+.admin-context-bar__control {
   font-size: 12px;
-  min-width: 0;
-  width: 100%;
-  box-sizing: border-box;
+  box-shadow: none;
 }
 
 .context-year-range {
@@ -69,20 +62,8 @@
   justify-self: end;
 }
 
-.context-add-btn {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  background: var(--ptt-yellow);
-  color: #141414;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-.context-add-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
+.admin-context-bar__add-button {
+  min-width: 64px;
 }
 
 .layout {
@@ -151,20 +132,8 @@
   flex-wrap: wrap;
 }
 
-.quick-mode-btn {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 5px 8px;
-  font-size: 11px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+.admin-quick-entity-panel__mode-button {
   gap: 6px;
-}
-
-.quick-mode-btn.active {
-  background: var(--ptt-yellow);
 }
 
 .quick-edge-row {
@@ -188,22 +157,24 @@
 }
 
 .quick-edge-field input {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  padding: 6px 8px;
-  background: #ffffff;
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
+  padding: var(--form-control-padding-y) var(--form-control-padding-x);
+  background: var(--color-surface-default);
   width: 100%;
   box-sizing: border-box;
+  box-shadow: var(--shadow-strong);
 }
 
 .quick-edge-field select,
 .quick-edge-field textarea {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  padding: 6px 8px;
-  background: #ffffff;
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
+  padding: var(--form-control-padding-y) var(--form-control-padding-x);
+  background: var(--color-surface-default);
   width: 100%;
   box-sizing: border-box;
+  box-shadow: var(--shadow-strong);
 }
 
 .quick-node-filter {
@@ -259,30 +230,17 @@
   border: 2px solid #141414;
 }
 
-.quick-edge-swap {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  background: #ffffff;
+.admin-quick-entity-panel__swap-button {
   width: 34px;
   height: 34px;
-  cursor: pointer;
+  min-height: 34px;
+  min-width: 34px;
+  padding: 0;
+  box-shadow: none;
 }
 
-.quick-edge-create {
+.admin-quick-entity-panel__create-button {
   justify-self: start;
-  border: 2px solid #141414;
-  background: var(--ptt-yellow);
-  color: #141414;
-  border-radius: 10px;
-  padding: 6px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.quick-edge-create[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .quick-edge-meta {
@@ -340,13 +298,14 @@
 
 .quick-trip-row input,
 .quick-trip-row select {
-  border: 2px solid #141414;
-  border-radius: 8px;
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
   padding: 5px 6px;
-  background: #ffffff;
+  background: var(--color-surface-default);
   font-size: 12px;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: var(--shadow-strong);
 }
 
 .quick-fact-grid {
@@ -409,7 +368,9 @@
   border: 1px solid var(--ptt-black);
   border-radius: 4px;
   padding: 1px 6px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
   font-size: 11px;
   margin-right: 6px;
 }
@@ -510,17 +471,11 @@
   gap: 6px;
 }
 
-.inspector-tab {
-  border: 2px solid #141414;
-  border-radius: 10px;
-  background: #ffffff;
-  padding: 6px 8px;
+.admin-inspector__tab-button {
   font-size: 12px;
-  cursor: pointer;
 }
 
-.inspector-tab.active {
-  background: var(--ptt-yellow);
+.admin-inspector__tab-button.is-active {
   font-weight: 700;
 }
 
@@ -616,14 +571,14 @@
 .field input,
 .field select,
 .field textarea {
-  border: 2px solid #141414;
-  border-radius: 14px;
-  padding: 6px 10px;
-  background: #ffffff;
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
+  padding: var(--form-control-padding-y) var(--form-control-padding-x);
+  background: var(--color-surface-default);
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-strong);
 }
 
 .field-grid {
@@ -721,11 +676,6 @@
   right: auto;
 }
 
-.ghost-btn.danger {
-  border-color: #141414;
-  color: #141414;
-}
-
 .trip-header {
   display: flex;
   gap: 6px;
@@ -751,34 +701,29 @@
 
 .trip-row input,
 .trip-row select {
-  border: 1px solid var(--ptt-black);
-  border-radius: 6px;
+  border: var(--form-control-border-width) solid var(--color-border-default);
+  border-radius: var(--form-control-radius);
   padding: 5px 6px;
-  background: #f8f8f8;
+  background: var(--color-surface-default);
   font-size: 12px;
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  box-shadow: var(--shadow-strong);
 }
 
-.remove-btn {
-  background: var(--ptt-white);
-  border: 2px solid #141414;
+.admin-trip-table__remove-button {
+  min-width: 38px;
   padding: 6px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  cursor: pointer;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-strong);
 }
 
-.ghost-btn {
-  background: var(--ptt-white);
-  border: 2px solid #141414;
-  padding: 6px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  cursor: pointer;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+.admin-panel__ghost-button {
+  box-shadow: var(--shadow-strong);
+}
+
+.admin-panel__ghost-button.button--danger {
+  background: var(--color-surface-default);
 }
 
 .archive-debug {
@@ -868,23 +813,8 @@
   align-items: center;
 }
 
-.action-btn {
-  border: 2px solid var(--ptt-black);
-  color: var(--ptt-black);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--ptt-yellow);
-}
-
-.action-btn.secondary {
-  background: var(--ptt-white);
-}
-
-.action-btn[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
+.admin-sticky-bar__action-button {
+  min-width: 132px;
 }
 
 .status-text {
@@ -935,7 +865,7 @@
     grid-template-columns: 1fr;
   }
 
-  .quick-edge-swap {
+  .admin-quick-entity-panel__swap-button {
     width: 100%;
     height: 32px;
   }

@@ -1,7 +1,12 @@
 <aside class="viewer-sidebar" [class.is-open]="vm.isOpen" [attr.aria-hidden]="!vm.isOpen">
   <div class="sidebar-header">
     <div class="section-title">{{ vm.title }}</div>
-    <button class="ghost-btn" type="button" (click)="close.emit()" [attr.aria-label]="'btn.cancel' | transloco">
+    <button
+      class="button button--ghost button--pill viewer-sidebar__close-button"
+      type="button"
+      (click)="close.emit()"
+      [attr.aria-label]="'btn.cancel' | transloco"
+    >
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>
   </div>

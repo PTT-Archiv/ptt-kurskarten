@@ -1,31 +1,3 @@
-:root {
-  --ptt-black: #141414;
-  --ptt-white: #ffffff;
-  --ptt-yellow: #ffff00;
-  --ptt-blue: #0000ff;
-  --border: 1px solid var(--ptt-black);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "ABC Favorit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  color: var(--ptt-black);
-  background: var(--ptt-white);
-  font-size: 16px;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-:focus-visible {
-  outline: 2px solid var(--ptt-blue);
-  outline-offset: 2px;
-}
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/primitives.css';

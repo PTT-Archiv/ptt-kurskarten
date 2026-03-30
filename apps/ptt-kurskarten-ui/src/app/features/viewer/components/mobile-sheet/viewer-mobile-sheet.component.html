@@ -1,20 +1,19 @@
 @if (vm.visible) {
 <section class="mobile-sheet" [class.snap-peek]="vm.snap === 'peek'"
   [class.snap-half]="vm.snap === 'half'" [class.snap-full]="vm.snap === 'full'">
-  <div style="display: grid; gap: 10px; padding: 10px 14px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.14);">
-    <button type="button" (click)="cycleSnap.emit()" aria-label="Ansicht erweitern"
-      style="border: none; background: transparent; padding: 0; margin: 0 auto; width: 100%; display: grid; justify-items: center; cursor: pointer;">
-      <span style="display: block; width: 48px; height: 5px; border-radius: 999px; background: rgba(255, 255, 255, 0.72);"></span>
+  <div class="viewer-mobile-sheet__header">
+    <button type="button" class="viewer-mobile-sheet__handle-button" (click)="cycleSnap.emit()" aria-label="Ansicht erweitern">
+      <span class="viewer-mobile-sheet__handle"></span>
     </button>
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+    <div class="viewer-mobile-sheet__toolbar">
       <div class="section-title">{{ vm.title }}</div>
-      <div style="display: flex; align-items: center; gap: 8px;">
+      <div class="viewer-mobile-sheet__actions">
         @if (vm.showResultsBack) {
-        <button class="ghost-btn" type="button" (click)="openResults.emit()">
+        <button class="button button--ghost button--pill button--compact viewer-mobile-sheet__back-button" type="button" (click)="openResults.emit()">
           {{ 'viewer.results' | transloco }}
         </button>
         }
-        <button class="route-close-btn" type="button" (click)="close.emit()"
+        <button class="button button--ghost button--pill viewer-mobile-sheet__close-button" type="button" (click)="close.emit()"
           [attr.aria-label]="'btn.cancel' | transloco">
           <fa-icon [icon]="xmarkIcon"></fa-icon>
         </button>
@@ -23,7 +22,7 @@
   </div>
 
   @if (vm.snap !== 'peek') {
-  <div style="overflow-y: auto; padding: 0 14px 14px; display: grid; gap: 12px;">
+  <div class="viewer-mobile-sheet__body">
     @if (vm.mode === 'planner') {
     <app-viewer-route-planner-overlay [nodes]="nodes" [fromId]="fromId" [toId]="toId"
       [nodeAliases]="nodeAliases" [departTime]="departTime" [showTime]="showTime"
@@ -35,20 +34,20 @@
       (resetSearch)="resetSearch.emit()" (swap)="swap.emit()" (plannerFocus)="plannerFocus.emit($event)"
       (plannerHover)="plannerHover.emit($event)"></app-viewer-route-planner-overlay>
       @if (vm.resultsVm.routingState === 'searching') {
-      <div class="status-card">
+      <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
         <span class="spinner" aria-hidden="true"></span>
         <span>{{ 'viewer.searching' | transloco }}</span>
       </div>
       } @else if (vm.resultsVm.routingState === 'no_results') {
-      <div style="display: grid; gap: 10px; justify-items: start;">
-        <div class="status-card">{{ vm.resultsVm.noResultsMessage }}</div>
+      <div class="viewer-mobile-sheet__planner-status">
+        <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">{{ vm.resultsVm.noResultsMessage }}</div>
         <div class="quick-actions">
-          <button type="button" class="ghost-btn" (click)="shiftTime.emit(-30)">-30 min</button>
-          <button type="button" class="ghost-btn" (click)="shiftTime.emit(30)">+30 min</button>
+          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(-30)">-30 min</button>
+          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(30)">+30 min</button>
         </div>
       </div>
       } @else if (vm.resultsVm.routingState === 'error') {
-      <div class="status-card">{{ 'viewer.error' | transloco }}</div>
+      <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">{{ 'viewer.error' | transloco }}</div>
       }
     }
 

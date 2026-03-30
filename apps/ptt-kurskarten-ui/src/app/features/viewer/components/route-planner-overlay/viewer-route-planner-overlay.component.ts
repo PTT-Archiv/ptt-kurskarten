@@ -25,7 +25,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
-      class="planner-card"
+      class="planner-card surface-card surface-card--inverse surface-card--interactive"
       [class.compact]="variant() === 'compact'"
       (focusin)="plannerFocus.emit(true)"
       (focusout)="plannerFocus.emit(false)"
@@ -33,7 +33,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
       (mouseleave)="plannerHover.emit(false)"
     >
       <div class="route-core">
-        <label class="field minimal typeahead">
+        <label class="form-field field minimal typeahead">
           <span>{{ 'label.from' | transloco }}</span>
           <div class="typeahead-input">
             <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(fromQuery)">
@@ -48,7 +48,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
                 placeholder=" "
               />
               @if (fromQuery) {
-                <button type="button" class="clear-btn" (mousedown)="clearFrom($event)">
+                <button type="button" class="button button--ghost button--pill planner-card__clear-button clear-btn" (mousedown)="clearFrom($event)">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
@@ -70,10 +70,10 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
             </div>
           }
         </label>
-        <button class="swap-btn" type="button" (click)="swap.emit()">
+        <button class="button button--ghost button--pill planner-card__swap-button swap-btn" type="button" (click)="swap.emit()">
           <fa-icon class="swap-icon" [icon]="swapIcon"></fa-icon>
         </button>
-        <label class="field minimal typeahead">
+        <label class="form-field field minimal typeahead">
           <span>{{ 'label.to' | transloco }}</span>
           <div class="typeahead-input">
             <div class="input-shell" [style.--clear-left.px]="clearButtonLeft(toQuery)">
@@ -88,7 +88,7 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
                 placeholder=" "
               />
               @if (toQuery) {
-                <button type="button" class="clear-btn" (mousedown)="clearTo($event)">
+                <button type="button" class="button button--ghost button--pill planner-card__clear-button clear-btn" (mousedown)="clearTo($event)">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               }
@@ -127,21 +127,9 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
   styles: [
     `
       .planner-card {
-        background: #000000;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        border-radius: 18px;
         padding: 12px 14px;
-        box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
         display: grid;
         gap: 10px;
-        transition: transform 160ms ease-out, box-shadow 160ms ease-out;
-      }
-
-      .planner-card:hover,
-      .planner-card:focus-within {
-        transform: translateY(-2px);
-        box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.25);
       }
 
       .route-core {
@@ -152,22 +140,12 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         align-items: end;
       }
 
-      .field {
-        display: grid;
-        gap: 6px;
-        font-size: 12px;
-      }
-
       .field select,
       .field input {
-        border: 2px solid #ffffff;
-        border-radius: 14px;
         padding: 8px 10px;
-        background: #000000;
-        color: #ffffff;
-        width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
+        border-color: var(--color-border-inverse);
+        background: var(--color-surface-inverse);
+        color: var(--color-text-inverse);
         box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
       }
 
@@ -193,26 +171,14 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
 
       .swap-btn {
         position: relative;
-        background: #141414;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        border-radius: 999px;
         height: 56px;
         width: 56px;
         padding: 0;
-        cursor: pointer;
-        font-weight: 600;
         font-size: 22px;
         line-height: 1;
         display: grid;
         place-items: center;
         box-shadow: none;
-      }
-
-      .swap-btn:hover,
-      .swap-btn:focus-visible {
-        background: #ffffff;
-        color: #141414;
       }
 
       .swap-icon {
@@ -288,8 +254,9 @@ import { ViewerRoutePlannerTimeControlsComponent } from './viewer-route-planner-
         width: 20px;
         display: grid;
         place-items: center;
-        cursor: pointer;
         padding: 0;
+        min-height: 20px;
+        min-width: 20px;
       }
 
       .typeahead-list {

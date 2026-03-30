@@ -10,15 +10,15 @@ import { ToastService } from './toast.service';
   template: `
     <div class="toast-container" aria-live="polite">
       @for (toast of toasts(); track toast.id) {
-        <div class="toast" [class]="toast.type">
-          <div class="accent"></div>
-          <div class="content">
-            <div class="title">{{ toast.title }}</div>
+        <div class="toast-container__toast surface-card surface-card--inverse surface-card--status" [class]="toast.type">
+          <div class="toast-container__accent"></div>
+          <div class="toast-container__content">
+            <div class="toast-container__title">{{ toast.title }}</div>
             @if (toast.message) {
-              <div class="message">{{ toast.message }}</div>
+              <div class="toast-container__message">{{ toast.message }}</div>
             }
           </div>
-          <button class="close" type="button" (click)="remove(toast.id)" aria-label="Close">
+          <button class="button button--ghost button--pill toast-container__close-button" type="button" (click)="remove(toast.id)" aria-label="Close">
             <fa-icon [icon]="xmarkIcon"></fa-icon>
           </button>
         </div>
@@ -37,14 +37,11 @@ import { ToastService } from './toast.service';
         pointer-events: none;
       }
 
-      .toast {
+      .toast-container__toast {
         display: grid;
         grid-template-columns: 6px 1fr auto;
         gap: 10px;
         align-items: center;
-        background: #000000;
-        border: 1px solid #ffffff;
-        color: #ffffff;
         padding: 10px 12px;
         min-width: 220px;
         max-width: 320px;
@@ -54,38 +51,43 @@ import { ToastService } from './toast.service';
         animation: toast-in 140ms ease-out forwards;
       }
 
-      .toast .accent {
+      .toast-container__accent {
         width: 6px;
         height: 100%;
         background: #5f5f5f;
       }
 
-      .toast.success .accent,
-      .toast.warning .accent {
+      .toast-container__toast.success .toast-container__accent,
+      .toast-container__toast.warning .toast-container__accent {
         background: #ffffff;
       }
 
-      .toast.error {
+      .toast-container__toast.error {
         border-width: 2px;
       }
 
-      .title {
+      .toast-container__content {
+        display: grid;
+        gap: 4px;
+      }
+
+      .toast-container__title {
         font-weight: 700;
         font-size: 14px;
       }
 
-      .message {
+      .toast-container__message {
         font-size: 12px;
         color: #d0d0d0;
       }
 
-      .close {
-        background: transparent;
-        border: none;
+      .toast-container__close-button {
         font-size: 16px;
         line-height: 1;
-        cursor: pointer;
-        color: #ffffff;
+        min-height: 32px;
+        min-width: 32px;
+        padding: 0;
+        box-shadow: none;
       }
 
       @keyframes toast-in {

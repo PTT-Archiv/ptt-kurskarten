@@ -46,13 +46,23 @@
         @if (vm.smallScreenLayout) {
         <div class="topbar-actions">
           @if (!vm.archiveModeActive) {
-          <button class="route-toggle-btn" type="button" (click)="openRoutePlanner.emit()" aria-label="Routenplaner öffnen">
+          <button
+            class="button button--ghost button--pill viewer-header__planner-toggle-button"
+            type="button"
+            (click)="openRoutePlanner.emit()"
+            aria-label="Routenplaner öffnen"
+          >
             <fa-icon [icon]="routeIcon"></fa-icon>
           </button>
           }
         </div>
         } @else if (!vm.archiveModeActive) {
-        <button class="route-toggle-btn" type="button" (click)="openRoutePlanner.emit()" aria-label="Routenplaner öffnen">
+        <button
+          class="button button--ghost button--pill viewer-header__planner-toggle-button"
+          type="button"
+          (click)="openRoutePlanner.emit()"
+          aria-label="Routenplaner öffnen"
+        >
           <fa-icon [icon]="routeIcon"></fa-icon>
         </button>
         }

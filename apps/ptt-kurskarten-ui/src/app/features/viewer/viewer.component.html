@@ -87,20 +87,27 @@
           (plannerFocus)="facade.onPlannerFocus($event)"
           (plannerHover)="facade.onPlannerHover($event)"
         ></app-viewer-route-planner-overlay>
-        <button class="route-close-btn" type="button" (click)="facade.closeRoutePlanner()" aria-label="Routenplaner schliessen">
+        <button
+          class="button button--ghost button--pill viewer-route-planner__close-button"
+          type="button"
+          (click)="facade.closeRoutePlanner()"
+          aria-label="Routenplaner schliessen"
+        >
           <fa-icon [icon]="xmarkIcon"></fa-icon>
         </button>
       </div>
       @if (facade.routingState() === 'searching') {
       <div class="planner-status">
-        <div class="status-card">
+        <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
           <span class="spinner" aria-hidden="true"></span>
           <span>{{ 'viewer.searching' | transloco }}</span>
         </div>
       </div>
       } @else if (facade.routingState() === 'no_results') {
       <div class="planner-status">
-        <div class="status-card">{{ facade.resultsVm().noResultsMessage }}</div>
+        <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">
+          {{ facade.resultsVm().noResultsMessage }}
+        </div>
       </div>
       }
     </div>

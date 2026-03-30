@@ -10,13 +10,13 @@ let nextTimePickerId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="time-controls" [class.compact]="compact()">
-      <label class="field time-field">
+      <label class="form-field time-field">
         <span>{{ 'label.departure' | transloco }}</span>
         <div class="time-picker">
           <div class="time-segment">
             <span class="time-label">hr</span>
             <input
-              class="time-input"
+              class="form-control form-control--inverse time-input"
               type="text"
               inputmode="numeric"
               [attr.list]="hourOptionsId"
@@ -36,7 +36,7 @@ let nextTimePickerId = 0;
           <div class="time-segment">
             <span class="time-label">min</span>
             <input
-              class="time-input"
+              class="form-control form-control--inverse time-input"
               type="text"
               inputmode="numeric"
               [attr.list]="minuteOptionsId"
@@ -57,11 +57,11 @@ let nextTimePickerId = 0;
       </label>
       <div class="planner-actions">
         @if (canApplyTime()) {
-          <button type="button" class="action-btn" (click)="applyTime.emit()">
+          <button type="button" class="button button--ghost button--pill button--compact planner-time-controls__button" (click)="applyTime.emit()">
             {{ 'btn.apply' | transloco }}
           </button>
         }
-        <button type="button" class="action-btn secondary" (click)="resetSearch.emit()">
+        <button type="button" class="button button--ghost button--pill button--compact planner-time-controls__button" (click)="resetSearch.emit()">
           {{ 'viewer.resetSearch' | transloco }}
         </button>
       </div>
@@ -89,12 +89,6 @@ let nextTimePickerId = 0;
         row-gap: 8px;
       }
 
-      .field {
-        display: grid;
-        gap: 6px;
-        font-size: 12px;
-      }
-
       .time-field {
         justify-self: stretch;
         width: 240px;
@@ -118,17 +112,10 @@ let nextTimePickerId = 0;
       }
 
       .time-input {
-        border: 2px solid #ffffff;
-        border-radius: 14px;
         padding: 10px 8px;
-        background: #000000;
-        color: #ffffff;
-        box-shadow: none;
         font-size: 16px;
         font-weight: 600;
         text-align: center;
-        width: 100%;
-        box-sizing: border-box;
       }
 
       .time-input:focus {
@@ -136,32 +123,8 @@ let nextTimePickerId = 0;
         box-shadow: none;
       }
 
-      .action-btn {
-        background: #141414;
-        border: 2px solid #ffffff;
-        color: #ffffff;
-        padding: 8px 14px;
-        border-radius: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        height: 40px;
-        box-shadow: none;
-      }
-
-      .action-btn:hover,
-      .action-btn:focus-visible {
-        background: #ffffff;
-        color: #141414;
-      }
-
-      .action-btn.secondary {
-        background: #141414;
-      }
-
-      .action-btn.secondary:hover,
-      .action-btn.secondary:focus-visible {
-        background: #ffffff;
-        color: #141414;
+      .planner-time-controls__button {
+        min-width: 120px;
       }
 
       .compact .time-input {
@@ -187,7 +150,7 @@ let nextTimePickerId = 0;
           width: 100%;
         }
 
-        .planner-actions .action-btn {
+        .planner-actions .planner-time-controls__button {
           width: 100%;
           justify-content: center;
           min-width: 0;

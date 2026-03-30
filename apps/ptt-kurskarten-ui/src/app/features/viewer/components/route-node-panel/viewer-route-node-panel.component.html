@@ -2,7 +2,7 @@
 <aside class="route-node-panel is-open">
   <div class="sidebar-header">
     <div class="section-title">{{ panelNode.name }}</div>
-    <button class="ghost-btn" type="button" (click)="close.emit()" [attr.aria-label]="'btn.cancel' | transloco">
+    <button class="button button--ghost button--pill viewer-route-node-panel__close-button" type="button" (click)="close.emit()" [attr.aria-label]="'btn.cancel' | transloco">
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>
   </div>
@@ -15,12 +15,12 @@
     ></app-archive-snippet-viewer>
     }
     <div class="location-actions">
-      <button class="icon-action-btn" type="button" (click)="setNodeAsStart.emit(panelNode.id)"
+      <button class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button" type="button" (click)="setNodeAsStart.emit(panelNode.id)"
         [attr.aria-label]="'viewer.setAsStart' | transloco">
         <fa-icon [icon]="startIcon"></fa-icon>
         <span>{{ 'viewer.setAsStart' | transloco }}</span>
       </button>
-      <button class="icon-action-btn" type="button" (click)="setNodeAsEnd.emit(panelNode.id)"
+      <button class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button" type="button" (click)="setNodeAsEnd.emit(panelNode.id)"
         [attr.aria-label]="'viewer.setAsEnd' | transloco">
         <fa-icon [icon]="endIcon"></fa-icon>
         <span>{{ 'viewer.setAsEnd' | transloco }}</span>

@@ -17,16 +17,16 @@ type Rect = { x: number; y: number; width: number; height: number };
           <div class="title">{{ current.title }}</div>
           <div class="body">{{ current.body }}</div>
           <div class="actions">
-            <button class="ghost-btn" type="button" (click)="tour.back()" [disabled]="index() === 0">
+            <button class="button button--secondary button--compact admin-tour-overlay__ghost-button" type="button" (click)="tour.back()" [disabled]="index() === 0">
               Zurück
             </button>
-            <button class="ghost-btn" type="button" (click)="tour.skipRequirement()" [disabled]="tour.canNext()">
+            <button class="button button--secondary button--compact admin-tour-overlay__ghost-button" type="button" (click)="tour.skipRequirement()" [disabled]="tour.canNext()">
               Überspringen
             </button>
-            <button class="action-btn" type="button" (click)="tour.next()" [disabled]="!tour.canNext()">
+            <button class="button button--primary button--compact admin-tour-overlay__primary-button" type="button" (click)="tour.next()" [disabled]="!tour.canNext()">
               Weiter
             </button>
-            <button class="ghost-btn" type="button" (click)="tour.exit()">Beenden</button>
+            <button class="button button--secondary button--compact admin-tour-overlay__ghost-button" type="button" (click)="tour.exit()">Beenden</button>
           </div>
         </div>
       </div>
@@ -89,23 +89,9 @@ type Rect = { x: number; y: number; width: number; height: number };
         flex-wrap: wrap;
       }
 
-      .ghost-btn {
-        background: #ffffff;
-        border: 1px solid #141414;
-        border-radius: 6px;
-        padding: 4px 8px;
-        cursor: pointer;
-        font-size: 12px;
-      }
-
-      .action-btn {
-        background: #ffff00;
-        border: 2px solid #141414;
-        border-radius: 6px;
-        padding: 4px 8px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
+      .admin-tour-overlay__ghost-button,
+      .admin-tour-overlay__primary-button {
+        box-shadow: none;
       }
     `
   ]

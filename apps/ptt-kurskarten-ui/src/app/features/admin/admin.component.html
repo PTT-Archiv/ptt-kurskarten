@@ -2,7 +2,7 @@
   <div class="context-group context-group-year">
     <span class="context-label">Year</span>
     <div class="context-controls">
-      <select [value]="year()" (change)="onEditionYearSelect($event)">
+      <select class="form-control admin-context-bar__control" [value]="year()" (change)="onEditionYearSelect($event)">
         @if (availableYears().length > 0) {
           @for (item of availableYears(); track item) {
             <option [value]="item" [selected]="item === year()">{{ item }}</option>
@@ -18,6 +18,7 @@
     <span class="context-label">IIIF Route (per year)</span>
     <div class="context-controls">
       <input
+        class="form-control admin-context-bar__control"
         type="text"
         [value]="iiifRouteDraft()"
         placeholder="https://iiif.ptt-archiv.ch/iiif/3/..."
@@ -32,13 +33,19 @@
     <span class="context-label">New Edition</span>
     <div class="context-controls context-controls-new-edition">
       <input
+        class="form-control admin-context-bar__control"
         type="number"
         [value]="newEditionYearDraft()"
         placeholder="e.g. 1865"
         (input)="onNewEditionYearInput($event)"
         (keydown)="onNewEditionYearKeydown($event)"
       />
-      <button type="button" class="context-add-btn" [disabled]="!canAddNewEdition()" (click)="addNewEdition()">
+      <button
+        type="button"
+        class="button button--primary button--compact admin-context-bar__add-button"
+        [disabled]="!canAddNewEdition()"
+        (click)="addNewEdition()"
+      >
         Add
       </button>
     </div>
@@ -70,8 +77,8 @@
         @for (mode of quickEntityModes; track mode.id) {
           <button
             type="button"
-            class="quick-mode-btn"
-            [class.active]="quickEntityMode() === mode.id"
+            class="button button--secondary button--compact admin-quick-entity-panel__mode-button"
+            [class.is-active]="quickEntityMode() === mode.id"
             (click)="setQuickEntityMode(mode.id)"
             [attr.title]="'Shortcut ' + mode.shortcut"
           >
@@ -133,7 +140,7 @@
         @if (quickPlaceGeoPoint(); as point) {
           <div class="quick-mode-note">Anchor preview: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}</div>
         }
-        <button type="button" class="quick-edge-create" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
+        <button type="button" class="button button--primary button--compact admin-quick-entity-panel__create-button" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
           @if (selectedQuickPlaceExisting(); as selected) {
             @if (selected.hidden) {
               Unhide & Use Place
@@ -193,7 +200,7 @@
             </div>
           </label>
 
-          <button type="button" class="quick-edge-swap" tabindex="-1" (click)="swapQuickDirection()" title="Swap direction">
+          <button type="button" class="button button--secondary button--compact admin-quick-entity-panel__swap-button" tabindex="-1" (click)="swapQuickDirection()" title="Swap direction">
             <fa-icon [icon]="swapIcon"></fa-icon>
           </button>
 
@@ -280,7 +287,7 @@
 
           <div class="quick-trip-header">
             <span class="quick-trip-title">Trips</span>
-            <button #addQuickTripButton type="button" class="ghost-btn" (click)="addQuickTrip()"
+          <button #addQuickTripButton type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="addQuickTrip()"
               tabindex="4"
             >
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
@@ -327,7 +334,7 @@
                   [attr.data-quick-trip-index]="idx"
                   data-quick-trip-field="arrives"
                 />
-                <button type="button" class="remove-btn" tabindex="-1" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+                <button type="button" class="button button--secondary button--compact admin-trip-table__remove-button" tabindex="-1" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               </div>
@@ -338,7 +345,7 @@
         @if (quickEntityMode() === 'link') {
           <button
             type="button"
-            class="quick-edge-create"
+            class="button button--primary button--compact admin-quick-entity-panel__create-button"
             [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId()"
             (click)="saveQuickLink()"
           >
@@ -349,7 +356,7 @@
         @if (quickEntityMode() === 'service') {
           <button
             type="button"
-            class="quick-edge-create"
+            class="button button--primary button--compact admin-quick-entity-panel__create-button"
             [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId() || !tripsValid(quickTrips())"
             (click)="saveQuickEdge()"
             [tabIndex]="5 + quickTrips().length * 2"
@@ -364,11 +371,11 @@
           Add trips fast, then append into current selected/draft service.
         </div>
         <div class="trip-header">
-          <button class="ghost-btn" type="button" (click)="addQuickTrip()">
+          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addQuickTrip()">
             <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
             Add row
           </button>
-          <button class="ghost-btn" type="button" (click)="appendQuickTripsToCurrentService()">Append to Service</button>
+          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="appendQuickTripsToCurrentService()">Append to Service</button>
         </div>
         <div class="quick-trip-table">
           <div class="quick-trip-row header">
@@ -386,7 +393,7 @@
               </select>
               <input type="text" [value]="trip.departs" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)" />
               <input type="text" [value]="trip.arrives" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)" />
-              <button type="button" class="remove-btn" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+              <button type="button" class="button button--secondary button--compact admin-trip-table__remove-button" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
                 <fa-icon [icon]="xmarkIcon"></fa-icon>
               </button>
             </div>
@@ -423,7 +430,7 @@
             }
           </div>
         </label>
-        <button type="button" class="ghost-btn" (click)="useSelectedPlaceAsQuickTarget()" [disabled]="!selectedNodeId()">
+        <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="useSelectedPlaceAsQuickTarget()" [disabled]="!selectedNodeId()">
           Use selected place
         </button>
       }
@@ -447,11 +454,11 @@
           <span>Value</span>
           <input type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
         </label>
-        <button type="button" class="quick-edge-create" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
+        <button type="button" class="button button--primary button--compact admin-quick-entity-panel__create-button" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
           {{ editingFactId() ? 'Save Fact' : 'Add Fact' }}
         </button>
         @if (editingFactId()) {
-          <button type="button" class="ghost-btn" (click)="cancelFactEdit()">Cancel Edit</button>
+          <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="cancelFactEdit()">Cancel Edit</button>
         }
       }
 
@@ -460,7 +467,7 @@
     <div class="shortcuts-panel" [class.collapsed]="shortcutsCollapsed()">
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
-        <button type="button" class="ghost-btn" (click)="toggleShortcuts()">
+        <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="toggleShortcuts()">
           @if (shortcutsCollapsed()) {
             <fa-icon [icon]="plusIcon"></fa-icon>
           } @else {
@@ -493,18 +500,18 @@
           }
         </div>
         <div class="header-actions">
-          <button class="ghost-btn" type="button" (click)="addNodeAtCursor()">
+          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addNodeAtCursor()">
             <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
             Add Place
           </button>
           @if (selectedNodeId()) {
-            <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
+            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEdgeFromSelected()">
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
               Add Link/Service
             </button>
           }
           @if (isDemo()) {
-            <button class="ghost-btn" type="button" (click)="restartTutorial()">
+            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="restartTutorial()">
               {{ 'admin.restartTutorial' | transloco }}
             </button>
           }
@@ -518,7 +525,7 @@
       @if (selection.pendingCreateEdgeFromNodeId(); as fromId) {
         <div class="pending-row">
           <span>Service from {{ getNodeName(fromId) }} - pick destination</span>
-          <button class="ghost-btn" type="button" (click)="cancelPendingEdge()">Esc</button>
+          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelPendingEdge()">Esc</button>
         </div>
       }
 
@@ -526,8 +533,8 @@
         @for (tab of inspectorTabs; track tab.id) {
           <button
             type="button"
-            class="inspector-tab"
-            [class.active]="inspectorTab() === tab.id"
+            class="button button--secondary button--compact admin-inspector__tab-button"
+            [class.is-active]="inspectorTab() === tab.id"
             (click)="setInspectorTab(tab.id)"
           >
             {{ tab.label }}
@@ -550,11 +557,11 @@
           <div class="section-title">Place (Core)</div>
           @if (selectedNodeId() && !draftNode()) {
             <div class="node-actions">
-              <button class="ghost-btn" type="button" (click)="startEdgeFromSelected()">
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEdgeFromSelected()">
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 Add Service
               </button>
-              <button class="ghost-btn" type="button" (click)="duplicateSelectedNode()">
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateSelectedNode()">
                 Duplicate Place
               </button>
               <div class="danger-action-wrap">
@@ -562,16 +569,16 @@
                   <div class="delete-popover">
                     <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
                     <div class="delete-popover-actions">
-                      <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                      <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
                         Delete Place
                       </button>
-                      <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelDeleteNode()">
                         {{ 'btn.cancel' | transloco }}
                       </button>
                     </div>
                   </div>
                 }
-                <button class="ghost-btn danger" type="button" (click)="requestDeleteNode('inline')">
+                <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="requestDeleteNode('inline')">
                   Delete Place
                 </button>
               </div>
@@ -810,11 +817,11 @@
           <div class="section-title">Trip Table</div>
           @if (selectedEdgeDraft(); as edgeDraft) {
             <div class="trip-header">
-              <button class="ghost-btn" type="button" (click)="addSelectedTrip()">
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addSelectedTrip()">
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 {{ 'btn.addTrip' | transloco }}
               </button>
-              <button class="ghost-btn" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
             </div>
             @if (edgeDraft.trips.length > 0) {
               <div class="trip-table">
@@ -854,7 +861,7 @@
                       [attr.data-trip-index]="idx"
                       data-trip-field="arrives"
                     />
-                    <button class="remove-btn" type="button" (click)="removeSelectedTrip(trip.id)">
+                    <button class="button button--secondary button--compact admin-trip-table__remove-button" type="button" (click)="removeSelectedTrip(trip.id)">
                       <fa-icon [icon]="xmarkIcon"></fa-icon>
                     </button>
                   </div>
@@ -866,11 +873,11 @@
             }
           } @else if (draftEdge(); as draft) {
             <div class="trip-header">
-              <button class="ghost-btn" type="button" (click)="addTrip()">
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addTrip()">
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 {{ 'btn.addTrip' | transloco }}
               </button>
-              <button class="ghost-btn" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
+              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
             </div>
             @if (draft.trips.length > 0) {
               <div class="trip-table">
@@ -910,7 +917,7 @@
                       [attr.data-trip-index]="idx"
                       data-trip-field="arrives"
                     />
-                    <button class="remove-btn" type="button" (click)="removeTrip(trip.id)">
+                    <button class="button button--secondary button--compact admin-trip-table__remove-button" type="button" (click)="removeTrip(trip.id)">
                       <fa-icon [icon]="xmarkIcon"></fa-icon>
                     </button>
                   </div>
@@ -923,7 +930,7 @@
           }
 
           <div class="trip-header">
-            <button class="ghost-btn" type="button" (click)="appendQuickTripsToCurrentService()">Append Quick Trips</button>
+            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="appendQuickTripsToCurrentService()">Append Quick Trips</button>
           </div>
         </section>
       }
@@ -951,10 +958,10 @@
                     </div>
                     <div class="fact-meta">{{ fact.valueType }}</div>
                     @if (fact.editable) {
-                      <button class="ghost-btn" type="button" (click)="startEditFact(fact)">Edit</button>
+                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEditFact(fact)">Edit</button>
                     }
                     @if (fact.removable) {
-                      <button class="ghost-btn" type="button" (click)="removeFact(fact.id)">Remove</button>
+                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="removeFact(fact.id)">Remove</button>
                     }
                   </div>
                 }
@@ -1005,20 +1012,20 @@
       <div class="action-row">
         @if (draftEdge()) {
           <button
-            class="action-btn"
+            class="button button--primary button--compact admin-sticky-bar__action-button"
             [disabled]="!draftEdge()?.from || !draftEdge()?.to || !tripsValid(draftEdge()?.trips ?? [])"
             (click)="saveDraftEdge()"
           >
             Save Service Draft
           </button>
         } @else if (selectedEdgeDraft()) {
-          <button class="action-btn" [disabled]="!tripsValid(selectedEdgeDraft()?.trips ?? [])" (click)="saveSelectedEdge()">Update Service</button>
+          <button class="button button--primary button--compact admin-sticky-bar__action-button" [disabled]="!tripsValid(selectedEdgeDraft()?.trips ?? [])" (click)="saveSelectedEdge()">Update Service</button>
         } @else if (draftNode()) {
-          <button class="action-btn" (click)="saveDraftNode()">Create Place</button>
+          <button class="button button--primary button--compact admin-sticky-bar__action-button" (click)="saveDraftNode()">Create Place</button>
         } @else if (selectedNodeId()) {
-          <button class="action-btn" (click)="saveSelectedNode()">Save Place</button>
+          <button class="button button--primary button--compact admin-sticky-bar__action-button" (click)="saveSelectedNode()">Save Place</button>
         } @else {
-          <button class="action-btn" disabled>{{ 'btn.save' | transloco }}</button>
+          <button class="button button--primary button--compact admin-sticky-bar__action-button" disabled>{{ 'btn.save' | transloco }}</button>
         }
         @if (selectedType() === 'node') {
           <div class="danger-action-wrap sticky-danger">
@@ -1026,29 +1033,29 @@
               <div class="delete-popover">
                 <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
                 <div class="delete-popover-actions">
-                  <button class="ghost-btn danger" type="button" (click)="deleteSelectedNode()">
+                  <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
                     Delete Place
                   </button>
-                  <button class="ghost-btn" type="button" (click)="cancelDeleteNode()">
+                  <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelDeleteNode()">
                     {{ 'btn.cancel' | transloco }}
                   </button>
                 </div>
               </div>
             }
-            <button class="action-btn secondary" [disabled]="!selectedNodeId()" (click)="requestDeleteNode('sticky')">
+            <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="!selectedNodeId()" (click)="requestDeleteNode('sticky')">
               Delete Place
             </button>
           </div>
         } @else {
-          <button class="action-btn secondary" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
+          <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
             Delete Service
           </button>
         }
-        <button class="action-btn secondary" [disabled]="undoStack().length === 0" (click)="undoMove()">
+        <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="undoStack().length === 0" (click)="undoMove()">
           {{ 'admin.undoMove' | transloco }}
         </button>
         @if (isDemo()) {
-          <button class="action-btn secondary" type="button" (click)="resetDemo()">
+          <button class="button button--secondary button--compact admin-sticky-bar__action-button" type="button" (click)="resetDemo()">
             {{ 'admin.resetDemo' | transloco }}
           </button>
         }

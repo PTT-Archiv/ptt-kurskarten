@@ -1,0 +1,57 @@
+:root {
+  --ptt-black: #141414;
+  --ptt-white: #ffffff;
+  --ptt-yellow: #ffff00;
+  --ptt-blue: #0000ff;
+  --border: 1px solid var(--ptt-black);
+
+  --color-text-default: var(--ptt-black);
+  --color-text-muted: #3a3a3a;
+  --color-text-inverse: var(--ptt-white);
+  --color-text-inverse-muted: #cfcfcf;
+  --color-surface-default: var(--ptt-white);
+  --color-surface-subtle: #f8f8f8;
+  --color-surface-muted: #f6f6f2;
+  --color-surface-inverse: #000000;
+  --color-border-default: var(--ptt-black);
+  --color-border-inverse: var(--ptt-white);
+  --color-focus-ring: var(--ptt-blue);
+  --color-danger: #8d1414;
+  --color-danger-soft: #fbe9e9;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 18px;
+
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  --shadow-soft: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  --shadow-strong: 6px 6px 0 rgba(0, 0, 0, 0.25);
+
+  --transition-fast: 120ms ease-out;
+  --transition-medium: 160ms ease-out;
+
+  --button-height-compact: 34px;
+  --button-height-default: 40px;
+  --button-padding-y-compact: 6px;
+  --button-padding-x-compact: 10px;
+  --button-padding-y-default: 8px;
+  --button-padding-x-default: 12px;
+
+  --form-control-padding-y: 8px;
+  --form-control-padding-x: 10px;
+  --form-control-radius: var(--radius-md);
+  --form-control-border-width: var(--border-width-2);
+}

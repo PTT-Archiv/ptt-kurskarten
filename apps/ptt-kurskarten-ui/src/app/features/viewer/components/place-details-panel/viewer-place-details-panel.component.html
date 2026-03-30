@@ -5,12 +5,12 @@
     [showCenterMarker]="false"></app-archive-snippet-viewer>
   }
   <div class="location-actions">
-    <button class="icon-action-btn" type="button" (click)="setNodeAsStart.emit(place.id)"
+    <button class="button button--ghost button--pill button--icon viewer-place-details__action-button" type="button" (click)="setNodeAsStart.emit(place.id)"
       [attr.aria-label]="'viewer.setAsStart' | transloco">
       <fa-icon [icon]="startIcon"></fa-icon>
       <span>{{ 'viewer.setAsStart' | transloco }}</span>
     </button>
-    <button class="icon-action-btn" type="button" (click)="setNodeAsEnd.emit(place.id)"
+    <button class="button button--ghost button--pill button--icon viewer-place-details__action-button" type="button" (click)="setNodeAsEnd.emit(place.id)"
       [attr.aria-label]="'viewer.setAsEnd' | transloco">
       <fa-icon [icon]="endIcon"></fa-icon>
       <span>{{ 'viewer.setAsEnd' | transloco }}</span>
