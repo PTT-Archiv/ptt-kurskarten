@@ -83,10 +83,10 @@ Pflegeregel:
 
 ### Planner Overlay und Time Controls
 
-- [ ] Route-Planner-Overlay-Styles aus TS in echte CSS-Datei auslagern.
-- [ ] Time-Control-Styles aus TS in echte CSS-Datei auslagern.
-- [ ] Planner-Overlay weiter in kleinere visuelle/technische Unterkomponenten zerlegen.
-- [ ] Typeahead-/Field-Teile des Planners weiter von Shell-Layout entkoppeln.
+- [x] Route-Planner-Overlay-Styles aus TS in echte CSS-Datei auslagern.
+- [x] Time-Control-Styles aus TS in echte CSS-Datei auslagern.
+- [x] Planner-Overlay weiter in kleinere visuelle/technische Unterkomponenten zerlegen.
+- [x] Typeahead-/Field-Teile des Planners weiter von Shell-Layout entkoppeln.
 
 ### Facade, Stores, Utils und Tests
 

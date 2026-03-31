@@ -1,0 +1,52 @@
+<label
+  class="form-field viewer-route-planner-field"
+  [class.viewer-route-planner-field--compact]="variant() === 'compact'"
+>
+  <span class="viewer-route-planner-field__label">{{ labelKey() | transloco }}</span>
+
+  <div class="viewer-route-planner-field__input-row">
+    <div
+      class="viewer-route-planner-field__input-shell"
+      [style.--viewer-route-planner-clear-left.px]="clearButtonLeft()"
+    >
+      <input
+        #input
+        class="viewer-route-planner-field__input"
+        type="text"
+        [value]="query()"
+        (input)="onInput($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        (keydown)="onKeydown($event)"
+        placeholder=" "
+      />
+
+      @if (query()) {
+        <button
+          type="button"
+          class="button button--ghost button--pill viewer-route-planner-field__clear-button"
+          (mousedown)="clear($event)"
+        >
+          <fa-icon [icon]="clearIcon"></fa-icon>
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (open() && filteredNodes().length) {
+    <div class="viewer-route-planner-field__list">
+      @for (node of filteredNodes(); track node.id; let i = $index) {
+        <button
+          #option
+          type="button"
+          class="viewer-route-planner-field__option"
+          [class.viewer-route-planner-field__option--active]="i === activeIndex()"
+          (mousedown)="selectNode(node)"
+          (mouseenter)="setActiveIndex(i)"
+        >
+          {{ node.name }}
+        </button>
+      }
+    </div>
+  }
+</label>

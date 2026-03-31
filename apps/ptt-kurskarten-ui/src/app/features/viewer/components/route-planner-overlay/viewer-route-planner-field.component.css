@@ -1,0 +1,122 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.viewer-route-planner-field {
+  position: relative;
+  min-width: 0;
+}
+
+.viewer-route-planner-field__label {
+  font-size: var(--font-size-xs);
+  color: #cfcfcf;
+}
+
+.viewer-route-planner-field__input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.viewer-route-planner-field__input-shell {
+  position: relative;
+  width: 100%;
+}
+
+.viewer-route-planner-field__input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 0;
+  padding: 4px 24px 6px 2px;
+  background: transparent;
+  color: var(--color-text-inverse);
+  font-size: 22px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.viewer-route-planner-field__input::placeholder {
+  color: #c2c2c2;
+}
+
+.viewer-route-planner-field__input:focus,
+.viewer-route-planner-field__clear-button:focus,
+.viewer-route-planner-field__clear-button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.viewer-route-planner-field__clear-button {
+  position: absolute;
+  left: var(--viewer-route-planner-clear-left, 8px);
+  top: 45%;
+  transform: translateY(-50%);
+  min-width: 20px;
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #d0d0d0;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  display: grid;
+  place-items: center;
+}
+
+.viewer-route-planner-field__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: grid;
+  gap: 2px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: var(--space-2) 0;
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-strong);
+  scroll-behavior: smooth;
+}
+
+.viewer-route-planner-field__option {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  padding: var(--surface-padding-roomy);
+  font-size: var(--font-size-lg);
+}
+
+.viewer-route-planner-field__option--active,
+.viewer-route-planner-field__option:hover {
+  background: #ffffff;
+  color: #141414;
+  font-weight: 600;
+}
+
+.viewer-route-planner-field--compact .viewer-route-planner-field__input {
+  font-size: var(--font-size-lg);
+}
+
+@media (max-width: 767px) {
+  .viewer-route-planner-field__label {
+    font-size: var(--font-size-2xs);
+  }
+
+  .viewer-route-planner-field__input,
+  .viewer-route-planner-field--compact .viewer-route-planner-field__input {
+    font-size: 17px;
+    padding-right: 30px;
+  }
+}

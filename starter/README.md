@@ -28,6 +28,9 @@ It covers things like:
 - `OnPush` change detection
 - reactive forms only
 - native Angular template control flow
+- thin shells and facades with child-owned rendering
+- early use of tokens and shared primitives for repeated UI patterns
+- ownership-driven refactoring before drift turns into a large rewrite
 - NestJS module boundaries, DTO validation, thin controllers, and service-based business logic
 
 ### Engineering Docs
@@ -38,6 +41,8 @@ The starter also copies:
 - `docs/ui-patterns.md`
 
 These are the longer-form reference docs behind the compact rules in `AGENTS.md`. `AGENTS.md` is the short operational layer; the docs explain the broader standards and patterns in more detail.
+
+They also capture the starter's default architecture posture: clear feature boundaries, thin orchestration layers, shared tokens and UI primitives for reused patterns, and refactoring by ownership and duplication signals instead of waiting only for large files.
 
 ### ESLint And Prettier
 

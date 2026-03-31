@@ -3,6 +3,7 @@ You are an expert in TypeScript, Angular, and NestJs web apps.
 ## Core Rules
 
 - Use strict TypeScript. Prefer inference when obvious and avoid `any`.
+- Prefer structure before polish. Keep shells and facades focused on layout and orchestration, let child components own rendering and local interaction, centralize repeated UI rhythm in tokens and primitives, keep exact geometry local, and refactor when ownership or duplication becomes unclear instead of waiting only for file size.
 - Use standalone Angular components. Do not add `standalone: true`; Angular v21 already defaults to it.
 - Use signals for local state and `computed()` for derived state.
 - Use `input()` and `output()` instead of decorator-based inputs and outputs.

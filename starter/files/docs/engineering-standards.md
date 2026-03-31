@@ -35,14 +35,18 @@
 ## Architecture rules
 
 - Components should be explainable in one sentence.
+- Keep shells, facades, and other orchestration boundaries thin. They should coordinate layout, workflows, and composition, not absorb leaf rendering and local interaction.
+- Split by ownership before introducing shared abstractions. Move code and styling into the component or service that clearly owns it, then extract shared primitives only after a pattern repeats across features.
 - Move orchestration, domain rules, and multi-source composition out of leaf UI components.
 - Facades are recommended for complex features with multiple data sources, workflows, or derived state.
+- Refactor when ownership boundaries blur or duplicated patterns start to spread, not only when a file crosses a size threshold.
 - Split service responsibilities between data access, orchestration/facade state, and pure transforms/helpers.
 - For NestJS, split responsibilities between controllers, application services, data access, and pure domain helpers rather than collapsing them into one provider.
 
 ## Styling and tokens
 
 - New style work must use the semantic token layer from `src/styles/_tokens.scss`.
+- Centralize repeated rhythm, typography, color, and surface decisions in tokens or shared primitives. Keep exact geometry and context-specific layout local unless the geometry itself is reused.
 - Refactor by boundary: tokens first, then shared primitives, then feature shells, then leaf components.
 - Do not introduce UI-library-specific design language into feature decisions.
 

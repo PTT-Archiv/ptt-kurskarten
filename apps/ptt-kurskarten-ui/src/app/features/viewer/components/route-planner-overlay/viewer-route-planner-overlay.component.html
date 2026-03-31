@@ -1,0 +1,52 @@
+<div
+  class="planner-card surface-card surface-card--inverse surface-card--interactive"
+  [class.planner-card--compact]="variant() === 'compact'"
+  (focusin)="plannerFocus.emit(true)"
+  (focusout)="plannerFocus.emit(false)"
+  (mouseenter)="plannerHover.emit(true)"
+  (mouseleave)="plannerHover.emit(false)"
+>
+  <div class="route-core">
+    <app-viewer-route-planner-field
+      [labelKey]="'label.from'"
+      [selectedNodeId]="fromId()"
+      [nodes]="nodes()"
+      [nodeAliases]="nodeAliases()"
+      [variant]="variant()"
+      [autoFocusToken]="autoFocusFromToken()"
+      (selectedNodeIdChange)="fromIdChange.emit($event)"
+      (previewNodeIdChange)="fromPreviewChange.emit($event)"
+      (pickStateChange)="onFieldPickStateChange('from', $event)"
+    ></app-viewer-route-planner-field>
+
+    <button
+      class="button button--ghost button--pill planner-card__swap-button"
+      type="button"
+      (click)="swap.emit()"
+    >
+      <fa-icon class="swap-icon" [icon]="swapIcon"></fa-icon>
+    </button>
+
+    <app-viewer-route-planner-field
+      [labelKey]="'label.to'"
+      [selectedNodeId]="toId()"
+      [nodes]="nodes()"
+      [nodeAliases]="nodeAliases()"
+      [variant]="variant()"
+      (selectedNodeIdChange)="toIdChange.emit($event)"
+      (previewNodeIdChange)="toPreviewChange.emit($event)"
+      (pickStateChange)="onFieldPickStateChange('to', $event)"
+    ></app-viewer-route-planner-field>
+  </div>
+
+  @if (showTime()) {
+    <app-viewer-route-planner-time-controls
+      [departTime]="departTime()"
+      [canApplyTime]="canApplyTime()"
+      [compact]="variant() === 'compact'"
+      (departTimeChange)="departTimeChange.emit($event)"
+      (applyTime)="applyTime.emit()"
+      (resetSearch)="resetSearch.emit()"
+    ></app-viewer-route-planner-time-controls>
+  }
+</div>

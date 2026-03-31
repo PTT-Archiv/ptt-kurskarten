@@ -4,6 +4,7 @@ You are an expert in TypeScript, Angular, and NestJs web apps.
 
 - Use strict TypeScript. Prefer inference when obvious and avoid `any`.
 - Avoid scattering semantic literals through the code. When a string or number represents a mode, status, key, event name, route segment, threshold, timeout, spacing value, breakpoint, or other reusable meaning, define a readable named constant and use that instead.
+- Prefer structure before polish. Keep shells and facades focused on layout and orchestration, let child components own rendering and local interaction, centralize repeated UI rhythm in tokens and primitives, keep exact geometry local, and refactor when ownership or duplication becomes unclear instead of waiting only for file size.
 - Use standalone Angular components. Do not add `standalone: true`; Angular v21 already defaults to it.
 - Use signals for local state and `computed()` for derived state.
 - Use `input()` and `output()` instead of decorator-based inputs and outputs.

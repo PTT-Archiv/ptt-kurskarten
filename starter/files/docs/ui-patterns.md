@@ -4,7 +4,10 @@
 
 - Prefer simple, explicit UI state over clever abstractions.
 - Keep feature shells responsible for layout and leaf components responsible for rendering.
+- Keep shells and facades thin. Let child components own their markup, styles, and local interaction states instead of styling or coordinating them from a monolithic parent.
 - Reuse semantic tokens before introducing one-off colors, spacing, or elevation values.
+- Promote repeated UI patterns into shared primitives only when they are truly reused across features. Do not use a global primitive layer as a substitute for clear ownership.
+- Centralize rhythm in tokens and primitives, but keep exact geometry local when it is specific to a map, panel, overlay, or single feature context.
 
 ## Angular template patterns
 
@@ -15,6 +18,7 @@
 ## Component patterns
 
 - Split components by responsibility, not only by file length.
+- Refactor when ownership becomes unclear or when the same pattern is implemented in multiple feature components, even if file size still looks acceptable.
 - Use container or facade components for orchestration and data composition.
 - Keep presentational components input-driven and event-driven.
 - Prefer `input()` and `output()` APIs over decorator-based bindings.

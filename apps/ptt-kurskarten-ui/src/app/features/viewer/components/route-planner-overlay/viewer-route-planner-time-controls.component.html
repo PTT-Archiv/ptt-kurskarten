@@ -1,0 +1,71 @@
+<div class="time-controls" [class.compact]="compact()">
+  <label class="form-field time-field">
+    <span>{{ 'label.departure' | transloco }}</span>
+
+    <div class="time-picker">
+      <div class="time-segment">
+        <span class="time-label">hr</span>
+        <input
+          class="form-control form-control--inverse time-input"
+          type="text"
+          inputmode="numeric"
+          [attr.list]="hourOptionsId"
+          maxlength="2"
+          [value]="hourDisplayValue()"
+          (focus)="onHourFocus()"
+          (input)="onHourInput($event)"
+          (blur)="onHourBlur()"
+          (keydown.enter)="onHourEnter($event)"
+        />
+
+        <datalist [id]="hourOptionsId">
+          @for (hour of hours; track hour) {
+            <option [value]="hour"></option>
+          }
+        </datalist>
+      </div>
+
+      <div class="time-segment">
+        <span class="time-label">min</span>
+        <input
+          class="form-control form-control--inverse time-input"
+          type="text"
+          inputmode="numeric"
+          [attr.list]="minuteOptionsId"
+          maxlength="2"
+          [value]="minuteDisplayValue()"
+          (focus)="onMinuteFocus()"
+          (input)="onMinuteInput($event)"
+          (blur)="onMinuteBlur()"
+          (keydown.enter)="onMinuteEnter($event)"
+        />
+
+        <datalist [id]="minuteOptionsId">
+          @for (minute of minutes; track minute) {
+            <option [value]="minute"></option>
+          }
+        </datalist>
+      </div>
+    </div>
+  </label>
+
+  <div class="planner-actions">
+    @if (canApplyTime()) {
+      <button
+        type="button"
+        class="button button--ghost button--pill button--compact planner-time-controls__button"
+        (click)="applyTime.emit()"
+      >
+        {{ 'btn.apply' | transloco }}
+      </button>
+    }
+
+    <button
+      type="button"
+      class="button button--ghost button--pill button--compact planner-time-controls__button"
+      (click)="resetSearch.emit()"
+    >
+      {{ 'viewer.resetSearch' | transloco }}
+    </button>
+  </div>
+</div>
