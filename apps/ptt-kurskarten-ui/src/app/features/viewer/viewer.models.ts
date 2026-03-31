@@ -79,7 +79,7 @@ export interface ViewerResultsVm {
 
 export interface ViewerRouteDetailsVm {
   selectedConnection: ConnectionOption | null;
-  selectedWaitSegments: WaitSegment[];
+  selectedWaitSegments: Array<WaitSegment | null>;
   activeHoveredRouteEdgeId: string | null;
   showConnectionDetailsOnMap: boolean;
   getNodeLabel: (id: string) => string;

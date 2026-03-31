@@ -446,7 +446,7 @@ function computeOutgoingChoices(
 }
 
 export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingParams): ConnectionOption | null {
-  const minTransferMinutes = params.minTransferMinutes ?? 3;
+  const minTransferMinutes = params.minTransferMinutes ?? 0;
   const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 20;
   const startTime = parseTime(params.depart);
 
@@ -612,7 +612,7 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
 
   const startEdges = adjacency.get(params.from) ?? [];
   const startTime = parseTime(params.depart);
-  const minTransferMinutes = params.minTransferMinutes ?? 3;
+  const minTransferMinutes = params.minTransferMinutes ?? 0;
   const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 2;
 
   const candidateDepartures = new Set<number>();

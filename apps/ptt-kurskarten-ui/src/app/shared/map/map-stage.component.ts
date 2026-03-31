@@ -1676,6 +1676,9 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
       );
 
     const waitLabels = waitSegments.map((segment) => {
+      if (!segment) {
+        return null;
+      }
       const node = this.screenNodes.get(segment.atNodeId);
       if (!node) {
         return null;

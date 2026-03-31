@@ -17,9 +17,9 @@ export type LegAbsTime = {
 
 const MINUTES_PER_DAY = 1440;
 
-export function buildWaitSegments(option: ConnectionOption): WaitSegment[] {
+export function buildWaitSegments(option: ConnectionOption): Array<WaitSegment | null> {
   const legs = option.legs ?? [];
-  const segments: WaitSegment[] = [];
+  const segments = Array.from({ length: Math.max(legs.length - 1, 0) }, () => null as WaitSegment | null);
 
   for (let i = 0; i < legs.length - 1; i += 1) {
     const current = legs[i];
@@ -34,8 +34,8 @@ export function buildWaitSegments(option: ConnectionOption): WaitSegment[] {
     let endAbs = end.absMinutes;
     let endDayOffset = end.dayOffset;
 
-    if (endAbs <= startAbs) {
-      while (endAbs <= startAbs) {
+    if (endAbs < startAbs) {
+      while (endAbs < startAbs) {
         endAbs += MINUTES_PER_DAY;
         endDayOffset += 1;
       }
@@ -44,7 +44,7 @@ export function buildWaitSegments(option: ConnectionOption): WaitSegment[] {
     if (endAbs > startAbs) {
       const startDayOffset = start.dayOffset;
       const overnight = Math.floor(startAbs / MINUTES_PER_DAY) < Math.floor(endAbs / MINUTES_PER_DAY);
-      segments.push({
+      segments[i] = {
         atNodeId: current.to,
         startAbsMin: startAbs,
         endAbsMin: endAbs,
@@ -52,7 +52,7 @@ export function buildWaitSegments(option: ConnectionOption): WaitSegment[] {
         overnight,
         startDayOffset,
         endDayOffset
-      });
+      };
     }
   }
 

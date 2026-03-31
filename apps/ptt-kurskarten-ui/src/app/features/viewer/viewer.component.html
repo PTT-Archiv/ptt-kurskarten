@@ -59,34 +59,24 @@
       (previewPlaceResult)="facade.previewPlaceSearchResult($event.nodeId, $event.index)"
       (selectPlaceResult)="facade.selectPlaceResult($event)"
       (openRoutePlanner)="facade.openRoutePlanner()"
-    ></app-viewer-header>
-
+    >
     @if (!facade.archiveModeActive() && facade.routePlannerOpen() && !facade.smallScreenLayout()) {
-    <app-viewer-desktop-planner
-      [nodes]="facade.nodes()"
-      [fromId]="facade.fromId()"
-      [toId]="facade.toId()"
-      [nodeAliases]="facade.nodeAliasesById()"
-      [departTime]="facade.draftDepartTime()"
-      [showTime]="facade.hasSearched()"
+    <app-viewer-desktop-planner [nodes]="facade.nodes()" [fromId]="facade.fromId()" [toId]="facade.toId()"
+      [nodeAliases]="facade.nodeAliasesById()" [departTime]="facade.draftDepartTime()" [showTime]="facade.hasSearched()"
       [canApplyTime]="facade.hasSearched() && facade.draftDepartTime() !== facade.departTime()"
       [searching]="facade.routingState() === 'searching'"
       [noResultsMessage]="facade.routingState() === 'no_results' ? facade.resultsVm().noResultsMessage : ''"
-      [autoFocusFromToken]="facade.routePlannerFocusToken()"
-      (close)="facade.closeRoutePlanner()"
-      (fromIdChange)="facade.onFromIdChange($event)"
-      (toIdChange)="facade.onToIdChange($event)"
-      (fromPreviewChange)="facade.onFromPreview($event)"
-      (toPreviewChange)="facade.onToPreview($event)"
+      [autoFocusFromToken]="facade.routePlannerFocusToken()" (close)="facade.closeRoutePlanner()"
+      (fromIdChange)="facade.onFromIdChange($event)" (toIdChange)="facade.onToIdChange($event)"
+      (fromPreviewChange)="facade.onFromPreview($event)" (toPreviewChange)="facade.onToPreview($event)"
       (pickTargetChange)="facade.onRoutePlannerPickTargetChange($event)"
-      (departTimeChange)="facade.onDepartTimeDraftChange($event)"
-      (applyTime)="facade.applyDepartTime()"
-      (resetSearch)="facade.resetSearch()"
-      (swap)="facade.swapConnections()"
-      (plannerFocus)="facade.onPlannerFocus($event)"
-      (plannerHover)="facade.onPlannerHover($event)"
-    ></app-viewer-desktop-planner>
+      (departTimeChange)="facade.onDepartTimeDraftChange($event)" (applyTime)="facade.applyDepartTime()"
+      (resetSearch)="facade.resetSearch()" (swap)="facade.swapConnections()" (plannerFocus)="facade.onPlannerFocus($event)"
+      (plannerHover)="facade.onPlannerHover($event)"></app-viewer-desktop-planner>
     }
+  </app-viewer-header>
+
+    
 
     <app-viewer-floating-actions
       [vm]="facade.floatingActionsVm()"

@@ -47,7 +47,7 @@ export class ViewerRoutingStore {
     return ids.size > 0 ? ids : null;
   });
 
-  readonly selectedWaitSegments = computed<WaitSegment[]>(() => {
+  readonly selectedWaitSegments = computed<Array<WaitSegment | null>>(() => {
     const selected = this.selectedConnection();
     return selected ? buildWaitSegments(selected) : [];
   });

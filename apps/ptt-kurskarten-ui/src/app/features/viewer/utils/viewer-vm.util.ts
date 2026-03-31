@@ -52,7 +52,7 @@ export function buildResultsVm(params: {
 
 export function buildRouteDetailsVm(params: {
   selectedConnection: ConnectionOption | null;
-  selectedWaitSegments: WaitSegment[];
+  selectedWaitSegments: Array<WaitSegment | null>;
   activeHoveredRouteEdgeId: string | null;
   showConnectionDetailsOnMap: boolean;
   getNodeLabel: (id: string) => string;
