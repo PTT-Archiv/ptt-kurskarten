@@ -1,100 +1,117 @@
 @if (vm.place; as place) {
-<section class="content-section location-section">
-  @if (showArchivePreview) {
-  <app-archive-snippet-viewer [imageUrl]="vm.archiveSnippetUrl" [iiifInfoUrl]="vm.archiveIiifInfoUrl"
-    [showCenterMarker]="false"></app-archive-snippet-viewer>
-  }
-  <div class="location-actions">
-    <button class="button button--ghost button--pill button--icon viewer-place-details__action-button" type="button" (click)="setNodeAsStart.emit(place.id)"
-      [attr.aria-label]="'viewer.setAsStart' | transloco">
-      <fa-icon [icon]="startIcon"></fa-icon>
-      <span>{{ 'viewer.setAsStart' | transloco }}</span>
-    </button>
-    <button class="button button--ghost button--pill button--icon viewer-place-details__action-button" type="button" (click)="setNodeAsEnd.emit(place.id)"
-      [attr.aria-label]="'viewer.setAsEnd' | transloco">
-      <fa-icon [icon]="endIcon"></fa-icon>
-      <span>{{ 'viewer.setAsEnd' | transloco }}</span>
-    </button>
-  </div>
-</section>
-
-<section class="content-section">
-  <div class="content-section__title">{{ 'viewer.facts' | transloco }}</div>
-  @if (vm.sidebarFacts.length > 0) {
-  <div class="fact-list content-list">
-    @for (fact of vm.sidebarFacts; track fact.id) {
-    <div class="fact-row content-list__row">
-      <div class="fact-schema">
-        <div class="fact-schema-label content-list__label">{{ fact.schemaLabel }}</div>
-      </div>
-      <div class="fact-value">
-        @if (fact.url) {
-        <a class="fact-link" [href]="fact.url" target="_blank" rel="noopener noreferrer">
-          {{ fact.label }}
-        </a>
-        } @else {
-        {{ fact.label }}
-        }
-      </div>
-    </div>
+  <section class="panel-shell panel-shell--content location-section">
+    @if (showArchivePreview) {
+      <app-archive-snippet-viewer
+        [imageUrl]="vm.archiveSnippetUrl"
+        [iiifInfoUrl]="vm.archiveIiifInfoUrl"
+        [showCenterMarker]="false"
+      ></app-archive-snippet-viewer>
     }
-  </div>
-  } @else {
-  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.noFacts' | transloco }}</div>
-  }
-</section>
+    <div class="location-actions">
+      <button
+        class="button button--ghost button--pill button--icon viewer-place-details__action-button"
+        type="button"
+        (click)="setNodeAsStart.emit(place.id)"
+        [attr.aria-label]="'viewer.setAsStart' | transloco"
+      >
+        <fa-icon [icon]="startIcon"></fa-icon>
+        <span>{{ 'viewer.setAsStart' | transloco }}</span>
+      </button>
+      <button
+        class="button button--ghost button--pill button--icon viewer-place-details__action-button"
+        type="button"
+        (click)="setNodeAsEnd.emit(place.id)"
+        [attr.aria-label]="'viewer.setAsEnd' | transloco"
+      >
+        <fa-icon [icon]="endIcon"></fa-icon>
+        <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+      </button>
+    </div>
+  </section>
 
-<section class="content-section">
-  <div class="content-section__title">Ausgehende Verbindungen</div>
-  @if (vm.outgoingNodeTrips.length > 0) {
-  <div class="node-trip-list content-list">
-    @for (trip of vm.outgoingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
-    <div class="node-trip-row content-list__row">
-      <div class="node-trip-head content-list__label">{{ trip.nodeName }}</div>
-      <div class="node-trip-time">
-        @if (trip.departs) {
-        {{ trip.departs }} →
-        }
-        {{ trip.arrives }}
-        @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
-        <span>(+{{ trip.arrivalDayOffset }})</span>
+  <section class="panel-shell panel-shell--content">
+    <div class="panel-shell__title">{{ 'viewer.facts' | transloco }}</div>
+    @if (vm.sidebarFacts.length > 0) {
+      <div class="fact-list panel-list">
+        @for (fact of vm.sidebarFacts; track fact.id) {
+          <div class="fact-row panel-list__row">
+            <div class="fact-schema">
+              <div class="fact-schema-label panel-list__label">{{ fact.schemaLabel }}</div>
+            </div>
+            <div class="fact-value">
+              @if (fact.url) {
+                <a class="fact-link" [href]="fact.url" target="_blank" rel="noopener noreferrer">
+                  {{ fact.label }}
+                </a>
+              } @else {
+                {{ fact.label }}
+              }
+            </div>
+          </div>
         }
       </div>
-      <div class="node-trip-meta meta-text meta-text--xs text-muted--inverse">{{ ('transport.' + trip.transport) | transloco }}</div>
-    </div>
+    } @else {
+      <div class="meta-line meta-line--md meta-line--inverse">
+        {{ 'viewer.noFacts' | transloco }}
+      </div>
     }
-  </div>
-  } @else {
-  <div class="meta-text meta-text--md text-muted--inverse">Keine ausgehenden Verbindungen</div>
-  }
-</section>
+  </section>
 
-<section class="content-section">
-  <div class="content-section__title">Eingehende Verbindungen</div>
-  @if (vm.incomingNodeTrips.length > 0) {
-  <div class="node-trip-list content-list">
-    @for (trip of vm.incomingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
-    <div class="node-trip-row content-list__row">
-      <div class="node-trip-head content-list__label">{{ trip.nodeName }}</div>
-      <div class="node-trip-time">
-        @if (trip.departs) {
-        {{ trip.departs }} →
-        }
-        {{ trip.arrives }}
-        @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
-        <span>(+{{ trip.arrivalDayOffset }})</span>
+  <section class="panel-shell panel-shell--content">
+    <div class="panel-shell__title">Ausgehende Verbindungen</div>
+    @if (vm.outgoingNodeTrips.length > 0) {
+      <div class="node-trip-list panel-list">
+        @for (trip of vm.outgoingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
+          <div class="node-trip-row panel-list__row">
+            <div class="node-trip-head panel-list__label">{{ trip.nodeName }}</div>
+            <div class="node-trip-time">
+              @if (trip.departs) {
+                {{ trip.departs }} →
+              }
+              {{ trip.arrives }}
+              @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+                <span>(+{{ trip.arrivalDayOffset }})</span>
+              }
+            </div>
+            <div class="node-trip-meta meta-line meta-line--xs meta-line--inverse">
+              {{ 'transport.' + trip.transport | transloco }}
+            </div>
+          </div>
         }
       </div>
-      <div class="node-trip-meta meta-text meta-text--xs text-muted--inverse">{{ ('transport.' + trip.transport) | transloco }}</div>
-    </div>
+    } @else {
+      <div class="meta-line meta-line--md meta-line--inverse">Keine ausgehenden Verbindungen</div>
     }
-  </div>
-  } @else {
-  <div class="meta-text meta-text--md text-muted--inverse">Keine eingehenden Verbindungen</div>
-  }
-</section>
+  </section>
+
+  <section class="panel-shell panel-shell--content">
+    <div class="panel-shell__title">Eingehende Verbindungen</div>
+    @if (vm.incomingNodeTrips.length > 0) {
+      <div class="node-trip-list panel-list">
+        @for (trip of vm.incomingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
+          <div class="node-trip-row panel-list__row">
+            <div class="node-trip-head panel-list__label">{{ trip.nodeName }}</div>
+            <div class="node-trip-time">
+              @if (trip.departs) {
+                {{ trip.departs }} →
+              }
+              {{ trip.arrives }}
+              @if (trip.arrivalDayOffset && trip.arrivalDayOffset > 0) {
+                <span>(+{{ trip.arrivalDayOffset }})</span>
+              }
+            </div>
+            <div class="node-trip-meta meta-line meta-line--xs meta-line--inverse">
+              {{ 'transport.' + trip.transport | transloco }}
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="meta-line meta-line--md meta-line--inverse">Keine eingehenden Verbindungen</div>
+    }
+  </section>
 } @else {
-<section class="content-section">
-  <div class="meta-text meta-text--md text-muted--inverse">{{ 'viewer.details' | transloco }}</div>
-</section>
+  <section class="panel-shell panel-shell--content">
+    <div class="meta-line meta-line--md meta-line--inverse">{{ 'viewer.details' | transloco }}</div>
+  </section>
 }

@@ -1,21 +1,29 @@
 import { computed, effect, inject, Injectable } from '@angular/core';
-import type {
-  ConnectionOption,
-  GraphAssertion,
-  LocalizedText,
-  TimeHHMM
-} from '@ptt-kurskarten/shared';
+import type { ConnectionOption, LocalizedText, TimeHHMM } from '@ptt-kurskarten/shared';
 import { TranslocoService } from '@jsverse/transloco';
 import {
-  assertionValueToString,
-  resolveFactLink
-} from '@viewer/utils/viewer-facts.util';
+  SIDEBAR_TRIP_DIRECTION_INCOMING,
+  SIDEBAR_TRIP_DIRECTION_OUTGOING,
+  buildMobileSheetTitle,
+  buildNoResultsMessage,
+  buildPickModeLabel,
+  buildPulseNodeIds,
+  buildRouteNodePanelSnippetUrl,
+  buildRouteSidebarTitle,
+  buildSidebarFacts,
+  buildSidebarNodeTrips,
+  getLocalizedNoteValue,
+} from '@viewer/utils/viewer-facade-selectors.util';
 import {
-  buildArchiveSnippetUrlForNode
-} from '@shared-ui/archive/archive-snippet.util';
-import {
-  formatDuration
-} from '@viewer/utils/viewer-routing.util';
+  buildFloatingActionsVm,
+  buildHeaderVm,
+  buildMobileSheetVm,
+  buildPlaceDetailsVm,
+  buildResultsVm,
+  buildRouteDetailsVm,
+  buildRouteNodePanelVm,
+  buildSidebarVm,
+} from '@viewer/utils/viewer-vm.util';
 import type {
   SidebarFact,
   SidebarNodeTrip,
@@ -27,9 +35,8 @@ import type {
   ViewerRouteDetailsVm,
   ViewerRouteNodePanelVm,
   ViewerSidebarVm,
-  ViewerSurfaceMode
+  ViewerSurfaceMode,
 } from '@viewer/viewer.models';
-import { tripSortValue } from '@viewer/utils/viewer-node-selectors.util';
 import { ViewerArchiveStore } from '@viewer/stores/viewer-archive.store';
 import { ViewerCoreStore } from '@viewer/stores/viewer-core.store';
 import { ViewerLayoutStore } from '@viewer/stores/viewer-layout.store';
@@ -37,8 +44,6 @@ import { ViewerRoutingStore } from '@viewer/stores/viewer-routing.store';
 import { ViewerSearchStore } from '@viewer/stores/viewer-search.store';
 import { ViewerSimulationStore } from '@viewer/stores/viewer-simulation.store';
 
-const PLACE_HIDDEN_SCHEMA_KEY = 'place.hidden';
-const PLACE_FOREIGN_SCHEMA_KEY = 'place.is_foreign';
 const PICK_TARGET_FROM = 'from';
 const PICK_TARGET_TO = 'to';
 const MOBILE_SHEET_MODE_CLOSED = 'closed';
@@ -55,9 +60,6 @@ const KEY_ARROW_UP = 'ArrowUp';
 const KEY_ENTER = 'Enter';
 const KEY_ESCAPE = 'Escape';
 const ROUTE_PLANNER_TITLE = 'Routing';
-const EMPTY_TEXT = '';
-const SCHEMA_KEY_NORMALIZE_PATTERN = /[^a-z0-9]+/g;
-const SCHEMA_KEY_TRIM_PATTERN = /^_+|_+$/g;
 
 @Injectable()
 export class ViewerFacade {
@@ -70,6 +72,11 @@ export class ViewerFacade {
   private readonly simulation = inject(ViewerSimulationStore);
 
   private searchHandle: ReturnType<typeof setTimeout> | null = null;
+  private readonly nodeLabelForVm = (id: string) => this.core.getNodeLabel(id);
+  private readonly nodeNameForVm = (id: string) => this.core.getNodeName(id);
+  private readonly localizedNoteForVm = (note?: LocalizedText) =>
+    getLocalizedNoteValue(note, this.activeLang());
+  private readonly translateSchemaKey = (key: string) => this.transloco.translate(key);
 
   readonly readonlyViewer = this.core.readonlyViewer;
   readonly archiveModeEnabled = this.core.archiveModeEnabled;
@@ -155,233 +162,226 @@ export class ViewerFacade {
   readonly orbitVisible = this.simulation.orbitVisible;
   readonly simulationMinuteForMap = this.simulation.simulationMinuteForMap;
 
-  readonly pulseNodeIds = computed(() => {
-    const ids = new Set(this.core.transientPulseIds());
-    const from = this.routing.fromPreviewId();
-    const to = this.routing.toPreviewId();
-    if (from) {
-      ids.add(from);
-    }
-    if (to) {
-      ids.add(to);
-    }
-    const placePreview = this.search.placeSearchPreviewId();
-    if (placePreview) {
-      ids.add(placePreview);
-    }
-    return ids;
+  readonly viewerText = computed(() => {
+    this.activeLang();
+
+    return {
+      details: this.transloco.translate('viewer.details'),
+      results: this.transloco.translate('viewer.results'),
+      editionTitle: this.transloco.translate('viewer.editionTitle'),
+      noInput: this.transloco.translate('viewer.noInput'),
+      noRouteYear: this.transloco.translate('viewer.noRouteYear'),
+      noRouteTime: this.transloco.translate('viewer.noRouteTime'),
+      pickModeFrom: this.transloco.translate('viewer.pickModeFrom'),
+      pickModeTo: this.transloco.translate('viewer.pickModeTo'),
+    };
   });
+
+  readonly pulseNodeIds = computed(() =>
+    buildPulseNodeIds(this.core.transientPulseIds(), {
+      fromPreviewId: this.routing.fromPreviewId(),
+      toPreviewId: this.routing.toPreviewId(),
+      placePreviewId: this.search.placeSearchPreviewId(),
+    }),
+  );
 
   readonly sidebarPlaceNode = this.archive.archiveSnippetNode;
 
   readonly sidebarFacts = computed<SidebarFact[]>(() => {
-    this.core.activeLang();
-    const place = this.sidebarPlaceNode();
-    if (!place) {
-      return [];
-    }
-    return this.nodeFacts()
-      .filter((assertion) => assertion.targetType === 'place' && assertion.targetId === place.id)
-      .filter(
-        (assertion) =>
-          assertion.schemaKey !== PLACE_HIDDEN_SCHEMA_KEY && assertion.schemaKey !== PLACE_FOREIGN_SCHEMA_KEY
-      )
-      .map((assertion) => this.mapSidebarFact(assertion))
-      .filter((fact): fact is SidebarFact => fact !== null);
+    this.activeLang();
+
+    return buildSidebarFacts(
+      this.nodeFacts(),
+      this.sidebarPlaceNode()?.id ?? null,
+      this.translateSchemaKey,
+    );
   });
 
-  readonly routeSidebarTitle = computed(() => {
-    const selected = this.selectedConnection();
-    const from = selected?.from ?? this.fromId();
-    const to = selected?.to ?? this.toId();
-    if (!from || !to) {
-      return this.transloco.translate('viewer.details');
-    }
-    return `${this.getNodeLabel(from)} → ${this.getNodeLabel(to)}`;
-  });
+  readonly routeSidebarTitle = computed(() =>
+    buildRouteSidebarTitle({
+      selectedConnection: this.selectedConnection(),
+      fromId: this.fromId(),
+      toId: this.toId(),
+      getNodeLabel: this.nodeLabelForVm,
+      detailsLabel: this.viewerText().details,
+    }),
+  );
 
   readonly routeNodePanelNode = computed(() => this.core.getNodeById(this.selectedNodeId()));
 
-  readonly routeNodePanelSnippetUrl = computed(() => {
-    const nodeId = this.selectedNodeId();
-    if (!nodeId) {
-      return null;
-    }
-    const node = this.core.getNodeByIdFull(nodeId);
-    if (!node) {
-      return null;
-    }
-    return buildArchiveSnippetUrlForNode(node, this.archiveTransform(), this.archiveIiifRoute());
-  });
+  readonly routeNodePanelSnippetUrl = computed(() =>
+    buildRouteNodePanelSnippetUrl({
+      graph: this.graph(),
+      nodeId: this.selectedNodeId(),
+      archiveTransform: this.archiveTransform(),
+      archiveIiifRoute: this.archiveIiifRoute(),
+    }),
+  );
 
   readonly showRouteNodePanel = computed(
-    () => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId()
+    () => this.routeResultsVisible() && this.sidebarOpen() && !!this.selectedNodeId(),
   );
 
-  readonly mobileSheetTitle = computed(() => {
-    const mode = this.mobileSheetMode();
-    if (mode === MOBILE_SHEET_MODE_DETAILS) {
-      return this.routeNodePanelNode()?.name ?? this.sidebarPlaceNode()?.name ?? this.transloco.translate('viewer.details');
-    }
-    if (mode === MOBILE_SHEET_MODE_RESULTS) {
-      return this.transloco.translate('viewer.results');
-    }
-    if (mode === MOBILE_SHEET_MODE_PLANNER) {
-      return ROUTE_PLANNER_TITLE;
-    }
-    return EMPTY_TEXT;
-  });
+  readonly mobileSheetTitle = computed(() =>
+    buildMobileSheetTitle({
+      mode: this.mobileSheetMode(),
+      routeNodePanelNodeName: this.routeNodePanelNode()?.name ?? null,
+      sidebarPlaceNodeName: this.sidebarPlaceNode()?.name ?? null,
+      detailsLabel: this.viewerText().details,
+      resultsLabel: this.viewerText().results,
+      plannerTitle: ROUTE_PLANNER_TITLE,
+    }),
+  );
 
   readonly mobileShowResultsBack = computed(
-    () => this.mobileSheetMode() === MOBILE_SHEET_MODE_DETAILS && this.routeResultsVisible()
+    () => this.mobileSheetMode() === MOBILE_SHEET_MODE_DETAILS && this.routeResultsVisible(),
   );
 
-  readonly outgoingNodeTrips = computed<SidebarNodeTrip[]>(() => {
-    const snapshot = this.graph();
-    const place = this.sidebarPlaceNode();
-    if (!snapshot || !place) {
-      return [];
-    }
-    const rows: SidebarNodeTrip[] = [];
-    snapshot.edges
-      .filter((edge) => edge.from === place.id)
-      .forEach((edge) => {
-        const toNode = snapshot.nodes.find((node) => node.id === edge.to);
-        edge.trips.forEach((trip) => {
-          rows.push({
-            edgeId: edge.id,
-            tripId: trip.id,
-            nodeId: edge.to,
-            nodeName: toNode?.name ?? edge.to,
-            transport: trip.transport,
-            departs: trip.departs,
-            arrives: trip.arrives,
-            arrivalDayOffset: trip.arrivalDayOffset
-          });
-        });
-      });
-    return rows.sort((a, b) => tripSortValue(a) - tripSortValue(b));
-  });
+  readonly outgoingNodeTrips = computed<SidebarNodeTrip[]>(() =>
+    buildSidebarNodeTrips(
+      this.graph(),
+      this.sidebarPlaceNode()?.id ?? null,
+      SIDEBAR_TRIP_DIRECTION_OUTGOING,
+    ),
+  );
 
-  readonly incomingNodeTrips = computed<SidebarNodeTrip[]>(() => {
-    const snapshot = this.graph();
-    const place = this.sidebarPlaceNode();
-    if (!snapshot || !place) {
-      return [];
-    }
-    const rows: SidebarNodeTrip[] = [];
-    snapshot.edges
-      .filter((edge) => edge.to === place.id)
-      .forEach((edge) => {
-        const fromNode = snapshot.nodes.find((node) => node.id === edge.from);
-        edge.trips.forEach((trip) => {
-          rows.push({
-            edgeId: edge.id,
-            tripId: trip.id,
-            nodeId: edge.from,
-            nodeName: fromNode?.name ?? edge.from,
-            transport: trip.transport,
-            departs: trip.departs,
-            arrives: trip.arrives,
-            arrivalDayOffset: trip.arrivalDayOffset
-          });
-        });
-      });
-    return rows.sort((a, b) => tripSortValue(a) - tripSortValue(b));
-  });
+  readonly incomingNodeTrips = computed<SidebarNodeTrip[]>(() =>
+    buildSidebarNodeTrips(
+      this.graph(),
+      this.sidebarPlaceNode()?.id ?? null,
+      SIDEBAR_TRIP_DIRECTION_INCOMING,
+    ),
+  );
 
-  readonly headerVm = computed<ViewerHeaderVm>(() => ({
-    archiveModeActive: this.archiveModeActive(),
-    routePlannerOpen: this.routePlannerOpen(),
-    smallScreenLayout: this.smallScreenLayout(),
-    orbitVisible: this.orbitVisible(),
-    simulationMinute: this.simulationMinute(),
-    year: this.year(),
-    editionTitle: this.transloco.translate('viewer.editionTitle'),
-    publicEditionOptions: this.publicEditionOptions(),
-    selectedEditionLabel: this.selectedEditionLabel(),
-    placeSearchQuery: this.placeSearchQuery(),
-    placeSearchOpen: this.placeSearchOpen(),
-    placeSearchActiveIndex: this.placeSearchActiveIndex(),
-    placeSearchResults: this.placeSearchResults()
-  }));
+  readonly noResultsMessage = computed(() =>
+    buildNoResultsMessage({
+      fromId: this.fromId(),
+      toId: this.toId(),
+      nodes: this.graph()?.nodes ?? [],
+      lastResultParams: this.routing.lastResultParams(),
+      year: this.year(),
+      noInputLabel: this.viewerText().noInput,
+      noRouteYearLabel: this.viewerText().noRouteYear,
+      noRouteNotYetLabel: this.transloco.translate('viewer.noRouteNotYet', { year: this.year() }),
+      noRouteTimeLabel: this.viewerText().noRouteTime,
+    }),
+  );
 
-  readonly resultsVm = computed<ViewerResultsVm>(() => ({
-    routingState: this.routingState(),
-    connectionResults: this.connectionResults(),
-    selectedConnectionId: this.selectedConnectionId(),
-    noResultsMessage: this.getNoResultsMessage(),
-    getNodeLabel: (id: string) => this.getNodeLabel(id),
-    formatDuration
-  }));
+  readonly pickModeLabel = computed(() =>
+    buildPickModeLabel({
+      target: this.pickTarget(),
+      pickModeFromLabel: this.viewerText().pickModeFrom,
+      pickModeToLabel: this.viewerText().pickModeTo,
+    }),
+  );
 
-  readonly routeDetailsVm = computed<ViewerRouteDetailsVm>(() => ({
-    selectedConnection: this.selectedConnection(),
-    selectedWaitSegments: this.selectedWaitSegments(),
-    activeHoveredRouteEdgeId: this.activeHoveredRouteEdgeId(),
-    showConnectionDetailsOnMap: this.showConnectionDetailsOnMap(),
-    getNodeLabel: (id: string) => this.getNodeLabel(id),
-    getNodeName: (id: string) => this.getNodeName(id),
-    getLocalizedNote: (note?: LocalizedText) => this.getLocalizedNote(note),
-    formatDuration
-  }));
+  readonly headerVm = computed<ViewerHeaderVm>(() =>
+    buildHeaderVm({
+      archiveModeActive: this.archiveModeActive(),
+      routePlannerOpen: this.routePlannerOpen(),
+      smallScreenLayout: this.smallScreenLayout(),
+      orbitVisible: this.orbitVisible(),
+      simulationMinute: this.simulationMinute(),
+      year: this.year(),
+      editionTitle: this.viewerText().editionTitle,
+      publicEditionOptions: this.publicEditionOptions(),
+      selectedEditionLabel: this.selectedEditionLabel(),
+      placeSearchQuery: this.placeSearchQuery(),
+      placeSearchOpen: this.placeSearchOpen(),
+      placeSearchActiveIndex: this.placeSearchActiveIndex(),
+      placeSearchResults: this.placeSearchResults(),
+    }),
+  );
 
-  readonly placeDetailsVm = computed<ViewerPlaceDetailsVm>(() => ({
-    place: this.sidebarPlaceNode() ? { id: this.sidebarPlaceNode()!.id, name: this.sidebarPlaceNode()!.name } : null,
-    archiveSnippetUrl: this.archiveSnippetUrl(),
-    archiveIiifInfoUrl: this.archiveIiifInfoUrl(),
-    sidebarFacts: this.sidebarFacts(),
-    outgoingNodeTrips: this.outgoingNodeTrips(),
-    incomingNodeTrips: this.incomingNodeTrips()
-  }));
+  readonly resultsVm = computed<ViewerResultsVm>(() =>
+    buildResultsVm({
+      routingState: this.routingState(),
+      connectionResults: this.connectionResults(),
+      selectedConnectionId: this.selectedConnectionId(),
+      noResultsMessage: this.noResultsMessage(),
+      getNodeLabel: this.nodeLabelForVm,
+    }),
+  );
 
-  readonly sidebarVm = computed<ViewerSidebarVm>(() => ({
-    isOpen: this.sidebarOpen(),
-    title: this.routeResultsVisible()
-      ? this.routeSidebarTitle()
-      : this.sidebarPlaceNode()?.name ?? this.transloco.translate('viewer.details'),
-    routeResultsVisible: this.routeResultsVisible(),
-    resultsVm: this.resultsVm(),
-    routeDetailsVm: this.routeDetailsVm(),
-    placeDetailsVm: this.placeDetailsVm()
-  }));
+  readonly routeDetailsVm = computed<ViewerRouteDetailsVm>(() =>
+    buildRouteDetailsVm({
+      selectedConnection: this.selectedConnection(),
+      selectedWaitSegments: this.selectedWaitSegments(),
+      activeHoveredRouteEdgeId: this.activeHoveredRouteEdgeId(),
+      showConnectionDetailsOnMap: this.showConnectionDetailsOnMap(),
+      getNodeLabel: this.nodeLabelForVm,
+      getNodeName: this.nodeNameForVm,
+      getLocalizedNote: this.localizedNoteForVm,
+    }),
+  );
 
-  readonly routeNodePanelVm = computed<ViewerRouteNodePanelVm>(() => ({
-    visible: this.showRouteNodePanel(),
-    node: this.routeNodePanelNode(),
-    snippetUrl: this.routeNodePanelSnippetUrl(),
-    archiveIiifInfoUrl: this.archiveIiifInfoUrl()
-  }));
+  readonly placeDetailsVm = computed<ViewerPlaceDetailsVm>(() =>
+    buildPlaceDetailsVm({
+      place: this.sidebarPlaceNode()
+        ? { id: this.sidebarPlaceNode()!.id, name: this.sidebarPlaceNode()!.name }
+        : null,
+      archiveSnippetUrl: this.archiveSnippetUrl(),
+      archiveIiifInfoUrl: this.archiveIiifInfoUrl(),
+      sidebarFacts: this.sidebarFacts(),
+      outgoingNodeTrips: this.outgoingNodeTrips(),
+      incomingNodeTrips: this.incomingNodeTrips(),
+    }),
+  );
 
-  readonly mobileSheetVm = computed<ViewerMobileSheetVm>(() => ({
-    visible: this.mobileSheetVisible(),
-    snap: this.mobileSheetSnap(),
-    title: this.mobileSheetTitle(),
-    showResultsBack: this.mobileShowResultsBack(),
-    mode: this.mobileSheetMode(),
-    resultsVm: this.resultsVm(),
-    routeDetailsVm: this.routeDetailsVm(),
-    placeDetailsVm: this.placeDetailsVm()
-  }));
+  readonly sidebarVm = computed<ViewerSidebarVm>(() =>
+    buildSidebarVm({
+      isOpen: this.sidebarOpen(),
+      routeResultsVisible: this.routeResultsVisible(),
+      routeSidebarTitle: this.routeSidebarTitle(),
+      sidebarPlaceNodeName: this.sidebarPlaceNode()?.name ?? null,
+      detailsLabel: this.viewerText().details,
+      resultsVm: this.resultsVm(),
+      routeDetailsVm: this.routeDetailsVm(),
+      placeDetailsVm: this.placeDetailsVm(),
+    }),
+  );
 
-  readonly floatingActionsVm = computed<ViewerFloatingActionsVm>(() => ({
-    helpOpen: this.helpOpen(),
-    settingsOpen: this.settingsOpen(),
-    actionStackBottomOffset: this.actionStackBottomOffset(),
-    archiveModeEnabled: this.archiveModeEnabled,
-    archiveModeActive: this.archiveModeActive(),
-    inactiveSurfaceMode: this.inactiveSurfaceMode(),
-    inactiveSurfacePreviewImageUrl: this.inactiveSurfacePreviewImageUrl(),
-    pickModeLabel: this.getPickModeLabel(),
-    pickModeVisible: !this.archiveModeActive() && !!this.pickTarget(),
-    resetViewVisible: !this.archiveModeActive(),
-    activeLang: this.activeLang(),
-    readonlyViewer: this.readonlyViewer,
-    tripFlowNodeMode: this.tripFlowNodeMode(),
-    tripFlowEdgeMode: this.tripFlowEdgeMode(),
-    tripFlowNodeModeOptions: this.simulation.tripFlowNodeModeOptions,
-    tripFlowEdgeModeOptions: this.simulation.tripFlowEdgeModeOptions
-  }));
+  readonly routeNodePanelVm = computed<ViewerRouteNodePanelVm>(() =>
+    buildRouteNodePanelVm({
+      visible: this.showRouteNodePanel(),
+      node: this.routeNodePanelNode(),
+      snippetUrl: this.routeNodePanelSnippetUrl(),
+      archiveIiifInfoUrl: this.archiveIiifInfoUrl(),
+    }),
+  );
+
+  readonly mobileSheetVm = computed<ViewerMobileSheetVm>(() =>
+    buildMobileSheetVm({
+      visible: this.mobileSheetVisible(),
+      snap: this.mobileSheetSnap(),
+      title: this.mobileSheetTitle(),
+      showResultsBack: this.mobileShowResultsBack(),
+      mode: this.mobileSheetMode(),
+      resultsVm: this.resultsVm(),
+      routeDetailsVm: this.routeDetailsVm(),
+      placeDetailsVm: this.placeDetailsVm(),
+    }),
+  );
+
+  readonly floatingActionsVm = computed<ViewerFloatingActionsVm>(() =>
+    buildFloatingActionsVm({
+      helpOpen: this.helpOpen(),
+      settingsOpen: this.settingsOpen(),
+      actionStackBottomOffset: this.actionStackBottomOffset(),
+      archiveModeEnabled: this.archiveModeEnabled,
+      archiveModeActive: this.archiveModeActive(),
+      inactiveSurfaceMode: this.inactiveSurfaceMode(),
+      inactiveSurfacePreviewImageUrl: this.inactiveSurfacePreviewImageUrl(),
+      pickModeLabel: this.pickModeLabel(),
+      pickTarget: this.pickTarget(),
+      activeLang: this.activeLang(),
+      readonlyViewer: this.readonlyViewer,
+      tripFlowNodeMode: this.tripFlowNodeMode(),
+      tripFlowEdgeMode: this.tripFlowEdgeMode(),
+      tripFlowNodeModeOptions: this.simulation.tripFlowNodeModeOptions,
+      tripFlowEdgeModeOptions: this.simulation.tripFlowEdgeModeOptions,
+    }),
+  );
 
   constructor() {
     this.core.init();
@@ -461,7 +461,9 @@ export class ViewerFacade {
         this.sidebarOpen.set(false);
       }
       if (this.smallScreenLayout()) {
-        this.mobileSheetMode.set(routeResultsVisible ? MOBILE_SHEET_MODE_RESULTS : MOBILE_SHEET_MODE_CLOSED);
+        this.mobileSheetMode.set(
+          routeResultsVisible ? MOBILE_SHEET_MODE_RESULTS : MOBILE_SHEET_MODE_CLOSED,
+        );
       }
       return;
     }
@@ -472,7 +474,9 @@ export class ViewerFacade {
     if (this.smallScreenLayout()) {
       this.sidebarOpen.set(false);
       this.mobileSheetMode.set(MOBILE_SHEET_MODE_DETAILS);
-      this.mobileSheetSnap.set(routeResultsVisible ? MOBILE_SHEET_SNAP_FULL : MOBILE_SHEET_SNAP_HALF);
+      this.mobileSheetSnap.set(
+        routeResultsVisible ? MOBILE_SHEET_SNAP_FULL : MOBILE_SHEET_SNAP_HALF,
+      );
       return;
     }
     this.sidebarOpen.set(true);
@@ -503,7 +507,7 @@ export class ViewerFacade {
           this.mobileSheetMode.set(MOBILE_SHEET_MODE_PLANNER);
           this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_FULL);
         }
-      }
+      },
     });
   }
 
@@ -692,7 +696,9 @@ export class ViewerFacade {
     this.selectedNodeId.set(null);
     this.sidebarOpen.set(false);
     if (this.smallScreenLayout()) {
-      this.mobileSheetMode.set(this.routePlannerOpen() ? MOBILE_SHEET_MODE_PLANNER : MOBILE_SHEET_MODE_CLOSED);
+      this.mobileSheetMode.set(
+        this.routePlannerOpen() ? MOBILE_SHEET_MODE_PLANNER : MOBILE_SHEET_MODE_CLOSED,
+      );
       this.mobileSheetSnap.set(MOBILE_SHEET_SNAP_HALF);
     }
   }
@@ -731,57 +737,6 @@ export class ViewerFacade {
 
   toggleViewerSurfaceMode(): void {
     this.archive.toggleViewerSurfaceMode();
-  }
-
-  getNodeName(id: string): string {
-    return this.core.getNodeName(id);
-  }
-
-  getNodeLabel(id: string): string {
-    return this.core.getNodeLabel(id);
-  }
-
-  getNodeById(id: string | null): { id: string; name: string } | null {
-    return this.core.getNodeById(id);
-  }
-
-  getLocalizedNote(note?: LocalizedText): string | null {
-    if (!note) {
-      return null;
-    }
-    const lang = this.transloco.getActiveLang();
-    const value = (note as Record<string, string | undefined>)[lang] ?? note.de ?? note.fr;
-    return value?.trim() ? value : null;
-  }
-
-  getNoResultsMessage(): string {
-    const from = this.fromId();
-    const to = this.toId();
-    if (!from || !to || from === to) {
-      return this.transloco.translate('viewer.noInput');
-    }
-    const nodes = this.graph()?.nodes ?? [];
-    const fromExists = nodes.some((node) => node.id === from);
-    const toExists = nodes.some((node) => node.id === to);
-    if (!fromExists || !toExists) {
-      return this.transloco.translate('viewer.noRouteYear');
-    }
-    const lastResult = this.routing.lastResultParams();
-    if (lastResult && lastResult.from === from && lastResult.to === to && lastResult.year !== this.year()) {
-      return this.transloco.translate('viewer.noRouteNotYet', { year: this.year() });
-    }
-    return this.transloco.translate('viewer.noRouteTime');
-  }
-
-  getPickModeLabel(): string {
-    const target = this.pickTarget();
-    if (target === PICK_TARGET_FROM) {
-      return this.transloco.translate('viewer.pickModeFrom');
-    }
-    if (target === PICK_TARGET_TO) {
-      return this.transloco.translate('viewer.pickModeTo');
-    }
-    return EMPTY_TEXT;
   }
 
   private setupRoutingSearchEffect(): void {
@@ -854,34 +809,5 @@ export class ViewerFacade {
         this.core.applyYearChange(editions[0].year);
       }
     });
-  }
-
-  private mapSidebarFact(assertion: GraphAssertion): SidebarFact | null {
-    const rawValue = assertionValueToString(assertion);
-    if (!rawValue) {
-      return null;
-    }
-    const link = resolveFactLink(assertion.schemaKey, rawValue);
-    return {
-      id: assertion.id,
-      schemaKey: assertion.schemaKey,
-      schemaLabel: this.schemaKeyDisplayLabel(assertion.schemaKey),
-      label: link.label,
-      url: link.url
-    };
-  }
-
-  private schemaKeyDisplayLabel(schemaKey: string): string {
-    const normalized = schemaKey
-      .trim()
-      .toLowerCase()
-      .replace(SCHEMA_KEY_NORMALIZE_PATTERN, '_')
-      .replace(SCHEMA_KEY_TRIM_PATTERN, '');
-    if (!normalized) {
-      return schemaKey;
-    }
-    const translationKey = `schemaKey.${normalized}`;
-    const translated = this.transloco.translate(translationKey);
-    return !translated || translated === translationKey ? schemaKey : translated;
   }
 }

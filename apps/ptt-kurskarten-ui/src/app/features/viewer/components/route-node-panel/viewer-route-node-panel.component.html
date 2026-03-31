@@ -1,31 +1,44 @@
 @if (vm.visible && vm.node; as panelNode) {
-<aside class="route-node-panel is-open">
-  <div class="sidebar-header">
-    <div class="section-title">{{ panelNode.name }}</div>
-    <button class="button button--ghost button--pill viewer-route-node-panel__close-button" type="button" (click)="close.emit()" [attr.aria-label]="'btn.cancel' | transloco">
-      <fa-icon [icon]="xmarkIcon"></fa-icon>
-    </button>
-  </div>
-  <section class="panel-section location-section">
-    @if (vm.snippetUrl) {
-    <app-archive-snippet-viewer
-      [imageUrl]="vm.snippetUrl"
-      [iiifInfoUrl]="vm.archiveIiifInfoUrl"
-      [showCenterMarker]="false"
-    ></app-archive-snippet-viewer>
-    }
-    <div class="location-actions">
-      <button class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button" type="button" (click)="setNodeAsStart.emit(panelNode.id)"
-        [attr.aria-label]="'viewer.setAsStart' | transloco">
-        <fa-icon [icon]="startIcon"></fa-icon>
-        <span>{{ 'viewer.setAsStart' | transloco }}</span>
-      </button>
-      <button class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button" type="button" (click)="setNodeAsEnd.emit(panelNode.id)"
-        [attr.aria-label]="'viewer.setAsEnd' | transloco">
-        <fa-icon [icon]="endIcon"></fa-icon>
-        <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+  <aside class="route-node-panel is-open">
+    <div class="sidebar-header panel-shell__header">
+      <div class="panel-shell__title">{{ panelNode.name }}</div>
+      <button
+        class="button button--ghost button--pill viewer-route-node-panel__close-button"
+        type="button"
+        (click)="close.emit()"
+        [attr.aria-label]="'btn.cancel' | transloco"
+      >
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
       </button>
     </div>
-  </section>
-</aside>
+    <section class="panel-section panel-shell panel-shell--content location-section">
+      @if (vm.snippetUrl) {
+        <app-archive-snippet-viewer
+          [imageUrl]="vm.snippetUrl"
+          [iiifInfoUrl]="vm.archiveIiifInfoUrl"
+          [showCenterMarker]="false"
+        ></app-archive-snippet-viewer>
+      }
+      <div class="location-actions">
+        <button
+          class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button"
+          type="button"
+          (click)="setNodeAsStart.emit(panelNode.id)"
+          [attr.aria-label]="'viewer.setAsStart' | transloco"
+        >
+          <fa-icon [icon]="startIcon"></fa-icon>
+          <span>{{ 'viewer.setAsStart' | transloco }}</span>
+        </button>
+        <button
+          class="button button--ghost button--pill button--icon viewer-route-node-panel__action-button"
+          type="button"
+          (click)="setNodeAsEnd.emit(panelNode.id)"
+          [attr.aria-label]="'viewer.setAsEnd' | transloco"
+        >
+          <fa-icon [icon]="endIcon"></fa-icon>
+          <span>{{ 'viewer.setAsEnd' | transloco }}</span>
+        </button>
+      </div>
+    </section>
+  </aside>
 }

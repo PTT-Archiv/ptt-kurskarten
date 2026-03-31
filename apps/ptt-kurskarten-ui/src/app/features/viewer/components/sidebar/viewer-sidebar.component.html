@@ -1,6 +1,6 @@
 <aside class="viewer-sidebar" [class.is-open]="vm.isOpen" [attr.aria-hidden]="!vm.isOpen">
-  <div class="sidebar-header">
-    <div class="section-title">{{ vm.title }}</div>
+  <div class="sidebar-header panel-shell__header">
+    <div class="panel-shell__title">{{ vm.title }}</div>
     <button
       class="button button--ghost button--pill viewer-sidebar__close-button"
       type="button"
@@ -12,12 +12,21 @@
   </div>
 
   @if (vm.routeResultsVisible) {
-  <app-viewer-results-panel [vm]="vm.resultsVm" (selectConnection)="selectConnection.emit($event)"
-    (shiftTime)="shiftTime.emit($event)"></app-viewer-results-panel>
-  <app-viewer-route-details-panel [vm]="vm.routeDetailsVm" (hoverRouteLeg)="hoverRouteLeg.emit($event)"
-    (toggleDetailsOnMap)="toggleDetailsOnMap.emit($event)"></app-viewer-route-details-panel>
+    <app-viewer-results-panel
+      [vm]="vm.resultsVm"
+      (selectConnection)="selectConnection.emit($event)"
+      (shiftTime)="shiftTime.emit($event)"
+    ></app-viewer-results-panel>
+    <app-viewer-route-details-panel
+      [vm]="vm.routeDetailsVm"
+      (hoverRouteLeg)="hoverRouteLeg.emit($event)"
+      (toggleDetailsOnMap)="toggleDetailsOnMap.emit($event)"
+    ></app-viewer-route-details-panel>
   } @else {
-  <app-viewer-place-details-panel [vm]="vm.placeDetailsVm" (setNodeAsStart)="setNodeAsStart.emit($event)"
-    (setNodeAsEnd)="setNodeAsEnd.emit($event)"></app-viewer-place-details-panel>
+    <app-viewer-place-details-panel
+      [vm]="vm.placeDetailsVm"
+      (setNodeAsStart)="setNodeAsStart.emit($event)"
+      (setNodeAsEnd)="setNodeAsEnd.emit($event)"
+    ></app-viewer-place-details-panel>
   }
 </aside>

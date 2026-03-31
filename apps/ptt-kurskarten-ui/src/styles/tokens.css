@@ -9,12 +9,14 @@
   --color-text-muted: #3a3a3a;
   --color-text-inverse: var(--ptt-white);
   --color-text-inverse-muted: #cfcfcf;
+  --color-link-inverse: #79b8ff;
   --color-surface-default: var(--ptt-white);
   --color-surface-subtle: #f8f8f8;
   --color-surface-muted: #f6f6f2;
   --color-surface-inverse: #000000;
   --color-border-default: var(--ptt-black);
   --color-border-inverse: var(--ptt-white);
+  --color-border-inverse-soft: #5a5a5a;
   --color-focus-ring: var(--ptt-blue);
   --color-danger: #8d1414;
   --color-danger-soft: #fbe9e9;

@@ -1,0 +1,24 @@
+<div class="toast-container" aria-live="polite">
+  @for (toast of toasts(); track toast.id) {
+    <div
+      class="toast-container__toast surface-card surface-card--inverse surface-card--status"
+      [class]="toast.type"
+    >
+      <div class="toast-container__accent"></div>
+      <div class="toast-container__content">
+        <div class="toast-container__title">{{ toast.title }}</div>
+        @if (toast.message) {
+          <div class="toast-container__message text-muted--inverse">{{ toast.message }}</div>
+        }
+      </div>
+      <button
+        class="button button--ghost button--pill button--icon button--compact toast-container__close-button"
+        type="button"
+        (click)="remove(toast.id)"
+        aria-label="Close"
+      >
+        <fa-icon [icon]="xmarkIcon"></fa-icon>
+      </button>
+    </div>
+  }
+</div>

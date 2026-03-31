@@ -1,0 +1,73 @@
+<svg
+  class="day-night-svg"
+  viewBox="0 0 88 88"
+  preserveAspectRatio="xMidYMid meet"
+  aria-hidden="true"
+>
+  <defs>
+    <clipPath [attr.id]="clipPathId">
+      <rect
+        [attr.x]="CARD_INSET"
+        [attr.y]="CARD_INSET"
+        [attr.width]="VIEWBOX_SIZE - CARD_INSET * 2"
+        [attr.height]="VIEWBOX_SIZE - CARD_INSET * 2"
+        [attr.rx]="CARD_RADIUS"
+      />
+    </clipPath>
+  </defs>
+
+  <rect
+    class="day-night-card"
+    [attr.x]="CARD_INSET"
+    [attr.y]="CARD_INSET"
+    [attr.width]="VIEWBOX_SIZE - CARD_INSET * 2"
+    [attr.height]="VIEWBOX_SIZE - CARD_INSET * 2"
+    [attr.rx]="CARD_RADIUS"
+  />
+
+  <g [attr.clip-path]="'url(#' + clipPathId + ')'">
+    <g class="day-night-waves" [attr.transform]="waveTransform()">
+      @for (row of waveRows; track row) {
+        <path
+          class="day-night-wave"
+          [attr.d]="wavePath"
+          [attr.transform]="'translate(0 ' + row + ')'"
+        ></path>
+      }
+    </g>
+
+    <line
+      class="day-night-horizon"
+      x1="10"
+      [attr.y1]="HORIZON_Y"
+      x2="78"
+      [attr.y2]="HORIZON_Y"
+    ></line>
+
+    <g
+      class="day-night-symbol"
+      [attr.transform]="symbolTransform()"
+      [attr.data-symbol-x]="formatNumber(SYMBOL_X)"
+      [attr.data-symbol-y]="formatNumber(symbolY())"
+    >
+      <g class="day-night-sun" [attr.opacity]="formatOpacity(sunOpacity())">
+        <circle class="day-night-sun-core" r="6"></circle>
+        <g class="day-night-rays" [attr.opacity]="formatOpacity(rayOpacity())">
+          <line x1="0" y1="-10" x2="0" y2="-15"></line>
+          <line x1="0" y1="10" x2="0" y2="15"></line>
+          <line x1="-10" y1="0" x2="-15" y2="0"></line>
+          <line x1="10" y1="0" x2="15" y2="0"></line>
+          <line x1="-7.5" y1="-7.5" x2="-11.5" y2="-11.5"></line>
+          <line x1="7.5" y1="-7.5" x2="11.5" y2="-11.5"></line>
+          <line x1="-7.5" y1="7.5" x2="-11.5" y2="11.5"></line>
+          <line x1="7.5" y1="7.5" x2="11.5" y2="11.5"></line>
+        </g>
+      </g>
+
+      <g class="day-night-moon" [attr.opacity]="formatOpacity(moonOpacity())">
+        <circle class="day-night-moon-core" r="6"></circle>
+        <circle class="day-night-moon-cut" cx="3.2" cy="-1.4" r="6"></circle>
+      </g>
+    </g>
+  </g>
+</svg>

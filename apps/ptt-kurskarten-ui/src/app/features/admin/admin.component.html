@@ -2,7 +2,11 @@
   <div class="context-group context-group-year">
     <span class="context-label">Year</span>
     <div class="context-controls">
-      <select class="form-control admin-context-bar__control" [value]="year()" (change)="onEditionYearSelect($event)">
+      <select
+        class="form-control form-control--compact admin-context-bar__control"
+        [value]="year()"
+        (change)="onEditionYearSelect($event)"
+      >
         @if (availableYears().length > 0) {
           @for (item of availableYears(); track item) {
             <option [value]="item" [selected]="item === year()">{{ item }}</option>
@@ -18,7 +22,7 @@
     <span class="context-label">IIIF Route (per year)</span>
     <div class="context-controls">
       <input
-        class="form-control admin-context-bar__control"
+        class="form-control form-control--compact admin-context-bar__control"
         type="text"
         [value]="iiifRouteDraft()"
         placeholder="https://iiif.ptt-archiv.ch/iiif/3/..."
@@ -33,7 +37,7 @@
     <span class="context-label">New Edition</span>
     <div class="context-controls context-controls-new-edition">
       <input
-        class="form-control admin-context-bar__control"
+        class="form-control form-control--compact admin-context-bar__control"
         type="number"
         [value]="newEditionYearDraft()"
         placeholder="e.g. 1865"
@@ -67,7 +71,9 @@
       (mapPointer)="onMapPointer($event)"
     ></app-map-stage>
 
-    <section class="quick-edge-panel quick-entity-panel surface-card surface-card--panel">
+    <section
+      class="quick-edge-panel quick-entity-panel panel-shell panel-shell--surface surface-card surface-card--panel"
+    >
       <div class="quick-entity-header">
         <div class="quick-edge-title">Quick Entity</div>
         <div class="quick-entity-active">Mode: {{ quickEntityMode() }}</div>
@@ -89,8 +95,10 @@
       </div>
 
       @if (quickEntityMode() === 'place') {
-        <div class="quick-mode-note">Prefer existing places first to reuse anchors and avoid duplicates.</div>
-        <label class="quick-edge-field">
+        <div class="quick-mode-note">
+          Prefer existing places first to reuse anchors and avoid duplicates.
+        </div>
+        <label class="form-field form-field--compact quick-edge-field">
           <span>Name</span>
           <div class="quick-edge-typeahead">
             <input
@@ -105,7 +113,11 @@
             />
             @if (quickPlaceGeoOpen() && quickPlaceSuggestions().length > 0) {
               <div class="quick-edge-list interactive-list">
-                @for (suggestion of quickPlaceSuggestions(); track suggestion.id; let idx = $index) {
+                @for (
+                  suggestion of quickPlaceSuggestions();
+                  track suggestion.id;
+                  let idx = $index
+                ) {
                   <button
                     type="button"
                     class="interactive-list__item"
@@ -115,14 +127,21 @@
                     <span>{{ suggestion.label }}</span>
                     @if (suggestion.kind === 'existing') {
                       @if (suggestion.value.hidden) {
-                        <span class="text-muted interactive-list__meta">Existing · hidden in {{ year() }}</span>
+                        <span class="text-muted interactive-list__meta"
+                          >Existing · hidden in {{ year() }}</span
+                        >
                       } @else if (!suggestion.value.active) {
-                        <span class="text-muted interactive-list__meta">Existing · not active in {{ year() }}</span>
+                        <span class="text-muted interactive-list__meta"
+                          >Existing · not active in {{ year() }}</span
+                        >
                       } @else {
                         <span class="text-muted interactive-list__meta">Existing · visible</span>
                       }
                     } @else {
-                      <span class="text-muted interactive-list__meta">GeoAdmin · {{ suggestion.x.toFixed(0) }}, {{ suggestion.y.toFixed(0) }}</span>
+                      <span class="text-muted interactive-list__meta"
+                        >GeoAdmin · {{ suggestion.x.toFixed(0) }},
+                        {{ suggestion.y.toFixed(0) }}</span
+                      >
                     }
                   </button>
                 }
@@ -136,13 +155,22 @@
           } @else if (!selected.active) {
             <div class="quick-mode-note">Existing place selected: not active in {{ year() }}.</div>
           } @else {
-            <div class="quick-mode-note">Existing place selected: will reuse current anchor history.</div>
+            <div class="quick-mode-note">
+              Existing place selected: will reuse current anchor history.
+            </div>
           }
         }
         @if (quickPlaceGeoPoint(); as point) {
-          <div class="quick-mode-note">Anchor preview: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}</div>
+          <div class="quick-mode-note">
+            Anchor preview: x {{ point.x.toFixed(1) }}, y {{ point.y.toFixed(1) }}
+          </div>
         }
-        <button type="button" class="button button--primary button--compact admin-quick-entity-panel__create-button" [disabled]="!quickPlaceName().trim()" (click)="saveQuickPlace()">
+        <button
+          type="button"
+          class="button button--primary button--compact admin-quick-entity-panel__create-button"
+          [disabled]="!quickPlaceName().trim()"
+          (click)="saveQuickPlace()"
+        >
           @if (selectedQuickPlaceExisting(); as selected) {
             @if (selected.hidden) {
               Unhide & Use Place
@@ -157,7 +185,7 @@
 
       @if (quickEntityMode() === 'link' || quickEntityMode() === 'service') {
         <div class="quick-edge-row">
-          <label class="quick-edge-field">
+          <label class="form-field form-field--compact quick-edge-field">
             <div class="quick-field-header">
               <span>{{ 'label.from' | transloco }}</span>
               @if (quickEntityMode() === 'service') {
@@ -169,7 +197,9 @@
                   aria-label="Filter source places by trip direction"
                 >
                   @for (filter of serviceNodeFilterOptions; track filter.id) {
-                    <option [value]="filter.id" [selected]="filter.id === quickFromNodeFilter()">{{ filter.label }}</option>
+                    <option [value]="filter.id" [selected]="filter.id === quickFromNodeFilter()">
+                      {{ filter.label }}
+                    </option>
                   }
                 </select>
               }
@@ -204,11 +234,17 @@
             </div>
           </label>
 
-          <button type="button" class="button button--secondary button--compact admin-quick-entity-panel__swap-button" tabindex="-1" (click)="swapQuickDirection()" title="Swap direction">
+          <button
+            type="button"
+            class="button button--secondary button--compact button--pill button--icon admin-quick-entity-panel__swap-button"
+            tabindex="-1"
+            (click)="swapQuickDirection()"
+            title="Swap direction"
+          >
             <fa-icon [icon]="swapIcon"></fa-icon>
           </button>
 
-          <label class="quick-edge-field">
+          <label class="form-field form-field--compact quick-edge-field">
             <div class="quick-field-header">
               <span>{{ 'label.to' | transloco }}</span>
               @if (quickEntityMode() === 'service') {
@@ -220,7 +256,9 @@
                   aria-label="Filter destination places by trip direction"
                 >
                   @for (filter of serviceNodeFilterOptions; track filter.id) {
-                    <option [value]="filter.id" [selected]="filter.id === quickToNodeFilter()">{{ filter.label }}</option>
+                    <option [value]="filter.id" [selected]="filter.id === quickToNodeFilter()">
+                      {{ filter.label }}
+                    </option>
                   }
                 </select>
               }
@@ -257,9 +295,15 @@
         </div>
 
         <div class="quick-edge-row quick-edge-meta">
-          <label class="quick-edge-field">
+          <label class="form-field form-field--compact quick-edge-field">
             <span>{{ 'label.distance' | transloco }}</span>
-            <input class="form-control form-control--elevated" type="number" tabindex="3" [value]="quickDistance()" (input)="updateQuickDistance($event)" />
+            <input
+              class="form-control form-control--elevated"
+              type="number"
+              tabindex="3"
+              [value]="quickDistance()"
+              (input)="updateQuickDistance($event)"
+            />
           </label>
         </div>
 
@@ -269,7 +313,7 @@
 
         @if (quickEntityMode() === 'service') {
           <div class="quick-service-notes">
-            <label class="quick-edge-field">
+            <label class="form-field form-field--compact quick-edge-field">
               <span>Note DE</span>
               <input
                 class="form-control form-control--elevated"
@@ -280,7 +324,7 @@
                 (input)="quickServiceNoteDe.set($any($event.target).value)"
               />
             </label>
-            <label class="quick-edge-field">
+            <label class="form-field form-field--compact quick-edge-field">
               <span>Note FR</span>
               <input
                 class="form-control form-control--elevated"
@@ -295,7 +339,11 @@
 
           <div class="quick-trip-header">
             <span class="quick-trip-title">Trips</span>
-          <button #addQuickTripButton type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="addQuickTrip()"
+            <button
+              #addQuickTripButton
+              type="button"
+              class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+              (click)="addQuickTrip()"
               tabindex="4"
             >
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
@@ -319,7 +367,7 @@
                 >
                   @for (transport of transportOptions; track transport) {
                     <option [value]="transport" [selected]="transport === trip.transport">
-                      {{ ('transport.' + transport) | transloco }}
+                      {{ 'transport.' + transport | transloco }}
                     </option>
                   }
                 </select>
@@ -345,7 +393,13 @@
                   [attr.data-quick-trip-index]="idx"
                   data-quick-trip-field="arrives"
                 />
-                <button type="button" class="button button--secondary button--compact admin-trip-table__remove-button" tabindex="-1" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+                <button
+                  type="button"
+                  class="button button--secondary button--compact button--pill button--icon admin-trip-table__remove-button"
+                  tabindex="-1"
+                  (click)="removeQuickTrip(trip.id)"
+                  [disabled]="quickTrips().length <= 1"
+                >
                   <fa-icon [icon]="xmarkIcon"></fa-icon>
                 </button>
               </div>
@@ -368,7 +422,12 @@
           <button
             type="button"
             class="button button--primary button--compact admin-quick-entity-panel__create-button"
-            [disabled]="!quickFromId() || !quickToId() || quickFromId() === quickToId() || !tripsValid(quickTrips())"
+            [disabled]="
+              !quickFromId() ||
+              !quickToId() ||
+              quickFromId() === quickToId() ||
+              !tripsValid(quickTrips())
+            "
             (click)="saveQuickEdge()"
             [tabIndex]="5 + quickTrips().length * 2"
           >
@@ -382,11 +441,21 @@
           Add trips fast, then append into current selected/draft service.
         </div>
         <div class="trip-header">
-          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addQuickTrip()">
+          <button
+            class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+            type="button"
+            (click)="addQuickTrip()"
+          >
             <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
             Add row
           </button>
-          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="appendQuickTripsToCurrentService()">Append to Service</button>
+          <button
+            class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+            type="button"
+            (click)="appendQuickTripsToCurrentService()"
+          >
+            Append to Service
+          </button>
         </div>
         <div class="quick-trip-table">
           <div class="quick-trip-row header">
@@ -397,14 +466,37 @@
           </div>
           @for (trip of quickTrips(); track trip.id; let idx = $index) {
             <div class="quick-trip-row">
-              <select class="form-control form-control--compact form-control--elevated" [value]="trip.transport" (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)">
+              <select
+                class="form-control form-control--compact form-control--elevated"
+                [value]="trip.transport"
+                (change)="updateQuickTripField(trip.id, 'transport', $any($event.target).value)"
+              >
                 @for (transport of transportOptions; track transport) {
-                  <option [value]="transport" [selected]="transport === trip.transport">{{ ('transport.' + transport) | transloco }}</option>
+                  <option [value]="transport" [selected]="transport === trip.transport">
+                    {{ 'transport.' + transport | transloco }}
+                  </option>
                 }
               </select>
-              <input class="form-control form-control--compact form-control--elevated" type="text" [value]="trip.departs" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)" />
-              <input class="form-control form-control--compact form-control--elevated" type="text" [value]="trip.arrives" placeholder="HH:MM" (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)" />
-              <button type="button" class="button button--secondary button--compact admin-trip-table__remove-button" (click)="removeQuickTrip(trip.id)" [disabled]="quickTrips().length <= 1">
+              <input
+                class="form-control form-control--compact form-control--elevated"
+                type="text"
+                [value]="trip.departs"
+                placeholder="HH:MM"
+                (input)="updateQuickTripField(trip.id, 'departs', $any($event.target).value)"
+              />
+              <input
+                class="form-control form-control--compact form-control--elevated"
+                type="text"
+                [value]="trip.arrives"
+                placeholder="HH:MM"
+                (input)="updateQuickTripField(trip.id, 'arrives', $any($event.target).value)"
+              />
+              <button
+                type="button"
+                class="button button--secondary button--compact button--pill button--icon admin-trip-table__remove-button"
+                (click)="removeQuickTrip(trip.id)"
+                [disabled]="quickTrips().length <= 1"
+              >
                 <fa-icon [icon]="xmarkIcon"></fa-icon>
               </button>
             </div>
@@ -413,7 +505,7 @@
       }
 
       @if (quickEntityMode() === 'fact') {
-        <label class="quick-edge-field">
+        <label class="form-field form-field--compact quick-edge-field">
           <span>Target place</span>
           <div class="quick-edge-typeahead">
             <input
@@ -443,44 +535,80 @@
             }
           </div>
         </label>
-        <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="useSelectedPlaceAsQuickTarget()" [disabled]="!selectedNodeId()">
+        <button
+          type="button"
+          class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+          (click)="useSelectedPlaceAsQuickTarget()"
+          [disabled]="!selectedNodeId()"
+        >
           Use selected place
         </button>
       }
 
       @if (quickEntityMode() === 'fact') {
         <div class="quick-fact-grid">
-          <label class="quick-edge-field">
+          <label class="form-field form-field--compact quick-edge-field">
             <span>Schema key</span>
-            <input class="form-control form-control--elevated" type="text" [value]="quickFactSchemaKey()" (input)="quickFactSchemaKey.set($any($event.target).value)" />
+            <input
+              class="form-control form-control--elevated"
+              type="text"
+              [value]="quickFactSchemaKey()"
+              (input)="quickFactSchemaKey.set($any($event.target).value)"
+            />
           </label>
-          <label class="quick-edge-field">
+          <label class="form-field form-field--compact quick-edge-field">
             <span>Value type</span>
-            <select class="form-control form-control--elevated" [value]="quickFactValueType()" (change)="quickFactValueType.set($any($event.target).value)">
+            <select
+              class="form-control form-control--elevated"
+              [value]="quickFactValueType()"
+              (change)="quickFactValueType.set($any($event.target).value)"
+            >
               <option value="string">string</option>
               <option value="number">number</option>
               <option value="boolean">boolean</option>
             </select>
           </label>
         </div>
-        <label class="quick-edge-field">
+        <label class="form-field form-field--compact quick-edge-field">
           <span>Value</span>
-          <input class="form-control form-control--elevated" type="text" [value]="quickFactValue()" (input)="quickFactValue.set($any($event.target).value)" />
+          <input
+            class="form-control form-control--elevated"
+            type="text"
+            [value]="quickFactValue()"
+            (input)="quickFactValue.set($any($event.target).value)"
+          />
         </label>
-        <button type="button" class="button button--primary button--compact admin-quick-entity-panel__create-button" [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()" (click)="addQuickFact()">
+        <button
+          type="button"
+          class="button button--primary button--compact admin-quick-entity-panel__create-button"
+          [disabled]="!quickFactSchemaKey().trim() || !quickFactValue().trim()"
+          (click)="addQuickFact()"
+        >
           {{ editingFactId() ? 'Save Fact' : 'Add Fact' }}
         </button>
         @if (editingFactId()) {
-          <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="cancelFactEdit()">Cancel Edit</button>
+          <button
+            type="button"
+            class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+            (click)="cancelFactEdit()"
+          >
+            Cancel Edit
+          </button>
         }
       }
-
     </section>
 
-    <div class="shortcuts-panel surface-card surface-card--panel" [class.collapsed]="shortcutsCollapsed()">
+    <div
+      class="shortcuts-panel panel-shell panel-shell--surface surface-card surface-card--panel"
+      [class.collapsed]="shortcutsCollapsed()"
+    >
       <div class="shortcuts-header">
         <span>{{ 'admin.shortcutsTitle' | transloco }}</span>
-        <button type="button" class="button button--secondary button--compact button--pill admin-panel__ghost-button" (click)="toggleShortcuts()">
+        <button
+          type="button"
+          class="button button--secondary button--compact button--pill button--icon admin-panel__ghost-button"
+          (click)="toggleShortcuts()"
+        >
           @if (shortcutsCollapsed()) {
             <fa-icon [icon]="plusIcon"></fa-icon>
           } @else {
@@ -504,7 +632,7 @@
   </section>
 
   <aside class="side-panel admin-panel">
-    <div class="sidebar-header panel-section">
+    <div class="sidebar-header panel-section panel-shell panel-shell--compact">
       <div class="header-row">
         <div class="header-title">
           Admin
@@ -513,18 +641,30 @@
           }
         </div>
         <div class="header-actions">
-          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addNodeAtCursor()">
+          <button
+            class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+            type="button"
+            (click)="addNodeAtCursor()"
+          >
             <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
             Add Place
           </button>
           @if (selectedNodeId()) {
-            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEdgeFromSelected()">
+            <button
+              class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+              type="button"
+              (click)="startEdgeFromSelected()"
+            >
               <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
               Add Link/Service
             </button>
           }
           @if (isDemo()) {
-            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="restartTutorial()">
+            <button
+              class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+              type="button"
+              (click)="restartTutorial()"
+            >
               {{ 'admin.restartTutorial' | transloco }}
             </button>
           }
@@ -538,7 +678,13 @@
       @if (selection.pendingCreateEdgeFromNodeId(); as fromId) {
         <div class="pending-row">
           <span>Service from {{ getNodeName(fromId) }} - pick destination</span>
-          <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelPendingEdge()">Esc</button>
+          <button
+            class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+            type="button"
+            (click)="cancelPendingEdge()"
+          >
+            Esc
+          </button>
         </div>
       }
 
@@ -559,46 +705,76 @@
     <div class="sidebar-body">
       @if (inspectorTab() === 'core') {
         @if (!selectedNodeId() && !selectedEdgeId() && !draftNode() && !draftEdge()) {
-          <section class="panel-section surface-card surface-card--panel empty-state">
-            <div class="ui-section-title">Core Inspector</div>
+          <section
+            class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel empty-state"
+          >
+            <div class="panel-shell__title">Core Inspector</div>
             <div class="text-muted">Select a place or service on the map to edit core fields.</div>
             <div class="hint">Use quick modes (P/L/S/T/F/A) for fast creation.</div>
           </section>
         }
 
-        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedNodeId() && !draftNode()" #nodePanel>
-          <div class="ui-section-title">Place (Core)</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel compact"
+          [class.collapsed]="!selectedNodeId() && !draftNode()"
+          #nodePanel
+        >
+          <div class="panel-shell__title">Place (Core)</div>
           @if (selectedNodeId() && !draftNode()) {
             <div class="node-actions">
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEdgeFromSelected()">
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="startEdgeFromSelected()"
+              >
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 Add Service
               </button>
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateSelectedNode()">
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="duplicateSelectedNode()"
+              >
                 Duplicate Place
               </button>
               <div class="danger-action-wrap">
                 @if (confirmDeleteNode() && deleteConfirmAnchor() === 'inline') {
-                  <div class="delete-popover surface-card surface-card--panel surface-card--overlay">
-                    <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
+                  <div
+                    class="delete-popover panel-shell panel-shell--surface panel-shell--compact surface-card surface-card--panel surface-card--overlay"
+                  >
+                    <div class="delete-popover-text">
+                      {{ 'admin.confirmDeleteNode' | transloco }}
+                    </div>
                     <div class="overlay-panel__actions delete-popover-actions">
-                      <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
+                      <button
+                        class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button"
+                        type="button"
+                        (click)="deleteSelectedNode()"
+                      >
                         Delete Place
                       </button>
-                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelDeleteNode()">
+                      <button
+                        class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                        type="button"
+                        (click)="cancelDeleteNode()"
+                      >
                         {{ 'btn.cancel' | transloco }}
                       </button>
                     </div>
                   </div>
                 }
-                <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="requestDeleteNode('inline')">
+                <button
+                  class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button"
+                  type="button"
+                  (click)="requestDeleteNode('inline')"
+                >
                   Delete Place
                 </button>
               </div>
             </div>
           }
           @if (draftNode(); as draft) {
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.name' | transloco }}</span>
               <div class="typeahead">
                 <input
@@ -619,18 +795,24 @@
                         (click)="applyGeoResult(result)"
                       >
                         <span>{{ result.label }}</span>
-                        <span class="text-muted interactive-list__meta">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                        <span class="text-muted interactive-list__meta"
+                          >{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span
+                        >
                       </button>
                     }
                   </div>
                 }
               </div>
             </label>
-            <label class="field checkbox-row">
-              <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+            <label class="form-field field checkbox-row">
+              <input
+                type="checkbox"
+                [checked]="geoSearchEnabled()"
+                (change)="toggleGeoSearch($event)"
+              />
               <span>{{ 'admin.geoSearch' | transloco }}</span>
             </label>
-            <label class="field checkbox-row">
+            <label class="form-field field checkbox-row">
               <input
                 type="checkbox"
                 [checked]="draft.foreign ?? false"
@@ -638,17 +820,27 @@
               />
               <span>{{ 'label.foreign' | transloco }}</span>
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.validFrom' | transloco }}</span>
-              <input class="form-control form-control--elevated" type="number" [value]="draft.validFrom" (input)="updateDraftValidFrom($event)" />
+              <input
+                class="form-control form-control--elevated"
+                type="number"
+                [value]="draft.validFrom"
+                (input)="updateDraftValidFrom($event)"
+              />
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.validTo' | transloco }}</span>
-              <input class="form-control form-control--elevated" type="number" [value]="draft.validTo ?? ''" (input)="updateDraftValidTo($event)" />
+              <input
+                class="form-control form-control--elevated"
+                type="number"
+                [value]="draft.validTo ?? ''"
+                (input)="updateDraftValidTo($event)"
+              />
             </label>
             <div class="coord">x: {{ draft.x.toFixed(1) }} y: {{ draft.y.toFixed(1) }}</div>
           } @else if (nodeDetail(); as detail) {
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.name' | transloco }}</span>
               <div class="typeahead">
                 <input
@@ -669,18 +861,24 @@
                         (click)="applyGeoResult(result)"
                       >
                         <span>{{ result.label }}</span>
-                        <span class="text-muted interactive-list__meta">{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span>
+                        <span class="text-muted interactive-list__meta"
+                          >{{ result.x.toFixed(0) }}, {{ result.y.toFixed(0) }}</span
+                        >
                       </button>
                     }
                   </div>
                 }
               </div>
             </label>
-            <label class="field checkbox-row">
-              <input type="checkbox" [checked]="geoSearchEnabled()" (change)="toggleGeoSearch($event)" />
+            <label class="form-field field checkbox-row">
+              <input
+                type="checkbox"
+                [checked]="geoSearchEnabled()"
+                (change)="toggleGeoSearch($event)"
+              />
               <span>{{ 'admin.geoSearch' | transloco }}</span>
             </label>
-            <label class="field checkbox-row">
+            <label class="form-field field checkbox-row">
               <input
                 type="checkbox"
                 [checked]="detail.node?.foreign ?? false"
@@ -688,15 +886,27 @@
               />
               <span>{{ 'label.foreign' | transloco }}</span>
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.validFrom' | transloco }}</span>
-              <input class="form-control form-control--elevated" type="number" [value]="detail.node?.validFrom" (input)="updateSelectedValidFrom($event)" />
+              <input
+                class="form-control form-control--elevated"
+                type="number"
+                [value]="detail.node?.validFrom"
+                (input)="updateSelectedValidFrom($event)"
+              />
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.validTo' | transloco }}</span>
-              <input class="form-control form-control--elevated" type="number" [value]="detail.node?.validTo ?? ''" (input)="updateSelectedValidTo($event)" />
+              <input
+                class="form-control form-control--elevated"
+                type="number"
+                [value]="detail.node?.validTo ?? ''"
+                (input)="updateSelectedValidTo($event)"
+              />
             </label>
-            <div class="coord">x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}</div>
+            <div class="coord">
+              x: {{ detail.node?.x?.toFixed(1) }} y: {{ detail.node?.y?.toFixed(1) }}
+            </div>
             @if (outgoingEdges().length > 0) {
               <div class="edge-list dense">
                 @for (edge of outgoingEdges(); track edge.id) {
@@ -709,8 +919,12 @@
                     <span>{{ edge.toName }}</span>
                     <span class="edge-meta">
                       @for (transport of edge.transports; track transport; let isLast = $last) {
-                        {{ ('transport.' + (transport || 'postkutsche')) | transloco }}@if (!isLast) {, }
-                      } - Year {{ edge.validFrom }}
+                        {{ 'transport.' + (transport || 'postkutsche') | transloco }}
+                        @if (!isLast) {
+                          ,
+                        }
+                      }
+                      - Year {{ edge.validFrom }}
                     </span>
                   </button>
                 }
@@ -721,40 +935,68 @@
           }
         </section>
 
-        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()" #edgeEditor>
-          <div class="ui-section-title">Service (Core)</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel compact"
+          [class.collapsed]="!selectedEdgeId() && !draftEdge()"
+          #edgeEditor
+        >
+          <div class="panel-shell__title">Service (Core)</div>
           @if (selectedEdgeDraft(); as edgeDraft) {
-            <div class="coord">{{ getNodeName(edgeDraft.from) }} -> {{ getNodeName(edgeDraft.to) }}</div>
-            <label class="field">
+            <div class="coord">
+              {{ getNodeName(edgeDraft.from) }} -> {{ getNodeName(edgeDraft.to) }}
+            </div>
+            <label class="form-field field">
               <span>{{ 'label.from' | transloco }}</span>
-              <select class="form-control form-control--elevated" [value]="edgeDraft.from" (change)="updateSelectedEdgeFrom($event)">
+              <select
+                class="form-control form-control--elevated"
+                [value]="edgeDraft.from"
+                (change)="updateSelectedEdgeFrom($event)"
+              >
                 @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id" [selected]="node.id === edgeDraft.from">{{ node.name }}</option>
+                  <option [value]="node.id" [selected]="node.id === edgeDraft.from">
+                    {{ node.name }}
+                  </option>
                 }
               </select>
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.to' | transloco }}</span>
-              <select class="form-control form-control--elevated" [value]="edgeDraft.to" (change)="updateSelectedEdgeTo($event)">
+              <select
+                class="form-control form-control--elevated"
+                [value]="edgeDraft.to"
+                (change)="updateSelectedEdgeTo($event)"
+              >
                 @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id" [selected]="node.id === edgeDraft.to">{{ node.name }}</option>
+                  <option [value]="node.id" [selected]="node.id === edgeDraft.to">
+                    {{ node.name }}
+                  </option>
                 }
               </select>
             </label>
             <div class="field-grid">
-              <label class="field">
+              <label class="form-field field">
                 <span>Year</span>
-                <input class="form-control form-control--elevated" type="number" [value]="edgeDraft.validFrom" readonly />
+                <input
+                  class="form-control form-control--elevated"
+                  type="number"
+                  [value]="edgeDraft.validFrom"
+                  readonly
+                />
               </label>
-              <label class="field">
+              <label class="form-field field">
                 <span>{{ 'label.distance' | transloco }}</span>
-                <input class="form-control form-control--elevated" type="number" [value]="edgeDraft.distance ?? ''" (input)="updateSelectedEdgeDistance($event)" />
+                <input
+                  class="form-control form-control--elevated"
+                  type="number"
+                  [value]="edgeDraft.distance ?? ''"
+                  (input)="updateSelectedEdgeDistance($event)"
+                />
               </label>
             </div>
             <div class="field">
               <span>{{ 'label.notes' | transloco }}</span>
               <div class="notes-grid">
-                <label class="notes-field">
+                <label class="form-field form-field--compact notes-field">
                   <span>DE</span>
                   <textarea
                     class="form-control form-control--elevated"
@@ -763,7 +1005,7 @@
                     (input)="updateSelectedEdgeNotes('de', $event)"
                   ></textarea>
                 </label>
-                <label class="notes-field">
+                <label class="form-field form-field--compact notes-field">
                   <span>FR</span>
                   <textarea
                     class="form-control form-control--elevated"
@@ -776,40 +1018,65 @@
             </div>
           } @else if (draftEdge(); as draft) {
             <div class="coord">
-              {{ 'admin.edgeFromTo' | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) } }}
+              {{
+                'admin.edgeFromTo'
+                  | transloco: { from: getNodeName(draft.from), to: getNodeName(draft.to) }
+              }}
             </div>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.from' | transloco }}</span>
-              <select class="form-control form-control--elevated" [value]="draft.from" (change)="updateDraftEdgeFrom($event)">
+              <select
+                class="form-control form-control--elevated"
+                [value]="draft.from"
+                (change)="updateDraftEdgeFrom($event)"
+              >
                 <option value="">-</option>
                 @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id" [selected]="node.id === draft.from">{{ node.name }}</option>
+                  <option [value]="node.id" [selected]="node.id === draft.from">
+                    {{ node.name }}
+                  </option>
                 }
               </select>
             </label>
-            <label class="field">
+            <label class="form-field field">
               <span>{{ 'label.to' | transloco }}</span>
-              <select class="form-control form-control--elevated" [value]="draft.to" (change)="updateDraftEdgeTo($event)">
+              <select
+                class="form-control form-control--elevated"
+                [value]="draft.to"
+                (change)="updateDraftEdgeTo($event)"
+              >
                 <option value="">-</option>
                 @for (node of nodeOptions(); track node.id) {
-                  <option [value]="node.id" [selected]="node.id === draft.to">{{ node.name }}</option>
+                  <option [value]="node.id" [selected]="node.id === draft.to">
+                    {{ node.name }}
+                  </option>
                 }
               </select>
             </label>
             <div class="field-grid">
-              <label class="field">
+              <label class="form-field field">
                 <span>Year</span>
-                <input class="form-control form-control--elevated" type="number" [value]="draft.validFrom" readonly />
+                <input
+                  class="form-control form-control--elevated"
+                  type="number"
+                  [value]="draft.validFrom"
+                  readonly
+                />
               </label>
-              <label class="field">
+              <label class="form-field field">
                 <span>{{ 'label.distance' | transloco }}</span>
-                <input class="form-control form-control--elevated" type="number" [value]="draft.distance ?? ''" (input)="updateDraftEdgeDistance($event)" />
+                <input
+                  class="form-control form-control--elevated"
+                  type="number"
+                  [value]="draft.distance ?? ''"
+                  (input)="updateDraftEdgeDistance($event)"
+                />
               </label>
             </div>
             <div class="field">
               <span>{{ 'label.notes' | transloco }}</span>
               <div class="notes-grid">
-                <label class="notes-field">
+                <label class="form-field form-field--compact notes-field">
                   <span>DE</span>
                   <textarea
                     class="form-control form-control--elevated"
@@ -818,7 +1085,7 @@
                     (input)="updateDraftEdgeNotes('de', $event)"
                   ></textarea>
                 </label>
-                <label class="notes-field">
+                <label class="form-field form-field--compact notes-field">
                   <span>FR</span>
                   <textarea
                     class="form-control form-control--elevated"
@@ -834,15 +1101,28 @@
           }
         </section>
 
-        <section class="panel-section surface-card surface-card--panel compact" [class.collapsed]="!selectedEdgeId() && !draftEdge()">
-          <div class="ui-section-title">Trip Table</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel compact"
+          [class.collapsed]="!selectedEdgeId() && !draftEdge()"
+        >
+          <div class="panel-shell__title">Trip Table</div>
           @if (selectedEdgeDraft(); as edgeDraft) {
             <div class="trip-header">
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addSelectedTrip()">
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="addSelectedTrip()"
+              >
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 {{ 'btn.addTrip' | transloco }}
               </button>
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateSelectedTrip()">{{ 'btn.duplicate' | transloco }}</button>
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="duplicateSelectedTrip()"
+              >
+                {{ 'btn.duplicate' | transloco }}
+              </button>
             </div>
             @if (edgeDraft.trips.length > 0) {
               <div class="trip-table">
@@ -857,11 +1137,13 @@
                     <select
                       class="form-control form-control--compact form-control--elevated"
                       [value]="trip.transport"
-                      (change)="updateSelectedTripField(trip.id, 'transport', $any($event.target).value)"
+                      (change)="
+                        updateSelectedTripField(trip.id, 'transport', $any($event.target).value)
+                      "
                     >
                       @for (transport of transportOptions; track transport) {
                         <option [value]="transport" [selected]="transport === trip.transport">
-                          {{ ('transport.' + transport) | transloco }}
+                          {{ 'transport.' + transport | transloco }}
                         </option>
                       }
                     </select>
@@ -870,7 +1152,9 @@
                       type="text"
                       [value]="trip.departs"
                       placeholder="HH:MM"
-                      (input)="updateSelectedTripField(trip.id, 'departs', $any($event.target).value)"
+                      (input)="
+                        updateSelectedTripField(trip.id, 'departs', $any($event.target).value)
+                      "
                       (keydown.enter)="handleTripEnter(true, idx, 'departs')"
                       [attr.data-trip-index]="idx"
                       data-trip-field="departs"
@@ -880,12 +1164,18 @@
                       type="text"
                       [value]="trip.arrives"
                       placeholder="HH:MM"
-                      (input)="updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)"
+                      (input)="
+                        updateSelectedTripField(trip.id, 'arrives', $any($event.target).value)
+                      "
                       (keydown.enter)="handleTripEnter(true, idx, 'arrives')"
                       [attr.data-trip-index]="idx"
                       data-trip-field="arrives"
                     />
-                    <button class="button button--secondary button--compact admin-trip-table__remove-button" type="button" (click)="removeSelectedTrip(trip.id)">
+                    <button
+                      class="button button--secondary button--compact button--pill button--icon admin-trip-table__remove-button"
+                      type="button"
+                      (click)="removeSelectedTrip(trip.id)"
+                    >
                       <fa-icon [icon]="xmarkIcon"></fa-icon>
                     </button>
                   </div>
@@ -897,11 +1187,21 @@
             }
           } @else if (draftEdge(); as draft) {
             <div class="trip-header">
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="addTrip()">
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="addTrip()"
+              >
                 <fa-icon class="btn-icon" [icon]="plusIcon"></fa-icon>
                 {{ 'btn.addTrip' | transloco }}
               </button>
-              <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="duplicateDraftTrip()">{{ 'btn.duplicate' | transloco }}</button>
+              <button
+                class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                type="button"
+                (click)="duplicateDraftTrip()"
+              >
+                {{ 'btn.duplicate' | transloco }}
+              </button>
             </div>
             @if (draft.trips.length > 0) {
               <div class="trip-table">
@@ -920,7 +1220,7 @@
                     >
                       @for (transport of transportOptions; track transport) {
                         <option [value]="transport" [selected]="transport === trip.transport">
-                          {{ ('transport.' + transport) | transloco }}
+                          {{ 'transport.' + transport | transloco }}
                         </option>
                       }
                     </select>
@@ -944,7 +1244,11 @@
                       [attr.data-trip-index]="idx"
                       data-trip-field="arrives"
                     />
-                    <button class="button button--secondary button--compact admin-trip-table__remove-button" type="button" (click)="removeTrip(trip.id)">
+                    <button
+                      class="button button--secondary button--compact button--pill button--icon admin-trip-table__remove-button"
+                      type="button"
+                      (click)="removeTrip(trip.id)"
+                    >
                       <fa-icon [icon]="xmarkIcon"></fa-icon>
                     </button>
                   </div>
@@ -957,14 +1261,22 @@
           }
 
           <div class="trip-header">
-            <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="appendQuickTripsToCurrentService()">Append Quick Trips</button>
+            <button
+              class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+              type="button"
+              (click)="appendQuickTripsToCurrentService()"
+            >
+              Append Quick Trips
+            </button>
           </div>
         </section>
       }
 
       @if (inspectorTab() === 'facts') {
-        <section class="panel-section surface-card surface-card--panel">
-          <div class="ui-section-title">Facts</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel"
+        >
+          <div class="panel-shell__title">Facts</div>
           @if (selectedNodeId(); as nodeId) {
             <div class="coord">Target place: {{ getNodeName(nodeId) }}</div>
             @if (selectedNodeFacts().length > 0) {
@@ -975,7 +1287,12 @@
                       <code>{{ fact.schemaKey }}</code>
                       @if (factLink(fact); as link) {
                         @if (link.url) {
-                          <a class="fact-link" [href]="link.url" target="_blank" rel="noopener noreferrer">
+                          <a
+                            class="fact-link"
+                            [href]="link.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             {{ link.label }}
                           </a>
                         } @else {
@@ -985,10 +1302,22 @@
                     </div>
                     <div class="fact-meta">{{ fact.valueType }}</div>
                     @if (fact.editable) {
-                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="startEditFact(fact)">Edit</button>
+                      <button
+                        class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                        type="button"
+                        (click)="startEditFact(fact)"
+                      >
+                        Edit
+                      </button>
                     }
                     @if (fact.removable) {
-                      <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="removeFact(fact.id)">Remove</button>
+                      <button
+                        class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                        type="button"
+                        (click)="removeFact(fact.id)"
+                      >
+                        Remove
+                      </button>
                     }
                   </div>
                 }
@@ -1003,12 +1332,17 @@
       }
 
       @if (inspectorTab() === 'anchors') {
-        <section class="panel-section surface-card surface-card--panel" #archivePanel>
-          <div class="ui-section-title">Anchors</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel"
+          #archivePanel
+        >
+          <div class="panel-shell__title">Anchors</div>
           @if (selectedNodeId(); as nodeId) {
             @if (getNodeById(nodeId); as node) {
               <div class="archive-debug">
-                map: x={{ node.x.toFixed(1) }}, y={{ node.y.toFixed(1) }} | iiifCenter={{ node.iiifCenterX ?? '—' }}, {{ node.iiifCenterY ?? '—' }}
+                map: x={{ node.x.toFixed(1) }}, y={{ node.y.toFixed(1) }} | iiifCenter={{
+                  node.iiifCenterX ?? '—'
+                }}, {{ node.iiifCenterY ?? '—' }}
               </div>
             }
           }
@@ -1026,8 +1360,10 @@
       }
 
       @if (inspectorTab() === 'source') {
-        <section class="panel-section surface-card surface-card--panel">
-          <div class="ui-section-title">Source</div>
+        <section
+          class="panel-section panel-shell panel-shell--surface surface-card surface-card--panel"
+        >
+          <div class="panel-shell__title">Source</div>
           <div class="text-muted">Current entity payload preview (for migration/debugging).</div>
           <pre class="source-preview">{{ selectedEntitySourceJson() }}</pre>
         </section>
@@ -1040,49 +1376,98 @@
         @if (draftEdge()) {
           <button
             class="button button--primary button--compact admin-sticky-bar__action-button"
-            [disabled]="!draftEdge()?.from || !draftEdge()?.to || !tripsValid(draftEdge()?.trips ?? [])"
+            [disabled]="
+              !draftEdge()?.from || !draftEdge()?.to || !tripsValid(draftEdge()?.trips ?? [])
+            "
             (click)="saveDraftEdge()"
           >
             Save Service Draft
           </button>
         } @else if (selectedEdgeDraft()) {
-          <button class="button button--primary button--compact admin-sticky-bar__action-button" [disabled]="!tripsValid(selectedEdgeDraft()?.trips ?? [])" (click)="saveSelectedEdge()">Update Service</button>
+          <button
+            class="button button--primary button--compact admin-sticky-bar__action-button"
+            [disabled]="!tripsValid(selectedEdgeDraft()?.trips ?? [])"
+            (click)="saveSelectedEdge()"
+          >
+            Update Service
+          </button>
         } @else if (draftNode()) {
-          <button class="button button--primary button--compact admin-sticky-bar__action-button" (click)="saveDraftNode()">Create Place</button>
+          <button
+            class="button button--primary button--compact admin-sticky-bar__action-button"
+            (click)="saveDraftNode()"
+          >
+            Create Place
+          </button>
         } @else if (selectedNodeId()) {
-          <button class="button button--primary button--compact admin-sticky-bar__action-button" (click)="saveSelectedNode()">Save Place</button>
+          <button
+            class="button button--primary button--compact admin-sticky-bar__action-button"
+            (click)="saveSelectedNode()"
+          >
+            Save Place
+          </button>
         } @else {
-          <button class="button button--primary button--compact admin-sticky-bar__action-button" disabled>{{ 'btn.save' | transloco }}</button>
+          <button
+            class="button button--primary button--compact admin-sticky-bar__action-button"
+            disabled
+          >
+            {{ 'btn.save' | transloco }}
+          </button>
         }
         @if (selectedType() === 'node') {
           <div class="danger-action-wrap sticky-danger">
             @if (confirmDeleteNode() && deleteConfirmAnchor() === 'sticky') {
-              <div class="delete-popover surface-card surface-card--panel surface-card--overlay">
+              <div
+                class="delete-popover panel-shell panel-shell--surface panel-shell--compact surface-card surface-card--panel surface-card--overlay"
+              >
                 <div class="delete-popover-text">{{ 'admin.confirmDeleteNode' | transloco }}</div>
                 <div class="overlay-panel__actions delete-popover-actions">
-                  <button class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button" type="button" (click)="deleteSelectedNode()">
+                  <button
+                    class="button button--secondary button--compact button--pill button--danger admin-panel__ghost-button"
+                    type="button"
+                    (click)="deleteSelectedNode()"
+                  >
                     Delete Place
                   </button>
-                  <button class="button button--secondary button--compact button--pill admin-panel__ghost-button" type="button" (click)="cancelDeleteNode()">
+                  <button
+                    class="button button--secondary button--compact button--pill admin-panel__ghost-button"
+                    type="button"
+                    (click)="cancelDeleteNode()"
+                  >
                     {{ 'btn.cancel' | transloco }}
                   </button>
                 </div>
               </div>
             }
-            <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="!selectedNodeId()" (click)="requestDeleteNode('sticky')">
+            <button
+              class="button button--secondary button--compact admin-sticky-bar__action-button"
+              [disabled]="!selectedNodeId()"
+              (click)="requestDeleteNode('sticky')"
+            >
               Delete Place
             </button>
           </div>
         } @else {
-          <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="!selectedEdgeId()" (click)="removeSelectedEdge()">
+          <button
+            class="button button--secondary button--compact admin-sticky-bar__action-button"
+            [disabled]="!selectedEdgeId()"
+            (click)="removeSelectedEdge()"
+          >
             Delete Service
           </button>
         }
-        <button class="button button--secondary button--compact admin-sticky-bar__action-button" [disabled]="undoStack().length === 0" (click)="undoMove()">
+        <button
+          class="button button--secondary button--compact admin-sticky-bar__action-button"
+          [disabled]="undoStack().length === 0"
+          (click)="undoMove()"
+        >
           {{ 'admin.undoMove' | transloco }}
         </button>
         @if (isDemo()) {
-          <button class="button button--secondary button--compact admin-sticky-bar__action-button" type="button" (click)="resetDemo()">
+          <button
+            class="button button--secondary button--compact admin-sticky-bar__action-button"
+            type="button"
+            (click)="resetDemo()"
+          >
             {{ 'admin.resetDemo' | transloco }}
           </button>
         }

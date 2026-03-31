@@ -5,7 +5,7 @@ import { ViewerDayNightIndicatorComponent } from './viewer-day-night-indicator.c
 describe('ViewerDayNightIndicatorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewerDayNightIndicatorComponent]
+      imports: [ViewerDayNightIndicatorComponent],
     }).compileComponents();
   });
 
@@ -16,7 +16,9 @@ describe('ViewerDayNightIndicatorComponent', () => {
     expect(host.querySelector('.day-night-card')).toBeTruthy();
     expect(host.querySelector('.day-night-horizon')).toBeTruthy();
     expect(host.querySelectorAll('.day-night-wave').length).toBeGreaterThan(0);
-    expect(host.querySelector('.day-night-waves')?.getAttribute('transform')).toContain('translate(');
+    expect(host.querySelector('.day-night-waves')?.getAttribute('transform')).toContain(
+      'translate(',
+    );
   });
 
   it('keeps the symbol horizontally centered while moving it vertically', () => {
@@ -58,7 +60,7 @@ describe('ViewerDayNightIndicatorComponent', () => {
     fixture.detectChanges();
     const nearHorizonRays = getOpacity(fixture, '.day-night-rays');
 
-    fixture.componentRef.setInput('minuteOfDay', 1080);
+    fixture.componentRef.setInput('minuteOfDay', 1140);
     fixture.detectChanges();
     const horizonRays = getOpacity(fixture, '.day-night-rays');
 
@@ -69,7 +71,9 @@ describe('ViewerDayNightIndicatorComponent', () => {
 
   it('moves the wave field as the input minute changes', () => {
     const fixture = createComponent(120);
-    const earlyTransform = getRequiredElement(fixture, '.day-night-waves').getAttribute('transform');
+    const earlyTransform = getRequiredElement(fixture, '.day-night-waves').getAttribute(
+      'transform',
+    );
 
     fixture.componentRef.setInput('minuteOfDay', 780);
     fixture.detectChanges();
@@ -86,19 +90,23 @@ function createComponent(minuteOfDay: number) {
   return fixture;
 }
 
-function getRequiredElement(fixture: ReturnType<typeof createComponent>, selector: string): Element {
+function getRequiredElement(
+  fixture: ReturnType<typeof createComponent>,
+  selector: string,
+): Element {
   const element = fixture.nativeElement.querySelector(selector);
   expect(element, `Expected element ${selector} to exist`).toBeTruthy();
   return element as Element;
 }
 
 function getSymbolPosition(fixture: ReturnType<typeof createComponent>): { x: number; y: number } {
-  const transform = getRequiredElement(fixture, '.day-night-symbol').getAttribute('transform') ?? '';
+  const transform =
+    getRequiredElement(fixture, '.day-night-symbol').getAttribute('transform') ?? '';
   const match = transform.match(/translate\(([-\d.]+)\s+([-\d.]+)\)/);
   expect(match).toBeTruthy();
   return {
     x: Number(match?.[1] ?? NaN),
-    y: Number(match?.[2] ?? NaN)
+    y: Number(match?.[2] ?? NaN),
   };
 }
 

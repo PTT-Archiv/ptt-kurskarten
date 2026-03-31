@@ -12,12 +12,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  background: #000;
-  color: #fff;
+  background: var(--color-surface-inverse);
+  color: var(--color-text-inverse);
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
-  border: 2px solid #fff;
+  border: var(--border-width-2) solid var(--color-border-inverse);
   transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
@@ -33,18 +33,9 @@
 }
 
 .sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  border-bottom: 1px solid #5a5a5a;
+  border-bottom: var(--border-width-1) solid var(--color-border-inverse-soft);
   padding: var(--space-2) 2px var(--space-5);
   background: transparent;
-}
-
-.section-title {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
 }
 
 .viewer-sidebar__close-button {

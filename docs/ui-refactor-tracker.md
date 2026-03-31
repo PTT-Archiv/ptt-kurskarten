@@ -40,7 +40,7 @@ Pflegeregel:
 - [ ] Gemeinsame State-Konventionen fuer `is-active`, `is-selected`, `is-open`, `is-disabled` dokumentieren.
 - [x] Gemeinsame Text-/Section-Helfer pruefen und entscheiden, was globales Primitive wird und was lokal bleiben soll.
 - [x] Uebrige doppelte Form-Control-Stile zwischen Viewer und Admin auf gemeinsame Primitives zurueckfuehren.
-- [ ] Design-System-Naming mit strengem BEM in `docs/engineering-standards.md` oder `AGENTS.md` explizit festhalten.
+- [x] Design-System-Naming mit strengem BEM in `docs/engineering-standards.md` oder `AGENTS.md` explizit festhalten.
 
 ## 3. Viewer
 
@@ -91,16 +91,16 @@ Pflegeregel:
 ### Facade, Stores, Utils und Tests
 
 - [x] Viewer-Fassade strukturell in Stores/Utils aufgeteilt.
-- [ ] `viewer.facade.ts` weiter schrumpfen und nur als duenne Orchestrierung belassen.
-- [ ] Pure Selektoren/Mapper aus der Fassade weiter in Utils verschieben, wo keine Injection noetig ist.
-- [ ] Gezielt Unit-Tests fuer Stores und VM-Ableitungen ergaenzen.
-- [ ] Inline-Styles in Viewer-Komponenten systematisch abbauen.
+- [x] `viewer.facade.ts` weiter schrumpfen und nur als duenne Orchestrierung belassen.
+- [x] Pure Selektoren/Mapper aus der Fassade weiter in Utils verschieben, wo keine Injection noetig ist.
+- [x] Gezielt Unit-Tests fuer Stores und VM-Ableitungen ergaenzen.
+- [x] Inline-Styles in Viewer-Komponenten systematisch abbauen.
 
 ## 4. Admin / Toast / Shared UI
 
 - [x] Admin und Toast an die globale UI-Foundation angebunden.
-- [ ] Admin-Buttons vollstaendig auf globale Primitives und Viewer-nahe Designlogik angleichen.
-- [ ] Admin-Form-Controls und Panels auf verbleibende Alt-Design-Regeln pruefen.
+- [x] Admin-Buttons vollstaendig auf globale Primitives und Viewer-nahe Designlogik angleichen.
+- [x] Admin-Form-Controls und Panels auf verbleibende Alt-Design-Regeln pruefen.
 - [ ] Toast-Container und Dismiss-Controls visuell gegen die neue Foundation validieren.
 - [x] Shared UI-Komponenten wie Map-/Archive-nahe Controls auf gemeinsame Design-Tokens angleichen.
 
@@ -108,17 +108,25 @@ Pflegeregel:
 
 - [x] Angular-UI nach den groesseren Refactors mit `ngc -p apps/ptt-kurskarten-ui/tsconfig.app.json` erfolgreich kompiliert.
 - [ ] Manueller Browser-Pass fuer Viewer auf Desktop durchfuehren.
+      Separat manuell im Browser durchfuehren; nicht im Codex-Lauf abhaken.
 - [ ] Manueller Browser-Pass fuer Viewer auf Mobile durchfuehren.
+      Separat manuell im Browser durchfuehren; nicht im Codex-Lauf abhaken.
 - [ ] Archive-Mode im Browser gezielt gegenpruefen.
+      Bestandteil des separaten manuellen Browser-Passes.
 - [ ] Planner-/Search-Flows im Browser gezielt gegenpruefen.
+      Bestandteil des separaten manuellen Browser-Passes.
 - [ ] Hover-/Focus-/Disabled-Zustaende ueber Viewer, Admin und Toast gezielt gegenpruefen.
+      Bestandteil des separaten manuellen Browser-Passes.
 - [ ] Kleine Playwright-Smoke-Tests fuer Viewer-Shell, Sidebar, Planner und Mobile Sheet entwerfen.
-- [ ] Entscheiden, ob kuenftig eine automatisierte visuelle Regression fuer Kern-UI-Zustaende eingefuehrt wird.
+      Vorlaeufig nicht in diesem Repo umsetzen.
+- [x] Entscheiden, ob kuenftig eine automatisierte visuelle Regression fuer Kern-UI-Zustaende eingefuehrt wird.
+      Vorlaeufig nein: erst manuelle Browser-Paesse stabilisieren, dann ueber spaetere Automatisierung neu entscheiden.
 
 ## 6. Spaeter / Nice to have
 
-- [ ] Design-System-Regeln als eigenes Kapitel in den Engineering-Standards dokumentieren.
-- [ ] Admin- und Viewer-Panels auf einen gemeinsamen semantischen Panel-Baukasten zusammenziehen.
-- [ ] Weitere Shared-Primitives fuer Listen, Status-Badges und Meta-Zeilen ableiten.
-- [ ] Screenshot-basierte Referenzdokumentation fuer wichtige UI-Zustaende aufbauen.
+- [x] Design-System-Regeln als eigenes Kapitel in den Engineering-Standards dokumentieren.
+- [x] Admin- und Viewer-Panels auf einen gemeinsamen semantischen Panel-Baukasten zusammenziehen.
+- [x] Weitere Shared-Primitives fuer Listen, Status-Badges und Meta-Zeilen ableiten.
+- [x] Screenshot-basierte Referenzdokumentation fuer wichtige UI-Zustaende aufbauen.
 - [ ] Refactor-Tracker spaeter in bereichsspezifische Tracker aufteilen, falls das Dokument zu gross wird.
+      Aktuell noch nicht noetig; bei weiterem Wachstum erneut pruefen.

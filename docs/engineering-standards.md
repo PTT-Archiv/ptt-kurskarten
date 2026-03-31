@@ -40,10 +40,14 @@
 - Split service responsibilities between data access, orchestration/facade state, and pure transforms/helpers.
 - For NestJS, split responsibilities between controllers, application services, data access, and pure domain helpers rather than collapsing them into one provider.
 
-## Styling and tokens
+## Design system
 
-- New style work must use the semantic token layer from `src/styles/_tokens.scss`.
-- Refactor by boundary: tokens first, then shared primitives, then feature shells, then leaf components.
+- New style work must use the semantic token layer from `apps/ptt-kurskarten-ui/src/styles/tokens.css`.
+- Build UI in layers: tokens first, then shared primitives in `apps/ptt-kurskarten-ui/src/styles/primitives.css`, then feature shells, then leaf components.
+- Prefer semantic primitives such as `panel-shell`, `panel-list`, `status-badge`, `meta-line`, `button`, `surface-card`, and `form-control` over feature-local base classes.
+- Use feature-local classes only for ownership, geometry, and one-off behavior. Do not recreate global primitives inside feature CSS.
+- Keep naming strict and readable: primitives stay semantic and reusable, feature classes stay namespaced to the feature or component and follow BEM-like ownership.
+- When Admin and Viewer need the same UI shape, extract or extend the shared primitive instead of copying the pattern twice.
 - Do not introduce UI-library-specific design language into feature decisions.
 
 ## Accessibility and themes

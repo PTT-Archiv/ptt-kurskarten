@@ -19,17 +19,17 @@
 
 .fact-value {
   font-size: var(--font-size-md);
-  color: #fff;
+  color: var(--color-text-inverse);
   overflow-wrap: anywhere;
 }
 
 .fact-link {
-  color: #79b8ff;
+  color: var(--color-link-inverse);
   text-decoration: underline;
 }
 
 .fact-link:hover {
-  color: #fff;
+  color: var(--color-text-inverse);
 }
 
 .node-trip-time {
