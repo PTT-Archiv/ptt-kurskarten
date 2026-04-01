@@ -11,7 +11,7 @@ import type {
   GraphSnapshot,
   NodeDetail,
   TransportType,
-  Year
+  Year,
 } from '@ptt-kurskarten/shared';
 import type { GraphRepository } from '../graph.repository';
 
@@ -57,13 +57,16 @@ export class JsonGraphRepository implements GraphRepository {
     const activeNodes = nodes.filter((node) => this.isNodeActive(node, y));
     const activeNodeIds = new Set(activeNodes.map((node) => node.id));
     const activeEdges = edges.filter(
-      (edge) => this.isEdgeActive(edge, y) && activeNodeIds.has(edge.from) && activeNodeIds.has(edge.to)
+      (edge) =>
+        this.isEdgeActive(edge, y) &&
+        activeNodeIds.has(edge.from) &&
+        activeNodeIds.has(edge.to),
     );
 
     return {
       year: y,
       nodes: activeNodes,
-      edges: activeEdges.map((edge) => ({ ...edge, trips: edge.trips ?? [] }))
+      edges: activeEdges.map((edge) => ({ ...edge, trips: edge.trips ?? [] })),
     };
   }
 
@@ -73,20 +76,29 @@ export class JsonGraphRepository implements GraphRepository {
 
   async getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail> {
     const snapshot = await this.getGraphSnapshot(year);
-    const edges = snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId);
-    const node = snapshot.nodes.find((candidate) => candidate.id === nodeId) ?? null;
+    const edges = snapshot.edges.filter(
+      (edge) => edge.from === nodeId || edge.to === nodeId,
+    );
+    const node =
+      snapshot.nodes.find((candidate) => candidate.id === nodeId) ?? null;
     const neighborIds = new Set(edges.flatMap((edge) => [edge.from, edge.to]));
     neighborIds.delete(nodeId);
 
     return {
       year: snapshot.year,
       node,
-      neighbors: snapshot.nodes.filter((candidate) => neighborIds.has(candidate.id)),
-      edges
+      neighbors: snapshot.nodes.filter((candidate) =>
+        neighborIds.has(candidate.id),
+      ),
+      edges,
     };
   }
 
-  async getAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+  async getAssertions(_filters?: {
+    year?: number;
+    targetType?: string;
+    targetId?: string;
+  }): Promise<GraphAssertion[]> {
     return [];
   }
 
@@ -94,7 +106,10 @@ export class JsonGraphRepository implements GraphRepository {
     return assertion;
   }
 
-  async updateAssertion(_id: string, _patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+  async updateAssertion(
+    _id: string,
+    _patch: Partial<GraphAssertion>,
+  ): Promise<GraphAssertion | null> {
     return null;
   }
 
@@ -133,14 +148,20 @@ export class JsonGraphRepository implements GraphRepository {
     return years.map((year) => ({ id: `edition-${year}`, year, public: true }));
   }
 
-  async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
+  async updateEdition(
+    year: number,
+    patch: Partial<EditionEntry>,
+  ): Promise<EditionEntry> {
     const y = Number.isFinite(year) ? year : 1852;
     return {
       id: patch.id ?? `edition-${y}`,
       year: y,
       title: patch.title,
-      iiifRoute: typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined,
-      public: patch.public ?? true
+      iiifRoute:
+        typeof patch.iiifRoute === 'string' && patch.iiifRoute.trim().length
+          ? patch.iiifRoute.trim().replace(/\/+$/, '')
+          : undefined,
+      public: patch.public ?? true,
     };
   }
 
@@ -165,7 +186,10 @@ export class JsonGraphRepository implements GraphRepository {
     });
   }
 
-  async updateNode(id: string, patch: GraphNodePatch): Promise<GraphNode | null> {
+  async updateNode(
+    id: string,
+    patch: GraphNodePatch,
+  ): Promise<GraphNode | null> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
@@ -174,14 +198,22 @@ export class JsonGraphRepository implements GraphRepository {
         return null;
       }
       const { anchorYear: _anchorYear, ...nodePatch } = patch;
-      const updated = { ...this.fromStoredNode(nodes[index]), ...nodePatch, id } satisfies GraphNode;
+      const updated = {
+        ...this.fromStoredNode(nodes[index]),
+        ...nodePatch,
+        id,
+      } satisfies GraphNode;
       nodes[index] = this.toStoredNode(updated);
       await this.writeJsonAtomic(this.nodesPath, nodes);
       return updated;
     });
   }
 
-  async setNodeHidden(_id: string, _year: number, _hidden: boolean): Promise<boolean> {
+  async setNodeHidden(
+    _id: string,
+    _year: number,
+    _hidden: boolean,
+  ): Promise<boolean> {
     return false;
   }
 
@@ -190,20 +222,34 @@ export class JsonGraphRepository implements GraphRepository {
       await this.ensureInitialized();
       const nodes = await this.readArrayFile<StoredNode>(this.nodesPath);
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
-      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
+      const segments = await this.readArrayFile<StoredSegment>(
+        this.segmentsPath,
+      );
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = nodes.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
         return false;
       }
 
-      const remainingNodes = [...nodes.slice(0, index), ...nodes.slice(index + 1)];
+      const remainingNodes = [
+        ...nodes.slice(0, index),
+        ...nodes.slice(index + 1),
+      ];
       const removedEdgeIds = new Set(
-        edges.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id)
+        edges
+          .filter((edge) => edge.from === id || edge.to === id)
+          .map((edge) => edge.id),
       );
-      const remainingEdges = edges.filter((edge) => !removedEdgeIds.has(edge.id));
-      const remainingSegments = this.cleanupOrphanSegments(segments, remainingEdges);
-      const remainingTrips = trips.filter((trip) => !removedEdgeIds.has(trip.edgeId));
+      const remainingEdges = edges.filter(
+        (edge) => !removedEdgeIds.has(edge.id),
+      );
+      const remainingSegments = this.cleanupOrphanSegments(
+        segments,
+        remainingEdges,
+      );
+      const remainingTrips = trips.filter(
+        (trip) => !removedEdgeIds.has(trip.edgeId),
+      );
 
       await this.writeJsonAtomic(this.nodesPath, remainingNodes);
       await this.writeJsonAtomic(this.edgesPath, remainingEdges);
@@ -217,7 +263,9 @@ export class JsonGraphRepository implements GraphRepository {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
-      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
+      const segments = await this.readArrayFile<StoredSegment>(
+        this.segmentsPath,
+      );
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const existing = edges.find((candidate) => candidate.id === edge.id);
       if (existing) {
@@ -226,24 +274,44 @@ export class JsonGraphRepository implements GraphRepository {
 
       const normalizedTrips = this.normalizeTrips(edge.id, edge.trips ?? []);
       const storedEdge = this.toStoredEdge({ ...edge, trips: [] });
-      const nextSegments = this.upsertSegment(segments, edge.from, edge.to, edge.distance);
-      const nextTrips = trips.filter((trip) => trip.edgeId !== edge.id).concat(normalizedTrips);
+      const nextSegments = this.upsertSegment(
+        segments,
+        edge.from,
+        edge.to,
+        edge.distance,
+      );
+      const nextTrips = trips
+        .filter((trip) => trip.edgeId !== edge.id)
+        .concat(normalizedTrips);
 
       edges.push(storedEdge);
       await this.writeJsonAtomic(this.edgesPath, edges);
       await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      const distance = this.getSegmentDistance(nextSegments, edge.from, edge.to);
-      return { ...edge, distance, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const distance = this.getSegmentDistance(
+        nextSegments,
+        edge.from,
+        edge.to,
+      );
+      return {
+        ...edge,
+        distance,
+        trips: normalizedTrips.map(this.stripTripEdgeId),
+      };
     });
   }
 
-  async updateEdge(id: string, patch: Partial<GraphEdge>): Promise<GraphEdge | null> {
+  async updateEdge(
+    id: string,
+    patch: Partial<GraphEdge>,
+  ): Promise<GraphEdge | null> {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
-      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
+      const segments = await this.readArrayFile<StoredSegment>(
+        this.segmentsPath,
+      );
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = edges.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
@@ -254,17 +322,32 @@ export class JsonGraphRepository implements GraphRepository {
       const updated = { ...existing, ...patch, id } satisfies GraphEdge;
       const nextTripsPayload = patch.trips ?? existing.trips ?? [];
       const normalizedTrips = this.normalizeTrips(id, nextTripsPayload);
-      const nextSegments = this.upsertSegment(segments, updated.from, updated.to, patch.distance);
+      const nextSegments = this.upsertSegment(
+        segments,
+        updated.from,
+        updated.to,
+        patch.distance,
+      );
 
       edges[index] = this.toStoredEdge(updated);
-      const nextTrips = trips.filter((trip) => trip.edgeId !== id).concat(normalizedTrips);
+      const nextTrips = trips
+        .filter((trip) => trip.edgeId !== id)
+        .concat(normalizedTrips);
 
       await this.writeJsonAtomic(this.edgesPath, edges);
       await this.writeJsonAtomic(this.segmentsPath, nextSegments);
       await this.writeJsonAtomic(this.tripsPath, nextTrips);
 
-      const distance = this.getSegmentDistance(nextSegments, updated.from, updated.to);
-      return { ...updated, distance, trips: normalizedTrips.map(this.stripTripEdgeId) };
+      const distance = this.getSegmentDistance(
+        nextSegments,
+        updated.from,
+        updated.to,
+      );
+      return {
+        ...updated,
+        distance,
+        trips: normalizedTrips.map(this.stripTripEdgeId),
+      };
     });
   }
 
@@ -272,7 +355,9 @@ export class JsonGraphRepository implements GraphRepository {
     return this.enqueueWrite(async () => {
       await this.ensureInitialized();
       const edges = await this.readArrayFile<StoredEdge>(this.edgesPath);
-      const segments = await this.readArrayFile<StoredSegment>(this.segmentsPath);
+      const segments = await this.readArrayFile<StoredSegment>(
+        this.segmentsPath,
+      );
       const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
       const index = edges.findIndex((candidate) => candidate.id === id);
       if (index === -1) {
@@ -293,11 +378,17 @@ export class JsonGraphRepository implements GraphRepository {
   }
 
   private isNodeActive(node: GraphNode, year: Year): boolean {
-    return node.validFrom <= year && (node.validTo === undefined || year <= node.validTo);
+    return (
+      node.validFrom <= year &&
+      (node.validTo === undefined || year <= node.validTo)
+    );
   }
 
   private isEdgeActive(edge: GraphEdge, year: Year): boolean {
-    return edge.validFrom <= year && (edge.validTo === undefined || year <= edge.validTo);
+    return (
+      edge.validFrom <= year &&
+      (edge.validTo === undefined || year <= edge.validTo)
+    );
   }
 
   private async loadGraphData(): Promise<GraphData> {
@@ -309,7 +400,11 @@ export class JsonGraphRepository implements GraphRepository {
     const trips = await this.readArrayFile<StoredTrip>(this.tripsPath);
 
     const normalizedNodes = nodes.map((node) => this.fromStoredNode(node));
-    const migration = this.migrateEdgesIfNeeded(rawEdges, normalizedNodes, segments);
+    const migration = this.migrateEdgesIfNeeded(
+      rawEdges,
+      normalizedNodes,
+      segments,
+    );
     if (migration.changed) {
       edges = migration.edges;
       segments = migration.segments;
@@ -318,22 +413,30 @@ export class JsonGraphRepository implements GraphRepository {
         await this.writeJsonAtomic(this.segmentsPath, migration.segments);
       });
     }
-    const normalizedEdges = edges.map((edge) => this.assembleEdge(edge, trips, segments));
+    const normalizedEdges = edges.map((edge) =>
+      this.assembleEdge(edge, trips, segments),
+    );
 
     return {
       nodes: normalizedNodes,
-      edges: normalizedEdges
+      edges: normalizedEdges,
     };
   }
 
-  private assembleEdge(edge: StoredEdge, trips: StoredTrip[], segments: StoredSegment[]): GraphEdge {
-    const edgeTrips = trips.filter((trip) => trip.edgeId === edge.id).map(this.stripTripEdgeId);
+  private assembleEdge(
+    edge: StoredEdge,
+    trips: StoredTrip[],
+    segments: StoredSegment[],
+  ): GraphEdge {
+    const edgeTrips = trips
+      .filter((trip) => trip.edgeId === edge.id)
+      .map(this.stripTripEdgeId);
     const distance = this.getSegmentDistance(segments, edge.from, edge.to);
     return {
       ...edge,
       distance,
       validTo: edge.validTo ?? undefined,
-      trips: edgeTrips
+      trips: edgeTrips,
     };
   }
 
@@ -341,8 +444,8 @@ export class JsonGraphRepository implements GraphRepository {
     return trips.map((trip) => ({
       ...trip,
       id: trip.id ?? randomUUID(),
-      transport: (trip.transport ?? 'postkutsche') as TransportType,
-      edgeId
+      transport: trip.transport ?? 'postkutsche',
+      edgeId,
     }));
   }
 
@@ -350,21 +453,21 @@ export class JsonGraphRepository implements GraphRepository {
     const { edgeId: _edgeId, ...rest } = trip;
     return {
       transport: 'postkutsche',
-      ...rest
+      ...rest,
     };
   }
 
   private toStoredNode(node: GraphNode): StoredNode {
     return {
       ...node,
-      validTo: node.validTo ?? null
+      validTo: node.validTo ?? null,
     };
   }
 
   private fromStoredNode(node: StoredNode): GraphNode {
     return {
       ...node,
-      validTo: node.validTo ?? undefined
+      validTo: node.validTo ?? undefined,
     };
   }
 
@@ -372,14 +475,14 @@ export class JsonGraphRepository implements GraphRepository {
     const { trips: _trips, distance: _distance, ...rest } = edge;
     return {
       ...rest,
-      validTo: edge.validTo ?? null
+      validTo: edge.validTo ?? null,
     };
   }
 
   private migrateEdgesIfNeeded(
     edges: StoredEdge[],
     nodes: GraphNode[],
-    existingSegments: StoredSegment[]
+    existingSegments: StoredSegment[],
   ): { edges: StoredEdge[]; segments: StoredSegment[]; changed: boolean } {
     const nodeIds = new Set(nodes.map((node) => node.id));
     const nameToId = new Map<string, string>();
@@ -396,14 +499,20 @@ export class JsonGraphRepository implements GraphRepository {
     duplicates.forEach((name) => nameToId.delete(name));
 
     let changed = false;
-    const segments = new Map(existingSegments.map((segment) => [segment.id, segment]));
+    const segments = new Map(
+      existingSegments.map((segment) => [segment.id, segment]),
+    );
     const migrated = edges.map((edge) => {
       const {
         durationMinutes: _durationMinutes,
         distance: edgeDistance,
         leuge: edgeLeuge,
         ...base
-      } = edge as StoredEdge & { durationMinutes?: number; distance?: number; leuge?: number };
+      } = edge as StoredEdge & {
+        durationMinutes?: number;
+        distance?: number;
+        leuge?: number;
+      };
       const segmentDistance = edgeDistance ?? edgeLeuge;
       let next: StoredEdge = { ...base };
       if (_durationMinutes !== undefined) {
@@ -416,31 +525,46 @@ export class JsonGraphRepository implements GraphRepository {
       if (!nodeIds.has(edge.from)) {
         const mapped = nameToId.get(edge.from);
         if (mapped) {
-          console.info(`Migrated edge ${edge.id} from "${edge.from}" to node id "${mapped}" (from).`);
+          console.info(
+            `Migrated edge ${edge.id} from "${edge.from}" to node id "${mapped}" (from).`,
+          );
           next = { ...next, from: mapped };
           changed = true;
         } else {
-          console.warn(`Failed to migrate edge ${edge.id}: from node "${edge.from}" not found.`);
+          console.warn(
+            `Failed to migrate edge ${edge.id}: from node "${edge.from}" not found.`,
+          );
         }
       }
 
       if (!nodeIds.has(edge.to)) {
         const mapped = nameToId.get(edge.to);
         if (mapped) {
-          console.info(`Migrated edge ${edge.id} from "${edge.to}" to node id "${mapped}" (to).`);
+          console.info(
+            `Migrated edge ${edge.id} from "${edge.to}" to node id "${mapped}" (to).`,
+          );
           next = { ...next, to: mapped };
           changed = true;
         } else {
-          console.warn(`Failed to migrate edge ${edge.id}: to node "${edge.to}" not found.`);
+          console.warn(
+            `Failed to migrate edge ${edge.id}: to node "${edge.to}" not found.`,
+          );
         }
       }
 
-      const segment = this.createStoredSegment(next.from, next.to, segmentDistance);
+      const segment = this.createStoredSegment(
+        next.from,
+        next.to,
+        segmentDistance,
+      );
       const existing = segments.get(segment.id);
       if (!existing) {
         changed = true;
         segments.set(segment.id, segment);
-      } else if (this.getStoredSegmentDistance(existing) === null && this.getStoredSegmentDistance(segment) !== null) {
+      } else if (
+        this.getStoredSegmentDistance(existing) === null &&
+        this.getStoredSegmentDistance(segment) !== null
+      ) {
         changed = true;
         segments.set(segment.id, segment);
       }
@@ -466,7 +590,11 @@ export class JsonGraphRepository implements GraphRepository {
     await this.ensureFile(this.tripsPath);
   }
 
-  private getSegmentDistance(segments: StoredSegment[], from: string, to: string): number | undefined {
+  private getSegmentDistance(
+    segments: StoredSegment[],
+    from: string,
+    to: string,
+  ): number | undefined {
     const id = this.segmentIdFor(from, to);
     const segment = segments.find((candidate) => candidate.id === id);
     return this.getStoredSegmentDistance(segment) ?? undefined;
@@ -476,7 +604,7 @@ export class JsonGraphRepository implements GraphRepository {
     segments: StoredSegment[],
     from: string,
     to: string,
-    distance: number | undefined
+    distance: number | undefined,
   ): StoredSegment[] {
     const next = [...segments];
     const segment = this.createStoredSegment(from, to, distance);
@@ -491,22 +619,33 @@ export class JsonGraphRepository implements GraphRepository {
     return next;
   }
 
-  private cleanupOrphanSegments(segments: StoredSegment[], edges: StoredEdge[]): StoredSegment[] {
-    const used = new Set(edges.map((edge) => this.segmentIdFor(edge.from, edge.to)));
+  private cleanupOrphanSegments(
+    segments: StoredSegment[],
+    edges: StoredEdge[],
+  ): StoredSegment[] {
+    const used = new Set(
+      edges.map((edge) => this.segmentIdFor(edge.from, edge.to)),
+    );
     return segments.filter((segment) => used.has(segment.id));
   }
 
-  private createStoredSegment(from: string, to: string, distance?: number): StoredSegment {
+  private createStoredSegment(
+    from: string,
+    to: string,
+    distance?: number,
+  ): StoredSegment {
     const [a, b] = this.normalizeSegmentNodes(from, to);
     return {
       id: this.segmentIdFor(from, to),
       a,
       b,
-      distance: distance ?? null
+      distance: distance ?? null,
     };
   }
 
-  private getStoredSegmentDistance(segment: StoredSegment | undefined): number | null | undefined {
+  private getStoredSegmentDistance(
+    segment: StoredSegment | undefined,
+  ): number | null | undefined {
     if (!segment) {
       return undefined;
     }
@@ -561,7 +700,10 @@ export class JsonGraphRepository implements GraphRepository {
     return parsed as T[];
   }
 
-  private async writeJsonAtomic(filePath: string, data: unknown): Promise<void> {
+  private async writeJsonAtomic(
+    filePath: string,
+    data: unknown,
+  ): Promise<void> {
     const json = `${JSON.stringify(data, null, 2)}\n`;
     const tmpPath = `${filePath}.tmp`;
     const handle = await fs.open(tmpPath, 'w');
@@ -578,7 +720,7 @@ export class JsonGraphRepository implements GraphRepository {
     const run = this.writeQueue.then(task, task);
     this.writeQueue = run.then(
       () => undefined,
-      () => undefined
+      () => undefined,
     );
     return run;
   }

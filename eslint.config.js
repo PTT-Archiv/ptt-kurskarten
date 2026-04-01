@@ -10,6 +10,13 @@ const templateAccessibilityRules = angular.configs.templateAccessibility[1].rule
 module.exports = [
   {
     ignores: [
+      'apps/ptt-kurskarten.api/**',
+      'apps/ptt-kurskarten-ui/.angular/**',
+      'apps/ptt-kurskarten-ui/dist/**',
+      'apps/ptt-kurskarten-ui/node_modules/**',
+      'apps/ptt-kurskarten-ui/coverage/**',
+      'packages/**/dist/**',
+      'packages/**/node_modules/**',
       '**/.angular/**',
       '**/.husky/**',
       '**/dist/**',
@@ -22,7 +29,7 @@ module.exports = [
     ],
   },
   {
-    files: ['src/**/*.ts'],
+    files: ['apps/ptt-kurskarten-ui/src/**/*.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -56,7 +63,7 @@ module.exports = [
     },
   },
   {
-    files: ['src/**/*.html'],
+    files: ['apps/ptt-kurskarten-ui/src/**/*.html'],
     languageOptions: {
       parser: angular.templateParser,
     },

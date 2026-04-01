@@ -17,8 +17,8 @@ import { JsonV2GraphRepository } from './repository/json-v2-graph.repository';
           return new InMemoryGraphRepository();
         }
         return new JsonV2GraphRepository();
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 export class GraphModule {}

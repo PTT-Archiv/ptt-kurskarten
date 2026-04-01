@@ -1,4 +1,8 @@
-import type { GraphAssertion, GraphSnapshot, NodeDetail } from '@ptt-kurskarten/shared';
+import type {
+  GraphAssertion,
+  GraphSnapshot,
+  NodeDetail,
+} from '@ptt-kurskarten/shared';
 import type { GraphRepository } from './graph.repository';
 
 export class GraphDbGraphRepository implements GraphRepository {
@@ -11,11 +15,18 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async getNodeNeighborhood(_nodeId: string, _year: number): Promise<NodeDetail> {
+  async getNodeNeighborhood(
+    _nodeId: string,
+    _year: number,
+  ): Promise<NodeDetail> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async getAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+  async getAssertions(_filters?: {
+    year?: number;
+    targetType?: string;
+    targetId?: string;
+  }): Promise<GraphAssertion[]> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
@@ -23,7 +34,10 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async updateAssertion(_id: string, _patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+  async updateAssertion(
+    _id: string,
+    _patch: Partial<GraphAssertion>,
+  ): Promise<GraphAssertion | null> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
@@ -35,13 +49,15 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async getEditions(): Promise<import('@ptt-kurskarten/shared').EditionEntry[]> {
+  async getEditions(): Promise<
+    import('@ptt-kurskarten/shared').EditionEntry[]
+  > {
     throw new Error('Graph DB repository not wired yet.');
   }
 
   async updateEdition(
     _year: number,
-    _patch: Partial<import('@ptt-kurskarten/shared').EditionEntry>
+    _patch: Partial<import('@ptt-kurskarten/shared').EditionEntry>,
   ): Promise<import('@ptt-kurskarten/shared').EditionEntry> {
     throw new Error('Graph DB repository not wired yet.');
   }
@@ -50,18 +66,24 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async createNode(_node: import('@ptt-kurskarten/shared').GraphNode): Promise<import('@ptt-kurskarten/shared').GraphNode> {
+  async createNode(
+    _node: import('@ptt-kurskarten/shared').GraphNode,
+  ): Promise<import('@ptt-kurskarten/shared').GraphNode> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
   async updateNode(
     _id: string,
-    _patch: import('@ptt-kurskarten/shared').GraphNodePatch
+    _patch: import('@ptt-kurskarten/shared').GraphNodePatch,
   ): Promise<import('@ptt-kurskarten/shared').GraphNode | null> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async setNodeHidden(_id: string, _year: number, _hidden: boolean): Promise<boolean> {
+  async setNodeHidden(
+    _id: string,
+    _year: number,
+    _hidden: boolean,
+  ): Promise<boolean> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
@@ -69,13 +91,15 @@ export class GraphDbGraphRepository implements GraphRepository {
     throw new Error('Graph DB repository not wired yet.');
   }
 
-  async createEdge(_edge: import('@ptt-kurskarten/shared').GraphEdge): Promise<import('@ptt-kurskarten/shared').GraphEdge> {
+  async createEdge(
+    _edge: import('@ptt-kurskarten/shared').GraphEdge,
+  ): Promise<import('@ptt-kurskarten/shared').GraphEdge> {
     throw new Error('Graph DB repository not wired yet.');
   }
 
   async updateEdge(
     _id: string,
-    _patch: Partial<import('@ptt-kurskarten/shared').GraphEdge>
+    _patch: Partial<import('@ptt-kurskarten/shared').GraphEdge>,
   ): Promise<import('@ptt-kurskarten/shared').GraphEdge | null> {
     throw new Error('Graph DB repository not wired yet.');
   }

@@ -7,6 +7,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ADMIN_GRAPH_REPOSITORY, type AdminGraphRepository } from './admin-graph.repository';
 import { AdminComponent } from './admin.component';
 
+type AdminComponentPrivateApi = AdminComponent & {
+  resolveDirectionalPairState: () => 'missingReverse' | 'reverseOnly';
+};
+
 function buildNode(id: string, name: string): GraphNode {
   return {
     id,
@@ -169,7 +173,7 @@ describe('AdminComponent quick service reverse pair flow', () => {
     component.quickDistance.set('42');
     fixture.detectChanges();
 
-    vi.spyOn(component as any, 'resolveDirectionalPairState').mockReturnValue('reverseOnly');
+    vi.spyOn(component as AdminComponentPrivateApi, 'resolveDirectionalPairState').mockReturnValue('reverseOnly');
 
     component.saveQuickEdge();
 

@@ -5,7 +5,7 @@ import type {
   GraphSnapshot,
   StationProfileReport,
   TimeHHMM,
-  TransportType
+  TransportType,
 } from '@ptt-kurskarten/shared';
 
 const DAY_MINUTES = 1440;
@@ -18,7 +18,11 @@ export function timeToMinutes(value: TimeHHMM): number {
   return hh * 60 + mm;
 }
 
-export function computeDurationMinutes(departs: TimeHHMM, arrives: TimeHHMM, arrivalDayOffset?: number): number {
+export function computeDurationMinutes(
+  departs: TimeHHMM,
+  arrives: TimeHHMM,
+  arrivalDayOffset?: number,
+): number {
   const dep = timeToMinutes(departs);
   const arrRaw = timeToMinutes(arrives);
   const arr = arrRaw + (arrivalDayOffset ?? 0) * DAY_MINUTES;
@@ -26,7 +30,10 @@ export function computeDurationMinutes(departs: TimeHHMM, arrives: TimeHHMM, arr
   return normalized - dep;
 }
 
-export function buildStationProfile(snapshot: GraphSnapshot, nodeId: string): StationProfileReport {
+export function buildStationProfile(
+  snapshot: GraphSnapshot,
+  nodeId: string,
+): StationProfileReport {
   const nodesById = new Map(snapshot.nodes.map((node) => [node.id, node]));
   const node = nodesById.get(nodeId) ?? null;
 
@@ -41,8 +48,15 @@ export function buildStationProfile(snapshot: GraphSnapshot, nodeId: string): St
     .map((edge) => buildEdgeStats(edge, nodesById.get(edge.from), true))
     .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
 
-  outgoing.sort((a, b) => b.tripsCount - a.tripsCount || a.toNode.name.localeCompare(b.toNode.name));
-  incoming.sort((a, b) => b.tripsCount - a.tripsCount || a.fromNode.name.localeCompare(b.fromNode.name));
+  outgoing.sort(
+    (a, b) =>
+      b.tripsCount - a.tripsCount || a.toNode.name.localeCompare(b.toNode.name),
+  );
+  incoming.sort(
+    (a, b) =>
+      b.tripsCount - a.tripsCount ||
+      a.fromNode.name.localeCompare(b.fromNode.name),
+  );
 
   return {
     year: snapshot.year,
@@ -53,16 +67,20 @@ export function buildStationProfile(snapshot: GraphSnapshot, nodeId: string): St
       outgoingEdges: outgoing.length,
       outgoingTrips: outgoing.reduce((sum, entry) => sum + entry.tripsCount, 0),
       incomingEdges: incoming.length,
-      incomingTrips: incoming.reduce((sum, entry) => sum + entry.tripsCount, 0)
-    }
+      incomingTrips: incoming.reduce((sum, entry) => sum + entry.tripsCount, 0),
+    },
   };
 }
 
-export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): EdgeTimetableReport {
-  const edge = snapshot.edges.find((candidate) => candidate.id === edgeId) ?? null;
+export function buildEdgeTimetable(
+  snapshot: GraphSnapshot,
+  edgeId: string,
+): EdgeTimetableReport {
+  const edge =
+    snapshot.edges.find((candidate) => candidate.id === edgeId) ?? null;
   const nodesById = new Map(snapshot.nodes.map((node) => [node.id, node]));
-  const fromNode = edge ? nodesById.get(edge.from) ?? null : null;
-  const toNode = edge ? nodesById.get(edge.to) ?? null : null;
+  const fromNode = edge ? (nodesById.get(edge.from) ?? null) : null;
+  const toNode = edge ? (nodesById.get(edge.to) ?? null) : null;
 
   const trips = (edge?.trips ?? [])
     .filter((trip) => Boolean(trip.departs) && Boolean(trip.arrives))
@@ -71,7 +89,11 @@ export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): Edg
       departs: trip.departs as TimeHHMM,
       arrives: trip.arrives as TimeHHMM,
       arrivalDayOffset: trip.arrivalDayOffset,
-      durationMinutes: computeDurationMinutes(trip.departs as TimeHHMM, trip.arrives as TimeHHMM, trip.arrivalDayOffset)
+      durationMinutes: computeDurationMinutes(
+        trip.departs as TimeHHMM,
+        trip.arrives as TimeHHMM,
+        trip.arrivalDayOffset,
+      ),
     }));
 
   trips.sort((a, b) => timeToMinutes(a.departs) - timeToMinutes(b.departs));
@@ -84,7 +106,7 @@ export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): Edg
     firstDeparture: trips.length ? trips[0].departs : undefined,
     lastDeparture: trips.length ? trips[trips.length - 1].departs : undefined,
     minDurationMinutes: durations.length ? Math.min(...durations) : undefined,
-    maxDurationMinutes: durations.length ? Math.max(...durations) : undefined
+    maxDurationMinutes: durations.length ? Math.max(...durations) : undefined,
   };
 
   return {
@@ -93,14 +115,14 @@ export function buildEdgeTimetable(snapshot: GraphSnapshot, edgeId: string): Edg
     fromNode,
     toNode,
     trips,
-    summary
+    summary,
   };
 }
 
 function buildEdgeStats(
   edge: GraphEdge,
   otherNode: GraphNode | undefined,
-  incoming = false
+  incoming = false,
 ):
   | {
       toNode: GraphNode;
@@ -125,9 +147,15 @@ function buildEdgeStats(
     return null;
   }
 
-  const trips = (edge.trips ?? []).filter((trip) => Boolean(trip.departs) && Boolean(trip.arrives));
-  const departures = trips.map((trip) => timeToMinutes(trip.departs as TimeHHMM));
-  const durations = trips.map((trip) => computeDurationMinutes(trip.departs, trip.arrives, trip.arrivalDayOffset));
+  const trips = (edge.trips ?? []).filter(
+    (trip) => Boolean(trip.departs) && Boolean(trip.arrives),
+  );
+  const departures = trips.map((trip) =>
+    timeToMinutes(trip.departs as TimeHHMM),
+  );
+  const durations = trips.map((trip) =>
+    computeDurationMinutes(trip.departs, trip.arrives, trip.arrivalDayOffset),
+  );
 
   const base = {
     edgeId: edge.id,
@@ -139,7 +167,7 @@ function buildEdgeStats(
     lastDeparture: departures.length
       ? trips[departures.indexOf(Math.max(...departures))].departs
       : undefined,
-    minDurationMinutes: durations.length ? Math.min(...durations) : undefined
+    minDurationMinutes: durations.length ? Math.min(...durations) : undefined,
   };
 
   if (incoming) {

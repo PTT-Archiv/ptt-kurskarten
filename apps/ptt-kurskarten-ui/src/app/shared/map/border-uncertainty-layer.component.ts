@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, inject } from '@angular/core';
 
 export type BorderUncertaintyConfig = {
   seed: number;
@@ -65,6 +65,7 @@ export const DEFAULT_BORDER_UNCERTAINTY_CONFIG: BorderUncertaintyConfig = {
 @Component({
   selector: 'app-border-uncertainty-layer',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <svg
       class="border-uncertainty-svg"

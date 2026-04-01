@@ -36,6 +36,7 @@
     "@angular/compiler-cli": "21.2.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
+    "@types/openseadragon": "^5.0.2",
     "jsdom": "^27.0.1",
     "typescript": "~5.9.3",
     "vitest": "^4.0.8"

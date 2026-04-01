@@ -6,7 +6,7 @@ import type {
   GraphNodePatch,
   GraphSnapshot,
   NodeDetail,
-  Year
+  Year,
 } from '@ptt-kurskarten/shared';
 import type { GraphRepository } from './graph.repository';
 
@@ -14,7 +14,7 @@ const YEARS: number[] = [1840, 1855, 1852, 1888, 1900];
 let EDITIONS: EditionEntry[] = YEARS.map((year) => ({
   id: `edition-${year}`,
   year,
-  public: true
+  public: true,
 }));
 
 let NODES: GraphNode[] = [
@@ -22,8 +22,15 @@ let NODES: GraphNode[] = [
   { id: 'zurich', name: 'Zurich', x: 420, y: 140, validFrom: 1800 },
   { id: 'basel', name: 'Basel', x: 240, y: 90, validFrom: 1830 },
   { id: 'geneva', name: 'Geneva', x: 120, y: 240, validFrom: 1845 },
-  { id: 'lucerne', name: 'Lucerne', x: 360, y: 220, validFrom: 1855, validTo: 1885 },
-  { id: 'st-gallen', name: 'St. Gallen', x: 520, y: 110, validFrom: 1875 }
+  {
+    id: 'lucerne',
+    name: 'Lucerne',
+    x: 360,
+    y: 220,
+    validFrom: 1855,
+    validTo: 1885,
+  },
+  { id: 'st-gallen', name: 'St. Gallen', x: 520, y: 110, validFrom: 1875 },
 ];
 
 let EDGES: GraphEdge[] = [
@@ -39,9 +46,9 @@ let EDGES: GraphEdge[] = [
         transport: 'postkutsche',
         departs: '06:15',
         arrives: '16:15',
-        arrivalDayOffset: 0
-      }
-    ]
+        arrivalDayOffset: 0,
+      },
+    ],
   },
   {
     id: 'bern-zurich-rail',
@@ -49,10 +56,25 @@ let EDGES: GraphEdge[] = [
     to: 'zurich',
     validFrom: 1866,
     trips: [
-      { id: 'bern-zurich-rail-1', transport: 'courier', departs: '06:15', arrives: '09:10' },
-      { id: 'bern-zurich-rail-2', transport: 'courier', departs: '12:00', arrives: '14:55' },
-      { id: 'bern-zurich-rail-3', transport: 'courier', departs: '18:30', arrives: '21:10' }
-    ]
+      {
+        id: 'bern-zurich-rail-1',
+        transport: 'courier',
+        departs: '06:15',
+        arrives: '09:10',
+      },
+      {
+        id: 'bern-zurich-rail-2',
+        transport: 'courier',
+        departs: '12:00',
+        arrives: '14:55',
+      },
+      {
+        id: 'bern-zurich-rail-3',
+        transport: 'courier',
+        departs: '18:30',
+        arrives: '21:10',
+      },
+    ],
   },
   {
     id: 'basel-zurich-rail',
@@ -60,8 +82,14 @@ let EDGES: GraphEdge[] = [
     to: 'zurich',
     validFrom: 1855,
     trips: [
-      { id: 'basel-zurich-rail-overnight', transport: 'courier', departs: '22:40', arrives: '01:20', arrivalDayOffset: 1 }
-    ]
+      {
+        id: 'basel-zurich-rail-overnight',
+        transport: 'courier',
+        departs: '22:40',
+        arrives: '01:20',
+        arrivalDayOffset: 1,
+      },
+    ],
   },
   {
     id: 'bern-geneva-coach',
@@ -69,7 +97,14 @@ let EDGES: GraphEdge[] = [
     to: 'geneva',
     validFrom: 1848,
     validTo: 1878,
-    trips: [{ id: 'bern-geneva-coach-1', transport: 'postkutsche', departs: '07:00', arrives: '16:00' }]
+    trips: [
+      {
+        id: 'bern-geneva-coach-1',
+        transport: 'postkutsche',
+        departs: '07:00',
+        arrives: '16:00',
+      },
+    ],
   },
   {
     id: 'bern-geneva-rail',
@@ -77,9 +112,19 @@ let EDGES: GraphEdge[] = [
     to: 'geneva',
     validFrom: 1879,
     trips: [
-      { id: 'bern-geneva-rail-1', transport: 'courier', departs: '08:00', arrives: '11:10' },
-      { id: 'bern-geneva-rail-2', transport: 'courier', departs: '14:00', arrives: '17:10' }
-    ]
+      {
+        id: 'bern-geneva-rail-1',
+        transport: 'courier',
+        departs: '08:00',
+        arrives: '11:10',
+      },
+      {
+        id: 'bern-geneva-rail-2',
+        transport: 'courier',
+        departs: '14:00',
+        arrives: '17:10',
+      },
+    ],
   },
   {
     id: 'lucerne-bern-coach',
@@ -87,7 +132,14 @@ let EDGES: GraphEdge[] = [
     to: 'bern',
     validFrom: 1855,
     validTo: 1885,
-    trips: [{ id: 'lucerne-bern-coach-1', transport: 'postkutsche', departs: '09:30', arrives: '13:30' }]
+    trips: [
+      {
+        id: 'lucerne-bern-coach-1',
+        transport: 'postkutsche',
+        departs: '09:30',
+        arrives: '13:30',
+      },
+    ],
   },
   {
     id: 'zurich-st-gallen-rail',
@@ -95,10 +147,20 @@ let EDGES: GraphEdge[] = [
     to: 'st-gallen',
     validFrom: 1875,
     trips: [
-      { id: 'zurich-st-gallen-rail-1', transport: 'courier', departs: '05:50', arrives: '08:20' },
-      { id: 'zurich-st-gallen-rail-2', transport: 'courier', departs: '17:15', arrives: '19:45' }
-    ]
-  }
+      {
+        id: 'zurich-st-gallen-rail-1',
+        transport: 'courier',
+        departs: '05:50',
+        arrives: '08:20',
+      },
+      {
+        id: 'zurich-st-gallen-rail-2',
+        transport: 'courier',
+        departs: '17:15',
+        arrives: '19:45',
+      },
+    ],
+  },
 ];
 
 export class InMemoryGraphRepository implements GraphRepository {
@@ -107,7 +169,7 @@ export class InMemoryGraphRepository implements GraphRepository {
     return {
       year: y,
       nodes: this.filterNodes(y),
-      edges: this.filterEdges(y)
+      edges: this.filterEdges(y),
     };
   }
 
@@ -118,7 +180,9 @@ export class InMemoryGraphRepository implements GraphRepository {
   async getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail> {
     const y = this.coerceYear(year);
     const nodes = this.filterNodes(y);
-    const edges = this.filterEdges(y).filter((edge) => edge.from === nodeId || edge.to === nodeId);
+    const edges = this.filterEdges(y).filter(
+      (edge) => edge.from === nodeId || edge.to === nodeId,
+    );
     const node = nodes.find((candidate) => candidate.id === nodeId) ?? null;
     const neighborIds = new Set(edges.flatMap((edge) => [edge.from, edge.to]));
     neighborIds.delete(nodeId);
@@ -127,11 +191,15 @@ export class InMemoryGraphRepository implements GraphRepository {
       year: y,
       node,
       neighbors: nodes.filter((candidate) => neighborIds.has(candidate.id)),
-      edges
+      edges,
     };
   }
 
-  async getAssertions(_filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+  async getAssertions(_filters?: {
+    year?: number;
+    targetType?: string;
+    targetId?: string;
+  }): Promise<GraphAssertion[]> {
     return [];
   }
 
@@ -139,7 +207,10 @@ export class InMemoryGraphRepository implements GraphRepository {
     return assertion;
   }
 
-  async updateAssertion(_id: string, _patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+  async updateAssertion(
+    _id: string,
+    _patch: Partial<GraphAssertion>,
+  ): Promise<GraphAssertion | null> {
     return null;
   }
 
@@ -155,20 +226,30 @@ export class InMemoryGraphRepository implements GraphRepository {
     return [...EDITIONS].sort((a, b) => a.year - b.year);
   }
 
-  async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
+  async updateEdition(
+    year: number,
+    patch: Partial<EditionEntry>,
+  ): Promise<EditionEntry> {
     const y = this.coerceYear(year);
     const index = EDITIONS.findIndex((entry) => entry.year === y);
-    const normalizedRoute = typeof patch.iiifRoute === 'string' ? patch.iiifRoute.trim().replace(/\/+$/, '') : undefined;
+    const normalizedRoute =
+      typeof patch.iiifRoute === 'string'
+        ? patch.iiifRoute.trim().replace(/\/+$/, '')
+        : undefined;
     const next: EditionEntry = {
       id: patch.id ?? EDITIONS[index]?.id ?? `edition-${y}`,
       year: y,
       title: patch.title ?? EDITIONS[index]?.title,
-      iiifRoute: normalizedRoute || undefined
+      iiifRoute: normalizedRoute || undefined,
     };
     if (index === -1) {
       EDITIONS = [...EDITIONS, next];
     } else {
-      EDITIONS = [...EDITIONS.slice(0, index), next, ...EDITIONS.slice(index + 1)];
+      EDITIONS = [
+        ...EDITIONS.slice(0, index),
+        next,
+        ...EDITIONS.slice(index + 1),
+      ];
     }
     if (!YEARS.includes(y)) {
       YEARS.push(y);
@@ -190,7 +271,10 @@ export class InMemoryGraphRepository implements GraphRepository {
     return node;
   }
 
-  async updateNode(id: string, patch: GraphNodePatch): Promise<GraphNode | null> {
+  async updateNode(
+    id: string,
+    patch: GraphNodePatch,
+  ): Promise<GraphNode | null> {
     const index = NODES.findIndex((candidate) => candidate.id === id);
     if (index === -1) {
       return null;
@@ -201,7 +285,11 @@ export class InMemoryGraphRepository implements GraphRepository {
     return updated;
   }
 
-  async setNodeHidden(_id: string, _year: number, _hidden: boolean): Promise<boolean> {
+  async setNodeHidden(
+    _id: string,
+    _year: number,
+    _hidden: boolean,
+  ): Promise<boolean> {
     return false;
   }
 
@@ -211,7 +299,9 @@ export class InMemoryGraphRepository implements GraphRepository {
       return false;
     }
     NODES = [...NODES.slice(0, index), ...NODES.slice(index + 1)];
-    const removedEdges = EDGES.filter((edge) => edge.from === id || edge.to === id).map((edge) => edge.id);
+    const removedEdges = EDGES.filter(
+      (edge) => edge.from === id || edge.to === id,
+    ).map((edge) => edge.id);
     if (removedEdges.length) {
       const removedSet = new Set(removedEdges);
       EDGES = EDGES.filter((edge) => !removedSet.has(edge.id));
@@ -229,13 +319,19 @@ export class InMemoryGraphRepository implements GraphRepository {
     return normalized;
   }
 
-  async updateEdge(id: string, patch: Partial<GraphEdge>): Promise<GraphEdge | null> {
+  async updateEdge(
+    id: string,
+    patch: Partial<GraphEdge>,
+  ): Promise<GraphEdge | null> {
     const index = EDGES.findIndex((candidate) => candidate.id === id);
     if (index === -1) {
       return null;
     }
     const updated = { ...EDGES[index], ...patch, id } satisfies GraphEdge;
-    const normalized = { ...updated, trips: updated.trips ?? EDGES[index].trips ?? [] };
+    const normalized = {
+      ...updated,
+      trips: updated.trips ?? EDGES[index].trips ?? [],
+    };
     EDGES = [...EDGES.slice(0, index), normalized, ...EDGES.slice(index + 1)];
     return normalized;
   }
@@ -254,15 +350,21 @@ export class InMemoryGraphRepository implements GraphRepository {
   }
 
   private filterNodes(year: Year): GraphNode[] {
-    return NODES.filter((node) => node.validFrom <= year && (node.validTo === undefined || node.validTo >= year));
+    return NODES.filter(
+      (node) =>
+        node.validFrom <= year &&
+        (node.validTo === undefined || node.validTo >= year),
+    );
   }
 
   private filterEdges(year: Year): GraphEdge[] {
-    return EDGES.filter((edge) => edge.validFrom <= year && (edge.validTo === undefined || edge.validTo >= year)).map(
-      (edge) => ({
-        ...edge,
-        trips: edge.trips ?? []
-      })
-    );
+    return EDGES.filter(
+      (edge) =>
+        edge.validFrom <= year &&
+        (edge.validTo === undefined || edge.validTo >= year),
+    ).map((edge) => ({
+      ...edge,
+      trips: edge.trips ?? [],
+    }));
   }
 }

@@ -12,7 +12,7 @@ import type {
   LocalizedText,
   NodeDetail,
   TransportType,
-  Year
+  Year,
 } from '@ptt-kurskarten/shared';
 import type { GraphRepository } from '../graph.repository';
 
@@ -162,7 +162,10 @@ export class JsonV2GraphRepository implements GraphRepository {
     const nodeIds = new Set(nodes.map((node) => node.id));
     const edges = data.services
       .filter((service) => this.coerceStoredServiceYear(service) === y)
-      .filter((service) => nodeIds.has(service.fromPlaceId) && nodeIds.has(service.toPlaceId))
+      .filter(
+        (service) =>
+          nodeIds.has(service.fromPlaceId) && nodeIds.has(service.toPlaceId),
+      )
       .map((service) => this.materializeEdge(service, data, y))
       .filter((edge) => this.isEdgeActive(edge, y));
 
@@ -183,7 +186,9 @@ export class JsonV2GraphRepository implements GraphRepository {
       const labels = new Set<string>();
       const names = data.placeNames
         .filter((entry) => entry.placeId === node.id)
-        .filter((entry) => this.isStoredActive(entry.validFrom, entry.validTo, y));
+        .filter((entry) =>
+          this.isStoredActive(entry.validFrom, entry.validTo, y),
+        );
       for (const entry of names) {
         const label = (entry.name ?? '').trim();
         if (!label) {
@@ -203,32 +208,53 @@ export class JsonV2GraphRepository implements GraphRepository {
 
   async getNodeNeighborhood(nodeId: string, year: number): Promise<NodeDetail> {
     const snapshot = await this.getGraphSnapshot(year);
-    const edges = snapshot.edges.filter((edge) => edge.from === nodeId || edge.to === nodeId);
-    const node = snapshot.nodes.find((candidate) => candidate.id === nodeId) ?? null;
+    const edges = snapshot.edges.filter(
+      (edge) => edge.from === nodeId || edge.to === nodeId,
+    );
+    const node =
+      snapshot.nodes.find((candidate) => candidate.id === nodeId) ?? null;
     const neighborIds = new Set(edges.flatMap((edge) => [edge.from, edge.to]));
     neighborIds.delete(nodeId);
 
     return {
       year: snapshot.year,
       node,
-      neighbors: snapshot.nodes.filter((candidate) => neighborIds.has(candidate.id)),
-      edges
+      neighbors: snapshot.nodes.filter((candidate) =>
+        neighborIds.has(candidate.id),
+      ),
+      edges,
     };
   }
 
-  async getAssertions(filters?: { year?: number; targetType?: string; targetId?: string }): Promise<GraphAssertion[]> {
+  async getAssertions(filters?: {
+    year?: number;
+    targetType?: string;
+    targetId?: string;
+  }): Promise<GraphAssertion[]> {
     await this.writeQueue;
     const data = await this.loadData();
-    const year = Number.isFinite(filters?.year) ? this.coerceYear(Number(filters?.year)) : undefined;
+    const year = Number.isFinite(filters?.year)
+      ? this.coerceYear(Number(filters?.year))
+      : undefined;
     const targetType = filters?.targetType?.trim();
     const targetId = filters?.targetId?.trim();
 
     return data.assertions
-      .filter((assertion) => (targetType ? assertion.targetType === targetType : true))
-      .filter((assertion) => (targetId ? assertion.targetId === targetId : true))
-      .filter((assertion) => (
-        year !== undefined ? this.isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, year) : true
-      ))
+      .filter((assertion) =>
+        targetType ? assertion.targetType === targetType : true,
+      )
+      .filter((assertion) =>
+        targetId ? assertion.targetId === targetId : true,
+      )
+      .filter((assertion) =>
+        year !== undefined
+          ? this.isStoredActive(
+              assertion.validFrom ?? null,
+              assertion.validTo ?? null,
+              year,
+            )
+          : true,
+      )
       .map((assertion) => this.materializeAssertion(assertion));
   }
 
@@ -246,7 +272,7 @@ export class JsonV2GraphRepository implements GraphRepository {
         targetId: assertion.targetId?.trim() ?? '',
         schemaKey: assertion.schemaKey?.trim() ?? '',
         validFrom: this.toNullableYear(assertion.validFrom),
-        validTo: this.toNullableYear(assertion.validTo)
+        validTo: this.toNullableYear(assertion.validTo),
       };
       this.applyStoredAssertionValue(next, assertion);
       data.assertions.push(next);
@@ -255,7 +281,10 @@ export class JsonV2GraphRepository implements GraphRepository {
     });
   }
 
-  async updateAssertion(id: string, patch: Partial<GraphAssertion>): Promise<GraphAssertion | null> {
+  async updateAssertion(
+    id: string,
+    patch: Partial<GraphAssertion>,
+  ): Promise<GraphAssertion | null> {
     return this.enqueueWrite(async () => {
       const data = await this.loadData();
       const index = data.assertions.findIndex((item) => item.id === id);
@@ -265,11 +294,26 @@ export class JsonV2GraphRepository implements GraphRepository {
       const current = data.assertions[index];
       const next: StoredAssertion = {
         ...current,
-        targetType: patch.targetType !== undefined ? (patch.targetType?.trim() || current.targetType) : current.targetType,
-        targetId: patch.targetId !== undefined ? (patch.targetId?.trim() || current.targetId) : current.targetId,
-        schemaKey: patch.schemaKey !== undefined ? (patch.schemaKey?.trim() || current.schemaKey) : current.schemaKey,
-        validFrom: patch.validFrom !== undefined ? this.toNullableYear(patch.validFrom) : (current.validFrom ?? null),
-        validTo: patch.validTo !== undefined ? this.toNullableYear(patch.validTo) : (current.validTo ?? null)
+        targetType:
+          patch.targetType !== undefined
+            ? patch.targetType?.trim() || current.targetType
+            : current.targetType,
+        targetId:
+          patch.targetId !== undefined
+            ? patch.targetId?.trim() || current.targetId
+            : current.targetId,
+        schemaKey:
+          patch.schemaKey !== undefined
+            ? patch.schemaKey?.trim() || current.schemaKey
+            : current.schemaKey,
+        validFrom:
+          patch.validFrom !== undefined
+            ? this.toNullableYear(patch.validFrom)
+            : (current.validFrom ?? null),
+        validTo:
+          patch.validTo !== undefined
+            ? this.toNullableYear(patch.validTo)
+            : (current.validTo ?? null),
       };
       const shouldPatchValue =
         patch.valueType !== undefined ||
@@ -323,18 +367,24 @@ export class JsonV2GraphRepository implements GraphRepository {
       .sort((a, b) => a.year - b.year);
   }
 
-  async updateEdition(year: number, patch: Partial<EditionEntry>): Promise<EditionEntry> {
+  async updateEdition(
+    year: number,
+    patch: Partial<EditionEntry>,
+  ): Promise<EditionEntry> {
     return this.enqueueWrite(async () => {
       const data = await this.loadData();
       const targetYear = this.coerceYear(year);
-      const index = data.editions.findIndex((edition) => this.coerceYear(edition.year) === targetYear);
+      const index = data.editions.findIndex(
+        (edition) => this.coerceYear(edition.year) === targetYear,
+      );
       const existing = index === -1 ? null : data.editions[index];
       const next: StoredEdition = {
         id: existing?.id ?? patch.id ?? `edition-${targetYear}`,
         year: targetYear,
         title: patch.title ?? existing?.title,
-        iiifRoute: this.normalizeIiifRoute(patch.iiifRoute) ?? existing?.iiifRoute,
-        public: patch.public ?? existing?.public ?? true
+        iiifRoute:
+          this.normalizeIiifRoute(patch.iiifRoute) ?? existing?.iiifRoute,
+        public: patch.public ?? existing?.public ?? true,
       };
 
       if (patch.iiifRoute !== undefined) {
@@ -375,7 +425,7 @@ export class JsonV2GraphRepository implements GraphRepository {
         id: node.id,
         defaultName: node.name ?? 'Unnamed',
         validFrom,
-        validTo
+        validTo,
       });
 
       data.placeNames.push({
@@ -387,7 +437,7 @@ export class JsonV2GraphRepository implements GraphRepository {
         preferred: true,
         nameType: 'primary',
         validFrom,
-        validTo
+        validTo,
       });
 
       data.mapAnchors.push({
@@ -398,17 +448,26 @@ export class JsonV2GraphRepository implements GraphRepository {
         iiifCenterX: node.iiifCenterX ?? null,
         iiifCenterY: node.iiifCenterY ?? null,
         validFrom,
-        validTo
+        validTo,
       });
 
-      this.setForeignAssertion(data, node.id, node.foreign === true, validFrom, validTo);
+      this.setForeignAssertion(
+        data,
+        node.id,
+        node.foreign === true,
+        validFrom,
+        validTo,
+      );
       await this.persistData(data);
       const created = data.places.find((place) => place.id === node.id)!;
       return this.materializeNode(created, data);
     });
   }
 
-  async updateNode(id: string, patch: GraphNodePatch): Promise<GraphNode | null> {
+  async updateNode(
+    id: string,
+    patch: GraphNodePatch,
+  ): Promise<GraphNode | null> {
     return this.enqueueWrite(async () => {
       const data = await this.loadData();
       const place = data.places.find((candidate) => candidate.id === id);
@@ -427,7 +486,11 @@ export class JsonV2GraphRepository implements GraphRepository {
         place.validTo = this.toNullableYear(patch.validTo);
       }
 
-      if (patch.name !== undefined || patch.validFrom !== undefined || patch.validTo !== undefined) {
+      if (
+        patch.name !== undefined ||
+        patch.validFrom !== undefined ||
+        patch.validTo !== undefined
+      ) {
         this.upsertPrimaryName(data, place);
       }
 
@@ -437,7 +500,11 @@ export class JsonV2GraphRepository implements GraphRepository {
         patch.iiifCenterX !== undefined ||
         patch.iiifCenterY !== undefined
       ) {
-        const writeYear = anchorYear ?? this.toNullableYear(patch.validFrom) ?? place.validFrom ?? DEFAULT_YEAR;
+        const writeYear =
+          anchorYear ??
+          this.toNullableYear(patch.validFrom) ??
+          place.validFrom ??
+          DEFAULT_YEAR;
         const fallbackAnchor =
           anchorYear !== null
             ? this.resolveAnchorForPlaceWithoutExactYear(id, data, anchorYear)
@@ -450,7 +517,9 @@ export class JsonV2GraphRepository implements GraphRepository {
           const initialValidFrom = anchorYear ?? place.validFrom;
           const initialValidTo = anchorYear ?? place.validTo;
           const suggestedId = `anchor-${id}-${writeYear ?? DEFAULT_YEAR}`;
-          const anchorId = data.mapAnchors.some((candidate) => candidate.id === suggestedId)
+          const anchorId = data.mapAnchors.some(
+            (candidate) => candidate.id === suggestedId,
+          )
             ? `${suggestedId}-${randomUUID().slice(0, 8)}`
             : suggestedId;
           anchor = {
@@ -458,10 +527,12 @@ export class JsonV2GraphRepository implements GraphRepository {
             placeId: id,
             x: patch.x ?? fallbackAnchor?.x ?? 0,
             y: patch.y ?? fallbackAnchor?.y ?? 0,
-            iiifCenterX: patch.iiifCenterX ?? fallbackAnchor?.iiifCenterX ?? null,
-            iiifCenterY: patch.iiifCenterY ?? fallbackAnchor?.iiifCenterY ?? null,
+            iiifCenterX:
+              patch.iiifCenterX ?? fallbackAnchor?.iiifCenterX ?? null,
+            iiifCenterY:
+              patch.iiifCenterY ?? fallbackAnchor?.iiifCenterY ?? null,
             validFrom: initialValidFrom,
-            validTo: initialValidTo
+            validTo: initialValidTo,
           };
           data.mapAnchors.push(anchor);
         }
@@ -498,7 +569,13 @@ export class JsonV2GraphRepository implements GraphRepository {
       }
 
       if (patch.foreign !== undefined) {
-        this.setForeignAssertion(data, id, patch.foreign === true, place.validFrom, place.validTo);
+        this.setForeignAssertion(
+          data,
+          id,
+          patch.foreign === true,
+          place.validFrom,
+          place.validTo,
+        );
       }
 
       await this.persistData(data);
@@ -506,7 +583,11 @@ export class JsonV2GraphRepository implements GraphRepository {
     });
   }
 
-  async setNodeHidden(id: string, year: number, hidden: boolean): Promise<boolean> {
+  async setNodeHidden(
+    id: string,
+    year: number,
+    hidden: boolean,
+  ): Promise<boolean> {
     return this.enqueueWrite(async () => {
       const data = await this.loadData();
       const place = data.places.find((candidate) => candidate.id === id);
@@ -546,24 +627,40 @@ export class JsonV2GraphRepository implements GraphRepository {
       }
 
       data.placeNames = data.placeNames.filter((name) => name.placeId !== id);
-      data.mapAnchors = data.mapAnchors.filter((anchor) => anchor.placeId !== id);
-      data.assertions = data.assertions.filter((assertion) => !(assertion.targetType === 'place' && assertion.targetId === id));
+      data.mapAnchors = data.mapAnchors.filter(
+        (anchor) => anchor.placeId !== id,
+      );
+      data.assertions = data.assertions.filter(
+        (assertion) =>
+          !(assertion.targetType === 'place' && assertion.targetId === id),
+      );
 
       const removedLinkIds = new Set(
         data.links
           .filter((link) => link.placeAId === id || link.placeBId === id)
-          .map((link) => link.id)
+          .map((link) => link.id),
       );
       data.links = data.links.filter((link) => !removedLinkIds.has(link.id));
-      data.linkMeasures = data.linkMeasures.filter((measure) => !removedLinkIds.has(measure.linkId));
+      data.linkMeasures = data.linkMeasures.filter(
+        (measure) => !removedLinkIds.has(measure.linkId),
+      );
 
       const removedServiceIds = new Set(
         data.services
-          .filter((service) => service.fromPlaceId === id || service.toPlaceId === id || removedLinkIds.has(service.linkId))
-          .map((service) => service.id)
+          .filter(
+            (service) =>
+              service.fromPlaceId === id ||
+              service.toPlaceId === id ||
+              removedLinkIds.has(service.linkId),
+          )
+          .map((service) => service.id),
       );
-      data.services = data.services.filter((service) => !removedServiceIds.has(service.id));
-      data.serviceTrips = data.serviceTrips.filter((trip) => !removedServiceIds.has(trip.serviceId));
+      data.services = data.services.filter(
+        (service) => !removedServiceIds.has(service.id),
+      );
+      data.serviceTrips = data.serviceTrips.filter(
+        (trip) => !removedServiceIds.has(trip.serviceId),
+      );
 
       this.cleanupOrphanLinks(data);
       await this.persistData(data);
@@ -580,7 +677,13 @@ export class JsonV2GraphRepository implements GraphRepository {
       }
 
       const serviceYear = this.coerceServiceYear(edge.validFrom, edge.validTo);
-      const linkId = this.ensureLink(data, edge.from, edge.to, serviceYear, serviceYear);
+      const linkId = this.ensureLink(
+        data,
+        edge.from,
+        edge.to,
+        serviceYear,
+        serviceYear,
+      );
       if (edge.distance !== undefined) {
         this.upsertLinkMeasure(data, linkId, edge.distance, serviceYear);
       }
@@ -591,7 +694,7 @@ export class JsonV2GraphRepository implements GraphRepository {
         fromPlaceId: edge.from,
         toPlaceId: edge.to,
         year: serviceYear,
-        note: edge.notes ?? null
+        note: edge.notes ?? null,
       });
       this.replaceServiceTrips(data, edge.id, edge.trips ?? [], serviceYear);
 
@@ -601,7 +704,10 @@ export class JsonV2GraphRepository implements GraphRepository {
     });
   }
 
-  async updateEdge(id: string, patch: Partial<GraphEdge>): Promise<GraphEdge | null> {
+  async updateEdge(
+    id: string,
+    patch: Partial<GraphEdge>,
+  ): Promise<GraphEdge | null> {
     return this.enqueueWrite(async () => {
       const data = await this.loadData();
       const index = data.services.findIndex((service) => service.id === id);
@@ -611,9 +717,18 @@ export class JsonV2GraphRepository implements GraphRepository {
 
       const current = this.materializeEdge(data.services[index], data);
       const merged = { ...current, ...patch, id } as GraphEdge;
-      const serviceYear = this.coerceServiceYear(merged.validFrom, merged.validTo);
+      const serviceYear = this.coerceServiceYear(
+        merged.validFrom,
+        merged.validTo,
+      );
       const oldLinkId = data.services[index].linkId;
-      const nextLinkId = this.ensureLink(data, merged.from, merged.to, serviceYear, serviceYear);
+      const nextLinkId = this.ensureLink(
+        data,
+        merged.from,
+        merged.to,
+        serviceYear,
+        serviceYear,
+      );
 
       data.services[index] = {
         id,
@@ -621,7 +736,7 @@ export class JsonV2GraphRepository implements GraphRepository {
         fromPlaceId: merged.from,
         toPlaceId: merged.to,
         year: serviceYear,
-        note: merged.notes ?? null
+        note: merged.notes ?? null,
       };
 
       if (patch.distance !== undefined) {
@@ -649,7 +764,9 @@ export class JsonV2GraphRepository implements GraphRepository {
         return false;
       }
 
-      data.serviceTrips = data.serviceTrips.filter((trip) => trip.serviceId !== id);
+      data.serviceTrips = data.serviceTrips.filter(
+        (trip) => trip.serviceId !== id,
+      );
       this.cleanupOrphanLinks(data);
       await this.persistData(data);
       return true;
@@ -660,7 +777,11 @@ export class JsonV2GraphRepository implements GraphRepository {
     return data.places.map((place) => this.materializeNode(place, data, year));
   }
 
-  private materializeNode(place: StoredPlace, data: V2Data, year?: number): GraphNode {
+  private materializeNode(
+    place: StoredPlace,
+    data: V2Data,
+    year?: number,
+  ): GraphNode {
     const anchor = this.resolveAnchorForPlace(place.id, data, year);
     const validFrom = this.toNullableYear(place.validFrom) ?? DEFAULT_YEAR;
     const validTo = this.toNullableYear(place.validTo);
@@ -677,18 +798,30 @@ export class JsonV2GraphRepository implements GraphRepository {
       validTo: validTo ?? undefined,
       foreign: foreign ? true : undefined,
       iiifCenterX: anchor?.iiifCenterX ?? undefined,
-      iiifCenterY: anchor?.iiifCenterY ?? undefined
+      iiifCenterY: anchor?.iiifCenterY ?? undefined,
     };
   }
 
-  private materializeEdge(service: StoredService, data: V2Data, year?: number): GraphEdge {
+  private materializeEdge(
+    service: StoredService,
+    data: V2Data,
+    year?: number,
+  ): GraphEdge {
     const serviceYear = this.coerceStoredServiceYear(service);
     const trips = data.serviceTrips
       .filter((trip) => trip.serviceId === service.id)
-      .filter((trip) => (year !== undefined ? this.coerceStoredTripYear(trip, serviceYear) === year : true))
+      .filter((trip) =>
+        year !== undefined
+          ? this.coerceStoredTripYear(trip, serviceYear) === year
+          : true,
+      )
       .map((trip) => this.materializeTrip(trip));
 
-    const distance = this.resolveDistance(service.linkId, data.linkMeasures, year ?? serviceYear);
+    const distance = this.resolveDistance(
+      service.linkId,
+      data.linkMeasures,
+      year ?? serviceYear,
+    );
 
     return {
       id: service.id,
@@ -698,7 +831,7 @@ export class JsonV2GraphRepository implements GraphRepository {
       validFrom: serviceYear,
       validTo: undefined,
       notes: service.note ?? undefined,
-      trips
+      trips,
     };
   }
 
@@ -710,18 +843,31 @@ export class JsonV2GraphRepository implements GraphRepository {
       transport: trip.transport ?? 'postkutsche',
       departs,
       arrives,
-      arrivalDayOffset: this.normalizeDayOffset(trip.arrivalDayOffset)
+      arrivalDayOffset: this.normalizeDayOffset(trip.arrivalDayOffset),
     };
   }
 
-  private resolveDistance(linkId: string, linkMeasures: StoredLinkMeasure[], year?: number): number | undefined {
+  private resolveDistance(
+    linkId: string,
+    linkMeasures: StoredLinkMeasure[],
+    year?: number,
+  ): number | undefined {
     const candidates = linkMeasures
-      .filter((measure) =>
-        measure.linkId === linkId &&
-        (measure.measureKey === DISTANCE_MEASURE_KEY || measure.measureKey === LEGACY_DISTANCE_MEASURE_KEY)
+      .filter(
+        (measure) =>
+          measure.linkId === linkId &&
+          (measure.measureKey === DISTANCE_MEASURE_KEY ||
+            measure.measureKey === LEGACY_DISTANCE_MEASURE_KEY),
       )
-      .filter((measure) => (year !== undefined ? this.isStoredActive(measure.validFrom, measure.validTo, year) : true))
-      .filter((measure) => measure.valueNumber !== null && measure.valueNumber !== undefined)
+      .filter((measure) =>
+        year !== undefined
+          ? this.isStoredActive(measure.validFrom, measure.validTo, year)
+          : true,
+      )
+      .filter(
+        (measure) =>
+          measure.valueNumber !== null && measure.valueNumber !== undefined,
+      )
       .sort((a, b) => {
         if (year === undefined) {
           return 0;
@@ -735,13 +881,23 @@ export class JsonV2GraphRepository implements GraphRepository {
         const bFrom = b.validFrom ?? Number.NEGATIVE_INFINITY;
         return bFrom - aFrom;
       });
-    return candidates.length ? (candidates[0].valueNumber as number) : undefined;
+    return candidates.length
+      ? (candidates[0].valueNumber as number)
+      : undefined;
   }
 
-  private resolvePlaceName(place: StoredPlace, placeNames: StoredPlaceName[], year?: number): string {
+  private resolvePlaceName(
+    place: StoredPlace,
+    placeNames: StoredPlaceName[],
+    year?: number,
+  ): string {
     const names = placeNames
       .filter((name) => name.placeId === place.id)
-      .filter((name) => (year !== undefined ? this.isStoredActive(name.validFrom, name.validTo, year) : true))
+      .filter((name) =>
+        year !== undefined
+          ? this.isStoredActive(name.validFrom, name.validTo, year)
+          : true,
+      )
       .sort((a, b) => {
         const ap = a.preferred ? 0 : 1;
         const bp = b.preferred ? 0 : 1;
@@ -753,7 +909,11 @@ export class JsonV2GraphRepository implements GraphRepository {
     return names[0]?.name ?? place.defaultName ?? place.id;
   }
 
-  private resolveForeignFlag(placeId: string, assertions: StoredAssertion[], year?: number): boolean {
+  private resolveForeignFlag(
+    placeId: string,
+    assertions: StoredAssertion[],
+    year?: number,
+  ): boolean {
     return assertions.some((assertion) => {
       if (assertion.targetType !== 'place' || assertion.targetId !== placeId) {
         return false;
@@ -767,11 +927,19 @@ export class JsonV2GraphRepository implements GraphRepository {
       if (year === undefined) {
         return true;
       }
-      return this.isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, year);
+      return this.isStoredActive(
+        assertion.validFrom ?? null,
+        assertion.validTo ?? null,
+        year,
+      );
     });
   }
 
-  private resolveHiddenFlag(placeId: string, assertions: StoredAssertion[], year?: number): boolean {
+  private resolveHiddenFlag(
+    placeId: string,
+    assertions: StoredAssertion[],
+    year?: number,
+  ): boolean {
     return assertions.some((assertion) => {
       if (assertion.targetType !== 'place' || assertion.targetId !== placeId) {
         return false;
@@ -785,14 +953,26 @@ export class JsonV2GraphRepository implements GraphRepository {
       if (year === undefined) {
         return true;
       }
-      return this.isStoredActive(assertion.validFrom ?? null, assertion.validTo ?? null, year);
+      return this.isStoredActive(
+        assertion.validFrom ?? null,
+        assertion.validTo ?? null,
+        year,
+      );
     });
   }
 
-  private resolveAnchorForPlace(placeId: string, data: V2Data, year?: number): StoredMapAnchor | null {
+  private resolveAnchorForPlace(
+    placeId: string,
+    data: V2Data,
+    year?: number,
+  ): StoredMapAnchor | null {
     const candidates = data.mapAnchors
       .filter((anchor) => anchor.placeId === placeId)
-      .filter((anchor) => (year !== undefined ? this.isStoredActive(anchor.validFrom, anchor.validTo, year) : true));
+      .filter((anchor) =>
+        year !== undefined
+          ? this.isStoredActive(anchor.validFrom, anchor.validTo, year)
+          : true,
+      );
     if (candidates.length) {
       candidates.sort((a, b) => {
         if (year !== undefined) {
@@ -822,7 +1002,7 @@ export class JsonV2GraphRepository implements GraphRepository {
       year: this.coerceYear(edition.year),
       title: edition.title,
       iiifRoute: this.normalizeIiifRoute(edition.iiifRoute),
-      public: edition.public !== false
+      public: edition.public !== false,
     };
   }
 
@@ -838,11 +1018,14 @@ export class JsonV2GraphRepository implements GraphRepository {
       valueBoolean: assertion.valueBoolean ?? null,
       valueJson: assertion.valueJson ?? null,
       validFrom: assertion.validFrom ?? null,
-      validTo: assertion.validTo ?? null
+      validTo: assertion.validTo ?? null,
     };
   }
 
-  private applyStoredAssertionValue(target: StoredAssertion, source: Partial<GraphAssertion>): void {
+  private applyStoredAssertionValue(
+    target: StoredAssertion,
+    source: Partial<GraphAssertion>,
+  ): void {
     const resolvedType = this.resolveStoredAssertionValueType(source);
     target.valueType = resolvedType;
     target.valueText = null;
@@ -866,7 +1049,9 @@ export class JsonV2GraphRepository implements GraphRepository {
     }
   }
 
-  private resolveStoredAssertionValueType(source: Partial<GraphAssertion>): 'string' | 'number' | 'boolean' | 'json' {
+  private resolveStoredAssertionValueType(
+    source: Partial<GraphAssertion>,
+  ): 'string' | 'number' | 'boolean' | 'json' {
     if (
       source.valueType === 'string' ||
       source.valueType === 'number' ||
@@ -887,17 +1072,34 @@ export class JsonV2GraphRepository implements GraphRepository {
     return 'json';
   }
 
-  private resolveAnchorForPlaceAtExactYear(placeId: string, data: V2Data, year: number): StoredMapAnchor | null {
-    return data.mapAnchors.find(
-      (anchor) => anchor.placeId === placeId && anchor.validFrom === year && anchor.validTo === year
-    ) ?? null;
+  private resolveAnchorForPlaceAtExactYear(
+    placeId: string,
+    data: V2Data,
+    year: number,
+  ): StoredMapAnchor | null {
+    return (
+      data.mapAnchors.find(
+        (anchor) =>
+          anchor.placeId === placeId &&
+          anchor.validFrom === year &&
+          anchor.validTo === year,
+      ) ?? null
+    );
   }
 
-  private resolveAnchorForPlaceWithoutExactYear(placeId: string, data: V2Data, year: number): StoredMapAnchor | null {
+  private resolveAnchorForPlaceWithoutExactYear(
+    placeId: string,
+    data: V2Data,
+    year: number,
+  ): StoredMapAnchor | null {
     const candidates = data.mapAnchors
       .filter((anchor) => anchor.placeId === placeId)
-      .filter((anchor) => this.isStoredActive(anchor.validFrom, anchor.validTo, year))
-      .filter((anchor) => !(anchor.validFrom === year && anchor.validTo === year));
+      .filter((anchor) =>
+        this.isStoredActive(anchor.validFrom, anchor.validTo, year),
+      )
+      .filter(
+        (anchor) => !(anchor.validFrom === year && anchor.validTo === year),
+      );
     if (candidates.length) {
       candidates.sort((a, b) => {
         const aFrom = a.validFrom ?? Number.NEGATIVE_INFINITY;
@@ -911,20 +1113,34 @@ export class JsonV2GraphRepository implements GraphRepository {
       });
       return candidates[0];
     }
-    return data.mapAnchors.find(
-      (anchor) => anchor.placeId === placeId && !(anchor.validFrom === year && anchor.validTo === year)
-    ) ?? null;
+    return (
+      data.mapAnchors.find(
+        (anchor) =>
+          anchor.placeId === placeId &&
+          !(anchor.validFrom === year && anchor.validTo === year),
+      ) ?? null
+    );
   }
 
   private isNodeActive(node: GraphNode, year: Year): boolean {
-    return node.validFrom <= year && (node.validTo === undefined || year <= node.validTo);
+    return (
+      node.validFrom <= year &&
+      (node.validTo === undefined || year <= node.validTo)
+    );
   }
 
   private isEdgeActive(edge: GraphEdge, year: Year): boolean {
-    return edge.validFrom <= year && (edge.validTo === undefined || year <= edge.validTo);
+    return (
+      edge.validFrom <= year &&
+      (edge.validTo === undefined || year <= edge.validTo)
+    );
   }
 
-  private isStoredActive(validFrom: NullableYear, validTo: NullableYear, year: number): boolean {
+  private isStoredActive(
+    validFrom: NullableYear,
+    validTo: NullableYear,
+    year: number,
+  ): boolean {
     const from = validFrom ?? Number.NEGATIVE_INFINITY;
     const to = validTo ?? Number.POSITIVE_INFINITY;
     return from <= year && year <= to;
@@ -938,7 +1154,10 @@ export class JsonV2GraphRepository implements GraphRepository {
   }
 
   private coerceServiceYear(validFrom?: number, validTo?: number): Year {
-    const year = this.toNullableYear(validFrom) ?? this.toNullableYear(validTo) ?? DEFAULT_YEAR;
+    const year =
+      this.toNullableYear(validFrom) ??
+      this.toNullableYear(validTo) ??
+      DEFAULT_YEAR;
     return year;
   }
 
@@ -946,7 +1165,10 @@ export class JsonV2GraphRepository implements GraphRepository {
     return Number.isFinite(service.year) ? Number(service.year) : DEFAULT_YEAR;
   }
 
-  private coerceStoredTripYear(trip: StoredServiceTrip, fallbackYear: Year): Year {
+  private coerceStoredTripYear(
+    trip: StoredServiceTrip,
+    fallbackYear: Year,
+  ): Year {
     return Number.isFinite(trip.year) ? Number(trip.year) : fallbackYear;
   }
 
@@ -967,13 +1189,22 @@ export class JsonV2GraphRepository implements GraphRepository {
     return Number.isFinite(year) ? year : DEFAULT_YEAR;
   }
 
-  private ensureLink(data: V2Data, from: string, to: string, validFrom?: number, validTo?: number): string {
+  private ensureLink(
+    data: V2Data,
+    from: string,
+    to: string,
+    validFrom?: number,
+    validTo?: number,
+  ): string {
     const [a, b] = this.normalizeLinkNodes(from, to);
     const linkId = `${a}__${b}`;
     const existing = data.links.find((link) => link.id === linkId);
     if (existing) {
       if (validFrom !== undefined) {
-        existing.validFrom = existing.validFrom === null ? validFrom : Math.min(existing.validFrom, validFrom);
+        existing.validFrom =
+          existing.validFrom === null
+            ? validFrom
+            : Math.min(existing.validFrom, validFrom);
       }
       if (validTo !== undefined) {
         if (existing.validTo === null) {
@@ -990,7 +1221,7 @@ export class JsonV2GraphRepository implements GraphRepository {
       placeAId: a,
       placeBId: b,
       validFrom: this.toNullableYear(validFrom),
-      validTo: this.toNullableYear(validTo)
+      validTo: this.toNullableYear(validTo),
     });
     return linkId;
   }
@@ -999,16 +1230,21 @@ export class JsonV2GraphRepository implements GraphRepository {
     return a <= b ? [a, b] : [b, a];
   }
 
-  private upsertLinkMeasure(data: V2Data, linkId: string, distance: number, year: number): void {
+  private upsertLinkMeasure(
+    data: V2Data,
+    linkId: string,
+    distance: number,
+    year: number,
+  ): void {
     const id = `link-measure-${linkId}-distance-${year}`;
-    const existing = data.linkMeasures.find((measure) =>
-      measure.id === id ||
-      (
-        measure.linkId === linkId &&
-        (measure.measureKey === DISTANCE_MEASURE_KEY || measure.measureKey === LEGACY_DISTANCE_MEASURE_KEY) &&
-        measure.validFrom === year &&
-        measure.validTo === year
-      )
+    const existing = data.linkMeasures.find(
+      (measure) =>
+        measure.id === id ||
+        (measure.linkId === linkId &&
+          (measure.measureKey === DISTANCE_MEASURE_KEY ||
+            measure.measureKey === LEGACY_DISTANCE_MEASURE_KEY) &&
+          measure.validFrom === year &&
+          measure.validTo === year),
     );
     if (existing) {
       existing.valueNumber = distance;
@@ -1025,20 +1261,27 @@ export class JsonV2GraphRepository implements GraphRepository {
       measureKey: DISTANCE_MEASURE_KEY,
       valueNumber: distance,
       validFrom: year,
-      validTo: year
+      validTo: year,
     });
   }
 
-  private replaceServiceTrips(data: V2Data, serviceId: string, trips: EdgeTrip[], year: number): void {
-    data.serviceTrips = data.serviceTrips.filter((trip) => trip.serviceId !== serviceId);
+  private replaceServiceTrips(
+    data: V2Data,
+    serviceId: string,
+    trips: EdgeTrip[],
+    year: number,
+  ): void {
+    data.serviceTrips = data.serviceTrips.filter(
+      (trip) => trip.serviceId !== serviceId,
+    );
     const normalized = trips.map((trip) => ({
       id: trip.id ?? randomUUID(),
       serviceId,
-      transport: (trip.transport ?? 'postkutsche') as TransportType,
+      transport: trip.transport ?? 'postkutsche',
       departs: this.normalizeTripTime(trip.departs),
       arrives: this.normalizeTripTime(trip.arrives),
       arrivalDayOffset: this.normalizeDayOffset(trip.arrivalDayOffset),
-      year
+      year,
     }));
     data.serviceTrips = data.serviceTrips.concat(normalized);
   }
@@ -1054,12 +1297,17 @@ export class JsonV2GraphRepository implements GraphRepository {
   private cleanupOrphanLinks(data: V2Data): void {
     const usedLinkIds = new Set(data.services.map((service) => service.linkId));
     data.links = data.links.filter((link) => usedLinkIds.has(link.id));
-    data.linkMeasures = data.linkMeasures.filter((measure) => usedLinkIds.has(measure.linkId));
+    data.linkMeasures = data.linkMeasures.filter((measure) =>
+      usedLinkIds.has(measure.linkId),
+    );
   }
 
   private upsertPrimaryName(data: V2Data, place: StoredPlace): void {
     const existing = data.placeNames.find(
-      (name) => name.placeId === place.id && name.preferred === true && (name.nameType ?? 'primary') === 'primary'
+      (name) =>
+        name.placeId === place.id &&
+        name.preferred === true &&
+        (name.nameType ?? 'primary') === 'primary',
     );
     if (existing) {
       existing.name = place.defaultName;
@@ -1077,7 +1325,7 @@ export class JsonV2GraphRepository implements GraphRepository {
       preferred: true,
       nameType: 'primary',
       validFrom: place.validFrom,
-      validTo: place.validTo
+      validTo: place.validTo,
     });
   }
 
@@ -1086,16 +1334,20 @@ export class JsonV2GraphRepository implements GraphRepository {
     placeId: string,
     enabled: boolean,
     validFrom: NullableYear,
-    validTo: NullableYear
+    validTo: NullableYear,
   ): void {
     const current = data.assertions.filter(
       (assertion) =>
-        assertion.targetType === 'place' && assertion.targetId === placeId && assertion.schemaKey === FOREIGN_SCHEMA_KEY
+        assertion.targetType === 'place' &&
+        assertion.targetId === placeId &&
+        assertion.schemaKey === FOREIGN_SCHEMA_KEY,
     );
     if (!enabled) {
       if (current.length) {
         const ids = new Set(current.map((assertion) => assertion.id));
-        data.assertions = data.assertions.filter((assertion) => !ids.has(assertion.id));
+        data.assertions = data.assertions.filter(
+          (assertion) => !ids.has(assertion.id),
+        );
       }
       return;
     }
@@ -1122,23 +1374,30 @@ export class JsonV2GraphRepository implements GraphRepository {
       valueBoolean: true,
       valueJson: null,
       validFrom,
-      validTo
+      validTo,
     });
   }
 
-  private setHiddenAssertion(data: V2Data, placeId: string, enabled: boolean, year: number): void {
+  private setHiddenAssertion(
+    data: V2Data,
+    placeId: string,
+    enabled: boolean,
+    year: number,
+  ): void {
     const current = data.assertions.filter(
       (assertion) =>
         assertion.targetType === 'place' &&
         assertion.targetId === placeId &&
         assertion.schemaKey === HIDDEN_SCHEMA_KEY &&
         assertion.validFrom === year &&
-        assertion.validTo === year
+        assertion.validTo === year,
     );
     if (!enabled) {
       if (current.length) {
         const ids = new Set(current.map((assertion) => assertion.id));
-        data.assertions = data.assertions.filter((assertion) => !ids.has(assertion.id));
+        data.assertions = data.assertions.filter(
+          (assertion) => !ids.has(assertion.id),
+        );
       }
       return;
     }
@@ -1165,7 +1424,7 @@ export class JsonV2GraphRepository implements GraphRepository {
       valueBoolean: true,
       valueJson: null,
       validFrom: year,
-      validTo: year
+      validTo: year,
     });
   }
 
@@ -1193,14 +1452,24 @@ export class JsonV2GraphRepository implements GraphRepository {
     await this.ensureInitialized();
     return {
       places: await this.readArrayFile<StoredPlace>(this.placesPath),
-      placeNames: await this.readArrayFile<StoredPlaceName>(this.placeNamesPath),
-      mapAnchors: await this.readArrayFile<StoredMapAnchor>(this.mapAnchorsPath),
+      placeNames: await this.readArrayFile<StoredPlaceName>(
+        this.placeNamesPath,
+      ),
+      mapAnchors: await this.readArrayFile<StoredMapAnchor>(
+        this.mapAnchorsPath,
+      ),
       editions: await this.readArrayFile<StoredEdition>(this.editionsPath),
       links: await this.readArrayFile<StoredLink>(this.linksPath),
-      linkMeasures: await this.readArrayFile<StoredLinkMeasure>(this.linkMeasuresPath),
+      linkMeasures: await this.readArrayFile<StoredLinkMeasure>(
+        this.linkMeasuresPath,
+      ),
       services: await this.readArrayFile<StoredService>(this.servicesPath),
-      serviceTrips: await this.readArrayFile<StoredServiceTrip>(this.serviceTripsPath),
-      assertions: await this.readArrayFile<StoredAssertion>(this.assertionsPath)
+      serviceTrips: await this.readArrayFile<StoredServiceTrip>(
+        this.serviceTripsPath,
+      ),
+      assertions: await this.readArrayFile<StoredAssertion>(
+        this.assertionsPath,
+      ),
     };
   }
 
@@ -1271,7 +1540,10 @@ export class JsonV2GraphRepository implements GraphRepository {
     return parsed as T[];
   }
 
-  private async writeJsonAtomic(filePath: string, data: unknown): Promise<void> {
+  private async writeJsonAtomic(
+    filePath: string,
+    data: unknown,
+  ): Promise<void> {
     const json = `${JSON.stringify(data, null, 2)}\n`;
     const tmpPath = `${filePath}.tmp`;
     const handle = await fs.open(tmpPath, 'w');
@@ -1288,7 +1560,7 @@ export class JsonV2GraphRepository implements GraphRepository {
     const run = this.writeQueue.then(task, task);
     this.writeQueue = run.then(
       () => undefined,
-      () => undefined
+      () => undefined,
     );
     return run;
   }

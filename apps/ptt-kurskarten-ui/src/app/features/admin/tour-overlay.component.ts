@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, HostListener, effect, inject, signal } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { TourService } from './tour.service';
 
 type Rect = { x: number; y: number; width: number; height: number };
@@ -7,12 +6,28 @@ type Rect = { x: number; y: number; width: number; height: number };
 @Component({
   selector: 'app-tour-overlay',
   standalone: true,
-  imports: [NgStyle],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:resize)': 'onResize()',
+    '(window:scroll)': 'onScroll()'
+  },
   template: `
     @if (tour.active() && step(); as current) {
       <div class="tour-overlay">
-        <div class="spotlight" [ngStyle]="spotlightStyle()"></div>
-        <div class="tooltip" [ngStyle]="tooltipStyle()">
+        <div
+          class="spotlight"
+          [style.display]="spotlightDisplay()"
+          [style.top]="spotlightTop()"
+          [style.left]="spotlightLeft()"
+          [style.width]="spotlightWidth()"
+          [style.height]="spotlightHeight()"
+        ></div>
+        <div
+          class="tooltip"
+          [style.display]="tooltipDisplay()"
+          [style.top]="tooltipTop()"
+          [style.left]="tooltipLeft()"
+        >
           <div class="progress">Schritt {{ index() + 1 }} / {{ total() }}</div>
           <div class="title">{{ current.title }}</div>
           <div class="body">{{ current.body }}</div>
@@ -97,6 +112,10 @@ type Rect = { x: number; y: number; width: number; height: number };
   ]
 })
 export class TourOverlayComponent implements AfterViewInit {
+  private static readonly HIDDEN_DISPLAY = 'none';
+  private static readonly TOOLTIP_WIDTH_PX = 340;
+  private static readonly TOOLTIP_HEIGHT_PX = 160;
+  private static readonly TOOLTIP_GAP_PX = 12;
   readonly tour = inject(TourService);
   readonly step = this.tour.currentStep;
   readonly index = this.tour.index;
@@ -116,59 +135,80 @@ export class TourOverlayComponent implements AfterViewInit {
     this.updateTarget();
   }
 
-  @HostListener('window:resize')
   onResize(): void {
     this.updateTarget();
   }
 
-  @HostListener('window:scroll')
   onScroll(): void {
     this.updateTarget();
   }
 
-  spotlightStyle(): Record<string, string> {
-    const rect = this.targetRect();
-    if (!rect) {
-      return { display: 'none' };
-    }
-    return {
-      top: `${rect.y}px`,
-      left: `${rect.x}px`,
-      width: `${rect.width}px`,
-      height: `${rect.height}px`
-    };
+  spotlightDisplay(): string {
+    return this.targetRect() ? '' : TourOverlayComponent.HIDDEN_DISPLAY;
   }
 
-  tooltipStyle(): Record<string, string> {
+  spotlightTop(): string {
+    return this.targetRectCssValue((rect) => rect.y);
+  }
+
+  spotlightLeft(): string {
+    return this.targetRectCssValue((rect) => rect.x);
+  }
+
+  spotlightWidth(): string {
+    return this.targetRectCssValue((rect) => rect.width);
+  }
+
+  spotlightHeight(): string {
+    return this.targetRectCssValue((rect) => rect.height);
+  }
+
+  tooltipDisplay(): string {
+    return this.resolveTooltipPosition() ? '' : TourOverlayComponent.HIDDEN_DISPLAY;
+  }
+
+  tooltipTop(): string {
+    const position = this.resolveTooltipPosition();
+    return position ? `${position.top}px` : '';
+  }
+
+  tooltipLeft(): string {
+    const position = this.resolveTooltipPosition();
+    return position ? `${position.left}px` : '';
+  }
+
+  private targetRectCssValue(project: (rect: Rect) => number): string {
+    const rect = this.targetRect();
+    return rect ? `${project(rect)}px` : '';
+  }
+
+  private resolveTooltipPosition(): { top: number; left: number } | null {
     if (typeof window === 'undefined') {
-      return { display: 'none' };
+      return null;
     }
     const rect = this.targetRect();
     if (!rect) {
-      return { display: 'none' };
+      return null;
     }
     const placement = this.step()?.placement ?? 'bottom';
-    const gap = 12;
+    const gap = TourOverlayComponent.TOOLTIP_GAP_PX;
     let top = rect.y + rect.height + gap;
     let left = rect.x;
 
     if (placement === 'top') {
-      top = rect.y - gap - 120;
+      top = rect.y - gap - TourOverlayComponent.TOOLTIP_HEIGHT_PX;
     } else if (placement === 'left') {
       top = rect.y;
-      left = rect.x - 340;
+      left = rect.x - TourOverlayComponent.TOOLTIP_WIDTH_PX;
     } else if (placement === 'right') {
       top = rect.y;
       left = rect.x + rect.width + gap;
     }
 
-    top = Math.max(12, Math.min(window.innerHeight - 160, top));
-    left = Math.max(12, Math.min(window.innerWidth - 340, left));
+    top = Math.max(gap, Math.min(window.innerHeight - TourOverlayComponent.TOOLTIP_HEIGHT_PX, top));
+    left = Math.max(gap, Math.min(window.innerWidth - TourOverlayComponent.TOOLTIP_WIDTH_PX, left));
 
-    return {
-      top: `${top}px`,
-      left: `${left}px`
-    };
+    return { top, left };
   }
 
   private updateTarget(): void {

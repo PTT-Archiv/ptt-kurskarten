@@ -1,4 +1,4 @@
-import { Component, PLATFORM_ID, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, PLATFORM_ID, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { EdgeTimetableReport, GraphSnapshot, LocalizedText, StationProfileReport } from '@ptt-kurskarten/shared';
@@ -11,6 +11,7 @@ type Tab = 'station' | 'edge';
 @Component({
   selector: 'app-reports',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TranslocoPipe],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'

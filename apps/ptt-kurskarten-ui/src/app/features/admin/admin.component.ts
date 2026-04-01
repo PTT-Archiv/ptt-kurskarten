@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, PLATFORM_ID, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type {
@@ -140,9 +140,17 @@ type FactLink = {
   url: string | null;
 };
 
+type ApiErrorResponse = {
+  message?: string;
+  error?: {
+    message?: string;
+  };
+};
+
 @Component({
   selector: 'app-admin',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MapStageComponent, TranslocoPipe, TourOverlayComponent, ArchiveSnippetViewerComponent, FaIconComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
@@ -4080,8 +4088,12 @@ export class AdminComponent implements OnDestroy {
     return rows;
   }
 
-  private extractErrorMessage(error: any): string {
-    return error?.error?.message || error?.message || 'Unerwarteter Fehler';
+  private extractErrorMessage(error: unknown): string {
+    const apiError = error as ApiErrorResponse | null;
+    if (!apiError) {
+      return 'Unerwarteter Fehler';
+    }
+    return apiError.error?.message || apiError.message || 'Unerwarteter Fehler';
   }
 
 }

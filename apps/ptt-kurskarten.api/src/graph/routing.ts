@@ -6,7 +6,7 @@ import type {
   GraphSnapshot,
   RouteResultKind,
   TimeHHMM,
-  TransportType
+  TransportType,
 } from '@ptt-kurskarten/shared';
 
 export type RoutingParams = {
@@ -67,7 +67,11 @@ export function formatTime(minutes: number): TimeHHMM {
   return `${hh}:${mm}` as TimeHHMM;
 }
 
-function resolveArrivalMinutes(dep: number, arrRaw: number, offset?: number): number {
+function resolveArrivalMinutes(
+  dep: number,
+  arrRaw: number,
+  offset?: number,
+): number {
   let arr = arrRaw + (offset ?? 0) * DAY_MINUTES;
   if (offset === undefined && arrRaw < dep) {
     arr += DAY_MINUTES;
@@ -78,16 +82,27 @@ function resolveArrivalMinutes(dep: number, arrRaw: number, offset?: number): nu
   return arr;
 }
 
-function resolveTripTransport(trip: EdgeTrip | null | undefined): TransportType {
+function resolveTripTransport(
+  trip: EdgeTrip | null | undefined,
+): TransportType {
   return trip?.transport ?? 'postkutsche';
 }
 
-function resolveEdgeTransport(edge: GraphEdge | null | undefined): TransportType {
+function resolveEdgeTransport(
+  edge: GraphEdge | null | undefined,
+): TransportType {
   return resolveTripTransport(edge?.trips?.[0]);
 }
 
-function resolveTimeAtOrAfter(referenceAbs: number, time: TimeHHMM, offset?: number): number {
-  let resolved = Math.floor(referenceAbs / DAY_MINUTES) * DAY_MINUTES + parseTime(time) + (offset ?? 0) * DAY_MINUTES;
+function resolveTimeAtOrAfter(
+  referenceAbs: number,
+  time: TimeHHMM,
+  offset?: number,
+): number {
+  let resolved =
+    Math.floor(referenceAbs / DAY_MINUTES) * DAY_MINUTES +
+    parseTime(time) +
+    (offset ?? 0) * DAY_MINUTES;
   while (resolved < referenceAbs) {
     resolved += DAY_MINUTES;
   }
@@ -98,11 +113,16 @@ function buildRouteLeg(
   edge: GraphEdge,
   trip: EdgeTrip,
   departAbs?: number,
-  arriveAbs?: number
+  arriveAbs?: number,
 ): ConnectionLeg {
-  const legArrivalDayOffset = departAbs !== undefined && arriveAbs !== undefined
-    ? (Math.max(0, Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(departAbs / DAY_MINUTES)) as 0 | 1 | 2)
-    : undefined;
+  const legArrivalDayOffset =
+    departAbs !== undefined && arriveAbs !== undefined
+      ? (Math.max(
+          0,
+          Math.floor(arriveAbs / DAY_MINUTES) -
+            Math.floor(departAbs / DAY_MINUTES),
+        ) as 0 | 1 | 2)
+      : undefined;
 
   return {
     edgeId: edge.id,
@@ -116,19 +136,29 @@ function buildRouteLeg(
     arrivalDayOffset: legArrivalDayOffset,
     departAbsMinutes: departAbs,
     arriveAbsMinutes: arriveAbs,
-    durationMinutes: departAbs !== undefined && arriveAbs !== undefined ? arriveAbs - departAbs : undefined
+    durationMinutes:
+      departAbs !== undefined && arriveAbs !== undefined
+        ? arriveAbs - departAbs
+        : undefined,
   };
 }
 
-function finalizeLegs(legs: ConnectionLeg[], startTime: number): ConnectionLeg[] {
+function finalizeLegs(
+  legs: ConnectionLeg[],
+  startTime: number,
+): ConnectionLeg[] {
   return legs.map((leg) => ({
     ...leg,
-    departDayOffset: leg.departAbsMinutes !== undefined
-      ? (Math.floor(leg.departAbsMinutes / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES)) as 0 | 1 | 2
-      : undefined,
-    arriveDayOffset: leg.arriveAbsMinutes !== undefined
-      ? (Math.floor(leg.arriveAbsMinutes / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES)) as 0 | 1 | 2
-      : undefined
+    departDayOffset:
+      leg.departAbsMinutes !== undefined
+        ? ((Math.floor(leg.departAbsMinutes / DAY_MINUTES) -
+            Math.floor(startTime / DAY_MINUTES)) as 0 | 1 | 2)
+        : undefined,
+    arriveDayOffset:
+      leg.arriveAbsMinutes !== undefined
+        ? ((Math.floor(leg.arriveAbsMinutes / DAY_MINUTES) -
+            Math.floor(startTime / DAY_MINUTES)) as 0 | 1 | 2)
+        : undefined,
   }));
 }
 
@@ -142,7 +172,10 @@ function buildAdjacency(snapshot: GraphSnapshot): Map<string, GraphEdge[]> {
   return adjacency;
 }
 
-function buildReachableToTarget(adjacency: Map<string, GraphEdge[]>, targetNode: string): Set<string> {
+function buildReachableToTarget(
+  adjacency: Map<string, GraphEdge[]>,
+  targetNode: string,
+): Set<string> {
   const reverse = new Map<string, string[]>();
 
   adjacency.forEach((edges) => {
@@ -177,7 +210,7 @@ function buildReachableToTarget(adjacency: Map<string, GraphEdge[]>, targetNode:
 export function computeTripChoice(
   edge: GraphEdge,
   currentTime: number,
-  minTransferMinutes: number
+  minTransferMinutes: number,
 ): TripChoice | null {
   const trips = edge.trips ?? [];
   if (!trips.length) {
@@ -194,7 +227,11 @@ export function computeTripChoice(
       continue;
     }
     const depAbs = resolveTimeAtOrAfter(earliest, trip.departs);
-    const arrAbs = resolveTimeAtOrAfter(depAbs, trip.arrives, trip.arrivalDayOffset);
+    const arrAbs = resolveTimeAtOrAfter(
+      depAbs,
+      trip.arrives,
+      trip.arrivalDayOffset,
+    );
 
     if (chosen === null || depAbs < chosenDepAbs) {
       chosen = trip;
@@ -211,7 +248,7 @@ export function computeTripChoice(
     toNode: edge.to,
     departAbs: chosenDepAbs,
     arriveAbs: chosenArrAbs,
-    legs: [buildRouteLeg(edge, chosen, chosenDepAbs, chosenArrAbs)]
+    legs: [buildRouteLeg(edge, chosen, chosenDepAbs, chosenArrAbs)],
   };
 }
 
@@ -221,7 +258,7 @@ function computePartialChainChoices(
   currentTime: number,
   minTransferMinutes: number,
   targetReachable: Set<string>,
-  targetNode: string
+  targetNode: string,
 ): TripChoice[] {
   const choices: TripChoice[] = [];
   const trips = edge.trips ?? [];
@@ -231,7 +268,10 @@ function computePartialChainChoices(
       continue;
     }
 
-    const departAbs = resolveTimeAtOrAfter(currentTime + minTransferMinutes, trip.departs);
+    const departAbs = resolveTimeAtOrAfter(
+      currentTime + minTransferMinutes,
+      trip.departs,
+    );
     const arriveAbs = trip.arrives
       ? resolveTimeAtOrAfter(departAbs, trip.arrives, trip.arrivalDayOffset)
       : undefined;
@@ -244,7 +284,7 @@ function computePartialChainChoices(
       arriveAbs ?? departAbs,
       visitedNodes,
       targetReachable,
-      targetNode
+      targetNode,
     );
     if (!continuations.length) {
       continue;
@@ -255,7 +295,7 @@ function computePartialChainChoices(
         toNode: continuation.toNode,
         departAbs,
         arriveAbs: continuation.arriveAbs,
-        legs: [baseLeg, ...continuation.legs]
+        legs: [baseLeg, ...continuation.legs],
       });
     });
   }
@@ -270,16 +310,22 @@ function extendPartialChain(
   referenceAbs: number,
   visitedNodes: Set<string>,
   targetReachable: Set<string>,
-  targetNode: string
+  targetNode: string,
 ): TripChoice[] {
   if (visitedNodes.size > adjacency.size + 1) {
     return [];
   }
 
   const continuations = selectContinuationCandidates(
-    collectContinuationCandidates(adjacency, startNode, transport, referenceAbs, visitedNodes),
+    collectContinuationCandidates(
+      adjacency,
+      startNode,
+      transport,
+      referenceAbs,
+      visitedNodes,
+    ),
     targetReachable,
-    targetNode
+    targetNode,
   );
   if (!continuations.length) {
     return [];
@@ -298,7 +344,7 @@ function extendPartialChain(
         toNode: nextNode,
         departAbs: referenceAbs,
         arriveAbs: next.arriveAbs,
-        legs: [next.leg]
+        legs: [next.leg],
       });
       continue;
     }
@@ -312,7 +358,7 @@ function extendPartialChain(
       next.departAbs ?? referenceAbs,
       nextVisitedNodes,
       targetReachable,
-      targetNode
+      targetNode,
     );
 
     downstreamChains.forEach((chain) => {
@@ -320,7 +366,7 @@ function extendPartialChain(
         toNode: chain.toNode,
         departAbs: referenceAbs,
         arriveAbs: chain.arriveAbs,
-        legs: [next.leg, ...chain.legs]
+        legs: [next.leg, ...chain.legs],
       });
     });
   }
@@ -333,7 +379,7 @@ function collectContinuationCandidates(
   nodeId: string,
   transport: TransportType,
   referenceAbs: number,
-  visitedNodes: Set<string>
+  visitedNodes: Set<string>,
 ): ContinuationCandidate[] {
   const edges = adjacency.get(nodeId) ?? [];
   const candidates: ContinuationCandidate[] = [];
@@ -348,16 +394,22 @@ function collectContinuationCandidates(
         continue;
       }
 
-      const departAbs = trip.departs ? resolveTimeAtOrAfter(referenceAbs, trip.departs) : undefined;
+      const departAbs = trip.departs
+        ? resolveTimeAtOrAfter(referenceAbs, trip.departs)
+        : undefined;
       const arriveAbs = trip.arrives
-        ? resolveTimeAtOrAfter(departAbs ?? referenceAbs, trip.arrives, trip.arrivalDayOffset)
+        ? resolveTimeAtOrAfter(
+            departAbs ?? referenceAbs,
+            trip.arrives,
+            trip.arrivalDayOffset,
+          )
         : undefined;
 
       candidates.push({
         edge,
         leg: buildRouteLeg(edge, trip, departAbs, arriveAbs),
         departAbs,
-        arriveAbs
+        arriveAbs,
       });
     }
   }
@@ -368,7 +420,7 @@ function collectContinuationCandidates(
 function selectContinuationCandidates(
   candidates: ContinuationCandidate[],
   targetReachable: Set<string>,
-  targetNode: string
+  targetNode: string,
 ): ContinuationCandidate[] {
   if (!candidates.length) {
     return [];
@@ -381,7 +433,9 @@ function selectContinuationCandidates(
     byEdge.set(candidate.edge.id, edgeCandidates);
   });
 
-  const directTargetEdgeGroups = [...byEdge.values()].filter((group) => group[0]?.edge.to === targetNode);
+  const directTargetEdgeGroups = [...byEdge.values()].filter(
+    (group) => group[0]?.edge.to === targetNode,
+  );
   if (directTargetEdgeGroups.length === 1) {
     return directTargetEdgeGroups[0];
   }
@@ -389,7 +443,9 @@ function selectContinuationCandidates(
     return [];
   }
 
-  const targetEdgeGroups = [...byEdge.values()].filter((group) => targetReachable.has(group[0]?.edge.to ?? ''));
+  const targetEdgeGroups = [...byEdge.values()].filter((group) =>
+    targetReachable.has(group[0]?.edge.to ?? ''),
+  );
   if (targetEdgeGroups.length === 1) {
     return targetEdgeGroups[0];
   }
@@ -410,7 +466,7 @@ function computeOutgoingChoices(
   currentTime: number,
   minTransferMinutes: number,
   targetReachable: Set<string>,
-  targetNode: string
+  targetNode: string,
 ): TripChoice[] {
   const edges = adjacency.get(currentNode) ?? [];
   const signatures = new Set<string>();
@@ -419,7 +475,9 @@ function computeOutgoingChoices(
   for (const edge of edges) {
     const direct = computeTripChoice(edge, currentTime, minTransferMinutes);
     if (direct) {
-      const signature = direct.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
+      const signature = direct.legs
+        .map((leg) => `${leg.edgeId}:${leg.tripId}`)
+        .join('|');
       if (!signatures.has(signature)) {
         signatures.add(signature);
         choices.push(direct);
@@ -432,9 +490,11 @@ function computeOutgoingChoices(
       currentTime,
       minTransferMinutes,
       targetReachable,
-      targetNode
+      targetNode,
     )) {
-      const signature = chain.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
+      const signature = chain.legs
+        .map((leg) => `${leg.edgeId}:${leg.tripId}`)
+        .join('|');
       if (!signatures.has(signature)) {
         signatures.add(signature);
         choices.push(chain);
@@ -445,7 +505,10 @@ function computeOutgoingChoices(
   return choices;
 }
 
-export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingParams): ConnectionOption | null {
+export function computeEarliestArrival(
+  snapshot: GraphSnapshot,
+  params: RoutingParams,
+): ConnectionOption | null {
   const minTransferMinutes = params.minTransferMinutes ?? 0;
   const maxMinutesHorizon = params.maxMinutesHorizon ?? DAY_MINUTES * 20;
   const startTime = parseTime(params.depart);
@@ -462,7 +525,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     prevNode: null,
     legs: [],
     departAbs: null,
-    arriveAbs: null
+    arriveAbs: null,
   });
   heap.push({ nodeId: params.from, time: startTime });
 
@@ -493,7 +556,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
       current.time,
       current.nodeId === params.from ? 0 : minTransferMinutes,
       targetReachable,
-      params.to
+      params.to,
     );
     for (const choice of choices) {
       if (visited.has(choice.toNode)) {
@@ -511,7 +574,7 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
           prevNode: current.nodeId,
           legs: choice.legs,
           departAbs: choice.departAbs,
-          arriveAbs: choice.arriveAbs
+          arriveAbs: choice.arriveAbs,
         });
         heap.push({ nodeId: choice.toNode, time: choice.arriveAbs });
       }
@@ -534,7 +597,13 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     backtrackVisited.add(nodeCursor);
 
     const info = prev.get(nodeCursor);
-    if (!info || !info.prevNode || info.departAbs === null || info.arriveAbs === null || info.legs.length === 0) {
+    if (
+      !info ||
+      !info.prevNode ||
+      info.departAbs === null ||
+      info.arriveAbs === null ||
+      info.legs.length === 0
+    ) {
       break;
     }
 
@@ -556,10 +625,13 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
   const departAbs = firstLeg?.departAbsMinutes ?? startTime;
   const lastLeg = finalizedLegs[finalizedLegs.length - 1];
   const arriveAbs = lastLeg?.arriveAbsMinutes;
-  const departDayOffset = Math.floor(departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
-  const arriveDayOffset = arriveAbs !== undefined
-    ? Math.floor(arriveAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES)
-    : undefined;
+  const departDayOffset =
+    Math.floor(departAbs / DAY_MINUTES) - Math.floor(startTime / DAY_MINUTES);
+  const arriveDayOffset =
+    arriveAbs !== undefined
+      ? Math.floor(arriveAbs / DAY_MINUTES) -
+        Math.floor(startTime / DAY_MINUTES)
+      : undefined;
 
   return {
     year: params.year,
@@ -570,24 +642,35 @@ export function computeEarliestArrival(snapshot: GraphSnapshot, params: RoutingP
     departDayOffset: departDayOffset as 0 | 1 | 2,
     arrives: arriveAbs !== undefined ? formatTime(arriveAbs) : undefined,
     arriveDayOffset: arriveDayOffset as 0 | 1 | 2,
-    durationMinutes: arriveAbs !== undefined ? arriveAbs - departAbs : undefined,
+    durationMinutes:
+      arriveAbs !== undefined ? arriveAbs - departAbs : undefined,
     legs: finalizedLegs,
-    kind: 'COMPLETE_JOURNEY'
+    kind: 'COMPLETE_JOURNEY',
   };
 }
 
-export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsParams): ConnectionOption[] {
+export function computeConnections(
+  snapshot: GraphSnapshot,
+  params: ConnectionsParams,
+): ConnectionOption[] {
   const k = Math.max(3, Math.min(params.k ?? 5, 10));
   const results: ConnectionOption[] = [];
   const allowForeignStartFallback = params.allowForeignStartFallback ?? true;
-  const fromNode = snapshot.nodes.find((node) => node.id === params.from) ?? null;
+  const fromNode =
+    snapshot.nodes.find((node) => node.id === params.from) ?? null;
   const fromIsForeign = fromNode?.foreign === true;
 
-  if (!isNodeInSnapshot(params.to, snapshot) && isNodeInSnapshot(params.from, snapshot)) {
+  if (
+    !isNodeInSnapshot(params.to, snapshot) &&
+    isNodeInSnapshot(params.from, snapshot)
+  ) {
     return computePrefixConnections(snapshot, params, k);
   }
 
-  if (!isNodeInSnapshot(params.from, snapshot) && isNodeInSnapshot(params.to, snapshot)) {
+  if (
+    !isNodeInSnapshot(params.from, snapshot) &&
+    isNodeInSnapshot(params.to, snapshot)
+  ) {
     if (!allowForeignStartFallback) {
       return [];
     }
@@ -599,7 +682,13 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   if (base) {
     results.push(base);
   } else {
-    if (!(fromIsForeign && allowForeignStartFallback && isNodeInSnapshot(params.to, snapshot))) {
+    if (
+      !(
+        fromIsForeign &&
+        allowForeignStartFallback &&
+        isNodeInSnapshot(params.to, snapshot)
+      )
+    ) {
       return results;
     }
   }
@@ -627,7 +716,9 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
     }
   }
 
-  const sortedDepartures = [...candidateDepartures].sort((a, b) => a - b).slice(0, k * 2);
+  const sortedDepartures = [...candidateDepartures]
+    .sort((a, b) => a - b)
+    .slice(0, k * 2);
 
   for (const depAbs of sortedDepartures) {
     if (results.length >= k) {
@@ -638,7 +729,7 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
       ...params,
       depart: formatTime(depAbs),
       minTransferMinutes,
-      maxMinutesHorizon
+      maxMinutesHorizon,
     };
 
     const option = computeEarliestArrival(snapshot, seededParams);
@@ -646,22 +737,36 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
       continue;
     }
 
-    const signature = option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
-    const exists = results.some((existing) => existing.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|') === signature);
+    const signature = option.legs
+      .map((leg) => `${leg.edgeId}:${leg.tripId}`)
+      .join('|');
+    const exists = results.some(
+      (existing) =>
+        existing.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|') ===
+        signature,
+    );
     if (!exists) {
       results.push(option);
     }
   }
 
-  if (fromIsForeign && isNodeInSnapshot(params.to, snapshot) && allowForeignStartFallback) {
+  if (
+    fromIsForeign &&
+    isNodeInSnapshot(params.to, snapshot) &&
+    allowForeignStartFallback
+  ) {
     const fallback = computeForeignStartFallback(snapshot, params, k);
     if (fallback.length) {
       const existing = new Set(
-        results.map((option) => option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|'))
+        results.map((option) =>
+          option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|'),
+        ),
       );
       const merged = [...results];
       for (const option of fallback) {
-        const signature = option.legs.map((leg) => `${leg.edgeId}:${leg.tripId}`).join('|');
+        const signature = option.legs
+          .map((leg) => `${leg.edgeId}:${leg.tripId}`)
+          .join('|');
         if (!existing.has(signature)) {
           existing.add(signature);
           merged.push(option);
@@ -672,8 +777,12 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
         return merged;
       }
 
-      const normal = merged.filter((option) => option.kind !== 'FOREIGN_START_FALLBACK');
-      const foreign = merged.filter((option) => option.kind === 'FOREIGN_START_FALLBACK');
+      const normal = merged.filter(
+        (option) => option.kind !== 'FOREIGN_START_FALLBACK',
+      );
+      const foreign = merged.filter(
+        (option) => option.kind === 'FOREIGN_START_FALLBACK',
+      );
 
       if (normal.length && foreign.length && k > 1) {
         const trimmed = normal.slice(0, k - 1);
@@ -688,14 +797,18 @@ export function computeConnections(snapshot: GraphSnapshot, params: ConnectionsP
   return results.slice(0, k);
 }
 
-function computePrefixConnections(snapshot: GraphSnapshot, params: ConnectionsParams, k: number): ConnectionOption[] {
+function computePrefixConnections(
+  snapshot: GraphSnapshot,
+  params: ConnectionsParams,
+  k: number,
+): ConnectionOption[] {
   const edgesToTarget = snapshot.edges.filter((edge) => edge.to === params.to);
   const candidateNodes = Array.from(
     new Set(
       edgesToTarget
         .map((edge) => edge.from)
-        .filter((nodeId) => isNodeInSnapshot(nodeId, snapshot))
-    )
+        .filter((nodeId) => isNodeInSnapshot(nodeId, snapshot)),
+    ),
   );
 
   if (!candidateNodes.length) {
@@ -705,7 +818,10 @@ function computePrefixConnections(snapshot: GraphSnapshot, params: ConnectionsPa
   const options: ConnectionOption[] = [];
 
   for (const candidate of candidateNodes) {
-    const option = computeEarliestArrival(snapshot, { ...params, to: candidate });
+    const option = computeEarliestArrival(snapshot, {
+      ...params,
+      to: candidate,
+    });
     if (!option) {
       continue;
     }
@@ -719,16 +835,24 @@ function computePrefixConnections(snapshot: GraphSnapshot, params: ConnectionsPa
   }
 
   const sorted = options.sort((a, b) => {
-    const aArr = a.legs[a.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
-    const bArr = b.legs[b.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
+    const aArr =
+      a.legs[a.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
+    const bArr =
+      b.legs[b.legs.length - 2]?.arriveAbsMinutes ?? Number.POSITIVE_INFINITY;
     return aArr - bArr;
   });
 
   return sorted.slice(0, k);
 }
 
-function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: string): ConnectionLeg {
-  const edge = snapshot.edges.find((candidate) => candidate.from === fromId && candidate.to === toId);
+function buildContinuationLeg(
+  snapshot: GraphSnapshot,
+  fromId: string,
+  toId: string,
+): ConnectionLeg {
+  const edge = snapshot.edges.find(
+    (candidate) => candidate.from === fromId && candidate.to === toId,
+  );
   const trip = edge?.trips?.[0];
   return {
     edgeId: edge?.id ?? `outside:${fromId}->${toId}`,
@@ -738,7 +862,7 @@ function buildContinuationLeg(snapshot: GraphSnapshot, fromId: string, toId: str
     transport: resolveTripTransport(trip),
     departs: trip?.departs,
     arrives: undefined,
-    continuationOutsideDataset: true
+    continuationOutsideDataset: true,
   };
 }
 
@@ -749,7 +873,7 @@ function isNodeInSnapshot(nodeId: string, snapshot: GraphSnapshot): boolean {
 function computeForeignStartFallback(
   snapshot: GraphSnapshot,
   params: ConnectionsParams,
-  k: number
+  k: number,
 ): ConnectionOption[] {
   const knownDepartures: Array<{
     from: string;
@@ -790,7 +914,7 @@ function computeForeignStartFallback(
           depart: trip.departs,
           arrival: trip.arrives,
           arrivalDayOffset: trip.arrivalDayOffset,
-          edge
+          edge,
         });
         return;
       }
@@ -799,7 +923,7 @@ function computeForeignStartFallback(
         to: edge.to,
         arrival: trip.arrives,
         arrivalDayOffset: trip.arrivalDayOffset,
-        edge
+        edge,
       });
     });
   });
@@ -838,7 +962,8 @@ function computeForeignStartFallback(
     if (entry.to === params.to) {
       const preface: ConnectionLeg = {
         edgeId: entry.edge.id,
-        tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
+        tripId:
+          entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
         from: entry.from,
         to: entry.to,
         transport: resolveEdgeTransport(entry.edge),
@@ -846,7 +971,7 @@ function computeForeignStartFallback(
         arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
         notes: entry.edge.notes,
         continuationOutsideDataset: true,
-        foreignStartPreface: true
+        foreignStartPreface: true,
       };
       options.push({
         year: params.year,
@@ -858,8 +983,10 @@ function computeForeignStartFallback(
         requestedFrom: params.from,
         effectiveFrom: entry.to,
         effectiveStartTime: entry.arrival,
-        foreignStartNote: entry.arrivalOnly ? `Known from ${entry.to}` : undefined,
-        legs: [preface]
+        foreignStartNote: entry.arrivalOnly
+          ? `Known from ${entry.to}`
+          : undefined,
+        legs: [preface],
       });
       return;
     }
@@ -868,7 +995,7 @@ function computeForeignStartFallback(
       ...params,
       from: entry.to,
       depart: entry.arrival,
-      allowForeignStartFallback: false
+      allowForeignStartFallback: false,
     });
     if (!inner.length) {
       return;
@@ -877,18 +1004,19 @@ function computeForeignStartFallback(
       if (options.length >= k) {
         return;
       }
-    const preface: ConnectionLeg = {
-      edgeId: entry.edge.id,
-      tripId: entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
-      from: entry.from,
-      to: entry.to,
-      transport: resolveEdgeTransport(entry.edge),
-      arrives: entry.arrival,
-      arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
-      notes: entry.edge.notes,
-      continuationOutsideDataset: true,
-      foreignStartPreface: true
-    };
+      const preface: ConnectionLeg = {
+        edgeId: entry.edge.id,
+        tripId:
+          entry.edge.trips?.[0]?.id ?? `outside:${entry.from}->${entry.to}`,
+        from: entry.from,
+        to: entry.to,
+        transport: resolveEdgeTransport(entry.edge),
+        arrives: entry.arrival,
+        arrivalDayOffset: entry.arrivalDayOffset as 0 | 1 | 2 | undefined,
+        notes: entry.edge.notes,
+        continuationOutsideDataset: true,
+        foreignStartPreface: true,
+      };
       options.push({
         ...option,
         from: params.from,
@@ -899,8 +1027,10 @@ function computeForeignStartFallback(
         requestedFrom: params.from,
         effectiveFrom: entry.to,
         effectiveStartTime: entry.arrival,
-        foreignStartNote: entry.arrivalOnly ? `Known from ${entry.to}` : undefined,
-        legs: [preface, ...option.legs]
+        foreignStartNote: entry.arrivalOnly
+          ? `Known from ${entry.to}`
+          : undefined,
+        legs: [preface, ...option.legs],
       });
     });
   };
@@ -955,7 +1085,10 @@ class MinHeap<T> {
       if (this.compare(this.data[current], this.data[parent]) >= 0) {
         break;
       }
-      [this.data[current], this.data[parent]] = [this.data[parent], this.data[current]];
+      [this.data[current], this.data[parent]] = [
+        this.data[parent],
+        this.data[current],
+      ];
       current = parent;
     }
   }
@@ -967,16 +1100,25 @@ class MinHeap<T> {
       let smallest = current;
       const left = current * 2 + 1;
       const right = current * 2 + 2;
-      if (left < length && this.compare(this.data[left], this.data[smallest]) < 0) {
+      if (
+        left < length &&
+        this.compare(this.data[left], this.data[smallest]) < 0
+      ) {
         smallest = left;
       }
-      if (right < length && this.compare(this.data[right], this.data[smallest]) < 0) {
+      if (
+        right < length &&
+        this.compare(this.data[right], this.data[smallest]) < 0
+      ) {
         smallest = right;
       }
       if (smallest === current) {
         break;
       }
-      [this.data[current], this.data[smallest]] = [this.data[smallest], this.data[current]];
+      [this.data[current], this.data[smallest]] = [
+        this.data[smallest],
+        this.data[current],
+      ];
       current = smallest;
     }
   }

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -20,6 +21,7 @@ import { TileSourceSpecifier } from 'openseadragon';
 @Component({
   selector: 'app-archive-snippet-viewer',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FaIconComponent],
   templateUrl: './archive-snippet-viewer.component.html',
   styleUrl: './archive-snippet-viewer.component.css'

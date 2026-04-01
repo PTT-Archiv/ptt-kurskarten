@@ -1,4 +1,4 @@
-import { Component, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, PLATFORM_ID, computed, effect, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import type { ConnectionOption, GraphSnapshot, TimeHHMM } from '@ptt-kurskarten/shared';
@@ -9,6 +9,7 @@ const DEFAULT_YEAR = 1852;
 @Component({
   selector: 'app-connections',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TranslocoPipe],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'

@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -40,7 +40,7 @@ import {
 
 const NODE_RADIUS = 1;
 const NODE_RADIUS_MAX = 1;
-const NODE_RADIUS_STEP = .3;
+const NODE_RADIUS_STEP = 0.3;
 const DEFAULT_VIEWPORT_ZOOM = 1.0;
 const DEFAULT_INITIAL_VIEWPORT_ZOOM = 0.85;
 const DEFAULT_INITIAL_VIEWPORT_OFFSET_Y = -100;
@@ -115,6 +115,11 @@ export type MapSimulationTripHit = {
 @Component({
   selector: 'app-map-stage',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.pick-mode]': 'pickMode !== null',
+    '[class.routing-active]': 'routingActive'
+  },
   imports: [BorderUncertaintyLayerComponent, FaIconComponent],
   template: `
     <div
@@ -337,14 +342,6 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
   private readonly transloco = inject(TranslocoService);
-
-  @HostBinding('class.pick-mode') get pickModeClass(): boolean {
-    return this.pickMode !== null;
-  }
-
-  @HostBinding('class.routing-active') get routingActiveClass(): boolean {
-    return this.routingActive;
-  }
 
   @ViewChild('graphCanvas') private canvasRef?: ElementRef<HTMLCanvasElement>;
 
