@@ -9,6 +9,13 @@ import type {
 } from '@ptt-kurskarten/shared';
 
 const DAY_MINUTES = 1440;
+type TimedTrip = GraphEdge['trips'][number] & {
+  departs: TimeHHMM;
+  arrives: TimeHHMM;
+};
+type StationProfileOutgoing = StationProfileReport['outgoing'][number];
+type StationProfileIncoming = StationProfileReport['incoming'][number];
+type StationProfileEdgeBase = Omit<StationProfileOutgoing, 'toNode'>;
 
 export function timeToMinutes(value: TimeHHMM): number {
   const [hh, mm] = value.split(':').map((part) => Number(part));
@@ -40,13 +47,13 @@ export function buildStationProfile(
   const outgoingEdges = snapshot.edges.filter((edge) => edge.from === nodeId);
   const incomingEdges = snapshot.edges.filter((edge) => edge.to === nodeId);
 
-  const outgoing = outgoingEdges
-    .map((edge) => buildEdgeStats(edge, nodesById.get(edge.to)))
-    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+  const outgoing: StationProfileOutgoing[] = outgoingEdges
+    .map((edge) => buildOutgoingEdgeStats(edge, nodesById.get(edge.to)))
+    .filter((entry): entry is StationProfileOutgoing => entry !== null);
 
-  const incoming = incomingEdges
-    .map((edge) => buildEdgeStats(edge, nodesById.get(edge.from), true))
-    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+  const incoming: StationProfileIncoming[] = incomingEdges
+    .map((edge) => buildIncomingEdgeStats(edge, nodesById.get(edge.from)))
+    .filter((entry): entry is StationProfileIncoming => entry !== null);
 
   outgoing.sort(
     (a, b) =>
@@ -119,47 +126,20 @@ export function buildEdgeTimetable(
   };
 }
 
-function buildEdgeStats(
-  edge: GraphEdge,
-  otherNode: GraphNode | undefined,
-  incoming = false,
-):
-  | {
-      toNode: GraphNode;
-      edgeId: string;
-      transport: TransportType;
-      tripsCount: number;
-      firstDeparture?: TimeHHMM;
-      lastDeparture?: TimeHHMM;
-      minDurationMinutes?: number;
-    }
-  | {
-      fromNode: GraphNode;
-      edgeId: string;
-      transport: TransportType;
-      tripsCount: number;
-      firstDeparture?: TimeHHMM;
-      lastDeparture?: TimeHHMM;
-      minDurationMinutes?: number;
-    }
-  | null {
-  if (!otherNode) {
-    return null;
-  }
+function hasTimedTrip(trip: GraphEdge['trips'][number]): trip is TimedTrip {
+  return Boolean(trip.departs) && Boolean(trip.arrives);
+}
 
-  const trips = (edge.trips ?? []).filter(
-    (trip) => Boolean(trip.departs) && Boolean(trip.arrives),
-  );
-  const departures = trips.map((trip) =>
-    timeToMinutes(trip.departs as TimeHHMM),
-  );
+function buildEdgeStatsBase(edge: GraphEdge): StationProfileEdgeBase {
+  const trips = edge.trips.filter(hasTimedTrip);
+  const departures = trips.map((trip) => timeToMinutes(trip.departs));
   const durations = trips.map((trip) =>
     computeDurationMinutes(trip.departs, trip.arrives, trip.arrivalDayOffset),
   );
 
-  const base = {
+  return {
     edgeId: edge.id,
-    transport: edge.trips?.[0]?.transport ?? 'postkutsche',
+    transport: edge.trips[0]?.transport ?? 'postkutsche',
     tripsCount: trips.length,
     firstDeparture: departures.length
       ? trips[departures.indexOf(Math.min(...departures))].departs
@@ -169,10 +149,26 @@ function buildEdgeStats(
       : undefined,
     minDurationMinutes: durations.length ? Math.min(...durations) : undefined,
   };
+}
 
-  if (incoming) {
-    return { ...base, fromNode: otherNode };
+function buildOutgoingEdgeStats(
+  edge: GraphEdge,
+  otherNode: GraphNode | undefined,
+): StationProfileOutgoing | null {
+  if (!otherNode) {
+    return null;
   }
 
-  return { ...base, toNode: otherNode };
+  return { ...buildEdgeStatsBase(edge), toNode: otherNode };
+}
+
+function buildIncomingEdgeStats(
+  edge: GraphEdge,
+  otherNode: GraphNode | undefined,
+): StationProfileIncoming | null {
+  if (!otherNode) {
+    return null;
+  }
+
+  return { ...buildEdgeStatsBase(edge), fromNode: otherNode };
 }

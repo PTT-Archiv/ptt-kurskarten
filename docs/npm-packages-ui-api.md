@@ -78,8 +78,6 @@ Die API enthält NestJS- und Backend-spezifische Pakete. Diese liegen im API-Pak
 | `@nestjs/schematics`       | `devDependency` | Generatoren für Module, Controller und Services über die Nest-CLI.                              |
 | `@nestjs/testing`          | `devDependency` | Testhilfen für isolierte NestJS-Tests und Testmodule.                                           |
 | `@ptt-kurskarten/shared`   | `dependency`    | Gemeinsames Workspace-Paket für geteilte Typen und wiederverwendbare Logik zwischen API und UI. |
-| `@swc/cli`                 | `devDependency` | Kommandozeilenwerkzeug für den schnellen TypeScript/JavaScript-Compiler SWC.                    |
-| `@swc/core`                | `devDependency` | Kernbibliothek des SWC-Compilers.                                                               |
 | `@types/express`           | `devDependency` | TypeScript-Typdefinitionen für Express.                                                         |
 | `@types/node`              | `devDependency` | TypeScript-Typdefinitionen für Node.js-APIs.                                                    |
 | `@types/supertest`         | `devDependency` | TypeScript-Typdefinitionen für Supertest.                                                       |

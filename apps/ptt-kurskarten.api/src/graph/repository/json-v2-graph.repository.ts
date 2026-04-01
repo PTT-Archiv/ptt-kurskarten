@@ -11,6 +11,7 @@ import type {
   GraphSnapshot,
   LocalizedText,
   NodeDetail,
+  TimeHHMM,
   TransportType,
   Year,
 } from '@ptt-kurskarten/shared';
@@ -123,6 +124,7 @@ const FOREIGN_SCHEMA_KEY = 'place.is_foreign';
 const HIDDEN_SCHEMA_KEY = 'place.hidden';
 const DISTANCE_MEASURE_KEY = 'distance';
 const LEGACY_DISTANCE_MEASURE_KEY = 'distance.leuge';
+const TIME_HHMM_PATTERN = /^\d{2}:\d{2}$/;
 
 export class JsonV2GraphRepository implements GraphRepository {
   private readonly dataDir: string;
@@ -836,13 +838,11 @@ export class JsonV2GraphRepository implements GraphRepository {
   }
 
   private materializeTrip(trip: StoredServiceTrip): EdgeTrip {
-    const departs = trip.departs ?? undefined;
-    const arrives = trip.arrives ?? undefined;
     return {
       id: trip.id,
       transport: trip.transport ?? 'postkutsche',
-      departs,
-      arrives,
+      departs: this.parseTripTime(trip.departs),
+      arrives: this.parseTripTime(trip.arrives),
       arrivalDayOffset: this.normalizeDayOffset(trip.arrivalDayOffset),
     };
   }
@@ -1292,6 +1292,16 @@ export class JsonV2GraphRepository implements GraphRepository {
     }
     const trimmed = value.trim();
     return trimmed.length ? trimmed : null;
+  }
+
+  private parseTripTime(value: string | null): TimeHHMM | undefined {
+    if (!value) {
+      return undefined;
+    }
+    const normalized = value.trim();
+    return TIME_HHMM_PATTERN.test(normalized)
+      ? (normalized as TimeHHMM)
+      : undefined;
   }
 
   private cleanupOrphanLinks(data: V2Data): void {

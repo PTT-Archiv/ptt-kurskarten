@@ -452,8 +452,8 @@ export class JsonGraphRepository implements GraphRepository {
   private stripTripEdgeId(trip: StoredTrip): EdgeTrip {
     const { edgeId: _edgeId, ...rest } = trip;
     return {
-      transport: 'postkutsche',
       ...rest,
+      transport: rest.transport ?? 'postkutsche',
     };
   }
 
