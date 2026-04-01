@@ -14,7 +14,7 @@ Dieses Dokument beschreibt die direkt deklarierten NPM-Pakete aus den folgenden 
 ## Warum sind die Pakete an verschiedenen Stellen eingetragen?
 
 - `package.json` im Workspace-Root enthält gemeinsames Tooling und root-weite Pakete, die nicht nur zu einer einzelnen App gehören.
-- `apps/ptt-kurskarten-ui/package.json` enthält alles, was speziell für das Angular-Frontend und dessen SSR-Betrieb gebraucht wird.
+- `apps/ptt-kurskarten-ui/package.json` enthält alles, was speziell für das Angular-Frontend gebraucht wird.
 - `apps/ptt-kurskarten.api/package.json` enthält alles, was speziell für das NestJS-Backend gebraucht wird.
 - UI und API sind über `@ptt-kurskarten/shared` miteinander verbunden. Dort liegen gemeinsame Typen oder wiederverwendbare Bausteine, damit beide Anwendungen auf derselben fachlichen Grundlage arbeiten.
 
@@ -36,7 +36,7 @@ Im Root liegen vor allem Werkzeuge, die den gesamten Monorepo betreffen. Sie sin
 
 ## UI (`apps/ptt-kurskarten-ui`)
 
-Die UI enthält Angular-, SSR- und Frontend-spezifische Pakete. Diese liegen bewusst im UI-Paket, weil sie für Rendering, Routing, Übersetzungen, Tests und den SSR-Server des Frontends verantwortlich sind.
+Die UI enthält Angular- und Frontend-spezifische Pakete. Diese liegen bewusst im UI-Paket, weil sie für Rendering, Routing, Übersetzungen und Frontend-Tests verantwortlich sind.
 
 | Paket                               | Typ             | Kurzbeschreibung                                                                                |
 | ----------------------------------- | --------------- | ----------------------------------------------------------------------------------------------- |
@@ -47,18 +47,14 @@ Die UI enthält Angular-, SSR- und Frontend-spezifische Pakete. Diese liegen bew
 | `@angular/compiler-cli`             | `devDependency` | Compiler-Anbindung für TypeScript- und Angular-Builds.                                          |
 | `@angular/core`                     | `dependency`    | Kernpaket von Angular mit Komponentenmodell, DI und Laufzeitverhalten.                          |
 | `@angular/platform-browser`         | `dependency`    | Browser-spezifische Laufzeitunterstützung für das Angular-Frontend.                             |
-| `@angular/platform-server`          | `dependency`    | Server-seitige Angular-Unterstützung für SSR und Prerendering.                                  |
 | `@angular/router`                   | `dependency`    | Routing-Bibliothek für Navigation und View-Komposition im Frontend.                             |
-| `@angular/ssr`                      | `dependency`    | Angular-Werkzeuge für Server Side Rendering und SSR-Integration.                                |
 | `@fortawesome/angular-fontawesome`  | `dependency`    | Angular-Bindings zur Nutzung von Font-Awesome-Icons in Templates.                               |
 | `@fortawesome/fontawesome-svg-core` | `dependency`    | SVG-Kernbibliothek von Font Awesome.                                                            |
 | `@fortawesome/free-solid-svg-icons` | `dependency`    | Freies Solid-Iconset von Font Awesome für die UI.                                               |
 | `@jsverse/transloco`                | `dependency`    | Internationalisierungsbibliothek für Übersetzungen und lokalisierte Inhalte.                    |
 | `@ptt-kurskarten/shared`            | `dependency`    | Gemeinsames Workspace-Paket für geteilte Typen und wiederverwendbare Logik zwischen UI und API. |
-| `@types/express`                    | `devDependency` | TypeScript-Typdefinitionen für Express.                                                         |
 | `@types/node`                       | `devDependency` | TypeScript-Typdefinitionen für Node.js-APIs.                                                    |
 | `@types/openseadragon`              | `devDependency` | TypeScript-Typdefinitionen für OpenSeadragon im Frontend.                                       |
-| `express`                           | `dependency`    | Serverframework, das hier den Angular-SSR-Server hostet.                                        |
 | `jsdom`                             | `devDependency` | DOM-Implementierung für Node.js, nützlich für Tests und browserähnliche Umgebungen.             |
 | `openseadragon`                     | `dependency`    | Bildbetrachter für große, zoombare Karten- und Scanbilder im Frontend.                          |
 | `rxjs`                              | `dependency`    | Reaktive Bibliothek für Streams, asynchrone Abläufe und Event-Verarbeitung.                     |

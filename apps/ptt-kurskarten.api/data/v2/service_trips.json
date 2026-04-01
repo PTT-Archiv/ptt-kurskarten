@@ -6219,24 +6219,6 @@
     "year": 1852
   },
   {
-    "id": "quick-trip-1774281295721",
-    "serviceId": "edge-1774281316707",
-    "transport": "postkutsche",
-    "departs": "08:45",
-    "arrives": "11:30",
-    "arrivalDayOffset": 0,
-    "year": 1852
-  },
-  {
-    "id": "quick-trip-1774281301434",
-    "serviceId": "edge-1774281316707",
-    "transport": "postkutsche",
-    "departs": "21:00",
-    "arrives": "02:00",
-    "arrivalDayOffset": 0,
-    "year": 1852
-  },
-  {
     "id": "quick-trip-1774281316807",
     "serviceId": "edge-1774281331585",
     "transport": "postkutsche",
@@ -11678,6 +11660,24 @@
     "transport": "postkutsche",
     "departs": "19:30",
     "arrives": "21:10",
+    "arrivalDayOffset": 0,
+    "year": 1852
+  },
+  {
+    "id": "quick-trip-1774281295721",
+    "serviceId": "edge-1774281316707",
+    "transport": "postkutsche",
+    "departs": "08:45",
+    "arrives": "11:30",
+    "arrivalDayOffset": 0,
+    "year": 1852
+  },
+  {
+    "id": "quick-trip-1774281301434",
+    "serviceId": "edge-1774281316707",
+    "transport": "postkutsche",
+    "departs": "23:00",
+    "arrives": "02:00",
     "arrivalDayOffset": 0,
     "year": 1852
   }
