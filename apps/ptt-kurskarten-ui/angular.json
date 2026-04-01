@@ -16,23 +16,11 @@
             "outputPath": "dist/ptt-kurskarten-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "public",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["public", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "src/server.ts"
-            },
             "localize": false
           },
           "configurations": {
@@ -67,8 +55,6 @@
                   "with": "src/app/app.routes.static.ts"
                 }
               ],
-              "ssr": false,
-              "prerender": false,
               "assets": [
                 "public",
                 "src/assets",
