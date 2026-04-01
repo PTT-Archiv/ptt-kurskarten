@@ -33,7 +33,7 @@
     "@types/node": "^25.5.0",
     "@types/openseadragon": "^5.0.2",
     "jsdom": "^29.0.1",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.2",
     "vitest": "^4.1.2"
   }
 }
