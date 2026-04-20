@@ -29,7 +29,7 @@
   "devDependencies": {
     "@angular/build": "21.2.6",
     "@angular/cli": "21.2.6",
-    "@angular/compiler-cli": "21.2.6",
+    "@angular/compiler-cli": "21.2.9",
     "@types/node": "^25.5.0",
     "@types/openseadragon": "^5.0.2",
     "jsdom": "^29.0.1",
