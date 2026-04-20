@@ -3,10 +3,10 @@
     <div class="panel-shell__title">{{ 'viewer.routeDetails' | transloco }}</div>
     @if (selected.kind === 'COMPLETE_PREFIX') {
       <div class="detail-subtitle meta-line meta-line--md meta-line--inverse">
-        Reise bis {{ vm.getNodeLabel(selected.resolvedTo ?? selected.to) }} (Datensatz-Ende)
+        {{ 'viewer.completePrefixTitle' | transloco: { node: vm.getNodeLabel(selected.resolvedTo ?? selected.to) } }}
       </div>
       <div class="detail-badge status-badge status-badge--inverse meta-line meta-line--xs">
-        Weiterreise ins Ausland: Zeiten unvollständig
+        {{ 'viewer.completePrefixBadge' | transloco }}
       </div>
     } @else if (selected.kind === 'FOREIGN_START_FALLBACK') {
       <div class="detail-subtitle meta-line meta-line--md meta-line--inverse">

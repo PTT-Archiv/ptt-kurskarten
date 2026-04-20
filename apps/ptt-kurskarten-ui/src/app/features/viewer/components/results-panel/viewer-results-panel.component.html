@@ -16,10 +16,10 @@
         >
           @if (option.kind === 'COMPLETE_PREFIX') {
             <div class="result-time">
-              Reise bis {{ vm.getNodeLabel(option.resolvedTo ?? option.to) }} (Datensatz-Ende)
+              {{ 'viewer.completePrefixTitle' | transloco: { node: vm.getNodeLabel(option.resolvedTo ?? option.to) } }}
             </div>
             <div class="result-meta status-badge status-badge--inverse meta-line meta-line--sm">
-              Weiterreise ins Ausland: Zeiten unvollständig
+              {{ 'viewer.completePrefixBadge' | transloco }}
             </div>
             <div class="result-meta meta-line meta-line--sm meta-line--inverse">
               @if (option.departs) {
@@ -113,14 +113,14 @@
           class="button button--ghost button--pill button--compact viewer-results-panel__shift-button"
           (click)="shiftTime.emit(-30)"
         >
-          -30 min
+          {{ 'label.shiftMinusThirtyMinutes' | transloco }}
         </button>
         <button
           type="button"
           class="button button--ghost button--pill button--compact viewer-results-panel__shift-button"
           (click)="shiftTime.emit(30)"
         >
-          +30 min
+          {{ 'label.shiftPlusThirtyMinutes' | transloco }}
         </button>
       </div>
     }

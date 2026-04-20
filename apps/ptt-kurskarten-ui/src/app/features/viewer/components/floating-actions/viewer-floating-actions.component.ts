@@ -5,6 +5,8 @@ import { faGear, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoPipe } from '@jsverse/transloco';
 import type { ViewerFloatingActionsVm } from '@viewer/viewer.models';
 
+const LEGAL_NOTICES_URL = 'https://www.mfk.ch/rechtliche-hinweise';
+
 @Component({
   selector: 'app-viewer-floating-actions',
   imports: [TranslocoPipe, FaIconComponent, RouterLink],
@@ -27,6 +29,7 @@ export class ViewerFloatingActionsComponent {
 
   readonly xmarkIcon = faXmark;
   readonly gearIcon = faGear;
+  readonly legalNoticesUrl = LEGAL_NOTICES_URL;
 
   get vm(): ViewerFloatingActionsVm {
     return this.vmInput();

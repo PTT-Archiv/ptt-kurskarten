@@ -1,6 +1,6 @@
-<div class="viewer-brand-bar" aria-label="Viewer information">
-  <span class="viewer-brand-title">PTT-Kurskarten</span>
-  <span class="viewer-brand-note">Änderungen vorbehalten</span>
+<div class="viewer-brand-bar" [attr.aria-label]="'viewer.infoRegion' | transloco">
+  <span class="viewer-brand-title">{{ 'viewer.brandTitle' | transloco }}</span>
+  <span class="viewer-brand-note">{{ 'viewer.brandNotice' | transloco }}</span>
 </div>
 <div class="viewer-header">
   <div class="viewer-header-slot viewer-header-slot-start">
@@ -50,7 +50,7 @@
             class="button button--ghost button--pill viewer-header__planner-toggle-button"
             type="button"
             (click)="openRoutePlanner.emit()"
-            aria-label="Routenplaner öffnen"
+            [attr.aria-label]="'viewer.routePlannerOpen' | transloco"
           >
             <fa-icon [icon]="routeIcon"></fa-icon>
           </button>
@@ -61,7 +61,7 @@
           class="button button--ghost button--pill viewer-header__planner-toggle-button"
           type="button"
           (click)="openRoutePlanner.emit()"
-          aria-label="Routenplaner öffnen"
+          [attr.aria-label]="'viewer.routePlannerOpen' | transloco"
         >
           <fa-icon [icon]="routeIcon"></fa-icon>
         </button>

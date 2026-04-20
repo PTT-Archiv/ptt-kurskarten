@@ -63,7 +63,7 @@
                       @if (leg.departs && leg.arrives) {
                         {{ leg.departs }} → {{ leg.arrives }}
                       } @else {
-                        Zeiten unbekannt
+                        {{ 'connections.unknownTimes' | transloco }}
                       }
                     </div>
                     <div class="leg-line">

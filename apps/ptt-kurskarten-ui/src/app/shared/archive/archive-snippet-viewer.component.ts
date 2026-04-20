@@ -16,13 +16,14 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlassMinus, faMagnifyingGlassPlus, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { TileSourceSpecifier } from 'openseadragon';
 
 @Component({
   selector: 'app-archive-snippet-viewer',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FaIconComponent],
+  imports: [FaIconComponent, TranslocoPipe],
   templateUrl: './archive-snippet-viewer.component.html',
   styleUrl: './archive-snippet-viewer.component.css'
 })

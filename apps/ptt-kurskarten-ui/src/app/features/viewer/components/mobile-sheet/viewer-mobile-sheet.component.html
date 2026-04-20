@@ -2,7 +2,8 @@
 <section class="mobile-sheet" [class.snap-peek]="vm.snap === 'peek'"
   [class.snap-half]="vm.snap === 'half'" [class.snap-full]="vm.snap === 'full'">
   <div class="viewer-mobile-sheet__header">
-    <button type="button" class="viewer-mobile-sheet__handle-button" (click)="cycleSnap.emit()" aria-label="Ansicht erweitern">
+    <button type="button" class="viewer-mobile-sheet__handle-button" (click)="cycleSnap.emit()"
+      [attr.aria-label]="'viewer.expandSheet' | transloco">
       <span class="viewer-mobile-sheet__handle"></span>
     </button>
     <div class="viewer-mobile-sheet__toolbar">
@@ -42,8 +43,8 @@
       <div class="viewer-mobile-sheet__planner-status">
         <div class="surface-card surface-card--inverse surface-card--status viewer-status-card">{{ vm.resultsVm.noResultsMessage }}</div>
         <div class="quick-actions">
-          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(-30)">-30 min</button>
-          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(30)">+30 min</button>
+          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(-30)">{{ 'label.shiftMinusThirtyMinutes' | transloco }}</button>
+          <button type="button" class="button button--ghost button--pill button--compact viewer-mobile-sheet__shift-button" (click)="shiftTime.emit(30)">{{ 'label.shiftPlusThirtyMinutes' | transloco }}</button>
         </div>
       </div>
       } @else if (vm.resultsVm.routingState === 'error') {

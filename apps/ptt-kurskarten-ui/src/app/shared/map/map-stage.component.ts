@@ -128,7 +128,7 @@ export type MapSimulationTripHit = {
       (mouseenter)="onStageEnter()"
       (mouseleave)="onStageLeave()"
     >
-      <img class="map" src="assets/maps/switzerland.svg" alt="Switzerland map" [style.transform]="getMapTransform()" />
+      <img class="map" src="assets/maps/switzerland.svg" [attr.alt]="getMapAltLabel()" [style.transform]="getMapTransform()" />
       <app-border-uncertainty-layer
         class="border-uncertainty-layer"
         [mapTransform]="getMapTransform()"
@@ -146,11 +146,11 @@ export type MapSimulationTripHit = {
           (wheel)="onWheel($event)"
         ></canvas>
         @if (showZoomControls()) {
-          <div class="zoom-controls" aria-label="Zoom controls">
-            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" aria-label="Zoom in" (click)="onZoomInClick()">
+          <div class="zoom-controls" [attr.aria-label]="getZoomControlsLabel()">
+            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" [attr.aria-label]="getZoomInLabel()" (click)="onZoomInClick()">
               <fa-icon [icon]="plusIcon"></fa-icon>
             </button>
-            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" aria-label="Zoom out" (click)="onZoomOutClick()">
+            <button type="button" class="button button--ghost button--compact button--pill button--icon zoom-btn" [attr.aria-label]="getZoomOutLabel()" (click)="onZoomOutClick()">
               <fa-icon [icon]="minusIcon"></fa-icon>
             </button>
           </div>
@@ -663,6 +663,22 @@ export class MapStageComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   getZoomHintLabel(): string {
     return this.transloco.translate('viewer.zoomHint');
+  }
+
+  getMapAltLabel(): string {
+    return this.transloco.translate('viewer.mapAlt');
+  }
+
+  getZoomControlsLabel(): string {
+    return this.transloco.translate('viewer.zoomControls');
+  }
+
+  getZoomInLabel(): string {
+    return this.transloco.translate('viewer.zoomIn');
+  }
+
+  getZoomOutLabel(): string {
+    return this.transloco.translate('viewer.zoomOut');
   }
 
   private attachResizeObserver(): void {

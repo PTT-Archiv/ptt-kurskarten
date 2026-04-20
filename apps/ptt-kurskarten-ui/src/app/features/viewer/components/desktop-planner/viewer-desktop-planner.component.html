@@ -27,7 +27,7 @@
       class="button button--ghost button--pill viewer-route-planner__close-button"
       type="button"
       (click)="close.emit()"
-      aria-label="Routenplaner schliessen"
+      [attr.aria-label]="'viewer.routePlannerClose' | transloco"
     >
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>

@@ -58,7 +58,7 @@
   </section>
 
   <section class="panel-shell panel-shell--content">
-    <div class="panel-shell__title">Ausgehende Verbindungen</div>
+    <div class="panel-shell__title">{{ 'viewer.outgoingConnections' | transloco }}</div>
     @if (vm.outgoingNodeTrips.length > 0) {
       <div class="node-trip-list panel-list">
         @for (trip of vm.outgoingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
@@ -80,12 +80,12 @@
         }
       </div>
     } @else {
-      <div class="meta-line meta-line--md meta-line--inverse">Keine ausgehenden Verbindungen</div>
+      <div class="meta-line meta-line--md meta-line--inverse">{{ 'viewer.noOutgoingConnections' | transloco }}</div>
     }
   </section>
 
   <section class="panel-shell panel-shell--content">
-    <div class="panel-shell__title">Eingehende Verbindungen</div>
+    <div class="panel-shell__title">{{ 'viewer.incomingConnections' | transloco }}</div>
     @if (vm.incomingNodeTrips.length > 0) {
       <div class="node-trip-list panel-list">
         @for (trip of vm.incomingNodeTrips; track trip.edgeId + '-' + trip.tripId) {
@@ -107,7 +107,7 @@
         }
       </div>
     } @else {
-      <div class="meta-line meta-line--md meta-line--inverse">Keine eingehenden Verbindungen</div>
+      <div class="meta-line meta-line--md meta-line--inverse">{{ 'viewer.noIncomingConnections' | transloco }}</div>
     }
   </section>
 } @else {

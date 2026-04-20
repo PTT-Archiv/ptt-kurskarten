@@ -52,6 +52,41 @@
     <p>{{ 'viewer.helpText2' | transloco }}</p>
     <p>{{ 'viewer.helpText3' | transloco }}</p>
     <p>{{ 'viewer.helpText4' | transloco }}</p>
+    <hr class="help-popup__divider" />
+    <details class="help-popup__imprint-details">
+      <summary class="help-popup__imprint-summary">{{ 'imprint.title' | transloco }}</summary>
+      <section class="help-popup__imprint">
+        <div class="help-popup__imprint-entry">
+          <div class="help-popup__imprint-role">{{ 'imprint.mainProjectLead' | transloco }}</div>
+          <div class="help-popup__imprint-name">{{ 'imprint.mainProjectLeadName' | transloco }}</div>
+        </div>
+
+        <div class="help-popup__imprint-entry">
+          <div class="help-popup__imprint-role">{{ 'imprint.projectLead' | transloco }}</div>
+          <div class="help-popup__imprint-name">{{ 'imprint.projectLeadName' | transloco }}</div>
+        </div>
+
+        <div class="help-popup__imprint-entry">
+          <div class="help-popup__imprint-role">{{ 'imprint.visualDesign' | transloco }}</div>
+          <div class="help-popup__imprint-name">{{ 'imprint.visualDesignName' | transloco }}</div>
+        </div>
+
+        <div class="help-popup__imprint-entry">
+          <div class="help-popup__imprint-role">{{ 'imprint.conceptImplementation' | transloco }}</div>
+          <div class="help-popup__imprint-name">{{ 'imprint.conceptImplementationName' | transloco }}</div>
+        </div>
+
+        <div class="help-popup__imprint-entry">
+          <div class="help-popup__imprint-role">{{ 'imprint.legalTitle' | transloco }}</div>
+          <p class="help-popup__imprint-legal">
+            {{ 'imprint.legalBody' | transloco }}
+            <a [href]="legalNoticesUrl" target="_blank" rel="noopener noreferrer">
+              {{ 'imprint.legalLinkLabel' | transloco }}
+            </a>
+          </p>
+        </div>
+      </section>
+    </details>
   </div>
 </section>
 }
@@ -65,7 +100,7 @@
       <fa-icon [icon]="xmarkIcon"></fa-icon>
     </button>
   </div>
-  <div class="text-muted viewer-floating-actions__settings-label">{{ 'nav.language' | transloco }}</div>
+  <div class="viewer-floating-actions__settings-label">{{ 'nav.language' | transloco }}</div>
   <div class="overlay-panel__actions quick-actions">
     <button
       class="button button--ghost button--pill viewer-floating-actions__lang-button"

@@ -1,18 +1,18 @@
 <div class="snippet-frame" [class.fill-frame]="fillFrame">
-  <div #osdContainer class="osd-container" aria-label="Archiv-Ausschnitt"></div>
+  <div #osdContainer class="osd-container" [attr.aria-label]="'viewer.archiveSnippetAriaLabel' | transloco"></div>
   @if (showCenterMarker) {
     <div class="osd-center-marker" aria-hidden="true">
       <span class="marker-dot"></span>
     </div>
   }
   <div class="snippet-controls">
-    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="zoomIn()" aria-label="Zoom in">
+    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="zoomIn()" [attr.aria-label]="'viewer.zoomIn' | transloco">
       <fa-icon [icon]="zoomInIcon"></fa-icon>
     </button>
-    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="zoomOut()" aria-label="Zoom out">
+    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="zoomOut()" [attr.aria-label]="'viewer.zoomOut' | transloco">
       <fa-icon [icon]="zoomOutIcon"></fa-icon>
     </button>
-    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="reset()" aria-label="Reset view">
+    <button class="button button--ghost button--compact button--icon archive-snippet-viewer__control" type="button" (click)="reset()" [attr.aria-label]="'viewer.resetSnippetView' | transloco">
       <fa-icon [icon]="resetIcon"></fa-icon>
     </button>
   </div>
